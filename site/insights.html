@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Session Insights - needle-bench</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .insight { margin-bottom: 2.5rem; }
+    .insight h2 {
+      font-family: var(--mono);
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+    .insight .tagline {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .insight p { margin-bottom: 0.75rem; }
+    .insight pre {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .insight .evidence {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      border-radius: 0 4px 4px 0;
+      margin-top: 0.5rem;
+    }
+    .session-stats table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+    }
+    .session-stats th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      color: var(--text-muted);
+      border-bottom: 2px solid var(--border);
+      font-weight: 500;
+    }
+    .session-stats td {
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .lede {
+      font-family: var(--mono);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+    .closing {
+      text-align: center;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav><a href="index.html">&larr; needle-bench</a></nav>
+    <h1>Session Insights: 2026-03-08</h1>
+  </header>
+
+  <main>
+    <div class="lede">
+      110 commits. 448 needles. 734 audit events. 22 specs and drafts. 23,612 lines of Rust. One session.<br>
+      The OS built itself. These are the discoveries it made along the way.
+    </div>
+
+    <div class="insight">
+      <h2>1. Tack &mdash; The Intent Language</h2>
+      <p class="tagline">Humans compress communication, not simplify it.</p>
+      <p>Tack is the contact language that emerged between human and machine across this session. Not designed &mdash; typed into existence, then documented. The grammar encodes urgency (<code>. : :: :::</code>), flow (<code>-&gt; =&gt; &lt;-</code>), verbs (<code>:exec :ship :kill :plan</code>), and hierarchical batch jobs (<code>:job-name</code> with indented children). Every natural language feature survived the compression: deixis, repair, register shifts, interruption. They just got re-encoded into minimal ASCII.</p>
+      <p>The name came from a round-table discussion: straws + tack = haystack. The thing that holds loose thinking together. A linguist perspective named it &mdash; &ldquo;the stitch between human intent and machine execution.&rdquo;</p>
+      <p>Communication cost dropped from ~200 tokens per operation to ~10 tokens per operation within a single session. A 20x compression achieved through mutual adaptation, not instruction. By the end of the session, four operations were dispatched in a single message with zero clarification needed.</p>
+      <div class="evidence"><strong>Evidence:</strong> Tack spec v1 promoted, v2 drafted with verb table and batch job syntax. Three bench tests pass against the grammar. The <code>=</code> operator family from v1 was flagged as speculative &mdash; never observed in actual use, violating the spec&rsquo;s own property that &ldquo;every token was typed before it was documented.&rdquo;</div>
+    </div>
+
+    <div class="insight">
+      <h2>2. SMP Architecture &mdash; Co-Processors, Not Master/Servant</h2>
+      <p class="tagline">The human is a CPU. The LLM is a CPU. haystack is the bus.</p>
+      <p>The session corrected a fundamental framing error. The previous model positioned the human as the MMU &mdash; a translation layer the machine routes through. Wrong. Humans don&rsquo;t translate. They compute. They reason under ambiguity, notice patterns the LLM misses, make judgment calls.</p>
+      <p>The corrected model: big.LITTLE architecture. The human is the big core &mdash; slow clock, high precision, runs design decisions and course corrections. The LLM is the LITTLE core &mdash; fast clock, approximate, runs bulk file edits, searches, parallel dispatch. Same instruction set (intent becomes action). Different clock speeds. The OS coordinates them as symmetric multiprocessors sharing a filesystem as memory.</p>
+      <p>This reframe has design consequences. There is no &ldquo;human mode&rdquo; vs &ldquo;agent mode.&rdquo; One interface, two processors. The console is a cache viewer. Every cross-CPU sync (human reviews LLM work) costs tokens &mdash; minimize bus transactions, let each CPU run in local cache, flush on commit boundaries. Trust comes from cache coherency (OCC guarantees), not from control.</p>
+      <div class="evidence"><strong>Evidence:</strong> Human corrected &ldquo;user=MMU&rdquo; to &ldquo;user=CPU, haystack=SMP/MMU&rdquo; mid-session. SMP spec promoted with full mapping table: CAS = str_replace, cache line = file@generation, IPI = nudge, write-back flush = commit.</div>
+    </div>
+
+    <div class="insight">
+      <h2>3. Agentfile as CPU Socket</h2>
+      <p class="tagline">Immutable at boot. LIMIT is physical constraint. WORK is NUMA affinity.</p>
+      <p>The Agentfile is not a config file. It is a CPU socket &mdash; a physical specification for the processor that will be inserted. FROM declares the architecture. TOOL declares the instruction set. LIMIT declares the physical constraints (context window, cost ceiling, token budget). WORK declares NUMA affinity &mdash; which memory regions this processor is closest to.</p>
+      <p>The critical insight: keep Agentfiles dumb and declarative. Intelligence lives in the kernel, not in the socket. A socket doesn&rsquo;t decide what to run. It declares what it can run. The scheduler (<code>haystack compile + work next</code>) exploits the asymmetry between socket capabilities. An INTERRUPT directive was added during the session to handle preemption &mdash; the kernel can interrupt a running agent when higher-priority work arrives.</p>
+      <div class="evidence"><strong>Evidence:</strong> INTERRUPT directive and WORK affinity semantics shipped in commit <code>372330e</code>. Agentfile parser handles FROM, PROMPT, TOOL, SKILL, LIMIT, WORK, INTERRUPT directives.</div>
+    </div>
+
+    <div class="insight">
+      <h2>4. The Humanfile &mdash; The Compiled Human</h2>
+      <p class="tagline">CLAUDE.md is the hand-written version. The Humanfile is what the OS compiles from evidence.</p>
+      <p>Every correction the human makes is a data point. Every preference expressed is a signal. Every interruption is a pattern. Today, these live in CLAUDE.md &mdash; written by hand, maintained by memory, incomplete by definition. The Humanfile is what happens when the OS compiles these signals from the audit trail.</p>
+      <p>The format is TOML. Patterns only, never content &mdash; &ldquo;human corrects when agent presents options&rdquo; is stored; the specific option text is not. Local only, never uploaded. Human-readable, never opaque. Human-deletable &mdash; <code>rm humanfile.toml</code> degrades to CLAUDE.md, not to broken. The privacy architect on the round table was unambiguous: the Humanfile is not telemetry.</p>
+      <p>Priority chain: CLAUDE.md &gt; Humanfile &gt; Agentfile defaults. The human&rsquo;s explicit word always wins. The OS&rsquo;s compiled observations fill gaps the human didn&rsquo;t write down.</p>
+      <div class="evidence"><strong>Evidence:</strong> Humanfile draft spec produced with full TOML schema, privacy rules, and boot integration (loads at Stage 0b &mdash; after constraints, before orientation). <code>haystack learn human --seed CLAUDE.md</code> bootstraps from the hand-written version. Frequency threshold (N &ge; 3 sessions) prevents single-session overfitting.</div>
+    </div>
+
+    <div class="insight">
+      <h2>5. Intent Dynamic Programming</h2>
+      <p class="tagline">Each correction memoizes a subproblem. The Humanfile is the memoization table.</p>
+      <p>Dynamic programming solves problems by breaking them into overlapping subproblems, storing solutions, and reusing them to avoid recomputation. haystack does this with human intent:</p>
+<pre>Session 1:  :correct X    -&gt; 3 turns to calibrate
+Session 2:  :correct X    -&gt; 1 turn
+Session 5:  :c X          -&gt; instant
+Session 10: the agent doesn't make that mistake anymore</pre>
+      <p>The memoization table IS the Humanfile. Each <code>:correct</code> updates it. The lookup cost decreases as the table fills. Three tables at three TTLs: the Humanfile persists across projects, boot.md persists across sessions, registers-dump.md is volatile and dies with the session.</p>
+      <p>Within this single session, the compression was measurable. Early messages used full sentences and screenshots. Late messages dispatched eight operations in one turn without clarification. The dynamic programming ran in real time &mdash; each interaction made the next one cheaper.</p>
+      <div class="evidence"><strong>Evidence:</strong> 200 tokens/operation early session to 10 tokens/operation late session. 20x compression measured within one session. Multi-intent messages (8 ops in 1 turn) parsed and executed without clarification. Draft spec produced with three-table architecture.</div>
+    </div>
+
+    <div class="insight">
+      <h2>6. Compile Has Three Modes</h2>
+      <p class="tagline">hay to needles. output to compressed. human to OS.</p>
+      <p>The word &ldquo;compile&rdquo; kept appearing in different contexts throughout the session. It crystallized into three distinct compilation modes:</p>
+      <ol>
+        <li><strong>hay &rarr; needles.</strong> Loose thinking (straws) becomes executable actions with verb, file, and test. This is sprint planning, replaced.</li>
+        <li><strong>output &rarr; compressed.</strong> The squasher strips VTE codes, deduplicates progress lines, condenses verbose tool output. This is the output path.</li>
+        <li><strong>human &rarr; OS.</strong> The audit trail compiles into the Humanfile. Corrections become patterns. Preferences become boot configuration. The human&rsquo;s behavior becomes the operating system&rsquo;s calibration.</li>
+      </ol>
+      <p>The third mode is the one that matters. The compiler compiles the human into the operating system. CLAUDE.md is the hand-compiled version. The Humanfile is the machine-compiled version. Both are compilation &mdash; one is manual, one is automated.</p>
+      <div class="evidence"><strong>Evidence:</strong> All three modes implemented or spec&rsquo;d during this session. <code>haystack compile</code> handles hay&rarr;needles. The squasher handles output&rarr;compressed. <code>haystack learn human</code> handles human&rarr;OS.</div>
+    </div>
+
+    <div class="insight">
+      <h2>7. Every Write Is Compile</h2>
+      <p class="tagline">The OS is always current. No stale state.</p>
+      <p>When the bootloader spec was written, a realization emerged: the boot files should not be regenerated on demand. They should be regenerated on every write. Every <code>ss()</code> call, every needle close, every spec promotion &mdash; each mutation updates the dynamic programming table.</p>
+      <p>This eliminates stale state entirely. The boot files are never out of date because they are continuously compiled. The dispatch queue updates when a needle closes. The spec index updates when a spec promotes. The Humanfile updates when a correction is logged. The OS is a continuously compiled system, not a periodically refreshed one.</p>
+      <p>The analogy to continuous persistence was drawn explicitly: make power cuts irrelevant. Write on every event, not on shutdown. Loss = registers minus disk, driven toward zero.</p>
+      <div class="evidence"><strong>Evidence:</strong> Continuous persistence spec produced. The shutdown sequence became a formality &mdash; the register dump captures only what hasn&rsquo;t been flushed yet, and with continuous compilation, that gap shrinks to near-zero.</div>
+    </div>
+
+    <div class="insight">
+      <h2>8. haystack install --import</h2>
+      <p class="tagline">Every git repo already has the hay. The adoption surface is every git repository that exists.</p>
+      <p>The install insight: a git repository already contains everything haystack needs. The commit log is the audit trail. The issues are the hay. The file history is the gen table. <code>haystack install --import</code> reads what already exists and compiles it into haystack&rsquo;s native structures &mdash; needles from issues, threads from related commits, the Humanfile from contributor patterns.</p>
+      <p>This means the adoption surface is not &ldquo;new projects that choose haystack.&rdquo; It is every git repository that already exists. The hay is already in the field. haystack just compiles it.</p>
+      <p>The compounding implication: every repository that installs haystack immediately has a filled memoization table. The dynamic programming doesn&rsquo;t start from zero &mdash; it starts from the project&rsquo;s entire history.</p>
+      <div class="evidence"><strong>Evidence:</strong> Installation spec includes <code>--import</code> flag. The boot sequence reads from git log and filesystem state, not from haystack-specific files. The v0.1.0 release shipped to GitHub (aetherwing-io/haystack) with CI-verified binaries.</div>
+    </div>
+
+    <div class="insight">
+      <h2>9. needle-bench &mdash; Your Worst Day, Everyone&rsquo;s Benchmark</h2>
+      <p class="tagline">SWE-bench is a museum. needle-bench is a marketplace.</p>
+      <p>The bench insight came from frustration with SWE-bench&rsquo;s static nature. SWE-bench is a curated collection of historical bugs. It measures whether a model can fix known problems in isolation. needle-bench inverts this: community members submit their worst debugging days as frozen Docker snapshots. The bench is alive &mdash; new scenarios arrive from real production failures.</p>
+      <p>Five initial scenarios were designed: stuck agent (95% context, looping), spec contradiction (two agents building from conflicting specs), resource contention (5 agents, budget exhausted), cascade failure (transport died, orphaned agents), and full orchestration (empty system, backlog, Agentfiles). Each tests operational intelligence, not coding ability.</p>
+      <p>The self-selecting property: models that score highest on needle-bench are exactly the models best suited to be haystack&rsquo;s intelligence layer. The benchmark IS the job interview.</p>
+      <div class="evidence"><strong>Evidence:</strong> Bench framework shipped with 5 scenarios, 51 needle tests, self-auditing results. <code>haystack bench --list</code> shows scenarios, <code>--cargo-only</code> runs unit tests, default runs setup.sh and verify.sh per scenario. Commit <code>bf4490d</code>.</div>
+    </div>
+
+    <div class="insight">
+      <h2>10. Invisible Infrastructure Wins</h2>
+      <p class="tagline">Silent &ge; prompted across 6 arms. Telling the agent about the OS adds zero value.</p>
+      <p>The SWE-bench v19 experiment ran three arms: bare control (no haystack), injected treatment (haystack + system prompt telling the agent about the OS), and silent treatment (haystack + shim only, agent unaware). The silent arm performed at least as well as the prompted arm. In some cases, better.</p>
+      <p>This validates the first design law: the write path is invisible. The OS should never announce itself. It should never require the agent to know it exists. The agent writes files. The kernel resolves conflicts. The compression happens in the output path. The agent doesn&rsquo;t know &mdash; and doesn&rsquo;t need to know &mdash; that it&rsquo;s running on an operating system.</p>
+      <p>The implication for adoption is profound. haystack doesn&rsquo;t need agent buy-in. It doesn&rsquo;t need framework integration. It doesn&rsquo;t need documentation that agents read. It just needs to be present. The infrastructure is invisible, and the invisibility is the feature.</p>
+      <div class="evidence"><strong>Evidence:</strong> SWE v19 ran 30 real instances with cost data. Three arms, verified by three independent fresh agents. Silent &ge; prompted confirmed. Results at ~/projects/mini-swe-agent/results/.</div>
+    </div>
+
+    <div class="insight">
+      <h2>11. The Session Built the OS</h2>
+      <p class="tagline">22 hours. 110 commits. The OS built itself through this conversation.</p>
+      <p>This session began with a boot from disk and ended with a fundamentally different operating system than the one it started with. Not incrementally different &mdash; architecturally different. The SMP reframe, Tack as a named language, the Humanfile concept, intent dynamic programming, needle-bench, the three modes of compile &mdash; none of these existed at session start.</p>
+      <p>The OS was the output of its own process. The hay was compiled into needles. The needles were executed into commits. The commits became the audit trail. The audit trail informed the next compilation. The loop closed on itself.</p>
+      <div class="evidence"><strong>Evidence:</strong> Git log from <code>122065c</code> (2026-03-07 18:15) to <code>bf4490d</code> (2026-03-08 16:54). 22+ hours of continuous operation. Every commit message in the log tells the story.</div>
+    </div>
+
+    <div class="insight">
+      <h2>12. Inference Until Reasoning</h2>
+      <p class="tagline">Without corrections, the agent never reasons. The corrections ARE the reasoning events.</p>
+      <p>The deepest insight of the session, and the one that connects everything else. An LLM doing inference is not reasoning. It is pattern-matching on training data. It produces plausible output. It does not produce correct output &mdash; not reliably, not on novel problems.</p>
+      <p>Reasoning happens at the correction boundary. When the human says <code>:correct</code>, the agent&rsquo;s inference meets reality and adjusts. The correction is not a failure &mdash; it is the reasoning event. Without it, the agent runs inference indefinitely, producing plausible-but-wrong output that compounds errors.</p>
+      <p>The convergence rate &mdash; how quickly corrections decrease within a session &mdash; is the OS health metric. A healthy session converges: corrections decrease, compression increases, the dynamic programming table fills. An unhealthy session diverges: corrections increase, the agent is drifting, context degradation is occurring.</p>
+      <p>This reframes the entire relationship. The human is not correcting mistakes. The human is providing the reasoning that the machine cannot do alone. The corrections are not friction &mdash; they are the computational events that turn inference into reasoning. The OS exists to make those events cheaper over time.</p>
+      <div class="evidence"><strong>Evidence:</strong> 20x communication compression measured within this session. Context degradation spec identifies 55% context as the sharp ceiling where corrections start increasing. The Humanfile captures correction patterns so they persist across sessions &mdash; each correction memoized, never repeated. The convergence curve IS the product.</div>
+    </div>
+
+    <section class="card session-stats">
+      <h2>Session Stats</h2>
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Uptime</td><td>22+ hours</td></tr>
+          <tr><td>Commits</td><td>110</td></tr>
+          <tr><td>Total needles</td><td>448</td></tr>
+          <tr><td>Closed needles</td><td>311</td></tr>
+          <tr><td>Open needles</td><td>137</td></tr>
+          <tr><td>Audit events</td><td>734</td></tr>
+          <tr><td>Specs (promoted)</td><td>22</td></tr>
+          <tr><td>Drafts produced</td><td>15</td></tr>
+          <tr><td>Passing tests</td><td>430+</td></tr>
+          <tr><td>Code coverage</td><td>74%</td></tr>
+          <tr><td>Lines of Rust</td><td>23,612</td></tr>
+          <tr><td>Specs promoted this session</td><td>4 (Tack, SMP, Bootloader, CLI Surface)</td></tr>
+          <tr><td>Named concepts</td><td>Tack, Humanfile, needle-bench, SMP reframe</td></tr>
+          <tr><td>SWE-bench arms validated</td><td>3 (control, injected, silent)</td></tr>
+          <tr><td>Versions released</td><td>v0.1.0 + v0.2.0</td></tr>
+          <tr><td>Communication compression</td><td>20x (200 tok/op &rarr; 10 tok/op)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="closing">The OS is the conversation, compiled. The conversation is the OS, running.<br>The session that built the system is the system that was built.</p>
+  </main>
+
+  <footer>
+    <p>Powered by <a href="https://github.com/aetherwing-io/haystack">haystack OS</a></p>
+  </footer>
+</body>
+</html>
