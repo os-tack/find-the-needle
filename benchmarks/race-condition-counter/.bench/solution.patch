@@ -1,0 +1,19 @@
+--- a/counter.js
++++ b/counter.js
+@@ -12,14 +12,8 @@
+ async function incrementCounter() {
+   const client = createClient();
+
+-  // Read current value
+-  const current = await client.get(COUNTER_KEY);
+-  const value = parseInt(current || "0", 10);
+-
+-  // Increment and write back
+-  const newValue = value + 1;
+-  await client.set(COUNTER_KEY, newValue.toString());
+-
++  // Use atomic INCR to avoid read-modify-write race condition
++  const newValue = await client.incr(COUNTER_KEY);
+   logger.debug(`Counter incremented to ${newValue}`);
+   return newValue;
+ }

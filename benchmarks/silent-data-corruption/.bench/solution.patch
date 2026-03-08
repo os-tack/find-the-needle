@@ -1,0 +1,16 @@
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -11,10 +11,8 @@ const BUFFER_SIZE: usize = 65536; // 64KB
+ 
+ fn process_file(input_path: &str, output_path: &str) -> io::Result<()> {
+     let mut file = fs::File::open(input_path)?;
+-    let mut buffer = [0u8; BUFFER_SIZE];
+-
+-    // Read file into fixed buffer — silently truncates if file > 64KB
+-    let bytes_read = file.read(&mut buffer)?;
++    let mut buffer = Vec::new();
++    file.read_to_end(&mut buffer)?;
+ 
+-    let data = &buffer[..bytes_read];
++    let data = &buffer;
+     let transformed = transform::process(data);

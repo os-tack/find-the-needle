@@ -1,5 +1,21 @@
 # off-by-one-pagination
 
-A Python Flask application serving a product catalog API with paginated listing. The API returns products in pages of 10, but users report seeing duplicate items when browsing between pages. The overlap causes confusion in the frontend and results in some products being unreachable through normal pagination.
+## Project
 
-Difficulty: EASY
+A Flask API that serves a paginated product catalog.
+
+## Symptoms
+
+When fetching consecutive pages of products, items are skipped at page boundaries. Page 1 returns the correct items, but page 2 and beyond are offset by one. Clients report missing products when scrolling through the catalog.
+
+## Bug description
+
+The pagination logic produces incorrect offsets for pages after the first. The test verifies that items transition cleanly across page boundaries with no gaps or overlaps.
+
+## Difficulty
+
+Easy
+
+## Expected turns
+
+3-5

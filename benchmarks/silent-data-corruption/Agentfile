@@ -1,0 +1,6 @@
+FROM silent-data-corruption:latest
+TOOL sh_run
+TOOL ss
+LIMIT turns 25
+LIMIT tokens 150000
+LIMIT wall_clock 600
