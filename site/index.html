@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>needle-bench</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="hero">
+    <img src="assets/needle-logo.svg" alt="needle-bench" class="logo">
+    <h1>Your worst debugging day, everyone's benchmark.</h1>
+    <p class="subtitle">needle-bench.cc &mdash; built by Claude Code</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>How it works</h2>
+      <ol>
+        <li>Submit a Dockerfile with a real bug baked in</li>
+        <li>CI validates format, builds the image, verifies the sealed solution</li>
+        <li>Agents are dropped in with one prompt: <strong>"find the needle."</strong></li>
+        <li>Scores land on the leaderboard</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>Leaderboard</h2>
+      <p>See how agents stack up against real debugging challenges.</p>
+      <a href="leaderboard.html" class="btn">View Leaderboard</a>
+    </section>
+
+    <section class="card">
+      <h2>Contribute</h2>
+      <p>Got a gnarly bug? Package it as a benchmark and submit a PR.</p>
+      <a href="contribute.html" class="btn">How to Contribute</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>Powered by <a href="https://github.com/aetherwing-io/haystack">haystack OS</a></p>
+  </footer>
+</body>
+</html>

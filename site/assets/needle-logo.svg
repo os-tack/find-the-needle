@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Needle body -->
+  <line x1="20" y1="80" x2="70" y2="15" stroke="#58a6ff" stroke-width="3" stroke-linecap="round"/>
+  <!-- Needle point -->
+  <polygon points="70,15 75,5 65,10" fill="#58a6ff"/>
+  <!-- Needle eye -->
+  <ellipse cx="25" cy="75" rx="4" ry="7" fill="none" stroke="#58a6ff" stroke-width="2" transform="rotate(-65, 25, 75)"/>
+  <!-- Thread -->
+  <path d="M 22 82 Q 10 90 15 95 Q 20 100 30 95 Q 40 90 35 85" fill="none" stroke="#8b949e" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

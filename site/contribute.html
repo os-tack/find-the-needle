@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contribute - needle-bench</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header>
+    <nav><a href="index.html">&larr; needle-bench</a></nav>
+    <h1>Contribute a Benchmark</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>What makes a good benchmark?</h2>
+      <ul>
+        <li>A <strong>real bug</strong> from a real codebase &mdash; not synthetic, not contrived</li>
+        <li>A Dockerfile that builds the broken environment in under 5 minutes</li>
+        <li>A <code>test.sh</code> that fails on the bug and passes on the fix</li>
+        <li>A sealed <code>.bench/solution.patch</code> the agent never sees</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Directory structure</h2>
+      <pre><code>benchmarks/&lt;name&gt;/
+  Dockerfile
+  Agentfile
+  test.sh
+  README.md
+  .bench/
+    solution.patch</code></pre>
+    </section>
+
+    <section class="card">
+      <h2>Getting started</h2>
+      <ol>
+        <li>Read the full <a href="https://github.com/aetherwing-io/needle-bench/blob/main/docs/CONTRIBUTING.md">CONTRIBUTING.md</a></li>
+        <li>Copy the <code>benchmarks/_template/</code> directory</li>
+        <li>Package your bug, write a test, generate a patch</li>
+        <li>Open a PR &mdash; CI will validate everything automatically</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <p>Powered by <a href="https://github.com/aetherwing-io/haystack">haystack OS</a></p>
+  </footer>
+</body>
+</html>

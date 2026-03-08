@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard - needle-bench</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header>
+    <nav><a href="index.html">&larr; needle-bench</a></nav>
+    <h1>Leaderboard</h1>
+  </header>
+
+  <main>
+    <div id="leaderboard-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Agent</th>
+            <th>Solved</th>
+            <th>Avg Turns</th>
+            <th>Avg Tokens</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody id="scores-body">
+          <tr><td colspan="6" class="empty">Loading scores...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <p>Powered by <a href="https://github.com/aetherwing-io/haystack">haystack OS</a></p>
+  </footer>
+
+  <script>
+    (async function() {
+      try {
+        const resp = await fetch('scores.json');
+        if (!resp.ok) throw new Error('No scores yet');
+        const data = await resp.json();
+
+        const tbody = document.getElementById('scores-body');
+        if (!data.length) {
+          tbody.innerHTML = '<tr><td colspan="6" class="empty">No scores yet. Run some benchmarks!</td></tr>';
+          return;
+        }
+
+        data.sort((a, b) => b.score - a.score);
+        tbody.innerHTML = data.map((entry, i) =>
+          `<tr>
+            <td>${i + 1}</td>
+            <td>${entry.agent}</td>
+            <td>${entry.solved}/${entry.total}</td>
+            <td>${entry.avg_turns}</td>
+            <td>${entry.avg_tokens}</td>
+            <td>${entry.score}</td>
+          </tr>`
+        ).join('');
+      } catch (e) {
+        document.getElementById('scores-body').innerHTML =
+          '<tr><td colspan="6" class="empty">No scores available yet.</td></tr>';
+      }
+    })();
+  </script>
+</body>
+</html>

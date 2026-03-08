@@ -1,0 +1,13 @@
+{
+  "name": "counter-service",
+  "version": "1.0.0",
+  "description": "A shared counter service backed by Redis",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "ioredis": "^5.4.1"
+  }
+}

@@ -1,0 +1,16 @@
+# needle-bench template Agentfile
+# See docs/SPEC.md for directive reference.
+
+FROM template:latest
+
+# Optional: extra context for the agent (omit for blind_discovery scoring)
+# PROMPT The server crashes under load — find why.
+
+# Tools available to the agent
+TOOL sh_run
+TOOL ss
+
+# Resource limits
+LIMIT turns 30
+LIMIT tokens 200000
+LIMIT wall_clock 600

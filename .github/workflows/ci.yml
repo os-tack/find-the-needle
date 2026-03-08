@@ -1,0 +1,30 @@
+name: Validate Benchmarks
+on: [pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate format
+        run: |
+          for dir in benchmarks/*/; do
+            [ -f "$dir/Dockerfile" ] || (echo "FAIL: $dir missing Dockerfile" && exit 1)
+            [ -f "$dir/Agentfile" ] || (echo "FAIL: $dir missing Agentfile" && exit 1)
+            [ -f "$dir/test.sh" ] || (echo "FAIL: $dir missing test.sh" && exit 1)
+            [ -f "$dir/.bench/solution.patch" ] || (echo "FAIL: $dir missing .bench/solution.patch" && exit 1)
+          done
+      - name: Build Dockerfiles
+        run: |
+          for dir in benchmarks/*/; do
+            [ "$dir" = "benchmarks/_template/" ] && continue
+            echo "Building $dir..."
+            docker build -t "needle-bench-$(basename $dir)" "$dir" || exit 1
+          done
+      - name: Verify solutions
+        run: |
+          for dir in benchmarks/*/; do
+            [ "$dir" = "benchmarks/_template/" ] && continue
+            name=$(basename "$dir")
+            echo "Verifying $name..."
+            docker run --rm "needle-bench-$name" bash -c "cd /app && git apply .bench/solution.patch && bash test.sh" || exit 1
+          done
