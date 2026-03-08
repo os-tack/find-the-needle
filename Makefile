@@ -3,6 +3,8 @@
 #   make validate              — validate all benchmarks
 #   make validate BENCH=name   — validate one benchmark
 #   make run BENCH=name        — build and run one benchmark
+#   make bench                 — run all benchmarks (expect failures)
+#   make verify                — verify all solutions work
 #   make list                  — list all benchmarks
 
 BENCHMARKS_DIR := benchmarks
@@ -17,6 +19,8 @@ help: ## Show this help
 	@echo "  make validate              Validate all benchmarks"
 	@echo "  make validate BENCH=name   Validate a single benchmark"
 	@echo "  make run BENCH=name        Build and run a benchmark"
+	@echo "  make bench                 Run all benchmarks (expect failures)"
+	@echo "  make verify                Verify all solutions work"
 	@echo "  make list                  List all benchmarks"
 	@echo "  make clean                 Remove build artifacts"
 	@echo ""
