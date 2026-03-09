@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-    paths: ['site/**', 'leaderboard/**']
+    paths: ['site-v2/**', 'leaderboard/**']
   workflow_dispatch:
 
 permissions:
@@ -22,11 +22,18 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Copy scores into site
-        run: cp leaderboard/scores.json site/scores.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install and build Astro
+        run: |
+          cd site-v2
+          cp ../leaderboard/scores.json public/scores.json
+          npm ci
+          npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: site-v2/dist
       - id: deployment
         uses: actions/deploy-pages@v4
