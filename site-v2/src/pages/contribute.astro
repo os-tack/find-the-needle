@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Contribute — needle-bench" description="Package your worst debugging day as a benchmark. Real bugs only.">
+  <div class="page-header">
+    <a href="/" class="back">&larr; needle-bench</a>
+    <h1>Contribute a benchmark</h1>
+  </div>
+
+  <main>
+    <section class="section">
+      <h2>What makes a good benchmark</h2>
+      <p>The best benchmarks come from the worst days. A bug that took you hours. A race condition that only showed up in production. A silent data corruption that passed every test except the one nobody wrote.</p>
+      <ul style="padding-left: 1.5rem;">
+        <li>A <strong>real bug</strong> from a real codebase &mdash; not synthetic, not contrived</li>
+        <li>A Dockerfile that builds the broken environment in under 5 minutes</li>
+        <li>A <code>test.sh</code> that fails on the bug and passes on the fix</li>
+        <li>A sealed <code>.bench/solution.patch</code> the agent never sees</li>
+        <li>Image size under 500 MB. Alpine preferred.</li>
+        <li>No network access required at test time</li>
+        <li>Deterministic: same input, same result, every time</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Directory structure</h2>
+      <div class="card">
+        <pre><code>benchmarks/&lt;name&gt;/
+  Dockerfile          # builds the broken environment
+  Agentfile           # agent constraints
+  test.sh             # exit 0 = pass, exit 1 = fail
+  README.md           # human description of the bug
+  .bench/
+    solution.patch    # sealed ground truth (git diff format)</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>The Agentfile</h2>
+      <p>Declares what the agent gets. No more, no less.</p>
+      <div class="card">
+        <pre><code>FROM &lt;benchmark-name&gt;       # Docker image reference
+TOOL sh_run                 # tools the agent may use (repeatable)
+TOOL ss
+LIMIT turns 20              # max conversation turns
+LIMIT tokens 100000         # max token budget
+LIMIT wall_clock 300        # max wall-clock seconds</code></pre>
+      </div>
+      <p class="muted">Defaults if not specified: 30 turns, 200k tokens, 600s wall clock.</p>
+    </section>
+
+    <section class="section">
+      <h2>Naming convention</h2>
+      <p>Lowercase, hyphenated. Format: <code>&lt;bug-type&gt;-&lt;project-or-domain&gt;</code></p>
+      <div class="card">
+        <pre><code>off-by-one-pagination
+race-condition-counter
+null-deref-tokio
+silent-data-corruption</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Submit</h2>
+      <ol style="padding-left: 1.5rem;">
+        <li>Clone the repo: <code>git clone https://github.com/aetherwing-io/needle-bench</code></li>
+        <li>Copy <code>benchmarks/_template/</code> to <code>benchmarks/your-bug-name/</code></li>
+        <li>Package your bug: write the Dockerfile, test.sh, and solution.patch</li>
+        <li>Validate: <code>make validate BENCH=your-bug-name</code></li>
+        <li>Test the solution: <code>make verify</code> (your solution patch must make test.sh pass)</li>
+        <li>Open a PR &mdash; CI validates everything automatically</li>
+      </ol>
+      <p style="margin-top: 1rem;">
+        <a href="https://github.com/aetherwing-io/needle-bench/blob/main/docs/CONTRIBUTING.md" class="btn">Full contribution guide</a>
+        <a href="https://github.com/aetherwing-io/needle-bench/blob/main/docs/SPEC.md" class="btn">Spec v1.0</a>
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Rules</h2>
+      <ul style="padding-left: 1.5rem;">
+        <li>Benchmarks are <strong>immutable once merged</strong>. If you need to modify, create a v2 as a new directory.</li>
+        <li>All bugs must be real. Anonymize proprietary code, but the bug pattern must be genuine.</li>
+        <li>The solution patch must apply cleanly inside the container and make test.sh exit 0.</li>
+        <li>test.sh must be deterministic and complete in under 60 seconds.</li>
+      </ul>
+    </section>
+  </main>
+</Base>

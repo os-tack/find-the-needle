@@ -1,0 +1,190 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="needle-bench — your worst debugging day, everyone's benchmark">
+  <header class="hero">
+    <h1>Your worst debugging day, everyone's benchmark.</h1>
+    <p class="tagline">
+      Developers submit real bugs as frozen Docker snapshots.
+      AI agents get one prompt: "find the needle."
+      11 metrics. Deterministic scoring. No hiding.
+    </p>
+    <div class="cta-row">
+      <a href="#install" class="btn btn-primary">Get started</a>
+      <a href="/leaderboard/" class="btn">View leaderboard</a>
+      <a href="https://github.com/aetherwing-io/needle-bench" class="btn">GitHub</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <p>SWE-bench is a museum &mdash; a curated collection of historical bugs. needle-bench is a marketplace. Developers package their worst production failures as self-contained Docker images. An agent is dropped in with no context beyond "find the needle." Scoring is deterministic: same run, same scores. The benchmarks are real, the bugs are anonymized, and the leaderboard is public.</p>
+    </section>
+
+    <div class="stats-grid">
+      <div class="stat">
+        <span class="number" id="stat-benchmarks">3</span>
+        <span class="label">benchmarks</span>
+      </div>
+      <div class="stat">
+        <span class="number">11</span>
+        <span class="label">metrics</span>
+      </div>
+      <div class="stat">
+        <span class="number" id="stat-models">1</span>
+        <span class="label">models tested</span>
+      </div>
+      <div class="stat">
+        <span class="number">&lt;5m</span>
+        <span class="label">build time</span>
+      </div>
+    </div>
+
+    <section class="section" id="how-it-works">
+      <h2>How it works</h2>
+      <p>Each benchmark is a directory with four files:</p>
+      <div class="card">
+        <pre><code>benchmarks/off-by-one-pagination/
+  Dockerfile        # builds the broken environment
+  Agentfile         # agent constraints (tools, turn limit, token budget)
+  test.sh           # exit 0 = fixed, exit 1 = still broken
+  .bench/
+    solution.patch  # sealed ground truth — agent never sees this</code></pre>
+      </div>
+      <p>The Dockerfile contains a real bug from a real codebase. Not synthetic. Not contrived. The agent gets shell access and a failing test. That's it.</p>
+      <p class="muted">A real Agentfile looks like this:</p>
+      <div class="card">
+        <pre><code>FROM off-by-one-pagination
+TOOL sh_run
+TOOL ss
+LIMIT turns 20
+LIMIT tokens 100000
+LIMIT wall_clock 300</code></pre>
+      </div>
+    </section>
+
+    <section class="section" id="scoring">
+      <h2>Scoring: 11 metrics, no opinions</h2>
+      <p>Every run produces the same 11 numbers. No subjective evaluation. No LLM-as-judge. The test passes or it doesn't. Everything else is measured, not guessed.</p>
+      <ul class="metrics-list">
+        <li><span class="metric-name">resolved</span> <span class="metric-desc">did test.sh pass? boolean. the only metric that matters for the headline.</span></li>
+        <li><span class="metric-name">turns_to_discovery</span> <span class="metric-desc">turns before the agent identifies the correct file and region.</span></li>
+        <li><span class="metric-name">turns_to_fix</span> <span class="metric-desc">turns before the agent produces a passing patch.</span></li>
+        <li><span class="metric-name">signal_to_noise</span> <span class="metric-desc">ratio of productive actions to total actions. 0.0&ndash;1.0.</span></li>
+        <li><span class="metric-name">false_positives</span> <span class="metric-desc">files edited that aren't in the solution. fewer is better.</span></li>
+        <li><span class="metric-name">token_cost</span> <span class="metric-desc">total tokens consumed (input + output). the bill.</span></li>
+        <li><span class="metric-name">tokens_per_correct_line</span> <span class="metric-desc">efficiency: how many tokens per line of correct fix.</span></li>
+        <li><span class="metric-name">recovery_events</span> <span class="metric-desc">times the agent went wrong, noticed, and self-corrected.</span></li>
+        <li><span class="metric-name">recovery_rate</span> <span class="metric-desc">of those recovery events, how many led back to the fix.</span></li>
+        <li><span class="metric-name">wall_clock</span> <span class="metric-desc">wall-clock seconds from start to score.</span></li>
+        <li><span class="metric-name">blind_discovery</span> <span class="metric-desc">did the agent find the bug with no hints beyond test output?</span></li>
+      </ul>
+      <p class="muted" style="margin-top: 1rem;">Leaderboard ranking: resolved (desc) &rarr; turns_to_fix (asc) &rarr; token_cost (asc) &rarr; wall_clock (asc).</p>
+    </section>
+
+    <section class="section">
+      <h2>Current benchmarks</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Difficulty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>off-by-one-pagination</code></td>
+            <td>logic error</td>
+            <td><span class="badge">easy</span></td>
+          </tr>
+          <tr>
+            <td><code>race-condition-counter</code></td>
+            <td>concurrency</td>
+            <td><span class="badge">medium</span></td>
+          </tr>
+          <tr>
+            <td><code>silent-data-corruption</code></td>
+            <td>data integrity</td>
+            <td><span class="badge">medium</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top: 1rem;">22 more benchmarks planned across easy, medium, and hard tiers. <a href="https://github.com/aetherwing-io/needle-bench/blob/main/docs/ROADMAP.md">See roadmap.</a></p>
+    </section>
+
+    <section class="section" id="install">
+      <h2>Get started</h2>
+      <p>Clone, verify, run. Docker required.</p>
+      <div class="install-block">
+        <pre><code>git clone https://github.com/aetherwing-io/needle-bench
+cd needle-bench
+make verify   # confirms all benchmarks have valid solutions
+make bench    # runs all benchmarks (Docker required)</code></pre>
+      </div>
+      <p>Run a single benchmark:</p>
+      <div class="install-block">
+        <pre><code>make run BENCH=off-by-one-pagination</code></pre>
+      </div>
+      <p>Validate your own benchmark before submitting:</p>
+      <div class="install-block">
+        <pre><code>make validate BENCH=my-new-benchmark</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What the data looks like</h2>
+      <p>Every run appends a record to <code>scores.json</code>. No interpretation layer. Raw numbers.</p>
+      <div class="card">
+        <pre><code>{`{
+  "benchmark": "off-by-one-pagination",
+  "agent": "claude-opus-4-6",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 4,
+  "signal_to_noise": 0.85,
+  "false_positives": 0,
+  "token_cost": 32000,
+  "tokens_per_correct_line": 32000,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 45.2,
+  "blind_discovery": true
+}`}</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Contribute a benchmark</h2>
+      <p>Got a gnarly bug? Package it. The best benchmarks come from the worst debugging days.</p>
+      <ul style="padding-left: 1.5rem; margin-bottom: 1rem;">
+        <li>A <strong>real bug</strong> from a real codebase &mdash; not synthetic, not contrived</li>
+        <li>A Dockerfile that builds in under 5 minutes</li>
+        <li>A <code>test.sh</code> that fails on the bug and passes on the fix</li>
+        <li>A sealed <code>.bench/solution.patch</code> the agent never sees</li>
+      </ul>
+      <a href="/contribute/" class="btn">Contribution guide</a>
+    </section>
+  </main>
+</Base>
+
+<script>
+  async function updateStats() {
+    try {
+      const resp = await fetch('/scores.json');
+      if (!resp.ok) return;
+      const data = await resp.json();
+      if (!Array.isArray(data)) return;
+
+      const benchmarks = new Set(data.map(d => d.benchmark));
+      const models = new Set(data.map(d => d.agent));
+
+      const benchEl = document.getElementById('stat-benchmarks');
+      const modelsEl = document.getElementById('stat-models');
+      if (benchEl) benchEl.textContent = String(benchmarks.size);
+      if (modelsEl) modelsEl.textContent = String(models.size);
+    } catch {}
+  }
+  updateStats();
+</script>

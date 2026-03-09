@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'An open benchmark where developers submit real bugs as frozen Docker snapshots and AI agents find the needle.' } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={`https://needle-bench.cc${currentPath}`}>
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="topnav">
+    <a href="/" class="brand">needle-bench</a>
+    <a href="/" class:list={[{ active: currentPath === '/' }]}>Home</a>
+    <a href="/leaderboard/" class:list={[{ active: currentPath.startsWith('/leaderboard') }]}>Leaderboard</a>
+    <a href="/insights/" class:list={[{ active: currentPath.startsWith('/insights') }]}>Insights</a>
+    <a href="/contribute/" class:list={[{ active: currentPath.startsWith('/contribute') }]}>Contribute</a>
+    <a href="https://github.com/aetherwing-io/needle-bench">GitHub</a>
+  </nav>
+
+  <slot />
+
+  <footer>
+    Built with <a href="https://github.com/aetherwing-io/needle-bench">needle-bench</a>. Open source.<br>
+    <a href="https://github.com/aetherwing-io/needle-bench">GitHub</a> &middot;
+    <a href="https://github.com/aetherwing-io/needle-bench/blob/main/LICENSE">MIT License</a> &middot;
+    All benchmarks are real bugs, anonymized.
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Leaderboard — needle-bench" description="needle-bench leaderboard: which AI agents find the needle fastest?">
+  <div class="page-header">
+    <a href="/" class="back">&larr; needle-bench</a>
+    <h1>Leaderboard</h1>
+  </div>
+
+  <main>
+    <p class="muted" style="margin-bottom: 1.5rem; font-size: 0.9rem;">Click any column header to sort. Ranking: resolved (desc) &rarr; turns to fix (asc) &rarr; tokens (asc).</p>
+
+    <div id="leaderboard-table" style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th data-key="rank">#</th>
+            <th data-key="agent" data-type="string">Agent</th>
+            <th data-key="benchmark" data-type="string">Benchmark</th>
+            <th data-key="resolved" data-type="boolean">Resolved</th>
+            <th data-key="turns_to_discovery" data-type="number">Discovery</th>
+            <th data-key="turns_to_fix" data-type="number">Fix turns</th>
+            <th data-key="files_touched" data-type="number">Files</th>
+            <th data-key="lines_changed" data-type="number">Lines</th>
+            <th data-key="blind_discovery" data-type="boolean">Blind</th>
+          </tr>
+        </thead>
+        <tbody id="scores-body">
+          <tr><td colspan="9" class="empty">Loading scores...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</Base>
+
+<script>
+  const FALLBACK_SCORES = [
+    {"benchmark":"off-by-one-pagination","agent":"claude-opus-4-6","os":"none","resolved":true,"turns_to_discovery":1,"turns_to_fix":4,"files_touched":1,"lines_changed":1,"blind_discovery":true,"timestamp":"2026-03-09T00:00:00Z"},
+    {"benchmark":"race-condition-counter","agent":"claude-opus-4-6","os":"none","resolved":true,"turns_to_discovery":1,"turns_to_fix":4,"files_touched":1,"lines_changed":4,"blind_discovery":true,"timestamp":"2026-03-09T00:01:00Z"},
+    {"benchmark":"silent-data-corruption","agent":"claude-opus-4-6","os":"none","resolved":true,"turns_to_discovery":1,"turns_to_fix":4,"files_touched":1,"lines_changed":3,"blind_discovery":true,"timestamp":"2026-03-09T00:02:00Z"}
+  ];
+
+  (async function() {
+    try {
+      let data: any[];
+      try {
+        const resp = await fetch('/scores.json');
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        data = await resp.json();
+        if (!Array.isArray(data)) throw new Error('Not an array');
+      } catch {
+        data = FALLBACK_SCORES;
+      }
+
+      if (!data.length) {
+        document.getElementById('scores-body')!.innerHTML =
+          '<tr><td colspan="9" class="empty">No scores yet. Run some benchmarks!</td></tr>';
+        return;
+      }
+
+      let sortKey = 'turns_to_fix';
+      let sortAsc = true;
+
+      function render(entries: any[]) {
+        const sorted = [...entries].sort((a, b) => {
+          // Primary: resolved desc
+          if (a.resolved !== b.resolved) return (b.resolved ? 1 : 0) - (a.resolved ? 1 : 0);
+          let av = a[sortKey], bv = b[sortKey];
+          if (typeof av === 'boolean') { av = av ? 1 : 0; bv = bv ? 1 : 0; }
+          if (typeof av === 'string') return sortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
+          return sortAsc ? av - bv : bv - av;
+        });
+
+        document.getElementById('scores-body')!.innerHTML = sorted.map((e, i) =>
+          '<tr>' +
+          '<td>' + (i + 1) + '</td>' +
+          '<td><code>' + e.agent + '</code></td>' +
+          '<td><code>' + e.benchmark + '</code></td>' +
+          '<td>' + (e.resolved ? '<span style="color: var(--green);">&#10003;</span>' : '<span style="color: var(--red);">&#10007;</span>') + '</td>' +
+          '<td>' + e.turns_to_discovery + '</td>' +
+          '<td>' + e.turns_to_fix + '</td>' +
+          '<td>' + e.files_touched + '</td>' +
+          '<td>' + e.lines_changed + '</td>' +
+          '<td>' + (e.blind_discovery ? '<span style="color: var(--green);">&#10003;</span>' : '&ndash;') + '</td>' +
+          '</tr>'
+        ).join('');
+      }
+
+      render(data);
+
+      document.querySelectorAll('th[data-key]').forEach(function(th) {
+        th.addEventListener('click', function() {
+          const key = (th as HTMLElement).getAttribute('data-key')!;
+          if (key === 'rank') return;
+          if (sortKey === key) { sortAsc = !sortAsc; } else { sortKey = key; sortAsc = true; }
+          document.querySelectorAll('th').forEach(t => t.classList.remove('sorted'));
+          th.classList.add('sorted');
+          render(data);
+        });
+      });
+    } catch {
+      document.getElementById('scores-body')!.innerHTML =
+        '<tr><td colspan="9" class="empty">No scores available yet.</td></tr>';
+    }
+  })();
+</script>

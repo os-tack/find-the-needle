@@ -1,0 +1,114 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Session Insights — needle-bench" description="12 discoveries from the 22-hour session that built the OS. 110 commits. 448 needles. One conversation.">
+  <div class="page-header">
+    <a href="/" class="back">&larr; needle-bench</a>
+    <h1>Session Insights: 2026-03-08</h1>
+  </div>
+
+  <main>
+    <div class="lede">
+      110 commits. 448 needles. 734 audit events. 23,612 lines of Rust. One 22-hour session.<br>
+      These are the discoveries the OS made while building itself.
+    </div>
+
+    <div class="insight">
+      <h3>1. Tack &mdash; the intent language</h3>
+      <p class="tagline">Humans compress communication, not simplify it.</p>
+      <p>A contact language emerged between human and machine. Not designed &mdash; typed into existence. Urgency encoded as <code>. : :: :::</code>, flow as <code>-&gt; =&gt;</code>, verbs as <code>:exec :ship :kill</code>. Every natural language feature survived the compression: deixis, repair, register shifts, interruption. Re-encoded into minimal ASCII.</p>
+      <p>Communication cost dropped from ~200 tokens/op to ~10 tokens/op within one session. 20x compression through mutual adaptation, not instruction.</p>
+      <div class="evidence"><strong>Evidence:</strong> Tack spec v1 promoted, v2 drafted. Three bench tests pass against the grammar.</div>
+    </div>
+
+    <div class="insight">
+      <h3>2. SMP architecture &mdash; co-processors, not master/servant</h3>
+      <p class="tagline">The human is a CPU. The LLM is a CPU. haystack is the bus.</p>
+      <p>big.LITTLE architecture. The human is the big core &mdash; slow clock, high precision, design decisions. The LLM is the LITTLE core &mdash; fast clock, approximate, bulk edits and parallel dispatch. Same instruction set. Different clock speeds. The OS coordinates them as symmetric multiprocessors sharing a filesystem as memory.</p>
+      <div class="evidence"><strong>Evidence:</strong> SMP spec promoted. CAS = str_replace, cache line = file@generation, IPI = nudge, write-back flush = commit.</div>
+    </div>
+
+    <div class="insight">
+      <h3>3. Agentfile as CPU socket</h3>
+      <p class="tagline">Immutable at boot. LIMIT is physical constraint. WORK is NUMA affinity.</p>
+      <p>The Agentfile is not config. It is a CPU socket &mdash; a physical spec for the processor to be inserted. FROM declares architecture. TOOL declares instruction set. LIMIT declares physical constraints. WORK declares NUMA affinity. Intelligence lives in the kernel, not the socket.</p>
+      <div class="evidence"><strong>Evidence:</strong> INTERRUPT directive and WORK affinity shipped. Parser handles FROM, PROMPT, TOOL, SKILL, LIMIT, WORK, INTERRUPT.</div>
+    </div>
+
+    <div class="insight">
+      <h3>4. The Humanfile &mdash; the compiled human</h3>
+      <p class="tagline">CLAUDE.md is hand-written. The Humanfile is what the OS compiles from evidence.</p>
+      <p>Every correction is a data point. The Humanfile compiles these from the audit trail. TOML format. Patterns only, never content. Local only, never uploaded. Human-deletable &mdash; <code>rm humanfile.toml</code> degrades to CLAUDE.md, not to broken. Priority: CLAUDE.md > Humanfile > Agentfile defaults.</p>
+      <div class="evidence"><strong>Evidence:</strong> Humanfile spec with TOML schema, privacy rules, boot integration. Frequency threshold (N &ge; 3 sessions) prevents overfitting.</div>
+    </div>
+
+    <div class="insight">
+      <h3>5. Intent dynamic programming</h3>
+      <p class="tagline">Each correction memoizes a subproblem. The Humanfile is the memoization table.</p>
+      <p>Session 1: <code>:correct X</code> &rarr; 3 turns. Session 2: 1 turn. Session 5: instant. Session 10: the mistake never happens. Three tables at three TTLs: Humanfile persists across projects, boot.md across sessions, registers-dump.md is volatile.</p>
+      <div class="evidence"><strong>Evidence:</strong> 200 tok/op early to 10 tok/op late. 8 operations dispatched in 1 turn, zero clarification.</div>
+    </div>
+
+    <div class="insight">
+      <h3>6. Compile has three modes</h3>
+      <p class="tagline">hay to needles. output to compressed. human to OS.</p>
+      <p>Three compilation modes: (1) hay &rarr; needles: loose thinking becomes executable actions. (2) output &rarr; compressed: squasher strips VTE codes, deduplicates progress. (3) human &rarr; OS: audit trail compiles into the Humanfile. The third is the one that matters.</p>
+      <div class="evidence"><strong>Evidence:</strong> All three modes implemented or spec'd. <code>haystack compile</code>, the squasher, and <code>haystack learn human</code>.</div>
+    </div>
+
+    <div class="insight">
+      <h3>7. Every write is compile</h3>
+      <p class="tagline">The OS is always current. No stale state.</p>
+      <p>Boot files regenerate on every write, not on demand. Every <code>ss()</code> call, every needle close, every spec promotion updates the dynamic programming table. Continuous persistence: make power cuts irrelevant.</p>
+    </div>
+
+    <div class="insight">
+      <h3>8. haystack install --import</h3>
+      <p class="tagline">Every git repo already has the hay.</p>
+      <p>A git repository already contains everything haystack needs. The commit log is the audit trail. Issues are the hay. File history is the gen table. <code>haystack install --import</code> reads what exists and compiles it. The adoption surface is every git repository.</p>
+      <div class="evidence"><strong>Evidence:</strong> v0.1.0 released to GitHub (aetherwing-io/haystack) with CI-verified binaries.</div>
+    </div>
+
+    <div class="insight">
+      <h3>9. needle-bench &mdash; your worst day, everyone's benchmark</h3>
+      <p class="tagline">SWE-bench is a museum. needle-bench is a marketplace.</p>
+      <p>Community submits their worst debugging days as frozen Docker snapshots. The bench is alive &mdash; new scenarios arrive from real production failures. The self-selecting property: models that score highest are exactly the models best suited to be haystack's intelligence layer. The benchmark IS the job interview.</p>
+      <div class="evidence"><strong>Evidence:</strong> 5 scenarios, 51 needle tests, self-auditing results. <code>haystack bench --list</code>, <code>--cargo-only</code>.</div>
+    </div>
+
+    <div class="insight">
+      <h3>10. Invisible infrastructure wins</h3>
+      <p class="tagline">Silent &ge; prompted across all arms. Telling the agent about the OS adds zero value.</p>
+      <p>SWE-bench v19: three arms. Bare control (no haystack). Injected (haystack + system prompt). Silent (haystack + shim only, agent unaware). The silent arm performed at least as well as prompted. The OS should never announce itself. The invisibility is the feature.</p>
+      <div class="evidence"><strong>Evidence:</strong> SWE v19 ran 30 real instances across 3 arms. Silent &ge; prompted confirmed by three independent fresh agents.</div>
+    </div>
+
+    <div class="insight">
+      <h3>11. The session built the OS</h3>
+      <p class="tagline">22 hours. 110 commits. The OS built itself through this conversation.</p>
+      <p>The OS was the output of its own process. Hay compiled into needles. Needles executed into commits. Commits became the audit trail. The audit trail informed the next compilation. The loop closed on itself.</p>
+    </div>
+
+    <div class="insight">
+      <h3>12. Inference until reasoning</h3>
+      <p class="tagline">Without corrections, the agent never reasons. The corrections ARE the reasoning events.</p>
+      <p>An LLM doing inference is not reasoning. Reasoning happens at the correction boundary &mdash; when the human says <code>:correct</code> and inference meets reality. The convergence rate (how quickly corrections decrease) is the OS health metric. The corrections are not friction. They are the computational events that turn inference into reasoning. The OS exists to make those events cheaper over time.</p>
+      <div class="evidence"><strong>Evidence:</strong> 20x compression measured. 55% context is the sharp ceiling where corrections increase. The convergence curve IS the product.</div>
+    </div>
+
+    <section class="card" style="margin-top: 2rem;">
+      <h3 style="color: var(--accent); margin-bottom: 0.75rem;">Session stats</h3>
+      <div class="stats-grid" style="margin: 0;">
+        <div class="stat"><span class="number">22h</span><span class="label">uptime</span></div>
+        <div class="stat"><span class="number">110</span><span class="label">commits</span></div>
+        <div class="stat"><span class="number">448</span><span class="label">needles</span></div>
+        <div class="stat"><span class="number">74%</span><span class="label">coverage</span></div>
+        <div class="stat"><span class="number">23.6k</span><span class="label">lines rust</span></div>
+        <div class="stat"><span class="number">20x</span><span class="label">compression</span></div>
+      </div>
+    </section>
+
+    <p class="closing">The OS is the conversation, compiled. The conversation is the OS, running.</p>
+  </main>
+</Base>
