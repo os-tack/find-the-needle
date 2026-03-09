@@ -16,14 +16,14 @@ import Base from '../layouts/Base.astro';
         <thead>
           <tr>
             <th data-key="rank">#</th>
-            <th data-key="agent" data-type="string">Agent</th>
-            <th data-key="benchmark" data-type="string">Benchmark</th>
-            <th data-key="resolved" data-type="boolean">Resolved</th>
-            <th data-key="turns_to_discovery" data-type="number">Discovery</th>
-            <th data-key="turns_to_fix" data-type="number">Fix turns</th>
-            <th data-key="files_touched" data-type="number">Files</th>
-            <th data-key="lines_changed" data-type="number">Lines</th>
-            <th data-key="blind_discovery" data-type="boolean">Blind</th>
+            <th data-key="agent" data-type="string">Agent <span class="sort-arrow">&#9650;</span></th>
+            <th data-key="benchmark" data-type="string">Benchmark <span class="sort-arrow">&#9650;</span></th>
+            <th data-key="resolved" data-type="boolean">Resolved <span class="sort-arrow">&#9650;</span></th>
+            <th data-key="turns_to_discovery" data-type="number">Discovery <span class="sort-arrow">&#9650;</span></th>
+            <th data-key="turns_to_fix" data-type="number">Fix turns <span class="sort-arrow">&#9650;</span></th>
+            <th data-key="files_touched" data-type="number">Files <span class="sort-arrow">&#9650;</span></th>
+            <th data-key="lines_changed" data-type="number">Lines <span class="sort-arrow">&#9650;</span></th>
+            <th data-key="blind_discovery" data-type="boolean">Blind <span class="sort-arrow">&#9650;</span></th>
           </tr>
         </thead>
         <tbody id="scores-body">
@@ -77,25 +77,40 @@ import Base from '../layouts/Base.astro';
           '<td>' + (i + 1) + '</td>' +
           '<td><code>' + e.agent + '</code></td>' +
           '<td><code>' + e.benchmark + '</code></td>' +
-          '<td>' + (e.resolved ? '<span style="color: var(--green);">&#10003;</span>' : '<span style="color: var(--red);">&#10007;</span>') + '</td>' +
+          '<td>' + (e.resolved ? '<span class="mark-ok">&#10003;</span>' : '<span class="mark-fail">&#10007;</span>') + '</td>' +
           '<td>' + e.turns_to_discovery + '</td>' +
           '<td>' + e.turns_to_fix + '</td>' +
           '<td>' + e.files_touched + '</td>' +
           '<td>' + e.lines_changed + '</td>' +
-          '<td>' + (e.blind_discovery ? '<span style="color: var(--green);">&#10003;</span>' : '&ndash;') + '</td>' +
+          '<td>' + (e.blind_discovery ? '<span class="mark-ok">&#10003;</span>' : '&ndash;') + '</td>' +
           '</tr>'
         ).join('');
       }
 
       render(data);
 
+      function updateSortIndicators() {
+        document.querySelectorAll('th[data-key]').forEach(function(th) {
+          const key = (th as HTMLElement).getAttribute('data-key')!;
+          const arrow = th.querySelector('.sort-arrow') as HTMLElement;
+          if (!arrow) return;
+          th.classList.toggle('sorted', key === sortKey);
+          if (key === sortKey) {
+            arrow.textContent = sortAsc ? '\u25B2' : '\u25BC';
+          } else {
+            arrow.textContent = '\u25B2';
+          }
+        });
+      }
+
+      updateSortIndicators();
+
       document.querySelectorAll('th[data-key]').forEach(function(th) {
         th.addEventListener('click', function() {
           const key = (th as HTMLElement).getAttribute('data-key')!;
           if (key === 'rank') return;
           if (sortKey === key) { sortAsc = !sortAsc; } else { sortKey = key; sortAsc = true; }
-          document.querySelectorAll('th').forEach(t => t.classList.remove('sorted'));
-          th.classList.add('sorted');
+          updateSortIndicators();
           render(data);
         });
       });

@@ -22,22 +22,24 @@ const currentPath = Astro.url.pathname;
   <meta name="twitter:card" content="summary">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <nav class="topnav">
-    <a href="/" class="brand">needle-bench</a>
+    <a href="/" class="brand">needle-bench<span class="brand-sub">by ostk</span></a>
     <a href="/" class:list={[{ active: currentPath === '/' }]}>Home</a>
     <a href="/leaderboard/" class:list={[{ active: currentPath.startsWith('/leaderboard') }]}>Leaderboard</a>
     <a href="/insights/" class:list={[{ active: currentPath.startsWith('/insights') }]}>Insights</a>
     <a href="/contribute/" class:list={[{ active: currentPath.startsWith('/contribute') }]}>Contribute</a>
+    <span class="nav-sep">|</span>
+    <a href="https://ostk.ai">ostk.ai</a>
     <a href="https://github.com/aetherwing-io/needle-bench">GitHub</a>
   </nav>
 
   <slot />
 
   <footer>
-    Built with <a href="https://github.com/aetherwing-io/needle-bench">needle-bench</a>. Open source.<br>
+    <span class="footer-brand">Part of the <a href="https://ostk.ai">ostk</a> stack</span>
     <a href="https://github.com/aetherwing-io/needle-bench">GitHub</a> &middot;
     <a href="https://github.com/aetherwing-io/needle-bench/blob/main/LICENSE">MIT License</a> &middot;
     All benchmarks are real bugs, anonymized.
