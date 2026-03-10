@@ -121,7 +121,7 @@ This means the adoption surface is not "new projects that choose haystack." It i
 
 The compounding implication: every repository that installs haystack immediately has a filled memoization table. The dynamic programming doesn't start from zero — it starts from the project's entire history.
 
-**Evidence:** Installation spec includes `--import` flag. The boot sequence reads from git log and filesystem state, not from haystack-specific files. The v0.1.0 release shipped to GitHub (aetherwing-io/haystack) with CI-verified binaries.
+**Evidence:** Installation spec includes `--import` flag. The boot sequence reads from git log and filesystem state, not from haystack-specific files. The v0.1.0 release shipped to GitHub with CI-verified binaries.
 
 ---
 
