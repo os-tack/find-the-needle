@@ -96,6 +96,48 @@ import Base from '../layouts/Base.astro';
       </div>
     </section>
 
+    <div class="compounded-header" style="margin-top: 3rem; margin-bottom: 0.75rem; padding-bottom: var(--space-2); border-bottom: 1px solid var(--border);">
+      <h2 style="font-family: var(--mono); font-size: 1.2rem; color: var(--accent); font-weight: 500; margin: 0;">Compounded</h2>
+    </div>
+    <p style="font-family: var(--mono); font-size: 0.833rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 2rem;">
+      These insights emerged in the first session. The second session's data reinforced them.
+    </p>
+
+    <div class="insight">
+      <h3>The intent language compiled itself into commands</h3>
+      <p class="tagline">Session 1: tack compressed 200 tokens to 10. Session 2: 22 of 26 verbs shipped as CLI commands.</p>
+      <p>In the first session, a contact language emerged &mdash; tack &mdash; that compressed operator intent 20x. In the second session, the OS grew 30 commands, and 22 of them map 1:1 to tack verbs. The language didn't stay a shorthand. It compiled itself into the command surface. 85% coverage means the human's vocabulary IS the CLI.</p>
+      <div class="evidence"><strong>Evidence:</strong> 20x compression ratio (session 1). tack-command-map.md traces 22/26 verb-to-command mappings (session 2).</div>
+    </div>
+
+    <div class="insight">
+      <h3>Invisible infrastructure, proven at runtime</h3>
+      <p class="tagline">Session 1: "invisible infrastructure wins" was a design bet. Session 2: the OS was hotswapped under a running agent.</p>
+      <p>The first session established the design law: the write path is invisible. SWE-bench confirmed it &mdash; the silent shim beat the prompted version 8/10 vs 7/10. The second session proved it harder: the haystack binary was replaced while Opus 4.6 was running, and the agent didn't notice for hours. Invisibility isn't aspirational. It's measured.</p>
+      <div class="evidence"><strong>Evidence:</strong> SWE-bench arms: silent 8/10, prompted 7/10 (session 1). Hotswap scenario passed in production before the test suite existed (session 2).</div>
+    </div>
+
+    <div class="insight">
+      <h3>The OS requests its own evolution</h3>
+      <p class="tagline">Session 1: the session built the OS. Session 2: the OS filed its own feature requests.</p>
+      <p>104 commits in the first session proved self-hosting &mdash; the OS was built by running on itself. In the second session, Opus 4.6 was asked what it needed to eject the harness. It filed three P0 needles: <code>search</code>, <code>diff</code>, <code>replay</code>. Not from a spec. From hours of lived experience. The OS crossed from being built by the human to requesting its own extensions.</p>
+      <div class="evidence"><strong>Evidence:</strong> 104 commits, self-hosting proof (session 1). Needles &rarr;571-573 filed at audit event 1098 (session 2).</div>
+    </div>
+
+    <div class="insight">
+      <h3>Inference until reasoning</h3>
+      <p class="tagline">Session 1: without corrections, LLMs pattern-match. Session 2: 77% of intent stayed uncompiled.</p>
+      <p>The first session discovered that LLMs infer until a human correction triggers actual reasoning. The second session quantified it: 48 hay entries filed, only 11 compiled into needles. The other 77% stayed as thinking. Human corrections are the compilation gate. Without them, the machine produces plausible output. With them, it produces executable work.</p>
+      <div class="evidence"><strong>Evidence:</strong> Correction-triggered reasoning observed across sessions (session 1). 23% compilation ratio from 48 hay.compiled events (session 2).</div>
+    </div>
+
+    <div class="insight">
+      <h3>The Humanfile is identity, not preferences</h3>
+      <p class="tagline">Session 1: compile the human into a document. Session 2: the document identifies the human, not the agent.</p>
+      <p>The first session proposed the Humanfile &mdash; compiling human preferences into a machine-readable identity document. The second session revealed something deeper: the file doesn't describe what the human likes. It describes who the human is. Agent behavior calibrates to the operator's identity &mdash; their vocabulary, their correction patterns, their compilation threshold. The Humanfile is a fingerprint, not a config file.</p>
+      <div class="evidence"><strong>Evidence:</strong> Humanfile concept (session 1). Tack verb emergence + 85% command coverage calibrated to one operator's patterns (session 2).</div>
+    </div>
+
     <p class="closing">Every finding traced to its audit event. The data is the argument.</p>
   </main>
 </Base>
