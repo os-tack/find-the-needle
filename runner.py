@@ -15,10 +15,11 @@ OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
 
 # OpenRouter model name mapping (needle-bench name → OpenRouter name)
 OPENROUTER_MODELS = {
-    "claude-haiku-3-5-20251001": "anthropic/claude-haiku-3-5",
-    "claude-haiku-3-5-20241022": "anthropic/claude-haiku-3-5",
-    "claude-sonnet-4-6": "anthropic/claude-sonnet-4-5",
-    "claude-opus-4-6": "anthropic/claude-opus-4-5",
+    "claude-haiku-3-5-20251001": "anthropic/claude-haiku-4.5",
+    "claude-haiku-3-5-20241022": "anthropic/claude-haiku-4.5",
+    "claude-haiku-4-5": "anthropic/claude-haiku-4.5",
+    "claude-sonnet-4-6": "anthropic/claude-sonnet-4.6",
+    "claude-opus-4-6": "anthropic/claude-opus-4.6",
     "gemini-2.5-pro": "google/gemini-2.5-pro-preview",
 }
 
@@ -31,6 +32,8 @@ MODEL_PRICING = {
     "claude-sonnet-4-5": (3.0, 15.0),
     "claude-haiku-3-5": (0.8, 4.0),
     "claude-haiku-3-5-20241022": (0.8, 4.0),
+    "claude-haiku-4.5": (0.8, 4.0),
+    "claude-haiku-4-5": (0.8, 4.0),
     "claude-sonnet-3-5": (3.0, 15.0),
     "claude-sonnet-3-5-20241022": (3.0, 15.0),
     # Google
@@ -304,12 +307,89 @@ def call_google(model, messages, api_key):
     return result
 
 
+def _anthropic_messages_to_openai(messages):
+    """Convert Anthropic-format messages to OpenAI-format for OpenRouter."""
+    oai_messages = []
+    for m in messages:
+        role = m["role"]
+        content = m["content"]
+        if isinstance(content, str):
+            oai_messages.append({"role": role, "content": content})
+        elif isinstance(content, list):
+            # Anthropic list content: text blocks, tool_use blocks, tool_result blocks
+            if role == "assistant":
+                # Check if there are tool_use blocks
+                tool_calls = []
+                text_parts = []
+                for block in content:
+                    btype = block.get("type")
+                    if btype == "text":
+                        text_parts.append(block.get("text", ""))
+                    elif btype == "tool_use":
+                        tool_calls.append({
+                            "id": block.get("id", ""),
+                            "type": "function",
+                            "function": {
+                                "name": block.get("name", ""),
+                                "arguments": json.dumps(block.get("input", {})),
+                            },
+                        })
+                msg = {"role": "assistant", "content": " ".join(text_parts) or None}
+                if tool_calls:
+                    msg["tool_calls"] = tool_calls
+                oai_messages.append(msg)
+            elif role == "user":
+                # tool_result blocks become tool messages.
+                # The runner appends a synthetic "_test" tool_result after each edit
+                # (tool_use_id = original_id + "_test") that has no matching tool_call.
+                # OpenAI/OpenRouter rejects orphan tool messages, so we merge _test
+                # content into the preceding real tool result instead.
+                for block in content:
+                    btype = block.get("type")
+                    if btype == "tool_result":
+                        tid = block.get("tool_use_id", "")
+                        result_content = block.get("content", "")
+                        if isinstance(result_content, list):
+                            result_content = " ".join(
+                                b.get("text", "") for b in result_content if b.get("type") == "text"
+                            )
+                        if tid.endswith("_test") and oai_messages and oai_messages[-1].get("role") == "tool":
+                            # Merge test.sh output into the preceding tool message
+                            oai_messages[-1]["content"] += "\n" + result_content
+                        else:
+                            oai_messages.append({
+                                "role": "tool",
+                                "tool_call_id": tid,
+                                "content": result_content,
+                            })
+                    elif btype == "text":
+                        oai_messages.append({"role": "user", "content": block.get("text", "")})
+    return oai_messages
+
+
 def call_openrouter(model, messages, api_key):
-    """Call any model via OpenRouter's OpenAI-compatible API."""
+    """Call any model via OpenRouter's OpenAI-compatible API with tool support."""
     or_model = OPENROUTER_MODELS.get(model, model)
+
+    # Convert TOOLS (Anthropic format) to OpenAI function format
+    oai_tools = [
+        {
+            "type": "function",
+            "function": {
+                "name": t["name"],
+                "description": t["description"],
+                "parameters": t["input_schema"],
+            },
+        }
+        for t in TOOLS
+    ]
+
+    oai_messages = _anthropic_messages_to_openai(messages)
+
     payload = json.dumps({
         "model": or_model,
-        "messages": [{"role": m["role"], "content": m["content"]} for m in messages],
+        "messages": oai_messages,
+        "tools": oai_tools,
         "max_tokens": 4096,
     }).encode()
     req = urllib.request.Request(
@@ -324,11 +404,34 @@ def call_openrouter(model, messages, api_key):
     )
     with urllib.request.urlopen(req, timeout=120) as resp:
         data = json.loads(resp.read())
-    choice = data["choices"][0]["message"]
+
+    choice = data["choices"][0]
+    msg = choice["message"]
     usage = data.get("usage", {})
+    finish_reason = choice.get("finish_reason", "end_turn")
+
+    # Translate OpenAI response back to Anthropic format
+    content_blocks = []
+    if msg.get("content"):
+        content_blocks.append({"type": "text", "text": msg["content"]})
+    for tc in msg.get("tool_calls") or []:
+        fn = tc.get("function", {})
+        try:
+            args = json.loads(fn.get("arguments", "{}"))
+        except json.JSONDecodeError:
+            args = {"command": fn.get("arguments", "")}
+        content_blocks.append({
+            "type": "tool_use",
+            "id": tc.get("id", f"call_{int(time.time()*1000)}"),
+            "name": fn.get("name", ""),
+            "input": args,
+        })
+
+    stop_reason = "tool_use" if msg.get("tool_calls") else "end_turn"
+
     return {
-        "content": choice["content"],
-        "stop_reason": data["choices"][0].get("finish_reason", "end_turn"),
+        "content": content_blocks,
+        "stop_reason": stop_reason,
         "usage": {
             "input_tokens": usage.get("prompt_tokens", 0),
             "output_tokens": usage.get("completion_tokens", 0),

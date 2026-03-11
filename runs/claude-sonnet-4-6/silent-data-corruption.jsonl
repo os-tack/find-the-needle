@@ -1,0 +1,10 @@
+{"event": "run.start", "timestamp": "2026-03-11T16:04:20Z", "benchmark": "silent-data-corruption", "model": "claude-sonnet-4-6", "has_prompt": false, "solution_files": ["src/main.rs"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 668, "tokens_out": 55, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 805, "tokens_out": 51, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 892, "tokens_out": 74, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1561, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": ["src/main.rs"], "files_read": [], "tokens_in": 2693, "tokens_out": 315, "test_exit": 1}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/usr/local/bin/fileproc"], "tokens_in": 3101, "tokens_out": 93, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 3247, "tokens_out": 54, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 3366, "tokens_out": 220, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-11T16:04:45Z", "test_exit": 0, "total_turns": 8, "correct_lines": 0}

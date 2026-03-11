@@ -1,0 +1,15 @@
+{"event": "run.start", "timestamp": "2026-03-11T16:03:53Z", "benchmark": "silent-data-corruption", "model": "claude-haiku-3-5-20241022", "has_prompt": false, "solution_files": ["src/main.rs"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 667, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 818, "tokens_out": 70, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1418, "tokens_out": 90, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1523, "tokens_out": 53, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1845, "tokens_out": 70, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 2043, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 2838, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": ["src/main.rs"], "files_read": [], "tokens_in": 3229, "tokens_out": 609, "test_exit": 1}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 3931, "tokens_out": 79, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 4063, "tokens_out": 64, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/usr/local/bin/fileproc"], "tokens_in": 4149, "tokens_out": 75, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": [], "tokens_in": 4239, "tokens_out": 63, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 4367, "tokens_out": 228, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-11T16:04:13Z", "test_exit": 0, "total_turns": 13, "correct_lines": 0}

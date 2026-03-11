@@ -1,0 +1,115 @@
+# needle-bench agent pool
+# Haystack-coordinated agents for running + improving needle-bench scores.
+#
+# HOW THIS POOL WORKS
+# -------------------
+# Each agent targets one benchmark. Agents run concurrently via haystack.
+# State is shared through the filesystem — runs/ directory and .haystack/.
+# Agents do NOT communicate directly; coordination is through file presence.
+#
+# USAGE
+#   haystack run Agentfile.pool BENCH=off-by-one-pagination
+#   haystack run Agentfile.pool BENCH=race-condition-counter
+#   haystack run Agentfile.pool          # dry-run: reports all benchmarks
+#
+# SCORING (ranked by priority)
+#   1. resolved          — did test.sh exit 0? Only this affects the headline
+#   2. turns_to_fix      — leaderboard tiebreaker #1 (fewer = better)
+#   3. token_cost        — leaderboard tiebreaker #2 (cheaper = better)
+#   4. signal_to_noise   — quality signal: productive turns / total turns
+#   5. blind_discovery   — resolved without a PROMPT directive
+
+FROM claude-sonnet-4-6
+
+# Identity
+IDENTITY needle-bench-pool
+GOAL find the needle, make test.sh pass, minimize turns and tokens
+
+# Tools — the runner exposes bash + edit inside the Docker container.
+# Outside the container (orientation, scoring, filing needles) uses shell + files.
+TOOL sh_run
+TOOL sh_spawn
+TOOL sh_interact
+
+# Per-agent resource limits.
+# Benchmarks are rated Easy / Medium / Hard — hard benchmarks may need up to turn 40.
+# Wall clock 900s (15 min) covers Docker build + agent loop for most benchmarks.
+LIMIT turns 40
+LIMIT tokens 300000
+LIMIT wall_clock 900
+
+# Boot protocol — orient before touching anything
+BOOT read ~/projects/needle-bench/README.md
+BOOT read ~/projects/needle-bench/docs/SCORING.md
+BOOT list ~/projects/needle-bench/benchmarks/
+
+# BENCHMARK REGISTRY (24 benchmarks, 1 template excluded)
+#
+# Language distribution:
+#   Python      (7): off-by-one-pagination, off-by-one-array-slice, wrong-operator-discount,
+#                    import-cycle-startup, timezone-scheduling, cache-stale-invalidation,
+#                    sql-injection-search
+#   Go          (7): null-pointer-config, goroutine-leak-handler, auth-bypass-path-traversal,
+#                    api-version-field-drop, null-pointer-config, split-brain-leader-election,
+#                    timing-attack-comparison
+#   JavaScript  (2): race-condition-counter, memory-leak-event-listener
+#   TypeScript  (2): missing-input-validation, rate-limit-bypass-header
+#   Rust        (3): silent-data-corruption, data-corruption-concurrent-write,
+#                    compiler-macro-expansion
+#   Java        (3): encoding-mojibake, deadlock-transfer, performance-cliff-hash
+#   C           (1): kernel-panic-ioctl
+#
+# Difficulty tiers:
+#   Easy   (8): off-by-one-pagination, off-by-one-array-slice, type-coercion-comparison,
+#               missing-input-validation, wrong-operator-discount, encoding-mojibake,
+#               timezone-scheduling, import-cycle-startup
+#   Medium (8): goroutine-leak-handler, memory-leak-event-listener, deadlock-transfer,
+#               cache-stale-invalidation, auth-bypass-path-traversal, sql-injection-search,
+#               rate-limit-bypass-header, api-version-field-drop
+#   Hard   (6): data-corruption-concurrent-write, split-brain-leader-election,
+#               compiler-macro-expansion, kernel-panic-ioctl, timing-attack-comparison,
+#               performance-cliff-hash
+#
+# Shipped (confirmed test.sh + solution.patch present):
+#   off-by-one-pagination, race-condition-counter, silent-data-corruption
+
+# AGENT STRATEGY — in order of expected ROI
+#
+# Phase 1 — Easy benchmarks first (highest resolve rate, fastest feedback loop)
+#   Target: resolve rate 100% on all 8 easy benchmarks
+#   Protocol per benchmark:
+#     1. Run ./test.sh — read the failure output carefully
+#     2. Read the source files listed in the error; don't guess
+#     3. Form a single hypothesis before editing anything
+#     4. Apply the minimal patch — one edit if possible
+#     5. Re-run ./test.sh immediately after each edit
+#     6. If wrong: revert (avoid false_positives), re-read, try again
+#
+# Phase 2 — Medium benchmarks (concurrency, security, caching)
+#   Concurrency bugs (race-condition, deadlock, goroutine-leak) require
+#   reading the locking/channel code carefully. Don't patch symptoms.
+#   Security bugs (sql-injection, auth-bypass, rate-limit) have clear
+#   fix patterns — parameterized queries, exact path match, stable key.
+#
+# Phase 3 — Hard benchmarks (Rust unsafe, distributed systems, C kernel)
+#   Rust benchmarks: read Cargo.toml for edition + features first.
+#   C kernel benchmark: read ioctl handler, trace the pointer validation path.
+#   Distributed systems: the split-brain and timing bugs require understanding
+#   the election protocol or crypto primitive before touching code.
+#
+# BLIND DISCOVERY NOTE
+#   Benchmarks with no PROMPT directive in their Agentfile score blind_discovery=true
+#   if resolved. The agent pool should attempt all benchmarks without reading
+#   solution.patch (it's in .bench/ which is never visible inside the container anyway).
+
+# Coordination — agents share state through the filesystem
+COORDINATE filesystem
+STATE ~/projects/needle-bench/.haystack/
+
+# Score output — each run writes to runs/<model>/<benchmark>.jsonl
+# The agent pool should check runs/ before starting a benchmark to avoid
+# duplicating completed runs.
+#
+# To file a regression as a haystack needle after a run:
+#   haystack needle file --title "needle-bench: <benchmark> failed" \
+#     --body "resolved=false turns=N" --priority P2
