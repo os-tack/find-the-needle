@@ -11,6 +11,16 @@ import urllib.request
 
 ANTHROPIC_ENDPOINT = "https://api.anthropic.com/v1/messages"
 GOOGLE_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+OPENROUTER_ENDPOINT = "https://openrouter.ai/api/v1/chat/completions"
+
+# OpenRouter model name mapping (needle-bench name → OpenRouter name)
+OPENROUTER_MODELS = {
+    "claude-haiku-3-5-20251001": "anthropic/claude-haiku-3-5",
+    "claude-haiku-3-5-20241022": "anthropic/claude-haiku-3-5",
+    "claude-sonnet-4-6": "anthropic/claude-sonnet-4-5",
+    "claude-opus-4-6": "anthropic/claude-opus-4-5",
+    "gemini-2.5-pro": "google/gemini-2.5-pro-preview",
+}
 
 # Estimated cost per 1M tokens (input, output) — USD.
 # These are approximate; update when pricing changes.
@@ -294,16 +304,55 @@ def call_google(model, messages, api_key):
     return result
 
 
+def call_openrouter(model, messages, api_key):
+    """Call any model via OpenRouter's OpenAI-compatible API."""
+    or_model = OPENROUTER_MODELS.get(model, model)
+    payload = json.dumps({
+        "model": or_model,
+        "messages": [{"role": m["role"], "content": m["content"]} for m in messages],
+        "max_tokens": 4096,
+    }).encode()
+    req = urllib.request.Request(
+        OPENROUTER_ENDPOINT,
+        data=payload,
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://needle-bench.cc",
+            "X-Title": "needle-bench",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=120) as resp:
+        data = json.loads(resp.read())
+    choice = data["choices"][0]["message"]
+    usage = data.get("usage", {})
+    return {
+        "content": choice["content"],
+        "stop_reason": data["choices"][0].get("finish_reason", "end_turn"),
+        "usage": {
+            "input_tokens": usage.get("prompt_tokens", 0),
+            "output_tokens": usage.get("completion_tokens", 0),
+        },
+    }
+
+
 def call_model(model, messages, provider):
     if provider == "anthropic":
         return call_anthropic(model, messages, os.environ["ANTHROPIC_API_KEY"])
     elif provider == "google":
         return call_google(model, messages, os.environ["GOOGLE_API_KEY"])
+    elif provider == "openrouter":
+        return call_openrouter(model, messages, os.environ["OPENROUTER_API_KEY"])
     else:
         raise ValueError(f"Unknown provider: {provider}")
 
 
 def detect_provider(model):
+    # Prefer OpenRouter if ANTHROPIC_API_KEY is absent but OPENROUTER_API_KEY is set
+    if model.startswith("gemini") and os.environ.get("GOOGLE_API_KEY"):
+        return "google"
+    if not os.environ.get("ANTHROPIC_API_KEY") and os.environ.get("OPENROUTER_API_KEY"):
+        return "openrouter"
     if model.startswith("gemini"):
         return "google"
     return "anthropic"
@@ -613,10 +662,13 @@ def main():
     provider = args.provider or detect_provider(args.model)
 
     if provider == "anthropic" and not os.environ.get("ANTHROPIC_API_KEY"):
-        print("ERROR: ANTHROPIC_API_KEY not set", file=sys.stderr)
+        print("ERROR: ANTHROPIC_API_KEY not set (tip: set --provider openrouter)", file=sys.stderr)
         sys.exit(1)
     if provider == "google" and not os.environ.get("GOOGLE_API_KEY"):
         print("ERROR: GOOGLE_API_KEY not set", file=sys.stderr)
+        sys.exit(1)
+    if provider == "openrouter" and not os.environ.get("OPENROUTER_API_KEY"):
+        print("ERROR: OPENROUTER_API_KEY not set", file=sys.stderr)
         sys.exit(1)
 
     base = os.path.dirname(os.path.abspath(__file__))
