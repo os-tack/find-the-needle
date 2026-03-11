@@ -371,6 +371,64 @@ tr:hover td {
   vertical-align: middle;
 }
 
+/* ostk leaderboard badges */
+.badge-boot-error {
+  display: inline-block;
+  background: #0d0000;
+  color: #ff3333;
+  border: 1px solid #ff3333;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 4px;
+  box-shadow: 0 0 4px rgba(255, 51, 51, 0.4);
+}
+
+.badge-dnf {
+  display: inline-block;
+  background: transparent;
+  color: #993333;
+  border: 1px solid #993333;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.badge-blind {
+  display: inline-block;
+  background: transparent;
+  color: #d4a054;
+  border: 1px solid #d4a054;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.badge-fast {
+  display: inline-block;
+  background: transparent;
+  color: #4ecdc4;
+  border: 1px solid #4ecdc4;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  padding: 1px 5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
 /* Footer */
 footer {
   text-align: center;

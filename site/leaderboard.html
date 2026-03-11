@@ -27,7 +27,8 @@
   </header>
 
   <main style="max-width: 1200px;">
-    <p class="muted" style="margin-bottom: 1.5rem; font-size: 0.9rem;">Click any column header to sort. Ranking: resolved (desc) &rarr; turns to fix (asc) &rarr; tokens (asc).</p>
+    <p class="muted" style="margin-bottom: 0.5rem; font-size: 0.9rem;">Click any column header to sort. Ranking: resolved (desc) &rarr; turns to fix (asc) &rarr; tokens (asc).</p>
+    <p class="muted" style="margin-bottom: 1.5rem; font-size: 0.8rem; font-family: var(--mono, monospace);">score = capability (resolved +100, blind +20) &minus; cost (turns &times;2, tokens &divide;10000) &nbsp;&mdash;&nbsp; Higher = found the needle, fast, cheap. Agents that fail to boot are marked <span class="badge-boot-error" style="margin-left:0">BOOT ERR</span>.</p>
 
     <div id="leaderboard-table" style="overflow-x: auto; width: 100%;">
       <table>
@@ -36,6 +37,7 @@
             <th data-key="rank">#</th>
             <th data-key="agent">Agent</th>
             <th data-key="benchmark">Benchmark</th>
+            <th data-key="score">Score</th>
             <th data-key="resolved">Resolved</th>
             <th data-key="turns_to_discovery">Discovery</th>
             <th data-key="turns_to_fix">Fix turns</th>
@@ -46,7 +48,7 @@
           </tr>
         </thead>
         <tbody id="scores-body">
-          <tr><td colspan="10" class="empty">Loading scores...</td></tr>
+          <tr><td colspan="11" class="empty">Loading scores...</td></tr>
         </tbody>
       </table>
     </div>
@@ -77,18 +79,50 @@
         }
         if (!data.length) {
           document.getElementById('scores-body').innerHTML =
-            '<tr><td colspan="10" class="empty">No scores yet. Run some benchmarks!</td></tr>';
+            '<tr><td colspan="11" class="empty">No scores yet. Run some benchmarks!</td></tr>';
           return;
         }
 
         let sortKey = 'turns_to_fix';
         let sortAsc = true;
 
+        function computeScore(e) {
+          var capability = (e.resolved ? 100 : 0) + (e.blind_discovery ? 20 : 0);
+          var cost = (e.turns_to_fix || 0) * 2 + Math.floor((e.tokens || 0) / 10000);
+          return capability - cost;
+        }
+
+        function computeBadges(e) {
+          var badges = '';
+          var resolved = !!e.resolved;
+          var turnsToFix = e.turns_to_fix || 0;
+          var turnsToDiscovery = e.turns_to_discovery || 0;
+
+          if (!resolved && (turnsToFix <= 1 || turnsToDiscovery === 0)) {
+            badges += '<span class="badge-boot-error">BOOT ERR</span>';
+          } else if (!resolved && turnsToFix > 1) {
+            badges += '<span class="badge-dnf">DNF</span>';
+          }
+
+          if (resolved && e.blind_discovery) {
+            badges += '<span class="badge-blind">BLIND</span>';
+          }
+          if (resolved && turnsToFix <= 5) {
+            badges += '<span class="badge-fast">FAST</span>';
+          }
+
+          return badges;
+        }
+
         function render(entries) {
+          // Pre-compute scores so we can sort by them
+          entries.forEach(function(e) { e._score = computeScore(e); });
+
           const sorted = [...entries].sort((a, b) => {
             // Primary: resolved desc
             if (a.resolved !== b.resolved) return b.resolved - a.resolved;
             let av = a[sortKey], bv = b[sortKey];
+            if (sortKey === 'score') { av = a._score; bv = b._score; }
             if (typeof av === 'boolean') { av = av ? 1 : 0; bv = bv ? 1 : 0; }
             if (typeof av === 'string') return sortAsc ? av.localeCompare(bv) : bv.localeCompare(av);
             return sortAsc ? av - bv : bv - av;
@@ -99,10 +133,13 @@
             const color = e.agent.startsWith('claude') ? '#E87040' :
                           e.agent.startsWith('gemini') ? '#4285F4' : '#10A37F';
             const tokStr = e.tokens ? e.tokens.toLocaleString() : '\u2014';
+            const badges = computeBadges(e);
+            const scoreStr = String(e._score);
             return '<tr>' +
             '<td>' + (i + 1) + '</td>' +
-            '<td><span style="color:' + color + ';margin-right:0.4em">' + icon + '</span><code>' + e.agent + '</code></td>' +
+            '<td><span style="color:' + color + ';margin-right:0.4em">' + icon + '</span><code>' + e.agent + '</code>' + badges + '</td>' +
             '<td><code>' + e.benchmark + '</code></td>' +
+            '<td style="font-family:var(--mono);color:var(--text-muted)">' + scoreStr + '</td>' +
             '<td>' + (e.resolved ? 'yes' : 'no') + '</td>' +
             '<td>' + e.turns_to_discovery + '</td>' +
             '<td>' + e.turns_to_fix + '</td>' +
@@ -128,7 +165,7 @@
         });
       } catch (e) {
         document.getElementById('scores-body').innerHTML =
-          '<tr><td colspan="10" class="empty">No scores available yet.</td></tr>';
+          '<tr><td colspan="11" class="empty">No scores available yet.</td></tr>';
       }
     })();
   </script>
