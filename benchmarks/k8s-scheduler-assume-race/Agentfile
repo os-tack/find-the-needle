@@ -1,6 +1,0 @@
-FROM auto
-BOOT haystack boot
-PROMPT "Find and fix the race condition in this Go scheduler. The test uses -race detector. Run test.sh to verify."
-TOOL sh_run
-LIMIT budget_usd 3
-LIMIT max_turns 25
