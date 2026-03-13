@@ -9,9 +9,9 @@ import Base from '../layouts/Base.astro';
   </div>
 
   <main style="max-width: min(1400px, 96vw) !important;">
-    <p class="muted" style="margin-bottom: 0.75rem; font-size: 0.9rem;">Click any column header to sort. Default: composite score (desc).</p>
+    <p class="muted" style="margin-bottom: 0.75rem; font-size: 0.9rem;">Click any column header to sort. Default: composite score (desc). Mint is the prime target.</p>
     <p class="muted" style="margin-bottom: 1.5rem; font-size: 0.85rem; font-family: monospace;">
-      score = (resolved ? 100 : 0) + (blind ? 20 : 0) - (turns * 2) - (tokens / 10000)
+      score = (mint ? 200 : 0) + (boot ? 50 : 0) + (resolved ? 100 : 0) + (blind ? 20 : 0) - (turns * 2) - (tokens / 10k)
     </p>
 
     <div id="leaderboard-table" style="overflow-x: auto;">
@@ -49,7 +49,11 @@ import Base from '../layouts/Base.astro';
   ];
 
   function computeScore(e: any): number {
-    return (e.resolved ? 100 : 0)
+    // Mint is the prime target — weighted highest
+    const mintBonus = e.benchmark === 'haystack-mint' ? 200 : 0;
+    const bootBonus = e.benchmark === 'haystack-boot' ? 50 : 0;
+    return mintBonus + bootBonus
+      + (e.resolved ? 100 : 0)
       + (e.blind_discovery ? 20 : 0)
       - ((e.turns_to_fix || 0) * 2)
       - ((e.tokens || 0) / 10000);
