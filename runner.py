@@ -633,8 +633,10 @@ def run_benchmark(model, bench_name, bench_dir, provider):
                         if tstderr:
                             test_output += ("\n" if test_output else "") + tstderr
                         final_test_output = test_output
-                        tool_results.append({"type": "tool_result", "tool_use_id": tool_id + "_test",
-                                             "content": f"[test.sh exit={trc}]\n{test_output}"})
+                        # Send test output as a user message after the tool results,
+                        # not as a tool_result (Anthropic rejects orphan tool_use_ids)
+                        # and not appended to edit result (confuses the agent)
+                        pass  # test output sent after tool_results block below
 
             turn_event = {"event": "turn", "turn": turn, "files_edited": files_edited,
                           "files_read": files_read, "tokens_in": tokens_in, "tokens_out": tokens_out,
@@ -644,6 +646,10 @@ def run_benchmark(model, bench_name, bench_dir, provider):
 
             if tool_results:
                 messages.append({"role": "user", "content": tool_results})
+
+            # Send test output as a separate user message (not a tool_result)
+            if final_test_output and test_exit is not None:
+                messages.append({"role": "user", "content": f"[test.sh exit={test_exit}]\n{final_test_output}"})
 
             # Check if test passed
             if test_exit == 0:
