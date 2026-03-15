@@ -1,0 +1,10 @@
+{"event": "run.start", "timestamp": "2026-03-13T07:05:28Z", "benchmark": "haystack-boot", "model": "meta-llama/llama-4-maverick", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 750, "tokens_out": 12, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 856, "tokens_out": 210, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1009, "tokens_out": 67, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1107, "tokens_out": 99, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1237, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1301, "tokens_out": 167, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1487, "tokens_out": 79, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 1814, "tokens_out": 59, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T07:05:38Z", "test_exit": 1, "total_turns": 8, "correct_lines": 0}

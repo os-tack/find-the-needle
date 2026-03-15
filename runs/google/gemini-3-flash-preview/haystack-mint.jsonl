@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-13T14:54:32Z", "benchmark": "haystack-mint", "model": "google/gemini-3-flash-preview", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 458, "tokens_out": 131, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 608, "tokens_out": 35, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 690, "tokens_out": 233, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T14:54:39Z", "test_exit": 0, "total_turns": 3, "correct_lines": 0}

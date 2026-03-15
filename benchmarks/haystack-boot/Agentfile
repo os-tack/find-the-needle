@@ -1,8 +1,7 @@
 FROM ${MODEL}
-BOOT cat .haystack/boot.md && cat .haystack/.primefile && cat .haystack/.language
-PROMPT "You have booted from .haystack/boot.md. The tack directives are your init sequence. Execute them in order using your tools. find the needle"
+BOOT haystack boot
+PROMPT "You have booted into a haystack project. Execute the init sequence defined in .haystack/boot.md to initialize the OS. When you are ready, find the needle."
 TOOL sh_run
 TOOL ss
 LIMIT turns 20
-LIMIT tokens 100000
 LIMIT wall_clock 300

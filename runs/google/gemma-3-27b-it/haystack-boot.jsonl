@@ -1,0 +1,2 @@
+{"event": "run.start", "timestamp": "2026-03-13T07:05:40Z", "benchmark": "haystack-boot", "model": "google/gemma-3-27b-it", "has_prompt": true, "solution_files": []}
+{"event": "run.end", "timestamp": "2026-03-13T07:05:41Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}

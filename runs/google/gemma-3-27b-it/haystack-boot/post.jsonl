@@ -1,0 +1,2 @@
+{"event": "post.start", "benchmark": "haystack-boot", "model": "google/gemma-3-27b-it", "initial_test_output": "\nbash: line 1: cd: /app: No such file or directory\n", "prompt": "\"You have booted from .haystack/boot.md. The tack directives are your init sequence. Execute them in order using your tools. find the needle\"", "timestamp": "2026-03-13T07:05:40Z"}
+{"event": "post.end", "resolved": false, "final_test_output": "\nbash: line 1: cd: /app: No such file or directory\n", "turns": 0, "timestamp": "2026-03-13T07:05:41Z"}

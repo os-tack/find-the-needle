@@ -1,0 +1,11 @@
+{"event": "run.start", "timestamp": "2026-03-13T07:08:41Z", "benchmark": "haystack-boot", "model": "qwen/qwen3-coder-plus", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 418, "tokens_out": 78, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 570, "tokens_out": 256, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 852, "tokens_out": 243, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1120, "tokens_out": 58, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1206, "tokens_out": 189, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1703, "tokens_out": 180, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 2011, "tokens_out": 106, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 2133, "tokens_out": 84, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 2231, "tokens_out": 354, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T07:09:24Z", "test_exit": 1, "total_turns": 9, "correct_lines": 0}

@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-13T14:54:01Z", "benchmark": "haystack-mint", "model": "qwen/qwen-plus", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 612, "tokens_out": 90, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [".haystack/ENTITYFILE"], "files_read": [], "tokens_in": 727, "tokens_out": 259, "test_exit": 1}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1011, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1213, "tokens_out": 378, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T14:54:19Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0}

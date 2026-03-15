@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-13T04:56:54Z", "benchmark": "data-corruption-concurrent-write", "model": "claude-sonnet-4-6", "has_prompt": false, "solution_files": ["src/config.rs"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 668, "tokens_out": 55, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 1451, "tokens_out": 51, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1538, "tokens_out": 100, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 2888, "tokens_out": 102, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": ["src/config.rs"], "files_read": [], "tokens_in": 4072, "tokens_out": 527, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-13T04:57:11Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0}

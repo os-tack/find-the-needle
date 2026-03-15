@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-13T08:04:33Z", "benchmark": "haystack-mint", "model": "anthropic/claude-sonnet-4.5", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 1081, "tokens_out": 513, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 1659, "tokens_out": 58, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/"], "tokens_in": 2113, "tokens_out": 470, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 2626, "tokens_out": 160, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T08:04:54Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0}

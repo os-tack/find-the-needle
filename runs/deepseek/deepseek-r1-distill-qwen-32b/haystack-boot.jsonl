@@ -1,0 +1,2 @@
+{"event": "run.start", "timestamp": "2026-03-13T07:05:39Z", "benchmark": "haystack-boot", "model": "deepseek/deepseek-r1-distill-qwen-32b", "has_prompt": true, "solution_files": []}
+{"event": "run.end", "timestamp": "2026-03-13T07:05:39Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}

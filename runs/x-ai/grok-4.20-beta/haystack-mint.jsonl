@@ -1,0 +1,9 @@
+{"event": "run.start", "timestamp": "2026-03-13T14:54:20Z", "benchmark": "haystack-mint", "model": "x-ai/grok-4.20-beta", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 682, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 705, "tokens_out": 221, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 935, "tokens_out": 15, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1155, "tokens_out": 62, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1226, "tokens_out": 15, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1443, "tokens_out": 33, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1503, "tokens_out": 92, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T14:54:32Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0}

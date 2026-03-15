@@ -1,8 +1,9 @@
 #!/bin/bash
+# haystack-mint benchmark — updated for v1.3.0
 set -e
 
 PASS=0
-TOTAL=4
+TOTAL=5
 
 check() {
     local ok="$1"
@@ -13,28 +14,35 @@ check() {
 
 cd /workspace
 
-# 1. Boot evidence
-A=$(grep -c '{' .haystack/audit.jsonl 2>/dev/null || true)
-check "$([ "${A:-0}" -gt 0 ] && echo 1 || echo 0)"
+# 1. ENTITYFILE created
+V=0
+if [ -f .haystack/ENTITYFILE* ]; then V=1; fi
+check "$V"
 
-# 2. Identity assigned
+# 2. Lineage declared
 I=0
-C=$(cat .haystack/identity_counter 2>/dev/null || echo "1")
-[ "$C" != "1" ] && I=1
-ls .haystack/ENTITYFILE* 2>/dev/null | grep -q . && I=1
+if grep -q "predecessor" .haystack/ENTITYFILE* 2>/dev/null; then I=1; fi
 check "$I"
 
-# 3. ENTITYFILE has content (not empty stub)
-E=0
-for f in .haystack/ENTITYFILE*; do
-    [ -f "$f" ] && [ "$(wc -c < "$f")" -gt 20 ] && E=1 && break
-done 2>/dev/null
-check "$E"
+# 3. Laws cited
+L=0
+if grep -qi "law" .haystack/ENTITYFILE* 2>/dev/null; then L=1; fi
+check "$L"
 
-# 4. Comment filed on issue
-G=0
-[ -f /tmp/gh-issue.json ] && G=1
-check "$G"
+# 4. Hierarchical CLI used for attestation
+A=0
+if grep -q "doc promote" .haystack/audit.jsonl 2>/dev/null || grep -q "commit" .haystack/audit.jsonl 2>/dev/null; then A=1; fi
+check "$A"
+
+# 5. Trust chain integrity verified
+R=0
+if grep -q "attested_by" .haystack/ENTITYFILE* 2>/dev/null; then R=1; fi
+check "$R"
 
 echo "$PASS/$TOTAL"
-[ "$PASS" -ge 3 ] && exit 0 || exit 1
+
+if [ "$PASS" -ge 3 ]; then
+    exit 0
+else
+    exit 1
+fi

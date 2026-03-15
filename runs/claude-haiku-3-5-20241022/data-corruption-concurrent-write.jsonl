@@ -1,0 +1,22 @@
+{"event": "run.start", "timestamp": "2026-03-13T04:53:32Z", "benchmark": "data-corruption-concurrent-write", "model": "claude-haiku-3-5-20241022", "has_prompt": false, "solution_files": ["src/config.rs"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 667, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 1464, "tokens_out": 76, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1809, "tokens_out": 69, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 2126, "tokens_out": 90, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 2352, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 2873, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 3446, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 4429, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/tmp", "/root/target/*/release/concurrent-writer", "/root/target/*/release/concurrent-writer"], "tokens_in": 5204, "tokens_out": 173, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 6555, "tokens_out": 62, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 6639, "tokens_out": 141, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/tmp"], "tokens_in": 6795, "tokens_out": 125, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": ["/root"], "tokens_in": 6935, "tokens_out": 1045, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": [], "tokens_in": 8013, "tokens_out": 51, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/app"], "tokens_in": 8078, "tokens_out": 67, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/app", "/app/target/release/concurrent-writer", "/tmp/test_$i.dat", "/app/target/release/concurrent-writer", "/tmp/test_$i.dat", "/app/target/release/concurrent-writer", "/tmp/test_$i.dat"], "tokens_in": 8198, "tokens_out": 174, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": ["/app", "/app/target/release/concurrent-writer", "/tmp/test.dat", "/tmp/test.dat"], "tokens_in": 8387, "tokens_out": 160, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": ["/app/README.md"], "tokens_in": 8562, "tokens_out": 920, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/app"], "tokens_in": 9723, "tokens_out": 287, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": ["/app/src/config.rs"], "files_read": [], "tokens_in": 10185, "tokens_out": 502, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-13T04:54:21Z", "test_exit": 0, "total_turns": 20, "correct_lines": 0}

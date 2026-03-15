@@ -23,6 +23,24 @@ OPENROUTER_MODELS = {
     "gemini-2.5-pro": "google/gemini-2.5-pro-preview",
 }
 
+# Reverse mapping: OpenRouter path → canonical short name
+_OPENROUTER_REVERSE = {v: k for k, v in OPENROUTER_MODELS.items()}
+
+
+def _canonical_agent_name(model: str) -> str:
+    """Return the short canonical name for a model, regardless of how it was specified.
+
+    If the user passed an OpenRouter path like 'anthropic/claude-opus-4.6',
+    map it back to the short name 'claude-opus-4-6'.
+    """
+    if model in _OPENROUTER_REVERSE:
+        return _OPENROUTER_REVERSE[model]
+    # If it looks like an OpenRouter path but isn't in our map, take the part after '/'
+    if "/" in model:
+        return model.split("/", 1)[1].replace(".", "-")
+    return model
+
+
 # Estimated cost per 1M tokens (input, output) — USD.
 # These are approximate; update when pricing changes.
 MODEL_PRICING = {
@@ -473,6 +491,8 @@ def detect_provider(model):
 
 
 def run_benchmark(model, bench_name, bench_dir, provider):
+    # Bug 1 fix: always use canonical short name so scores don't fragment
+    model = _canonical_agent_name(model)
     cfg = parse_agentfile(os.path.join(bench_dir, "Agentfile"))
     sol_files = solution_files(bench_dir)
     limits = cfg["limits"]
@@ -498,6 +518,11 @@ def run_benchmark(model, bench_name, bench_dir, provider):
     container = f"nb-{bench_name}-{ts}"
     subprocess.run(["docker", "run", "-d", "--name", container, f"needle-bench-{bench_name}", "sleep", "3600"],
                    capture_output=True, check=True)
+
+    # Bug 2 fix: snapshot workspace before agent starts so diff works later.
+    # Create /workspace.orig AND init a git repo for `git diff` fallback.
+    docker_exec(container, "cp -a /workspace /workspace.orig")
+    docker_exec(container, "cd /workspace && git init -q && git add -A && git commit -q -m baseline")
 
     log_f = open(log_path, "w")
     start_time = time.time()
@@ -571,9 +596,15 @@ def run_benchmark(model, bench_name, bench_dir, provider):
                 if name == "bash":
                     cmd = inp.get("command", "")
                     # Track file reads from cat/less/head commands
+                    # Bug 3 fix: resolve relative paths against /workspace
                     for token in cmd.split():
-                        if token.startswith("/") and not token.startswith("/dev"):
+                        if token.startswith("/dev"):
+                            continue
+                        if token.startswith("/"):
                             files_read.append(token)
+                        elif "." in token and not token.startswith("-"):
+                            # Looks like a relative file path (e.g. app.py, src/main.rs)
+                            files_read.append("/workspace/" + token)
                     rc, stdout, stderr = docker_exec(container, cmd)
                     output = stdout
                     if stderr:

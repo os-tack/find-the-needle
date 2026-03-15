@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-13T08:05:01Z", "benchmark": "haystack-mint", "model": "google/gemini-2.5-pro-preview", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 458, "tokens_out": 609, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [".haystack/ENTITYFILE"], "files_read": [], "tokens_in": 498, "tokens_out": 584, "test_exit": 1}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 749, "tokens_out": 178, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 979, "tokens_out": 274, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1260, "tokens_out": 73, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T08:05:27Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0}

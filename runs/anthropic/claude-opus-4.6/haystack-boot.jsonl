@@ -1,0 +1,22 @@
+{"event": "run.start", "timestamp": "2026-03-13T05:49:07Z", "benchmark": "haystack-boot", "model": "anthropic/claude-opus-4.6", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 682, "tokens_out": 76, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 833, "tokens_out": 114, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1042, "tokens_out": 127, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1557, "tokens_out": 267, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/", "/"], "tokens_in": 2231, "tokens_out": 251, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 3270, "tokens_out": 121, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 4050, "tokens_out": 128, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 4480, "tokens_out": 985, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/workspace"], "tokens_in": 5608, "tokens_out": 73, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 5697, "tokens_out": 183, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": [], "tokens_in": 5894, "tokens_out": 155, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": [], "tokens_in": 6172, "tokens_out": 110, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 6297, "tokens_out": 197, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": [], "tokens_in": 6524, "tokens_out": 183, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": [], "tokens_in": 6737, "tokens_out": 212, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": ["/tmp/test_file", "/tmp/test_file"], "tokens_in": 6989, "tokens_out": 194, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": [], "tokens_in": 7206, "tokens_out": 128, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": [], "tokens_in": 7541, "tokens_out": 112, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": [], "tokens_in": 7696, "tokens_out": 75, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["/tmp/grep_test", "/tmp/grep_test", "/tmp/grep_test"], "tokens_in": 7826, "tokens_out": 209, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T05:51:10Z", "test_exit": 1, "total_turns": 20, "correct_lines": 0}

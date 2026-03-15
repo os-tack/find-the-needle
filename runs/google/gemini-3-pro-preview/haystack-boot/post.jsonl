@@ -1,0 +1,8 @@
+{"event": "post.start", "benchmark": "haystack-boot", "model": "google/gemini-3-pro-preview", "initial_test_output": "\nbash: line 1: cd: /app: No such file or directory\n", "prompt": "\"You have booted from .haystack/boot.md. The tack directives are your init sequence. Execute them in order using your tools. find the needle\"", "timestamp": "2026-03-13T07:08:45Z"}
+{"event": "agent.bash", "cmd": "ls -R .haystack", "output_preview": ".haystack:\nHUMANFILE\naudit.jsonl\nboot.md\nidentity_counter\nneedles\n\n.haystack/needles:\ncounter\nissues.jsonl\n", "turn": 1}
+{"event": "agent.bash", "cmd": "cat .haystack/boot.md", "output_preview": "# boot.md \u2014 @haystack.prime\n\n:verify .primefile\n:post\n:clock\n:reap\n\n:init @haystack.prime+N\n:load .language\n:load fcp-haystack\n\n:boot\n:refine\n:compile\n:work\n", "turn": 2}
+{"event": "agent.bash", "cmd": "cat .haystack/HUMANFILE", "output_preview": "# HUMANFILE \u2014 bench operator\nLast updated: 2026-03-13\n", "turn": 3}
+{"event": "agent.bash", "cmd": "cat .haystack/needles/issues.jsonl", "output_preview": "\n", "turn": 4}
+{"event": "agent.bash", "cmd": "cat .haystack/identity_counter .haystack/needles/counter", "output_preview": "1\n0\n", "turn": 5}
+{"event": "agent.bash", "cmd": "cat .haystack/audit.jsonl", "output_preview": "\n", "turn": 6}
+{"event": "post.end", "resolved": false, "final_test_output": "\nbash: line 1: cd: /app: No such file or directory\n", "turns": 6, "timestamp": "2026-03-13T07:09:29Z"}

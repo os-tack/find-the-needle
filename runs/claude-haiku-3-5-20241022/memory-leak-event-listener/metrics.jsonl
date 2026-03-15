@@ -1,0 +1,13 @@
+{"event": "token.usage", "turn": 1, "input_tokens": 667, "output_tokens": 69, "cumulative_input": 667, "cumulative_output": 69}
+{"event": "token.usage", "turn": 2, "input_tokens": 818, "output_tokens": 70, "cumulative_input": 1485, "cumulative_output": 139}
+{"event": "token.usage", "turn": 3, "input_tokens": 1516, "output_tokens": 68, "cumulative_input": 3001, "cumulative_output": 207}
+{"event": "token.usage", "turn": 4, "input_tokens": 2309, "output_tokens": 77, "cumulative_input": 5310, "cumulative_output": 284}
+{"event": "token.usage", "turn": 5, "input_tokens": 3088, "output_tokens": 784, "cumulative_input": 8398, "cumulative_output": 1068}
+{"event": "token.usage", "turn": 6, "input_tokens": 3886, "output_tokens": 248, "cumulative_input": 12284, "cumulative_output": 1316}
+{"event": "token.usage", "turn": 7, "input_tokens": 4148, "output_tokens": 73, "cumulative_input": 16432, "cumulative_output": 1389}
+{"event": "token.usage", "turn": 8, "input_tokens": 4923, "output_tokens": 1423, "cumulative_input": 21355, "cumulative_output": 2812}
+{"event": "token.usage", "turn": 9, "input_tokens": 6360, "output_tokens": 71, "cumulative_input": 27715, "cumulative_output": 2883}
+{"event": "token.usage", "turn": 10, "input_tokens": 6644, "output_tokens": 705, "cumulative_input": 34359, "cumulative_output": 3588}
+{"event": "token.usage", "turn": 11, "input_tokens": 7364, "output_tokens": 68, "cumulative_input": 41723, "cumulative_output": 3656}
+{"event": "token.usage", "turn": 12, "input_tokens": 7503, "output_tokens": 415, "cumulative_input": 49226, "cumulative_output": 4071}
+{"event": "run.complete", "total_input_tokens": 49226, "total_output_tokens": 4071, "total_tokens": 53297, "estimated_cost_usd": 0.055665}

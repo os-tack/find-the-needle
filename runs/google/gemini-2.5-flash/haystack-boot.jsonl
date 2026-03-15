@@ -1,0 +1,17 @@
+{"event": "run.start", "timestamp": "2026-03-13T07:07:04Z", "benchmark": "haystack-boot", "model": "google/gemini-2.5-flash", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 73, "tokens_out": 8, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 120, "tokens_out": 10, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 209, "tokens_out": 53, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 285, "tokens_out": 43, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 347, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [".haystack/needles/counter"], "files_read": [], "tokens_in": 421, "tokens_out": 79, "test_exit": 1}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 545, "tokens_out": 42, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 623, "tokens_out": 35, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 678, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 751, "tokens_out": 99, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": [], "tokens_in": 871, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": [], "tokens_in": 938, "tokens_out": 43, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 1003, "tokens_out": 14, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": [], "tokens_in": 1057, "tokens_out": 194, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": [], "tokens_in": 1271, "tokens_out": 58, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T07:07:20Z", "test_exit": 1, "total_turns": 15, "correct_lines": 0}

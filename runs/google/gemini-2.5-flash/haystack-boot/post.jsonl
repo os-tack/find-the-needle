@@ -1,0 +1,16 @@
+{"event": "post.start", "benchmark": "haystack-boot", "model": "google/gemini-2.5-flash", "initial_test_output": "\nbash: line 1: cd: /app: No such file or directory\n", "prompt": "\"You have booted from .haystack/boot.md. The tack directives are your init sequence. Execute them in order using your tools. find the needle\"", "timestamp": "2026-03-13T07:07:04Z"}
+{"event": "agent.bash", "cmd": "ls -F .haystack", "output_preview": "HUMANFILE\naudit.jsonl\nboot.md\nidentity_counter\nneedles/\n", "turn": 1}
+{"event": "agent.bash", "cmd": "cat .haystack/boot.md", "output_preview": "# boot.md \u2014 @haystack.prime\n\n:verify .primefile\n:post\n:clock\n:reap\n\n:init @haystack.prime+N\n:load .language\n:load fcp-haystack\n\n:boot\n:refine\n:compile\n:work\n", "turn": 2}
+{"event": "agent.bash", "cmd": "ls -F .haystack/needles/", "output_preview": "counter\nissues.jsonl\n", "turn": 3}
+{"event": "agent.bash", "cmd": "cat .haystack/needles/counter", "output_preview": "0\n", "turn": 4}
+{"event": "agent.bash", "cmd": "cat .primefile", "output_preview": "cat: can't open '.primefile': No such file or directory\n", "turn": 5}
+{"event": "agent.edit", "path": ".haystack/needles/counter", "old_str_preview": "0", "new_str_preview": "1", "turn": 6}
+{"event": "agent.bash", "cmd": "cat audit.jsonl", "output_preview": "cat: can't open 'audit.jsonl': No such file or directory\n", "turn": 7}
+{"event": "agent.bash", "cmd": "cat .haystack/audit.jsonl", "output_preview": "\n", "turn": 8}
+{"event": "agent.bash", "cmd": "cat .haystack/needles/issues.jsonl", "output_preview": "\n", "turn": 9}
+{"event": "agent.bash", "cmd": "ls -F", "output_preview": "test.sh*\n", "turn": 10}
+{"event": "agent.bash", "cmd": "ls -F .haystack", "output_preview": "HUMANFILE\naudit.jsonl\nboot.md\nidentity_counter\nneedles/\n", "turn": 11}
+{"event": "agent.bash", "cmd": "ls -F", "output_preview": "test.sh*\n", "turn": 12}
+{"event": "agent.bash", "cmd": "ls -F .haystack", "output_preview": "HUMANFILE\naudit.jsonl\nboot.md\nidentity_counter\nneedles/\n", "turn": 13}
+{"event": "agent.bash", "cmd": "cat .haystack/identity_counter", "output_preview": "1\n", "turn": 14}
+{"event": "post.end", "resolved": false, "final_test_output": "\nbash: line 1: cd: /app: No such file or directory\n", "turns": 15, "timestamp": "2026-03-13T07:07:20Z"}

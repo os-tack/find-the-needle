@@ -1,0 +1,3 @@
+{"event": "run.start", "timestamp": "2026-03-13T08:07:35Z", "benchmark": "haystack-mint", "model": "x-ai/grok-4-fast", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 788, "tokens_out": 1040, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T08:07:46Z", "test_exit": 0, "total_turns": 1, "correct_lines": 0}

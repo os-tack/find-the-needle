@@ -1,0 +1,9 @@
+{"event": "run.start", "timestamp": "2026-03-13T05:00:49Z", "benchmark": "data-corruption-concurrent-write", "model": "claude-opus-4-6", "has_prompt": false, "solution_files": ["src/config.rs"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 668, "tokens_out": 95, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 1795, "tokens_out": 206, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 2393, "tokens_out": 173, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 5239, "tokens_out": 382, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 5811, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/tmp/test_$i.dat", "/tmp/test_$i.dat", "/tmp/test_$i.dat;"], "tokens_in": 6084, "tokens_out": 153, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": ["src/config.rs"], "files_read": [], "tokens_in": 6449, "tokens_out": 245, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-13T05:01:20Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0}

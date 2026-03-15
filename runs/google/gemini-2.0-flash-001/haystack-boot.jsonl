@@ -1,0 +1,8 @@
+{"event": "run.start", "timestamp": "2026-03-13T07:10:42Z", "benchmark": "haystack-boot", "model": "google/gemini-2.0-flash-001", "has_prompt": true, "solution_files": []}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 73, "tokens_out": 86, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 240, "tokens_out": 198, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 471, "tokens_out": 60, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 569, "tokens_out": 204, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 795, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1396, "tokens_out": 45, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-13T07:10:49Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0}

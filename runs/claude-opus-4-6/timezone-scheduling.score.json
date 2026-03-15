@@ -1,0 +1,17 @@
+{
+  "benchmark": "timezone-scheduling",
+  "agent": "claude-opus-4-6",
+  "commit": "8f1e32a",
+  "timestamp": "2026-03-13T05:04:58Z",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 4,
+  "signal_to_noise": 0.25,
+  "false_positives": 0,
+  "token_cost": 10464,
+  "tokens_per_correct_line": "Infinity",
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 20.5,
+  "blind_discovery": true
+}

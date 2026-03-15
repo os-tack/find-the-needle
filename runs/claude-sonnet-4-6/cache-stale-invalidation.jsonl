@@ -1,0 +1,8 @@
+{"event": "run.start", "timestamp": "2026-03-13T04:56:36Z", "benchmark": "cache-stale-invalidation", "model": "claude-sonnet-4-6", "has_prompt": false, "solution_files": ["app/server.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": [], "tokens_in": 668, "tokens_out": 55, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 819, "tokens_out": 51, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 888, "tokens_out": 62, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1819, "tokens_out": 77, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": ["app/server.py"], "files_read": [], "tokens_in": 3082, "tokens_out": 266, "test_exit": 1}
+{"event": "turn", "turn": 6, "files_edited": ["app/server.py"], "files_read": [], "tokens_in": 3455, "tokens_out": 194, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-13T04:56:54Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0}
