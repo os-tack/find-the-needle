@@ -56,17 +56,49 @@ def slugify(text):
 # Step 1: Import repo
 # ---------------------------------------------------------------------------
 
-def import_repo(org, repo, branch="main", *, dry_run=False):
-    """Clone the repo and run haystack diagnosis on it.
+def _resolve_fork(repo_entry):
+    """Resolve the clone URL, preferring os-tack fork if upstream is specified.
+
+    Repos with an 'upstream' field are forks managed under os-tack.
+    The fork is synced before cloning to get the latest upstream state.
+    The benchmark pins the fork at a specific commit for reproducibility.
+    """
+    org, repo = repo_entry["org"], repo_entry["repo"]
+    upstream = repo_entry.get("upstream")
+
+    if upstream:
+        # This is an os-tack fork — sync it first, then clone the fork
+        print(f"[fork] {org}/{repo} is a fork of {upstream}")
+        # Sync fork with upstream (gh api handles this)
+        try:
+            subprocess.run(
+                ["gh", "api", f"repos/{org}/{repo}/merge-upstream",
+                 "-f", "branch=" + repo_entry.get("branch", "main"),
+                 "--silent"],
+                check=True, capture_output=True,
+            )
+            print(f"[fork] synced {org}/{repo} with {upstream}")
+        except subprocess.CalledProcessError:
+            print(f"[fork] sync failed or already up to date — continuing with current fork state")
+
+    return f"https://github.com/{org}/{repo}.git"
+
+
+def import_repo(org, repo, branch="main", *, upstream=None, dry_run=False):
+    """Clone the repo (or fork) and run haystack diagnosis on it.
 
     Returns (repo_path, needles) where needles is a list of diagnosed issues
     ranked by compounding impact.
+
+    If upstream is set, the repo is an os-tack fork. The fork is synced
+    before cloning, and any fix PRs go to the fork first, then upstream.
     """
     clone_url = f"https://github.com/{org}/{repo}.git"
     tmp_dir = tempfile.mkdtemp(prefix=f"needle-bench-{org}-{repo}-")
     repo_path = os.path.join(tmp_dir, repo)
 
-    print(f"[import] cloning {org}/{repo} (branch={branch}) -> {repo_path}")
+    source_label = f"{org}/{repo}" + (f" (fork of {upstream})" if upstream else "")
+    print(f"[import] cloning {source_label} (branch={branch}) -> {repo_path}")
 
     if not dry_run:
         subprocess.run(
@@ -471,14 +503,19 @@ def offer_fix(benchmark_path, solution_patch, org, repo, *, model="unknown", dry
 # Step 5: Main
 # ---------------------------------------------------------------------------
 
-def run_pipeline(org, repo, branch="main", *, dry_run=False):
+def run_pipeline(org, repo, branch="main", *, upstream=None, dry_run=False):
     """Execute the full weekly pipeline for a single repo."""
     print(f"\n{'='*60}")
-    print(f"  Weekly Pipeline: {org}/{repo} (branch={branch})")
+    label = f"{org}/{repo}" + (f" (fork of {upstream})" if upstream else "")
+    print(f"  Weekly Pipeline: {label} (branch={branch})")
     print(f"{'='*60}\n")
 
+    # Step 0: Sync fork with upstream if applicable
+    if upstream and not dry_run:
+        _resolve_fork({"org": org, "repo": repo, "branch": branch, "upstream": upstream})
+
     # Step 1: Import and diagnose
-    repo_path, needles = import_repo(org, repo, branch, dry_run=dry_run)
+    repo_path, needles = import_repo(org, repo, branch, upstream=upstream, dry_run=dry_run)
     print(f"[import] found {len(needles)} needle(s)\n")
 
     if not needles:
@@ -535,13 +572,16 @@ examples:
         print(f"Curated repos (week {week}, auto-select index: {week % len(repos)}):\n")
         for i, r in enumerate(repos):
             marker = " <-- this week" if i == week % len(repos) else ""
-            print(f"  [{i}] {r['org']}/{r['repo']} ({r['lang']}, branch={r['branch']}){marker}")
+            fork_label = f" (fork of {r['upstream']})" if r.get("upstream") else ""
+            print(f"  [{i}] {r['org']}/{r['repo']} ({r['lang']}, branch={r['branch']}){fork_label}{marker}")
         return
 
     # Determine which repo to run
+    upstream = None
     if args.auto:
         entry = repo_for_week()
         org, repo, branch = entry["org"], entry["repo"], entry["branch"]
+        upstream = entry.get("upstream")
         print(f"[auto] week {current_week_number()} -> {org}/{repo}")
     elif args.repo:
         parts = args.repo.split("/")
@@ -549,19 +589,19 @@ examples:
             print("ERROR: --repo must be org/name (e.g. django/django)", file=sys.stderr)
             sys.exit(1)
         org, repo = parts
-        # Look up branch from repos.json, fall back to arg or "main"
+        # Look up branch + upstream from repos.json, fall back to arg or "main"
         branch = args.branch
-        if not branch:
-            for entry in load_repos():
-                if entry["org"] == org and entry["repo"] == repo:
-                    branch = entry["branch"]
-                    break
-            branch = branch or "main"
+        for entry in load_repos():
+            if entry["org"] == org and entry["repo"] == repo:
+                branch = branch or entry["branch"]
+                upstream = entry.get("upstream")
+                break
+        branch = branch or "main"
     else:
         parser.print_help()
         sys.exit(1)
 
-    result = run_pipeline(org, repo, branch, dry_run=args.dry_run)
+    result = run_pipeline(org, repo, branch, upstream=upstream, dry_run=args.dry_run)
 
     if result:
         print(f"\nBenchmark created: {result}")

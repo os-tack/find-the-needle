@@ -10,7 +10,7 @@
     {"org": "pallets", "repo": "flask", "lang": "python", "branch": "main"},
     {"org": "expressjs", "repo": "express", "lang": "javascript", "branch": "master"},
     {"org": "gin-gonic", "repo": "gin", "lang": "go", "branch": "master"},
-    {"org": "anthropics", "repo": "claude-code", "lang": "typescript", "branch": "main"},
+    {"org": "os-tack", "repo": "claude-code", "lang": "typescript", "branch": "main", "upstream": "anthropics/claude-code"},
     {"org": "google-gemini", "repo": "gemini-cli", "lang": "typescript", "branch": "main"}
   ],
   "rotation": "weekly",
