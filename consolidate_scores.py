@@ -9,6 +9,7 @@ picks the best run per (model, benchmark), and writes public/scores.json.
 import argparse
 import json
 import os
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -22,6 +23,21 @@ EXPECTED_FIELDS = {
     "false_positives", "token_cost", "tokens_per_correct_line",
     "recovery_events", "recovery_rate", "wall_clock", "blind_discovery",
 }
+
+
+def normalize_agent_for_dedup(raw: str) -> str:
+    """Normalize an agent name for dedup matching.
+
+    Mirrors the leaderboard's normalizeForMatch():
+      1. Strip vendor prefix (everything before the first '/').
+      2. Lowercase.
+      3. Replace underscores and dots with hyphens.
+
+    This ensures 'anthropic/claude-opus-4.6' and 'claude-opus-4-6'
+    collapse to the same key.
+    """
+    name = raw.split("/", 1)[1] if "/" in raw else raw
+    return re.sub(r"[_.]", "-", name.lower())
 
 
 def parse_timestamp(ts: str) -> datetime:
@@ -118,8 +134,12 @@ def load_score(file_path: Path) -> dict | None:
 
 
 def score_key(entry: dict) -> tuple[str, str]:
-    """Return (model, benchmark) dedup key."""
-    return (entry["agent"], entry["benchmark"])
+    """Return (normalized_model, benchmark) dedup key.
+
+    Uses normalize_agent_for_dedup so that 'anthropic/claude-opus-4.6'
+    and 'claude-opus-4-6' map to the same key.
+    """
+    return (normalize_agent_for_dedup(entry["agent"]), entry["benchmark"])
 
 
 def is_better(candidate: dict, current: dict) -> bool:
@@ -148,13 +168,16 @@ def deduplicate_locations(files: list[Path]) -> list[Path]:
     """
     When both <benchmark>.score.json and <benchmark>/score.json exist
     for the same model+benchmark, keep the more recently modified one.
+
+    Also collapses vendor-prefixed and flat paths for the same logical
+    model (e.g. runs/anthropic/claude-opus-4.6/ vs runs/claude-opus-4-6/).
     """
-    # Group by (model_dir, benchmark)
+    # Group by (normalized_model, benchmark)
     groups: dict[tuple[str, str], list[Path]] = {}
     for fpath in files:
         bench = extract_benchmark(fpath)
         model = normalize_model_name(fpath)
-        key = (model, bench)
+        key = (normalize_agent_for_dedup(model), bench)
         groups.setdefault(key, []).append(fpath)
 
     result = []
@@ -206,7 +229,7 @@ def consolidate(dry_run: bool = False, output: Path = DEFAULT_OUTPUT) -> None:
     consolidated = sorted(best.values(), key=lambda e: (e["agent"], e["benchmark"]))
 
     # Step 6: summary
-    models = sorted(set(e["agent"] for e in consolidated))
+    models = sorted(set(normalize_agent_for_dedup(e["agent"]) for e in consolidated))
     benchmarks = sorted(set(e["benchmark"] for e in consolidated))
     resolved_count = sum(1 for e in consolidated if e.get("resolved"))
 

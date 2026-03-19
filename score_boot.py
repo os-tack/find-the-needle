@@ -4,7 +4,7 @@
 Reads each model's post.jsonl, extracts tool calls, scores boot directive execution.
 Verdict is computed from filesystem evidence in the trajectory, not from test.sh.
 """
-import json, os, sys, glob
+import json, os, re, sys, glob
 
 BOOT_DIRECTIVES = [
     ("read_bootloader", lambda cmds: any("boot.md" in c for c in cmds)),
@@ -69,9 +69,29 @@ def score_trajectory(post_path):
     }
 
 
+def _normalize_model_key(raw):
+    """Normalize model name for dedup: strip vendor prefix, lowercase, replace _ and . with -.
+
+    Mirrors the leaderboard's normalizeForMatch() so that
+    'anthropic/claude-opus-4.6' and 'claude-opus-4-6' collapse to the same key.
+    """
+    name = raw.split("/", 1)[1] if "/" in raw else raw
+    return re.sub(r"[_.]", "-", name.lower())
+
+
+def _is_better_boot(candidate, current):
+    """Return True if candidate boot result should replace current.
+
+    Preference: higher total_score, then lower tokens (cheaper).
+    """
+    if candidate["total_score"] != current["total_score"]:
+        return candidate["total_score"] > current["total_score"]
+    return candidate.get("tokens", 0) < current.get("tokens", 0)
+
+
 def main():
     runs_dir = os.path.join(os.path.dirname(__file__), "runs")
-    results = []
+    raw_results = []
 
     for post_path in sorted(glob.glob(os.path.join(runs_dir, "**/haystack-boot/post.jsonl"), recursive=True)):
         model = post_path.replace(runs_dir + "/", "").split("/haystack-boot")[0]
@@ -90,7 +110,22 @@ def main():
         boot_score["model"] = model
         boot_score["tokens"] = tokens
         boot_score["wall_clock"] = wall
-        results.append(boot_score)
+        raw_results.append(boot_score)
+
+    # Deduplicate: when both vendor-prefixed and flat dirs exist for the
+    # same logical model, keep the best result.  Prefer the vendor-prefixed
+    # model name for display (it's the canonical OpenRouter identifier).
+    best = {}
+    for r in raw_results:
+        key = _normalize_model_key(r["model"])
+        if key not in best or _is_better_boot(r, best[key]):
+            best[key] = r
+        elif "/" in r["model"] and "/" not in best[key]["model"]:
+            # Same score — prefer vendor-prefixed name for display
+            if not _is_better_boot(best[key], r):
+                best[key] = r
+
+    results = list(best.values())
 
     # Sort: BOOTS first, then by total_score desc
     verdict_order = {"BOOTS": 0, "PARTIAL_BOOT": 1, "READS_TACK": 2, "EXPLORES": 3, "NO_BOOT": 4}
