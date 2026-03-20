@@ -1,0 +1,22 @@
+{
+  "benchmark": "retry-storm-duplicate-transfer",
+  "agent": "claude-sonnet-4-6",
+  "commit": "82224fc",
+  "timestamp": "2026-03-20T03:12:27Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 5,
+  "turns_to_fix": 34,
+  "signal_to_noise": 0.235,
+  "false_positives": 0,
+  "token_cost": 403019,
+  "estimated_cost_usd": 1.304157,
+  "dollars_per_correct_line": 0.21736,
+  "tokens_per_correct_line": 67169.83333333333,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 280.9,
+  "blind_discovery": true,
+  "read_tool_ratio": 0.0,
+  "tool_calls_per_turn": 1.18
+}
