@@ -64,7 +64,14 @@ import Base from '../layouts/Base.astro';
     border-radius: 6px;
     background: var(--bg);
     margin-bottom: 2rem;
+    cursor: grab;
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
+  .leaderboard-container::-webkit-scrollbar { display: none; }
+  .leaderboard-container.dragging { cursor: grabbing; user-select: none; }
 
   #leaderboard {
     border-collapse: separate;
@@ -102,27 +109,29 @@ import Base from '../layouts/Base.astro';
     opacity: 1;
   }
 
-  /* Sticky left columns */
+  /* Sticky left columns — left offsets computed at runtime by JS */
   .sticky-col {
     position: sticky;
     z-index: 2;
     background: var(--surface);
   }
 
-  .col-model    { left: 0;     min-width: 140px; max-width: 180px; }
-  .col-boot     { left: 140px; min-width: 72px; }
-  .col-post     { left: 212px; min-width: 40px; text-align: center; }
-  .col-entity   { left: 252px; min-width: 46px; text-align: center; }
-  .col-resolved { left: 298px; min-width: 48px; text-align: center; }
-  .col-tokens   { left: 346px; min-width: 62px; text-align: right; }
-  .col-turns    { left: 408px; min-width: 48px; text-align: right; }
-  .col-time     { left: 456px; min-width: 52px; text-align: right; border-right: 2px solid rgba(212, 160, 84, 0.4); }
+  .col-model    { left: 0; min-width: 140px; max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+  .col-boot     { min-width: 72px; }
+  .col-post     { min-width: 40px; text-align: center; }
+  .col-entity   { min-width: 46px; text-align: center; }
+  .col-resolved { min-width: 48px; text-align: center; }
+  .col-tokens   { min-width: 62px; text-align: right; }
+  .col-turns    { min-width: 48px; text-align: right; }
+  .col-time     { min-width: 52px; text-align: right; border-right: 2px solid rgba(212, 160, 84, 0.4); }
 
   .bench-col {
-    min-width: 80px;
-    max-width: 80px;
+    min-width: 100px;
+    max-width: 110px;
     text-align: center;
     font-size: 0.65rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   th.bench-col {
@@ -706,5 +715,75 @@ import Base from '../layouts/Base.astro';
     }
 
     render();
+
+    // --- Compute sticky column left offsets from actual rendered widths ---
+    function computeStickyOffsets() {
+      const headerCells = document.querySelectorAll('#lb-head th.sticky-col');
+      let offset = 0;
+      headerCells.forEach(th => {
+        const el = th as HTMLElement;
+        el.style.left = offset + 'px';
+        offset += el.offsetWidth;
+      });
+      // Apply same offsets to body cells
+      const colClasses = ['col-model','col-boot','col-post','col-entity','col-resolved','col-tokens','col-turns','col-time'];
+      const offsets: number[] = [];
+      headerCells.forEach((th, i) => {
+        offsets[i] = parseInt((th as HTMLElement).style.left || '0');
+      });
+      for (const cls of colClasses) {
+        const idx = colClasses.indexOf(cls);
+        if (idx >= 0 && offsets[idx] !== undefined) {
+          document.querySelectorAll('td.' + cls).forEach(td => {
+            (td as HTMLElement).style.left = offsets[idx] + 'px';
+          });
+        }
+      }
+    }
+
+    // Recompute on render and resize
+    const origRender = render;
+    const renderWithOffsets = () => { origRender(); requestAnimationFrame(computeStickyOffsets); };
+    // Re-bind: replace last render() call
+    renderWithOffsets();
+    window.addEventListener('resize', computeStickyOffsets);
+
+    // --- Drag-to-scroll on the leaderboard container ---
+    const container = document.querySelector('.leaderboard-container') as HTMLElement;
+    if (container) {
+      let isDragging = false;
+      let startX = 0;
+      let scrollStart = 0;
+
+      container.addEventListener('mousedown', (e: MouseEvent) => {
+        // Don't interfere with clicks on links or sort headers
+        if ((e.target as HTMLElement).closest('a, th')) return;
+        isDragging = true;
+        startX = e.pageX;
+        scrollStart = container.scrollLeft;
+        container.classList.add('dragging');
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', (e: MouseEvent) => {
+        if (!isDragging) return;
+        const dx = e.pageX - startX;
+        container.scrollLeft = scrollStart - dx;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          container.classList.remove('dragging');
+        }
+      });
+
+      container.addEventListener('mouseleave', () => {
+        if (isDragging) {
+          isDragging = false;
+          container.classList.remove('dragging');
+        }
+      });
+    }
   })();
 </script>
