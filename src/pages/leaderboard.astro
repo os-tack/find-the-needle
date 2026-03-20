@@ -11,7 +11,6 @@ import Base from '../layouts/Base.astro';
   <main>
     <div class="lb-toolbar">
       <p class="muted">Unified test matrix. Left pane is sticky. Drag right to scroll the heatmap. Click any header to sort.</p>
-      <button id="a11y-toggle" title="Toggle colorblind mode">&#9855;</button>
     </div>
 
     <div class="leaderboard-container" id="lb-container">
@@ -45,7 +44,7 @@ import Base from '../layouts/Base.astro';
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 1rem; gap: 1rem;
   }
-  #a11y-toggle {
+  #a11y-toggle { display: none; /* removed — indicators always on */
     background: var(--surface); border: 1px solid var(--border); color: var(--text-muted);
     font-size: 1.1rem; padding: 0.25rem 0.5rem; border-radius: 4px; cursor: pointer;
     line-height: 1; transition: color 0.15s, border-color 0.15s;
@@ -111,10 +110,9 @@ import Base from '../layouts/Base.astro';
   .hm-empty { background: rgba(139,148,158,0.08); border: 1px solid rgba(139,148,158,0.1); }
 
   /* Colorblind mode */
-  .colorblind .hm { font-size: 0.55rem; font-weight: 700; }
-  .colorblind .hm-pass::after  { content: '\2713'; color: #fff; }
-  .colorblind .hm-fail::after  { content: '\2717'; color: #fff; }
-  .colorblind .hm-empty::after { content: '\2014'; color: #666; }
+  .hm-pass::after  { content: '\2713'; color: #fff; font-size: 0.7rem; font-weight: 700; }
+  .hm-fail::after  { content: '\2717'; color: #fff; font-size: 0.7rem; font-weight: 700; }
+  .hm-empty::after { content: '\2014'; color: #555; font-size: 0.6rem; }
 
   #leaderboard td {
     padding: 0.35rem 0.4rem; border-bottom: 1px solid var(--border);
