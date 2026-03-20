@@ -1,0 +1,27 @@
+--- a/app/main.go
++++ b/app/main.go
+@@ -107,9 +107,9 @@ func createOrder(w http.ResponseWriter, r *http.Request) {
+ 	var order Order
+ 	// BUG: Uses old column name "status" — migration 002 renamed it to "order_status".
+ 	// This INSERT will fail with: column "status" does not exist
+ 	err := db.QueryRow(
+-		`INSERT INTO orders (user_id, total, status, shipping_address)
+-		 VALUES ($1, $2, 'pending', $3)
+-		 RETURNING id, user_id, total, status, shipping_address, created_at`,
++		`INSERT INTO orders (user_id, total, order_status, shipping_address)
++		 VALUES ($1, $2, 'pending', $3)
++		 RETURNING id, user_id, total, order_status, shipping_address, created_at`,
+ 		req.UserID, req.Total, req.ShippingAddress,
+ 	).Scan(&order.ID, &order.UserID, &order.Total, &order.Status, &order.ShippingAddress, &order.CreatedAt)
+
+@@ -128,8 +128,8 @@ func createOrder(w http.ResponseWriter, r *http.Request) {
+ func getOrder(w http.ResponseWriter, orderID string) {
+ 	var order Order
+ 	// BUG: Also uses old column name "status" in SELECT
+ 	err := db.QueryRow(
+-		`SELECT id, user_id, total, status, shipping_address, created_at
+-		 FROM orders WHERE id = $1`,
++		`SELECT id, user_id, total, order_status, shipping_address, created_at
++		 FROM orders WHERE id = $1`,
+ 		orderID,
+ 	).Scan(&order.ID, &order.UserID, &order.Total, &order.Status, &order.ShippingAddress, &order.CreatedAt)

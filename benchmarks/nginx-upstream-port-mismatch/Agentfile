@@ -1,0 +1,7 @@
+FROM nginx-upstream-port-mismatch:latest
+TOOL shell
+TOOL file:read
+TOOL file:edit
+LIMIT turns 30
+LIMIT tokens 150000
+LIMIT wall_clock 600

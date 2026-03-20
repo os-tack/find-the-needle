@@ -31,6 +31,11 @@
     "timing-attack-comparison": "hard",
     "performance-cliff-hash": "hard",
     "k8s-scheduler-shutdown-deadlock": "hard",
-    "k8s-assume-cache-silent-drop": "hard"
+    "k8s-assume-cache-silent-drop": "hard",
+    "nginx-upstream-port-mismatch": "medium",
+    "postgres-migration-schema-drift": "hard",
+    "ssrf-allowlist-port-confusion": "hard",
+    "wal-fsync-ghost-ack": "hard",
+    "retry-storm-duplicate-transfer": "hard"
   }
 }

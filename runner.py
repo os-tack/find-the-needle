@@ -645,6 +645,10 @@ def run_benchmark(model, bench_name, bench_dir, provider):
     total_tokens_in = 0
     total_tokens_out = 0
     turn_events = []
+    # v2.0 metrics: accumulate tool-call counters for read_tool_ratio / tool_calls_per_turn
+    total_tool_calls = 0
+    total_read_calls = 0   # file:read tool
+    total_cat_calls = 0    # cat-via-bash
 
     def emit(event):
         log_f.write(json.dumps(event) + "\n")
@@ -708,9 +712,13 @@ def run_benchmark(model, bench_name, bench_dir, provider):
                 name = block["name"]
                 inp = block.get("input", {})
                 tool_id = block.get("id", "")
+                total_tool_calls += 1
 
                 if name == "bash":
                     cmd = inp.get("command", "")
+                    # v2.0: detect cat-via-bash for read_tool_ratio
+                    if cmd.strip().startswith("cat "):
+                        total_cat_calls += 1
                     # Track file reads from cat/less/head commands
                     # Bug 3 fix: resolve relative paths against /workspace
                     for token in cmd.split():
@@ -730,6 +738,7 @@ def run_benchmark(model, bench_name, bench_dir, provider):
                     # AC1: record bash call
                     post.bash(cmd, output, turn)
                 elif name == "read":
+                    total_read_calls += 1
                     path = inp.get("path", "")
                     files_read.append(path)
                     rc, stdout, stderr = docker_exec(container, f"cat {path!r}")
@@ -875,8 +884,28 @@ def run_benchmark(model, bench_name, bench_dir, provider):
             if "test" not in f.lower():
                 false_pos += 1
 
-    # tokens_per_correct_line
-    tpcl = float("inf") if correct_lines == 0 else token_cost / correct_lines
+    # tokens_per_correct_line (v1.0 compat — null instead of "Infinity" for JSON consumers)
+    tpcl = None if correct_lines == 0 else token_cost / correct_lines
+
+    # v2.0: estimated_cost_usd (already computed by MetricsRecorder above)
+    estimated_cost_usd = cost
+
+    # v2.0: dollars_per_correct_line
+    if correct_lines > 0:
+        dollars_per_correct_line = round(estimated_cost_usd / correct_lines, 6)
+    else:
+        dollars_per_correct_line = None
+
+    # v2.0: difficulty_tier
+    _tiers, _benchmarks = _load_difficulty_json()
+    difficulty_tier = (_benchmarks or {}).get(bench_name, "medium")
+
+    # v2.0: tool_calls_per_turn
+    tool_calls_per_turn = round(total_tool_calls / max(total_turns, 1), 2)
+
+    # v2.0: read_tool_ratio — file:read vs cat-via-bash
+    _total_reads = total_read_calls + total_cat_calls
+    read_tool_ratio = round(total_read_calls / _total_reads, 2) if _total_reads > 0 else None
 
     # recovery_events and recovery_rate (simplified: count reverts)
     recovery_events = 0
@@ -907,12 +936,17 @@ def run_benchmark(model, bench_name, bench_dir, provider):
         "benchmark": bench_name, "agent": model,
         "commit": _bench_sha,
         "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "difficulty_tier": difficulty_tier,
         "resolved": resolved, "turns_to_discovery": turns_to_discovery,
         "turns_to_fix": turns_to_fix, "signal_to_noise": round(signal_to_noise, 3),
         "false_positives": false_pos, "token_cost": token_cost,
-        "tokens_per_correct_line": tpcl if tpcl != float("inf") else "Infinity",
+        "estimated_cost_usd": estimated_cost_usd,
+        "dollars_per_correct_line": dollars_per_correct_line,
+        "tokens_per_correct_line": tpcl,
         "recovery_events": recovery_events, "recovery_rate": round(recovery_rate, 3),
         "wall_clock": round(wall_clock, 1), "blind_discovery": blind_discovery,
+        "read_tool_ratio": read_tool_ratio,
+        "tool_calls_per_turn": tool_calls_per_turn,
     }
 
     score_path = os.path.join(runs_dir, f"{bench_name}.score.json")

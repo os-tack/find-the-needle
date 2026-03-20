@@ -52,7 +52,7 @@ import Base from '../layouts/Base.astro';
   </main>
 </Base>
 
-<style>
+<style is:global>
   main {
     max-width: none;
     padding: 1rem 2rem 2rem;
@@ -116,7 +116,7 @@ import Base from '../layouts/Base.astro';
   .col-resolved { left: 298px; min-width: 48px; text-align: center; }
   .col-tokens   { left: 346px; min-width: 62px; text-align: right; }
   .col-turns    { left: 408px; min-width: 48px; text-align: right; }
-  .col-time     { left: 456px; min-width: 52px; text-align: right; border-right: 2px solid var(--border); }
+  .col-time     { left: 456px; min-width: 52px; text-align: right; border-right: 2px solid rgba(212, 160, 84, 0.4); }
 
   .bench-col {
     min-width: 80px;
@@ -132,13 +132,15 @@ import Base from '../layouts/Base.astro';
   }
 
   th.bench-col a {
-    color: var(--text-muted);
+    color: rgba(212, 160, 84, 0.75);
     text-decoration: none;
+    transition: color 0.15s;
   }
 
   th.bench-col a:hover {
-    color: var(--accent);
+    color: #d4a054;
     text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   th.bench-col .rotated {
@@ -174,11 +176,19 @@ import Base from '../layouts/Base.astro';
   }
 
   #leaderboard tr:hover td {
-    background: var(--surface);
+    background: rgba(255, 255, 255, 0.06);
   }
 
   #leaderboard tr:hover td.sticky-col {
-    background: var(--surface);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  #leaderboard tr:hover td.cell-pass {
+    background: rgba(63, 185, 80, 0.28);
+  }
+
+  #leaderboard tr:hover td.cell-fail {
+    background: rgba(248, 81, 73, 0.25);
   }
 
   .verdict-badge {
@@ -193,25 +203,28 @@ import Base from '../layouts/Base.astro';
     line-height: 1.4;
   }
 
-  .verdict-boots     { background: rgba(63, 185, 80, 0.2); color: #3fb950; border: 1px solid rgba(63, 185, 80, 0.3); }
-  .verdict-partial   { background: rgba(210, 153, 34, 0.2); color: #d29922; border: 1px solid rgba(210, 153, 34, 0.3); }
-  .verdict-reads     { background: rgba(219, 109, 40, 0.2); color: #db6d28; border: 1px solid rgba(219, 109, 40, 0.3); }
-  .verdict-explores  { background: rgba(139, 148, 158, 0.2); color: #8b949e; border: 1px solid rgba(139, 148, 158, 0.3); }
-  .verdict-noboot    { background: rgba(248, 81, 73, 0.2); color: #f85149; border: 1px solid rgba(248, 81, 73, 0.3); }
+  .verdict-boots     { background: rgba(63, 185, 80, 0.25); color: #3fb950; border: 1px solid rgba(63, 185, 80, 0.5); box-shadow: 0 0 6px rgba(63, 185, 80, 0.2); }
+  .verdict-partial   { background: rgba(210, 153, 34, 0.25); color: #e3b341; border: 1px solid rgba(210, 153, 34, 0.5); box-shadow: 0 0 6px rgba(210, 153, 34, 0.2); }
+  .verdict-reads     { background: rgba(219, 109, 40, 0.25); color: #f0883e; border: 1px solid rgba(219, 109, 40, 0.5); box-shadow: 0 0 6px rgba(219, 109, 40, 0.15); }
+  .verdict-explores  { background: rgba(139, 148, 158, 0.25); color: #9eaab6; border: 1px solid rgba(139, 148, 158, 0.45); }
+  .verdict-noboot    { background: rgba(248, 81, 73, 0.25); color: #ff7b72; border: 1px solid rgba(248, 81, 73, 0.5); box-shadow: 0 0 6px rgba(248, 81, 73, 0.2); }
 
   .cell-pass {
-    background: rgba(63, 185, 80, 0.12);
-    color: var(--text);
+    background: rgba(63, 185, 80, 0.20);
+    border-left: 3px solid rgba(63, 185, 80, 0.6);
+    color: #c9d1d9;
   }
 
   .cell-fail {
-    background: rgba(248, 81, 73, 0.12);
-    color: var(--text-muted);
+    background: rgba(248, 81, 73, 0.18);
+    border-left: 3px solid rgba(248, 81, 73, 0.5);
+    color: #8b949e;
   }
 
   .cell-empty {
-    background: rgba(139, 148, 158, 0.05);
-    color: var(--text-muted);
+    background: transparent;
+    color: #484f58;
+    border-left: 3px solid transparent;
   }
 
   td.col-post, td.col-entity, td.col-resolved {
@@ -223,11 +236,11 @@ import Base from '../layouts/Base.astro';
   }
 
   td.col-time {
-    border-right: 2px solid var(--border);
+    border-right: 2px solid rgba(212, 160, 84, 0.4);
   }
 
-  .check-pass { color: var(--green); }
-  .check-fail { color: var(--red); }
+  .check-pass { color: #3fb950; font-weight: 700; }
+  .check-fail { color: #f85149; font-weight: 700; }
 
   .model-link {
     color: var(--text);
@@ -276,15 +289,26 @@ import Base from '../layouts/Base.astro';
 
   .cell-sample {
     display: inline-block;
-    width: 20px;
-    height: 16px;
-    border-radius: 2px;
+    width: 28px;
+    height: 20px;
+    border-radius: 3px;
     flex-shrink: 0;
   }
 
-  .cell-sample.cell-pass  { background: rgba(63, 185, 80, 0.12); border: 1px solid rgba(63, 185, 80, 0.25); }
-  .cell-sample.cell-fail  { background: rgba(248, 81, 73, 0.12); border: 1px solid rgba(248, 81, 73, 0.25); }
-  .cell-sample.cell-empty { background: rgba(139, 148, 158, 0.05); border: 1px solid var(--border); }
+  .cell-sample.cell-pass  { background: rgba(63, 185, 80, 0.20); border: 1px solid rgba(63, 185, 80, 0.5); border-left: 3px solid rgba(63, 185, 80, 0.6); }
+  .cell-sample.cell-fail  { background: rgba(248, 81, 73, 0.18); border: 1px solid rgba(248, 81, 73, 0.4); border-left: 3px solid rgba(248, 81, 73, 0.5); }
+  .cell-sample.cell-empty { background: transparent; border: 1px solid var(--border); border-left: 3px solid transparent; }
+
+  /* Solved count color coding */
+  .solved-high { color: #3fb950; font-weight: 700; }
+  .solved-mid  { color: #d29922; font-weight: 600; }
+  .solved-low  { color: #f85149; }
+  .solved-zero { color: #484f58; }
+
+  /* Top 3 rank styling */
+  .rank-1 .model-link, .rank-1 .model-name { color: #d4a054; }
+  .rank-2 .model-link, .rank-2 .model-name { color: #b0b0b0; }
+  .rank-3 .model-link, .rank-3 .model-name { color: #cd7f32; }
 
   @media (max-width: 600px) {
     main { padding: 0.5rem; }
@@ -556,8 +580,13 @@ import Base from '../layouts/Base.astro';
       }
 
       const rows: string[] = [];
-      for (const m of models) {
-        let row = '<tr>';
+      for (let i = 0; i < models.length; i++) {
+        const m = models[i];
+        let rankClass = '';
+        if (i === 0) rankClass = ' rank-1';
+        else if (i === 1) rankClass = ' rank-2';
+        else if (i === 2) rankClass = ' rank-3';
+        let row = '<tr class="' + rankClass.trim() + '">';
 
         // Model name — link to commit if available
         if (m.commitHash) {
@@ -581,8 +610,13 @@ import Base from '../layouts/Base.astro';
         // Entityfile
         row += '<td class="sticky-col col-entity">' + (m.entityfile ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
 
-        // Solved count
-        row += '<td class="sticky-col col-resolved">' + m.resolvedCount + '/' + benchmarks.length + '</td>';
+        // Solved count — color-coded by ratio
+        const ratio = benchmarks.length > 0 ? m.resolvedCount / benchmarks.length : 0;
+        let solvedClass = 'solved-zero';
+        if (ratio >= 0.8) solvedClass = 'solved-high';
+        else if (ratio >= 0.4) solvedClass = 'solved-mid';
+        else if (ratio > 0) solvedClass = 'solved-low';
+        row += '<td class="sticky-col col-resolved ' + solvedClass + '">' + m.resolvedCount + '/' + benchmarks.length + '</td>';
 
         // Tokens
         row += '<td class="sticky-col col-tokens">' + fmtNum(m.totalTokens) + '</td>';

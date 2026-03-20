@@ -1,0 +1,28 @@
+--- a/app/validator.py
++++ b/app/validator.py
+@@ -4,6 +4,7 @@ Checks that outbound URLs are safe to request — blocks known internal
+ and private-network destinations so the proxy cannot be abused for SSRF.
+ """
+
++import ipaddress
+ from urllib.parse import urlparse
+
+ ALLOWED_HOSTS = ["api.example.com", "hooks.slack.com", "webhook.site"]
+@@ -38,6 +39,17 @@ def is_url_allowed(url: str) -> bool:
+     if not host:
+         return False
+
++    # Normalise via the ipaddress module so that all representations of
++    # loopback / private addresses (IPv4 *and* IPv6) are caught.
++    try:
++        addr = ipaddress.ip_address(host)
++        if addr.is_loopback or addr.is_private or addr.is_reserved or addr.is_link_local:
++            return False
++        # If it parsed as a valid IP and is globally routable, allow it.
++        return True
++    except ValueError:
++        pass  # Not a bare IP — fall through to hostname checks below.
++
+     # Block well-known internal hostnames / IPs
+     if host in BLOCKED_HOSTS:
+         return False

@@ -1,0 +1,7 @@
+FROM wal-fsync-ghost-ack:latest
+TOOL shell
+TOOL file:read
+TOOL file:edit
+LIMIT turns 50
+LIMIT tokens 300000
+LIMIT wall_clock 900

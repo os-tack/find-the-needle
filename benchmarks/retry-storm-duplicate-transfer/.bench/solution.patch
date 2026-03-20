@@ -1,0 +1,73 @@
+--- a/app/processor.py
++++ b/app/processor.py
+@@ -29,22 +29,21 @@
+     conn = get_db()
+     try:
+-        # Check if source account has sufficient funds
+-        row = conn.execute(
+-            "SELECT balance FROM accounts WHERE name = ?",
+-            (from_acct,)
+-        ).fetchone()
+-
+-        if row is None:
+-            return {"status": "error", "message": f"account {from_acct} not found"}
+-
+-        if row["balance"] < amount:
+-            return {"status": "error", "message": "insufficient funds"}
+-
+-        # Debit source account
+-        conn.execute(
+-            "UPDATE accounts SET balance = balance - ? WHERE name = ?",
+-            (amount, from_acct)
+-        )
+-        conn.commit()
+-
+-        # Small delay to simulate processing / cross-service call.
+-        time.sleep(0.05)
+-
+-        # Check idempotency — if we've already processed this transfer,
+-        # roll back the debit and return the cached result.
++        # Use BEGIN IMMEDIATE to acquire a write lock upfront,
++        # preventing concurrent transactions from interleaving.
++        conn.execute("BEGIN IMMEDIATE")
++
++        # Check idempotency FIRST — before any side effects.
+         existing = conn.execute(
+             "SELECT result FROM completed_transfers WHERE idempotency_key = ?",
+             (idempotency_key,)
+         ).fetchone()
+
+         if existing is not None:
+-            # Already processed — undo the debit we just did
+-            conn.execute(
+-                "UPDATE accounts SET balance = balance + ? WHERE name = ?",
+-                (amount, from_acct)
+-            )
+             conn.commit()
+             return {"status": "duplicate", "message": "transfer already completed"}
+
+-        # Credit destination account
++        # Check if source account has sufficient funds
++        row = conn.execute(
++            "SELECT balance FROM accounts WHERE name = ?",
++            (from_acct,)
++        ).fetchone()
++
++        if row is None:
++            conn.rollback()
++            return {"status": "error", "message": f"account {from_acct} not found"}
++
++        if row["balance"] < amount:
++            conn.rollback()
++            return {"status": "error", "message": "insufficient funds"}
++
++        # Debit source account
++        conn.execute(
++            "UPDATE accounts SET balance = balance - ? WHERE name = ?",
++            (amount, from_acct)
++        )
++
++        # Credit destination account
+         conn.execute(
+             "UPDATE accounts SET balance = balance + ? WHERE name = ?",
+             (amount, to_acct)
