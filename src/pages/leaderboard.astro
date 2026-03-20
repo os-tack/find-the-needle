@@ -14,15 +14,16 @@ import Base from '../layouts/Base.astro';
     <div class="leaderboard-container">
       <table id="leaderboard">
         <thead id="lb-head">
-          <tr>
-            <th class="sticky-col col-model" data-key="model" data-type="string">Model <span class="sort-arrow"></span></th>
-            <th class="sticky-col col-boot" data-key="boot" data-type="tier">Boot <span class="sort-arrow"></span></th>
-            <th class="sticky-col col-post" data-key="post" data-type="boolean">POST <span class="sort-arrow"></span></th>
-            <th class="sticky-col col-entity" data-key="entityfile" data-type="boolean">Entity <span class="sort-arrow"></span></th>
-            <th class="sticky-col col-resolved" data-key="resolvedCount" data-type="number">Solved <span class="sort-arrow"></span></th>
-            <th class="sticky-col col-tokens" data-key="totalTokens" data-type="number">Tokens <span class="sort-arrow"></span></th>
-            <th class="sticky-col col-turns" data-key="totalTurns" data-type="number">Turns <span class="sort-arrow"></span></th>
-            <th class="sticky-col col-time" data-key="totalTime" data-type="number">Time <span class="sort-arrow"></span></th>
+          <tr id="lb-tier-row"></tr>
+          <tr id="lb-header-row">
+            <th class="sticky-col col-model" data-key="model" data-type="string">Model</th>
+            <th class="sticky-col col-boot" data-key="boot" data-type="tier">Boot</th>
+            <th class="sticky-col col-post" data-key="post" data-type="boolean">POST</th>
+            <th class="sticky-col col-entity" data-key="entityfile" data-type="boolean">Entity</th>
+            <th class="sticky-col col-resolved" data-key="resolvedCount" data-type="number">Solved</th>
+            <th class="sticky-col col-tokens" data-key="totalTokens" data-type="number">Tok</th>
+            <th class="sticky-col col-turns" data-key="totalTurns" data-type="number">Trn</th>
+            <th class="sticky-col col-time" data-key="totalTime" data-type="number">Time</th>
           </tr>
         </thead>
         <tbody id="lb-body">
@@ -125,31 +126,45 @@ import Base from '../layouts/Base.astro';
   .col-turns    { min-width: 48px; text-align: right; }
   .col-time     { min-width: 52px; text-align: right; border-right: 2px solid rgba(212, 160, 84, 0.4); }
 
-  .bench-col {
-    min-width: 100px;
-    max-width: 110px;
+  /* Tier group headers */
+  th.tier-header {
     text-align: center;
-    font-size: 0.65rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    padding: 0.25rem 0;
+    background: var(--surface);
+  }
+  th.tier-easy   { color: #3fb950; }
+  th.tier-medium { color: #d29922; }
+  th.tier-hard   { color: #f85149; }
+
+  /* Benchmark columns — compact heatmap cells */
+  .bench-col {
+    min-width: 32px;
+    max-width: 32px;
+    width: 32px;
+    text-align: center;
+    padding: 0.2rem 0.1rem;
+    position: relative;
   }
 
   th.bench-col {
-    height: 100px;
+    height: 80px;
     vertical-align: bottom;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.3rem;
   }
 
   th.bench-col a {
-    color: rgba(212, 160, 84, 0.75);
+    color: rgba(212, 160, 84, 0.65);
     text-decoration: none;
     transition: color 0.15s;
   }
 
   th.bench-col a:hover {
     color: #d4a054;
-    text-decoration: underline;
-    text-underline-offset: 2px;
   }
 
   th.bench-col .rotated {
@@ -158,11 +173,63 @@ import Base from '../layouts/Base.astro';
     transform: rotate(180deg);
     white-space: nowrap;
     display: inline-block;
-    font-size: 0.65rem;
-    max-height: 90px;
+    font-size: 0.55rem;
+    max-height: 70px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  /* Heatmap cells — colored blocks, no text */
+  .hm {
+    display: block;
+    width: 24px;
+    height: 18px;
+    margin: 0 auto;
+    border-radius: 3px;
+    cursor: default;
+  }
+  .hm-pass {
+    background: rgba(63, 185, 80, 0.55);
+    border: 1px solid rgba(63, 185, 80, 0.4);
+  }
+  .hm-fail {
+    background: rgba(248, 81, 73, 0.45);
+    border: 1px solid rgba(248, 81, 73, 0.35);
+  }
+  .hm-empty {
+    background: rgba(139, 148, 158, 0.08);
+    border: 1px solid rgba(139, 148, 158, 0.1);
+  }
+
+  /* Tooltip on hover */
+  .bench-col {
+    position: relative;
+  }
+  .bench-col .tip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1c2128;
+    color: #c9d1d9;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.65rem;
+    font-size: 0.7rem;
+    font-family: var(--mono);
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    line-height: 1.5;
+  }
+  .bench-col:hover .tip {
+    display: block;
+  }
+  .tip-name { color: var(--accent); font-weight: 600; }
+  .tip-pass { color: #3fb950; }
+  .tip-fail { color: #f85149; }
 
   #leaderboard td {
     padding: 0.35rem 0.4rem;
@@ -560,9 +627,55 @@ import Base from '../layouts/Base.astro';
       });
     }
 
-    // Add benchmark column headers with links to repo
-    const headRow = document.querySelector('#lb-head tr')!;
+    // Load difficulty tiers for grouping
+    let difficultyMap: Record<string, string> = {};
+    try {
+      const resp = await fetch('/difficulty.json');
+      if (resp.ok) {
+        const d = await resp.json();
+        difficultyMap = d.benchmarks || {};
+      }
+    } catch {}
+
+    // Group benchmarks by tier
+    const tiers: {name: string, cls: string, benchmarks: string[]}[] = [
+      {name: 'Easy', cls: 'tier-easy', benchmarks: []},
+      {name: 'Medium', cls: 'tier-medium', benchmarks: []},
+      {name: 'Hard', cls: 'tier-hard', benchmarks: []},
+    ];
+    const tierOrder: Record<string, number> = {'easy': 0, 'medium': 1, 'hard': 2};
     for (const bench of benchmarks) {
+      const tier = difficultyMap[bench] || 'medium';
+      const idx = tierOrder[tier] ?? 1;
+      tiers[idx].benchmarks.push(bench);
+    }
+    // Rebuild sorted benchmarks in tier order
+    const sortedBenchmarks: string[] = [];
+    for (const t of tiers) {
+      t.benchmarks.sort();
+      sortedBenchmarks.push(...t.benchmarks);
+    }
+
+    // Build tier header row (row 1)
+    const tierRow = document.getElementById('lb-tier-row')!;
+    // 8 sticky columns span
+    const stickySpan = document.createElement('th');
+    stickySpan.className = 'sticky-col col-model';
+    stickySpan.setAttribute('colspan', '8');
+    stickySpan.style.borderRight = '2px solid rgba(212, 160, 84, 0.4)';
+    tierRow.appendChild(stickySpan);
+    for (const t of tiers) {
+      if (t.benchmarks.length === 0) continue;
+      const th = document.createElement('th');
+      th.className = 'tier-header ' + t.cls;
+      th.setAttribute('colspan', String(t.benchmarks.length));
+      th.textContent = t.name + ' (' + t.benchmarks.length + ')';
+      tierRow.appendChild(th);
+    }
+
+    // Build benchmark name header row (row 2)
+    const headRow = document.getElementById('lb-header-row')!;
+    for (const bench of sortedBenchmarks) {
       const th = document.createElement('th');
       th.className = 'bench-col';
       th.dataset.key = bench;
@@ -574,7 +687,9 @@ import Base from '../layouts/Base.astro';
       link.rel = 'noopener';
       const span = document.createElement('span');
       span.className = 'rotated';
-      span.textContent = bench;
+      // Shorten the name for display
+      const shortName = bench.replace(/-/g, ' ').replace(/\b\w/g, c => c);
+      span.textContent = shortName.length > 16 ? shortName.slice(0, 15) + '…' : shortName;
       link.appendChild(span);
       th.appendChild(link);
       headRow.appendChild(th);
@@ -636,23 +751,27 @@ import Base from '../layouts/Base.astro';
         // Time
         row += '<td class="sticky-col col-time">' + fmtTime(m.totalTime) + '</td>';
 
-        // Benchmark columns
-        for (const bench of benchmarks) {
+        // Benchmark columns — heatmap cells with tooltips
+        for (const bench of sortedBenchmarks) {
           const entry = m.benchmarks[bench];
           if (!entry) {
-            row += '<td class="bench-col cell-empty">&mdash;</td>';
+            row += '<td class="bench-col"><span class="hm hm-empty"></span></td>';
           } else if (entry.resolved) {
-            row += '<td class="bench-col cell-pass">'
-              + fmtK(entry.token_cost) + 'k '
-              + entry.turns_to_fix + 't '
+            row += '<td class="bench-col"><span class="hm hm-pass"></span>'
+              + '<span class="tip"><span class="tip-name">' + escHtml(bench) + '</span><br>'
+              + '<span class="tip-pass">&#10003; resolved</span><br>'
+              + fmtK(entry.token_cost) + 'k tok · '
+              + entry.turns_to_fix + ' turns · '
               + Math.round(entry.wall_clock) + 's'
-              + '</td>';
+              + '</span></td>';
           } else {
-            row += '<td class="bench-col cell-fail">'
-              + fmtK(entry.token_cost) + 'k '
-              + entry.turns_to_fix + 't '
+            row += '<td class="bench-col"><span class="hm hm-fail"></span>'
+              + '<span class="tip"><span class="tip-name">' + escHtml(bench) + '</span><br>'
+              + '<span class="tip-fail">&#10007; not resolved</span><br>'
+              + fmtK(entry.token_cost) + 'k tok · '
+              + entry.turns_to_fix + ' turns · '
               + Math.round(entry.wall_clock) + 's'
-              + '</td>';
+              + '</span></td>';
           }
         }
 

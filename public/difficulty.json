@@ -1,0 +1,41 @@
+{
+  "tiers": {
+    "easy": {"turns": 10, "tokens": 50000, "wall_clock": 180},
+    "medium": {"turns": 30, "tokens": 150000, "wall_clock": 600},
+    "hard": {"turns": 50, "tokens": 300000, "wall_clock": 900}
+  },
+  "benchmarks": {
+    "off-by-one-pagination": "easy",
+    "off-by-one-array-slice": "easy",
+    "wrong-operator-discount": "easy",
+    "missing-input-validation": "easy",
+    "encoding-mojibake": "easy",
+    "timezone-scheduling": "easy",
+    "import-cycle-startup": "easy",
+    "type-coercion-comparison": "easy",
+    "goroutine-leak-handler": "medium",
+    "memory-leak-event-listener": "medium",
+    "deadlock-transfer": "medium",
+    "cache-stale-invalidation": "medium",
+    "auth-bypass-path-traversal": "medium",
+    "sql-injection-search": "medium",
+    "rate-limit-bypass-header": "medium",
+    "api-version-field-drop": "medium",
+    "null-pointer-config": "medium",
+    "race-condition-counter": "medium",
+    "silent-data-corruption": "medium",
+    "data-corruption-concurrent-write": "hard",
+    "split-brain-leader-election": "hard",
+    "compiler-macro-expansion": "hard",
+    "kernel-panic-ioctl": "hard",
+    "timing-attack-comparison": "hard",
+    "performance-cliff-hash": "hard",
+    "k8s-scheduler-shutdown-deadlock": "hard",
+    "k8s-assume-cache-silent-drop": "hard",
+    "nginx-upstream-port-mismatch": "medium",
+    "postgres-migration-schema-drift": "hard",
+    "ssrf-allowlist-port-confusion": "hard",
+    "wal-fsync-ghost-ack": "hard",
+    "retry-storm-duplicate-transfer": "hard"
+  }
+}
