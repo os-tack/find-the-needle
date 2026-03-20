@@ -185,13 +185,15 @@ jobs:
               [ -d "runs/${MODEL}/${BENCH}" ] && cp -r "runs/${MODEL}/${BENCH}" "runs/${AGENT_NAME}/${BENCH}"
               # Patch agent name in score files
               for sf in runs/${AGENT_NAME}/${BENCH}*.score.json runs/${AGENT_NAME}/${BENCH}/score.json; do
-                [ -f "$sf" ] && python3 -c "
-import json, sys
-d = json.load(open('$sf'))
-d['agent'] = '${AGENT_NAME}'
-d['control_type'] = 'no-ostk'
-json.dump(d, open('$sf', 'w'), indent=2)
-"
+                if [ -f "$sf" ]; then
+                  python3 << PYEOF
+          import json
+          d = json.load(open("$sf"))
+          d["agent"] = "${AGENT_NAME}"
+          d["control_type"] = "no-ostk"
+          json.dump(d, open("$sf", "w"), indent=2)
+          PYEOF
+                fi
               done
             fi
           fi
