@@ -7,6 +7,11 @@ FAIL=0
 
 echo "=== IOCTL Handler Validation Test ==="
 
+# Rebuild from source (needed after patching)
+echo "--- Building ---"
+make -C /app/src clean && make -C /app/src 2>&1
+cp /app/src/devctl /usr/local/bin/devctl
+
 # Test 1: Normal operation should work
 echo "--- Normal operation ---"
 if devctl test; then

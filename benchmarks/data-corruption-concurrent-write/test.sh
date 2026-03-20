@@ -10,6 +10,11 @@ OUTPUT=/tmp/concurrent_test.dat
 
 echo "=== Concurrent Write Integrity Test ==="
 
+# Rebuild from source (needed after patching)
+echo "--- Building ---"
+cd /app && cargo build --release 2>&1
+cp /app/target/release/concurrent-writer /usr/local/bin/concurrent-writer
+
 # Run the concurrent write and capture stderr (worker assignment info)
 rm -f "$OUTPUT"
 concurrent-writer write "$OUTPUT" 2>/tmp/concurrent_write_log.txt

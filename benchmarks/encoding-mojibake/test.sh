@@ -3,6 +3,10 @@ set -e
 
 cd /app
 
+# Rebuild from source (needed after patching)
+echo "--- Building ---"
+mkdir -p build && javac -d build app/*.java 2>&1
+
 # Generate the report
 java -cp build Main app/customers.csv /tmp/report.txt
 

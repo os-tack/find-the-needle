@@ -9,6 +9,11 @@ FAIL=0
 
 echo "=== Code Generation Engine Tests ==="
 
+# Rebuild from source (needed after patching)
+echo "--- Building ---"
+cd /app && cargo build --release 2>&1
+cp /app/target/release/codegen-engine /usr/local/bin/codegen-engine
+
 # Test 1: Simple accessors (single-level field access)
 echo "--- Simple accessor test ---"
 if ! codegen-engine test-simple; then
@@ -29,12 +34,13 @@ codegen-engine generate complex > /tmp/generated.rs
 echo "Generated code written to /tmp/generated.rs"
 
 # Check that Ref-typed fields have reference return types.
-# Match "-> Company {" (owned) but not "-> &Company {" (reference).
-if grep -q "\-> Company {" /tmp/generated.rs && ! grep -q "\-> &Company {" /tmp/generated.rs; then
+# Use fixed-string grep (-F) to match "-> Company {" literally.
+# The bug produces "-> Company {" (owned); the fix produces "-> &Company {" (reference).
+if grep -Fq "-> Company {" /tmp/generated.rs && ! grep -Fq "-> &Company {" /tmp/generated.rs; then
     echo "FAIL: company getter returns owned type instead of reference"
     FAIL=1
 fi
-if grep -q "\-> Address {" /tmp/generated.rs && ! grep -q "\-> &Address {" /tmp/generated.rs; then
+if grep -Fq "-> Address {" /tmp/generated.rs && ! grep -Fq "-> &Address {" /tmp/generated.rs; then
     echo "FAIL: address getter returns owned type instead of reference"
     FAIL=1
 fi

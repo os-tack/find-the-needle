@@ -9,8 +9,13 @@ FAIL=0
 
 echo "=== Timing Attack Resistance Test ==="
 
+# Rebuild from source (needed after patching)
+echo "--- Building ---"
+cd /app/app && go build -o /usr/local/bin/authserver . 2>&1
+
 # Test 1: Basic authentication works
 echo "--- Basic auth test ---"
+cd /app
 if authserver verify "correct-horse-battery-staple"; then
     echo "OK: correct password accepted"
 else
