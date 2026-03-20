@@ -1,7 +1,7 @@
 {
   "benchmark": "timezone-scheduling",
   "agent": "control-baseline",
-  "timestamp": "2026-03-20T15:50:28Z",
+  "timestamp": "2026-03-20T16:56:59Z",
   "resolved": false,
   "turns_to_fix": 0,
   "token_cost": 0,

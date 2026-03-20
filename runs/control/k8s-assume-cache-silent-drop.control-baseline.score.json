@@ -1,7 +1,7 @@
 {
   "benchmark": "k8s-assume-cache-silent-drop",
   "agent": "control-baseline",
-  "timestamp": "2026-03-20T15:48:44Z",
+  "timestamp": "2026-03-20T16:55:29Z",
   "resolved": false,
   "turns_to_fix": 0,
   "token_cost": 0,

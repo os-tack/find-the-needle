@@ -1,7 +1,7 @@
 {
   "benchmark": "memory-leak-event-listener",
   "agent": "control-baseline",
-  "timestamp": "2026-03-20T15:49:00Z",
+  "timestamp": "2026-03-20T16:55:46Z",
   "resolved": false,
   "turns_to_fix": 0,
   "token_cost": 0,

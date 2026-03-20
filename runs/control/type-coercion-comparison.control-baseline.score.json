@@ -1,7 +1,7 @@
 {
   "benchmark": "type-coercion-comparison",
   "agent": "control-baseline",
-  "timestamp": "2026-03-20T15:50:32Z",
+  "timestamp": "2026-03-20T16:57:10Z",
   "resolved": false,
   "turns_to_fix": 0,
   "token_cost": 0,

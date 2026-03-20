@@ -1,7 +1,7 @@
 {
   "benchmark": "split-brain-leader-election",
   "agent": "control-baseline",
-  "timestamp": "2026-03-20T15:50:15Z",
+  "timestamp": "2026-03-20T16:56:46Z",
   "resolved": false,
   "turns_to_fix": 0,
   "token_cost": 0,

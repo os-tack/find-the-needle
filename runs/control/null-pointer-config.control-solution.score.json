@@ -1,10 +1,10 @@
 {
   "benchmark": "null-pointer-config",
   "agent": "control-solution",
-  "timestamp": "2026-03-20T15:49:12Z",
-  "resolved": false,
+  "timestamp": "2026-03-20T16:56:03Z",
+  "resolved": true,
   "turns_to_fix": 0,
   "token_cost": 0,
-  "wall_clock": 0.0,
+  "wall_clock": 2.3,
   "control_type": "solution-applied"
 }
