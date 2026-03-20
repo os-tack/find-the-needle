@@ -240,6 +240,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          git pull --rebase origin main || true
           git add public/scores.json runs/haystack-boot-leaderboard.json 2>/dev/null || true
 
           VERSION="${{ github.event.inputs.version }}"
