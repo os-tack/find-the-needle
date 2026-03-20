@@ -117,7 +117,7 @@ import Base from '../layouts/Base.astro';
     background: var(--surface);
   }
 
-  .col-model    { left: 0; min-width: 140px; max-width: 180px; overflow: hidden; text-overflow: ellipsis; }
+  .col-model    { left: 0; width: 140px; min-width: 140px; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
   .col-boot     { min-width: 72px; }
   .col-post     { min-width: 40px; text-align: center; }
   .col-entity   { min-width: 46px; text-align: center; }
@@ -125,6 +125,14 @@ import Base from '../layouts/Base.astro';
   .col-tokens   { min-width: 62px; text-align: right; }
   .col-turns    { min-width: 48px; text-align: right; }
   .col-time     { min-width: 52px; text-align: right; border-right: 2px solid rgba(212, 160, 84, 0.4); }
+
+  /* Tier row: placeholder cells for sticky columns (no content, match widths) */
+  th.tier-sticky-placeholder {
+    padding: 0.25rem 0.4rem;
+    font-size: 0;
+    line-height: 0;
+    background: var(--surface);
+  }
 
   /* Tier group headers */
   th.tier-header {
@@ -388,14 +396,8 @@ import Base from '../layouts/Base.astro';
 
   @media (max-width: 600px) {
     main { padding: 0.5rem; }
-    .col-model { min-width: 100px; max-width: 120px; }
-    .col-boot  { left: 100px; }
-    .col-post  { left: 172px; }
-    .col-entity { left: 212px; }
-    .col-resolved { left: 258px; }
-    .col-tokens { left: 306px; }
-    .col-turns  { left: 368px; }
-    .col-time   { left: 416px; }
+    .col-model { width: 100px; min-width: 100px; max-width: 100px; }
+    /* Left offsets are computed at runtime by JS */
   }
 </style>
 
@@ -657,13 +659,22 @@ import Base from '../layouts/Base.astro';
     }
 
     // Build tier header row (row 1)
+    // Create one <th> per sticky column so widths stay aligned with row 2.
     const tierRow = document.getElementById('lb-tier-row')!;
-    // 8 sticky columns span
-    const stickySpan = document.createElement('th');
-    stickySpan.className = 'sticky-col col-model';
-    stickySpan.setAttribute('colspan', '8');
-    stickySpan.style.borderRight = '2px solid rgba(212, 160, 84, 0.4)';
-    tierRow.appendChild(stickySpan);
+    const stickyColClasses = [
+      'col-model', 'col-boot', 'col-post', 'col-entity',
+      'col-resolved', 'col-tokens', 'col-turns', 'col-time'
+    ];
+    for (const cls of stickyColClasses) {
+      const th = document.createElement('th');
+      th.className = 'sticky-col tier-sticky-placeholder ' + cls;
+      // Last sticky column gets the accent border
+      if (cls === 'col-time') {
+        th.style.borderRight = '2px solid rgba(212, 160, 84, 0.4)';
+      }
+      th.style.borderBottom = '1px solid var(--border)';
+      tierRow.appendChild(th);
+    }
     for (const t of tiers) {
       if (t.benchmarks.length === 0) continue;
       const th = document.createElement('th');
@@ -837,24 +848,23 @@ import Base from '../layouts/Base.astro';
 
     // --- Compute sticky column left offsets from actual rendered widths ---
     function computeStickyOffsets() {
-      const headerCells = document.querySelectorAll('#lb-head th.sticky-col');
-      let offset = 0;
-      headerCells.forEach(th => {
-        const el = th as HTMLElement;
-        el.style.left = offset + 'px';
-        offset += el.offsetWidth;
-      });
-      // Apply same offsets to body cells
+      // Use row 2 (the real header row) to measure column widths
+      const headerCells = document.querySelectorAll('#lb-header-row th.sticky-col');
       const colClasses = ['col-model','col-boot','col-post','col-entity','col-resolved','col-tokens','col-turns','col-time'];
       const offsets: number[] = [];
+      let offset = 0;
       headerCells.forEach((th, i) => {
-        offsets[i] = parseInt((th as HTMLElement).style.left || '0');
+        const el = th as HTMLElement;
+        el.style.left = offset + 'px';
+        offsets[i] = offset;
+        offset += el.offsetWidth;
       });
+      // Apply same offsets to tier row sticky cells and body cells
       for (const cls of colClasses) {
         const idx = colClasses.indexOf(cls);
         if (idx >= 0 && offsets[idx] !== undefined) {
-          document.querySelectorAll('td.' + cls).forEach(td => {
-            (td as HTMLElement).style.left = offsets[idx] + 'px';
+          document.querySelectorAll('#lb-tier-row th.' + cls + ', td.' + cls).forEach(cell => {
+            (cell as HTMLElement).style.left = offsets[idx] + 'px';
           });
         }
       }
