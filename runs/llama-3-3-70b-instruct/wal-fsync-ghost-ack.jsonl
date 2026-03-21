@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-21T17:19:49Z", "benchmark": "wal-fsync-ghost-ack", "model": "llama-3-3-70b-instruct", "has_prompt": false, "solution_files": ["wal.go"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 478, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 918, "tokens_out": 18, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T17:19:56Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0}

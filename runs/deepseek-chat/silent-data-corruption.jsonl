@@ -1,8 +1,10 @@
-{"event": "run.start", "timestamp": "2026-03-21T13:33:36Z", "benchmark": "silent-data-corruption", "model": "deepseek-chat", "has_prompt": false, "solution_files": ["src/main.rs"]}
+{"event": "run.start", "timestamp": "2026-03-21T17:48:42Z", "benchmark": "silent-data-corruption", "model": "deepseek-chat", "has_prompt": false, "solution_files": ["src/main.rs"]}
 {"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 701, "tokens_out": 42, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/tmp/input.dat", "/tmp/output.dat"], "tokens_in": 804, "tokens_out": 138, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 915, "tokens_out": 95, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["test.sh"], "tokens_in": 986, "tokens_out": 43, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1480, "tokens_out": 155, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/"], "tokens_in": 1542, "tokens_out": 88, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T13:34:02Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/tmp/input.dat", "/tmp/output.dat"], "tokens_in": 804, "tokens_out": 143, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["./test.sh"], "tokens_in": 915, "tokens_out": 114, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 1409, "tokens_out": 177, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1468, "tokens_out": 45, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/.", "/workspace/\"*.sh\""], "tokens_in": 1530, "tokens_out": 105, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/."], "tokens_in": 1603, "tokens_out": 81, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 1662, "tokens_out": 172, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T17:49:16Z", "test_exit": 1, "total_turns": 8, "correct_lines": 0}

@@ -1,2 +1,7 @@
-{"event": "run.start", "timestamp": "2026-03-21T12:52:25Z", "benchmark": "retry-storm-duplicate-transfer", "model": "deepseek-chat", "has_prompt": false, "solution_files": ["app/processor.py"]}
-{"event": "run.end", "timestamp": "2026-03-21T12:52:34Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}
+{"event": "run.start", "timestamp": "2026-03-21T17:57:58Z", "benchmark": "retry-storm-duplicate-transfer", "model": "deepseek-chat", "has_prompt": false, "solution_files": ["app/processor.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 701, "tokens_out": 42, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["./test.sh"], "tokens_in": 813, "tokens_out": 160, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["app/processor.py"], "tokens_in": 1579, "tokens_out": 164, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": ["app/processor.py"], "files_read": [], "tokens_in": 2539, "tokens_out": 1548, "test_exit": 1}
+{"event": "turn", "turn": 5, "files_edited": ["app/processor.py"], "files_read": [], "tokens_in": 3568, "tokens_out": 936, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-21T17:59:34Z", "test_exit": 0, "total_turns": 5, "correct_lines": 4}

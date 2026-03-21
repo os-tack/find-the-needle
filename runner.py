@@ -632,7 +632,7 @@ def run_benchmark(model, bench_name, bench_dir, provider):
 
     # Start container
     ts = str(int(time.time()))
-    container = f"nb-{bench_name}-{ts}"
+    container = f"nb-{model.replace('/', '-')}-{bench_name}-{ts}"
     subprocess.run(["docker", "run", "-d", "--name", container, f"needle-bench-{bench_name}", "sleep", "3600"],
                    capture_output=True, check=True)
 

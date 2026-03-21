@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-21T17:42:50Z", "benchmark": "memory-leak-event-listener", "model": "deepseek-r1", "has_prompt": false, "solution_files": ["app/processor.js"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 520, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/server.js"], "tokens_in": 771, "tokens_out": 697, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 901, "tokens_out": 1188, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T17:43:47Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0}

@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T13:06:22Z", "benchmark": "auth-bypass-path-traversal", "model": "gemini-2.5-pro", "has_prompt": false, "solution_files": ["app/middleware.go"]}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 132, "tokens_out": 57, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 307, "tokens_out": 225, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 407, "tokens_out": 37, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["app/main.go"], "tokens_in": 486, "tokens_out": 62, "test_exit": null}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["app/middleware.go"], "tokens_in": 1909, "tokens_out": 24, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 2323, "tokens_out": 4092, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T13:07:12Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0}

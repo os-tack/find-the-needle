@@ -1,0 +1,5 @@
+{"event": "run.start", "timestamp": "2026-03-21T17:12:41Z", "benchmark": "deadlock-transfer", "model": "llama-3-3-70b-instruct", "has_prompt": false, "solution_files": ["app/TransferService.java"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 478, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["./test.sh"], "tokens_in": 590, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1077, "tokens_out": 610, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T17:13:22Z", "test_exit": 1, "total_turns": 3, "correct_lines": 0}

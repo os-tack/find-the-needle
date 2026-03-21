@@ -1,0 +1,13 @@
+{"event": "run.start", "timestamp": "2026-03-21T18:09:33Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "deepseek-r1", "has_prompt": false, "solution_files": ["app/validator.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh", "/root/workspace/main.go", "/workspace/./test.sh"], "tokens_in": 660, "tokens_out": 384, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/root/workspace/server.py", "/root/workspace/app.py", "/root/workspace/main.py", "/workspace/./test.sh"], "tokens_in": 1796, "tokens_out": 3775, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/root/workspace/webhook-proxy/server.py", "/workspace/./test.sh"], "tokens_in": 2599, "tokens_out": 1022, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/root/workspace/webhook-proxy/server.py"], "tokens_in": 3299, "tokens_out": 994, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/root/workspace/", "/root/workspace/webhook-proxy/"], "tokens_in": 6462, "tokens_out": 99, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 6615, "tokens_out": 53, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/app/server.py", "/workspace/app/app.py"], "tokens_in": 3669, "tokens_out": 329, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/workspace/validator.py"], "tokens_in": 4289, "tokens_out": 248, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/workspace", "/workspace/\"*.py\""], "tokens_in": 7518, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 4437, "tokens_out": 507, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": ["/workspace/app/validator.py", "/workspace/app/validator.py"], "files_read": ["/workspace/./test.sh"], "tokens_in": 4810, "tokens_out": 5165, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-21T18:15:18Z", "test_exit": 0, "total_turns": 11, "correct_lines": 4}

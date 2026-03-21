@@ -1,0 +1,9 @@
+{"event": "run.start", "timestamp": "2026-03-21T18:14:50Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "devstral-medium", "has_prompt": false, "solution_files": ["app/validator.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh", "/workspace/./test.sh"], "tokens_in": 307, "tokens_out": 42, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/server.py"], "tokens_in": 874, "tokens_out": 148, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1039, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1200, "tokens_out": 25, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/app/server.py"], "tokens_in": 1422, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/workspace/app/validator.py"], "tokens_in": 1980, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": ["/workspace/app/validator.py"], "files_read": [], "tokens_in": 2353, "tokens_out": 257, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-21T18:15:04Z", "test_exit": 0, "total_turns": 7, "correct_lines": 0}

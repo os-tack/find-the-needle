@@ -1,0 +1,22 @@
+{
+  "benchmark": "wal-fsync-ghost-ack",
+  "agent": "devstral-medium",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:18:23Z",
+  "difficulty_tier": "hard",
+  "resolved": false,
+  "turns_to_discovery": 3,
+  "turns_to_fix": 60,
+  "signal_to_noise": 0.182,
+  "false_positives": 0,
+  "token_cost": 410157,
+  "estimated_cost_usd": 1.381215,
+  "dollars_per_correct_line": 0.690608,
+  "tokens_per_correct_line": 205078.5,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 197.8,
+  "blind_discovery": false,
+  "read_tool_ratio": 0.72,
+  "tool_calls_per_turn": 1.0
+}

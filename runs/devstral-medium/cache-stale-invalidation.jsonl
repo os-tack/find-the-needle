@@ -1,0 +1,11 @@
+{"event": "run.start", "timestamp": "2026-03-21T18:08:35Z", "benchmark": "cache-stale-invalidation", "model": "devstral-medium", "has_prompt": false, "solution_files": ["app/server.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh", "/workspace/./test.sh"], "tokens_in": 307, "tokens_out": 42, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 431, "tokens_out": 35, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 604, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/.", "/workspace/test.sh"], "tokens_in": 648, "tokens_out": 30, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/test.sh"], "tokens_in": 686, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app", "/workspace/\"*.py\""], "tokens_in": 1431, "tokens_out": 32, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 1485, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/app/cache.py"], "tokens_in": 2428, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": ["/app/app/server.py"], "files_read": [], "tokens_in": 2917, "tokens_out": 382, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-21T18:08:47Z", "test_exit": 0, "total_turns": 9, "correct_lines": 0}

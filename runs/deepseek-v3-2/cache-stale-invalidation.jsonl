@@ -1,0 +1,12 @@
+{"event": "run.start", "timestamp": "2026-03-21T18:29:28Z", "benchmark": "cache-stale-invalidation", "model": "deepseek-v3-2", "has_prompt": false, "solution_files": ["app/server.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 520, "tokens_out": 57, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/cache_test.py"], "tokens_in": 671, "tokens_out": 59, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 764, "tokens_out": 53, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 944, "tokens_out": 47, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["app/cache.py"], "tokens_in": 1165, "tokens_out": 46, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["app/server.py"], "tokens_in": 1702, "tokens_out": 44, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["test.sh"], "tokens_in": 2677, "tokens_out": 88, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["app/store.py"], "tokens_in": 3493, "tokens_out": 147, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": ["app/server.py"], "files_read": [], "tokens_in": 4173, "tokens_out": 322, "test_exit": 1}
+{"event": "turn", "turn": 10, "files_edited": ["app/server.py"], "files_read": [], "tokens_in": 4597, "tokens_out": 208, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-21T18:30:24Z", "test_exit": 0, "total_turns": 10, "correct_lines": 3}

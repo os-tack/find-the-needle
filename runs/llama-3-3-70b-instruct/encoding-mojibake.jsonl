@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-21T17:09:48Z", "benchmark": "encoding-mojibake", "model": "llama-3-3-70b-instruct", "has_prompt": false, "solution_files": ["app/CsvReader.java"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 481, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["app/customers.csv"], "tokens_in": 1081, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 1285, "tokens_out": 37, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1338, "tokens_out": 193, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T17:09:58Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0}

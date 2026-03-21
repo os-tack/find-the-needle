@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-21T17:12:49Z", "benchmark": "memory-leak-event-listener", "model": "codestral-2508", "has_prompt": false, "solution_files": ["app/processor.js"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 307, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["app.js"], "tokens_in": 397, "tokens_out": 89, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/", "/workspace/app.js"], "tokens_in": 501, "tokens_out": 46, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 554, "tokens_out": 34, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T17:13:02Z", "test_exit": 1, "total_turns": 4, "correct_lines": 0}

@@ -1,8 +1,0 @@
-{"event": "run.start", "timestamp": "2026-03-21T13:13:35Z", "benchmark": "wrong-operator-discount", "model": "llama-4-maverick", "has_prompt": false, "solution_files": ["pricing.py"]}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 449, "tokens_out": 8, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 540, "tokens_out": 122, "test_exit": null}
-{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["pricing.py"], "tokens_in": 694, "tokens_out": 87, "test_exit": null}
-{"event": "turn", "turn": 4, "files_edited": ["pricing.py"], "files_read": [], "tokens_in": 1055, "tokens_out": 130, "test_exit": 1}
-{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 1227, "tokens_out": 40, "test_exit": null}
-{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1282, "tokens_out": 40, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-21T13:13:45Z", "test_exit": 1, "total_turns": 6, "correct_lines": 0}

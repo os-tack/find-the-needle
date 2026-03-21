@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-21T18:06:33Z", "benchmark": "silent-data-corruption", "model": "deepseek-r1", "has_prompt": false, "solution_files": ["src/main.rs"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh", "/root/app.py", "/workspace/./test.sh"], "tokens_in": 660, "tokens_out": 465, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 913, "tokens_out": 65, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["src/main.rs"], "tokens_in": 1269, "tokens_out": 497, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": ["src/main.rs"], "files_read": ["/workspace/./test.sh"], "tokens_in": 1902, "tokens_out": 519, "test_exit": 1}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 2187, "tokens_out": 167, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T18:07:21Z", "test_exit": 1, "total_turns": 5, "correct_lines": 0}

@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-21T17:19:57Z", "benchmark": "retry-storm-duplicate-transfer", "model": "llama-3-3-70b-instruct", "has_prompt": false, "solution_files": ["app/processor.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 481, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/tmp/supervisord.pid"], "tokens_in": 603, "tokens_out": 22, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 656, "tokens_out": 42, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 720, "tokens_out": 17, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 793, "tokens_out": 235, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T17:20:21Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0}

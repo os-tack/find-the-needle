@@ -1,0 +1,7 @@
+{"event": "run.start", "timestamp": "2026-03-21T17:13:56Z", "benchmark": "cache-stale-invalidation", "model": "codestral-2508", "has_prompt": false, "solution_files": ["app/server.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 307, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["app.py"], "tokens_in": 400, "tokens_out": 72, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["test.sh"], "tokens_in": 487, "tokens_out": 34, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["app/server.py"], "tokens_in": 1245, "tokens_out": 107, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": ["app/server.py", "app/server.py"], "files_read": [], "tokens_in": 2274, "tokens_out": 331, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-21T17:14:06Z", "test_exit": 0, "total_turns": 5, "correct_lines": 0}

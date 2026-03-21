@@ -1,0 +1,4 @@
+{"event": "run.start", "timestamp": "2026-03-21T18:20:57Z", "benchmark": "retry-storm-duplicate-transfer", "model": "deepseek-r1", "has_prompt": false, "solution_files": ["app/processor.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 660, "tokens_out": 529, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 862, "tokens_out": 90, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T18:21:26Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0}

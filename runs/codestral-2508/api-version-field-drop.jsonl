@@ -1,0 +1,15 @@
+{"event": "run.start", "timestamp": "2026-03-21T17:16:08Z", "benchmark": "api-version-field-drop", "model": "codestral-2508", "has_prompt": false, "solution_files": ["app/models.go"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 307, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["main.go"], "tokens_in": 541, "tokens_out": 78, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["api.go"], "tokens_in": 634, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["server.go"], "tokens_in": 678, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["test.sh"], "tokens_in": 722, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1724, "tokens_out": 494, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 2223, "tokens_out": 432, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 2660, "tokens_out": 432, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 3097, "tokens_out": 223, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 3325, "tokens_out": 432, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": [], "tokens_in": 3762, "tokens_out": 432, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": [], "tokens_in": 4199, "tokens_out": 432, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 4636, "tokens_out": 39, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T17:16:34Z", "test_exit": 1, "total_turns": 13, "correct_lines": 0}

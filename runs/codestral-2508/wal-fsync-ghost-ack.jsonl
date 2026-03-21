@@ -1,0 +1,9 @@
+{"event": "run.start", "timestamp": "2026-03-21T17:19:25Z", "benchmark": "wal-fsync-ghost-ack", "model": "codestral-2508", "has_prompt": false, "solution_files": ["wal.go"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 307, "tokens_out": 11, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["kvwal.go"], "tokens_in": 835, "tokens_out": 12, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["kvwal/kvwal.go"], "tokens_in": 863, "tokens_out": 15, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["kvwal/kvwal/kvwal.go"], "tokens_in": 895, "tokens_out": 18, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["kvwal/kvwal/kvwal/kvwal.go"], "tokens_in": 933, "tokens_out": 21, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["kvwal/kvwal/kvwal/kvwal/kvwal.go"], "tokens_in": 977, "tokens_out": 24, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1027, "tokens_out": 34, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T17:19:34Z", "test_exit": 1, "total_turns": 7, "correct_lines": 0}
