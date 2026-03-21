@@ -636,10 +636,13 @@ def run_benchmark(model, bench_name, bench_dir, provider):
     subprocess.run(["docker", "run", "-d", "--name", container, f"needle-bench-{bench_name}", "sleep", "3600"],
                    capture_output=True, check=True)
 
-    # Bug 2 fix: snapshot workspace before agent starts so diff works later.
-    # Create /workspace.orig AND init a git repo for `git diff` fallback.
-    docker_exec(container, "cp -a /workspace /workspace.orig")
-    docker_exec(container, "cd /workspace && git init -q && git add -A && git commit -q -m baseline")
+    # Detect WORKDIR from the running container
+    _, wdir_out, _ = docker_exec(container, "pwd")
+    workdir = wdir_out.strip() or "/workspace"
+
+    # Snapshot workspace before agent starts so diff works later.
+    docker_exec(container, f"cp -a {workdir} {workdir}.orig")
+    docker_exec(container, f"cd {workdir} && git init -q && git add -A && git commit -q -m baseline")
 
     log_f = open(log_path, "w")
     start_time = time.time()
@@ -671,7 +674,7 @@ def run_benchmark(model, bench_name, bench_dir, provider):
             system_prompt = boot_output + "\n\n" + system_prompt
 
     # POST start: capture initial test output before agent touches anything
-    _irc, _istdout, _istderr = docker_exec(container, "cd /workspace && bash test.sh")
+    _irc, _istdout, _istderr = docker_exec(container, "bash test.sh")
     initial_test_output = _istdout + ("\n" + _istderr if _istderr else "")
     post.start(initial_test_output, instance_prompt)
 
@@ -763,7 +766,7 @@ def run_benchmark(model, bench_name, bench_dir, provider):
 
                     # Run test.sh after every edit
                     if rc == 0:
-                        trc, tstdout, tstderr = docker_exec(container, "cd /workspace && bash test.sh")
+                        trc, tstdout, tstderr = docker_exec(container, "bash test.sh")
                         test_exit = trc
                         test_output = tstdout
                         if tstderr:
@@ -799,7 +802,7 @@ def run_benchmark(model, bench_name, bench_dir, provider):
     finally:
         # Final test run
         if final_test_exit != 0:
-            trc, fout, ferr = docker_exec(container, "cd /workspace && bash test.sh")
+            trc, fout, ferr = docker_exec(container, "bash test.sh")
             final_test_exit = trc
             final_test_output = fout + ("\n" + ferr if ferr else "")
 
@@ -810,7 +813,7 @@ def run_benchmark(model, bench_name, bench_dir, provider):
             with open(patch_path) as f:
                 patch_adds = [l[1:].strip() for l in f if l.startswith("+") and not l.startswith("+++")]
             # Get agent's diff
-            drc, diff_out, _ = docker_exec(container, "cd /workspace && git diff 2>/dev/null || diff -ruN /workspace.orig /workspace 2>/dev/null")
+            drc, diff_out, _ = docker_exec(container, f"cd {workdir} && git diff 2>/dev/null || diff -ruN {workdir}.orig {workdir} 2>/dev/null")
             agent_adds = [l[1:].strip() for l in diff_out.splitlines() if l.startswith("+") and not l.startswith("+++")]
             for line in patch_adds:
                 if line and line in agent_adds:
