@@ -1,0 +1,25 @@
+{"event": "run.start", "timestamp": "2026-03-21T13:19:42Z", "benchmark": "deadlock-transfer", "model": "gemini-2-5-flash", "has_prompt": false, "solution_files": ["app/TransferService.java"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 132, "tokens_out": 6, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["transfer.py"], "tokens_in": 245, "tokens_out": 40, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 320, "tokens_out": 33, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 381, "tokens_out": 35, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["app/TransferService.java"], "tokens_in": 455, "tokens_out": 36, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 944, "tokens_out": 404, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 1370, "tokens_out": 95, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": [], "tokens_in": 1483, "tokens_out": 183, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["app/TransferService.java"], "tokens_in": 1687, "tokens_out": 118, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 2260, "tokens_out": 1489, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": [], "tokens_in": 3770, "tokens_out": 264, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["app/TransferService.java"], "tokens_in": 4056, "tokens_out": 144, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 4655, "tokens_out": 1339, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": [], "files_read": [], "tokens_in": 6012, "tokens_out": 630, "test_exit": null}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": [], "tokens_in": 6661, "tokens_out": 721, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": [], "tokens_in": 7404, "tokens_out": 270, "test_exit": null}
+{"event": "turn", "turn": 17, "files_edited": [], "files_read": [], "tokens_in": 7697, "tokens_out": 746, "test_exit": null}
+{"event": "turn", "turn": 18, "files_edited": [], "files_read": [], "tokens_in": 8463, "tokens_out": 686, "test_exit": null}
+{"event": "turn", "turn": 19, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 9170, "tokens_out": 384, "test_exit": null}
+{"event": "turn", "turn": 20, "files_edited": [], "files_read": ["app/TransferService.java"], "tokens_in": 9657, "tokens_out": 262, "test_exit": null}
+{"event": "turn", "turn": 21, "files_edited": [], "files_read": [], "tokens_in": 10377, "tokens_out": 151, "test_exit": null}
+{"event": "turn", "turn": 22, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 10548, "tokens_out": 741, "test_exit": null}
+{"event": "turn", "turn": 23, "files_edited": [], "files_read": [], "tokens_in": 11394, "tokens_out": 23, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T13:21:19Z", "test_exit": 1, "total_turns": 23, "correct_lines": 0}

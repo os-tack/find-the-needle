@@ -1,0 +1,2 @@
+{"event": "run.start", "timestamp": "2026-03-21T12:55:00Z", "benchmark": "off-by-one-pagination", "model": "llama-4-maverick", "has_prompt": false, "solution_files": ["app/app.py"]}
+{"event": "run.end", "timestamp": "2026-03-21T12:55:00Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}

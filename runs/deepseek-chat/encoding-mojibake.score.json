@@ -1,0 +1,22 @@
+{
+  "benchmark": "encoding-mojibake",
+  "agent": "deepseek-chat",
+  "commit": "b6f87d2",
+  "timestamp": "2026-03-21T13:17:54Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 5,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.3,
+  "false_positives": 0,
+  "token_cost": 76622,
+  "estimated_cost_usd": 0.264066,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 110.0,
+  "blind_discovery": false,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.2
+}

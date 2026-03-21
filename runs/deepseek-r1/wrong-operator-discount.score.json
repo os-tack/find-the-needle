@@ -1,0 +1,22 @@
+{
+  "benchmark": "wrong-operator-discount",
+  "agent": "deepseek-r1",
+  "commit": "b6f87d2",
+  "timestamp": "2026-03-21T13:22:58Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 3,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.2,
+  "false_positives": 0,
+  "token_cost": 32059,
+  "estimated_cost_usd": 0.237321,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 296.6,
+  "blind_discovery": false,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 0.9
+}

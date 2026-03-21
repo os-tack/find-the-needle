@@ -1,0 +1,22 @@
+{
+  "benchmark": "type-coercion-comparison",
+  "agent": "gemini-2.5-pro",
+  "commit": "8389f74",
+  "timestamp": "2026-03-21T12:59:25Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 5,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.182,
+  "false_positives": 0,
+  "token_cost": 14842,
+  "estimated_cost_usd": 0.059514,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 31.9,
+  "blind_discovery": false,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 0.91
+}

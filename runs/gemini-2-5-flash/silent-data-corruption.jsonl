@@ -1,0 +1,18 @@
+{"event": "run.start", "timestamp": "2026-03-21T13:27:10Z", "benchmark": "silent-data-corruption", "model": "gemini-2-5-flash", "has_prompt": false, "solution_files": ["src/main.rs"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 132, "tokens_out": 6, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["main.c"], "tokens_in": 237, "tokens_out": 78, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 348, "tokens_out": 41, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 427, "tokens_out": 29, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["src/main.rs"], "tokens_in": 483, "tokens_out": 27, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": ["src/main.rs"], "files_read": [], "tokens_in": 1215, "tokens_out": 463, "test_exit": 1}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 1723, "tokens_out": 89, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["src/main.rs"], "tokens_in": 1906, "tokens_out": 53, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 2634, "tokens_out": 155, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": [], "tokens_in": 3051, "tokens_out": 35, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 3142, "tokens_out": 28, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["test.sh"], "tokens_in": 3268, "tokens_out": 55, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 3841, "tokens_out": 106, "test_exit": null}
+{"event": "turn", "turn": 14, "files_edited": ["test.sh"], "files_read": [], "tokens_in": 3973, "tokens_out": 244, "test_exit": 1}
+{"event": "turn", "turn": 15, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 4262, "tokens_out": 75, "test_exit": null}
+{"event": "turn", "turn": 16, "files_edited": [], "files_read": [], "tokens_in": 4464, "tokens_out": 50, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T13:27:31Z", "test_exit": 1, "total_turns": 16, "correct_lines": 0}

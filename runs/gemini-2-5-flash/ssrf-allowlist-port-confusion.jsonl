@@ -1,0 +1,8 @@
+{"event": "run.start", "timestamp": "2026-03-21T13:28:28Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "gemini-2-5-flash", "has_prompt": false, "solution_files": ["app/validator.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 132, "tokens_out": 6, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["server.py"], "tokens_in": 664, "tokens_out": 126, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": [], "tokens_in": 821, "tokens_out": 37, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 883, "tokens_out": 42, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["app/validator.py"], "tokens_in": 965, "tokens_out": 81, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": ["app/validator.py"], "files_read": [], "tokens_in": 1425, "tokens_out": 216, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-21T13:28:42Z", "test_exit": 0, "total_turns": 6, "correct_lines": 0}

@@ -1,0 +1,6 @@
+{"event": "run.start", "timestamp": "2026-03-21T13:29:54Z", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "llama-4-maverick", "has_prompt": false, "solution_files": ["main.go"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 449, "tokens_out": 8, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["./test.sh"], "tokens_in": 488, "tokens_out": 55, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["./main.go"], "tokens_in": 651, "tokens_out": 292, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": ["./main.go"], "files_read": ["/workspace/./test.sh"], "tokens_in": 1898, "tokens_out": 1018, "test_exit": 0}
+{"event": "run.end", "timestamp": "2026-03-21T13:30:19Z", "test_exit": 0, "total_turns": 4, "correct_lines": 0}

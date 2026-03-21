@@ -1,0 +1,13 @@
+{"event": "run.start", "timestamp": "2026-03-21T13:25:25Z", "benchmark": "cache-stale-invalidation", "model": "qwen3-coder-plus", "has_prompt": false, "solution_files": ["app/server.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 532, "tokens_out": 23, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/workspace/src/app.py"], "tokens_in": 641, "tokens_out": 84, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["/workspace", "/workspace/\"*.py\""], "tokens_in": 755, "tokens_out": 61, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 841, "tokens_out": 36, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1000, "tokens_out": 62, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": ["/app/app/cache.py"], "tokens_in": 1270, "tokens_out": 63, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/app/app/store.py"], "tokens_in": 1799, "tokens_out": 52, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/app/app/server.py"], "tokens_in": 2381, "tokens_out": 44, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": ["/app/app/server.py"], "files_read": [], "tokens_in": 3331, "tokens_out": 302, "test_exit": 1}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/workspace/test.sh"], "tokens_in": 3677, "tokens_out": 48, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": [], "tokens_in": 3803, "tokens_out": 131, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T13:25:54Z", "test_exit": 1, "total_turns": 11, "correct_lines": 0}

@@ -1,0 +1,22 @@
+{
+  "benchmark": "nginx-upstream-port-mismatch",
+  "agent": "gemini-2.5-pro",
+  "commit": "b6f87d2",
+  "timestamp": "2026-03-21T13:16:47Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 5,
+  "turns_to_fix": 7,
+  "signal_to_noise": 0.286,
+  "false_positives": 0,
+  "token_cost": 7188,
+  "estimated_cost_usd": 0.030744,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 18.2,
+  "blind_discovery": true,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.0
+}

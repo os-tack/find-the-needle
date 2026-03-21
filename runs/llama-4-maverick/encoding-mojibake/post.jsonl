@@ -1,0 +1,2 @@
+{"event": "post.start", "benchmark": "encoding-mojibake", "model": "llama-4-maverick", "initial_test_output": "\nbash: line 1: cd: /workspace: No such file or directory\n", "prompt": "Run ./test.sh to see the current failure. Read the code, find the bug, fix it.", "timestamp": "2026-03-21T13:15:04Z"}
+{"event": "post.end", "resolved": false, "final_test_output": "\nbash: line 1: cd: /workspace: No such file or directory\n", "turns": 1, "timestamp": "2026-03-21T13:15:04Z"}

@@ -1,0 +1,15 @@
+{"event": "run.start", "timestamp": "2026-03-21T13:20:16Z", "benchmark": "memory-leak-event-listener", "model": "llama-4-maverick", "has_prompt": false, "solution_files": ["app/processor.js"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 449, "tokens_out": 8, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["app.js"], "tokens_in": 533, "tokens_out": 88, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["test.sh", "server.js"], "tokens_in": 645, "tokens_out": 1035, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 2237, "tokens_out": 55, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["/app/app/server.js"], "tokens_in": 2367, "tokens_out": 148, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 3167, "tokens_out": 408, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": [], "tokens_in": 3599, "tokens_out": 89, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/workspace/./test.sh", "/workspace/./test.sh", "/workspace/./test.sh"], "tokens_in": 3698, "tokens_out": 186, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 4097, "tokens_out": 470, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 4643, "tokens_out": 149, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 4868, "tokens_out": 130, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 5074, "tokens_out": 429, "test_exit": null}
+{"event": "turn", "turn": 13, "files_edited": [], "files_read": [], "tokens_in": 5579, "tokens_out": 161, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T13:21:49Z", "test_exit": 1, "total_turns": 13, "correct_lines": 0}

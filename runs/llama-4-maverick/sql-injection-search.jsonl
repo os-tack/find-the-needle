@@ -1,0 +1,14 @@
+{"event": "run.start", "timestamp": "2026-03-21T13:25:43Z", "benchmark": "sql-injection-search", "model": "llama-4-maverick", "has_prompt": false, "solution_files": ["app/search.py"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 449, "tokens_out": 8, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/path/to/main.py"], "tokens_in": 553, "tokens_out": 68, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["app.py"], "tokens_in": 649, "tokens_out": 418, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": ["app.py"], "tokens_in": 1158, "tokens_out": 26, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": [], "tokens_in": 1209, "tokens_out": 221, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 1472, "tokens_out": 325, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 1854, "tokens_out": 130, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 2080, "tokens_out": 277, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 2453, "tokens_out": 373, "test_exit": null}
+{"event": "turn", "turn": 10, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 2922, "tokens_out": 226, "test_exit": null}
+{"event": "turn", "turn": 11, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 3244, "tokens_out": 289, "test_exit": null}
+{"event": "turn", "turn": 12, "files_edited": [], "files_read": [], "tokens_in": 3629, "tokens_out": 192, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T13:26:21Z", "test_exit": 1, "total_turns": 12, "correct_lines": 0}

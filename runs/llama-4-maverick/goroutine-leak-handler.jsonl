@@ -1,0 +1,11 @@
+{"event": "run.start", "timestamp": "2026-03-21T13:17:34Z", "benchmark": "goroutine-leak-handler", "model": "llama-4-maverick", "has_prompt": false, "solution_files": ["app/main.go"]}
+{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 449, "tokens_out": 31, "test_exit": null}
+{"event": "turn", "turn": 2, "files_edited": [], "files_read": ["/path/to/main.go"], "tokens_in": 591, "tokens_out": 175, "test_exit": null}
+{"event": "turn", "turn": 3, "files_edited": [], "files_read": ["main.go", "utils.go"], "tokens_in": 793, "tokens_out": 488, "test_exit": null}
+{"event": "turn", "turn": 4, "files_edited": [], "files_read": [], "tokens_in": 1326, "tokens_out": 88, "test_exit": null}
+{"event": "turn", "turn": 5, "files_edited": [], "files_read": ["app/main.go"], "tokens_in": 1451, "tokens_out": 32, "test_exit": null}
+{"event": "turn", "turn": 6, "files_edited": [], "files_read": [], "tokens_in": 2714, "tokens_out": 1349, "test_exit": null}
+{"event": "turn", "turn": 7, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 3988, "tokens_out": 56, "test_exit": null}
+{"event": "turn", "turn": 8, "files_edited": [], "files_read": ["/workspace/./test.sh"], "tokens_in": 4155, "tokens_out": 412, "test_exit": null}
+{"event": "turn", "turn": 9, "files_edited": [], "files_read": [], "tokens_in": 4693, "tokens_out": 392, "test_exit": null}
+{"event": "run.end", "timestamp": "2026-03-21T13:20:14Z", "test_exit": 1, "total_turns": 9, "correct_lines": 0}

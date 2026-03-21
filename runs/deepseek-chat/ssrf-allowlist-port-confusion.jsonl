@@ -1,0 +1,2 @@
+{"event": "run.start", "timestamp": "2026-03-21T12:52:15Z", "benchmark": "ssrf-allowlist-port-confusion", "model": "deepseek-chat", "has_prompt": false, "solution_files": ["app/validator.py"]}
+{"event": "run.end", "timestamp": "2026-03-21T12:52:19Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}

@@ -1,0 +1,2 @@
+{"event": "run.start", "timestamp": "2026-03-21T12:55:46Z", "benchmark": "retry-storm-duplicate-transfer", "model": "llama-4-maverick", "has_prompt": false, "solution_files": ["app/processor.py"]}
+{"event": "run.end", "timestamp": "2026-03-21T12:55:55Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}

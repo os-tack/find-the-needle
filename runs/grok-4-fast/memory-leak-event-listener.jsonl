@@ -1,0 +1,2 @@
+{"event": "run.start", "timestamp": "2026-03-21T12:51:51Z", "benchmark": "memory-leak-event-listener", "model": "grok-4-fast", "has_prompt": false, "solution_files": ["app/processor.js"]}
+{"event": "run.end", "timestamp": "2026-03-21T12:51:51Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}

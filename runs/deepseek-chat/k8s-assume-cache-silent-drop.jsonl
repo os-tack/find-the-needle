@@ -1,0 +1,2 @@
+{"event": "run.start", "timestamp": "2026-03-21T12:52:10Z", "benchmark": "k8s-assume-cache-silent-drop", "model": "deepseek-chat", "has_prompt": false, "solution_files": ["main.go"]}
+{"event": "run.end", "timestamp": "2026-03-21T12:52:12Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0}
