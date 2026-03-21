@@ -536,6 +536,7 @@ def call_openrouter(model, messages, api_key, system_prompt=None, tools=None):
         "usage": {
             "input_tokens": usage.get("prompt_tokens", 0),
             "output_tokens": usage.get("completion_tokens", 0),
+            "cost_usd": usage.get("cost", 0),  # real cost from OpenRouter
         },
     }
 
@@ -648,6 +649,7 @@ def run_benchmark(model, bench_name, bench_dir, provider):
     start_time = time.time()
     total_tokens_in = 0
     total_tokens_out = 0
+    total_cost_usd = 0.0
     turn_events = []
     # v2.0 metrics: accumulate tool-call counters for read_tool_ratio / tool_calls_per_turn
     total_tool_calls = 0
@@ -693,8 +695,10 @@ def run_benchmark(model, bench_name, bench_dir, provider):
             resp = call_model(api_model, messages, provider, system_prompt=system_prompt, tools=tools)
             tokens_in = resp.get("usage", {}).get("input_tokens", 0)
             tokens_out = resp.get("usage", {}).get("output_tokens", 0)
+            turn_cost_usd = resp.get("usage", {}).get("cost_usd", 0)
             total_tokens_in += tokens_in
             total_tokens_out += tokens_out
+            total_cost_usd += turn_cost_usd
 
             # AC2: record per-turn token usage
             metrics.record_turn(turn, tokens_in, tokens_out)
@@ -891,8 +895,8 @@ def run_benchmark(model, bench_name, bench_dir, provider):
     # tokens_per_correct_line (v1.0 compat — null instead of "Infinity" for JSON consumers)
     tpcl = None if correct_lines == 0 else token_cost / correct_lines
 
-    # v2.0: estimated_cost_usd (already computed by MetricsRecorder above)
-    estimated_cost_usd = cost
+    # v2.0: estimated_cost_usd — prefer real OpenRouter cost, fall back to MODEL_PRICING estimate
+    estimated_cost_usd = total_cost_usd if total_cost_usd > 0 else cost
 
     # v2.0: dollars_per_correct_line
     if correct_lines > 0:
