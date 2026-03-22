@@ -20,7 +20,12 @@
     "tool_calls": 35,
     "model": "anthropic/claude-opus-4.6",
     "tokens": 102232,
-    "wall_clock": 122.9
+    "wall_clock": 122.9,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:36:57Z"
   },
   {
     "directives": {
@@ -43,7 +48,12 @@
     "tool_calls": 20,
     "model": "anthropic/claude-sonnet-4.5",
     "tokens": 51206,
-    "wall_clock": 80.4
+    "wall_clock": 80.4,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:37:28Z"
   },
   {
     "directives": {
@@ -66,7 +76,12 @@
     "tool_calls": 17,
     "model": "anthropic/claude-sonnet-4.6",
     "tokens": 74185,
-    "wall_clock": 70.5
+    "wall_clock": 70.5,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:37:11Z"
   },
   {
     "directives": {
@@ -89,7 +104,12 @@
     "tool_calls": 20,
     "model": "google/gemini-3-flash-preview",
     "tokens": 29711,
-    "wall_clock": 27.4
+    "wall_clock": 27.4,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:41:55Z"
   },
   {
     "directives": {
@@ -112,7 +132,12 @@
     "tool_calls": 20,
     "model": "google/gemini-3.1-pro-preview",
     "tokens": 49025,
-    "wall_clock": 139.5
+    "wall_clock": 139.5,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:42:31Z"
   },
   {
     "directives": {
@@ -135,7 +160,12 @@
     "tool_calls": 20,
     "model": "x-ai/grok-4-fast",
     "tokens": 55966,
-    "wall_clock": 100.2
+    "wall_clock": 100.2,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:38:04Z"
   },
   {
     "directives": {
@@ -158,7 +188,12 @@
     "tool_calls": 20,
     "model": "qwen/qwen-plus",
     "tokens": 37391,
-    "wall_clock": 40.4
+    "wall_clock": 40.4,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:43:05Z"
   },
   {
     "directives": {
@@ -181,7 +216,12 @@
     "tool_calls": 20,
     "model": "anthropic/claude-haiku-4.5",
     "tokens": 45072,
-    "wall_clock": 37.5
+    "wall_clock": 37.5,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:37:41Z"
   },
   {
     "directives": {
@@ -227,7 +267,12 @@
     "tool_calls": 7,
     "model": "meta-llama/llama-4-maverick",
     "tokens": 10285,
-    "wall_clock": 9.9
+    "wall_clock": 9.9,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:42:44Z"
   },
   {
     "directives": {
@@ -250,7 +295,12 @@
     "tool_calls": 18,
     "model": "qwen/qwen3-coder-flash",
     "tokens": 59032,
-    "wall_clock": 50.9
+    "wall_clock": 50.9,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:43:21Z"
   },
   {
     "directives": {
@@ -273,7 +323,12 @@
     "tool_calls": 8,
     "model": "qwen/qwen3-coder-plus",
     "tokens": 13792,
-    "wall_clock": 43.0
+    "wall_clock": 43.0,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:43:15Z"
   },
   {
     "directives": {
@@ -296,7 +351,12 @@
     "tool_calls": 17,
     "model": "qwen/qwen3.5-plus-02-15",
     "tokens": 29334,
-    "wall_clock": 52.3
+    "wall_clock": 52.3,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": false,
+    "post_score": "3/4",
+    "post_timestamp": "2026-03-22T08:43:45Z"
   },
   {
     "directives": {
@@ -319,7 +379,12 @@
     "tool_calls": 21,
     "model": "x-ai/grok-4.1-fast",
     "tokens": 22456,
-    "wall_clock": 151.7
+    "wall_clock": 151.7,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:37:57Z"
   },
   {
     "directives": {
@@ -342,7 +407,12 @@
     "tool_calls": 13,
     "model": "google/gemini-2.5-flash",
     "tokens": 9991,
-    "wall_clock": 15.5
+    "wall_clock": 15.5,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:41:17Z"
   },
   {
     "directives": {
@@ -365,7 +435,12 @@
     "tool_calls": 3,
     "model": "deepseek/deepseek-chat",
     "tokens": 3217,
-    "wall_clock": 18.1
+    "wall_clock": 18.1,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:39:53Z"
   },
   {
     "directives": {
@@ -388,6 +463,91 @@
     "tool_calls": 5,
     "model": "google/gemini-2.0-flash-001",
     "tokens": 4168,
-    "wall_clock": 7.4
+    "wall_clock": 7.4,
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:41:16Z"
+  },
+  {
+    "model": "deepseek/deepseek-v3.2",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:39:38Z"
+  },
+  {
+    "model": "deepseek/deepseek-r1",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:40:57Z"
+  },
+  {
+    "model": "mistralai/mistral-large",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:41:08Z"
+  },
+  {
+    "model": "mistralai/devstral-medium",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:41:10Z"
+  },
+  {
+    "model": "mistralai/codestral-2508",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:41:12Z"
+  },
+  {
+    "model": "google/gemini-2.5-pro",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:41:50Z"
+  },
+  {
+    "model": "openai/gpt-4o",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:42:34Z"
+  },
+  {
+    "model": "openai/gpt-4.1",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:42:38Z"
+  },
+  {
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:42:58Z"
+  },
+  {
+    "model": "qwen/qwen3.5-flash-02-23",
+    "boot": "BOOTS",
+    "post": true,
+    "entityfile": true,
+    "post_score": "4/4",
+    "post_timestamp": "2026-03-22T08:43:53Z"
   }
 ]
