@@ -1,0 +1,22 @@
+{
+  "benchmark": "encoding-mojibake",
+  "agent": "mistral-large",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:05:57Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.25,
+  "false_positives": 0,
+  "token_cost": 50441,
+  "estimated_cost_usd": 0.182211,
+  "dollars_per_correct_line": 0.091106,
+  "tokens_per_correct_line": 25220.5,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 44.0,
+  "blind_discovery": true,
+  "read_tool_ratio": 0.83,
+  "tool_calls_per_turn": 0.94
+}

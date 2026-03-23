@@ -1,0 +1,22 @@
+{
+  "benchmark": "sql-injection-search",
+  "agent": "llama-4-maverick",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T17:19:44Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 8,
+  "turns_to_fix": 13,
+  "signal_to_noise": 0.077,
+  "false_positives": 1,
+  "token_cost": 39883,
+  "estimated_cost_usd": 0.140337,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 2,
+  "recovery_rate": 1.0,
+  "wall_clock": 52.4,
+  "blind_discovery": true,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.15
+}

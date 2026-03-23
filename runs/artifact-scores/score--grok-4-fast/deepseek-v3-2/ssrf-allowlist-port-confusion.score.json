@@ -1,0 +1,22 @@
+{
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "agent": "deepseek-v3-2",
+  "commit": "b59a6f5",
+  "timestamp": "2026-03-21T18:51:29Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 7,
+  "turns_to_fix": 11,
+  "signal_to_noise": 0.182,
+  "false_positives": 0,
+  "token_cost": 26902,
+  "estimated_cost_usd": 0.105786,
+  "dollars_per_correct_line": 0.105786,
+  "tokens_per_correct_line": 26902.0,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 88.7,
+  "blind_discovery": true,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.0
+}

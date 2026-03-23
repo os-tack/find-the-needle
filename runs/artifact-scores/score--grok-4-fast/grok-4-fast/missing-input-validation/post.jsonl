@@ -1,0 +1,2 @@
+{"event": "post.start", "benchmark": "missing-input-validation", "model": "grok-4-fast", "initial_test_output": "\nbash: line 1: cd: /workspace: No such file or directory\n", "prompt": "Run ./test.sh to see the current failure. Read the code, find the bug, fix it.", "timestamp": "2026-03-21T12:51:45Z"}
+{"event": "post.end", "resolved": false, "final_test_output": "\nbash: line 1: cd: /workspace: No such file or directory\n", "turns": 0, "timestamp": "2026-03-21T12:51:45Z"}

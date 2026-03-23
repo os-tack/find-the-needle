@@ -1,0 +1,10 @@
+{
+  "benchmark": "race-condition-counter",
+  "agent": "control-baseline",
+  "timestamp": "2026-03-20T16:56:16Z",
+  "resolved": false,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 4.2,
+  "control_type": "no-agent"
+}

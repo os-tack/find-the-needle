@@ -1,0 +1,10 @@
+{
+  "benchmark": "wal-fsync-ghost-ack",
+  "agent": "control-solution",
+  "timestamp": "2026-03-20T16:57:18Z",
+  "resolved": false,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 2.5,
+  "control_type": "solution-applied"
+}
