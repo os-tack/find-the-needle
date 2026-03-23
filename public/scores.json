@@ -2180,11 +2180,11 @@
   {
     "benchmark": "api-version-field-drop",
     "agent": "control-baseline",
-    "timestamp": "2026-03-23T07:14:36Z",
+    "timestamp": "2026-03-20T16:54:03Z",
     "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 3.6,
+    "wall_clock": 3.5,
     "control_type": "no-agent"
   },
   {
@@ -2320,7 +2320,7 @@
   {
     "benchmark": "nginx-upstream-port-mismatch",
     "agent": "control-baseline",
-    "timestamp": "2026-03-23T07:13:47Z",
+    "timestamp": "2026-03-20T16:55:57Z",
     "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
@@ -2360,17 +2360,17 @@
   {
     "benchmark": "performance-cliff-hash",
     "agent": "control-baseline",
-    "timestamp": "2026-03-23T07:13:49Z",
+    "timestamp": "2026-03-20T16:56:10Z",
     "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 0.2,
+    "wall_clock": 0.1,
     "control_type": "no-agent"
   },
   {
     "benchmark": "postgres-migration-schema-drift",
     "agent": "control-baseline",
-    "timestamp": "2026-03-23T07:13:51Z",
+    "timestamp": "2026-03-20T16:56:11Z",
     "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
@@ -2400,17 +2400,17 @@
   {
     "benchmark": "retry-storm-duplicate-transfer",
     "agent": "control-baseline",
-    "timestamp": "2026-03-23T07:13:58Z",
-    "resolved": true,
+    "timestamp": "2026-03-20T16:56:42Z",
+    "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 4.3,
+    "wall_clock": 4.4,
     "control_type": "no-agent"
   },
   {
     "benchmark": "silent-data-corruption",
     "agent": "control-baseline",
-    "timestamp": "2026-03-23T07:14:04Z",
+    "timestamp": "2026-03-20T16:56:43Z",
     "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
@@ -2420,7 +2420,7 @@
   {
     "benchmark": "split-brain-leader-election",
     "agent": "control-baseline",
-    "timestamp": "2026-03-23T07:14:05Z",
+    "timestamp": "2026-03-20T16:56:46Z",
     "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
@@ -2460,7 +2460,7 @@
   {
     "benchmark": "timing-attack-comparison",
     "agent": "control-baseline",
-    "timestamp": "2026-03-23T07:14:12Z",
+    "timestamp": "2026-03-20T16:57:07Z",
     "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
@@ -2480,7 +2480,7 @@
   {
     "benchmark": "wal-fsync-ghost-ack",
     "agent": "control-baseline",
-    "timestamp": "2026-03-23T07:14:18Z",
+    "timestamp": "2026-03-20T16:57:15Z",
     "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
@@ -2640,11 +2640,11 @@
   {
     "benchmark": "nginx-upstream-port-mismatch",
     "agent": "control-solution",
-    "timestamp": "2026-03-23T07:13:48Z",
-    "resolved": true,
+    "timestamp": "2026-03-20T16:55:58Z",
+    "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 0.6,
+    "wall_clock": 0.0,
     "control_type": "solution-applied"
   },
   {
@@ -2680,21 +2680,21 @@
   {
     "benchmark": "performance-cliff-hash",
     "agent": "control-solution",
-    "timestamp": "2026-03-23T07:13:50Z",
-    "resolved": true,
+    "timestamp": "2026-03-20T16:56:10Z",
+    "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 0.4,
+    "wall_clock": 0.1,
     "control_type": "solution-applied"
   },
   {
     "benchmark": "postgres-migration-schema-drift",
     "agent": "control-solution",
-    "timestamp": "2026-03-23T07:13:53Z",
-    "resolved": true,
+    "timestamp": "2026-03-20T16:56:11Z",
+    "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 1.9,
+    "wall_clock": 0.0,
     "control_type": "solution-applied"
   },
   {
@@ -2720,31 +2720,31 @@
   {
     "benchmark": "retry-storm-duplicate-transfer",
     "agent": "control-solution",
-    "timestamp": "2026-03-23T07:14:02Z",
-    "resolved": true,
+    "timestamp": "2026-03-20T16:56:42Z",
+    "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 4.2,
+    "wall_clock": 0.0,
     "control_type": "solution-applied"
   },
   {
     "benchmark": "silent-data-corruption",
     "agent": "control-solution",
-    "timestamp": "2026-03-23T07:14:04Z",
-    "resolved": true,
+    "timestamp": "2026-03-20T16:56:43Z",
+    "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 0.2,
+    "wall_clock": 0.0,
     "control_type": "solution-applied"
   },
   {
     "benchmark": "split-brain-leader-election",
     "agent": "control-solution",
-    "timestamp": "2026-03-23T07:14:09Z",
-    "resolved": true,
+    "timestamp": "2026-03-20T16:56:46Z",
+    "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 4.3,
+    "wall_clock": 0.1,
     "control_type": "solution-applied"
   },
   {
@@ -2780,11 +2780,11 @@
   {
     "benchmark": "timing-attack-comparison",
     "agent": "control-solution",
-    "timestamp": "2026-03-23T07:14:15Z",
-    "resolved": true,
+    "timestamp": "2026-03-20T16:57:07Z",
+    "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
-    "wall_clock": 2.3,
+    "wall_clock": 0.0,
     "control_type": "solution-applied"
   },
   {
@@ -2800,8 +2800,8 @@
   {
     "benchmark": "wal-fsync-ghost-ack",
     "agent": "control-solution",
-    "timestamp": "2026-03-23T07:14:21Z",
-    "resolved": true,
+    "timestamp": "2026-03-20T16:57:18Z",
+    "resolved": false,
     "turns_to_fix": 0,
     "token_cost": 0,
     "wall_clock": 2.5,
@@ -3102,28 +3102,6 @@
     "blind_discovery": true,
     "read_tool_ratio": 1.0,
     "tool_calls_per_turn": 1.0
-  },
-  {
-    "benchmark": "off-by-one-pagination",
-    "agent": "deepseek-chat",
-    "commit": "9a7a62b",
-    "timestamp": "2026-03-21T19:37:13Z",
-    "difficulty_tier": "easy",
-    "resolved": false,
-    "turns_to_discovery": 20,
-    "turns_to_fix": 20,
-    "signal_to_noise": 0.0,
-    "false_positives": 0,
-    "token_cost": 737,
-    "estimated_cost_usd": 0.0003272,
-    "dollars_per_correct_line": null,
-    "tokens_per_correct_line": null,
-    "recovery_events": 0,
-    "recovery_rate": 1.0,
-    "wall_clock": 6.7,
-    "blind_discovery": false,
-    "read_tool_ratio": null,
-    "tool_calls_per_turn": 0.0
   },
   {
     "benchmark": "race-condition-counter",
