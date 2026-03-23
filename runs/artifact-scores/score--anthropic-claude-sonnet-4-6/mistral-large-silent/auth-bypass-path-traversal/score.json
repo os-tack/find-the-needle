@@ -1,0 +1,21 @@
+{
+  "benchmark": "auth-bypass-path-traversal",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "6abcbbf",
+  "timestamp": "2026-03-23T06:12:58Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 5,
+  "signal_to_noise": 0.8,
+  "false_positives": 0,
+  "token_cost": 10348,
+  "estimated_cost_usd": 0.0261872,
+  "dollars_per_correct_line": 0.005237,
+  "tokens_per_correct_line": 2069.6,
+  "wall_clock": 25.6,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

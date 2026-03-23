@@ -1,0 +1,8 @@
+{"event": "token.usage", "turn": 1, "input_tokens": 294, "output_tokens": 134, "cumulative_input": 294, "cumulative_output": 134}
+{"event": "token.usage", "turn": 2, "input_tokens": 511, "output_tokens": 153, "cumulative_input": 805, "cumulative_output": 287}
+{"event": "token.usage", "turn": 3, "input_tokens": 782, "output_tokens": 185, "cumulative_input": 1587, "cumulative_output": 472}
+{"event": "token.usage", "turn": 4, "input_tokens": 1177, "output_tokens": 42, "cumulative_input": 2764, "cumulative_output": 514}
+{"event": "token.usage", "turn": 5, "input_tokens": 1237, "output_tokens": 35, "cumulative_input": 4001, "cumulative_output": 549}
+{"event": "token.usage", "turn": 6, "input_tokens": 1290, "output_tokens": 30, "cumulative_input": 5291, "cumulative_output": 579}
+{"event": "token.usage", "turn": 7, "input_tokens": 1345, "output_tokens": 29, "cumulative_input": 6636, "cumulative_output": 608}
+{"event": "run.complete", "total_input_tokens": 6636, "total_output_tokens": 608, "total_tokens": 7244, "estimated_cost_usd": 0.029028}

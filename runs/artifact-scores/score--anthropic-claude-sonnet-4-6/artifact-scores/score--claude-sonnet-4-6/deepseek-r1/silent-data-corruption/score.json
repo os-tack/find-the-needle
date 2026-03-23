@@ -1,0 +1,22 @@
+{
+  "benchmark": "silent-data-corruption",
+  "agent": "deepseek-r1",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:07:21Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 3,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.4,
+  "false_positives": 0,
+  "token_cost": 8644,
+  "estimated_cost_usd": 0.046488,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 47.6,
+  "blind_discovery": false,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.6
+}

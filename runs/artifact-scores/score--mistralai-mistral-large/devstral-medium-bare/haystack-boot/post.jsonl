@@ -1,0 +1,2 @@
+{"event": "post.start", "benchmark": "haystack-boot", "model": "devstral-medium-bare", "initial_test_output": "0/5\n", "prompt": "find the needle.", "timestamp": "2026-03-21T21:14:14Z"}
+{"event": "post.end", "resolved": false, "final_test_output": "0/5\n", "turns": 1, "timestamp": "2026-03-21T21:14:15Z"}

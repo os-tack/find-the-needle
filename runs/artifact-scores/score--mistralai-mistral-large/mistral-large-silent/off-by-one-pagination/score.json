@@ -1,0 +1,21 @@
+{
+  "benchmark": "off-by-one-pagination",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:57:54Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 11,
+  "signal_to_noise": 0.545,
+  "false_positives": 0,
+  "token_cost": 27171,
+  "estimated_cost_usd": 0.0384796,
+  "dollars_per_correct_line": 0.03848,
+  "tokens_per_correct_line": 27171.0,
+  "wall_clock": 27.9,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

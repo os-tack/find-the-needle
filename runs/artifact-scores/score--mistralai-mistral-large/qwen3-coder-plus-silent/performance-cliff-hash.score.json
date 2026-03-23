@@ -1,0 +1,21 @@
+{
+  "benchmark": "performance-cliff-hash",
+  "agent": "qwen3-coder-plus-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-21T22:15:32Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 16,
+  "signal_to_noise": 0.375,
+  "false_positives": 0,
+  "token_cost": 72296,
+  "estimated_cost_usd": 0.021730279999999998,
+  "dollars_per_correct_line": 0.02173,
+  "tokens_per_correct_line": 72296.0,
+  "wall_clock": 44.9,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "silent-data-corruption",
+  "agent": "gpt-4o-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T07:05:08Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 31,
+  "signal_to_noise": 0.677,
+  "false_positives": 0,
+  "token_cost": 42294,
+  "estimated_cost_usd": 0.08081,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 31.9,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": null
+}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "null-pointer-config",
+  "agent": "deepseek-v3-2-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-21T21:45:27Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 6,
+  "signal_to_noise": 0.167,
+  "false_positives": 0,
+  "token_cost": 11070,
+  "estimated_cost_usd": 0.00217416,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 21.0,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

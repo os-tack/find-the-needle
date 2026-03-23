@@ -1,0 +1,21 @@
+{
+  "benchmark": "type-coercion-comparison",
+  "agent": "llama-4-maverick-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T05:37:50Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 7,
+  "signal_to_noise": 0.286,
+  "false_positives": 0,
+  "token_cost": 15783,
+  "estimated_cost_usd": 0.005366889999999999,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 78.2,
+  "tool_calls_per_turn": 2.0,
+  "read_tool_ratio": 0.0
+}

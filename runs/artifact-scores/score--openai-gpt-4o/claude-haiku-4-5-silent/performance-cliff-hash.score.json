@@ -1,0 +1,21 @@
+{
+  "benchmark": "performance-cliff-hash",
+  "agent": "claude-haiku-4-5-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:30:32Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 11,
+  "signal_to_noise": 0.455,
+  "false_positives": 0,
+  "token_cost": 71915,
+  "estimated_cost_usd": 0.08405499999999999,
+  "dollars_per_correct_line": 0.084055,
+  "tokens_per_correct_line": 71915.0,
+  "wall_clock": 40.7,
+  "tool_calls_per_turn": 1.27,
+  "read_tool_ratio": 0.0
+}

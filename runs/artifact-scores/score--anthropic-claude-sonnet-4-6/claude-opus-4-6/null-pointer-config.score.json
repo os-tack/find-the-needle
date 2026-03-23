@@ -1,0 +1,22 @@
+{
+  "benchmark": "null-pointer-config",
+  "agent": "claude-opus-4-6",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T17:23:38Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 6,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.261,
+  "false_positives": 0,
+  "token_cost": 120863,
+  "estimated_cost_usd": 1.968405,
+  "dollars_per_correct_line": 0.328068,
+  "tokens_per_correct_line": 20143.833333333332,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 88.1,
+  "blind_discovery": true,
+  "read_tool_ratio": 0.67,
+  "tool_calls_per_turn": 1.09
+}

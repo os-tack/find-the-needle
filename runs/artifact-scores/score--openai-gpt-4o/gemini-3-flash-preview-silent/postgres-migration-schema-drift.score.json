@@ -1,0 +1,21 @@
+{
+  "benchmark": "postgres-migration-schema-drift",
+  "agent": "gemini-3-flash-preview-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T05:56:33Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 7,
+  "signal_to_noise": 0.429,
+  "false_positives": 0,
+  "token_cost": 18117,
+  "estimated_cost_usd": 0.009776,
+  "dollars_per_correct_line": 0.003259,
+  "tokens_per_correct_line": 6039.0,
+  "wall_clock": 11.0,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

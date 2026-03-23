@@ -1,0 +1,21 @@
+{
+  "benchmark": "kernel-panic-ioctl",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:41:26Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 13,
+  "signal_to_noise": 0.538,
+  "false_positives": 0,
+  "token_cost": 80327,
+  "estimated_cost_usd": 0.1588844,
+  "dollars_per_correct_line": 0.017654,
+  "tokens_per_correct_line": 8925.222222222223,
+  "wall_clock": 193.4,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

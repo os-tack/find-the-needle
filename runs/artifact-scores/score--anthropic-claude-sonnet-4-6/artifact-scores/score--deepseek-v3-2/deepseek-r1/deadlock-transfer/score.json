@@ -1,0 +1,22 @@
+{
+  "benchmark": "deadlock-transfer",
+  "agent": "deepseek-r1",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T17:46:44Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 11,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.188,
+  "false_positives": 0,
+  "token_cost": 29737,
+  "estimated_cost_usd": 0.143559,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 174.7,
+  "blind_discovery": false,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.06
+}

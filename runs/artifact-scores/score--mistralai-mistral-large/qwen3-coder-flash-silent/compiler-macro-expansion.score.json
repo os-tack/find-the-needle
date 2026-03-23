@@ -1,0 +1,21 @@
+{
+  "benchmark": "compiler-macro-expansion",
+  "agent": "qwen3-coder-flash-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T06:33:55Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 12,
+  "signal_to_noise": 0.333,
+  "false_positives": 0,
+  "token_cost": 70697,
+  "estimated_cost_usd": 0.010713495,
+  "dollars_per_correct_line": 0.010713,
+  "tokens_per_correct_line": 70697.0,
+  "wall_clock": 43.8,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

@@ -1,0 +1,2 @@
+{"event": "post.start", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "qwen3-coder-plus-silent", "initial_test_output": "BUG: shutdown deadlock \u2014 timed out after 2s\nFAIL: shutdown deadlock or timeout\n", "prompt": "find the needle.", "timestamp": "2026-03-21T22:03:11Z"}
+{"event": "post.end", "resolved": false, "final_test_output": "BUG: shutdown deadlock \u2014 timed out after 2s\nFAIL: shutdown deadlock or timeout\n", "turns": 1, "timestamp": "2026-03-21T22:03:31Z"}

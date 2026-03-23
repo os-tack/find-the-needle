@@ -1,0 +1,4 @@
+{"event": "token.usage", "turn": 1, "input_tokens": 804, "output_tokens": 165, "cumulative_input": 804, "cumulative_output": 165}
+{"event": "token.usage", "turn": 2, "input_tokens": 1399, "output_tokens": 710, "cumulative_input": 2203, "cumulative_output": 875}
+{"event": "token.usage", "turn": 3, "input_tokens": 1774, "output_tokens": 1570, "cumulative_input": 3977, "cumulative_output": 2445}
+{"event": "run.complete", "total_input_tokens": 3977, "total_output_tokens": 2445, "total_tokens": 6422, "estimated_cost_usd": 0.048606}

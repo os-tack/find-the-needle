@@ -1,0 +1,22 @@
+{
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "agent": "gemini-2-0-flash-001",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:15:25Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 7,
+  "turns_to_fix": 24,
+  "signal_to_noise": 0.625,
+  "false_positives": 0,
+  "token_cost": 91449,
+  "estimated_cost_usd": 0.306639,
+  "dollars_per_correct_line": 0.306639,
+  "tokens_per_correct_line": 91449.0,
+  "recovery_events": 6,
+  "recovery_rate": 1.0,
+  "wall_clock": 61.7,
+  "blind_discovery": true,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.0
+}

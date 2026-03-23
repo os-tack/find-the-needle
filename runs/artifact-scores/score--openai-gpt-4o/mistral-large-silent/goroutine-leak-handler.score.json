@@ -1,0 +1,21 @@
+{
+  "benchmark": "goroutine-leak-handler",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:30:13Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 8,
+  "signal_to_noise": 0.375,
+  "false_positives": 0,
+  "token_cost": 26138,
+  "estimated_cost_usd": 0.0524568,
+  "dollars_per_correct_line": 0.004769,
+  "tokens_per_correct_line": 2376.181818181818,
+  "wall_clock": 63.6,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

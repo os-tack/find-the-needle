@@ -1,0 +1,22 @@
+{
+  "benchmark": "api-version-field-drop",
+  "agent": "claude-haiku-4-5",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:14:37Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 9,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.222,
+  "false_positives": 0,
+  "token_cost": 85062,
+  "estimated_cost_usd": 0.077803,
+  "dollars_per_correct_line": 0.012967,
+  "tokens_per_correct_line": 14177.0,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 50.2,
+  "blind_discovery": true,
+  "read_tool_ratio": 0.2,
+  "tool_calls_per_turn": 0.94
+}

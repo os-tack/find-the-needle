@@ -1,0 +1,21 @@
+{
+  "benchmark": "api-version-field-drop",
+  "agent": "gpt-4o-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "0f225ef",
+  "timestamp": "2026-03-22T09:07:16Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 6,
+  "turns_to_fix": 9,
+  "signal_to_noise": 0.333,
+  "false_positives": 0,
+  "token_cost": 4587,
+  "estimated_cost_usd": 0.013094999999999999,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 8.3,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": null
+}

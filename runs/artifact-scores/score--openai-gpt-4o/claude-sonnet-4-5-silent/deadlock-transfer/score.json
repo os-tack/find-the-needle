@@ -1,0 +1,21 @@
+{
+  "benchmark": "deadlock-transfer",
+  "agent": "claude-sonnet-4-5-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T06:35:22Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 3,
+  "signal_to_noise": 0.667,
+  "false_positives": 0,
+  "token_cost": 8969,
+  "estimated_cost_usd": 0.039507,
+  "dollars_per_correct_line": 0.013169,
+  "tokens_per_correct_line": 2989.6666666666665,
+  "wall_clock": 16.7,
+  "tool_calls_per_turn": 2.33,
+  "read_tool_ratio": 0.0
+}

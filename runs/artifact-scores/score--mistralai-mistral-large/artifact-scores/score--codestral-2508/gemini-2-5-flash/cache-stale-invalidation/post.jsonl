@@ -1,0 +1,9 @@
+{"event": "post.start", "benchmark": "cache-stale-invalidation", "model": "gemini-2-5-flash", "initial_test_output": "Initial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 5\nFAIL: Product list has 5 items after create, expected 6\n      List cache is stale \u2014 new product not visible\n", "prompt": "Run ./test.sh to see the current failure. Read the code, find the bug, fix it.", "timestamp": "2026-03-21T17:15:26Z"}
+{"event": "agent.bash", "cmd": "./test.sh", "output_preview": "Initial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 5\nFAIL: Product list has 5 items after create, expected 6\n      List cache is stale \u2014 new product not visible\n", "turn": 1}
+{"event": "agent.bash", "cmd": "ls -F", "output_preview": "app/\ntest.sh*\n", "turn": 2}
+{"event": "agent.bash", "cmd": "ls -F app/", "output_preview": "__pycache__/\ncache.py\nconfig.py\nserver.py\nstore.py\n", "turn": 3}
+{"event": "agent.read", "path": "app/store.py", "turn": 4}
+{"event": "agent.read", "path": "app/cache.py", "turn": 5}
+{"event": "agent.read", "path": "app/server.py", "turn": 6}
+{"event": "agent.edit", "path": "app/server.py", "old_str_preview": "        self._json_response(201, product)", "new_str_preview": "        self._json_response(201, product)\n        cache.delete(\"products:list\")", "turn": 7}
+{"event": "post.end", "resolved": true, "final_test_output": "Initial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 6\nPASS: Product list correctly shows 6 items\nPASS: Cache correctly invalidated after writes\n", "turns": 7, "timestamp": "2026-03-21T17:15:36Z"}

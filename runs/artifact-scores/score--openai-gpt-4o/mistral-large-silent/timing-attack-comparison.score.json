@@ -1,0 +1,21 @@
+{
+  "benchmark": "timing-attack-comparison",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "a268ea3",
+  "timestamp": "2026-03-23T07:21:52Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 6,
+  "signal_to_noise": 0.5,
+  "false_positives": 0,
+  "token_cost": 11928,
+  "estimated_cost_usd": 0.0241504,
+  "dollars_per_correct_line": 0.02415,
+  "tokens_per_correct_line": 11928.0,
+  "wall_clock": 18.6,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

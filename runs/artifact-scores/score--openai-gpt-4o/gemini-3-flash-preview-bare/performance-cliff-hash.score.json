@@ -1,0 +1,21 @@
+{
+  "benchmark": "performance-cliff-hash",
+  "agent": "gemini-3-flash-preview-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T05:55:58Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 5,
+  "signal_to_noise": 0.4,
+  "false_positives": 0,
+  "token_cost": 4780,
+  "estimated_cost_usd": 0.0026474999999999997,
+  "dollars_per_correct_line": 0.002647,
+  "tokens_per_correct_line": 4780.0,
+  "wall_clock": 8.5,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

@@ -1,0 +1,22 @@
+{
+  "benchmark": "race-condition-counter",
+  "agent": "mistral-large",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:20:08Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 6,
+  "turns_to_fix": 7,
+  "signal_to_noise": 0.286,
+  "false_positives": 0,
+  "token_cost": 6097,
+  "estimated_cost_usd": 0.026415,
+  "dollars_per_correct_line": 0.026415,
+  "tokens_per_correct_line": 6097.0,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 26.1,
+  "blind_discovery": true,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.0
+}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "retry-storm-duplicate-transfer",
+  "agent": "gemini-3-flash-preview-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T06:00:51Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 8,
+  "signal_to_noise": 0.75,
+  "false_positives": 0,
+  "token_cost": 29260,
+  "estimated_cost_usd": 0.01962,
+  "dollars_per_correct_line": 0.001784,
+  "tokens_per_correct_line": 2660.0,
+  "wall_clock": 27.3,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

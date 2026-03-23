@@ -1,0 +1,10 @@
+{
+  "benchmark": "sql-injection-search",
+  "agent": "control-baseline",
+  "timestamp": "2026-03-23T07:17:08Z",
+  "resolved": false,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 3.0,
+  "control_type": "no-agent"
+}

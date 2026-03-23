@@ -1,0 +1,21 @@
+{
+  "benchmark": "kernel-panic-ioctl",
+  "agent": "deepseek-r1-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:41:02Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 5,
+  "signal_to_noise": 0.4,
+  "false_positives": 0,
+  "token_cost": 15678,
+  "estimated_cost_usd": 0.0134226,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 52.9,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

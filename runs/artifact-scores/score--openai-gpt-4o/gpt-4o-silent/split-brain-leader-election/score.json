@@ -1,0 +1,21 @@
+{
+  "benchmark": "split-brain-leader-election",
+  "agent": "gpt-4o-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T07:08:11Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 28,
+  "signal_to_noise": 0.929,
+  "false_positives": 0,
+  "token_cost": 65712,
+  "estimated_cost_usd": 0.11932000000000001,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 45.5,
+  "tool_calls_per_turn": 1.04,
+  "read_tool_ratio": null
+}

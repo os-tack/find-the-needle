@@ -1,0 +1,21 @@
+{
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "agent": "qwen3-5-flash-02-23-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T07:34:41Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 6,
+  "signal_to_noise": 0.833,
+  "false_positives": 0,
+  "token_cost": 13012,
+  "estimated_cost_usd": 0.0012504050000000002,
+  "dollars_per_correct_line": 0.00125,
+  "tokens_per_correct_line": 13012.0,
+  "wall_clock": 24.4,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

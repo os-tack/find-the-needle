@@ -1,0 +1,10 @@
+{
+  "benchmark": "off-by-one-array-slice",
+  "agent": "control-solution",
+  "timestamp": "2026-03-23T07:16:12Z",
+  "resolved": true,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 0.1,
+  "control_type": "solution-applied"
+}

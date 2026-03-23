@@ -1,0 +1,21 @@
+{
+  "benchmark": "silent-data-corruption",
+  "agent": "llama-3-3-70b-instruct-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T05:38:10Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 40,
+  "turns_to_fix": 1,
+  "signal_to_noise": 0.0,
+  "false_positives": 0,
+  "token_cost": 449,
+  "estimated_cost_usd": 0.00031879,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 3.2,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": null
+}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "timing-attack-comparison",
+  "agent": "gemini-3-flash-preview-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T06:08:16Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 10,
+  "signal_to_noise": 0.2,
+  "false_positives": 0,
+  "token_cost": 24395,
+  "estimated_cost_usd": 0.0127925,
+  "dollars_per_correct_line": 0.006396,
+  "tokens_per_correct_line": 12197.5,
+  "wall_clock": 14.8,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

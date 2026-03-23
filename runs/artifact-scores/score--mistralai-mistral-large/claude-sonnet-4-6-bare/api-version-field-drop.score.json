@@ -1,0 +1,21 @@
+{
+  "benchmark": "api-version-field-drop",
+  "agent": "claude-sonnet-4-6-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "6abcbbf",
+  "timestamp": "2026-03-22T13:24:03Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 10,
+  "turns_to_fix": 10,
+  "signal_to_noise": 0.1,
+  "false_positives": 0,
+  "token_cost": 22737,
+  "estimated_cost_usd": 0.080343,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 29.0,
+  "tool_calls_per_turn": 1.5,
+  "read_tool_ratio": 0.0
+}

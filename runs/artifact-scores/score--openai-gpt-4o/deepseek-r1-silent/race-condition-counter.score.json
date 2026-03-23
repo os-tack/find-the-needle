@@ -1,0 +1,21 @@
+{
+  "benchmark": "race-condition-counter",
+  "agent": "deepseek-r1-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:57:37Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.5,
+  "false_positives": 0,
+  "token_cost": 3245,
+  "estimated_cost_usd": 0.0039851,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 41.1,
+  "tool_calls_per_turn": 0.5,
+  "read_tool_ratio": 0.0
+}

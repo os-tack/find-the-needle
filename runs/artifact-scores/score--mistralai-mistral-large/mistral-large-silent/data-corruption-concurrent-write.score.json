@@ -1,0 +1,21 @@
+{
+  "benchmark": "data-corruption-concurrent-write",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:22:14Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 5,
+  "signal_to_noise": 0.4,
+  "false_positives": 0,
+  "token_cost": 12654,
+  "estimated_cost_usd": 0.029564,
+  "dollars_per_correct_line": 0.029564,
+  "tokens_per_correct_line": 12654.0,
+  "wall_clock": 29.8,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

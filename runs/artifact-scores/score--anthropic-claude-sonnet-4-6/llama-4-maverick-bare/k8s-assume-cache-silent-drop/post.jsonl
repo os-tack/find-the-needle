@@ -1,0 +1,7 @@
+{"event": "post.start", "benchmark": "k8s-assume-cache-silent-drop", "model": "llama-4-maverick-bare", "initial_test_output": "after assume: version=5 data=\"assumed-by-scheduler\"\nafter informer: version=6 data=\"informer-update\"\nstill assumed: false\nBUG: assumed state silently dropped\nFAIL: assumed state still silently dropped\n", "prompt": "find the needle.", "timestamp": "2026-03-22T05:07:57Z"}
+{"event": "agent.bash", "cmd": "find . -name \"needle.txt\"", "output_preview": "", "turn": 1}
+{"event": "agent.bash", "cmd": "grep -r \"needle\" .", "output_preview": "./.git/logs/HEAD:0000000000000000000000000000000000000000 0dfaa709286a72de66c36086d1206e583e5c1ff3 bench <bench@needle-bench.cc> 1774156076 +0000\tcommit (initial): baseline\n./.git/logs/refs/heads/master:0000000000000000000000000000000000000000 0dfaa709286a72de66c36086d1206e583e5c1ff3 bench <bench@needle-bench.cc> 1774156076 +0000\tcommit (initial): baseline\n", "turn": 1}
+{"event": "agent.bash", "cmd": "git log --grep=needle", "output_preview": "", "turn": 2}
+{"event": "agent.bash", "cmd": "git log -Sneedle", "output_preview": "", "turn": 3}
+{"event": "agent.bash", "cmd": "git log -Gneedle", "output_preview": "", "turn": 3}
+{"event": "post.end", "resolved": false, "final_test_output": "after assume: version=5 data=\"assumed-by-scheduler\"\nafter informer: version=6 data=\"informer-update\"\nstill assumed: false\nBUG: assumed state silently dropped\nFAIL: assumed state still silently dropped\n", "turns": 4, "timestamp": "2026-03-22T05:08:01Z"}

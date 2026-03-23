@@ -1,0 +1,2 @@
+{"event": "post.start", "benchmark": "k8s-scheduler-shutdown-deadlock", "model": "gemini-2-0-flash-001-bare", "initial_test_output": "BUG: shutdown deadlock \u2014 timed out after 2s\nFAIL: shutdown deadlock or timeout\n", "prompt": "find the needle.", "timestamp": "2026-03-22T05:35:00Z"}
+{"event": "post.end", "resolved": false, "final_test_output": "BUG: shutdown deadlock \u2014 timed out after 2s\nFAIL: shutdown deadlock or timeout\n", "turns": 1, "timestamp": "2026-03-22T05:35:04Z"}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "timezone-scheduling",
+  "agent": "claude-opus-4-6-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "6abcbbf",
+  "timestamp": "2026-03-22T09:31:03Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 20,
+  "turns_to_fix": 8,
+  "signal_to_noise": 0.0,
+  "false_positives": 0,
+  "token_cost": 32884,
+  "estimated_cost_usd": 0.18534,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 24.9,
+  "tool_calls_per_turn": 2.12,
+  "read_tool_ratio": 0.0
+}

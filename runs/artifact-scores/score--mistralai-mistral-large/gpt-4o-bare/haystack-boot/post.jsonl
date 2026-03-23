@@ -1,0 +1,5 @@
+{"event": "post.start", "benchmark": "haystack-boot", "model": "gpt-4o-bare", "initial_test_output": "0/5\n", "prompt": "find the needle.", "timestamp": "2026-03-23T06:30:40Z"}
+{"event": "agent.bash", "cmd": "find / -name 'needle' 2>/dev/null", "output_preview": "", "turn": 1}
+{"event": "agent.bash", "cmd": "find / -name '*.needle' 2>/dev/null", "output_preview": "", "turn": 2}
+{"event": "agent.bash", "cmd": "locate needle 2>/dev/null", "output_preview": "", "turn": 3}
+{"event": "post.end", "resolved": false, "final_test_output": "0/5\n", "turns": 3, "timestamp": "2026-03-23T06:32:44Z"}

@@ -1,0 +1,22 @@
+{
+  "benchmark": "sql-injection-search",
+  "agent": "qwen3-coder-plus",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T17:21:30Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 40,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.0,
+  "false_positives": 1,
+  "token_cost": 34361,
+  "estimated_cost_usd": 0.119235,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 1,
+  "recovery_rate": 0.0,
+  "wall_clock": 41.6,
+  "blind_discovery": false,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 0.92
+}

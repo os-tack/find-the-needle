@@ -1,0 +1,21 @@
+{
+  "benchmark": "auth-bypass-path-traversal",
+  "agent": "llama-4-maverick-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T04:59:03Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 2,
+  "signal_to_noise": 1.0,
+  "false_positives": 0,
+  "token_cost": 7080,
+  "estimated_cost_usd": 0.00282278,
+  "dollars_per_correct_line": 0.001411,
+  "tokens_per_correct_line": 3540.0,
+  "wall_clock": 33.3,
+  "tool_calls_per_turn": 4.0,
+  "read_tool_ratio": 0.0
+}

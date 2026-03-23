@@ -1,0 +1,22 @@
+{
+  "benchmark": "sql-injection-search",
+  "agent": "devstral-medium",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:10:50Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 5,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.8,
+  "false_positives": 2,
+  "token_cost": 210521,
+  "estimated_cost_usd": 0.732291,
+  "dollars_per_correct_line": 0.183073,
+  "tokens_per_correct_line": 52630.25,
+  "recovery_events": 23,
+  "recovery_rate": 0.0,
+  "wall_clock": 151.3,
+  "blind_discovery": false,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.0
+}

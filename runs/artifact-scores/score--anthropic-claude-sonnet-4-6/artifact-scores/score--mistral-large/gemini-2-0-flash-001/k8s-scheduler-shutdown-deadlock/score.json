@@ -1,0 +1,22 @@
+{
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "agent": "gemini-2-0-flash-001",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:14:01Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 5,
+  "signal_to_noise": 0.4,
+  "false_positives": 0,
+  "token_cost": 2927,
+  "estimated_cost_usd": 0.013545,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 15.6,
+  "blind_discovery": true,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.4
+}

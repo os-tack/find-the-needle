@@ -1,0 +1,22 @@
+{
+  "benchmark": "sql-injection-search",
+  "agent": "claude-opus-4-6",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T17:19:10Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 7,
+  "turns_to_fix": 8,
+  "signal_to_noise": 0.25,
+  "false_positives": 0,
+  "token_cost": 17547,
+  "estimated_cost_usd": 0.326805,
+  "dollars_per_correct_line": 0.081701,
+  "tokens_per_correct_line": 4386.75,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 38.9,
+  "blind_discovery": true,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.5
+}

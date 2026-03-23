@@ -1,0 +1,10 @@
+{
+  "benchmark": "retry-storm-duplicate-transfer",
+  "agent": "control-solution",
+  "timestamp": "2026-03-20T16:56:42Z",
+  "resolved": false,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 0.0,
+  "control_type": "solution-applied"
+}

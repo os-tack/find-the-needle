@@ -1,0 +1,21 @@
+{
+  "benchmark": "import-cycle-startup",
+  "agent": "deepseek-chat-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T05:04:47Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.8,
+  "false_positives": 0,
+  "token_cost": 7623,
+  "estimated_cost_usd": 0.0039168,
+  "dollars_per_correct_line": 0.003917,
+  "tokens_per_correct_line": 7623.0,
+  "wall_clock": 33.7,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

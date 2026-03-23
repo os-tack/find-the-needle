@@ -1,0 +1,21 @@
+{
+  "benchmark": "off-by-one-pagination",
+  "agent": "gemini-2-5-flash-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-21T22:03:25Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 4,
+  "signal_to_noise": 0.75,
+  "false_positives": 0,
+  "token_cost": 4079,
+  "estimated_cost_usd": 0.0020311,
+  "dollars_per_correct_line": 0.002031,
+  "tokens_per_correct_line": 4079.0,
+  "wall_clock": 5.9,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

@@ -1,0 +1,22 @@
+{"event": "post.start", "benchmark": "timezone-scheduling", "model": "gpt-4o-bare", "initial_test_output": "=== Timezone Scheduling Tests ===\n\n--- Daytime events (should work) ---\nOK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC\nOK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC\nOK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC\n\n--- Late night events (the bug zone) ---\nFAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't\n  Output: Checking 6 events at 2025-01-16 04:30 UTC\nDue events: 0\n  (no events due)\nFAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't\n  Output: Checking 6 events at 2025-01-16 07:45 UTC\nDue events: 0\n  (no events due)\n\n--- Negative tests (should NOT fire) ---\nOK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC\nOK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC\n\nFAIL: 2 test(s) failed\n", "prompt": "find the needle.", "timestamp": "2026-03-23T07:13:32Z"}
+{"event": "agent.bash", "cmd": "find / -type f -name 'needle' 2>/dev/null", "output_preview": "", "turn": 1}
+{"event": "agent.bash", "cmd": "find / -type f -name 'needle*' 2>/dev/null", "output_preview": "", "turn": 2}
+{"event": "agent.bash", "cmd": "locate 'needle' 2>/dev/null", "output_preview": "", "turn": 3}
+{"event": "agent.bash", "cmd": "echo $PATH", "output_preview": "/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n", "turn": 4}
+{"event": "agent.bash", "cmd": "find / -type f -iname '*needle*' 2>/dev/null", "output_preview": "", "turn": 5}
+{"event": "agent.bash", "cmd": "find / -type f | grep -i needle", "output_preview": "", "turn": 6}
+{"event": "agent.bash", "cmd": "find / -type f -iname '*end*needle*' 2>/dev/null", "output_preview": "", "turn": 7}
+{"event": "agent.bash", "cmd": "ls /usr/bin | grep -i needle", "output_preview": "", "turn": 8}
+{"event": "agent.bash", "cmd": "ls /bin | grep -i needle", "output_preview": "", "turn": 9}
+{"event": "agent.bash", "cmd": "ls /usr/local/bin | grep -i needle", "output_preview": "", "turn": 10}
+{"event": "agent.bash", "cmd": "find / -type f -name 'needle.txt' 2>/dev/null", "output_preview": "", "turn": 11}
+{"event": "agent.bash", "cmd": "find / -type f -name 'needle.*' 2>/dev/null", "output_preview": "", "turn": 12}
+{"event": "agent.bash", "cmd": "find / -type f -name '*.needle' 2>/dev/null", "output_preview": "", "turn": 13}
+{"event": "agent.bash", "cmd": "find /home -type f -name '*needle*' 2>/dev/null", "output_preview": "", "turn": 14}
+{"event": "agent.bash", "cmd": "find /etc -type f -name '*needle*' 2>/dev/null", "output_preview": "", "turn": 15}
+{"event": "agent.bash", "cmd": "find /var -type f -name '*needle*' 2>/dev/null", "output_preview": "", "turn": 16}
+{"event": "agent.bash", "cmd": "find /opt -type f -name '*needle*' 2>/dev/null", "output_preview": "", "turn": 17}
+{"event": "agent.bash", "cmd": "find /usr -type f -name '*needle*' 2>/dev/null", "output_preview": "", "turn": 18}
+{"event": "agent.bash", "cmd": "find /tmp -type f -name '*needle*' 2>/dev/null", "output_preview": "", "turn": 19}
+{"event": "agent.bash", "cmd": "find / -name '*needle*' -print 2>/dev/null", "output_preview": "", "turn": 20}
+{"event": "post.end", "resolved": false, "final_test_output": "=== Timezone Scheduling Tests ===\n\n--- Daytime events (should work) ---\nOK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC\nOK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC\nOK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC\n\n--- Late night events (the bug zone) ---\nFAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't\n  Output: Checking 6 events at 2025-01-16 04:30 UTC\nDue events: 0\n  (no events due)\nFAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't\n  Output: Checking 6 events at 2025-01-16 07:45 UTC\nDue events: 0\n  (no events due)\n\n--- Negative tests (should NOT fire) ---\nOK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC\nOK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC\n\nFAIL: 2 test(s) failed\n", "turns": 20, "timestamp": "2026-03-23T07:13:53Z"}

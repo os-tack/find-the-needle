@@ -1,0 +1,21 @@
+{
+  "benchmark": "timing-attack-comparison",
+  "agent": "qwen3-coder-plus-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-21T22:28:31Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 13,
+  "signal_to_noise": 0.154,
+  "false_positives": 0,
+  "token_cost": 37649,
+  "estimated_cost_usd": 0.010888929999999998,
+  "dollars_per_correct_line": 0.005444,
+  "tokens_per_correct_line": 18824.5,
+  "wall_clock": 26.5,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

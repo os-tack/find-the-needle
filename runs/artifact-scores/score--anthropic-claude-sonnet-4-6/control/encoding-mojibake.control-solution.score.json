@@ -1,0 +1,10 @@
+{
+  "benchmark": "encoding-mojibake",
+  "agent": "control-solution",
+  "timestamp": "2026-03-23T07:15:09Z",
+  "resolved": true,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 0.3,
+  "control_type": "solution-applied"
+}

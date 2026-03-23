@@ -1,0 +1,12 @@
+{"event": "post.start", "benchmark": "cache-stale-invalidation", "model": "gemini-2-0-flash-001", "initial_test_output": "Initial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 5\nFAIL: Product list has 5 items after create, expected 6\n      List cache is stale \u2014 new product not visible\n", "prompt": "Run ./test.sh to see the current failure. Read the code, find the bug, fix it.", "timestamp": "2026-03-21T18:09:43Z"}
+{"event": "agent.bash", "cmd": "./test.sh", "output_preview": "Initial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 5\nFAIL: Product list has 5 items after create, expected 6\n      List cache is stale \u2014 new product not visible\n", "turn": 1}
+{"event": "agent.read", "path": "main.py", "turn": 2}
+{"event": "agent.read", "path": "app.py", "turn": 3}
+{"event": "agent.read", "path": "application.py", "turn": 4}
+{"event": "agent.read", "path": "src/app.py", "turn": 5}
+{"event": "agent.read", "path": "src/main.py", "turn": 6}
+{"event": "agent.bash", "cmd": "ls -l", "output_preview": "total 4\ndrwxr-xr-x 1 root root   22 Mar 21 18:09 app\n-rwxr-xr-x 1 root root 2321 Mar  9 02:39 test.sh\n", "turn": 7}
+{"event": "agent.bash", "cmd": "ls -l app", "output_preview": "total 16\ndrwxr-xr-x 1 root root   84 Mar 21 18:09 __pycache__\n-rw-r--r-- 1 root root 1905 Mar  9 02:38 cache.py\n-rw-r--r-- 1 root root  196 Mar  9 02:39 config.py\n-rw-r--r-- 1 root root 3946 Mar  9 02:38 server.py\n-rw-r--r-- 1 root root 2187 Mar  9 02:39 store.py\n", "turn": 8}
+{"event": "agent.read", "path": "app/server.py", "turn": 9}
+{"event": "agent.edit", "path": "app/server.py", "old_str_preview": "self._json_response(200, updated)", "new_str_preview": "cache.delete('products:list')\n        self._json_response(200, updated)", "turn": 10}
+{"event": "post.end", "resolved": true, "final_test_output": "Initial product count: 5\nOriginal product name: Widget A\nName after update: UPDATED-NAME-XYZ\nPASS: Product name correctly updated to 'UPDATED-NAME-XYZ'\nProduct count after create: 6\nPASS: Product list correctly shows 6 items\nPASS: Cache correctly invalidated after writes\n", "turns": 10, "timestamp": "2026-03-21T18:09:55Z"}

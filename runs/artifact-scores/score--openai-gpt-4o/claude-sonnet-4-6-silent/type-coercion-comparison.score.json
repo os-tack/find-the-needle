@@ -1,0 +1,21 @@
+{
+  "benchmark": "type-coercion-comparison",
+  "agent": "claude-sonnet-4-6-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "6abcbbf",
+  "timestamp": "2026-03-22T13:07:09Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 3,
+  "signal_to_noise": 0.667,
+  "false_positives": 0,
+  "token_cost": 6711,
+  "estimated_cost_usd": 0.027033,
+  "dollars_per_correct_line": 0.027033,
+  "tokens_per_correct_line": 6711.0,
+  "wall_clock": 12.6,
+  "tool_calls_per_turn": 2.0,
+  "read_tool_ratio": 0.0
+}

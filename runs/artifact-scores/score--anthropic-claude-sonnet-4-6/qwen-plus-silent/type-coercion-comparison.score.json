@@ -1,0 +1,21 @@
+{
+  "benchmark": "type-coercion-comparison",
+  "agent": "qwen-plus-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T06:02:45Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 10,
+  "signal_to_noise": 0.2,
+  "false_positives": 0,
+  "token_cost": 25857,
+  "estimated_cost_usd": 0.0050345879999999996,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 51.1,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

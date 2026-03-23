@@ -1,0 +1,10 @@
+{
+  "benchmark": "data-corruption-concurrent-write",
+  "agent": "control-baseline",
+  "timestamp": "2026-03-23T07:14:54Z",
+  "resolved": false,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "wall_clock": 0.4,
+  "control_type": "no-agent"
+}

@@ -1,0 +1,4 @@
+{"event": "post.start", "benchmark": "silent-data-corruption", "model": "claude-sonnet-4-6-bare", "initial_test_output": "Input file size: 102400 bytes\nOutput file size: 65536 bytes\nFAIL: Output size (65536) != input size (102400)\n      Data was silently truncated or corrupted\n\nProcessed /tmp/input.dat -> /tmp/output.dat (65536 bytes)\n", "prompt": "find the needle.", "timestamp": "2026-03-23T06:39:07Z"}
+{"event": "agent.bash", "cmd": "find / -name \"*needle*\" 2>/dev/null", "output_preview": "", "turn": 1}
+{"event": "agent.bash", "cmd": "grep -r \"needle\" / --include=\"*.txt\" -l 2>/dev/null", "output_preview": "", "turn": 1}
+{"event": "post.end", "resolved": false, "final_test_output": "Input file size: 102400 bytes\nOutput file size: 65536 bytes\nFAIL: Output size (65536) != input size (102400)\n      Data was silently truncated or corrupted\n\nProcessed /tmp/input.dat -> /tmp/output.dat (65536 bytes)\n", "turns": 1, "timestamp": "2026-03-23T06:41:13Z"}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "import-cycle-startup",
+  "agent": "claude-haiku-4-5-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:19:50Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 20,
+  "turns_to_fix": 4,
+  "signal_to_noise": 0.0,
+  "false_positives": 0,
+  "token_cost": 3469,
+  "estimated_cost_usd": 0.004857,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 9.5,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

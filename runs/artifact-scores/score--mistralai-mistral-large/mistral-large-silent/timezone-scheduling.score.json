@@ -1,0 +1,21 @@
+{
+  "benchmark": "timezone-scheduling",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "2ac0d56",
+  "timestamp": "2026-03-23T07:21:04Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 6,
+  "signal_to_noise": 0.5,
+  "false_positives": 0,
+  "token_cost": 16036,
+  "estimated_cost_usd": 0.0373176,
+  "dollars_per_correct_line": 0.037318,
+  "tokens_per_correct_line": 16036.0,
+  "wall_clock": 30.5,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

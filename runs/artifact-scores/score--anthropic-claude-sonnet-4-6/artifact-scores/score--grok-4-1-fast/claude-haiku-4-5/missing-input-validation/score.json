@@ -1,0 +1,22 @@
+{
+  "benchmark": "missing-input-validation",
+  "agent": "claude-haiku-4-5",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:04:53Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 5,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.4,
+  "false_positives": 0,
+  "token_cost": 65136,
+  "estimated_cost_usd": 0.06247,
+  "dollars_per_correct_line": 0.010412,
+  "tokens_per_correct_line": 10856.0,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 49.2,
+  "blind_discovery": true,
+  "read_tool_ratio": 0.62,
+  "tool_calls_per_turn": 0.93
+}

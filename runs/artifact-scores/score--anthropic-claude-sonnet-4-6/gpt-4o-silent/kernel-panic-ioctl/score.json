@@ -1,0 +1,21 @@
+{
+  "benchmark": "kernel-panic-ioctl",
+  "agent": "gpt-4o-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:41:55Z",
+  "difficulty_tier": "hard",
+  "resolved": false,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 60,
+  "signal_to_noise": 0.764,
+  "false_positives": 0,
+  "token_cost": 409134,
+  "estimated_cost_usd": 0.574935,
+  "dollars_per_correct_line": 0.082134,
+  "tokens_per_correct_line": 58447.71428571428,
+  "wall_clock": 60.0,
+  "tool_calls_per_turn": 1.04,
+  "read_tool_ratio": null
+}

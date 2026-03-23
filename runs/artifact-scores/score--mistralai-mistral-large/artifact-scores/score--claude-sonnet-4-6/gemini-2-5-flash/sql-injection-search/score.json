@@ -1,0 +1,22 @@
+{
+  "benchmark": "sql-injection-search",
+  "agent": "gemini-2-5-flash",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T17:18:11Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 6,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.536,
+  "false_positives": 1,
+  "token_cost": 211240,
+  "estimated_cost_usd": 0.747216,
+  "dollars_per_correct_line": 0.149443,
+  "tokens_per_correct_line": 42248.0,
+  "recovery_events": 9,
+  "recovery_rate": 0.0,
+  "wall_clock": 108.9,
+  "blind_discovery": false,
+  "read_tool_ratio": 1.0,
+  "tool_calls_per_turn": 1.0
+}

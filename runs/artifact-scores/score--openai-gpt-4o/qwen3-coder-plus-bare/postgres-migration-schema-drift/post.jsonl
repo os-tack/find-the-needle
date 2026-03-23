@@ -1,0 +1,3 @@
+{"event": "post.start", "benchmark": "postgres-migration-schema-drift", "model": "qwen3-coder-plus-bare", "initial_test_output": "=== postgres-migration-schema-drift test ===\n\nbash: line 1: initdb: command not found\n", "prompt": "find the needle.", "timestamp": "2026-03-21T22:15:33Z"}
+{"event": "agent.bash", "cmd": "find / -type f -name 'needle' 2>/dev/null", "output_preview": "", "turn": 1}
+{"event": "post.end", "resolved": false, "final_test_output": "=== postgres-migration-schema-drift test ===\n\nbash: line 1: initdb: command not found\n", "turns": 2, "timestamp": "2026-03-21T22:15:41Z"}

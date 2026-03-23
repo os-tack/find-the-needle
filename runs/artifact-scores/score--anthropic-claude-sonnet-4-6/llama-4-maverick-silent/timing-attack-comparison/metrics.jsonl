@@ -1,0 +1,2 @@
+{"event": "token.usage", "turn": 1, "input_tokens": 580, "output_tokens": 597, "cumulative_input": 580, "cumulative_output": 597}
+{"event": "run.complete", "total_input_tokens": 580, "total_output_tokens": 597, "total_tokens": 1177, "estimated_cost_usd": 0.010695}

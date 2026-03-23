@@ -1,0 +1,21 @@
+{
+  "benchmark": "kernel-panic-ioctl",
+  "agent": "gemini-3-1-pro-preview-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T05:56:42Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 18,
+  "signal_to_noise": 0.389,
+  "false_positives": 0,
+  "token_cost": 175507,
+  "estimated_cost_usd": 0.26174699999999995,
+  "dollars_per_correct_line": 0.032718,
+  "tokens_per_correct_line": 21938.375,
+  "wall_clock": 150.5,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

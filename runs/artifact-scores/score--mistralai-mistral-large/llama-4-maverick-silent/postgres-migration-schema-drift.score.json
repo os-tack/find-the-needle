@@ -1,0 +1,21 @@
+{
+  "benchmark": "postgres-migration-schema-drift",
+  "agent": "llama-4-maverick-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T05:19:06Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 8,
+  "turns_to_fix": 32,
+  "signal_to_noise": 0.594,
+  "false_positives": 0,
+  "token_cost": 362922,
+  "estimated_cost_usd": 0.10195092,
+  "dollars_per_correct_line": 0.033984,
+  "tokens_per_correct_line": 120974.0,
+  "wall_clock": 113.9,
+  "tool_calls_per_turn": 1.97,
+  "read_tool_ratio": 0.0
+}

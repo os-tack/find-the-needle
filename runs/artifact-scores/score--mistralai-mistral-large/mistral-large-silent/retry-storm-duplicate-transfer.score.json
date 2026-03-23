@@ -1,0 +1,21 @@
+{
+  "benchmark": "retry-storm-duplicate-transfer",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T07:11:06Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 3,
+  "turns_to_fix": 7,
+  "signal_to_noise": 0.571,
+  "false_positives": 0,
+  "token_cost": 25499,
+  "estimated_cost_usd": 0.0585132,
+  "dollars_per_correct_line": 0.008359,
+  "tokens_per_correct_line": 3642.714285714286,
+  "wall_clock": 56.0,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "silent-data-corruption",
+  "agent": "claude-sonnet-4-6-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "6abcbbf",
+  "timestamp": "2026-03-22T12:50:36Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 1,
+  "signal_to_noise": 1.0,
+  "false_positives": 0,
+  "token_cost": 1005,
+  "estimated_cost_usd": 0.004899,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 2.8,
+  "tool_calls_per_turn": 3.0,
+  "read_tool_ratio": 0.0
+}

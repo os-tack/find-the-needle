@@ -1,0 +1,22 @@
+{
+  "benchmark": "api-version-field-drop",
+  "agent": "claude-opus-4-6",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T17:22:09Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 5,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.471,
+  "false_positives": 0,
+  "token_cost": 111921,
+  "estimated_cost_usd": 1.857435,
+  "dollars_per_correct_line": 0.309572,
+  "tokens_per_correct_line": 18653.5,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 80.4,
+  "blind_discovery": true,
+  "read_tool_ratio": 0.75,
+  "tool_calls_per_turn": 1.24
+}

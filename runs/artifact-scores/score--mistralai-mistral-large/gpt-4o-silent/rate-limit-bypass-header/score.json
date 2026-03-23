@@ -1,0 +1,21 @@
+{
+  "benchmark": "rate-limit-bypass-header",
+  "agent": "gpt-4o-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:59:59Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 16,
+  "signal_to_noise": 0.312,
+  "false_positives": 0,
+  "token_cost": 31930,
+  "estimated_cost_usd": 0.054707500000000006,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 18.9,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": null
+}

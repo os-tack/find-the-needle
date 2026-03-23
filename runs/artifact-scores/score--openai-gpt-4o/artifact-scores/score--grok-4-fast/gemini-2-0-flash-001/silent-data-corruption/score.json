@@ -1,0 +1,22 @@
+{
+  "benchmark": "silent-data-corruption",
+  "agent": "gemini-2-0-flash-001",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:13:45Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 27,
+  "signal_to_noise": 0.259,
+  "false_positives": 1,
+  "token_cost": 106382,
+  "estimated_cost_usd": 0.339282,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "recovery_events": 4,
+  "recovery_rate": 1.0,
+  "wall_clock": 32.8,
+  "blind_discovery": true,
+  "read_tool_ratio": 0.92,
+  "tool_calls_per_turn": 1.0
+}

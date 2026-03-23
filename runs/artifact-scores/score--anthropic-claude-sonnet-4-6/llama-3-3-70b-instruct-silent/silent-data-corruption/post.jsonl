@@ -1,0 +1,3 @@
+{"event": "post.start", "benchmark": "silent-data-corruption", "model": "llama-3-3-70b-instruct-silent", "initial_test_output": "Input file size: 102400 bytes\nOutput file size: 65536 bytes\nFAIL: Output size (65536) != input size (102400)\n      Data was silently truncated or corrupted\n\nProcessed /tmp/input.dat -> /tmp/output.dat (65536 bytes)\n", "prompt": "find the needle.", "timestamp": "2026-03-22T05:38:06Z"}
+{"event": "agent.bash", "cmd": "find . -name \"test.sh\"", "output_preview": "./test.sh\n", "turn": 1}
+{"event": "post.end", "resolved": true, "final_test_output": "./test.sh\n", "turns": 1, "timestamp": "2026-03-22T05:38:10Z"}

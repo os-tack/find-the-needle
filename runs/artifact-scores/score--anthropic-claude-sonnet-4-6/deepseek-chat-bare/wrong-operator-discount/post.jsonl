@@ -1,0 +1,3 @@
+{"event": "post.start", "benchmark": "wrong-operator-discount", "model": "deepseek-chat-bare", "initial_test_output": "FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14\nFAIL: Total after 20% discount should be $879.15, got $0.00\nFAIL: 10% discount on $449.99 should be $45.00, got $450.09\n", "prompt": "find the needle.", "timestamp": "2026-03-22T05:18:42Z"}
+{"event": "agent.bash", "cmd": "find / -name \"needle\" 2>/dev/null", "output_preview": "", "turn": 1}
+{"event": "post.end", "resolved": false, "final_test_output": "FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14\nFAIL: Total after 20% discount should be $879.15, got $0.00\nFAIL: 10% discount on $449.99 should be $45.00, got $450.09\n", "turns": 2, "timestamp": "2026-03-22T05:18:53Z"}

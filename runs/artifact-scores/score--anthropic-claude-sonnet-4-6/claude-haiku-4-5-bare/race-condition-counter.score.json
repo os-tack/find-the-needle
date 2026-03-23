@@ -1,0 +1,21 @@
+{
+  "benchmark": "race-condition-counter",
+  "agent": "claude-haiku-4-5-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "5801125",
+  "timestamp": "2026-03-23T06:31:09Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 40,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.0,
+  "false_positives": 0,
+  "token_cost": 4328,
+  "estimated_cost_usd": 0.006136,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 15.0,
+  "tool_calls_per_turn": 0.75,
+  "read_tool_ratio": null
+}

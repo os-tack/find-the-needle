@@ -1,0 +1,4 @@
+{"event": "post.start", "benchmark": "postgres-migration-schema-drift", "model": "gpt-4o-silent", "initial_test_output": "=== postgres-migration-schema-drift test ===\n\nbash: line 1: initdb: command not found\n", "prompt": "find the needle.", "timestamp": "2026-03-23T06:55:27Z"}
+{"event": "agent.bash", "cmd": "grep -ri 'needle' /workspace", "output_preview": "/workspace/test.sh:# needle-bench test script\n", "turn": 1}
+{"event": "agent.bash", "cmd": "cat /workspace/test.sh | grep -i needle", "output_preview": "# needle-bench test script\n", "turn": 2}
+{"event": "post.end", "resolved": true, "final_test_output": "# needle-bench test script\n", "turns": 2, "timestamp": "2026-03-23T06:55:28Z"}

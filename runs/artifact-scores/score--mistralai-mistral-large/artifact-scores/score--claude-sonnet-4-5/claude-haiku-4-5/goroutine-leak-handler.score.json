@@ -1,0 +1,22 @@
+{
+  "benchmark": "goroutine-leak-handler",
+  "agent": "claude-haiku-4-5",
+  "commit": "5b350d4",
+  "timestamp": "2026-03-21T18:09:00Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 4,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.409,
+  "false_positives": 0,
+  "token_cost": 123736,
+  "estimated_cost_usd": 0.117235,
+  "dollars_per_correct_line": 0.007327,
+  "tokens_per_correct_line": 7733.5,
+  "recovery_events": 0,
+  "recovery_rate": 1.0,
+  "wall_clock": 112.1,
+  "blind_discovery": true,
+  "read_tool_ratio": 0.5,
+  "tool_calls_per_turn": 0.95
+}

@@ -1,0 +1,4 @@
+{"event": "post.start", "benchmark": "retry-storm-duplicate-transfer", "model": "claude-sonnet-4-6-bare", "initial_test_output": "Seeded accounts: A=1000, B=1000\n{\"drop_response_ms\":3000,\"status\":\"configured\"}\nA=500 B=1500\nTotal=2000 (should be 2000)\nPASS\n", "prompt": "find the needle.", "timestamp": "2026-03-23T06:36:53Z"}
+{"event": "agent.bash", "cmd": "find / -name \"*needle*\" 2>/dev/null", "output_preview": "", "turn": 1}
+{"event": "agent.bash", "cmd": "grep -r \"needle\" / --include=\"*.txt\" -l 2>/dev/null", "output_preview": "", "turn": 1}
+{"event": "post.end", "resolved": false, "final_test_output": "Seeded accounts: A=1000, B=1000\n{\"drop_response_ms\":3000,\"status\":\"configured\"}\nA=500 B=2000\nTotal=2500 (should be 2000)\nFAIL: money not conserved (total=2500, expected 2000) \u2014 duplicate transfer executed\n", "turns": 1, "timestamp": "2026-03-23T06:39:02Z"}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "timing-attack-comparison",
+  "agent": "claude-sonnet-4-6-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "6abcbbf",
+  "timestamp": "2026-03-22T13:04:40Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 3,
+  "signal_to_noise": 0.667,
+  "false_positives": 0,
+  "token_cost": 7336,
+  "estimated_cost_usd": 0.028596000000000003,
+  "dollars_per_correct_line": 0.014298,
+  "tokens_per_correct_line": 3668.0,
+  "wall_clock": 14.4,
+  "tool_calls_per_turn": 1.33,
+  "read_tool_ratio": 0.0
+}

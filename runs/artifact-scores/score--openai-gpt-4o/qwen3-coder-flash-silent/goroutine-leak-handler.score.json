@@ -1,0 +1,21 @@
+{
+  "benchmark": "goroutine-leak-handler",
+  "agent": "qwen3-coder-flash-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "1e03474",
+  "timestamp": "2026-03-22T06:36:50Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 6,
+  "signal_to_noise": 0.167,
+  "false_positives": 0,
+  "token_cost": 10035,
+  "estimated_cost_usd": 0.0020187569999999995,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 13.1,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}
