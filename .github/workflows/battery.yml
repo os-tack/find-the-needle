@@ -7,14 +7,14 @@ on:
         description: "Comma-separated model list (OpenRouter names)"
         required: false
         default: >-
-          claude-sonnet-4-6,claude-opus-4-6,claude-sonnet-4-5,claude-haiku-4-5,
-          deepseek-v3-2,deepseek-chat,deepseek-r1,
-          mistral-large,devstral-medium,codestral-2508,
-          gemini-2-0-flash-001,gemini-2-5-flash,gemini-2-5-pro,gemini-3-flash-preview,gemini-3-1-pro-preview,
-          gpt-4o,gpt-4-1,
-          grok-4-fast,grok-4-1-fast,
-          llama-4-maverick,llama-3-3-70b-instruct,
-          qwen-plus,qwen3-coder-plus,qwen3-coder-flash,qwen3-5-flash-02-23,qwen3-5-plus-02-15
+          anthropic/claude-sonnet-4-6,anthropic/claude-opus-4-6,anthropic/claude-sonnet-4-5,anthropic/claude-haiku-4.5,
+          deepseek/deepseek-v3.2,deepseek/deepseek-chat,deepseek/deepseek-r1,
+          mistralai/mistral-large,mistralai/devstral-medium,mistralai/codestral-2508,
+          google/gemini-2.0-flash-001,google/gemini-2.5-flash,google/gemini-2.5-pro,google/gemini-3-flash-preview,google/gemini-3.1-pro-preview,
+          openai/gpt-4o,openai/gpt-4.1,
+          x-ai/grok-4-fast,x-ai/grok-4.1-fast,
+          meta-llama/llama-4-maverick,meta-llama/llama-3.3-70b-instruct,
+          qwen/qwen-plus,qwen/qwen3-coder-plus,qwen/qwen3-coder-flash,qwen/qwen3.5-flash-02-23,qwen/qwen3.5-plus-02-15
       benchmarks:
         description: "Comma-separated benchmark list or 'all'"
         required: false
@@ -52,7 +52,7 @@ jobs:
       - name: Build matrix JSON
         id: matrix
         env:
-          MODELS_INPUT: ${{ github.event.inputs.models || 'claude-sonnet-4-6,claude-opus-4-6,claude-sonnet-4-5,claude-haiku-4-5,deepseek-v3-2,deepseek-chat,deepseek-r1,mistral-large,devstral-medium,codestral-2508,gemini-2-0-flash-001,gemini-2-5-flash,gemini-2-5-pro,gemini-3-flash-preview,gemini-3-1-pro-preview,gpt-4o,gpt-4-1,grok-4-fast,grok-4-1-fast,llama-4-maverick,llama-3-3-70b-instruct,qwen-plus,qwen3-coder-plus,qwen3-coder-flash,qwen3-5-flash-02-23,qwen3-5-plus-02-15' }}
+          MODELS_INPUT: ${{ github.event.inputs.models || 'anthropic/claude-sonnet-4-6,anthropic/claude-opus-4-6,anthropic/claude-sonnet-4-5,anthropic/claude-haiku-4.5,deepseek/deepseek-v3.2,deepseek/deepseek-chat,deepseek/deepseek-r1,mistralai/mistral-large,mistralai/devstral-medium,mistralai/codestral-2508,google/gemini-2.0-flash-001,google/gemini-2.5-flash,google/gemini-2.5-pro,google/gemini-3-flash-preview,google/gemini-3.1-pro-preview,openai/gpt-4o,openai/gpt-4.1,x-ai/grok-4-fast,x-ai/grok-4.1-fast,meta-llama/llama-4-maverick,meta-llama/llama-3.3-70b-instruct,qwen/qwen-plus,qwen/qwen3-coder-plus,qwen/qwen3-coder-flash,qwen/qwen3.5-flash-02-23,qwen/qwen3.5-plus-02-15' }}
           BENCHMARKS_INPUT: ${{ github.event.inputs.benchmarks || 'all' }}
           TIER_INPUT: ${{ github.event.inputs.tier || 'all' }}
         run: |
