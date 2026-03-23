@@ -63,7 +63,7 @@ import Base from '../layouts/Base.astro';
 
   .leaderboard-container {
     overflow-x: auto; border: 1px solid var(--border); border-radius: 6px;
-    background: var(--bg); cursor: grab; -webkit-overflow-scrolling: touch;
+    background: var(--bg); cursor: default; -webkit-overflow-scrolling: touch;
     scrollbar-width: none; -ms-overflow-style: none;
   }
   .leaderboard-container::-webkit-scrollbar { display: none; }
@@ -209,9 +209,9 @@ import Base from '../layouts/Base.astro';
 <script>
   const REPO = 'https://github.com/os-tack/find-the-needle';
 
-  const VERDICT_TIER: Record<string, number> = { BOOTS: 0, PARTIAL_BOOT: 1, READS_TACK: 2, EXPLORES: 3, NO_BOOT: 4 };
-  const VERDICT_DISPLAY: Record<string, string> = { BOOTS: 'BOOTS', PARTIAL_BOOT: 'PARTIAL', READS_TACK: 'READS', EXPLORES: 'EXPLORES', NO_BOOT: 'NO_BOOT' };
-  const VERDICT_CLASS: Record<string, string> = { BOOTS: 'verdict-boots', PARTIAL_BOOT: 'verdict-partial', READS_TACK: 'verdict-reads', EXPLORES: 'verdict-explores', NO_BOOT: 'verdict-noboot' };
+  const VERDICT_TIER: Record<string, number> = { BOOTS: 0, NO_BOOT: 1 };
+  const VERDICT_DISPLAY: Record<string, string> = { BOOTS: 'BOOTS', NO_BOOT: 'N/A' };
+  const VERDICT_CLASS: Record<string, string> = { BOOTS: 'verdict-boots', NO_BOOT: 'verdict-noboot' };
 
   // ── Model normalization ──────────────────────────────────────────────
   function normalizeModel(raw: string): string {
@@ -347,9 +347,13 @@ import Base from '../layouts/Base.astro';
     for (const b of bootData) {
       const m = getModel(b.model);
       m.boot = b;
-      m.tier = VERDICT_TIER[b.verdict] ?? 4;
-      m.post = b.total_score === b.total_possible;
-      m.entity = b.directives?.wrote_entityfile === true;
+      // Normalize verdict: anything that passed POST is BOOTS, rest is NO_BOOT
+      const verdict = (b as any).post === true ? 'BOOTS' : (b.verdict === 'BOOTS' ? 'BOOTS' : 'NO_BOOT');
+      m.boot.verdict = verdict;
+      m.tier = VERDICT_TIER[verdict] ?? 1;
+      // Use explicit post/entityfile fields if present, fall back to score-based check
+      m.post = (b as any).post === true || b.total_score === b.total_possible;
+      m.entity = (b as any).entityfile === true || b.directives?.wrote_entityfile === true;
     }
 
     // Ingest scores (skip haystack-boot, haystack-mint, and anything not in difficulty.json)
@@ -551,8 +555,12 @@ import Base from '../layouts/Base.astro';
         r += '<td class="sticky-col col-entity">' + (m.entity ? '<span class="check-pass">&#10003;</span>' : '<span class="check-fail">&#10007;</span>') + '</td>';
       }
 
-      // Solved — with coverage indicator
-      const coverage = Object.keys(m.benches).length;
+      // Solved — with coverage indicator (merge standard + experiment benchmarks)
+      const testedBenches = new Set(Object.keys(m.benches));
+      for (const bench of Object.keys(m.experiment)) {
+        if (benchSet.has(bench)) testedBenches.add(bench);
+      }
+      const coverage = testedBenches.size;
       const isFull = coverage === totalBenches;
 
       if (isControl) {

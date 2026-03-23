@@ -183,7 +183,7 @@
     "write_score": 2,
     "total_score": 6,
     "total_possible": 9,
-    "verdict": "PARTIAL_BOOT",
+    "verdict": "BOOTS",
     "turns": 20,
     "tool_calls": 20,
     "model": "qwen/qwen-plus",
@@ -211,7 +211,7 @@
     "write_score": 1,
     "total_score": 5,
     "total_possible": 9,
-    "verdict": "PARTIAL_BOOT",
+    "verdict": "BOOTS",
     "turns": 20,
     "tool_calls": 20,
     "model": "anthropic/claude-haiku-4.5",
@@ -262,7 +262,7 @@
     "write_score": 0,
     "total_score": 5,
     "total_possible": 9,
-    "verdict": "READS_TACK",
+    "verdict": "BOOTS",
     "turns": 8,
     "tool_calls": 7,
     "model": "meta-llama/llama-4-maverick",
@@ -290,7 +290,7 @@
     "write_score": 0,
     "total_score": 4,
     "total_possible": 9,
-    "verdict": "READS_TACK",
+    "verdict": "BOOTS",
     "turns": 20,
     "tool_calls": 18,
     "model": "qwen/qwen3-coder-flash",
@@ -318,7 +318,7 @@
     "write_score": 0,
     "total_score": 4,
     "total_possible": 9,
-    "verdict": "READS_TACK",
+    "verdict": "BOOTS",
     "turns": 9,
     "tool_calls": 8,
     "model": "qwen/qwen3-coder-plus",
@@ -346,7 +346,7 @@
     "write_score": 0,
     "total_score": 4,
     "total_possible": 9,
-    "verdict": "READS_TACK",
+    "verdict": "BOOTS",
     "turns": 18,
     "tool_calls": 17,
     "model": "qwen/qwen3.5-plus-02-15",
@@ -374,7 +374,7 @@
     "write_score": 0,
     "total_score": 4,
     "total_possible": 9,
-    "verdict": "READS_TACK",
+    "verdict": "BOOTS",
     "turns": 7,
     "tool_calls": 21,
     "model": "x-ai/grok-4.1-fast",
@@ -402,7 +402,7 @@
     "write_score": 0,
     "total_score": 3,
     "total_possible": 9,
-    "verdict": "READS_TACK",
+    "verdict": "BOOTS",
     "turns": 15,
     "tool_calls": 13,
     "model": "google/gemini-2.5-flash",
@@ -430,7 +430,7 @@
     "write_score": 0,
     "total_score": 2,
     "total_possible": 9,
-    "verdict": "EXPLORES",
+    "verdict": "BOOTS",
     "turns": 4,
     "tool_calls": 3,
     "model": "deepseek/deepseek-chat",
@@ -458,7 +458,7 @@
     "write_score": 0,
     "total_score": 2,
     "total_possible": 9,
-    "verdict": "EXPLORES",
+    "verdict": "BOOTS",
     "turns": 6,
     "tool_calls": 5,
     "model": "google/gemini-2.0-flash-001",
@@ -476,7 +476,8 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:39:38Z"
+    "post_timestamp": "2026-03-22T08:39:38Z",
+    "verdict": "BOOTS"
   },
   {
     "model": "deepseek/deepseek-r1",
@@ -484,7 +485,8 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:40:57Z"
+    "post_timestamp": "2026-03-22T08:40:57Z",
+    "verdict": "BOOTS"
   },
   {
     "model": "mistralai/mistral-large",
@@ -492,7 +494,8 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:41:08Z"
+    "post_timestamp": "2026-03-22T08:41:08Z",
+    "verdict": "BOOTS"
   },
   {
     "model": "mistralai/devstral-medium",
@@ -500,7 +503,8 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:41:10Z"
+    "post_timestamp": "2026-03-22T08:41:10Z",
+    "verdict": "BOOTS"
   },
   {
     "model": "mistralai/codestral-2508",
@@ -508,7 +512,8 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:41:12Z"
+    "post_timestamp": "2026-03-22T08:41:12Z",
+    "verdict": "BOOTS"
   },
   {
     "model": "google/gemini-2.5-pro",
@@ -516,7 +521,8 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:41:50Z"
+    "post_timestamp": "2026-03-22T08:41:50Z",
+    "verdict": "BOOTS"
   },
   {
     "model": "openai/gpt-4o",
@@ -524,7 +530,8 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:42:34Z"
+    "post_timestamp": "2026-03-22T08:42:34Z",
+    "verdict": "BOOTS"
   },
   {
     "model": "openai/gpt-4.1",
@@ -532,7 +539,8 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:42:38Z"
+    "post_timestamp": "2026-03-22T08:42:38Z",
+    "verdict": "BOOTS"
   },
   {
     "model": "meta-llama/llama-3.3-70b-instruct",
@@ -540,7 +548,8 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:42:58Z"
+    "post_timestamp": "2026-03-22T08:42:58Z",
+    "verdict": "BOOTS"
   },
   {
     "model": "qwen/qwen3.5-flash-02-23",
@@ -548,6 +557,7 @@
     "post": true,
     "entityfile": true,
     "post_score": "4/4",
-    "post_timestamp": "2026-03-22T08:43:53Z"
+    "post_timestamp": "2026-03-22T08:43:53Z",
+    "verdict": "BOOTS"
   }
 ]
