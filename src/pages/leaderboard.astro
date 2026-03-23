@@ -571,9 +571,7 @@ import Base from '../layouts/Base.astro';
         const ratio = totalBenches > 0 ? m.resolved / totalBenches : 0;
         const sc = ratio >= 0.8 ? 'solved-high' : ratio >= 0.4 ? 'solved-mid' : ratio > 0 ? 'solved-low' : 'solved-zero';
         const solvedText = m.resolved + '/' + totalBenches;
-        const coverageNote = isFull ? '' : ' <span class="coverage-partial">(' + coverage + ' tested)</span>';
-        const coverageCls = isFull ? ' coverage-full' : '';
-        r += '<td class="sticky-col col-resolved ' + sc + coverageCls + '">' + solvedText + coverageNote + '</td>';
+        r += '<td class="sticky-col col-resolved ' + sc + '">' + solvedText + '</td>';
       }
 
       // BARE / OS / Delta / Cost columns
