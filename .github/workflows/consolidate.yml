@@ -43,13 +43,15 @@ jobs:
 
       - name: Merge artifacts into runs/
         run: |
-          # Each artifact is at /tmp/artifacts/bench--{model}/runs/{model}-{arm}/...
-          find /tmp/artifacts -name "*.score.json" | while read f; do
-            # Extract path after runs/
-            REL=$(echo "$f" | sed 's|.*/runs/||')
-            DIR=$(dirname "runs/$REL")
-            mkdir -p "$DIR"
-            cp "$f" "runs/$REL"
+          # Artifacts extract to: /tmp/artifacts/bench--{model}/{model}-{arm}/{bench}.score.json
+          # We need them at: runs/{model}-{arm}/{bench}.score.json
+          for artifact_dir in /tmp/artifacts/bench--*/; do
+            for arm_dir in "$artifact_dir"/*-bare "$artifact_dir"/*-silent; do
+              [ -d "$arm_dir" ] || continue
+              arm_name=$(basename "$arm_dir")
+              mkdir -p "runs/$arm_name"
+              cp "$arm_dir"/*.score.json "runs/$arm_name/" 2>/dev/null || true
+            done
           done
 
           echo "Merged score files per model:"
