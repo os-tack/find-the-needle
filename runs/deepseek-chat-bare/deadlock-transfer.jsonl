@@ -1,4 +1,2 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:00:40Z", "benchmark": "deadlock-transfer", "model": "deepseek-chat", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/"], "tokens_in": 413, "tokens_out": 51, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 474, "tokens_out": 40, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:00:56Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "bare"}
+{"event": "run.start", "timestamp": "2026-03-24T06:52:41Z", "benchmark": "deadlock-transfer", "model": "deepseek-chat", "arm": "bare", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system."}
+{"event": "run.end", "timestamp": "2026-03-24T06:52:52Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0, "arm": "bare"}

@@ -1,4 +1,2 @@
-{"event": "run.start", "timestamp": "2026-03-22T05:00:08Z", "benchmark": "data-corruption-concurrent-write", "model": "deepseek-chat", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# data-corruption-concurrent-write\n\n## Project\n\nA Rust CLI tool (`concurrent-writer`) that writes data to a file using"}
-{"event": "turn", "turn": 1, "files_edited": [], "files_read": ["/app/src/config.rs"], "tokens_in": 949, "tokens_out": 295, "test_exit": null}
-{"event": "turn", "turn": 2, "files_edited": [], "files_read": [], "tokens_in": 1409, "tokens_out": 390, "test_exit": null}
-{"event": "run.end", "timestamp": "2026-03-22T05:00:29Z", "test_exit": 1, "total_turns": 2, "correct_lines": 0, "arm": "silent"}
+{"event": "run.start", "timestamp": "2026-03-24T07:00:13Z", "benchmark": "data-corruption-concurrent-write", "model": "deepseek-chat", "arm": "silent", "tools": ["bash"], "system_prompt_preview": "You are a software engineer. You have bash access to a system.\n\nProject overview:\n# data-corruption-concurrent-write\n\n## Project\n\nA Rust CLI tool (`concurrent-writer`) that writes data to a file using"}
+{"event": "run.end", "timestamp": "2026-03-24T07:00:13Z", "test_exit": 1, "total_turns": 0, "correct_lines": 0, "arm": "silent"}

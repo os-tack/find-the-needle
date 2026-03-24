@@ -1,3 +1,0 @@
-{"event": "post.start", "benchmark": "haystack-mint", "model": "deepseek-chat-bare", "initial_test_output": "0/5\n", "prompt": "find the needle.", "timestamp": "2026-03-22T05:03:51Z"}
-{"event": "agent.bash", "cmd": "find / -type f -name \"*needle*\" 2>/dev/null", "output_preview": "", "turn": 1}
-{"event": "post.end", "resolved": false, "final_test_output": "0/5\n", "turns": 2, "timestamp": "2026-03-22T05:03:59Z"}
