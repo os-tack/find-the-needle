@@ -1,0 +1,21 @@
+{
+  "benchmark": "goroutine-leak-handler",
+  "agent": "gpt-4-1-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:33:32Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 23,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.025,
+  "false_positives": 0,
+  "token_cost": 134503,
+  "estimated_cost_usd": 0.09771800000000003,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 50.3,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

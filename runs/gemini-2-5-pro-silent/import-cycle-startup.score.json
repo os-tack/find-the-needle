@@ -1,0 +1,21 @@
+{
+  "benchmark": "import-cycle-startup",
+  "agent": "gemini-2-5-pro-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:52:28Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 6,
+  "signal_to_noise": 0.667,
+  "false_positives": 0,
+  "token_cost": 10847,
+  "estimated_cost_usd": 0.029725375000000002,
+  "dollars_per_correct_line": 0.014863,
+  "tokens_per_correct_line": 5423.5,
+  "wall_clock": 29.0,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

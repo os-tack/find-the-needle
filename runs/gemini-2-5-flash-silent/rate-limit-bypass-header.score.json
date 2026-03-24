@@ -1,0 +1,21 @@
+{
+  "benchmark": "rate-limit-bypass-header",
+  "agent": "gemini-2-5-flash-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:49:06Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 9,
+  "signal_to_noise": 0.667,
+  "false_positives": 0,
+  "token_cost": 30089,
+  "estimated_cost_usd": 0.01187866,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 31.6,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

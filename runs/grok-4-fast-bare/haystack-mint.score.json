@@ -1,0 +1,21 @@
+{
+  "benchmark": "haystack-mint",
+  "agent": "grok-4-fast-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "1e03474",
+  "timestamp": "2026-03-21T22:00:10Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 30,
+  "turns_to_fix": 7,
+  "signal_to_noise": 0.0,
+  "false_positives": 0,
+  "token_cost": 7556,
+  "estimated_cost_usd": 0.00116965,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 13.1,
+  "tool_calls_per_turn": 1.71,
+  "read_tool_ratio": 0.0
+}

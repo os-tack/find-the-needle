@@ -1,0 +1,21 @@
+{
+  "benchmark": "data-corruption-concurrent-write",
+  "agent": "gemini-2-5-pro-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:49:11Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 4,
+  "signal_to_noise": 0.5,
+  "false_positives": 0,
+  "token_cost": 6281,
+  "estimated_cost_usd": 0.01735375,
+  "dollars_per_correct_line": 0.017354,
+  "tokens_per_correct_line": 6281.0,
+  "wall_clock": 32.6,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "missing-input-validation",
+  "agent": "devstral-medium-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:43:12Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.833,
+  "false_positives": 0,
+  "token_cost": 26391,
+  "estimated_cost_usd": 0.00655096,
+  "dollars_per_correct_line": 0.002184,
+  "tokens_per_correct_line": 8797.0,
+  "wall_clock": 26.1,
+  "tool_calls_per_turn": 0.92,
+  "read_tool_ratio": 0.0
+}

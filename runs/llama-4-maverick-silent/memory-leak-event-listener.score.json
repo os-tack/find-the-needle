@@ -1,0 +1,21 @@
+{
+  "benchmark": "memory-leak-event-listener",
+  "agent": "llama-4-maverick-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:54:28Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 8,
+  "signal_to_noise": 0.75,
+  "false_positives": 0,
+  "token_cost": 22362,
+  "estimated_cost_usd": 0.006846260000000001,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 41.1,
+  "tool_calls_per_turn": 2.12,
+  "read_tool_ratio": 0.0
+}

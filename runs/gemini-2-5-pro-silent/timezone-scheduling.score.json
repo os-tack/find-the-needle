@@ -1,0 +1,21 @@
+{
+  "benchmark": "timezone-scheduling",
+  "agent": "gemini-2-5-pro-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T08:13:22Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.6,
+  "false_positives": 0,
+  "token_cost": 14171,
+  "estimated_cost_usd": 0.07405500000000001,
+  "dollars_per_correct_line": 0.074055,
+  "tokens_per_correct_line": 14171.0,
+  "wall_clock": 70.5,
+  "tool_calls_per_turn": 0.8,
+  "read_tool_ratio": 0.0
+}

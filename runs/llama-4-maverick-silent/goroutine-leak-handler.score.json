@@ -1,0 +1,21 @@
+{
+  "benchmark": "goroutine-leak-handler",
+  "agent": "llama-4-maverick-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:52:19Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.538,
+  "false_positives": 0,
+  "token_cost": 61352,
+  "estimated_cost_usd": 0.01835666,
+  "dollars_per_correct_line": 0.001836,
+  "tokens_per_correct_line": 6135.2,
+  "wall_clock": 35.2,
+  "tool_calls_per_turn": 1.46,
+  "read_tool_ratio": 0.0
+}

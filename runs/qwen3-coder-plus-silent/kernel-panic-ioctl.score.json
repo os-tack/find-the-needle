@@ -1,0 +1,21 @@
+{
+  "benchmark": "kernel-panic-ioctl",
+  "agent": "qwen3-coder-plus-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:45:14Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 14,
+  "signal_to_noise": 0.357,
+  "false_positives": 0,
+  "token_cost": 80268,
+  "estimated_cost_usd": 0.03861208000000001,
+  "dollars_per_correct_line": 0.004827,
+  "tokens_per_correct_line": 10033.5,
+  "wall_clock": 104.4,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

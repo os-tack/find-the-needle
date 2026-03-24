@@ -1,0 +1,21 @@
+{
+  "benchmark": "missing-input-validation",
+  "agent": "gemini-2-0-flash-001-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:41:40Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.778,
+  "false_positives": 0,
+  "token_cost": 24612,
+  "estimated_cost_usd": 0.0029132999999999997,
+  "dollars_per_correct_line": 0.000971,
+  "tokens_per_correct_line": 8204.0,
+  "wall_clock": 23.8,
+  "tool_calls_per_turn": 1.67,
+  "read_tool_ratio": 0.0
+}

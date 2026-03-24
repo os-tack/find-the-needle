@@ -1,0 +1,21 @@
+{
+  "benchmark": "data-corruption-concurrent-write",
+  "agent": "deepseek-v3-2-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:31:44Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 6,
+  "turns_to_fix": 15,
+  "signal_to_noise": 0.067,
+  "false_positives": 0,
+  "token_cost": 50098,
+  "estimated_cost_usd": 0.01226384,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 90.9,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

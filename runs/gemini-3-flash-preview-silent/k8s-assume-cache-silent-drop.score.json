@@ -1,0 +1,21 @@
+{
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "agent": "gemini-3-flash-preview-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T08:04:45Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 3,
+  "signal_to_noise": 1.0,
+  "false_positives": 0,
+  "token_cost": 4469,
+  "estimated_cost_usd": 0.005237,
+  "dollars_per_correct_line": 0.001746,
+  "tokens_per_correct_line": 1489.6666666666667,
+  "wall_clock": 9.0,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

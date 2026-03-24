@@ -1,0 +1,21 @@
+{
+  "benchmark": "memory-leak-event-listener",
+  "agent": "gemini-2-5-flash-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:44:51Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 3,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.4,
+  "false_positives": 0,
+  "token_cost": 6663,
+  "estimated_cost_usd": 0.0034245000000000005,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 13.5,
+  "tool_calls_per_turn": 0.8,
+  "read_tool_ratio": 0.0
+}

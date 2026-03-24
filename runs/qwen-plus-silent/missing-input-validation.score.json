@@ -1,0 +1,21 @@
+{
+  "benchmark": "missing-input-validation",
+  "agent": "qwen-plus-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:50:02Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 3,
+  "signal_to_noise": 0.667,
+  "false_positives": 0,
+  "token_cost": 3444,
+  "estimated_cost_usd": 0.001034592,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 8.6,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

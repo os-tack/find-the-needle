@@ -1,0 +1,21 @@
+{
+  "benchmark": "wal-fsync-ghost-ack",
+  "agent": "grok-4-fast-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:56:26Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 60,
+  "turns_to_fix": 4,
+  "signal_to_noise": 0.0,
+  "false_positives": 0,
+  "token_cost": 3351,
+  "estimated_cost_usd": 0.0006837,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 16.3,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

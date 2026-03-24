@@ -1,0 +1,21 @@
+{
+  "benchmark": "import-cycle-startup",
+  "agent": "llama-4-maverick-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:52:37Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 8,
+  "signal_to_noise": 0.875,
+  "false_positives": 0,
+  "token_cost": 19334,
+  "estimated_cost_usd": 0.005808879999999999,
+  "dollars_per_correct_line": 0.001936,
+  "tokens_per_correct_line": 6444.666666666667,
+  "wall_clock": 15.5,
+  "tool_calls_per_turn": 1.25,
+  "read_tool_ratio": 0.0
+}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "memory-leak-event-listener",
+  "agent": "qwen3-coder-flash-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "96d00f5",
+  "timestamp": "2026-03-24T11:22:50Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 3,
+  "turns_to_fix": 12,
+  "signal_to_noise": 0.167,
+  "false_positives": 0,
+  "token_cost": 34513,
+  "estimated_cost_usd": 0.005064890999999999,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 35.0,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

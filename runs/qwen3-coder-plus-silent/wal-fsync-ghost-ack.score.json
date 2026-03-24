@@ -1,0 +1,21 @@
+{
+  "benchmark": "wal-fsync-ghost-ack",
+  "agent": "qwen3-coder-plus-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:59:53Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 14,
+  "signal_to_noise": 0.357,
+  "false_positives": 0,
+  "token_cost": 112349,
+  "estimated_cost_usd": 0.07096401,
+  "dollars_per_correct_line": 0.017741,
+  "tokens_per_correct_line": 28087.25,
+  "wall_clock": 174.3,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

@@ -1,0 +1,21 @@
+{
+  "benchmark": "timezone-scheduling",
+  "agent": "qwen-plus-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:37:11Z",
+  "difficulty_tier": "easy",
+  "resolved": false,
+  "turns_to_discovery": 20,
+  "turns_to_fix": 20,
+  "signal_to_noise": 0.0,
+  "false_positives": 0,
+  "token_cost": 253,
+  "estimated_cost_usd": 9.5108e-05,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 2.6,
+  "tool_calls_per_turn": 0.0,
+  "read_tool_ratio": null
+}

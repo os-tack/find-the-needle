@@ -1,0 +1,21 @@
+{
+  "benchmark": "deadlock-transfer",
+  "agent": "qwen3-5-flash-02-23-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "b32e1ed",
+  "timestamp": "2026-03-24T07:54:11Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 2,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.333,
+  "false_positives": 0,
+  "token_cost": 3398,
+  "estimated_cost_usd": 0.00039091,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 19.8,
+  "tool_calls_per_turn": 0.67,
+  "read_tool_ratio": 0.0
+}

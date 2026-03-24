@@ -1,0 +1,21 @@
+{
+  "benchmark": "api-version-field-drop",
+  "agent": "qwen3-5-flash-02-23-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "b32e1ed",
+  "timestamp": "2026-03-24T07:52:25Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.667,
+  "false_positives": 0,
+  "token_cost": 7270,
+  "estimated_cost_usd": 0.00072878,
+  "dollars_per_correct_line": 0.000121,
+  "tokens_per_correct_line": 1211.6666666666667,
+  "wall_clock": 13.4,
+  "tool_calls_per_turn": 1.33,
+  "read_tool_ratio": 0.0
+}

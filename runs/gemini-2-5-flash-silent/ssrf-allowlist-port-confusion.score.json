@@ -1,0 +1,21 @@
+{
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "agent": "gemini-2-5-flash-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T07:54:53Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_discovery": 3,
+  "turns_to_fix": 38,
+  "signal_to_noise": 0.658,
+  "false_positives": 0,
+  "token_cost": 278711,
+  "estimated_cost_usd": 0.03827417,
+  "dollars_per_correct_line": 0.009569,
+  "tokens_per_correct_line": 69677.75,
+  "wall_clock": 71.8,
+  "tool_calls_per_turn": 1.0,
+  "read_tool_ratio": 0.0
+}

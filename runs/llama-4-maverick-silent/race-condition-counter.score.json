@@ -1,0 +1,21 @@
+{
+  "benchmark": "race-condition-counter",
+  "agent": "llama-4-maverick-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c620679",
+  "timestamp": "2026-03-24T08:02:16Z",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 40,
+  "signal_to_noise": 0.857,
+  "false_positives": 0,
+  "token_cost": 38914,
+  "estimated_cost_usd": 0.012379020000000001,
+  "dollars_per_correct_line": 0.00619,
+  "tokens_per_correct_line": 19457.0,
+  "wall_clock": 108.7,
+  "tool_calls_per_turn": 3.0,
+  "read_tool_ratio": 0.0
+}
