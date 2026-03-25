@@ -1,0 +1,21 @@
+{
+  "benchmark": "import-cycle-startup",
+  "agent": "mistral-large-silent",
+  "arm": "silent",
+  "control_type": "silent",
+  "commit": "c05c497",
+  "timestamp": "2026-03-24T20:27:00Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_discovery": 1,
+  "turns_to_fix": 3,
+  "signal_to_noise": 0.667,
+  "false_positives": 0,
+  "token_cost": 6077,
+  "estimated_cost_usd": 0.012147600000000001,
+  "dollars_per_correct_line": 0.004049,
+  "tokens_per_correct_line": 2025.6666666666667,
+  "wall_clock": 21.6,
+  "tool_calls_per_turn": 3.67,
+  "read_tool_ratio": 0.0
+}

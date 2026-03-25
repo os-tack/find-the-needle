@@ -1,0 +1,13 @@
+{
+  "benchmark": "wal-fsync-ghost-ack",
+  "agent": "claude-sonnet-4-5-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "resolved": false,
+  "error": "'utf-8' codec can't decode byte 0xc9 in position 1: invalid continuation byte",
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "estimated_cost_usd": 0,
+  "wall_clock": 107.0,
+  "timestamp": "2026-03-24T19:58:44Z"
+}

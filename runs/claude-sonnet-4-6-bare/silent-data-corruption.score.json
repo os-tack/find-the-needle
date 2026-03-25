@@ -1,0 +1,13 @@
+{
+  "benchmark": "silent-data-corruption",
+  "agent": "claude-sonnet-4-6-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "resolved": false,
+  "error": "'utf-8' codec can't decode byte 0xc1 in position 1512: invalid start byte",
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "estimated_cost_usd": 0,
+  "wall_clock": 324.8,
+  "timestamp": "2026-03-24T21:00:40Z"
+}

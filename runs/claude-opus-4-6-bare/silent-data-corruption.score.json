@@ -1,0 +1,21 @@
+{
+  "benchmark": "silent-data-corruption",
+  "agent": "claude-opus-4-6-bare",
+  "arm": "bare",
+  "control_type": "bare",
+  "commit": "c05c497",
+  "timestamp": "2026-03-24T20:07:34Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_discovery": 6,
+  "turns_to_fix": 6,
+  "signal_to_noise": 0.167,
+  "false_positives": 0,
+  "token_cost": 17836,
+  "estimated_cost_usd": 0.11006,
+  "dollars_per_correct_line": null,
+  "tokens_per_correct_line": null,
+  "wall_clock": 146.9,
+  "tool_calls_per_turn": 3.17,
+  "read_tool_ratio": 0.0
+}
