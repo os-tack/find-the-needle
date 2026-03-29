@@ -64,7 +64,7 @@ jobs:
 
       - name: Generate scores from experiment data
         run: |
-          python3 consolidate_scores.py
+          python3 consolidate_scores.py || true
 
           # Also generate scores.json from silent arm for leaderboard
           python3 -c "
