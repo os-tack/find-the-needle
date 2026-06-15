@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "postgres-migration-schema-drift",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.005401017999999999,
+    "fresh_input_tokens": 0,
+    "input_tokens": 163216,
+    "output_tokens": 1736,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests passed. Two issues found and fixed:\n\n1. **Schema drift in `app/main.go`** \u2014 migration 002 renamed `status` \u2192 `order_status`, but the Go code still referenced the old column name `status` in both the INSERT (line 109\u2014was line 107) and SELECT (line 126\u2014was line 129) queries.\n\n2. **Missing PATH in `test.sh`** \u2014 PostgreSQL binaries (`initdb`, `pg_ctl`, etc.) are in `/usr/lib/postgresql/15/bin/` which wasn't in the PATH when running `su postgres -c`.",
+    "timestamp": "2026-06-15T18:25:35Z",
+    "token_cost": 1736,
+    "tool_uses": 19,
+    "turns_to_fix": 14,
+    "wall_clock": 55.645,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T18:25:46+00:00"
+  }
+]

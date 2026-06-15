@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "null-pointer-config",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.004084417999999999,
+    "fresh_input_tokens": 0,
+    "input_tokens": 85016,
+    "output_tokens": 1139,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "PASS.\n\n**The needle:** A nil pointer dereference bug. `config.json` has `enable_metrics: true` but no `metrics` block, so the `Metrics *MetricsConfig` pointer was nil. Accessing `cfg.Metrics.Endpoint` in `makeStatusHandler` at `main.go:47` caused a panic.\n\n**The fix:**\n1. **`main.go:46`** \u2014 Added a `cfg.Metrics != nil` guard before dereferencing\n2. **`config.go:49`** \u2014 When `EnableMetrics` is true but `Metrics` is nil, initialize a default `MetricsConfig` so the `/status` endpoint returns actual metrics data",
+    "timestamp": "2026-06-15T18:15:27Z",
+    "token_cost": 1139,
+    "tool_uses": 13,
+    "turns_to_fix": 8,
+    "wall_clock": 47.843,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T18:15:37+00:00"
+  }
+]

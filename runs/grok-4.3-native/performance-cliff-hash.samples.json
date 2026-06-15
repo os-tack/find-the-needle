@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "grok-4.3-native",
+    "arm": "native",
+    "benchmark": "performance-cliff-hash",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.031146800000000002,
+    "fresh_input_tokens": 0,
+    "input_tokens": 72556,
+    "output_tokens": 231,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "PASS",
+    "timestamp": "2026-06-15T16:34:37Z",
+    "token_cost": 231,
+    "tool_uses": 8,
+    "turns_to_fix": 9,
+    "wall_clock": 22.961,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T16:34:47+00:00"
+  }
+]

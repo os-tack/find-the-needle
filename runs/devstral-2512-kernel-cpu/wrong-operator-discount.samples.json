@@ -10,19 +10,19 @@
     "cache_read_tokens": 0,
     "control_type": "kernel",
     "difficulty_tier": "easy",
-    "estimated_cost_usd": 0.239451,
+    "estimated_cost_usd": 0.240141,
     "fresh_input_tokens": 76732,
     "input_tokens": 76732,
-    "output_tokens": 617,
+    "output_tokens": 663,
     "resolved": true,
     "stop_reason": "end_turn",
-    "summary": "complete: 13turns, 76732+617 tokens, $0.2395",
-    "timestamp": "2026-06-15T03:21:50Z",
-    "token_cost": 77349,
+    "summary": "complete: 13turns, 76732+663 tokens, $0.2401",
+    "timestamp": "2026-06-15T22:05:59Z",
+    "token_cost": 77395,
     "tool_uses": 12,
     "turns_to_fix": 13,
-    "wall_clock": 57.743,
+    "wall_clock": 32.262,
     "sample_attempt": 1,
-    "sample_ts": "2026-06-15T03:22:01+00:00"
+    "sample_ts": "2026-06-15T22:06:10+00:00"
   }
 ]

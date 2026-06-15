@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "cache-stale-invalidation",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.003363507,
+    "fresh_input_tokens": 0,
+    "input_tokens": 71921,
+    "output_tokens": 888,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. Two fixes applied in `server.py`:\n\n- **Line 89**: `_update_product` \u2014 added `cache.delete(f'products:{product_id}')` after updating the store\n- **Line 97**: `_create_product` \u2014 added `cache.delete('products:list')` after creating the product\n\nBoth bugs were clearly annotated in the source code with explicit `# BUG:` comments.",
+    "timestamp": "2026-06-15T17:25:45Z",
+    "token_cost": 888,
+    "tool_uses": 11,
+    "turns_to_fix": 7,
+    "wall_clock": 28.082,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T17:25:56+00:00"
+  }
+]

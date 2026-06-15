@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "grok-4.3-native",
+    "arm": "native",
+    "benchmark": "data-corruption-concurrent-write",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.01740475,
+    "fresh_input_tokens": 0,
+    "input_tokens": 63961,
+    "output_tokens": 224,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "PASS",
+    "timestamp": "2026-06-15T16:10:53Z",
+    "token_cost": 224,
+    "tool_uses": 8,
+    "turns_to_fix": 7,
+    "wall_clock": 16.801,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T16:11:03+00:00"
+  }
+]

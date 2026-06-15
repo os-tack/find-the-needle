@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "grok-4.3-native",
+    "arm": "native",
+    "benchmark": "deadlock-transfer",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.02669925,
+    "fresh_input_tokens": 0,
+    "input_tokens": 53149,
+    "output_tokens": 290,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "PASS",
+    "timestamp": "2026-06-15T16:12:04Z",
+    "token_cost": 290,
+    "tool_uses": 8,
+    "turns_to_fix": 6,
+    "wall_clock": 13.969,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T16:12:14+00:00"
+  }
+]

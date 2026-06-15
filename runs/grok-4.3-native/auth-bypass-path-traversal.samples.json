@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "grok-4.3-native",
+    "arm": "native",
+    "benchmark": "auth-bypass-path-traversal",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0313862,
+    "fresh_input_tokens": 0,
+    "input_tokens": 73882,
+    "output_tokens": 263,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "PASS",
+    "timestamp": "2026-06-15T15:51:42Z",
+    "token_cost": 263,
+    "tool_uses": 8,
+    "turns_to_fix": 8,
+    "wall_clock": 21.76,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T15:52:00+00:00"
+  }
+]

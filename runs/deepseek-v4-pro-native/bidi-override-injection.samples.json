@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "bidi-override-injection",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.008787290000000001,
+    "fresh_input_tokens": 0,
+    "input_tokens": 132720,
+    "output_tokens": 1722,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 5 tests pass. Here's what was wrong and what I fixed:\n\n**The needle**: A Unicode BIDI spoofing vulnerability \u2014 `\\u202enimda` renders visually as \"admin\" due to the RIGHT-TO-LEFT OVERRIDE character (U+202E).\n\n**Two fixes applied:**\n\n1. **`app/sanitizer.py:31`** \u2014 Strip BIDI control characters (U+202A\u2013U+202E, U+2066\u2013U+2069) at the start of `sanitize_username()`, so spoofed usernames like `\\u202enimda` become just `nimda`.\n\n2. **`app/auth.py:150`** \u2014 Compare the stored username directly against the admin allowlist instead of using `_render_display_name()`, which was the function that reversed the BIDI characters and made `\\u202enimda` match `\"admin\"`.",
+    "timestamp": "2026-06-15T17:21:43Z",
+    "token_cost": 1722,
+    "tool_uses": 14,
+    "turns_to_fix": 10,
+    "wall_clock": 43.034,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T17:21:53+00:00"
+  }
+]

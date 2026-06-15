@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "grok-4.3-native",
+    "arm": "native",
+    "benchmark": "k8s-scheduler-shutdown-deadlock",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.01836495,
+    "fresh_input_tokens": 0,
+    "input_tokens": 40799,
+    "output_tokens": 204,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "PASS",
+    "timestamp": "2026-06-15T16:21:13Z",
+    "token_cost": 204,
+    "tool_uses": 6,
+    "turns_to_fix": 5,
+    "wall_clock": 12.866,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T16:21:23+00:00"
+  }
+]

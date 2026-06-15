@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "memory-leak-event-listener",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.004120175,
+    "fresh_input_tokens": 0,
+    "input_tokens": 61025,
+    "output_tokens": 927,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Test passes. Listener count stayed at 1 after 500 requests \u2014 no leak.\n\n**The bug:** `processor.js:11` used `this.eventBus.on('data:validated', ...)` inside the `process()` method, registering a **new** listener on every request without ever removing it. Each listener's closure captured the `data` variable, preventing garbage collection.\n\n**The fix:** Changed `on()` to `once()` \u2014 the listeners now fire once (when the event is emitted synchronously in the same `process()` call) and are automatically removed.",
+    "timestamp": "2026-06-15T18:08:36Z",
+    "token_cost": 927,
+    "tool_uses": 12,
+    "turns_to_fix": 6,
+    "wall_clock": 44.509,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T18:08:47+00:00"
+  }
+]

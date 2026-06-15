@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.007095430000000001,
+    "fresh_input_tokens": 0,
+    "input_tokens": 153000,
+    "output_tokens": 2820,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. Query count went from 101 (N+1) down to **2** (1 for users + 1 batched for posts).\n\n**The fix:** Moved DataLoader instances from per-resolver creation into the request-scoped `GqlContext`:\n- `context.ts` \u2014 added `userLoader` and `postsByAuthorLoader` to the context, created via `createLoaders()` once per request\n- `userResolver.ts` \u2014 `user()` uses `ctx.userLoader`, `userPosts()` uses `ctx.postsByAuthorLoader`\n- `postResolver.ts` \u2014 `postAuthor()` uses `ctx.userLoader`, removed duplicate DataLoader factories",
+    "timestamp": "2026-06-15T17:46:37Z",
+    "token_cost": 2820,
+    "tool_uses": 18,
+    "turns_to_fix": 11,
+    "wall_clock": 49.243,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T17:46:48+00:00"
+  }
+]

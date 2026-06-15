@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.004109967,
+    "fresh_input_tokens": 0,
+    "input_tokens": 77673,
+    "output_tokens": 848,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 5 tests pass. The fix adds `ipaddress`-based checks to `validator.py:51-58` that block any loopback (`::1`, `0:0:0:0:0:0:0:1`, `127.0.0.1`, etc.) and link-local addresses (`169.254.x.x`) at the IP level, closing the IPv6 SSRF bypass.",
+    "timestamp": "2026-06-15T19:37:40Z",
+    "token_cost": 848,
+    "tool_uses": 7,
+    "turns_to_fix": 7,
+    "wall_clock": 62.778,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T19:37:50+00:00"
+  }
+]

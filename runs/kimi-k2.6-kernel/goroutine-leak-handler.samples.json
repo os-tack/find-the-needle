@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "kimi-k2.6-kernel",
+    "arm": "kernel",
+    "benchmark": "goroutine-leak-handler",
+    "billed_tokens": 207629,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.115464456,
+    "fresh_input_tokens": 207629,
+    "input_tokens": 207629,
+    "output_tokens": 13624,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 26turns, 207629+13624 tokens, $0.1155",
+    "timestamp": "2026-06-15T17:56:44Z",
+    "token_cost": 221253,
+    "tool_uses": 25,
+    "turns_to_fix": 26,
+    "wall_clock": 460.817,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T17:56:54+00:00"
+  }
+]

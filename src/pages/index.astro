@@ -17,7 +17,7 @@ const datasetSchema = {
   "distribution": {
     "@type": "DataDownload",
     "encodingFormat": "application/json",
-    "contentUrl": "https://needle-bench.cc/experiment-scores.json"
+    "contentUrl": "https://needle-bench.cc/cells-v760.json"
   }
 };
 ---
@@ -30,8 +30,8 @@ const datasetSchema = {
   <main>
     <h1 class="visually-hidden">needle-bench AI Coding Agent Leaderboard</h1>
     <div class="experiment-info">
-      <p><strong>v7.6.0 &mdash; native vendor CLI vs ostk kernel.</strong> 8 frontier models &times; 38 benchmarks, single-shot (samples=1), captured 2026-06-15. Cost/token &Delta; are resolved-gated (cells both arms solved), per-bucket priced, and shown <em>only</em> for Anthropic &mdash; the one native harness that reports cost.</p>
-      <p class="muted">Cost &Delta; / Token &Delta; = kernel vs native (<span style="color:#3fb950">negative = kernel cheaper/lighter</span>). Click headers to sort. <a href="/v760.html">Full per-cell detail &amp; methodology &rarr;</a></p>
+      <p><strong>v7.6.0 &mdash; native vendor CLI vs ostk kernel.</strong> 8 frontier models &times; 38 benchmarks, single-shot (samples=1), captured 2026-06-15. Cost/token &Delta; are resolved-gated (cells both arms solved) and per-bucket priced. Anthropic carries a full cache split; other harnesses report a usable total (basis noted per model) &mdash; see the per-cell matrix below.</p>
+      <p class="muted">Cost &Delta; / Token &Delta; = kernel vs native (<span style="color:#3fb950">negative = kernel cheaper/lighter</span>). Click headers to sort, or jump to the <a href="#matrix-wrap">per-cell matrix &darr;</a></p>
     </div>
 
     <div class="lb-container" id="lb-container">
@@ -68,16 +68,33 @@ const datasetSchema = {
 
     <div class="totals" id="totals"></div>
 
+    <section class="matrix-section">
+      <div class="matrix-head">
+        <h2>Per-cell results</h2>
+        <p class="muted">Every model &times; benchmark. Each cell splits <b class="lg-n">native</b>&#8201;&#9474;&#8201;<b class="lg-k">kernel</b>, colored by outcome. Benchmarks run hardest &rarr; easiest left to right. Tap any cell for the full token &amp; cost breakdown.</p>
+        <div class="hm-legend">
+          <span><i class="sw pass"></i>solved</span>
+          <span><i class="sw fail"></i>failed</span>
+          <span><i class="sw deadline"></i>timeout</span>
+          <span><i class="sw infra"></i>harness</span>
+          <span><i class="sw missing"></i>n/a</span>
+        </div>
+      </div>
+      <div class="matrix-wrap" id="matrix-wrap"><div class="empty">Loading matrix&hellip;</div></div>
+      <div class="matrix-mobile" id="matrix-mobile"></div>
+      <div class="cell-detail" id="cell-detail" hidden></div>
+    </section>
+
     <section class="results-summary">
       <h2>Results</h2>
 
       <h3>Key findings (v7.6.0)</h3>
       <ul>
-        <li><strong>Anthropic, apples-to-apples</strong> (over both-solved cells): opus &minus;17% cost / &minus;49% tokens at solve parity; sonnet &minus;38% / &minus;65% with kernel solve 93%&rarr;100%.</li>
-        <li><strong>Capability multiplier for weak tool-users</strong>: devstral 19%&rarr;97% through the kernel &mdash; 25 tasks the native CLI failed, the kernel solved.</li>
-        <li><strong>Solve held or improved</strong> everywhere comparable: gemini 97%&rarr;100%, gpt-5.5 94%&rarr;97%; kimi 97%&rarr;95% is the lone slight regression.</li>
-        <li><strong>Token win is universal; cost win is cache-dependent</strong> &mdash; native's volume is mostly cheap cache-read, so the cost gap trails the token gap.</li>
-        <li><strong>This is a floor</strong> &mdash; the cache-sliver projection is not yet exercised in the kernel arm.</li>
+        <li><strong>The kernel's cache win is Anthropic-specific.</strong> With the cache-sliver active, opus ties native on solve at &minus;2.5% cost / &minus;31% tokens; sonnet is &minus;42% cost / &minus;66% tokens. Explicit <code>cache_control</code> is Anthropic-only &mdash; that's the lever.</li>
+        <li><strong>Outside Anthropic, the kernel costs more</strong> &mdash; it routes through clients that forfeit the provider's automatic prompt caching the native CLI gets for free. Per both-solved cell: gemini +116%, gpt-5.5 +276%. Honest inverse of the opus story.</li>
+        <li><strong>Harness ceilings, not just models.</strong> devstral's native (Mistral Vibe) caps at 20 turns and solved 6/38; through the kernel it reached 32/38. Real, but it's the native harness's limit being removed, not raw capability.</li>
+        <li><strong>Solve parity holds for the strong models</strong> (opus, gpt, gemini, deepseek within 1&ndash;3 cells across arms); the kernel's value is provider- and harness-specific, not universal.</li>
+        <li><strong>A genuine difficulty ceiling.</strong> Only 1 of 37 benches (<code>postgres-migration-schema-drift</code>, 12%) is a true wall and 9 discriminate; 27 are floor. The matrix above shows it &mdash; benches ordered hardest&rarr;easiest.</li>
       </ul>
 
       <h3>Methodology</h3>
@@ -206,6 +223,88 @@ const datasetSchema = {
     .arm-comparison { grid-template-columns: 1fr; }
     main { padding: 0.5rem; }
     .col-model { width: 100px; min-width: 100px; }
+  }
+
+  /* ============ PER-CELL MATRIX (reinvented heatmap) ============ */
+  .matrix-section { margin: 2.2rem 0 1rem; }
+  .matrix-head h2 { margin: 0 0 0.3rem; font-size: 1.05rem; }
+  .matrix-head .muted { font-size: 0.78rem; max-width: 760px; margin: 0 0 0.5rem; line-height: 1.5; }
+  .lg-n { color: #f0883e; } .lg-k { color: #3fb950; }
+  .hm-legend { display: flex; flex-wrap: wrap; gap: 0.9rem; font-size: 0.68rem; color: var(--text-muted); margin-bottom: 0.7rem; }
+  .hm-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
+  .sw { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+  .sw.pass { background: rgba(63,185,80,0.65); }
+  .sw.fail { background: rgba(248,81,73,0.6); }
+  .sw.deadline { background: rgba(210,153,34,0.55); }
+  .sw.infra { background: rgba(110,118,129,0.5); }
+  .sw.missing { background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(139,148,158,0.4) 2px, rgba(139,148,158,0.4) 3px); border: 1px solid var(--border); }
+
+  /* ---- desktop matrix ---- */
+  .matrix-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); -webkit-overflow-scrolling: touch; }
+  .hm-table { border-collapse: separate; border-spacing: 0; }
+  .hm-table th, .hm-table td { padding: 0; }
+  .hm-table .corner { position: sticky; left: 0; z-index: 4; background: var(--surface); }
+  .hm-table thead .tier-band { font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.06em; text-align: center; padding: 0.2rem 0; border-bottom: 1px solid var(--border); font-weight: 700; }
+  .tier-band.ceiling { background: rgba(248,81,73,0.13); color: #f85149; }
+  .tier-band.discriminating { background: rgba(210,153,34,0.12); color: #d29922; }
+  .tier-band.floor { background: rgba(63,185,80,0.10); color: #3fb950; }
+  .hm-table .bench-h { vertical-align: bottom; height: 116px; background: var(--surface); border-bottom: 2px solid var(--border); }
+  .hm-table .bench-h > div { writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap; font-size: 0.6rem; color: var(--text-muted); padding: 0.3rem 0; margin: 0 auto; max-height: 110px; overflow: hidden; text-overflow: ellipsis; cursor: help; }
+  .hm-table .bench-h .bh-pct { font-size: 0.52rem; color: #6e7681; }
+  .hm-table .model-h { position: sticky; left: 0; z-index: 3; background: var(--surface); text-align: left; padding: 0 0.55rem; white-space: nowrap; border-bottom: 1px solid var(--border); border-right: 2px solid var(--border); }
+  .hm-table tbody tr:nth-child(even) .model-h { background: color-mix(in srgb, var(--surface) 97%, white); }
+  .hm-table .model-h .mn { font-weight: 600; font-size: 0.72rem; color: var(--text); }
+  .hm-table .model-h .mt { font-size: 0.56rem; color: var(--text-muted); margin-left: 0.25rem; }
+  .hm-table .model-h .ms { display: block; font-size: 0.56rem; color: #6e7681; font-family: var(--mono); }
+  .hm-cell { width: 24px; height: 24px; text-align: center; border-bottom: 1px solid rgba(139,148,158,0.08); border-right: 1px solid rgba(139,148,158,0.06); }
+  .hm-split { display: flex; width: 18px; height: 18px; margin: 0 auto; border-radius: 3px; overflow: hidden; cursor: pointer; outline: 1px solid rgba(0,0,0,0.25); }
+  .hm-split:hover { outline: 1.5px solid #d4a054; }
+  .hm-split > i { flex: 1; height: 100%; }
+  .hm-split > i + i { border-left: 1px solid rgba(0,0,0,0.3); }
+  .st-pass { background: rgba(63,185,80,0.65); }
+  .st-fail { background: rgba(248,81,73,0.6); }
+  .st-deadline { background: rgba(210,153,34,0.55); }
+  .st-infra { background: rgba(110,118,129,0.5); }
+  .st-missing { background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(139,148,158,0.35) 2px, rgba(139,148,158,0.35) 3px); }
+
+  /* ---- mobile accordion ---- */
+  .matrix-mobile { display: none; }
+  .mm-model { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 0.5rem; overflow: hidden; background: var(--surface); }
+  .mm-head { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0.7rem; cursor: pointer; }
+  .mm-head .mn { font-weight: 600; font-size: 0.82rem; flex: 1; }
+  .mm-head .mt { font-size: 0.6rem; color: var(--text-muted); }
+  .mm-head .mm-solve { font-family: var(--mono); font-size: 0.68rem; }
+  .mm-head .car { transition: transform 0.15s; color: var(--text-muted); }
+  .mm-model.open .car { transform: rotate(90deg); }
+  .mm-body { display: none; border-top: 1px solid var(--border); }
+  .mm-model.open .mm-body { display: block; }
+  .mm-tier { font-size: 0.56rem; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.25rem 0.7rem; font-weight: 700; background: var(--bg); }
+  .mm-tier.ceiling { color: #f85149; } .mm-tier.discriminating { color: #d29922; } .mm-tier.floor { color: #3fb950; }
+  .mm-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.7rem; border-top: 1px solid rgba(139,148,158,0.08); font-size: 0.72rem; cursor: pointer; }
+  .mm-row .bn { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mm-row .hm-split { cursor: pointer; }
+  .mm-row .arms { font-family: var(--mono); font-size: 0.62rem; color: var(--text-muted); min-width: 88px; text-align: right; }
+
+  /* ---- shared detail panel ---- */
+  .cell-detail { position: sticky; bottom: 0; margin-top: 0.6rem; background: var(--surface); border: 1px solid #d4a054; border-radius: 6px; padding: 0.7rem 0.9rem; font-size: 0.74rem; box-shadow: 0 -4px 16px rgba(0,0,0,0.3); }
+  .cell-detail .cd-close { float: right; cursor: pointer; color: var(--text-muted); font-size: 0.9rem; line-height: 1; }
+  .cell-detail h4 { margin: 0 0 0.1rem; font-size: 0.85rem; }
+  .cell-detail .cd-sub { font-size: 0.64rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .cd-arms { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-family: var(--mono); font-size: 0.66rem; }
+  .cd-arm { border: 1px solid var(--border); border-radius: 5px; padding: 0.45rem 0.55rem; }
+  .cd-arm.native { border-left: 3px solid #f0883e; }
+  .cd-arm.kernel { border-left: 3px solid #3fb950; }
+  .cd-arm .cd-h { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 0.25rem; }
+  .cd-arm .cd-st { font-weight: 700; }
+  .cd-arm .cd-row { display: flex; justify-content: space-between; color: var(--text-muted); }
+  .cd-arm .cd-row b { color: var(--text); font-weight: 600; }
+  .cd-delta { margin-top: 0.5rem; font-size: 0.66rem; font-family: var(--mono); color: var(--text-muted); }
+  .cd-delta b.neg { color: #3fb950; } .cd-delta b.pos { color: #f85149; }
+
+  @media (max-width: 760px) {
+    .matrix-wrap { display: none; }
+    .matrix-mobile { display: block; }
+    .cd-arms { grid-template-columns: 1fr; }
   }
 </style>
 
@@ -336,4 +435,125 @@ const datasetSchema = {
   }
 
   init();
+</script>
+
+<script>
+  // ============ PER-CELL MATRIX (heatmap + mobile accordion) ============
+  (async function () {
+    const resp = await fetch('/cells-v760.json');
+    if (!resp || !resp.ok) return;
+    const data = await resp.json();
+    const benches: any[] = data.benchmarks;
+    const models: any[] = data.models;
+
+    const short = (m: string) => m
+      .replace('claude-', '').replace('-preview', '')
+      .replace('-pro', '').replace('gemini-3.1', 'gemini-3.1');
+    const ftok = (n: number) => n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(0) + 'k' : String(n);
+    const usd = (n: number | null) => n == null ? '—' : n >= 10 ? '$' + n.toFixed(0) : n >= 1 ? '$' + n.toFixed(2) : '$' + n.toFixed(3);
+    const stCls = (s: string) => 'st-' + s;
+    const stLabel: Record<string, string> = { pass: 'solved', fail: 'failed', deadline: 'timed out', infra: 'harness limit', missing: 'not run' };
+
+    // ---- desktop matrix ----
+    function renderMatrix() {
+      // tier bands (group consecutive same-tier benches)
+      let bands = '';
+      let i = 0;
+      while (i < benches.length) {
+        const t = benches[i].tier; let j = i;
+        while (j < benches.length && benches[j].tier === t) j++;
+        bands += `<th class="tier-band ${t}" colspan="${j - i}">${t}</th>`;
+        i = j;
+      }
+      const heads = benches.map(b =>
+        `<th class="bench-h"><div title="${b.name} — solved by ${b.solved}/${b.total} arms">${b.name} <span class="bh-pct">${b.solve_pct}%</span></div></th>`
+      ).join('');
+      const body = models.map(m => {
+        const cells = benches.map(b => {
+          const c = m.cells[b.name];
+          const ns = c?.native?.status || 'missing', ks = c?.kernel?.status || 'missing';
+          return `<td class="hm-cell"><span class="hm-split" data-model="${m.model}" data-bench="${b.name}">`
+            + `<i class="${stCls(ns)}"></i><i class="${stCls(ks)}"></i></span></td>`;
+        }).join('');
+        return `<tr><th class="model-h"><span class="mn">${short(m.model)}</span><span class="mt">${m.type}</span>`
+          + `<span class="ms">${m.native_solved}/${benches.length} · ${m.kernel_solved}/${benches.length}</span></th>${cells}</tr>`;
+      }).join('');
+      return `<table class="hm-table"><thead>`
+        + `<tr><th class="corner" rowspan="2"><span class="mn" style="font-size:0.6rem">model<br>nat·ker</span></th>${bands}</tr>`
+        + `<tr>${heads}</tr></thead><tbody>${body}</tbody></table>`;
+    }
+
+    // ---- mobile accordion ----
+    function renderMobile() {
+      return models.map((m, idx) => {
+        let rows = '', lastTier = '';
+        for (const b of benches) {
+          if (b.tier !== lastTier) { rows += `<div class="mm-tier ${b.tier}">${b.tier}</div>`; lastTier = b.tier; }
+          const c = m.cells[b.name];
+          const ns = c?.native?.status || 'missing', ks = c?.kernel?.status || 'missing';
+          rows += `<div class="mm-row" data-model="${m.model}" data-bench="${b.name}">`
+            + `<span class="bn">${b.name}</span>`
+            + `<span class="hm-split" style="width:18px;height:18px"><i class="${stCls(ns)}"></i><i class="${stCls(ks)}"></i></span></div>`;
+        }
+        return `<div class="mm-model" data-idx="${idx}"><div class="mm-head">`
+          + `<span class="mn">${short(m.model)}</span><span class="mt">${m.type}</span>`
+          + `<span class="mm-solve">${m.native_solved}·${m.kernel_solved}/${benches.length}</span>`
+          + `<span class="car">▸</span></div><div class="mm-body">${rows}</div></div>`;
+      }).join('');
+    }
+
+    function armBlock(label: string, cls: string, c: any) {
+      if (!c || c.status === 'missing') return `<div class="cd-arm ${cls}"><div class="cd-h">${label}</div><div class="cd-st dim">not run</div></div>`;
+      const split = (c.input_total > 0)
+        ? `<div class="cd-row"><span>fresh</span><b>${ftok(c.fresh)}</b></div>`
+          + `<div class="cd-row"><span>cache read</span><b>${ftok(c.cache_read)}</b></div>`
+          + `<div class="cd-row"><span>cache create</span><b>${ftok(c.cache_create)}</b></div>`
+        : `<div class="cd-row"><span class="dim">input split not captured</span></div>`;
+      return `<div class="cd-arm ${cls}"><div class="cd-h">${label}</div>`
+        + `<div class="cd-st st-${c.status}-t">${stLabel[c.status] || c.status} · ${c.turns}t · ${Math.round(c.wall)}s</div>`
+        + `<div class="cd-row"><span>billed</span><b>${ftok(c.billed)}</b></div>`
+        + split
+        + `<div class="cd-row"><span>output</span><b>${ftok(c.output)}</b></div>`
+        + `<div class="cd-row"><span>cost</span><b>${usd(c.cost)}</b></div></div>`;
+    }
+
+    function showDetail(model: string, benchName: string) {
+      const m = models.find(x => x.model === model);
+      const b = benches.find((x: any) => x.name === benchName);
+      const c = m?.cells[benchName];
+      if (!c) return;
+      const n = c.native, k = c.kernel;
+      let delta = '';
+      if (n && k && n.input_total > 0 && k.input_total > 0) {
+        const td = (k.billed - n.billed) / n.billed * 100;
+        const tc = (n.cost && k.cost != null) ? (k.cost - n.cost) / n.cost * 100 : null;
+        const dc = (v: number) => `<b class="${v < 0 ? 'neg' : 'pos'}">${v > 0 ? '+' : ''}${v.toFixed(0)}%</b>`;
+        delta = `<div class="cd-delta">kernel vs native &nbsp; tokens ${dc(td)}`
+          + (tc != null ? ` &nbsp;·&nbsp; cost ${dc(tc)}` : '') + `</div>`;
+      }
+      const el = document.getElementById('cell-detail')!;
+      el.innerHTML = `<span class="cd-close" id="cd-x">✕</span>`
+        + `<h4>${benchName}</h4>`
+        + `<div class="cd-sub">${b.tier} · solved by ${b.solved}/${b.total} arms across all models · ${short(model)}</div>`
+        + `<div class="cd-arms">${armBlock('native (' + m.native_cli + ')', 'native', n)}${armBlock('kernel', 'kernel', k)}</div>${delta}`;
+      el.hidden = false;
+      document.getElementById('cd-x')!.addEventListener('click', () => { el.hidden = true; });
+      el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+
+    document.getElementById('matrix-wrap')!.innerHTML = renderMatrix();
+    document.getElementById('matrix-mobile')!.innerHTML = renderMobile();
+
+    // event delegation: cell/row click → detail
+    function wireClicks(root: HTMLElement) {
+      root.addEventListener('click', (e) => {
+        const t = (e.target as HTMLElement).closest('[data-model][data-bench]') as HTMLElement | null;
+        if (t) { showDetail(t.dataset.model!, t.dataset.bench!); return; }
+        const head = (e.target as HTMLElement).closest('.mm-head') as HTMLElement | null;
+        if (head) { head.parentElement!.classList.toggle('open'); }
+      });
+    }
+    wireClicks(document.getElementById('matrix-wrap')!);
+    wireClicks(document.getElementById('matrix-mobile')!);
+  })();
 </script>

@@ -11,14 +11,14 @@
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
   "fresh_input_tokens": 0,
-  "input_tokens": 233253,
-  "output_tokens": 1771,
+  "input_tokens": 249161,
+  "output_tokens": 1602,
   "resolved": false,
   "stop_reason": "fail",
   "summary": "",
-  "timestamp": "2026-06-15T02:55:16Z",
-  "token_cost": 1771,
+  "timestamp": "2026-06-15T21:35:40Z",
+  "token_cost": 1602,
   "tool_uses": 0,
   "turns_to_fix": 0,
-  "wall_clock": 37.159
+  "wall_clock": 69.803
 }

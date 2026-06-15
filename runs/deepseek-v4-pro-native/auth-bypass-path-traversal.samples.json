@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "auth-bypass-path-traversal",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.003398916,
+    "fresh_input_tokens": 0,
+    "input_tokens": 61544,
+    "output_tokens": 1008,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. The fix was in `middleware.go` \u2014 the auth middleware now cleans the request path (via `path.Clean`) before checking the `/api/` prefix, matching what the router already does. This prevents bypass via `//api/admin` or `/health/../api/admin`.",
+    "timestamp": "2026-06-15T17:18:26Z",
+    "token_cost": 1008,
+    "tool_uses": 12,
+    "turns_to_fix": 6,
+    "wall_clock": 25.672,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T17:18:36+00:00"
+  }
+]

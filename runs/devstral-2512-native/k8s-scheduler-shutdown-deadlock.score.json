@@ -11,14 +11,14 @@
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
   "fresh_input_tokens": 0,
-  "input_tokens": 228282,
-  "output_tokens": 3062,
+  "input_tokens": 0,
+  "output_tokens": 0,
   "resolved": false,
   "stop_reason": "fail",
-  "summary": "Based on my analysis of the code, I understand the issue completely. The \"needle\" refers to the deadlock fix in the scheduler shutdown. Here's what I found:\n\n## The Problem (Needle Found)\n\nThe deadlock occurs in the `Run` method of the `Scheduler` struct. The issue is in the ordering of operations during shutdown:\n\n**Current buggy code (lines 96-102):**\n```go\n<-ctx.Done()\n\n// BUG: this ordering can deadlock if ScheduleOne is blocked on Pop()\n// The goroutine checks ctx.Done() in select, but if it's inside Pop(),\n// it won't check until Pop() returns — which needs Close().\n<-done // wait for goroutine — but it might be stuck in Pop()\ns.queue.Close()\n```\n\n## The Fix\n\nThe solution is to swap the order of the last two lines - call `queue.Close()` BEFORE waiting for the goroutine to finish:\n\n**Fixed code:**\n```go\n<-ctx.Done()\n\n// FIX: Close the queue first to unblock any waiting Pop() calls,\n// then wait for the goroutine to finish.\ns.queue.Close()\n<-done // wait for goroutine to exit\n```\n\n## Why This Works\n\n1. When `ctx.Done()` fires, the worker goroutine might be blocked in `Pop()` waiting for items\n2. `Pop()` holds the mutex while waiting on `cond.Wait()`\n3. If we wait for the goroutine first (`<-done`), it can't exit because it's stuck in `Pop()`\n4. `Close()` needs the mutex to set `closed=true` and call `Broadcast()`\n5. By calling `Close()` first, we unblock any waiting `Pop()` calls\n6. The worker goroutine will see `closed=true` and return from `Pop()` with an error\n7. Then the worker goroutine can finish and signal `done`\n\nThis is the classic \"wake before wait\" pattern for clean shutdowns.\n\nThe test should now pass with \"OK: clean shutdown\" instead of timing out.",
-  "timestamp": "2026-06-15T00:33:44Z",
-  "token_cost": 3062,
-  "tool_uses": 20,
-  "turns_to_fix": 21,
-  "wall_clock": 48.66
+  "summary": "",
+  "timestamp": "2026-06-15T19:09:38Z",
+  "token_cost": 0,
+  "tool_uses": 0,
+  "turns_to_fix": 0,
+  "wall_clock": 1260.75
 }

@@ -101,8 +101,11 @@ FRONTIER_2026 = {  # model -> arms (exact, no gating)
     # (generic_kernel) in consolidate_scores. gpt-5.5-pro dropped 2026-06-14
     # (owner: too expensive at $30/$180 API list, and B* anyway).
     "gpt-5.5":           ["native", "kernel-cpu"],
-    # Tier-2: no native driver, B* = generic OpenRouter kernel
-    # (deepseek-v4-pro native Control is KEY-BLOCKED — only the kernel/B* arm runs)
+    # Tier-2: no native driver, B* = generic OpenRouter kernel. Native Control
+    # runs via the opencode fallback against the provider's own key (xAI /
+    # DeepSeek keys added by owner 2026-06-15). Not a first-party vendor CLI
+    # (xAI/DeepSeek ship none), but own-key on the provider endpoint — noted in
+    # results. kimi native = kimi CLI.
     "grok-4.3":          ["native", "kernel"],
     "deepseek-v4-pro":   ["native", "kernel"],
     "kimi-k2.6":         ["native", "kernel"],
@@ -208,6 +211,22 @@ def append_state(row: dict) -> None:
     with STATE.open("a") as f:
         f.write(json.dumps(row) + "\n")
 
+QUARANTINE = RUNS / ".quarantine.jsonl"
+
+def append_quarantine(model: str, bench: str, arm: str,
+                      stop_reason: str, reason: str) -> None:
+    """Log a quarantined (infra-budget-exhausted) cell. Append-only; one JSON
+    row per quarantine event. A quarantined cell is NOT counted as success and
+    is NOT retried again."""
+    QUARANTINE.parent.mkdir(parents=True, exist_ok=True)
+    row = {
+        "model": model, "bench": bench, "arm": arm,
+        "stop_reason": stop_reason, "reason": reason,
+        "ts": now_iso(),
+    }
+    with QUARANTINE.open("a") as f:
+        f.write(json.dumps(row) + "\n")
+
 def score_exists(model: str, bench: str, arm: str) -> bool:
     return (RUNS / f"{model}-{arm}" / f"{bench}.score.json").exists()
 
@@ -284,6 +303,85 @@ MAX_RETRIES = 2
 BACKOFF_SEC = [10, 60]  # 2 retries with escalating backoff
 WALL_TIMEOUT_SEC = 1800  # 30min per cell
 
+# ---------- completeness gate (→2062 / WS2) ----------
+# INFRA_RETRIES is a budget SEPARATE from the transient MAX_RETRIES above.
+# MAX_RETRIES covers in-attempt transient network noise (rate-limit / 5xx).
+# INFRA_RETRIES covers a *completed* run that wrote a score.json which is
+# nonetheless INVALID — deadline_exceeded, zero-work spawn race (turns==0 &&
+# tokens==0), or api_error-with-no-work. Such a phantom score must not be
+# trusted as "done": it pollutes the per-model /38 denominator. We re-run the
+# cell up to INFRA_RETRIES times (deleting the stale score so score_exists no
+# longer short-circuits); if still invalid, the cell is QUARANTINED — logged,
+# not counted as success, never retried again.
+INFRA_RETRIES = 2
+
+# SLOW_SCENARIOS: per-scenario wall-clock override map (seconds). Some
+# benchmarks legitimately need a longer wall_clock budget than the default
+# baked into their Agentfile (e.g. sql-injection-search at 1800s instead of
+# 600s). Extend this dict to add more.
+#
+# DISCOVERY (→2062, Task A.7): `ostk bench` has NO per-invocation wall-clock /
+# deadline / budget flag (only --list/--cargo-only/--model/--verbose/--docker/
+# --score/--arm/--all/--local/--driver/--keep). The wall_clock budget is set
+# PER-BENCHMARK in benchmarks/<scenario>/Agentfile via `LIMIT wall_clock N`.
+# So run_matrix cannot push a bumped wall-clock through the CLI today.
+# We plumb the override as far as run_matrix allows: (a) we raise the python
+# subprocess WALL_TIMEOUT_SEC so we don't kill a slow cell early, and (b) we
+# pass BENCH_WALL_CLOCK_OVERRIDE in the child env as a hook for a future
+# bench.rs flag.  TODO(lead): add a `--wall-clock <SEC>` flag to `ostk bench`
+# (haystack bench.rs) that overrides the Agentfile `LIMIT wall_clock`, then
+# wire it into ARM_FLAGS / run_cell below where BENCH_WALL_CLOCK_OVERRIDE is
+# set. Until then the in-Agentfile LIMIT governs the actual model deadline.
+SLOW_SCENARIOS = {"sql-injection-search": 1800}
+
+
+def is_valid_score(score: dict) -> bool:
+    """Promote the consolidator's post-hoc validity predicate to RUN TIME.
+
+    Returns False (INVALID / infra-failed) when the score.json is a phantom
+    that must NOT be trusted as a completed cell:
+      - deadline:  stop_reason contains 'deadline' (deadline_exceeded — the
+                   model never finished; re-running at the same wall_clock is
+                   waste, but the cell still must not be marked done).
+      - zero-work: turns_to_fix==0 AND input+output tokens==0 AND stop_reason
+                   is not 'pass' (a spawn race / api.error before turn 1 — the
+                   agent never made a real API call). stop_reason=='pass'
+                   (passive-verify, legitimately 0 turns) is NOT zero-work.
+      - api_error: stop_reason=='api_error' AND turns_to_fix==0 (auth / credit-
+                   cap / 4xx-5xx upstream before any work).
+
+    Returns True for a genuine capability fail (resolved=false WITH turns>0):
+    that IS a valid, comparable outcome and counts as a loss, not infra.
+    """
+    stop = (score.get("stop_reason", "") or "").lower()
+    turns = score.get("turns_to_fix", 0) or 0
+    in_tok = score.get("input_tokens", 0) or 0
+    out_tok = score.get("output_tokens", 0) or 0
+    if "deadline" in stop:
+        return False
+    if turns == 0 and (in_tok + out_tok) == 0 and stop != "pass":
+        return False
+    if stop == "api_error" and turns == 0:
+        return False
+    return True
+
+
+def read_score(model: str, bench: str, arm: str) -> dict | None:
+    """Load the score.json for a cell (or None if absent / unparseable)."""
+    p = score_path(model, bench, arm)
+    if not p.exists():
+        return None
+    try:
+        return json.loads(p.read_text())
+    except Exception:
+        return None
+
+
+def score_valid(model: str, bench: str, arm: str) -> bool:
+    """True iff a score.json exists AND passes is_valid_score."""
+    sc = read_score(model, bench, arm)
+    return sc is not None and is_valid_score(sc)
+
 # F7: cheap-retry-on-fail sampling. First attempt always runs. If resolved=false,
 # run up to MAX_SAMPLES total (cost-aware: a clean-on-first-try cell incurs 1
 # run, only the noisy ones pay for triplication).
@@ -319,34 +417,97 @@ def classify_failure(output: str, returncode: int) -> str:
     return "failed"
 
 def run_cell(model: str, bench: str, arm: str, dry_run: bool) -> tuple[str, str]:
-    """Invoke ostk bench. Return (status, tail_output)."""
+    """Invoke ostk bench. Return (status, tail_output).
+
+    A run counts as "success" ONLY if returncode==0 AND a score.json exists AND
+    that score passes is_valid_score. A returncode==0 run that writes an INVALID
+    score (deadline / zero-work / api_error-no-work) is classified as
+    'infra_fail' so the cell_action retry/quarantine path can handle it rather
+    than silently locking in a phantom.
+
+    SLOW_SCENARIOS bumps the python subprocess timeout so we don't SIGKILL a
+    legitimately-slow cell early, and exports BENCH_WALL_CLOCK_OVERRIDE in the
+    child env (a hook for a future `ostk bench --wall-clock` flag — see the
+    SLOW_SCENARIOS TODO above; the Agentfile `LIMIT wall_clock` still governs
+    the actual in-container model deadline until that flag lands)."""
     cmd = ["ostk", "bench", bench, "--model", model, *ARM_FLAGS[arm], "--docker"]
     if dry_run:
         print(f"    DRY-RUN: {' '.join(cmd)}")
         return "success", ""
+
+    # Per-scenario wall-clock override: bump the subprocess timeout and pass a
+    # hint in the child env for the (future) bench.rs flag.
+    timeout_sec = WALL_TIMEOUT_SEC
+    child_env = os.environ.copy()
+    if bench in SLOW_SCENARIOS:
+        override = SLOW_SCENARIOS[bench]
+        # Give the python subprocess generous headroom over the model's own
+        # wall_clock budget (container spin-up + scoring + teardown overhead).
+        timeout_sec = max(WALL_TIMEOUT_SEC, override + 600)
+        child_env["BENCH_WALL_CLOCK_OVERRIDE"] = str(override)
+
     start = time.time()
     try:
         proc = subprocess.run(
             cmd, cwd=ROOT,
             capture_output=True, text=True,
-            timeout=WALL_TIMEOUT_SEC,
+            timeout=timeout_sec,
+            env=child_env,
         )
         elapsed = time.time() - start
         tail = (proc.stdout + "\n" + proc.stderr).strip().splitlines()[-10:]
         tail_str = "\n".join(tail)
         if proc.returncode == 0 and score_exists(model, bench, arm):
-            return "success", f"({elapsed:.0f}s)"
+            # Gate the written score: a returncode==0 run that produced an
+            # INVALID score (phantom) is infra, not success.
+            if score_valid(model, bench, arm):
+                return "success", f"({elapsed:.0f}s)"
+            sc = read_score(model, bench, arm) or {}
+            reason = (sc.get("stop_reason", "") or "").lower() or "invalid"
+            return "infra_fail", f"invalid score (stop={reason}) ({elapsed:.0f}s)"
         return classify_failure(proc.stdout + proc.stderr, proc.returncode), tail_str
     except subprocess.TimeoutExpired:
-        return "transient_fail", f"timeout after {WALL_TIMEOUT_SEC}s"
+        return "transient_fail", f"timeout after {timeout_sec}s"
     except Exception as e:
         return "failed", f"exception: {e}"
 
-def cell_action(model: str, bench: str, arm: str, state: dict, retry_failed: bool) -> str:
-    """Return 'skip', 'run', or 'retry'."""
-    if score_exists(model, bench, arm):
-        return "skip"
+def cell_action(model: str, bench: str, arm: str, state: dict, retry_failed: bool,
+                dry_run: bool = False) -> str:
+    """Return 'skip', 'run', 'retry', or 'quarantine'.
+
+    Completeness gate (→2062 / WS2): an EXISTING score.json no longer
+    short-circuits to 'skip' unconditionally. We read the score and run it
+    through is_valid_score:
+      - VALID score   -> 'skip' (genuinely done — pass or a real capability
+                          fail with turns>0).
+      - INVALID score -> phantom (deadline / zero-work / api_error-no-work).
+                         If infra_attempts < INFRA_RETRIES: delete the stale
+                         score (so score_exists no longer short-circuits) and
+                         return 'retry'. If the infra budget is exhausted:
+                         return 'quarantine'.
+
+    dry_run=True makes this read-only: we never delete a stale score during
+    planning, so a --dry-run can be re-invoked without mutating runs/.
+    """
     prior = state.get((model, bench, arm))
+    infra_attempts = (prior or {}).get("infra_attempts", 0)
+
+    if score_exists(model, bench, arm):
+        if score_valid(model, bench, arm):
+            return "skip"
+        # Phantom / infra-failed score sitting on disk. Decide retry vs quarantine.
+        if infra_attempts < INFRA_RETRIES:
+            # Force a real re-run: score_exists short-circuits, so the stale
+            # score MUST be removed or run_cell would never fire. (The run loop
+            # also removes it just before re-running, so dry-run can skip it.)
+            if not dry_run:
+                try:
+                    score_path(model, bench, arm).unlink()
+                except FileNotFoundError:
+                    pass
+            return "retry"
+        return "quarantine"
+
     if prior is None:
         return "run"
     status = prior.get("status")
@@ -354,6 +515,12 @@ def cell_action(model: str, bench: str, arm: str, state: dict, retry_failed: boo
         # State says success but the score file was cleared (e.g., re-run
         # after a binary update). Trust the filesystem: re-run.
         return "run"
+    if status == "infra_fail":
+        # A prior attempt produced an invalid score we already deleted (no file
+        # on disk now). Retry until the infra budget is spent, then quarantine.
+        if infra_attempts < INFRA_RETRIES:
+            return "retry"
+        return "quarantine"
     if status == "transient_fail":
         attempts = prior.get("attempts", 1)
         if attempts < MAX_RETRIES:
@@ -418,20 +585,30 @@ def main() -> int:
 
     state = load_state()
 
-    total = pending = skipped = succeeded = failed_hard = failed_trans = 0
+    # per-model success / quarantine tallies for the final completeness summary.
+    per_model_ok: dict[str, int] = {m.name: 0 for m in models}
+    per_model_quarantined: dict[str, int] = {m.name: 0 for m in models}
+
+    total = pending = skipped = succeeded = failed_hard = failed_trans = quarantined = 0
+    plan_quarantine = 0
     for m in models:
         arms = [a for a in m.arms if not args.arm or a in args.arm]
         for bench in bench_list:
             for arm in arms:
                 total += 1
-                action = cell_action(m.name, bench, arm, state, args.retry_failed)
+                # Planning pass is read-only: never delete a stale score here.
+                action = cell_action(m.name, bench, arm, state, args.retry_failed,
+                                     dry_run=True)
                 if action == "skip":
                     skipped += 1
+                    continue
+                if action == "quarantine":
+                    plan_quarantine += 1
                     continue
                 pending += 1
 
     print(f"[plan] models={len(models)} benches={len(bench_list)}")
-    print(f"[plan] total cells={total} pending={pending} skipped={skipped}")
+    print(f"[plan] total cells={total} pending={pending} skipped={skipped} quarantine={plan_quarantine}")
     if args.dry_run and pending == 0:
         print("[plan] nothing to run")
         return 0
@@ -442,12 +619,31 @@ def main() -> int:
         print(f"\n========== {m.name} ({m.category}, arms={arms}) ==========")
         for bench in bench_list:
             for arm in arms:
-                action = cell_action(m.name, bench, arm, state, args.retry_failed)
+                action = cell_action(m.name, bench, arm, state, args.retry_failed,
+                                     dry_run=args.dry_run)
                 if action == "skip":
                     continue
+                if action == "quarantine":
+                    # Infra budget exhausted before this run even started —
+                    # log + skip. NOT counted as success, NOT retried.
+                    prior = state.get((m.name, bench, arm), {})
+                    sc = read_score(m.name, bench, arm) or {}
+                    stop = (sc.get("stop_reason", "") or "").lower() or \
+                           (prior.get("status", "") or "unknown")
+                    if not args.dry_run:
+                        append_quarantine(
+                            m.name, bench, arm, stop,
+                            f"infra budget exhausted ({INFRA_RETRIES} retries)")
+                    quarantined += 1
+                    per_model_quarantined[m.name] = per_model_quarantined.get(m.name, 0) + 1
+                    print(f"  [QUARANTINE] {m.name} / {bench} / {arm}  (stop={stop})")
+                    continue
+
+                # Carry forward the per-cell infra_attempts counter across runs.
+                prior = state.get((m.name, bench, arm), {})
+                infra_attempts = prior.get("infra_attempts", 0)
                 attempt_num = 1
                 if action == "retry":
-                    prior = state.get((m.name, bench, arm), {})
                     attempt_num = prior.get("attempts", 1) + 1
 
                 # F7 outer loop: up to samples_max attempts driven by
@@ -455,6 +651,7 @@ def main() -> int:
                 # First sample always runs; later samples only fire if the
                 # previous score.json reported resolved=false.
                 final_status = "skipped"
+                quarantine_now = False
                 for sample_idx in range(1, samples_max + 1):
                     cell_succeeded = False
                     for backoff_idx in range(attempt_num - 1, MAX_RETRIES + 1):
@@ -464,11 +661,16 @@ def main() -> int:
                             time.sleep(sleep_s)
                         print(f"  [{now_iso()}] {m.name} / {bench} / {arm}  (sample {sample_idx}/{samples_max}, attempt {backoff_idx+1})")
                         status, tail = run_cell(m.name, bench, arm, args.dry_run)
+                        # An invalid score (infra_fail) consumes the infra
+                        # budget, not the transient budget.
+                        if status == "infra_fail":
+                            infra_attempts += 1
                         row = {
                             "ts": now_iso(),
                             "model": m.name, "bench": bench, "arm": arm,
                             "status": status,
                             "attempts": backoff_idx + 1,
+                            "infra_attempts": infra_attempts,
                             "sample": sample_idx,
                             "tail": tail,
                         }
@@ -483,6 +685,23 @@ def main() -> int:
                         if status == "failed":
                             print(f"    HARD FAIL: {tail[:200]}")
                             break
+                        if status == "infra_fail":
+                            # Phantom/invalid score. run_cell already left no
+                            # valid score on disk; cell_action deleted any stale
+                            # one. Retry within the infra budget, else quarantine.
+                            if infra_attempts < INFRA_RETRIES:
+                                print(f"    INFRA (invalid score, will retry "
+                                      f"{infra_attempts}/{INFRA_RETRIES}): {tail[:200]}")
+                                # ensure no stale score short-circuits the re-run
+                                try:
+                                    score_path(m.name, bench, arm).unlink()
+                                except FileNotFoundError:
+                                    pass
+                                continue
+                            print(f"    INFRA (budget exhausted "
+                                  f"{infra_attempts}/{INFRA_RETRIES}): {tail[:200]}")
+                            quarantine_now = True
+                            break
                         if status == "transient_fail":
                             if backoff_idx + 1 >= MAX_RETRIES + 1:
                                 print(f"    TRANSIENT (gave up after {backoff_idx+1}): {tail[:200]}")
@@ -490,6 +709,8 @@ def main() -> int:
                             else:
                                 print(f"    TRANSIENT (will retry): {tail[:200]}")
                                 continue
+                    if quarantine_now:
+                        break
                     # F7: snapshot this sample, decide whether to resample
                     if cell_succeeded and not args.dry_run:
                         append_sample(m.name, bench, arm, sample_idx)
@@ -506,22 +727,50 @@ def main() -> int:
                             print(f"    [F7] all {samples_max} samples resolved=false")
                             break
                     else:
-                        # Hard/transient failure — don't burn extra samples
+                        # Hard/transient/infra failure — don't burn extra samples
                         break
                 # tally the cell once after F7 outer loop concludes
-                if final_status == "success":
+                if quarantine_now:
+                    sc = read_score(m.name, bench, arm) or {}
+                    stop = (sc.get("stop_reason", "") or "").lower() or "invalid"
+                    if not args.dry_run:
+                        append_quarantine(
+                            m.name, bench, arm, stop,
+                            f"infra budget exhausted ({INFRA_RETRIES} retries)")
+                    quarantined += 1
+                    per_model_quarantined[m.name] = per_model_quarantined.get(m.name, 0) + 1
+                    print(f"    [QUARANTINE] {m.name} / {bench} / {arm}  (stop={stop})")
+                elif final_status == "success":
                     succeeded += 1
+                    per_model_ok[m.name] = per_model_ok.get(m.name, 0) + 1
                 elif final_status == "failed":
                     failed_hard += 1
                 elif final_status == "transient_fail":
                     failed_trans += 1
+                elif final_status == "infra_fail":
+                    # ran out of samples while still infra-invalid but budget not
+                    # yet spent — count as transient give-up (will retry on next
+                    # invocation since the cell is not quarantined).
+                    failed_trans += 1
 
     print(f"\n========== summary @ {now_iso()} ==========")
-    print(f"  succeeded: {succeeded}")
-    print(f"  hard fail: {failed_hard}")
-    print(f"  gave up:   {failed_trans}")
-    print(f"  skipped:   {skipped}")
-    print(f"  total:     {total}")
+    print(f"  succeeded:   {succeeded}")
+    print(f"  hard fail:   {failed_hard}")
+    print(f"  gave up:     {failed_trans}")
+    print(f"  quarantined: {quarantined}")
+    print(f"  skipped:     {skipped}")
+    print(f"  total:       {total}")
+
+    # Per-model completeness: cells succeeded (valid score) vs quarantined
+    # (infra-budget exhausted, NOT counted toward the /38 denominator).
+    print(f"\n========== per-model completeness ==========")
+    for m in models:
+        ok = per_model_ok.get(m.name, 0)
+        q = per_model_quarantined.get(m.name, 0)
+        flag = "  <-- QUARANTINED CELLS" if q else ""
+        print(f"  {m.name:<26} succeeded={ok:<4} quarantined={q}{flag}")
+    if quarantined and QUARANTINE.exists():
+        print(f"  (quarantine detail: {QUARANTINE})")
 
     # punch list
     if failed_hard or failed_trans:

@@ -17,3 +17,7 @@ runs/.state.jsonl*
 runs/parallel-sweep/
 runs/logs/
 runs/openrouter/
+
+# raw harness artifacts — local re-derivation only, never published (may echo fixture text)
+runs/**/*.raw/
+runs/*.raw/

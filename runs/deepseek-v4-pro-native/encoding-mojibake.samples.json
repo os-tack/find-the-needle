@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "encoding-mojibake",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.0034140830000000005,
+    "fresh_input_tokens": 0,
+    "input_tokens": 78293,
+    "output_tokens": 912,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 12 name checks pass. The fix: changed `CsvReader.java:18` from `ISO-8859-1` to `UTF-8` \u2014 the CSV file is UTF-8 encoded but was being read as ISO-8859-1, corrupting every multi-byte character.",
+    "timestamp": "2026-06-15T17:41:06Z",
+    "token_cost": 912,
+    "tool_uses": 14,
+    "turns_to_fix": 8,
+    "wall_clock": 26.297,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T17:41:16+00:00"
+  }
+]

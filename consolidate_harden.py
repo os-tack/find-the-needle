@@ -62,6 +62,32 @@ def bucket_cost(rec, model):
         return (tin * in_rate + tout * out_rate) / 1_000_000
     fresh = fresh or 0
     cr = rec.get("cache_read_tokens", 0) or 0
+    # PRESENT-BUT-ZERO FALLBACK (→2062): for non-Anthropic NATIVE records the
+    # split buckets are present but all 0 (the harness reports no cache split),
+    # while the real total sits in input_tokens (e.g. gemini native
+    # input_tokens=19299, fresh=0). Pricing the empty buckets would return ~0
+    # and shadow the true cost. So when fresh+cache_read+cache_create are ALL 0
+    # but input_tokens>0, price input_tokens as all-fresh.
+    #
+    # HONESTY NOTE: pricing non-Anthropic native input as all-fresh (NO cache
+    # discount) OVER-states native cost and thus FLATTERS the kernel. This is
+    # the floor until the gemini/codex cache-split parsers land (WS4) and the
+    # native arm is re-run. The board carries native_cost_basis so this
+    # all-fresh approximation is visible per model.
+    cc_tot_check = rec.get("cache_create_tokens", 0) or 0
+    in_tok = rec.get("input_tokens", 0) or 0
+    if fresh == 0 and cr == 0 and cc_tot_check == 0 and in_tok > 0:
+        tout = rec.get("output_tokens", 0) or 0
+        return (in_tok * in_rate + tout * out_rate) / 1_000_000
+    # OPENCODE SELF-REPORTED FALLBACK (grok/deepseek native): the opencode
+    # harness writes its own estimated_cost_usd (real xAI/DeepSeek provider
+    # billing, input INCLUDED) + output tokens, but NOT the input token buckets
+    # (fresh/cr/cc and input_tokens all 0). Pricing the empty buckets would
+    # return output-only and badly under-state. Use the harness's billed cost.
+    # Basis is flagged 'self-reported' so the board footnotes the mixed basis.
+    sc = rec.get("estimated_cost_usd", 0) or 0
+    if fresh == 0 and cr == 0 and cc_tot_check == 0 and in_tok == 0 and sc > 0:
+        return sc
     cc5 = rec.get("cache_create_5m_tokens", 0) or 0
     cc1 = rec.get("cache_create_1h_tokens", 0) or 0
     cc_tot = rec.get("cache_create_tokens", 0) or 0
@@ -75,12 +101,24 @@ def bucket_cost(rec, model):
 
 def total_input(rec):
     """Grand-total input tokens summed from atomic buckets (fresh+read+create),
-    falling back to the fresh-only/legacy `input_tokens` when no split exists."""
+    falling back to the fresh-only/legacy `input_tokens` when no split exists.
+
+    Returns (total, split_present). split_present=False signals the count came
+    from the unsplit `input_tokens` field (legacy OR present-but-zero native)."""
     fresh = rec.get("fresh_input_tokens")
     if fresh is None:
         return rec.get("input_tokens", 0) or 0, False
-    return ((fresh or 0) + (rec.get("cache_read_tokens", 0) or 0)
-            + (rec.get("cache_create_tokens", 0) or 0)), True
+    f = fresh or 0
+    cr = rec.get("cache_read_tokens", 0) or 0
+    cc = rec.get("cache_create_tokens", 0) or 0
+    # PRESENT-BUT-ZERO FALLBACK (→2062): non-Anthropic native records carry
+    # zeroed split buckets but a real input_tokens total (e.g. gemini=19299).
+    # Counting the empty buckets would return 0 and shadow the real total, so
+    # fall back to input_tokens. Marked split_present=False (no true split).
+    in_tok = rec.get("input_tokens", 0) or 0
+    if f == 0 and cr == 0 and cc == 0 and in_tok > 0:
+        return in_tok, False
+    return (f + cr + cc), True
 
 # model -> (B arm dir, B label, native_harness)
 # native_harness: the vendor CLI used for the native arm. Only claude-code
@@ -93,14 +131,60 @@ MODELS = [
     ("claude-opus-4-8",        "kernel-cpu", "B",  "claude-code"),
     ("claude-sonnet-4-6",      "kernel-cpu", "B",  "claude-code"),
     ("gemini-3.1-pro-preview", "kernel-cpu", "B",  "gemini-cli"),
-    ("devstral-2512",          "kernel-cpu", "B",  "opencode/mistral"),
+    ("devstral-2512",          "kernel-cpu", "B",  "vibe"),
     ("gpt-5.5",                "kernel-cpu", "B",  "codex"),
     ("grok-4.3",               "kernel",     "B*", "opencode"),
     ("deepseek-v4-pro",        "kernel",     "B*", "opencode"),
-    ("kimi-k2.6",              "kernel",     "B*", "opencode"),
+    # kimi native runs on the kimi CLI (total-only token tier), NOT opencode.
+    ("kimi-k2.6",              "kernel",     "B*", "kimi"),
 ]
-# Only these native harnesses report trustworthy cost + cache + turns.
+# Only these native harnesses report trustworthy cost + cache + turns
+# (full cache split → apples-to-apples Δ$ over the both-solved set).
 COST_TRUSTED_HARNESS = {"claude-code"}
+
+# SECOND TIER (→2062 un-gate): harnesses that report a usable token TOTAL but
+# NO cache split. We now emit their native tokens + a recomputed native cost
+# (via bucket_cost, which after the present-but-zero fix prices their
+# input_tokens as all-fresh) and a cost_delta/tok_delta over both-solved — but
+# the cost is a FLOOR (all-fresh = no cache discount → over-states native cost,
+# flatters the kernel). native_cost_basis records this per model.
+#   gemini-cli / codex : "total-list"  (total today; cache-split parser is WS4)
+#   vibe / kimi        : "total-only"  (harness has NO cache split at all)
+#   opencode           : "self-reported" (grok/deepseek native: provider billing
+#                        cost + output tokens; input token split NOT captured)
+COST_TOTAL_HARNESS = {"gemini-cli", "codex", "vibe", "kimi", "opencode"}
+
+# Native arms that are KEY-BLOCKED (no vendor key) — would stay None / "key
+# pending". xAI + DeepSeek keys were added (2026-06-15) and BOTH native arms
+# ran, so this is now EMPTY. grok/deepseek native run on opencode, which reports
+# its own estimated_cost_usd (real provider billing) + output tokens but NOT the
+# input token split — surfaced as cost (self-reported basis), tokens output-only.
+KEY_BLOCKED_NATIVE = set()
+
+# Harnesses whose native cost+tokens are usable (trusted OR total-tier).
+COST_USABLE_HARNESS = COST_TRUSTED_HARNESS | COST_TOTAL_HARNESS
+
+
+def native_cost_basis(model, harness):
+    """Per-model native cost basis tag for the board footnote:
+      - 'cache-split' : claude-code — full fresh/cache_read/cache_create split.
+      - 'total-list'  : gemini-cli / codex — usable input_tokens TOTAL priced
+                        as all-fresh today; true cache-split parser is WS4.
+      - 'total-only'  : vibe / kimi — harness has NO cache split, ever.
+      - 'key-pending' : grok / deepseek — native key-blocked, no native arm.
+      - None          : harness reports nothing usable.
+    """
+    if model in KEY_BLOCKED_NATIVE:
+        return "key-pending"
+    if harness in COST_TRUSTED_HARNESS:
+        return "cache-split"
+    if harness in {"gemini-cli", "codex"}:
+        return "total-list"
+    if harness in {"vibe", "kimi"}:
+        return "total-only"
+    if harness == "opencode":
+        return "self-reported"  # opencode provider-billing cost; input not captured
+    return None
 
 def load(model, arm):
     out = {}
@@ -211,14 +295,26 @@ for model, barm, label, harness in MODELS:
                                nat_solve, b_solve, nc, nat_cost, b_cost,
                                cost_delta, tok_delta, split_cov))
     else:
-        # Solve-rate-only model: native metrics harness-incomplete. B-arm
-        # absolutes over the B-solved cells (context), NO cross-arm delta.
+        # Solve-rate model: native NOT cache-split. B-arm absolutes over the
+        # B-solved cells (context). →2062 UN-GATE: for the total tier
+        # (gemini-cli/codex/vibe/kimi) we now ALSO surface native absolutes
+        # over native-solved cells (cost via bucket_cost — all-fresh floor;
+        # tokens via total_input — present-but-zero aware). Key-blocked
+        # natives (grok/deepseek) stay None.
         bsv = [b for b in scored if B[b].get("resolved")]
         b_abs_cost = sum(bucket_cost(B[b], model) for b in bsv) if bsv else None
         b_abs_in = sum(total_input(B[b])[0] for b in bsv) if bsv else None
+        cost_usable = (harness in COST_USABLE_HARNESS) and (model not in KEY_BLOCKED_NATIVE)
+        nat_abs_cost = nat_abs_in = None
+        if cost_usable:
+            nsv = [b for b in scored if nat[b].get("resolved") and has_spend(nat[b])]
+            if nsv:
+                nat_abs_cost = sum(bucket_cost(nat[b], model) for b in nsv)
+                nat_abs_in = sum(total_input(nat[b])[0] for b in nsv)
         solveonly_rows.append((model, label, harness, n_scored,
                                len(nat_solved), len(b_solved),
-                               nat_solve, b_solve, b_abs_cost, b_abs_in))
+                               nat_solve, b_solve, b_abs_cost, b_abs_in,
+                               nat_abs_cost, nat_abs_in))
 
 def pct(x):
     return f"{x*100:>5.0f}%" if x is not None else "    -"
@@ -243,18 +339,23 @@ for (m, lab, scd, nsv, bsv, ns, bs, cn, nc_, bc_, cd, td, sc) in anthropic_rows:
 
 print()
 print("=" * 84)
-print("SECTION 2 — SOLVE-RATE ONLY (native metrics harness-incomplete)")
-print("  native cost=$0 and/or tokens undercounted and/or turns fake (codex=1).")
-print("  Cross-arm Δ$/Δtok OMITTED (measurement artifact). B$/B_tok = kernel")
-print("  ABSOLUTES over B-solved cells (not a delta).")
+print("SECTION 2 — SOLVE-RATE + native ABSOLUTES (native cache-split incomplete)")
+print("  Cross-arm Δ$/Δtok still OMITTED here (no cache split → not apples-to-")
+print("  apples; the board carries the un-gated delta + native_cost_basis).")
+print("  →2062 UN-GATE: nat$/nat_tok now shown for the total tier (gemini-cli/")
+print("  codex/vibe/kimi) — cost is an ALL-FRESH FLOOR (no cache discount, over-")
+print("  states native). B$/B_tok = kernel absolutes over B-solved. grok/deepseek")
+print("  native = key-pending (blank).")
 print("=" * 84)
 print(f"{'model':<18}{'B':>3}{'native_harness':>17}{'scd':>4}{'natSlv':>10}{'BSlv':>9}"
-      f"{'B$(abs)':>9}{'B_tok(abs)':>12}")
+      f"{'nat$(abs)':>10}{'nat_tok':>11}{'B$(abs)':>9}{'B_tok(abs)':>12}")
 print("-" * 84)
-for (m, lab, harness, scd, nsv, bsv, ns, bs, bac, bai) in solveonly_rows:
+for (m, lab, harness, scd, nsv, bsv, ns, bs, bac, bai, nac, nai) in solveonly_rows:
     bacs = f"{bac:>9.3f}" if bac is not None else "        -"
     bais = f"{bai:>12,}" if bai is not None else "           -"
-    print(f"{m:<18}{lab:>3}{harness:>17}{scd:>4}{nsv:>4}/{scd:<2}{pct(ns)}{bsv:>4}/{scd:<2}{pct(bs)}{bacs}{bais}")
+    nacs = f"{nac:>10.3f}" if nac is not None else "         -"
+    nais = f"{nai:>11,}" if nai is not None else "          -"
+    print(f"{m:<18}{lab:>3}{harness:>17}{scd:>4}{nsv:>4}/{scd:<2}{pct(ns)}{bsv:>4}/{scd:<2}{pct(bs)}{nacs}{nais}{bacs}{bais}")
 
 # Split-resolve + both-fail + infra breakdown (excluded from efficiency).
 print()
@@ -331,11 +432,13 @@ NATIVE_CLI = {
     "claude-opus-4-8": "claude-code", "claude-sonnet-4-6": "claude-code",
     "gemini-3.1-pro-preview": "gemini-cli", "devstral-2512": "vibe",
     "gpt-5.5": "codex", "grok-4.3": "opencode", "deepseek-v4-pro": "opencode",
-    "kimi-k2.6": "opencode",
+    # kimi native runs on the kimi CLI (NOT opencode). devstral -> vibe.
+    "kimi-k2.6": "kimi",
 }
 
 def _buckets(recs, model):
     f = r = c = b = o = 0
+    tin_total = 0  # grand-total input via total_input() (present-but-zero aware)
     cost = 0.0
     for rec in recs:
         f += rec.get("fresh_input_tokens", 0) or 0
@@ -343,11 +446,18 @@ def _buckets(recs, model):
         c += rec.get("cache_create_tokens", 0) or 0
         b += rec.get("billed_tokens", 0) or 0
         o += rec.get("output_tokens", 0) or 0
+        tin_total += total_input(rec)[0]
         cost += bucket_cost(rec, model)
+    # billed fallback: prefer the harness billed_tokens; else the bucket sum;
+    # else (present-but-zero native: empty buckets, real input_tokens) the
+    # total_input grand-total so the board total isn't a phantom 0.
     if b == 0:
         b = f + r + c
+    if b == 0:
+        b = tin_total
     return {"cost": round(cost, 3), "fresh": f, "cache_read": r,
-            "cache_create": c, "billed": b, "output": o}
+            "cache_create": c, "billed": b, "output": o,
+            "input_total": tin_total}
 
 def _pub(d):
     return {bn: rr for bn, rr in d.items()
@@ -358,6 +468,11 @@ for model, barm, label, harness in MODELS:
     natd = _pub(load(model, "native"))
     Bd = _pub(load(model, barm))
     cost_trusted = harness in COST_TRUSTED_HARNESS
+    # →2062 UN-GATE: native cost+tokens are usable for the trusted (cache-split)
+    # tier AND the total tier (gemini-cli/codex/vibe/kimi report a usable token
+    # TOTAL). Key-blocked natives (grok/deepseek) stay None → "key pending".
+    cost_usable = (harness in COST_USABLE_HARNESS) and (model not in KEY_BLOCKED_NATIVE)
+    basis = native_cost_basis(model, harness)
     native_ran = any(not is_zero_work(rr) for rr in natd.values())
     nat_solved = sum(1 for rr in natd.values() if rr.get("resolved"))
     b_solved = sum(1 for rr in Bd.values() if rr.get("resolved"))
@@ -369,6 +484,11 @@ for model, barm, label, harness in MODELS:
     rec = {
         "model": model, "type": label, "native_cli": NATIVE_CLI.get(model, harness),
         "native_present": native_ran, "published": PUBLISHED, "cost_trusted": cost_trusted,
+        # native_cost_basis (board footnote): cache-split (full, claude-code) |
+        # total-list (gemini/codex: usable total today, cache-split parser=WS4) |
+        # total-only (vibe/kimi: harness has no cache split) | key-pending
+        # (grok/deepseek: native key-blocked, no native arm).
+        "native_cost_basis": basis,
         "native_solved": nat_solved if native_ran else None,
         "kernel_solved": b_solved, "both_n": len(both),
         "split_kernel_only": sum(1 for _, who in sp if who == "kernel-only"),
@@ -377,11 +497,17 @@ for model, barm, label, harness in MODELS:
         "native": None, "kernel": None, "cost_delta": None, "tok_delta": None,
         "kernel_abs": _buckets([Bd[bn] for bn in bsolved_cells], model) if bsolved_cells else None,
     }
-    # Anthropic: full apples-to-apples over both-solved cells, with bucket totals.
-    if cost_trusted and both:
+    # Full cost/token comparison over both-solved cells, with bucket totals — now
+    # for ALL models whose native harness reports usable cost+tokens (was
+    # gated to claude-code only). HONESTY: total-tier native cost is priced
+    # all-fresh (no cache discount) → over-states native, flatters the kernel;
+    # native_cost_basis carries this caveat. tok_delta uses input_total
+    # (present-but-zero aware) so total-tier natives aren't a phantom 0.
+    if cost_usable and both:
         rec["native"] = _buckets([natd[bn] for bn in both], model)
         rec["kernel"] = _buckets([Bd[bn] for bn in both], model)
-        nb, kb = rec["native"]["billed"], rec["kernel"]["billed"]
+        nb = rec["native"].get("input_total") or rec["native"]["billed"]
+        kb = rec["kernel"].get("input_total") or rec["kernel"]["billed"]
         ncst, kcst = rec["native"]["cost"], rec["kernel"]["cost"]
         rec["cost_delta"] = round((kcst - ncst) / ncst * 100, 1) if ncst else None
         rec["tok_delta"] = round((kb - nb) / nb * 100, 1) if nb else None

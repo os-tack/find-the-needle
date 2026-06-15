@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "split-brain-leader-election",
+    "billed_tokens": 385986,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 20448,
+    "cache_read_tokens": 365522,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.22503759999999995,
+    "fresh_input_tokens": 16,
+    "input_tokens": 16,
+    "output_tokens": 2537,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 3 rounds pass. \n\n**The bug:** `node.go:124` used `finalVotes >= totalNodes/2`, which for 5 nodes means only 2 votes needed to win \u2014 both partitions (2-node and 3-node) could independently elect a leader simultaneously.\n\n**The fix:** Changed to `majority := totalNodes/2 + 1`, requiring a strict majority (3 out of 5). Now the minority partition (nodes 0 and 1) can only get 2 votes and fails to elect a leader, while the majority partition (nodes 2, 3, 4) correctly elects one.",
+    "timestamp": "2026-06-15T19:06:59Z",
+    "token_cost": 388523,
+    "tool_uses": 15,
+    "turns_to_fix": 16,
+    "wall_clock": 64.431,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T19:07:09+00:00"
+  }
+]

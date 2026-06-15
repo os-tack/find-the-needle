@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "benchmark": "api-version-field-drop",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.006872391,
+    "fresh_input_tokens": 0,
+    "input_tokens": 67601,
+    "output_tokens": 1103,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. The `UserV2` struct was missing `avatar_url`, `bio`, and `location` \u2014 three fields present in v1 that got dropped during the refactor. Added them back to both the struct and the `ToV2()` converter.",
+    "timestamp": "2026-06-15T17:15:39Z",
+    "token_cost": 1103,
+    "tool_uses": 11,
+    "turns_to_fix": 6,
+    "wall_clock": 30.648,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T17:15:50+00:00"
+  }
+]

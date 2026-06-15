@@ -4,4 +4,4 @@ TOOL file:read
 TOOL file:edit
 LIMIT turns 40
 LIMIT tokens 200000
-LIMIT wall_clock 600
+LIMIT wall_clock 1800

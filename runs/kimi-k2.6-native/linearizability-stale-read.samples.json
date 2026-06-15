@@ -12,17 +12,17 @@
     "difficulty_tier": "extreme",
     "estimated_cost_usd": 0.0,
     "fresh_input_tokens": 0,
-    "input_tokens": 43615,
+    "input_tokens": 33435,
     "output_tokens": 0,
     "resolved": true,
     "stop_reason": "pass",
-    "summary": "To resume this session: kimi -r cafaa417-cb6d-47d4-b110-1a01316da656",
-    "timestamp": "2026-06-15T00:36:19Z",
+    "summary": "To resume this session: kimi -r 4d75c15b-495d-4272-a2d1-0221d6a02a41",
+    "timestamp": "2026-06-15T18:16:41Z",
     "token_cost": 0,
-    "tool_uses": 38,
-    "turns_to_fix": 33,
-    "wall_clock": 285.536,
+    "tool_uses": 15,
+    "turns_to_fix": 10,
+    "wall_clock": 293.348,
     "sample_attempt": 1,
-    "sample_ts": "2026-06-15T00:36:29+00:00"
+    "sample_ts": "2026-06-15T18:16:51+00:00"
   }
 ]

@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "postgres-migration-schema-drift",
+    "billed_tokens": 193196,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 181760,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 11436,
+    "input_tokens": 11436,
+    "output_tokens": 2303,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the schema drift bug in [app/main.go](/workspace/app/main.go): create and fetch queries now use `order_status` instead of the old `status` column. Rebuilt `/workspace/orders-api` so `test.sh` runs the fixed binary.\n\nVerification: `./test.sh` passes, including create and retrieve order checks with `order_status: \"pending\"`.",
+    "timestamp": "2026-06-15T16:47:04Z",
+    "token_cost": 195499,
+    "tool_uses": 21,
+    "turns_to_fix": 1,
+    "wall_clock": 49.049,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T16:47:14+00:00"
+  }
+]
