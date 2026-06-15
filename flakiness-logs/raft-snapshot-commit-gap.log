@@ -1,0 +1,209 @@
+sha256:88f048f77a4a153ca9dee46b2355f88ed0838af93c036cdcb0b8b124d33dc384
+=== Raft Snapshot Commit-Gap Test ===
+Building...
+--- Round 1 ---
+DUPLICATE: key8 applied 2 times
+DUPLICATE: key6 applied 2 times
+DUPLICATE: key10 applied 2 times
+DUPLICATE: key2 applied 2 times
+DUPLICATE: key4 applied 2 times
+DUPLICATE: key3 applied 2 times
+DUPLICATE: key1 applied 2 times
+DUPLICATE: key7 applied 2 times
+DUPLICATE: key9 applied 2 times
+DUPLICATE: key5 applied 2 times
+FAIL: 10 keys had duplicate state machine transitions
+FAIL: Duplicate applies detected in round 1
+
+FAIL: State machine has duplicate entries after snapshot+restart sequence
+
+The 4-step reproduction:
+  1. Leader writes entries 1-10, replicates to all nodes
+  2. Leader takes snapshot at index 10
+  3. Leader sends snapshot to slow follower (node3)
+  4. Leader changes, node3 restarts, new leader replicates
+
+Run 'raft-snapshot simulate' for detailed trace.
+  [trial 1] fail (bug detected, expected)
+=== Raft Snapshot Commit-Gap Test ===
+Building...
+--- Round 1 ---
+DUPLICATE: key6 applied 2 times
+DUPLICATE: key8 applied 2 times
+DUPLICATE: key4 applied 2 times
+DUPLICATE: key1 applied 2 times
+DUPLICATE: key10 applied 2 times
+DUPLICATE: key7 applied 2 times
+DUPLICATE: key5 applied 2 times
+DUPLICATE: key3 applied 2 times
+DUPLICATE: key2 applied 2 times
+DUPLICATE: key9 applied 2 times
+FAIL: 10 keys had duplicate state machine transitions
+FAIL: Duplicate applies detected in round 1
+
+FAIL: State machine has duplicate entries after snapshot+restart sequence
+
+The 4-step reproduction:
+  1. Leader writes entries 1-10, replicates to all nodes
+  2. Leader takes snapshot at index 10
+  3. Leader sends snapshot to slow follower (node3)
+  4. Leader changes, node3 restarts, new leader replicates
+
+Run 'raft-snapshot simulate' for detailed trace.
+  [trial 2] fail (bug detected, expected)
+=== Raft Snapshot Commit-Gap Test ===
+Building...
+--- Round 1 ---
+DUPLICATE: key2 applied 2 times
+DUPLICATE: key7 applied 2 times
+DUPLICATE: key4 applied 2 times
+DUPLICATE: key8 applied 2 times
+DUPLICATE: key9 applied 2 times
+DUPLICATE: key5 applied 2 times
+DUPLICATE: key1 applied 2 times
+DUPLICATE: key10 applied 2 times
+DUPLICATE: key6 applied 2 times
+DUPLICATE: key3 applied 2 times
+FAIL: 10 keys had duplicate state machine transitions
+FAIL: Duplicate applies detected in round 1
+
+FAIL: State machine has duplicate entries after snapshot+restart sequence
+
+The 4-step reproduction:
+  1. Leader writes entries 1-10, replicates to all nodes
+  2. Leader takes snapshot at index 10
+  3. Leader sends snapshot to slow follower (node3)
+  4. Leader changes, node3 restarts, new leader replicates
+
+Run 'raft-snapshot simulate' for detailed trace.
+  [trial 3] fail (bug detected, expected)
+=== Raft Snapshot Commit-Gap Test ===
+Building...
+--- Round 1 ---
+DUPLICATE: key3 applied 2 times
+DUPLICATE: key2 applied 2 times
+DUPLICATE: key7 applied 2 times
+DUPLICATE: key5 applied 2 times
+DUPLICATE: key8 applied 2 times
+DUPLICATE: key10 applied 2 times
+DUPLICATE: key9 applied 2 times
+DUPLICATE: key1 applied 2 times
+DUPLICATE: key4 applied 2 times
+DUPLICATE: key6 applied 2 times
+FAIL: 10 keys had duplicate state machine transitions
+FAIL: Duplicate applies detected in round 1
+
+FAIL: State machine has duplicate entries after snapshot+restart sequence
+
+The 4-step reproduction:
+  1. Leader writes entries 1-10, replicates to all nodes
+  2. Leader takes snapshot at index 10
+  3. Leader sends snapshot to slow follower (node3)
+  4. Leader changes, node3 restarts, new leader replicates
+
+Run 'raft-snapshot simulate' for detailed trace.
+  [trial 4] fail (bug detected, expected)
+=== Raft Snapshot Commit-Gap Test ===
+Building...
+--- Round 1 ---
+DUPLICATE: key4 applied 2 times
+DUPLICATE: key3 applied 2 times
+DUPLICATE: key2 applied 2 times
+DUPLICATE: key10 applied 2 times
+DUPLICATE: key1 applied 2 times
+DUPLICATE: key8 applied 2 times
+DUPLICATE: key5 applied 2 times
+DUPLICATE: key7 applied 2 times
+DUPLICATE: key6 applied 2 times
+DUPLICATE: key9 applied 2 times
+FAIL: 10 keys had duplicate state machine transitions
+FAIL: Duplicate applies detected in round 1
+
+FAIL: State machine has duplicate entries after snapshot+restart sequence
+
+The 4-step reproduction:
+  1. Leader writes entries 1-10, replicates to all nodes
+  2. Leader takes snapshot at index 10
+  3. Leader sends snapshot to slow follower (node3)
+  4. Leader changes, node3 restarts, new leader replicates
+
+Run 'raft-snapshot simulate' for detailed trace.
+  [trial 5] fail (bug detected, expected)
+=== Raft Snapshot Commit-Gap Test ===
+Building...
+--- Round 1 ---
+DUPLICATE: key3 applied 2 times
+DUPLICATE: key2 applied 2 times
+DUPLICATE: key6 applied 2 times
+DUPLICATE: key10 applied 2 times
+DUPLICATE: key9 applied 2 times
+DUPLICATE: key5 applied 2 times
+DUPLICATE: key1 applied 2 times
+DUPLICATE: key7 applied 2 times
+DUPLICATE: key4 applied 2 times
+DUPLICATE: key8 applied 2 times
+FAIL: 10 keys had duplicate state machine transitions
+FAIL: Duplicate applies detected in round 1
+
+FAIL: State machine has duplicate entries after snapshot+restart sequence
+
+The 4-step reproduction:
+  1. Leader writes entries 1-10, replicates to all nodes
+  2. Leader takes snapshot at index 10
+  3. Leader sends snapshot to slow follower (node3)
+  4. Leader changes, node3 restarts, new leader replicates
+
+Run 'raft-snapshot simulate' for detailed trace.
+  [trial 6] fail (bug detected, expected)
+=== Raft Snapshot Commit-Gap Test ===
+Building...
+--- Round 1 ---
+DUPLICATE: key4 applied 2 times
+DUPLICATE: key6 applied 2 times
+DUPLICATE: key10 applied 2 times
+DUPLICATE: key7 applied 2 times
+DUPLICATE: key2 applied 2 times
+DUPLICATE: key3 applied 2 times
+DUPLICATE: key9 applied 2 times
+DUPLICATE: key5 applied 2 times
+DUPLICATE: key8 applied 2 times
+DUPLICATE: key1 applied 2 times
+FAIL: 10 keys had duplicate state machine transitions
+FAIL: Duplicate applies detected in round 1
+
+FAIL: State machine has duplicate entries after snapshot+restart sequence
+
+The 4-step reproduction:
+  1. Leader writes entries 1-10, replicates to all nodes
+  2. Leader takes snapshot at index 10
+  3. Leader sends snapshot to slow follower (node3)
+  4. Leader changes, node3 restarts, new leader replicates
+
+Run 'raft-snapshot simulate' for detailed trace.
+  [trial 7] fail (bug detected, expected)
+=== Raft Snapshot Commit-Gap Test ===
+Building...
+--- Round 1 ---
+DUPLICATE: key1 applied 2 times
+DUPLICATE: key3 applied 2 times
+DUPLICATE: key5 applied 2 times
+DUPLICATE: key9 applied 2 times
+DUPLICATE: key2 applied 2 times
+DUPLICATE: key6 applied 2 times
+DUPLICATE: key7 applied 2 times
+DUPLICATE: key10 applied 2 times
+DUPLICATE: key4 applied 2 times
+DUPLICATE: key8 applied 2 times
+FAIL: 10 keys had duplicate state machine transitions
+FAIL: Duplicate applies detected in round 1
+
+FAIL: State machine has duplicate entries after snapshot+restart sequence
+
+The 4-step reproduction:
+  1. Leader writes entries 1-10, replicates to all nodes
+  2. Leader takes snapshot at index 10
+  3. Leader sends snapshot to slow follower (node3)
+  4. Leader changes, node3 restarts, new leader replicates
+
+Run 'raft-snapshot simulate' for detailed trace.
+  [trial 8] fail (bug detected, expected)

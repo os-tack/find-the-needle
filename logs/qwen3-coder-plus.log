@@ -1,0 +1,6 @@
+1/1 passed, 40591ms total [model=qwen3-coder-plus, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 35758ms total [model=qwen3-coder-plus, arms=kernel]
+error: 1 scenario(s) failed
+
+=== qwen3-coder-plus DONE: 80/80 scores (pass=2 fail=2 skip=76) ===

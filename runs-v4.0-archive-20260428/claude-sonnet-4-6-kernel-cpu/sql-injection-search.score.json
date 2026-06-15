@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2342,
+  "output_tokens": 1145,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of what was found and fixed:\n\n## The Needle: SQL Injection Vulnerability in `search.py`\n\n**Location:** `/app/app/search.py` — the `search()` method\n\n**The Bug:** User input was directly interpolated into the SQL query string using an f-string:\n```python\nsql = f\"SELECT ... WHERE name LIKE '%{query}%'\"\n```\nThis allowed attackers to inject arbitrary SQL — for example, a `UNION SELECT` attack could extract usernames, password hashes, and API keys from the `users` table.\n\n**The Fix:** Replaced string interpolation with a **parameterized query**, passing user input as a bound parameter via `?` placeholders:\n```python\nsql = \"SELECT ... WHERE name LIKE ?\"\nparams = [f'%{query}%']\nreturn self.db.execute(sql, params)\n```\n\nThis ensures user input is always treated as data, never as executable SQL code.",
+  "timestamp": "2026-04-03T02:32:21Z",
+  "token_cost": 3487,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 25.156
+}

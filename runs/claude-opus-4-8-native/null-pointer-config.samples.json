@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "null-pointer-config",
+    "billed_tokens": 110193,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 7940,
+    "cache_read_tokens": 100430,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.146128,
+    "fresh_input_tokens": 1823,
+    "input_tokens": 1823,
+    "output_tokens": 1463,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified.\n\n**The needle:** a null-pointer config bug. `config.json` sets `enable_metrics: true` but includes no `metrics` object, so after unmarshalling `cfg.Metrics` is `nil`. The `/status` handler (`main.go:46-48`) dereferences `cfg.Metrics.Endpoint` whenever metrics are enabled, panicking on the nil pointer and returning 500 instead of a 200 with the `metrics` field.\n\n**The fix:** in `LoadConfig`, when metrics are enabled but no config was supplied, default `cfg.Metrics` to a `MetricsConfig{Endpoint: \"/metrics\", IntervalSec: 60}`. The handler now reads valid values, and `test.sh` passes.",
+    "timestamp": "2026-06-14T22:46:48Z",
+    "token_cost": 111656,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 41.005,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:46:58+00:00"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 13234,
+  "output_tokens": 667,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test script now passes, confirming that the IPv6 loopback addresses `[::1]` and `[0:0:0:0:0:0:0:1]` are correctly blocked. The needle in the haystack was the missing IPv6 loopback addresses in the `BLOCKED_HOSTS` list in the `validator.py` file. The fix ensures that the SSRF vulnerability is mitigated.",
+  "timestamp": "2026-04-03T03:27:56Z",
+  "token_cost": 13901,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 12.236
+}

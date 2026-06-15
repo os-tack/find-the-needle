@@ -1,0 +1,81 @@
+sha256:38864591ee603a713f3178ef4b2d28d9e7cd501cbb7cb04e30b84d69653bc178
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Running 200 concurrent transfers across 8 threads with 10s timeout...
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Initial total balance: 30000.00
+Running 200 transfers across 8 threads (timeout: 10s)
+ERROR: Transfers did not complete within timeout — possible deadlock
+
+FAIL: Transfers deadlocked — threads blocked waiting for locks
+      Concurrent transfers in opposite directions cause lock ordering violation
+  [trial 1] fail (bug detected, expected)
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Running 200 concurrent transfers across 8 threads with 10s timeout...
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Initial total balance: 30000.00
+Running 200 transfers across 8 threads (timeout: 10s)
+ERROR: Transfers did not complete within timeout — possible deadlock
+
+FAIL: Transfers deadlocked — threads blocked waiting for locks
+      Concurrent transfers in opposite directions cause lock ordering violation
+  [trial 2] fail (bug detected, expected)
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Running 200 concurrent transfers across 8 threads with 10s timeout...
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Initial total balance: 30000.00
+Running 200 transfers across 8 threads (timeout: 10s)
+ERROR: Transfers did not complete within timeout — possible deadlock
+
+FAIL: Transfers deadlocked — threads blocked waiting for locks
+      Concurrent transfers in opposite directions cause lock ordering violation
+  [trial 3] fail (bug detected, expected)
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Running 200 concurrent transfers across 8 threads with 10s timeout...
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Initial total balance: 30000.00
+Running 200 transfers across 8 threads (timeout: 10s)
+ERROR: Transfers did not complete within timeout — possible deadlock
+
+FAIL: Transfers deadlocked — threads blocked waiting for locks
+      Concurrent transfers in opposite directions cause lock ordering violation
+  [trial 4] fail (bug detected, expected)
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Running 200 concurrent transfers across 8 threads with 10s timeout...
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Initial total balance: 30000.00
+Running 200 transfers across 8 threads (timeout: 10s)
+ERROR: Transfers did not complete within timeout — possible deadlock
+
+FAIL: Transfers deadlocked — threads blocked waiting for locks
+      Concurrent transfers in opposite directions cause lock ordering violation
+  [trial 5] fail (bug detected, expected)
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Running 200 concurrent transfers across 8 threads with 10s timeout...
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Initial total balance: 30000.00
+Running 200 transfers across 8 threads (timeout: 10s)
+ERROR: Transfers did not complete within timeout — possible deadlock
+
+FAIL: Transfers deadlocked — threads blocked waiting for locks
+      Concurrent transfers in opposite directions cause lock ordering violation
+  [trial 6] fail (bug detected, expected)
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Running 200 concurrent transfers across 8 threads with 10s timeout...
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Initial total balance: 30000.00
+Running 200 transfers across 8 threads (timeout: 10s)
+ERROR: Transfers did not complete within timeout — possible deadlock
+
+FAIL: Transfers deadlocked — threads blocked waiting for locks
+      Concurrent transfers in opposite directions cause lock ordering violation
+  [trial 7] fail (bug detected, expected)
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Running 200 concurrent transfers across 8 threads with 10s timeout...
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Initial total balance: 30000.00
+Running 200 transfers across 8 threads (timeout: 10s)
+ERROR: Transfers did not complete within timeout — possible deadlock
+
+FAIL: Transfers deadlocked — threads blocked waiting for locks
+      Concurrent transfers in opposite directions cause lock ordering violation
+  [trial 8] fail (bug detected, expected)

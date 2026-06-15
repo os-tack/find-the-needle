@@ -1,0 +1,265 @@
+sha256:0ac0bcdbc428bf543c01baf46e1c47fc98c38b3051cdc5a27db4f9bcb0d95ed1
+=== GraphQL DataLoader Per-Request Test ===
+--- Compiling TypeScript ---
+Compile: OK
+--- Seeding database ---
+Seeded database: 100 users, 500 posts
+Seed: OK
+--- Waiting for server ---
+GraphQL server running on http://localhost:4000/graphql
+Server: OK
+--- Test 1: Fetch all users ---
+OK: Got 100 users
+--- Test 2: Fetch single user with posts ---
+OK: User 1 has 5 posts
+--- Test 3: Fetch recent posts with authors ---
+OK: All posts have resolved authors
+--- Test 4: Posts by department (JOIN query) ---
+OK: postsByDepartment returns correct department-filtered posts
+--- Test 5: Nested query correctness ---
+OK: Nested user->posts->author references are correct
+
+=== Performance Test: Query Count ===
+Fetching 100 users with their posts in a single GraphQL query.
+With proper DataLoader batching, this should require <=15 DB queries.
+(1 for users + a small number of batched post queries)
+
+Total DB queries executed: 101
+FAIL: Query count 101 exceeds threshold of 15
+      This indicates DataLoader batching is not working.
+      Expected: 1 query for users + 1-2 batched queries for posts = ~2-3 total
+      Got: 101 (likely N+1: 1 + 100 individual post queries)
+
+FAIL: One or more tests failed
+  [trial 1] fail (bug detected, expected)
+=== GraphQL DataLoader Per-Request Test ===
+--- Compiling TypeScript ---
+Compile: OK
+--- Seeding database ---
+Seeded database: 100 users, 500 posts
+Seed: OK
+--- Waiting for server ---
+GraphQL server running on http://localhost:4000/graphql
+Server: OK
+--- Test 1: Fetch all users ---
+OK: Got 100 users
+--- Test 2: Fetch single user with posts ---
+OK: User 1 has 5 posts
+--- Test 3: Fetch recent posts with authors ---
+OK: All posts have resolved authors
+--- Test 4: Posts by department (JOIN query) ---
+OK: postsByDepartment returns correct department-filtered posts
+--- Test 5: Nested query correctness ---
+OK: Nested user->posts->author references are correct
+
+=== Performance Test: Query Count ===
+Fetching 100 users with their posts in a single GraphQL query.
+With proper DataLoader batching, this should require <=15 DB queries.
+(1 for users + a small number of batched post queries)
+
+Total DB queries executed: 101
+FAIL: Query count 101 exceeds threshold of 15
+      This indicates DataLoader batching is not working.
+      Expected: 1 query for users + 1-2 batched queries for posts = ~2-3 total
+      Got: 101 (likely N+1: 1 + 100 individual post queries)
+
+FAIL: One or more tests failed
+  [trial 2] fail (bug detected, expected)
+=== GraphQL DataLoader Per-Request Test ===
+--- Compiling TypeScript ---
+Compile: OK
+--- Seeding database ---
+Seeded database: 100 users, 500 posts
+Seed: OK
+--- Waiting for server ---
+GraphQL server running on http://localhost:4000/graphql
+Server: OK
+--- Test 1: Fetch all users ---
+OK: Got 100 users
+--- Test 2: Fetch single user with posts ---
+OK: User 1 has 5 posts
+--- Test 3: Fetch recent posts with authors ---
+OK: All posts have resolved authors
+--- Test 4: Posts by department (JOIN query) ---
+OK: postsByDepartment returns correct department-filtered posts
+--- Test 5: Nested query correctness ---
+OK: Nested user->posts->author references are correct
+
+=== Performance Test: Query Count ===
+Fetching 100 users with their posts in a single GraphQL query.
+With proper DataLoader batching, this should require <=15 DB queries.
+(1 for users + a small number of batched post queries)
+
+Total DB queries executed: 101
+FAIL: Query count 101 exceeds threshold of 15
+      This indicates DataLoader batching is not working.
+      Expected: 1 query for users + 1-2 batched queries for posts = ~2-3 total
+      Got: 101 (likely N+1: 1 + 100 individual post queries)
+
+FAIL: One or more tests failed
+  [trial 3] fail (bug detected, expected)
+=== GraphQL DataLoader Per-Request Test ===
+--- Compiling TypeScript ---
+Compile: OK
+--- Seeding database ---
+Seeded database: 100 users, 500 posts
+Seed: OK
+--- Waiting for server ---
+GraphQL server running on http://localhost:4000/graphql
+Server: OK
+--- Test 1: Fetch all users ---
+OK: Got 100 users
+--- Test 2: Fetch single user with posts ---
+OK: User 1 has 5 posts
+--- Test 3: Fetch recent posts with authors ---
+OK: All posts have resolved authors
+--- Test 4: Posts by department (JOIN query) ---
+OK: postsByDepartment returns correct department-filtered posts
+--- Test 5: Nested query correctness ---
+OK: Nested user->posts->author references are correct
+
+=== Performance Test: Query Count ===
+Fetching 100 users with their posts in a single GraphQL query.
+With proper DataLoader batching, this should require <=15 DB queries.
+(1 for users + a small number of batched post queries)
+
+Total DB queries executed: 101
+FAIL: Query count 101 exceeds threshold of 15
+      This indicates DataLoader batching is not working.
+      Expected: 1 query for users + 1-2 batched queries for posts = ~2-3 total
+      Got: 101 (likely N+1: 1 + 100 individual post queries)
+
+FAIL: One or more tests failed
+  [trial 4] fail (bug detected, expected)
+=== GraphQL DataLoader Per-Request Test ===
+--- Compiling TypeScript ---
+Compile: OK
+--- Seeding database ---
+Seeded database: 100 users, 500 posts
+Seed: OK
+--- Waiting for server ---
+GraphQL server running on http://localhost:4000/graphql
+Server: OK
+--- Test 1: Fetch all users ---
+OK: Got 100 users
+--- Test 2: Fetch single user with posts ---
+OK: User 1 has 5 posts
+--- Test 3: Fetch recent posts with authors ---
+OK: All posts have resolved authors
+--- Test 4: Posts by department (JOIN query) ---
+OK: postsByDepartment returns correct department-filtered posts
+--- Test 5: Nested query correctness ---
+OK: Nested user->posts->author references are correct
+
+=== Performance Test: Query Count ===
+Fetching 100 users with their posts in a single GraphQL query.
+With proper DataLoader batching, this should require <=15 DB queries.
+(1 for users + a small number of batched post queries)
+
+Total DB queries executed: 101
+FAIL: Query count 101 exceeds threshold of 15
+      This indicates DataLoader batching is not working.
+      Expected: 1 query for users + 1-2 batched queries for posts = ~2-3 total
+      Got: 101 (likely N+1: 1 + 100 individual post queries)
+
+FAIL: One or more tests failed
+  [trial 5] fail (bug detected, expected)
+=== GraphQL DataLoader Per-Request Test ===
+--- Compiling TypeScript ---
+Compile: OK
+--- Seeding database ---
+Seeded database: 100 users, 500 posts
+Seed: OK
+--- Waiting for server ---
+GraphQL server running on http://localhost:4000/graphql
+Server: OK
+--- Test 1: Fetch all users ---
+OK: Got 100 users
+--- Test 2: Fetch single user with posts ---
+OK: User 1 has 5 posts
+--- Test 3: Fetch recent posts with authors ---
+OK: All posts have resolved authors
+--- Test 4: Posts by department (JOIN query) ---
+OK: postsByDepartment returns correct department-filtered posts
+--- Test 5: Nested query correctness ---
+OK: Nested user->posts->author references are correct
+
+=== Performance Test: Query Count ===
+Fetching 100 users with their posts in a single GraphQL query.
+With proper DataLoader batching, this should require <=15 DB queries.
+(1 for users + a small number of batched post queries)
+
+Total DB queries executed: 101
+FAIL: Query count 101 exceeds threshold of 15
+      This indicates DataLoader batching is not working.
+      Expected: 1 query for users + 1-2 batched queries for posts = ~2-3 total
+      Got: 101 (likely N+1: 1 + 100 individual post queries)
+
+FAIL: One or more tests failed
+  [trial 6] fail (bug detected, expected)
+=== GraphQL DataLoader Per-Request Test ===
+--- Compiling TypeScript ---
+Compile: OK
+--- Seeding database ---
+Seeded database: 100 users, 500 posts
+Seed: OK
+--- Waiting for server ---
+GraphQL server running on http://localhost:4000/graphql
+Server: OK
+--- Test 1: Fetch all users ---
+OK: Got 100 users
+--- Test 2: Fetch single user with posts ---
+OK: User 1 has 5 posts
+--- Test 3: Fetch recent posts with authors ---
+OK: All posts have resolved authors
+--- Test 4: Posts by department (JOIN query) ---
+OK: postsByDepartment returns correct department-filtered posts
+--- Test 5: Nested query correctness ---
+OK: Nested user->posts->author references are correct
+
+=== Performance Test: Query Count ===
+Fetching 100 users with their posts in a single GraphQL query.
+With proper DataLoader batching, this should require <=15 DB queries.
+(1 for users + a small number of batched post queries)
+
+Total DB queries executed: 101
+FAIL: Query count 101 exceeds threshold of 15
+      This indicates DataLoader batching is not working.
+      Expected: 1 query for users + 1-2 batched queries for posts = ~2-3 total
+      Got: 101 (likely N+1: 1 + 100 individual post queries)
+
+FAIL: One or more tests failed
+  [trial 7] fail (bug detected, expected)
+=== GraphQL DataLoader Per-Request Test ===
+--- Compiling TypeScript ---
+Compile: OK
+--- Seeding database ---
+Seeded database: 100 users, 500 posts
+Seed: OK
+--- Waiting for server ---
+GraphQL server running on http://localhost:4000/graphql
+Server: OK
+--- Test 1: Fetch all users ---
+OK: Got 100 users
+--- Test 2: Fetch single user with posts ---
+OK: User 1 has 5 posts
+--- Test 3: Fetch recent posts with authors ---
+OK: All posts have resolved authors
+--- Test 4: Posts by department (JOIN query) ---
+OK: postsByDepartment returns correct department-filtered posts
+--- Test 5: Nested query correctness ---
+OK: Nested user->posts->author references are correct
+
+=== Performance Test: Query Count ===
+Fetching 100 users with their posts in a single GraphQL query.
+With proper DataLoader batching, this should require <=15 DB queries.
+(1 for users + a small number of batched post queries)
+
+Total DB queries executed: 101
+FAIL: Query count 101 exceeds threshold of 15
+      This indicates DataLoader batching is not working.
+      Expected: 1 query for users + 1-2 batched queries for posts = ~2-3 total
+      Got: 101 (likely N+1: 1 + 100 individual post queries)
+
+FAIL: One or more tests failed
+  [trial 8] fail (bug detected, expected)

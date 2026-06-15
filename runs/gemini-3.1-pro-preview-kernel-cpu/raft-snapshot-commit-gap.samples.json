@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "raft-snapshot-commit-gap",
+    "billed_tokens": 114326,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.244396,
+    "fresh_input_tokens": 114326,
+    "input_tokens": 114326,
+    "output_tokens": 1312,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 16turns, 114326+1312 tokens, $0.2444",
+    "timestamp": "2026-06-14T22:56:59Z",
+    "token_cost": 115638,
+    "tool_uses": 15,
+    "turns_to_fix": 16,
+    "wall_clock": 94.508,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:57:10+00:00"
+  }
+]

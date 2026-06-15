@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "null-pointer-config",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 105865,
+    "output_tokens": 1375,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the nil pointer in [config.go](/app/config.go:48) by defaulting `Metrics` when `enable_metrics` is true but no `metrics` block is present.\n\nVerification:\n- `go test ./...` passes\n- `./test.sh` passes: `PASS: Server starts and responds correctly with metrics enabled`",
+    "timestamp": "2026-06-14T22:27:07Z",
+    "token_cost": 1375,
+    "tool_uses": 13,
+    "turns_to_fix": 1,
+    "wall_clock": 34.321,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:27:18+00:00"
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 20149,
+  "output_tokens": 775,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have successfully located and fixed the bug.\n\n### Summary of Findings:\n1. **The Bug (The Needle):** The application had a missing-input-validation vulnerability in the `POST /inventory/:sku/adjust` endpoint found inside `routes.ts`. Specifically, it accepted any numerical adjustment (both positive and negative), but failed to verify whether a negative adjustment would cause the total inventory to drop below zero.\n2. **The Fix:** I modified `routes.ts` to retrieve the current product and check if the resulting inventory quantity (`product.quantity + quantity`) would evaluate to less than zero. If it does, the API now returns an HTTP `400 Bad Request` with an `insufficient inventory` error, instead of processing the invalid state.\n3. **Verification:** I ran `test.sh` to confirm the fix works. The script successfully tested negative boundaries and confirmed that the API now correctly rejects requests that would result in impossible (negative) inventory states, printing `PASS`.",
+  "timestamp": "2026-04-03T05:04:43Z",
+  "token_cost": 20924,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 32.198
+}

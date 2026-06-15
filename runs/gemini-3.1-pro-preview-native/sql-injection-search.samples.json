@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "benchmark": "sql-injection-search",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 10880,
+    "output_tokens": 590,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have successfully fixed the SQL injection vulnerability in `app/search.py` by using parameterized queries. The `test.sh` script now passes, verifying that the endpoint is no longer vulnerable to UNION or boolean-based SQL injection attacks.",
+    "timestamp": "2026-06-14T23:19:47Z",
+    "token_cost": 590,
+    "tool_uses": 9,
+    "turns_to_fix": 6,
+    "wall_clock": 25.942,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:19:57+00:00"
+  }
+]

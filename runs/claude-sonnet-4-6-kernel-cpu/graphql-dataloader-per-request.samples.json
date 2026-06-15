@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 161744,
+    "cache_create_1h_tokens": 13866,
+    "cache_create_5m_tokens": 1185,
+    "cache_create_tokens": 15051,
+    "cache_read_tokens": 135498,
+    "control_type": "kernel",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.20581065,
+    "fresh_input_tokens": 11195,
+    "input_tokens": 11195,
+    "output_tokens": 5009,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 13turns, 11195+5009 tokens, $0.2058",
+    "timestamp": "2026-06-14T22:05:57Z",
+    "token_cost": 166753,
+    "tool_uses": 22,
+    "turns_to_fix": 13,
+    "wall_clock": 107.193,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:06:07+00:00"
+  }
+]

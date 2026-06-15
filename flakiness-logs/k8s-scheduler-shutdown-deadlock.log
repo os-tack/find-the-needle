@@ -1,0 +1,25 @@
+sha256:96e5afd46f2e9dbf8f0224caeed832a16abbcccc09255dc1942682986d26dcdb
+BUG: shutdown deadlock — timed out after 2s
+FAIL: shutdown deadlock or timeout
+  [trial 1] fail (bug detected, expected)
+BUG: shutdown deadlock — timed out after 2s
+FAIL: shutdown deadlock or timeout
+  [trial 2] fail (bug detected, expected)
+BUG: shutdown deadlock — timed out after 2s
+FAIL: shutdown deadlock or timeout
+  [trial 3] fail (bug detected, expected)
+BUG: shutdown deadlock — timed out after 2s
+FAIL: shutdown deadlock or timeout
+  [trial 4] fail (bug detected, expected)
+BUG: shutdown deadlock — timed out after 2s
+FAIL: shutdown deadlock or timeout
+  [trial 5] fail (bug detected, expected)
+BUG: shutdown deadlock — timed out after 2s
+FAIL: shutdown deadlock or timeout
+  [trial 6] fail (bug detected, expected)
+BUG: shutdown deadlock — timed out after 2s
+FAIL: shutdown deadlock or timeout
+  [trial 7] fail (bug detected, expected)
+BUG: shutdown deadlock — timed out after 2s
+FAIL: shutdown deadlock or timeout
+  [trial 8] fail (bug detected, expected)

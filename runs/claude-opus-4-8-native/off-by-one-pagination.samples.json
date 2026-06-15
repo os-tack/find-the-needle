@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "off-by-one-pagination",
+    "billed_tokens": 105305,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 6252,
+    "cache_read_tokens": 97230,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.114928,
+    "fresh_input_tokens": 1823,
+    "input_tokens": 1823,
+    "output_tokens": 701,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified.\n\n**The needle:** `app/app.py:28` had an off-by-one bug in the pagination offset:\n\n```python\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n```\n\nThe spurious `- 1` for pages beyond the first shifted every subsequent page back by one item, causing page 2 to start at ID 10 (duplicating page 1's last item) instead of ID 11. Corrected to:\n\n```python\noffset = (page - 1) * per_page\n```\n\n`test.sh` now reports **PASS**.",
+    "timestamp": "2026-06-14T22:50:33Z",
+    "token_cost": 106006,
+    "tool_uses": 4,
+    "turns_to_fix": 5,
+    "wall_clock": 21.837,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:50:43+00:00"
+  }
+]

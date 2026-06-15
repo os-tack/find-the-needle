@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 35994,
+  "output_tokens": 1714,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have successfully found and fixed the problem.\n\n**Summary of Findings:**\n- **The Problem:** The \"needle in the haystack\" was a goroutine leak in the `/compute` HTTP handler within `/app/app/main.go`. When a client initiated a request, the server spawned a new background goroutine to execute a CPU-intensive task (`performComputation`). However, this task had no awareness of the request's context. If a client disconnected or timed out early, the handler would return, but the heavy computation goroutine would leak and keep running until it finished naturally, wasting resources.\n- **The Fix:** I modified the server to capture the client's request context (`r.Context()`) and pass it down into the `performComputation` function. Inside the work loop, I replaced the non-interruptible `time.Sleep` with a `select` statement that listens for `ctx.Done()`. This guarantees that if the client abandons the request, the context cancellation safely stops the loop and returns immediately.\n- **The Result:** Running `./test.sh` demonstrates that the leaked goroutine count above baseline is now successfully `0`, confirming the fix is working as intended and all lifecycle tests pass.",
+  "timestamp": "2026-04-03T03:36:20Z",
+  "token_cost": 37708,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 69.29
+}

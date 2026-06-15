@@ -1,0 +1,42 @@
+1/1 passed, 29003ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 19294ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 27284ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 19590ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 60353ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 54470ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 25848ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 19943ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 43808ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 41470ms total [model=grok-code-fast-1, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 21296ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 19198ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 14127ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 23755ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 26339ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 29910ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 22206ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 19508ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 19446ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 19935ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 18258ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 20270ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 18739ms total [model=grok-code-fast-1, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 20531ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 30592ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 32262ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 23755ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 60420ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 77859ms total [model=grok-code-fast-1, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 27310ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 23416ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 15227ms total [model=grok-code-fast-1, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 33646ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 49582ms total [model=grok-code-fast-1, arms=native]
+1/1 passed, 12571ms total [model=grok-code-fast-1, arms=native]
+
+=== grok-code-fast-1 DONE: 120/120 scores (pass=35 fail=5 skip=80) ===

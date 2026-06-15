@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "goroutine-leak-handler",
+    "billed_tokens": 196908,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 11814,
+    "cache_read_tokens": 183265,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.27083799999999997,
+    "fresh_input_tokens": 1829,
+    "input_tokens": 1829,
+    "output_tokens": 3825,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Found and fixed the needle. \u2705\n\n## The bug\n`computeHandler` in `main.go` spawned a background goroutine running `performComputation`, but that computation had no way to be cancelled. When a client disconnected (or the request timed out), the handler returned \u2014 but the goroutine kept spinning through its full iteration/sleep loop, leaking one goroutine per abandoned request.\n\n## The fix\n- Derived a cancellable context from `r.Context()` (which Go cancels automatically on client disconnect), with a 25s overall timeout.\n- Threaded that context into `performComputation`, which now checks `ctx.Err()` each iteration and uses a `select` on `ctx.Done()` instead of a blocking `time.Sleep`, returning early when cancelled.\n- Made the goroutine send its result via a non-blocking `select` so it can't block on the buffered channel after the handler has gone away.\n\nTest result: goroutines stay at baseline (4) after 20 client disconnects \u2014 **0 leaked**. All tests pass.",
+    "timestamp": "2026-06-14T21:58:15Z",
+    "token_cost": 200733,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 85.059,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:58:25+00:00"
+  }
+]

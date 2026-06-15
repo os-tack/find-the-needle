@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 133046,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.331708,
+    "fresh_input_tokens": 133046,
+    "input_tokens": 133046,
+    "output_tokens": 4473,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 16turns, 133046+4473 tokens, $0.3317",
+    "timestamp": "2026-06-14T22:02:08Z",
+    "token_cost": 137519,
+    "tool_uses": 15,
+    "turns_to_fix": 16,
+    "wall_clock": 91.449,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:02:18+00:00"
+  }
+]

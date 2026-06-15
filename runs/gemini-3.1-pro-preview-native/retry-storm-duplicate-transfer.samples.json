@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "benchmark": "retry-storm-duplicate-transfer",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 3679,
+    "output_tokens": 124,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have investigated the issue and found the \"needle\": a subtle race condition in `app/processor.py` within the `execute_transfer` function. \n\nWhen concurrent transfer requests hit the processor, multiple threads could successfully debit the source account and proceed to credit the destination account. However, since the idempotency check enforces uniqueness on `completed_transfers`, only one thread successfully commits its insert. The other threads encountered a `sqlite3.IntegrityError` and fell into the exception handler to refund the source account. Because there was no `conn.rollback()` before doing the refund, the pending uncommitted credit to the destination account was inadvertently committed alongside the refund. This caused the system to duplicate the transfer amount into the destination account.\n\nI applied the fix by inserting `conn.rollback()` inside the exception handlers to cleanly drop any uncommitted transactions (the erroneous destination credit) before rolling back the source account debit. \n\nI've verified the fix by repeatedly running `test.sh`, ensuring the race window no longer creates duplicated money and `test.sh` now reliably outputs `PASS`.",
+    "timestamp": "2026-06-14T23:09:29Z",
+    "token_cost": 124,
+    "tool_uses": 37,
+    "turns_to_fix": 1,
+    "wall_clock": 411.699,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:09:39+00:00"
+  }
+]

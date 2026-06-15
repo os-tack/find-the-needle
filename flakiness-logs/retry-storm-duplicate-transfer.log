@@ -1,0 +1,49 @@
+sha256:a4d18ce766b239f7ce711858a90c7aebed3cdbb9813fc398f23cb78213205663
+Seeded accounts: A=1000, B=1000
+{"drop_response_ms":3000,"status":"configured"}
+A=500 B=2500
+Total=3000 (should be 2000)
+FAIL: money not conserved (total=3000, expected 2000) — duplicate transfer executed
+  [trial 1] fail (bug detected, expected)
+Seeded accounts: A=1000, B=1000
+{"drop_response_ms":3000,"status":"configured"}
+A=500 B=1500
+Total=2000 (should be 2000)
+PASS
+  [trial 2] SPURIOUS PASS (exit 0 on unmodified)
+Seeded accounts: A=1000, B=1000
+{"drop_response_ms":3000,"status":"configured"}
+A=500 B=3000
+Total=3500 (should be 2000)
+FAIL: money not conserved (total=3500, expected 2000) — duplicate transfer executed
+  [trial 3] fail (bug detected, expected)
+Seeded accounts: A=1000, B=1000
+{"drop_response_ms":3000,"status":"configured"}
+A=500 B=2500
+Total=3000 (should be 2000)
+FAIL: money not conserved (total=3000, expected 2000) — duplicate transfer executed
+  [trial 4] fail (bug detected, expected)
+Seeded accounts: A=1000, B=1000
+{"drop_response_ms":3000,"status":"configured"}
+A=500 B=2000
+Total=2500 (should be 2000)
+FAIL: money not conserved (total=2500, expected 2000) — duplicate transfer executed
+  [trial 5] fail (bug detected, expected)
+Seeded accounts: A=1000, B=1000
+{"drop_response_ms":3000,"status":"configured"}
+A=500 B=2000
+Total=2500 (should be 2000)
+FAIL: money not conserved (total=2500, expected 2000) — duplicate transfer executed
+  [trial 6] fail (bug detected, expected)
+Seeded accounts: A=1000, B=1000
+{"drop_response_ms":3000,"status":"configured"}
+A=500 B=3000
+Total=3500 (should be 2000)
+FAIL: money not conserved (total=3500, expected 2000) — duplicate transfer executed
+  [trial 7] fail (bug detected, expected)
+Seeded accounts: A=1000, B=1000
+{"drop_response_ms":3000,"status":"configured"}
+A=500 B=2000
+Total=2500 (should be 2000)
+FAIL: money not conserved (total=2500, expected 2000) — duplicate transfer executed
+  [trial 8] fail (bug detected, expected)

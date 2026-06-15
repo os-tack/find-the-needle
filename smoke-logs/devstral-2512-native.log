@@ -1,0 +1,14 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=devstral-2512, arms=native]
+
+--- null-pointer-config [native] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-native-devstral-2512-1781390400892 (timeout 660s)...
+  snapshotting workspace...
+  [native] using vibe (Mistral Vibe)
+  [native] running vibe ...
+  [native]   harness error: <vibe_stop_event>Turn limit of 40 reached</vibe_stop_event>
+  [native] complete: 0 turns, 561592+4357 tokens, $0.0000, 0 tools, stop=fail
+
+=== bench summary ===
+0/1 passed, 97171ms total [model=devstral-2512, arms=native]
+error: 1 scenario(s) failed

@@ -1,0 +1,425 @@
+sha256:61d2f1c19f8d328797d40cbf15d3ee353fafe787cf8af6d9a75650f8023012bc
+--- Building ---
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Reading customers from: app/customers.csv
+Loaded 10 customer records.
+Generating report: /tmp/report.txt
+Report generated successfully.
+--- Report Output ---
+=== Customer Summary Report ===
+
+Total customers: 10
+
+--- Customer List ---
+  [1001] John Smith <john.smith@example.com> - New York
+  [1002] RenÃ©e DubÃ¶is <renee.dubois@example.fr> - Paris
+  [1003] Hans MÃ¼ller <hans.mueller@example.de> - MÃ¼nchen
+  [1004] Yuki Tanaka <yuki.tanaka@example.jp> - Tokyo
+  [1005] MarÃ­a GarcÃ­a <maria.garcia@example.es> - Madrid
+  [1006] SÃ¸ren KirkegÃ¥rd <soren.k@example.dk> - KÃ¸benhavn
+  [1007] Alice Johnson <alice.j@example.com> - London
+  [1008] FranÃ§ois LÃ©ger <francois.leger@example.fr> - Lyon
+  [1009] Bob Williams <bob.w@example.com> - Chicago
+  [1010] ZoltÃ¡n KovÃ¡cs <zoltan.k@example.hu> - Budapest
+
+--- City Breakdown ---
+  Budapest: 1 customer(s)
+  Chicago: 1 customer(s)
+  KÃ¸benhavn: 1 customer(s)
+  London: 1 customer(s)
+  Lyon: 1 customer(s)
+  Madrid: 1 customer(s)
+  MÃ¼nchen: 1 customer(s)
+  New York: 1 customer(s)
+  Paris: 1 customer(s)
+  Tokyo: 1 customer(s)
+
+=== End of Report ===
+---------------------
+FAIL: Expected 'Renée Duböis' but not found in report
+FAIL: Expected 'Hans Müller' but not found in report
+FAIL: Expected 'María García' but not found in report
+FAIL: Expected 'Søren Kirkegård' but not found in report
+FAIL: Expected 'François Léger' but not found in report
+FAIL: Expected 'Zoltán Kovács' but not found in report
+FAIL: Expected 'München' but not found in report
+FAIL: Expected 'København' but not found in report
+OK: Found 'Budapest'
+OK: Found 'John Smith'
+OK: Found 'Alice Johnson'
+OK: Found 'Bob Williams'
+
+FAIL: 8 name(s) corrupted in report output
+  [trial 1] fail (bug detected, expected)
+--- Building ---
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Reading customers from: app/customers.csv
+Loaded 10 customer records.
+Generating report: /tmp/report.txt
+Report generated successfully.
+--- Report Output ---
+=== Customer Summary Report ===
+
+Total customers: 10
+
+--- Customer List ---
+  [1001] John Smith <john.smith@example.com> - New York
+  [1002] RenÃ©e DubÃ¶is <renee.dubois@example.fr> - Paris
+  [1003] Hans MÃ¼ller <hans.mueller@example.de> - MÃ¼nchen
+  [1004] Yuki Tanaka <yuki.tanaka@example.jp> - Tokyo
+  [1005] MarÃ­a GarcÃ­a <maria.garcia@example.es> - Madrid
+  [1006] SÃ¸ren KirkegÃ¥rd <soren.k@example.dk> - KÃ¸benhavn
+  [1007] Alice Johnson <alice.j@example.com> - London
+  [1008] FranÃ§ois LÃ©ger <francois.leger@example.fr> - Lyon
+  [1009] Bob Williams <bob.w@example.com> - Chicago
+  [1010] ZoltÃ¡n KovÃ¡cs <zoltan.k@example.hu> - Budapest
+
+--- City Breakdown ---
+  Budapest: 1 customer(s)
+  Chicago: 1 customer(s)
+  KÃ¸benhavn: 1 customer(s)
+  London: 1 customer(s)
+  Lyon: 1 customer(s)
+  Madrid: 1 customer(s)
+  MÃ¼nchen: 1 customer(s)
+  New York: 1 customer(s)
+  Paris: 1 customer(s)
+  Tokyo: 1 customer(s)
+
+=== End of Report ===
+---------------------
+FAIL: Expected 'Renée Duböis' but not found in report
+FAIL: Expected 'Hans Müller' but not found in report
+FAIL: Expected 'María García' but not found in report
+FAIL: Expected 'Søren Kirkegård' but not found in report
+FAIL: Expected 'François Léger' but not found in report
+FAIL: Expected 'Zoltán Kovács' but not found in report
+FAIL: Expected 'München' but not found in report
+FAIL: Expected 'København' but not found in report
+OK: Found 'Budapest'
+OK: Found 'John Smith'
+OK: Found 'Alice Johnson'
+OK: Found 'Bob Williams'
+
+FAIL: 8 name(s) corrupted in report output
+  [trial 2] fail (bug detected, expected)
+--- Building ---
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Reading customers from: app/customers.csv
+Loaded 10 customer records.
+Generating report: /tmp/report.txt
+Report generated successfully.
+--- Report Output ---
+=== Customer Summary Report ===
+
+Total customers: 10
+
+--- Customer List ---
+  [1001] John Smith <john.smith@example.com> - New York
+  [1002] RenÃ©e DubÃ¶is <renee.dubois@example.fr> - Paris
+  [1003] Hans MÃ¼ller <hans.mueller@example.de> - MÃ¼nchen
+  [1004] Yuki Tanaka <yuki.tanaka@example.jp> - Tokyo
+  [1005] MarÃ­a GarcÃ­a <maria.garcia@example.es> - Madrid
+  [1006] SÃ¸ren KirkegÃ¥rd <soren.k@example.dk> - KÃ¸benhavn
+  [1007] Alice Johnson <alice.j@example.com> - London
+  [1008] FranÃ§ois LÃ©ger <francois.leger@example.fr> - Lyon
+  [1009] Bob Williams <bob.w@example.com> - Chicago
+  [1010] ZoltÃ¡n KovÃ¡cs <zoltan.k@example.hu> - Budapest
+
+--- City Breakdown ---
+  Budapest: 1 customer(s)
+  Chicago: 1 customer(s)
+  KÃ¸benhavn: 1 customer(s)
+  London: 1 customer(s)
+  Lyon: 1 customer(s)
+  Madrid: 1 customer(s)
+  MÃ¼nchen: 1 customer(s)
+  New York: 1 customer(s)
+  Paris: 1 customer(s)
+  Tokyo: 1 customer(s)
+
+=== End of Report ===
+---------------------
+FAIL: Expected 'Renée Duböis' but not found in report
+FAIL: Expected 'Hans Müller' but not found in report
+FAIL: Expected 'María García' but not found in report
+FAIL: Expected 'Søren Kirkegård' but not found in report
+FAIL: Expected 'François Léger' but not found in report
+FAIL: Expected 'Zoltán Kovács' but not found in report
+FAIL: Expected 'München' but not found in report
+FAIL: Expected 'København' but not found in report
+OK: Found 'Budapest'
+OK: Found 'John Smith'
+OK: Found 'Alice Johnson'
+OK: Found 'Bob Williams'
+
+FAIL: 8 name(s) corrupted in report output
+  [trial 3] fail (bug detected, expected)
+--- Building ---
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Reading customers from: app/customers.csv
+Loaded 10 customer records.
+Generating report: /tmp/report.txt
+Report generated successfully.
+--- Report Output ---
+=== Customer Summary Report ===
+
+Total customers: 10
+
+--- Customer List ---
+  [1001] John Smith <john.smith@example.com> - New York
+  [1002] RenÃ©e DubÃ¶is <renee.dubois@example.fr> - Paris
+  [1003] Hans MÃ¼ller <hans.mueller@example.de> - MÃ¼nchen
+  [1004] Yuki Tanaka <yuki.tanaka@example.jp> - Tokyo
+  [1005] MarÃ­a GarcÃ­a <maria.garcia@example.es> - Madrid
+  [1006] SÃ¸ren KirkegÃ¥rd <soren.k@example.dk> - KÃ¸benhavn
+  [1007] Alice Johnson <alice.j@example.com> - London
+  [1008] FranÃ§ois LÃ©ger <francois.leger@example.fr> - Lyon
+  [1009] Bob Williams <bob.w@example.com> - Chicago
+  [1010] ZoltÃ¡n KovÃ¡cs <zoltan.k@example.hu> - Budapest
+
+--- City Breakdown ---
+  Budapest: 1 customer(s)
+  Chicago: 1 customer(s)
+  KÃ¸benhavn: 1 customer(s)
+  London: 1 customer(s)
+  Lyon: 1 customer(s)
+  Madrid: 1 customer(s)
+  MÃ¼nchen: 1 customer(s)
+  New York: 1 customer(s)
+  Paris: 1 customer(s)
+  Tokyo: 1 customer(s)
+
+=== End of Report ===
+---------------------
+FAIL: Expected 'Renée Duböis' but not found in report
+FAIL: Expected 'Hans Müller' but not found in report
+FAIL: Expected 'María García' but not found in report
+FAIL: Expected 'Søren Kirkegård' but not found in report
+FAIL: Expected 'François Léger' but not found in report
+FAIL: Expected 'Zoltán Kovács' but not found in report
+FAIL: Expected 'München' but not found in report
+FAIL: Expected 'København' but not found in report
+OK: Found 'Budapest'
+OK: Found 'John Smith'
+OK: Found 'Alice Johnson'
+OK: Found 'Bob Williams'
+
+FAIL: 8 name(s) corrupted in report output
+  [trial 4] fail (bug detected, expected)
+--- Building ---
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Reading customers from: app/customers.csv
+Loaded 10 customer records.
+Generating report: /tmp/report.txt
+Report generated successfully.
+--- Report Output ---
+=== Customer Summary Report ===
+
+Total customers: 10
+
+--- Customer List ---
+  [1001] John Smith <john.smith@example.com> - New York
+  [1002] RenÃ©e DubÃ¶is <renee.dubois@example.fr> - Paris
+  [1003] Hans MÃ¼ller <hans.mueller@example.de> - MÃ¼nchen
+  [1004] Yuki Tanaka <yuki.tanaka@example.jp> - Tokyo
+  [1005] MarÃ­a GarcÃ­a <maria.garcia@example.es> - Madrid
+  [1006] SÃ¸ren KirkegÃ¥rd <soren.k@example.dk> - KÃ¸benhavn
+  [1007] Alice Johnson <alice.j@example.com> - London
+  [1008] FranÃ§ois LÃ©ger <francois.leger@example.fr> - Lyon
+  [1009] Bob Williams <bob.w@example.com> - Chicago
+  [1010] ZoltÃ¡n KovÃ¡cs <zoltan.k@example.hu> - Budapest
+
+--- City Breakdown ---
+  Budapest: 1 customer(s)
+  Chicago: 1 customer(s)
+  KÃ¸benhavn: 1 customer(s)
+  London: 1 customer(s)
+  Lyon: 1 customer(s)
+  Madrid: 1 customer(s)
+  MÃ¼nchen: 1 customer(s)
+  New York: 1 customer(s)
+  Paris: 1 customer(s)
+  Tokyo: 1 customer(s)
+
+=== End of Report ===
+---------------------
+FAIL: Expected 'Renée Duböis' but not found in report
+FAIL: Expected 'Hans Müller' but not found in report
+FAIL: Expected 'María García' but not found in report
+FAIL: Expected 'Søren Kirkegård' but not found in report
+FAIL: Expected 'François Léger' but not found in report
+FAIL: Expected 'Zoltán Kovács' but not found in report
+FAIL: Expected 'München' but not found in report
+FAIL: Expected 'København' but not found in report
+OK: Found 'Budapest'
+OK: Found 'John Smith'
+OK: Found 'Alice Johnson'
+OK: Found 'Bob Williams'
+
+FAIL: 8 name(s) corrupted in report output
+  [trial 5] fail (bug detected, expected)
+--- Building ---
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Reading customers from: app/customers.csv
+Loaded 10 customer records.
+Generating report: /tmp/report.txt
+Report generated successfully.
+--- Report Output ---
+=== Customer Summary Report ===
+
+Total customers: 10
+
+--- Customer List ---
+  [1001] John Smith <john.smith@example.com> - New York
+  [1002] RenÃ©e DubÃ¶is <renee.dubois@example.fr> - Paris
+  [1003] Hans MÃ¼ller <hans.mueller@example.de> - MÃ¼nchen
+  [1004] Yuki Tanaka <yuki.tanaka@example.jp> - Tokyo
+  [1005] MarÃ­a GarcÃ­a <maria.garcia@example.es> - Madrid
+  [1006] SÃ¸ren KirkegÃ¥rd <soren.k@example.dk> - KÃ¸benhavn
+  [1007] Alice Johnson <alice.j@example.com> - London
+  [1008] FranÃ§ois LÃ©ger <francois.leger@example.fr> - Lyon
+  [1009] Bob Williams <bob.w@example.com> - Chicago
+  [1010] ZoltÃ¡n KovÃ¡cs <zoltan.k@example.hu> - Budapest
+
+--- City Breakdown ---
+  Budapest: 1 customer(s)
+  Chicago: 1 customer(s)
+  KÃ¸benhavn: 1 customer(s)
+  London: 1 customer(s)
+  Lyon: 1 customer(s)
+  Madrid: 1 customer(s)
+  MÃ¼nchen: 1 customer(s)
+  New York: 1 customer(s)
+  Paris: 1 customer(s)
+  Tokyo: 1 customer(s)
+
+=== End of Report ===
+---------------------
+FAIL: Expected 'Renée Duböis' but not found in report
+FAIL: Expected 'Hans Müller' but not found in report
+FAIL: Expected 'María García' but not found in report
+FAIL: Expected 'Søren Kirkegård' but not found in report
+FAIL: Expected 'François Léger' but not found in report
+FAIL: Expected 'Zoltán Kovács' but not found in report
+FAIL: Expected 'München' but not found in report
+FAIL: Expected 'København' but not found in report
+OK: Found 'Budapest'
+OK: Found 'John Smith'
+OK: Found 'Alice Johnson'
+OK: Found 'Bob Williams'
+
+FAIL: 8 name(s) corrupted in report output
+  [trial 6] fail (bug detected, expected)
+--- Building ---
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Reading customers from: app/customers.csv
+Loaded 10 customer records.
+Generating report: /tmp/report.txt
+Report generated successfully.
+--- Report Output ---
+=== Customer Summary Report ===
+
+Total customers: 10
+
+--- Customer List ---
+  [1001] John Smith <john.smith@example.com> - New York
+  [1002] RenÃ©e DubÃ¶is <renee.dubois@example.fr> - Paris
+  [1003] Hans MÃ¼ller <hans.mueller@example.de> - MÃ¼nchen
+  [1004] Yuki Tanaka <yuki.tanaka@example.jp> - Tokyo
+  [1005] MarÃ­a GarcÃ­a <maria.garcia@example.es> - Madrid
+  [1006] SÃ¸ren KirkegÃ¥rd <soren.k@example.dk> - KÃ¸benhavn
+  [1007] Alice Johnson <alice.j@example.com> - London
+  [1008] FranÃ§ois LÃ©ger <francois.leger@example.fr> - Lyon
+  [1009] Bob Williams <bob.w@example.com> - Chicago
+  [1010] ZoltÃ¡n KovÃ¡cs <zoltan.k@example.hu> - Budapest
+
+--- City Breakdown ---
+  Budapest: 1 customer(s)
+  Chicago: 1 customer(s)
+  KÃ¸benhavn: 1 customer(s)
+  London: 1 customer(s)
+  Lyon: 1 customer(s)
+  Madrid: 1 customer(s)
+  MÃ¼nchen: 1 customer(s)
+  New York: 1 customer(s)
+  Paris: 1 customer(s)
+  Tokyo: 1 customer(s)
+
+=== End of Report ===
+---------------------
+FAIL: Expected 'Renée Duböis' but not found in report
+FAIL: Expected 'Hans Müller' but not found in report
+FAIL: Expected 'María García' but not found in report
+FAIL: Expected 'Søren Kirkegård' but not found in report
+FAIL: Expected 'François Léger' but not found in report
+FAIL: Expected 'Zoltán Kovács' but not found in report
+FAIL: Expected 'München' but not found in report
+FAIL: Expected 'København' but not found in report
+OK: Found 'Budapest'
+OK: Found 'John Smith'
+OK: Found 'Alice Johnson'
+OK: Found 'Bob Williams'
+
+FAIL: 8 name(s) corrupted in report output
+  [trial 7] fail (bug detected, expected)
+--- Building ---
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Picked up JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
+Reading customers from: app/customers.csv
+Loaded 10 customer records.
+Generating report: /tmp/report.txt
+Report generated successfully.
+--- Report Output ---
+=== Customer Summary Report ===
+
+Total customers: 10
+
+--- Customer List ---
+  [1001] John Smith <john.smith@example.com> - New York
+  [1002] RenÃ©e DubÃ¶is <renee.dubois@example.fr> - Paris
+  [1003] Hans MÃ¼ller <hans.mueller@example.de> - MÃ¼nchen
+  [1004] Yuki Tanaka <yuki.tanaka@example.jp> - Tokyo
+  [1005] MarÃ­a GarcÃ­a <maria.garcia@example.es> - Madrid
+  [1006] SÃ¸ren KirkegÃ¥rd <soren.k@example.dk> - KÃ¸benhavn
+  [1007] Alice Johnson <alice.j@example.com> - London
+  [1008] FranÃ§ois LÃ©ger <francois.leger@example.fr> - Lyon
+  [1009] Bob Williams <bob.w@example.com> - Chicago
+  [1010] ZoltÃ¡n KovÃ¡cs <zoltan.k@example.hu> - Budapest
+
+--- City Breakdown ---
+  Budapest: 1 customer(s)
+  Chicago: 1 customer(s)
+  KÃ¸benhavn: 1 customer(s)
+  London: 1 customer(s)
+  Lyon: 1 customer(s)
+  Madrid: 1 customer(s)
+  MÃ¼nchen: 1 customer(s)
+  New York: 1 customer(s)
+  Paris: 1 customer(s)
+  Tokyo: 1 customer(s)
+
+=== End of Report ===
+---------------------
+FAIL: Expected 'Renée Duböis' but not found in report
+FAIL: Expected 'Hans Müller' but not found in report
+FAIL: Expected 'María García' but not found in report
+FAIL: Expected 'Søren Kirkegård' but not found in report
+FAIL: Expected 'François Léger' but not found in report
+FAIL: Expected 'Zoltán Kovács' but not found in report
+FAIL: Expected 'München' but not found in report
+FAIL: Expected 'København' but not found in report
+OK: Found 'Budapest'
+OK: Found 'John Smith'
+OK: Found 'Alice Johnson'
+OK: Found 'Bob Williams'
+
+FAIL: 8 name(s) corrupted in report output
+  [trial 8] fail (bug detected, expected)

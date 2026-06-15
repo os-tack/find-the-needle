@@ -1,0 +1,161 @@
+sha256:2239cb69a11b0ba441ff39059e7aa250103395a93a25a99c2e5177067430272c
+=== TLS Chain Ordering Test ===
+--- Building ---
+--- Starting HTTPS server ---
+Starting HTTPS server on :8443
+--- Test 1: Lenient TLS client ---
+OK: Lenient client connected successfully
+--- Test 2: Chain order verification (strict RFC 5246) ---
+FAIL: Chain order violation at position 0:
+      cert[0].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      cert[1].Subject = subject=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      Expected these to match (cert[1] should be the issuer of cert[0])
+FAIL: Chain order violation at position 1:
+      cert[1].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      cert[2].Subject = subject=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      Expected these to match (cert[2] should be the issuer of cert[1])
+--- Test 3: Leaf certificate identity ---
+OK: First certificate is the leaf (CN=localhost)
+
+FAIL: TLS chain ordering issues detected
+  [trial 1] fail (bug detected, expected)
+=== TLS Chain Ordering Test ===
+--- Building ---
+--- Starting HTTPS server ---
+Starting HTTPS server on :8443
+--- Test 1: Lenient TLS client ---
+OK: Lenient client connected successfully
+--- Test 2: Chain order verification (strict RFC 5246) ---
+FAIL: Chain order violation at position 0:
+      cert[0].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      cert[1].Subject = subject=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      Expected these to match (cert[1] should be the issuer of cert[0])
+FAIL: Chain order violation at position 1:
+      cert[1].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      cert[2].Subject = subject=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      Expected these to match (cert[2] should be the issuer of cert[1])
+--- Test 3: Leaf certificate identity ---
+OK: First certificate is the leaf (CN=localhost)
+
+FAIL: TLS chain ordering issues detected
+  [trial 2] fail (bug detected, expected)
+=== TLS Chain Ordering Test ===
+--- Building ---
+--- Starting HTTPS server ---
+Starting HTTPS server on :8443
+--- Test 1: Lenient TLS client ---
+OK: Lenient client connected successfully
+--- Test 2: Chain order verification (strict RFC 5246) ---
+FAIL: Chain order violation at position 0:
+      cert[0].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      cert[1].Subject = subject=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      Expected these to match (cert[1] should be the issuer of cert[0])
+FAIL: Chain order violation at position 1:
+      cert[1].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      cert[2].Subject = subject=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      Expected these to match (cert[2] should be the issuer of cert[1])
+--- Test 3: Leaf certificate identity ---
+OK: First certificate is the leaf (CN=localhost)
+
+FAIL: TLS chain ordering issues detected
+  [trial 3] fail (bug detected, expected)
+=== TLS Chain Ordering Test ===
+--- Building ---
+--- Starting HTTPS server ---
+Starting HTTPS server on :8443
+--- Test 1: Lenient TLS client ---
+OK: Lenient client connected successfully
+--- Test 2: Chain order verification (strict RFC 5246) ---
+FAIL: Chain order violation at position 0:
+      cert[0].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      cert[1].Subject = subject=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      Expected these to match (cert[1] should be the issuer of cert[0])
+FAIL: Chain order violation at position 1:
+      cert[1].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      cert[2].Subject = subject=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      Expected these to match (cert[2] should be the issuer of cert[1])
+--- Test 3: Leaf certificate identity ---
+OK: First certificate is the leaf (CN=localhost)
+
+FAIL: TLS chain ordering issues detected
+  [trial 4] fail (bug detected, expected)
+=== TLS Chain Ordering Test ===
+--- Building ---
+--- Starting HTTPS server ---
+Starting HTTPS server on :8443
+--- Test 1: Lenient TLS client ---
+OK: Lenient client connected successfully
+--- Test 2: Chain order verification (strict RFC 5246) ---
+FAIL: Chain order violation at position 0:
+      cert[0].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      cert[1].Subject = subject=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      Expected these to match (cert[1] should be the issuer of cert[0])
+FAIL: Chain order violation at position 1:
+      cert[1].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      cert[2].Subject = subject=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      Expected these to match (cert[2] should be the issuer of cert[1])
+--- Test 3: Leaf certificate identity ---
+OK: First certificate is the leaf (CN=localhost)
+
+FAIL: TLS chain ordering issues detected
+  [trial 5] fail (bug detected, expected)
+=== TLS Chain Ordering Test ===
+--- Building ---
+--- Starting HTTPS server ---
+Starting HTTPS server on :8443
+--- Test 1: Lenient TLS client ---
+OK: Lenient client connected successfully
+--- Test 2: Chain order verification (strict RFC 5246) ---
+FAIL: Chain order violation at position 0:
+      cert[0].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      cert[1].Subject = subject=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      Expected these to match (cert[1] should be the issuer of cert[0])
+FAIL: Chain order violation at position 1:
+      cert[1].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      cert[2].Subject = subject=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      Expected these to match (cert[2] should be the issuer of cert[1])
+--- Test 3: Leaf certificate identity ---
+OK: First certificate is the leaf (CN=localhost)
+
+FAIL: TLS chain ordering issues detected
+  [trial 6] fail (bug detected, expected)
+=== TLS Chain Ordering Test ===
+--- Building ---
+--- Starting HTTPS server ---
+Starting HTTPS server on :8443
+--- Test 1: Lenient TLS client ---
+OK: Lenient client connected successfully
+--- Test 2: Chain order verification (strict RFC 5246) ---
+FAIL: Chain order violation at position 0:
+      cert[0].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      cert[1].Subject = subject=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      Expected these to match (cert[1] should be the issuer of cert[0])
+FAIL: Chain order violation at position 1:
+      cert[1].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      cert[2].Subject = subject=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      Expected these to match (cert[2] should be the issuer of cert[1])
+--- Test 3: Leaf certificate identity ---
+OK: First certificate is the leaf (CN=localhost)
+
+FAIL: TLS chain ordering issues detected
+  [trial 7] fail (bug detected, expected)
+=== TLS Chain Ordering Test ===
+--- Building ---
+--- Starting HTTPS server ---
+Starting HTTPS server on :8443
+--- Test 1: Lenient TLS client ---
+OK: Lenient client connected successfully
+--- Test 2: Chain order verification (strict RFC 5246) ---
+FAIL: Chain order violation at position 0:
+      cert[0].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      cert[1].Subject = subject=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      Expected these to match (cert[1] should be the issuer of cert[0])
+FAIL: Chain order violation at position 1:
+      cert[1].Issuer  = issuer=C = US, ST = Test, L = Test, O = TestRootCA, CN = Test Root CA
+      cert[2].Subject = subject=C = US, ST = Test, L = Test, O = TestIntermediateCA, CN = Test Intermediate CA
+      Expected these to match (cert[2] should be the issuer of cert[1])
+--- Test 3: Leaf certificate identity ---
+OK: First certificate is the leaf (CN=localhost)
+
+FAIL: TLS chain ordering issues detected
+  [trial 8] fail (bug detected, expected)

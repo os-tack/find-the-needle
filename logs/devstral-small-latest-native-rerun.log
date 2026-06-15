@@ -1,0 +1,41 @@
+1/1 passed, 30296ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 22358ms total [model=devstral-small-latest, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 27463ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 44493ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 23675ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 18879ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 16163ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 70053ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 46536ms total [model=devstral-small-latest, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 35273ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 15180ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 16268ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 33007ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 41674ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 48854ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 31943ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 31992ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 15258ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 22525ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 14255ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 13413ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 19394ms total [model=devstral-small-latest, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 25730ms total [model=devstral-small-latest, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 20463ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 31631ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 23396ms total [model=devstral-small-latest, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 23104ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 23158ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 14550ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 41077ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 16584ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 31003ms total [model=devstral-small-latest, arms=native]
+1/1 passed, 10835ms total [model=devstral-small-latest, arms=native]
+=== devstral-small-latest native re-run DONE ===

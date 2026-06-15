@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "sql-injection-search",
+    "billed_tokens": 101395,
+    "cache_create_1h_tokens": 7230,
+    "cache_create_5m_tokens": 238,
+    "cache_create_tokens": 7468,
+    "cache_read_tokens": 87862,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.17083099999999998,
+    "fresh_input_tokens": 6065,
+    "input_tokens": 6065,
+    "output_tokens": 1996,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 10turns, 6065+1996 tokens, $0.1708",
+    "timestamp": "2026-06-14T23:23:17Z",
+    "token_cost": 103391,
+    "tool_uses": 14,
+    "turns_to_fix": 10,
+    "wall_clock": 53.973,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:23:27+00:00"
+  }
+]

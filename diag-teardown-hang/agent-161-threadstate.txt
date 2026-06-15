@@ -1,0 +1,26 @@
+tid 161 wchan=__futex_wait
+tid 162 wchan=__futex_wait
+tid 163 wchan=__futex_wait
+tid 164 wchan=__futex_wait
+tid 165 wchan=__futex_wait
+tid 166 wchan=__futex_wait
+tid 167 wchan=do_epoll_wait
+tid 168 wchan=__futex_wait
+tid 169 wchan=__futex_wait
+tid 170 wchan=__futex_wait
+tid 171 wchan=__futex_wait
+tid 172 wchan=__futex_wait
+tid 173 wchan=__futex_wait
+tid 174 wchan=__futex_wait
+tid 175 wchan=__futex_wait
+tid 176 wchan=__futex_wait
+tid 177 wchan=__futex_wait
+---procs---
+    PID    PPID     ELAPSED STAT COMMAND
+      1       0       10:16 Ss   sleep 660
+     87       1       10:07 SLl  [rosetta] /root/.cache/ostk/daemon-7.6.0 /root/.cache/ostk/daemon-7.6.0 daemon
+    161      87       10:00 SLl  [rosetta] /root/.cache/ostk/daemon-7.6.0 /root/.cache/ostk/daemon-7.6.0 _agent --name bench --task find the needle. run test.sh to verify your fix. --model gpt-5.5 --budget 100
+    549       1       09:09 Z    [server] <defunct>
+    757       1       08:59 Z    [server] <defunct>
+   2514       0       00:00 Ss   sh -c for t in /proc/161/task/*; do tid=$(basename $t); echo "tid $tid wchan=$(cat $t/wchan 2>/dev/null)"; done; echo "---procs---"; ps -eo pid,ppid,etime,stat,args
+   2554    2514       00:00 R    ps -eo pid,ppid,etime,stat,args

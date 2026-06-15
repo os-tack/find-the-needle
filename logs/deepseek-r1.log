@@ -1,0 +1,5 @@
+error: 1 scenario(s) failed
+1/1 passed, 201628ms total [model=deepseek-r1, arms=kernel]
+error: 1 scenario(s) failed
+
+=== deepseek-r1 DONE: 160/80 scores (pass=1 fail=2 skip=77) ===

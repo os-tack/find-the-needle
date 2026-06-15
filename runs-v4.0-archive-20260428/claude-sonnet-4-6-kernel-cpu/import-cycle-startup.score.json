@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "import-cycle-startup",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6047,
+  "output_tokens": 1410,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of what the needle was and how it was fixed:\n\n---\n\n### 🪡 The Needle: Circular Import\n\n**Problem:** `notifications.py` imported the `users` module just to access `users.DEFAULT_ROLE`:\n```python\n# notifications.py\nimport users                        # ← users.py imports notifications.py → CYCLE!\n_default_role = users.DEFAULT_ROLE\n```\nMeanwhile, `users.py` imports `NotificationService` from `notifications.py`, creating a **circular dependency** that crashes Python on startup with an `ImportError`.\n\n**Fix:**\n1. Added `DEFAULT_ROLE = \"member\"` to `config.py` (the proper home for app-wide constants).\n2. Changed `notifications.py` to import `DEFAULT_ROLE` from `config` instead of from `users`, breaking the cycle entirely.",
+  "timestamp": "2026-04-03T01:36:26Z",
+  "token_cost": 7457,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 28.774
+}

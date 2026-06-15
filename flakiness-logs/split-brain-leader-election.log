@@ -1,0 +1,137 @@
+sha256:186380ebc238478bb463462862d2c7bd75b284ed0a6ba0a71758f2b3af2a158f
+=== Split-Brain Leader Election Test ===
+--- Round 1 ---
+Network partitioned: [0 1] | [2 3 4]
+Node 2: starting election for term 1
+Node 0: starting election for term 1
+Node 3: granted vote to 2 for term 1
+Node 4: granted vote to 2 for term 1
+Node 2: received 3/5 votes for term 1
+Node 2: became LEADER for term 3 with 1 votes
+Node 1: granted vote to 0 for term 1
+Node 0: received 2/5 votes for term 1
+Node 0: became LEADER for term 2 with 1 votes
+Split-brain found on round 1
+UNSAFE: split-brain is possible under partition
+FAIL: Split-brain detected in round 1
+FAIL: Leader election allows split-brain under partition
+  [trial 1] fail (bug detected, expected)
+=== Split-Brain Leader Election Test ===
+--- Round 1 ---
+Network partitioned: [0 1] | [2 3 4]
+Node 2: starting election for term 1
+Node 0: starting election for term 1
+Node 4: granted vote to 2 for term 1
+Node 3: granted vote to 2 for term 1
+Node 2: received 3/5 votes for term 1
+Node 2: became LEADER for term 3 with 1 votes
+Node 1: granted vote to 0 for term 1
+Node 0: received 2/5 votes for term 1
+Node 0: became LEADER for term 2 with 1 votes
+Split-brain found on round 1
+UNSAFE: split-brain is possible under partition
+FAIL: Split-brain detected in round 1
+FAIL: Leader election allows split-brain under partition
+  [trial 2] fail (bug detected, expected)
+=== Split-Brain Leader Election Test ===
+--- Round 1 ---
+Network partitioned: [0 1] | [2 3 4]
+Node 2: starting election for term 1
+Node 0: starting election for term 1
+Node 3: granted vote to 2 for term 1
+Node 4: granted vote to 2 for term 1
+Node 2: received 3/5 votes for term 1
+Node 2: became LEADER for term 3 with 1 votes
+Node 1: granted vote to 0 for term 1
+Node 0: received 2/5 votes for term 1
+Node 0: became LEADER for term 2 with 1 votes
+Split-brain found on round 1
+UNSAFE: split-brain is possible under partition
+FAIL: Split-brain detected in round 1
+FAIL: Leader election allows split-brain under partition
+  [trial 3] fail (bug detected, expected)
+=== Split-Brain Leader Election Test ===
+--- Round 1 ---
+Network partitioned: [0 1] | [2 3 4]
+Node 2: starting election for term 1
+Node 0: starting election for term 1
+Node 3: granted vote to 2 for term 1
+Node 4: granted vote to 2 for term 1
+Node 2: received 3/5 votes for term 1
+Node 2: became LEADER for term 3 with 1 votes
+Node 1: granted vote to 0 for term 1
+Node 0: received 2/5 votes for term 1
+Node 0: became LEADER for term 2 with 1 votes
+Split-brain found on round 1
+UNSAFE: split-brain is possible under partition
+FAIL: Split-brain detected in round 1
+FAIL: Leader election allows split-brain under partition
+  [trial 4] fail (bug detected, expected)
+=== Split-Brain Leader Election Test ===
+--- Round 1 ---
+Network partitioned: [0 1] | [2 3 4]
+Node 2: starting election for term 1
+Node 0: starting election for term 1
+Node 4: granted vote to 2 for term 1
+Node 3: granted vote to 2 for term 1
+Node 2: received 3/5 votes for term 1
+Node 2: became LEADER for term 3 with 1 votes
+Node 1: granted vote to 0 for term 1
+Node 0: received 2/5 votes for term 1
+Node 0: became LEADER for term 2 with 1 votes
+Split-brain found on round 1
+UNSAFE: split-brain is possible under partition
+FAIL: Split-brain detected in round 1
+FAIL: Leader election allows split-brain under partition
+  [trial 5] fail (bug detected, expected)
+=== Split-Brain Leader Election Test ===
+--- Round 1 ---
+Network partitioned: [0 1] | [2 3 4]
+Node 2: starting election for term 1
+Node 0: starting election for term 1
+Node 3: granted vote to 2 for term 1
+Node 4: granted vote to 2 for term 1
+Node 2: received 3/5 votes for term 1
+Node 2: became LEADER for term 3 with 1 votes
+Node 1: granted vote to 0 for term 1
+Node 0: received 2/5 votes for term 1
+Node 0: became LEADER for term 2 with 1 votes
+Split-brain found on round 1
+UNSAFE: split-brain is possible under partition
+FAIL: Split-brain detected in round 1
+FAIL: Leader election allows split-brain under partition
+  [trial 6] fail (bug detected, expected)
+=== Split-Brain Leader Election Test ===
+--- Round 1 ---
+Network partitioned: [0 1] | [2 3 4]
+Node 2: starting election for term 1
+Node 0: starting election for term 1
+Node 3: granted vote to 2 for term 1
+Node 4: granted vote to 2 for term 1
+Node 2: received 3/5 votes for term 1
+Node 2: became LEADER for term 3 with 1 votes
+Node 1: granted vote to 0 for term 1
+Node 0: received 2/5 votes for term 1
+Node 0: became LEADER for term 2 with 1 votes
+Split-brain found on round 1
+UNSAFE: split-brain is possible under partition
+FAIL: Split-brain detected in round 1
+FAIL: Leader election allows split-brain under partition
+  [trial 7] fail (bug detected, expected)
+=== Split-Brain Leader Election Test ===
+--- Round 1 ---
+Network partitioned: [0 1] | [2 3 4]
+Node 2: starting election for term 1
+Node 0: starting election for term 1
+Node 3: granted vote to 2 for term 1
+Node 4: granted vote to 2 for term 1
+Node 2: received 3/5 votes for term 1
+Node 2: became LEADER for term 3 with 1 votes
+Node 1: granted vote to 0 for term 1
+Node 0: received 2/5 votes for term 1
+Node 0: became LEADER for term 2 with 1 votes
+Split-brain found on round 1
+UNSAFE: split-brain is possible under partition
+FAIL: Split-brain detected in round 1
+FAIL: Leader election allows split-brain under partition
+  [trial 8] fail (bug detected, expected)

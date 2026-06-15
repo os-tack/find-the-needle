@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "wrong-operator-discount",
+    "billed_tokens": 104531,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 5764,
+    "cache_read_tokens": 96944,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.111135,
+    "fresh_input_tokens": 1823,
+    "input_tokens": 1823,
+    "output_tokens": 677,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed it. The needle was in `pricing.py:11`:\n\n```python\ndiscount = subtotal + discount_percent / 100   # wrong operator\n```\n\nFor a 20% discount on $1098.94, this computed `1098.94 + 0.2 = 1099.14` instead of the actual discount. Changed `+` to `*`:\n\n```python\ndiscount = subtotal * discount_percent / 100\n```\n\n`test.sh` now passes: **PASS: Discount calculations are correct**.",
+    "timestamp": "2026-06-14T23:41:01Z",
+    "token_cost": 105208,
+    "tool_uses": 4,
+    "turns_to_fix": 5,
+    "wall_clock": 18.196,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:41:11+00:00"
+  }
+]

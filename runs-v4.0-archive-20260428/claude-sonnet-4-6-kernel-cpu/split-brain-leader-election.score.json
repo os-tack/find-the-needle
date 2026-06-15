@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "split-brain-leader-election",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 4000,
+  "output_tokens": 1359,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passes. ✅\n\n## Summary\n\n**The Bug:** An off-by-one error in the quorum check in `/app/app/cluster/node.go`:\n\n```go\n// BUGGY — allows minority partition to win\nif finalVotes >= totalNodes/2 {\n```\n\n**The Fix:**\n```go\n// CORRECT — requires strict majority\nif finalVotes > totalNodes/2 {\n```\n\n**Why it matters:** In a 5-node cluster, `totalNodes/2 = 2` (integer division). The buggy `>=` check meant only **2 votes** were needed to become leader. The minority partition `[0, 1]` could elect Node 0 with just its own vote + Node 1's vote = 2 votes, simultaneously with the majority partition `[2, 3, 4]` electing Node 2 — causing **split-brain**.\n\nWith the fix (`> totalNodes/2`), a node needs **at least 3 votes** (strict majority of 5). The minority partition `[0, 1]` can only get 2 votes maximum, so it can never elect a leader, while the majority partition `[2, 3, 4]` can still get 3 votes and elect one. This guarantees only one leader at a time.",
+  "timestamp": "2026-04-03T02:30:30Z",
+  "token_cost": 5359,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 34.672
+}

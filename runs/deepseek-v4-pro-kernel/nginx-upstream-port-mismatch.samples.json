@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-kernel",
+    "arm": "kernel",
+    "benchmark": "nginx-upstream-port-mismatch",
+    "billed_tokens": 114468,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.01651898,
+    "fresh_input_tokens": 114468,
+    "input_tokens": 114468,
+    "output_tokens": 2185,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 18turns, 114468+2185 tokens, $0.0165",
+    "timestamp": "2026-06-15T00:06:07Z",
+    "token_cost": 116653,
+    "tool_uses": 17,
+    "turns_to_fix": 18,
+    "wall_clock": 76.855,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T00:06:17+00:00"
+  }
+]

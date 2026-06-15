@@ -1,0 +1,7 @@
+{
+  "version": "v4.0.0",
+  "created": "2026-04-19T06:06:18Z",
+  "signer": "@ostk.ai",
+  "mode": "public",
+  "files": ["HUMANFILE", "Agentfile", "ostk.toml", "pin.caps", "manifest.json"]
+}

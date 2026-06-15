@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "kimi-k2.6-native",
+    "arm": "native",
+    "benchmark": "kernel-panic-ioctl",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 17522,
+    "output_tokens": 0,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "To resume this session: kimi -r 807dd509-2a04-44fe-9e70-aab85b28351c",
+    "timestamp": "2026-06-15T00:16:24Z",
+    "token_cost": 0,
+    "tool_uses": 9,
+    "turns_to_fix": 8,
+    "wall_clock": 53.074,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T00:16:35+00:00"
+  }
+]

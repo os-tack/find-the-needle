@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 14632,
+  "output_tokens": 1109,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The issue was successfully resolved. \n\nBy modifying the lock acquisition logic in `TransferService.java`, I enforced a strict ordering of the locks based on the account IDs (`from.getId().compareTo(to.getId())`). This ensures that regardless of the transfer direction (Account A to Account B or Account B to Account A), the locks are always acquired in the same order (e.g., Account A then Account B). Because all concurrent threads now request the locks in an identical sequence, the classic deadlock scenario—where two threads wait indefinitely for each other to release a lock—is completely avoided.\n\nThe test output indicates:\n- `PASS: All concurrent transfers completed without deadlock`\n- Both passes of 200 concurrent transfers finished successfully.\n- Total balance remained stable, meaning balance conservation wasn't violated.",
+  "timestamp": "2026-04-03T03:28:18Z",
+  "token_cost": 15741,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 27.308
+}

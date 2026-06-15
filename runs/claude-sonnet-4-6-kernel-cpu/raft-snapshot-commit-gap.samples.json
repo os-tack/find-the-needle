@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "raft-snapshot-commit-gap",
+    "billed_tokens": 112751,
+    "cache_create_1h_tokens": 12939,
+    "cache_create_5m_tokens": 407,
+    "cache_create_tokens": 13346,
+    "cache_read_tokens": 86754,
+    "control_type": "kernel",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.1418217,
+    "fresh_input_tokens": 12651,
+    "input_tokens": 12651,
+    "output_tokens": 1853,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 10turns, 12651+1853 tokens, $0.1418",
+    "timestamp": "2026-06-14T23:12:06Z",
+    "token_cost": 114604,
+    "tool_uses": 13,
+    "turns_to_fix": 10,
+    "wall_clock": 68.116,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:12:16+00:00"
+  }
+]

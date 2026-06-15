@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "timing-attack-comparison",
+    "billed_tokens": 63303,
+    "cache_create_1h_tokens": 3964,
+    "cache_create_5m_tokens": 145,
+    "cache_create_tokens": 4109,
+    "cache_read_tokens": 55371,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.06019905,
+    "fresh_input_tokens": 3823,
+    "input_tokens": 3823,
+    "output_tokens": 1114,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 9turns, 3823+1114 tokens, $0.0602",
+    "timestamp": "2026-06-14T23:48:13Z",
+    "token_cost": 64417,
+    "tool_uses": 9,
+    "turns_to_fix": 9,
+    "wall_clock": 45.361,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:48:23+00:00"
+  }
+]

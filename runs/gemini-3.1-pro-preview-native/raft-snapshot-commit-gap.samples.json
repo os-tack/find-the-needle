@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "benchmark": "raft-snapshot-commit-gap",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 27008,
+    "output_tokens": 807,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have found the issue and applied the fix to update `commitIndex` appropriately in `InstallSnapshot`. This ensures that `lastApplied` does not get dragged down during a node restart, successfully preventing duplicate state machine transitions. The fix has been verified and `test.sh` now passes all rounds successfully.",
+    "timestamp": "2026-06-14T22:55:15Z",
+    "token_cost": 807,
+    "tool_uses": 12,
+    "turns_to_fix": 11,
+    "wall_clock": 56.61,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:55:25+00:00"
+  }
+]

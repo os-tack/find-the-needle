@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 185789,
+    "output_tokens": 3397,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the DataLoader batching issue.\n\nChanged:\n- [src/context.ts](/app/src/context.ts): creates request-scoped loaders and exposes them on `GqlContext`.\n- [src/resolvers/userResolver.ts](/app/src/resolvers/userResolver.ts): uses `ctx.loaders.userLoader` and `ctx.loaders.postsByAuthorLoader`.\n- [src/resolvers/postResolver.ts](/app/src/resolvers/postResolver.ts): uses the shared `ctx.loaders.userLoader`.\n- [src/loaders.ts](/app/src/loaders.ts): exports the loader type for context typing.\n\nVerification:\n- Ran `./test.sh`\n- Result: `PASS: All tests passed`\n- Performance query count dropped from `101` to `2`, within the `<=15` threshold.",
+    "timestamp": "2026-06-14T22:00:27Z",
+    "token_cost": 3397,
+    "tool_uses": 17,
+    "turns_to_fix": 1,
+    "wall_clock": 50.439,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:00:37+00:00"
+  }
+]

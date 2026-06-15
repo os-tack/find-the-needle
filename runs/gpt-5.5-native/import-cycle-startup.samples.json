@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "import-cycle-startup",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 164644,
+    "output_tokens": 1689,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the startup failure by removing the circular import between `users.py` and `notifications.py`.\n\nChanged:\n- Moved `DEFAULT_ROLE = \"member\"` into [config.py](/app/app/config.py).\n- Updated [users.py](/app/app/users.py) and [notifications.py](/app/app/notifications.py) to import it from config.\n\nVerification:\n- `./test.sh` passes: all startup, notification, and authentication checks succeeded.",
+    "timestamp": "2026-06-14T22:08:30Z",
+    "token_cost": 1689,
+    "tool_uses": 18,
+    "turns_to_fix": 1,
+    "wall_clock": 52.485,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:08:41+00:00"
+  }
+]

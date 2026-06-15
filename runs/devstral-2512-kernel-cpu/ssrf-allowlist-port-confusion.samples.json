@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "devstral-2512-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "billed_tokens": 70662,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.218796,
+    "fresh_input_tokens": 70662,
+    "input_tokens": 70662,
+    "output_tokens": 454,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 11turns, 70662+454 tokens, $0.2188",
+    "timestamp": "2026-06-15T02:43:23Z",
+    "token_cost": 71116,
+    "tool_uses": 10,
+    "turns_to_fix": 11,
+    "wall_clock": 38.833,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T02:43:34+00:00"
+  }
+]

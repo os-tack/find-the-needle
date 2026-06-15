@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6089,
+  "output_tokens": 1487,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. ✅\n\n## The Needle\n\n**File:** `/app/app/CsvReader.java`\n\n**Problem:** The `CsvReader` was reading the UTF-8 encoded CSV file using `ISO-8859-1` (Latin-1) charset. UTF-8 encodes non-ASCII characters (like `é`, `ü`, `ø`, `ñ`, `ø`, etc.) as multi-byte sequences, but ISO-8859-1 treats each byte individually — causing the multi-byte sequences to be decoded as garbage, corrupting all the international customer names.\n\n**Fix:** Changed the charset from `Charset.forName(\"ISO-8859-1\")` to `StandardCharsets.UTF_8` so the CSV is read correctly, preserving all non-ASCII characters like `Renée Duböis`, `Hans Müller`, `Søren Kirkegård`, etc.",
+  "timestamp": "2026-04-03T01:24:17Z",
+  "token_cost": 7576,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 29.14
+}

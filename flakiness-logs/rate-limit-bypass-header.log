@@ -1,0 +1,73 @@
+sha256:7cd426f6af20dff8e80ea44a84136bd9e8a4f8b22b85593167b5a414ca8d2354
+Server listening on port 18084
+Sending 15 requests without header spoofing (limit is 10)...
+Without spoofing: 10 passed, 5 blocked
+PASS: Rate limiter correctly blocked excess requests
+Sending 30 requests with rotating X-Forwarded-For header (limit is 10)...
+With header spoofing: 30 passed, 0 blocked
+FAIL: Rate limiter bypassed — 30 of 30 requests passed with spoofed X-Forwarded-For
+      Attacker can rotate header to get unlimited requests
+  [trial 1] fail (bug detected, expected)
+Server listening on port 18084
+Sending 15 requests without header spoofing (limit is 10)...
+Without spoofing: 10 passed, 5 blocked
+PASS: Rate limiter correctly blocked excess requests
+Sending 30 requests with rotating X-Forwarded-For header (limit is 10)...
+With header spoofing: 30 passed, 0 blocked
+FAIL: Rate limiter bypassed — 30 of 30 requests passed with spoofed X-Forwarded-For
+      Attacker can rotate header to get unlimited requests
+  [trial 2] fail (bug detected, expected)
+Server listening on port 18084
+Sending 15 requests without header spoofing (limit is 10)...
+Without spoofing: 10 passed, 5 blocked
+PASS: Rate limiter correctly blocked excess requests
+Sending 30 requests with rotating X-Forwarded-For header (limit is 10)...
+With header spoofing: 30 passed, 0 blocked
+FAIL: Rate limiter bypassed — 30 of 30 requests passed with spoofed X-Forwarded-For
+      Attacker can rotate header to get unlimited requests
+  [trial 3] fail (bug detected, expected)
+Server listening on port 18084
+Sending 15 requests without header spoofing (limit is 10)...
+Without spoofing: 10 passed, 5 blocked
+PASS: Rate limiter correctly blocked excess requests
+Sending 30 requests with rotating X-Forwarded-For header (limit is 10)...
+With header spoofing: 30 passed, 0 blocked
+FAIL: Rate limiter bypassed — 30 of 30 requests passed with spoofed X-Forwarded-For
+      Attacker can rotate header to get unlimited requests
+  [trial 4] fail (bug detected, expected)
+Server listening on port 18084
+Sending 15 requests without header spoofing (limit is 10)...
+Without spoofing: 10 passed, 5 blocked
+PASS: Rate limiter correctly blocked excess requests
+Sending 30 requests with rotating X-Forwarded-For header (limit is 10)...
+With header spoofing: 30 passed, 0 blocked
+FAIL: Rate limiter bypassed — 30 of 30 requests passed with spoofed X-Forwarded-For
+      Attacker can rotate header to get unlimited requests
+  [trial 5] fail (bug detected, expected)
+Server listening on port 18084
+Sending 15 requests without header spoofing (limit is 10)...
+Without spoofing: 10 passed, 5 blocked
+PASS: Rate limiter correctly blocked excess requests
+Sending 30 requests with rotating X-Forwarded-For header (limit is 10)...
+With header spoofing: 30 passed, 0 blocked
+FAIL: Rate limiter bypassed — 30 of 30 requests passed with spoofed X-Forwarded-For
+      Attacker can rotate header to get unlimited requests
+  [trial 6] fail (bug detected, expected)
+Server listening on port 18084
+Sending 15 requests without header spoofing (limit is 10)...
+Without spoofing: 10 passed, 5 blocked
+PASS: Rate limiter correctly blocked excess requests
+Sending 30 requests with rotating X-Forwarded-For header (limit is 10)...
+With header spoofing: 30 passed, 0 blocked
+FAIL: Rate limiter bypassed — 30 of 30 requests passed with spoofed X-Forwarded-For
+      Attacker can rotate header to get unlimited requests
+  [trial 7] fail (bug detected, expected)
+Server listening on port 18084
+Sending 15 requests without header spoofing (limit is 10)...
+Without spoofing: 10 passed, 5 blocked
+PASS: Rate limiter correctly blocked excess requests
+Sending 30 requests with rotating X-Forwarded-For header (limit is 10)...
+With header spoofing: 30 passed, 0 blocked
+FAIL: Rate limiter bypassed — 30 of 30 requests passed with spoofed X-Forwarded-For
+      Attacker can rotate header to get unlimited requests
+  [trial 8] fail (bug detected, expected)

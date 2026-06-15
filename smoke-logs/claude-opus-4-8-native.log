@@ -1,0 +1,21 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=claude-opus-4-8, arms=native]
+
+--- null-pointer-config [native] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-native-claude-opus-4-8-1781390288652 (timeout 660s)...
+  snapshotting workspace...
+  [native] using claude (Claude Code)
+  [native] running claude ...
+  [native]   {"type":"result","subtype":"success","is_error":false,"api_error_status":null,"duration_ms":29308,"duration_api_ms":30147,"ttft_ms":2449,"ttft_stream_ms":2449,"time_to_request_ms":27,"num_turns":8,"result":"Test passes. ✅\n\n## The needle\n\n**Nil-pointer dereference in the `/status` handler.**\n\nIn `config.json`, `features.enable_metrics` is `true`, but there's no top-level `\"metrics\"` block — so `cfg.Metrics` parses as `nil`. The status handler (`main.go:46-48`) does:\n\n```go\nif cfg.Features.EnableMetrics {\n    resp[\"metrics\"] = cfg.Metrics.Endpoint   // nil pointer deref → panic\n```\n\nThat panic crashed the request, returning HTTP 500 for `/status`. (There's also no recovery middleware actually wired into the mux in `main.go`, so the panic isn't softened.)\n\n## The fix\n\nIn `LoadConfig`, when metrics are enabled but no `metrics` block was supplied, I default-initialize `cfg.Metrics`:\n\n```go\nif cfg.Features.EnableMetrics && cfg.Metrics == nil {\n    cfg.Metrics = &MetricsConfig{Endpoint: \"/metrics\", IntervalSec: 60}\n}\n```\n\nThis guarantees the handler can safely read `cfg.Metrics`, and `/status` now returns 200 with the `metrics` field present when metrics are enabled — exactly what the test verifies.","stop_reason":"end_turn","session_id":"0bf2de0e-5886-4afd-a18f-7820b81eec58","total_cost_usd":0.15755125,"usage":{"input_tokens":1823,"cache_creation_input_tokens":8169,"cache_read_input_tokens":100614,"output_tokens":1859,"server_tool_use":{"web_search_requests":0,"web_fetch_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":0,"ephemeral_5m_input_tokens":8169},"inference_geo":"global","iterations":[{"input_tokens":2,"output_tokens":428,"cache_read_input_tokens":23833,"cache_creation_input_tokens":184,"cache_creation":{"ephemeral_5m_input_tokens":184,"ephemeral_1h_input_tokens":0},"type":"message"}],"speed":"standard"},"modelUsage":{"claude-haiku-4-5-20251001":{"inputTokens":513,"outputTokens":17,"cacheReadInputTokens":0,"cacheCreationInputTokens":0,"webSearchRequests":0,"costUSD":0.000598,"contextWindow":200000,"maxOutputTokens":32000},"claude-opus-4-8":{"inputTokens":1823,"outputTokens":1859,"cacheReadInputTokens":100614,"cacheCreationInputTokens":8169,"webSearchRequests":0,"costUSD":0.15695325000000002,"contextWindow":1000000,"maxOutputTokens":64000}},"permission_denials":[],"terminal_reason":"completed","fast_mode_state":"off","uuid":"b81c3afb-8ee9-4499-987a-ce0adff01b5f"}
+  [native] complete: 8 turns, 110606+1859 tokens, $0.1576, 7 tools, stop=fail
+  [native] summary: Test passes. ✅
+
+## The needle
+
+**Nil-pointer dereference in the `/status` handler.**
+
+In `config.json`, `features.enable
+
+=== bench summary ===
+0/1 passed, 31670ms total [model=claude-opus-4-8, arms=native]
+error: 1 scenario(s) failed

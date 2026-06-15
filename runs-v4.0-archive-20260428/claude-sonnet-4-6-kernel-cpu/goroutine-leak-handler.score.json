@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2345,
+  "output_tokens": 2365,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the **needle** (the bug) and the fix:\n\n---\n\n## The Bug: Goroutine Leak on Client Disconnect\n\n**Location:** `/app/app/main.go` — `computeHandler` and `performComputation`\n\n### Root Cause\nThe background goroutine spawned in `computeHandler` was **not context-aware**:\n1. `performComputation` received no `context.Context`, so it had no way to detect client disconnection.\n2. The `select` in the handler had no `case <-ctx.Done()` branch, so when the client disconnected (curl timeout), the handler returned but the goroutine kept looping through all iterations — **leaking forever**.\n\n### Fix (3 changes)\n1. **Pass `r.Context()`** into the goroutine and down to `performComputation(ctx, req)`.\n2. **Check `ctx.Done()` each iteration** inside `performComputation` — returns early when the client disconnects.\n3. **Add `case <-ctx.Done()`** in the handler's `select` so the result send is also guarded, and the handler exits cleanly on disconnect.\n\nResult: goroutine count returns to baseline (0 leaked) after all 20 clients disconnect.",
+  "timestamp": "2026-04-03T01:27:14Z",
+  "token_cost": 4710,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 49.203
+}

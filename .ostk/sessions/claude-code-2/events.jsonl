@@ -1,0 +1,1 @@
+{"seq":0,"ts":"2026-04-24T01:26:36Z","type":"event","kind":"lifecycle","data":{"transition":"init.restricted_mode_deny","attempted":"fcp-olleh","safety_verbs":["boot","refine","help","audit"],"override_env":"OSTK_OVERRIDE_RESTRICTED=1"}}

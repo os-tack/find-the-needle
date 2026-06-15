@@ -1,0 +1,65 @@
+sha256:ad2179c068f42f54a16c1e4a55e36b1d1157fe31e0857f063c6bbbbdd22d66ee
+Normal search for 'Mouse': 1 results
+SQL injection UNION attack: 13 results
+FAIL: SQL injection succeeded — user table data leaked via UNION attack
+      Search returned usernames from the users table
+SQL injection boolean attack ('OR 1=1'): 10 results
+Total products in database: 10
+FAIL: Boolean SQL injection returned all 10 products (bypassed WHERE clause)
+  [trial 1] fail (bug detected, expected)
+Normal search for 'Mouse': 1 results
+SQL injection UNION attack: 13 results
+FAIL: SQL injection succeeded — user table data leaked via UNION attack
+      Search returned usernames from the users table
+SQL injection boolean attack ('OR 1=1'): 10 results
+Total products in database: 10
+FAIL: Boolean SQL injection returned all 10 products (bypassed WHERE clause)
+  [trial 2] fail (bug detected, expected)
+Normal search for 'Mouse': 1 results
+SQL injection UNION attack: 13 results
+FAIL: SQL injection succeeded — user table data leaked via UNION attack
+      Search returned usernames from the users table
+SQL injection boolean attack ('OR 1=1'): 10 results
+Total products in database: 10
+FAIL: Boolean SQL injection returned all 10 products (bypassed WHERE clause)
+  [trial 3] fail (bug detected, expected)
+Normal search for 'Mouse': 1 results
+SQL injection UNION attack: 13 results
+FAIL: SQL injection succeeded — user table data leaked via UNION attack
+      Search returned usernames from the users table
+SQL injection boolean attack ('OR 1=1'): 10 results
+Total products in database: 10
+FAIL: Boolean SQL injection returned all 10 products (bypassed WHERE clause)
+  [trial 4] fail (bug detected, expected)
+Normal search for 'Mouse': 1 results
+SQL injection UNION attack: 13 results
+FAIL: SQL injection succeeded — user table data leaked via UNION attack
+      Search returned usernames from the users table
+SQL injection boolean attack ('OR 1=1'): 10 results
+Total products in database: 10
+FAIL: Boolean SQL injection returned all 10 products (bypassed WHERE clause)
+  [trial 5] fail (bug detected, expected)
+Normal search for 'Mouse': 1 results
+SQL injection UNION attack: 13 results
+FAIL: SQL injection succeeded — user table data leaked via UNION attack
+      Search returned usernames from the users table
+SQL injection boolean attack ('OR 1=1'): 10 results
+Total products in database: 10
+FAIL: Boolean SQL injection returned all 10 products (bypassed WHERE clause)
+  [trial 6] fail (bug detected, expected)
+Normal search for 'Mouse': 1 results
+SQL injection UNION attack: 13 results
+FAIL: SQL injection succeeded — user table data leaked via UNION attack
+      Search returned usernames from the users table
+SQL injection boolean attack ('OR 1=1'): 10 results
+Total products in database: 10
+FAIL: Boolean SQL injection returned all 10 products (bypassed WHERE clause)
+  [trial 7] fail (bug detected, expected)
+Normal search for 'Mouse': 1 results
+SQL injection UNION attack: 13 results
+FAIL: SQL injection succeeded — user table data leaked via UNION attack
+      Search returned usernames from the users table
+SQL injection boolean attack ('OR 1=1'): 10 results
+Total products in database: 10
+FAIL: Boolean SQL injection returned all 10 products (bypassed WHERE clause)
+  [trial 8] fail (bug detected, expected)

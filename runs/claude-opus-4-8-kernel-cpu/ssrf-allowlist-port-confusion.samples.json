@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "billed_tokens": 108085,
+    "cache_create_1h_tokens": 6429,
+    "cache_create_5m_tokens": 178,
+    "cache_create_tokens": 6607,
+    "cache_read_tokens": 95899,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.18006324999999998,
+    "fresh_input_tokens": 5579,
+    "input_tokens": 5579,
+    "output_tokens": 2517,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 11turns, 5579+2517 tokens, $0.1801",
+    "timestamp": "2026-06-14T23:25:17Z",
+    "token_cost": 110602,
+    "tool_uses": 14,
+    "turns_to_fix": 11,
+    "wall_clock": 59.782,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:25:27+00:00"
+  }
+]

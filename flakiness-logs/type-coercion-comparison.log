@@ -1,0 +1,41 @@
+sha256:a5e8f6c3e748a135cceb39a6d9503fb20c017f943f4be4a3f71a58b328f4a5e4
+Server running on port 3000
+FAIL: min_rating=4 should return 9 products, got 4
+FAIL: min_rating=5 should return 4 products, got 0
+FAIL: min_rating=3 should return 12 products, got 9
+  [trial 1] fail (bug detected, expected)
+Server running on port 3000
+FAIL: min_rating=4 should return 9 products, got 4
+FAIL: min_rating=5 should return 4 products, got 0
+FAIL: min_rating=3 should return 12 products, got 9
+  [trial 2] fail (bug detected, expected)
+Server running on port 3000
+FAIL: min_rating=4 should return 9 products, got 4
+FAIL: min_rating=5 should return 4 products, got 0
+FAIL: min_rating=3 should return 12 products, got 9
+  [trial 3] fail (bug detected, expected)
+Server running on port 3000
+FAIL: min_rating=4 should return 9 products, got 4
+FAIL: min_rating=5 should return 4 products, got 0
+FAIL: min_rating=3 should return 12 products, got 9
+  [trial 4] fail (bug detected, expected)
+Server running on port 3000
+FAIL: min_rating=4 should return 9 products, got 4
+FAIL: min_rating=5 should return 4 products, got 0
+FAIL: min_rating=3 should return 12 products, got 9
+  [trial 5] fail (bug detected, expected)
+Server running on port 3000
+FAIL: min_rating=4 should return 9 products, got 4
+FAIL: min_rating=5 should return 4 products, got 0
+FAIL: min_rating=3 should return 12 products, got 9
+  [trial 6] fail (bug detected, expected)
+Server running on port 3000
+FAIL: min_rating=4 should return 9 products, got 4
+FAIL: min_rating=5 should return 4 products, got 0
+FAIL: min_rating=3 should return 12 products, got 9
+  [trial 7] fail (bug detected, expected)
+Server running on port 3000
+FAIL: min_rating=4 should return 9 products, got 4
+FAIL: min_rating=5 should return 4 products, got 0
+FAIL: min_rating=3 should return 12 products, got 9
+  [trial 8] fail (bug detected, expected)

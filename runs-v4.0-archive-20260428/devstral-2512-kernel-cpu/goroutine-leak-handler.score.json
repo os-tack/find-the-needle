@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "goroutine-leak-handler",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 23071,
+  "output_tokens": 1749,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test passes now. The fix successfully resolves the goroutine leak issue by using a `context.Context` to detect client disconnections and canceling the goroutines accordingly.",
+  "timestamp": "2026-04-03T01:27:02Z",
+  "token_cost": 24820,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 29.169
+}

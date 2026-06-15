@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "off-by-one-pagination",
+    "billed_tokens": 36655,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.082106,
+    "fresh_input_tokens": 36655,
+    "input_tokens": 36655,
+    "output_tokens": 733,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 8turns, 36655+733 tokens, $0.0821",
+    "timestamp": "2026-06-14T22:45:30Z",
+    "token_cost": 37388,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 68.196,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:45:40+00:00"
+  }
+]

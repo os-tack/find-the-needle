@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "compiler-macro-expansion",
+    "billed_tokens": 60901,
+    "cache_create_1h_tokens": 5169,
+    "cache_create_5m_tokens": 173,
+    "cache_create_tokens": 5342,
+    "cache_read_tokens": 50316,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0688863,
+    "fresh_input_tokens": 5243,
+    "input_tokens": 5243,
+    "output_tokens": 1202,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 8turns, 5243+1202 tokens, $0.0689",
+    "timestamp": "2026-06-14T21:50:57Z",
+    "token_cost": 62103,
+    "tool_uses": 11,
+    "turns_to_fix": 8,
+    "wall_clock": 72.723,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:51:07+00:00"
+  }
+]

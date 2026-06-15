@@ -1,0 +1,122 @@
+1/1 passed, 32140ms total [model=devstral-medium, arms=native]
+1/1 passed, 16149ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 21910ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 21355ms total [model=devstral-medium, arms=native]
+1/1 passed, 23118ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 29043ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 27332ms total [model=devstral-medium, arms=native]
+1/1 passed, 156528ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 481076ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 31151ms total [model=devstral-medium, arms=native]
+1/1 passed, 19752ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 12552ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 20159ms total [model=devstral-medium, arms=native]
+1/1 passed, 13399ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 20008ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 13222ms total [model=devstral-medium, arms=native]
+1/1 passed, 12669ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 12605ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 11369ms total [model=devstral-medium, arms=native]
+1/1 passed, 12421ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 20600ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 28134ms total [model=devstral-medium, arms=native]
+1/1 passed, 12058ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 11422ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 44394ms total [model=devstral-medium, arms=native]
+1/1 passed, 25548ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 36553ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 57625ms total [model=devstral-medium, arms=native]
+1/1 passed, 73904ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 32090ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 18266ms total [model=devstral-medium, arms=native]
+1/1 passed, 15162ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 74636ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 20248ms total [model=devstral-medium, arms=native]
+1/1 passed, 12025ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 15744ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 21995ms total [model=devstral-medium, arms=native]
+1/1 passed, 16832ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 14567ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 21611ms total [model=devstral-medium, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 13372ms total [model=devstral-medium, arms=native]
+1/1 passed, 18781ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 27143ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 38852ms total [model=devstral-medium, arms=native]
+1/1 passed, 18650ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 20937ms total [model=devstral-medium, arms=kernel]
+1/1 passed, 364687ms total [model=devstral-medium, arms=native]
+1/1 passed, 342716ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 25906ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 25300ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 22981ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 16455ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 14752ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 15856ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 22166ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 19675ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 13030ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 20665ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 13792ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 54496ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 18575ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 10931ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 16621ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 13115ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 16018ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 140906ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 16108ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 149983ms total [model=devstral-medium, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+
+=== devstral-medium DONE: 120/120 scores (pass=68 fail=52 skip=0) ===

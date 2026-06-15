@@ -1,0 +1,6 @@
+agent pid=1056
+--- thread states ---
+1056 S
+--- wchan per thread ---
+1056: anon_pipe_read
+--- zombies ---

@@ -1,0 +1,49 @@
+sha256:5b40be3d525348c31dc0f778fc70e3ef7c1c21dc402336cb428af05b4f709a20
+Server listening on port 8080
+Baseline: listeners=1, heap=4.04MB
+After 500 requests: listeners=501, heap=6.23MB
+FAIL: Listener count grew to 501 (expected <= 10)
+      Event listeners are being registered per-request and never removed
+  [trial 1] fail (bug detected, expected)
+Server listening on port 8080
+Baseline: listeners=1, heap=4.04MB
+After 500 requests: listeners=501, heap=6.14MB
+FAIL: Listener count grew to 501 (expected <= 10)
+      Event listeners are being registered per-request and never removed
+  [trial 2] fail (bug detected, expected)
+Server listening on port 8080
+Baseline: listeners=1, heap=4.04MB
+After 500 requests: listeners=501, heap=6.01MB
+FAIL: Listener count grew to 501 (expected <= 10)
+      Event listeners are being registered per-request and never removed
+  [trial 3] fail (bug detected, expected)
+Server listening on port 8080
+Baseline: listeners=1, heap=4.04MB
+After 500 requests: listeners=501, heap=6.13MB
+FAIL: Listener count grew to 501 (expected <= 10)
+      Event listeners are being registered per-request and never removed
+  [trial 4] fail (bug detected, expected)
+Server listening on port 8080
+Baseline: listeners=1, heap=4.04MB
+After 500 requests: listeners=501, heap=6.05MB
+FAIL: Listener count grew to 501 (expected <= 10)
+      Event listeners are being registered per-request and never removed
+  [trial 5] fail (bug detected, expected)
+Server listening on port 8080
+Baseline: listeners=1, heap=4.04MB
+After 500 requests: listeners=501, heap=6.19MB
+FAIL: Listener count grew to 501 (expected <= 10)
+      Event listeners are being registered per-request and never removed
+  [trial 6] fail (bug detected, expected)
+Server listening on port 8080
+Baseline: listeners=1, heap=4.04MB
+After 500 requests: listeners=501, heap=6.07MB
+FAIL: Listener count grew to 501 (expected <= 10)
+      Event listeners are being registered per-request and never removed
+  [trial 7] fail (bug detected, expected)
+Server listening on port 8080
+Baseline: listeners=1, heap=4.04MB
+After 500 requests: listeners=501, heap=6.24MB
+FAIL: Listener count grew to 501 (expected <= 10)
+      Event listeners are being registered per-request and never removed
+  [trial 8] fail (bug detected, expected)

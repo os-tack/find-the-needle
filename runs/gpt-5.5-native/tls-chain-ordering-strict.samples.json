@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "tls-chain-ordering-strict",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 144448,
+    "output_tokens": 2107,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Implemented the TLS chain ordering fix in [loader.go](/app/app/tlssetup/loader.go:52). The loader now keeps the matched leaf first, then rebuilds the remaining certificate list by following verified issuer relationships with `RawIssuer`/`RawSubject` plus `CheckSignatureFrom`.\n\nVerified:\n\n```text\ngo test ./...\nPASS\n\n./test.sh\nPASS: TLS chain is correctly ordered per RFC 5246\n```",
+    "timestamp": "2026-06-14T23:18:04Z",
+    "token_cost": 2107,
+    "tool_uses": 14,
+    "turns_to_fix": 1,
+    "wall_clock": 44.745,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:18:14+00:00"
+  }
+]

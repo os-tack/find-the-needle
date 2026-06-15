@@ -56,7 +56,7 @@ NEW_3ARM = [
     "kimi-k2.6",
     # Audit 2026-04-28: codex CLI 0.125.0 accepts all gpt-5.x — promote to 3ARM
     "gpt-5.2", "gpt-5.4",
-    "gpt-5.5", "gpt-5.5-pro",
+    "gpt-5.5",  # gpt-5.5-pro dropped 2026-06-14 (owner: too expensive at $30/$180 API list)
 ]
 NEW_2ARM = [
     # gemini models: native arm uses GeminiCpuDriver via kernel-cpu — no CLI harness
@@ -74,6 +74,39 @@ NEW_2ARM = [
 NEW_MLX_KERNEL = [
     "ternary-bonsai-8b",
 ]
+
+# ---------- frontier 2026 (approach-a Control + B sweep) ----------
+# Curated 10-model roster for the clean Control(native) + B baseline on the
+# current frontier running ostk v7.6.0. Selected via `--frontier`, which
+# bypasses the EXISTING/NEW category logic and the has_native_cpu_driver
+# gating entirely: each entry's arms are taken verbatim.
+#   Tier-1 (native CpuDriver → Control + true B):  ["native", "kernel-cpu"]
+#   Tier-2 (no native driver → Control + B* generic): ["native", "kernel"]
+FRONTIER_2026 = {  # model -> arms (exact, no gating)
+    # Tier-1: true native driver, true B = kernel-cpu
+    "claude-opus-4-8":   ["native", "kernel-cpu"],
+    "claude-sonnet-4-6": ["native", "kernel-cpu"],
+    "gemini-3.1-pro-preview": ["native", "kernel-cpu"],
+    # gemini-3.5-flash: DEFERRED 2026-06-14. The is_gemini_3 thinking-config gate
+    # (cpu/gemini.rs) was fixed to include the 3.5 family, but the kernel arm then
+    # surfaced a SECOND bug: the agent makes initial api.calls then stalls/over-runs
+    # the 660s poll deadline on even an easy bench (0 turns/0 tokens/deadline_exceeded
+    # — while gemini-3.1-pro-preview is healthy on the SAME driver). Needs deeper
+    # gemini thinking-response/loop work (likely thoughtSignature echo across turns).
+    # gemini-3.1-pro-preview remains the gemini frontier data point. (qwen3-coder
+    # also dropped — native DashScope key-blocked from ES.)
+    "devstral-2512":     ["native", "kernel-cpu"],
+    # gpt-5.5: runs the kernel-cpu arm but ostk v7.6.0 has no native OpenAI
+    # Responses-API driver, so it falls back to generic OpenRouter → labeled B*
+    # (generic_kernel) in consolidate_scores. gpt-5.5-pro dropped 2026-06-14
+    # (owner: too expensive at $30/$180 API list, and B* anyway).
+    "gpt-5.5":           ["native", "kernel-cpu"],
+    # Tier-2: no native driver, B* = generic OpenRouter kernel
+    # (deepseek-v4-pro native Control is KEY-BLOCKED — only the kernel/B* arm runs)
+    "grok-4.3":          ["native", "kernel"],
+    "deepseek-v4-pro":   ["native", "kernel"],
+    "kimi-k2.6":         ["native", "kernel"],
+}
 
 @dataclass
 class ModelSpec:
@@ -108,10 +141,16 @@ def has_native_cpu_driver(model: str) -> bool:
     return any(model.startswith(p) for p in prefixes)
 
 
-def roster() -> list[ModelSpec]:
+def roster(frontier: bool = False) -> list[ModelSpec]:
     """Build the model × arm matrix, dropping kernel-cpu for models without a
     native CpuDriver (where kernel-cpu would be a redundant duplicate of
-    kernel via OpenRouter)."""
+    kernel via OpenRouter).
+
+    When `frontier` is True, return EXACTLY the FRONTIER_2026 roster with each
+    model's arms taken verbatim — no EXISTING/NEW category logic, no
+    has_native_cpu_driver gating. This is the approach-(a) Control + B sweep."""
+    if frontier:
+        return [ModelSpec(m, list(arms), "new") for m, arms in FRONTIER_2026.items()]
     r = []
     def arms_for(default_arms: list[str], model: str) -> list[str]:
         if "kernel-cpu" in default_arms and not has_native_cpu_driver(model):
@@ -131,11 +170,17 @@ def roster() -> list[ModelSpec]:
     return r
 
 # ---------- benchmarks ----------
+# Benchmarks retired from the active suite: legacy tests predating the ostk
+# rename / the kernel's real existence — their oracles are not valid for this
+# comparison, so they are neither run nor published. Score files are archived
+# (not deleted) under runs-archive/legacy-pre-kernel-<ts>/.
+RETIRED_BENCHMARKS = {"haystack-boot", "haystack-mint"}
+
 def load_benchmarks() -> list[str]:
     bdir = ROOT / "benchmarks"
     names = []
     for p in sorted(bdir.iterdir()):
-        if p.is_dir() and not p.name.startswith("_"):
+        if p.is_dir() and not p.name.startswith("_") and p.name not in RETIRED_BENCHMARKS:
             names.append(p.name)
     return names
 
@@ -328,6 +373,9 @@ def now_iso() -> str:
 # ---------- main ----------
 def main() -> int:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--frontier", action="store_true",
+                    help="use the curated FRONTIER_2026 roster (10 models, Control + B) verbatim, "
+                         "bypassing existing/new category + native-driver gating")
     ap.add_argument("--only-new", action="store_true", help="skip existing models, run only new additions")
     ap.add_argument("--model", action="append", default=[], help="restrict to model(s); repeatable")
     ap.add_argument("--arm", action="append", default=[], help="restrict to arm(s); repeatable")
@@ -359,7 +407,7 @@ def main() -> int:
         print("no benchmarks selected", file=sys.stderr)
         return 1
 
-    models = roster()
+    models = roster(frontier=args.frontier)
     if args.only_new:
         models = [m for m in models if m.category == "new"]
     if args.model:

@@ -1,0 +1,5 @@
+DONE|gemini-3.1-pro-preview|native|resolved=false in=0 out=0 tools=0 stop=fail rc=1
+DONE|claude-opus-4-8|native|resolved=true in=109215 out=1585 tools=7 stop=pass rc=0
+DONE|gpt-5.5|native|resolved=true in=99743 out=1467 tools=13 stop=pass rc=0
+DONE|kimi-k2.6|native|resolved=true in=13433 out=0 tools=11 stop=pass rc=0
+DONE|devstral-2512|native|resolved=false in=317603 out=3001 tools=26 stop=fail rc=1

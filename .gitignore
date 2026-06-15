@@ -6,3 +6,14 @@ target/
 Cargo.lock
 __pycache__/
 *.pyc
+
+# local bench provenance — not for publish
+runs-archive/
+runs/.archive*
+__pycache__/
+*.pyc
+runs/*.log
+runs/.state.jsonl*
+runs/parallel-sweep/
+runs/logs/
+runs/openrouter/

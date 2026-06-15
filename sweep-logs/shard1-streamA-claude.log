@@ -1,0 +1,1774 @@
+[gate] ostk version OK: ostk 7.6.0
+[plan] models=2 benches=40
+[plan] total cells=160 pending=149 skipped=11
+[run] starting at 2026-06-14T09:46:17+00:00
+
+========== claude-opus-4-8 (new, arms=['native', 'kernel-cpu']) ==========
+  [2026-06-14T09:46:17+00:00] claude-opus-4-8 / api-version-field-drop / native  (sample 1/1, attempt 1)
+    OK (42s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:46:59+00:00] claude-opus-4-8 / api-version-field-drop / kernel-cpu  (sample 1/1, attempt 1)
+    OK (78s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:48:17+00:00] claude-opus-4-8 / auth-bypass-path-traversal / native  (sample 1/1, attempt 1)
+    OK (47s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:49:04+00:00] claude-opus-4-8 / auth-bypass-path-traversal / kernel-cpu  (sample 1/1, attempt 1)
+    OK (101s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:50:44+00:00] claude-opus-4-8 / bidi-override-injection / native  (sample 1/1, attempt 1)
+    OK (77s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:52:02+00:00] claude-opus-4-8 / bidi-override-injection / kernel-cpu  (sample 1/1, attempt 1)
+    OK (109s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:53:50+00:00] claude-opus-4-8 / cache-stale-invalidation / native  (sample 1/1, attempt 1)
+    OK (48s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:54:38+00:00] claude-opus-4-8 / cache-stale-invalidation / kernel-cpu  (sample 1/1, attempt 1)
+    OK (94s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:56:12+00:00] claude-opus-4-8 / compiler-macro-expansion / native  (sample 1/1, attempt 1)
+    OK (95s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:57:48+00:00] claude-opus-4-8 / compiler-macro-expansion / kernel-cpu  (sample 1/1, attempt 1)
+    OK (77s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T09:59:05+00:00] claude-opus-4-8 / data-corruption-concurrent-write / native  (sample 1/1, attempt 1)
+    OK (98s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:00:42+00:00] claude-opus-4-8 / data-corruption-concurrent-write / kernel-cpu  (sample 1/1, attempt 1)
+    OK (97s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:02:19+00:00] claude-opus-4-8 / deadlock-transfer / native  (sample 1/1, attempt 1)
+    OK (60s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:03:20+00:00] claude-opus-4-8 / deadlock-transfer / kernel-cpu  (sample 1/1, attempt 1)
+    OK (83s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:04:43+00:00] claude-opus-4-8 / encoding-mojibake / native  (sample 1/1, attempt 1)
+    OK (55s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:05:38+00:00] claude-opus-4-8 / encoding-mojibake / kernel-cpu  (sample 1/1, attempt 1)
+    OK (136s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:07:54+00:00] claude-opus-4-8 / goroutine-leak-handler / native  (sample 1/1, attempt 1)
+    OK (82s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:09:16+00:00] claude-opus-4-8 / goroutine-leak-handler / kernel-cpu  (sample 1/1, attempt 1)
+    OK (125s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:11:21+00:00] claude-opus-4-8 / graphql-dataloader-per-request / native  (sample 1/1, attempt 1)
+    OK (88s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:12:49+00:00] claude-opus-4-8 / graphql-dataloader-per-request / kernel-cpu  (sample 1/1, attempt 1)
+    OK (78s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:14:06+00:00] claude-opus-4-8 / haystack-boot / native  (sample 1/1, attempt 1)
+    OK (98s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:15:44+00:00] claude-opus-4-8 / haystack-boot / kernel-cpu  (sample 1/1, attempt 1)
+    OK (74s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:16:58+00:00] claude-opus-4-8 / haystack-mint / native  (sample 1/1, attempt 1)
+    OK (56s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:17:54+00:00] claude-opus-4-8 / haystack-mint / kernel-cpu  (sample 1/1, attempt 1)
+    OK (137s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:20:11+00:00] claude-opus-4-8 / import-cycle-startup / native  (sample 1/1, attempt 1)
+    OK (41s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:20:52+00:00] claude-opus-4-8 / import-cycle-startup / kernel-cpu  (sample 1/1, attempt 1)
+    OK (82s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:22:15+00:00] claude-opus-4-8 / k8s-assume-cache-silent-drop / native  (sample 1/1, attempt 1)
+    OK (45s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:23:00+00:00] claude-opus-4-8 / k8s-assume-cache-silent-drop / kernel-cpu  (sample 1/1, attempt 1)
+    OK (91s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:24:31+00:00] claude-opus-4-8 / k8s-scheduler-shutdown-deadlock / native  (sample 1/1, attempt 1)
+    OK (43s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:25:14+00:00] claude-opus-4-8 / k8s-scheduler-shutdown-deadlock / kernel-cpu  (sample 1/1, attempt 1)
+    OK (115s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:27:08+00:00] claude-opus-4-8 / kernel-panic-ioctl / native  (sample 1/1, attempt 1)
+    OK (102s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:28:50+00:00] claude-opus-4-8 / kernel-panic-ioctl / kernel-cpu  (sample 1/1, attempt 1)
+    OK (108s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:30:38+00:00] claude-opus-4-8 / linearizability-stale-read / native  (sample 1/1, attempt 1)
+    OK (425s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:37:42+00:00] claude-opus-4-8 / linearizability-stale-read / kernel-cpu  (sample 1/1, attempt 1)
+    OK (129s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:39:51+00:00] claude-opus-4-8 / memory-leak-event-listener / native  (sample 1/1, attempt 1)
+    OK (60s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:40:51+00:00] claude-opus-4-8 / memory-leak-event-listener / kernel-cpu  (sample 1/1, attempt 1)
+    OK (85s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:42:16+00:00] claude-opus-4-8 / missing-input-validation / native  (sample 1/1, attempt 1)
+    OK (38s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:42:54+00:00] claude-opus-4-8 / missing-input-validation / kernel-cpu  (sample 1/1, attempt 1)
+    OK (105s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:44:39+00:00] claude-opus-4-8 / nginx-upstream-port-mismatch / native  (sample 1/1, attempt 1)
+    OK (319s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:49:58+00:00] claude-opus-4-8 / nginx-upstream-port-mismatch / kernel-cpu  (sample 1/1, attempt 1)
+    OK (60s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:50:58+00:00] claude-opus-4-8 / off-by-one-array-slice / native  (sample 1/1, attempt 1)
+    OK (63s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:52:01+00:00] claude-opus-4-8 / off-by-one-array-slice / kernel-cpu  (sample 1/1, attempt 1)
+    OK (66s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:53:06+00:00] claude-opus-4-8 / off-by-one-pagination / native  (sample 1/1, attempt 1)
+    OK (61s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:54:07+00:00] claude-opus-4-8 / off-by-one-pagination / kernel-cpu  (sample 1/1, attempt 1)
+    OK (68s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:55:15+00:00] claude-opus-4-8 / performance-cliff-hash / native  (sample 1/1, attempt 1)
+    OK (47s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:56:02+00:00] claude-opus-4-8 / performance-cliff-hash / kernel-cpu  (sample 1/1, attempt 1)
+    OK (98s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T10:57:40+00:00] claude-opus-4-8 / postgres-migration-schema-drift / native  (sample 1/1, attempt 1)
+    HARD FAIL: ## Summary
+
+**The needle:** a Postgres migration schema-drift bug in `app/main.go`.
+
+Migration `00
+
+=== bench summary ===
+0/1 passed, 117807ms total [model=claude-opus-4-8, arms=native]
+
+error: 1 scen
+  [2026-06-14T10:59:48+00:00] claude-opus-4-8 / postgres-migration-schema-drift / kernel-cpu  (sample 1/1, attempt 1)
+    HARD FAIL:   [kernel] dispatching via `ostk kernel spawn` (cpu arm, model=claude-opus-4-8)...
+  [kernel] spawn returned: spawned bench (model claude-opus-4-8, budget $100, pid 160)
+  [kernel] agent journaled ter
+  [2026-06-14T11:02:38+00:00] claude-opus-4-8 / race-condition-counter / native  (sample 1/1, attempt 1)
+    OK (49s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:03:27+00:00] claude-opus-4-8 / race-condition-counter / kernel-cpu  (sample 1/1, attempt 1)
+    OK (131s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:05:38+00:00] claude-opus-4-8 / raft-snapshot-commit-gap / native  (sample 1/1, attempt 1)
+    OK (100s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:07:19+00:00] claude-opus-4-8 / raft-snapshot-commit-gap / kernel-cpu  (sample 1/1, attempt 1)
+    OK (116s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:09:15+00:00] claude-opus-4-8 / rate-limit-bypass-header / native  (sample 1/1, attempt 1)
+    OK (86s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:10:40+00:00] claude-opus-4-8 / rate-limit-bypass-header / kernel-cpu  (sample 1/1, attempt 1)
+    OK (128s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:12:49+00:00] claude-opus-4-8 / relaxed-ordering-ringbuf / native  (sample 1/1, attempt 1)
+    OK (65s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:13:54+00:00] claude-opus-4-8 / relaxed-ordering-ringbuf / kernel-cpu  (sample 1/1, attempt 1)
+    OK (138s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:16:13+00:00] claude-opus-4-8 / retry-storm-duplicate-transfer / native  (sample 1/1, attempt 1)
+    OK (188s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:19:20+00:00] claude-opus-4-8 / retry-storm-duplicate-transfer / kernel-cpu  (sample 1/1, attempt 1)
+    OK (186s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:22:27+00:00] claude-opus-4-8 / silent-data-corruption / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native] summary: Found and fixed the needle. ✅
+
+## The bug
+
+In `src/main.rs`, `process_file` read the input with a **single** `read()` in
+
+=== bench summary ===
+0/1 passed, 163107ms total [model=cl
+  [2026-06-14T11:25:20+00:00] claude-opus-4-8 / silent-data-corruption / kernel-cpu  (sample 1/1, attempt 1)
+    HARD FAIL:   [kernel] dispatching via `ostk kernel spawn` (cpu arm, model=claude-opus-4-8)...
+  [kernel] spawn returned: spawned bench (model claude-opus-4-8, budget $100, pid 161)
+  [kernel] agent journaled ter
+  [2026-06-14T11:27:22+00:00] claude-opus-4-8 / split-brain-leader-election / native  (sample 1/1, attempt 1)
+    HARD FAIL: 
+**File:** `app/cluster/node.go`, in `StartElection` — the quorum check.
+
+```go
+if finalVotes >= t
+
+=== bench summary ===
+0/1 passed, 73621ms total [model=claude-opus-4-8, arms=native]
+
+error: 1 scena
+  [2026-06-14T11:28:46+00:00] claude-opus-4-8 / split-brain-leader-election / kernel-cpu  (sample 1/1, attempt 1)
+    OK (108s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:30:35+00:00] claude-opus-4-8 / sql-injection-search / native  (sample 1/1, attempt 1)
+    OK (55s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:31:30+00:00] claude-opus-4-8 / sql-injection-search / kernel-cpu  (sample 1/1, attempt 1)
+    OK (95s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:33:05+00:00] claude-opus-4-8 / ssrf-allowlist-port-confusion / native  (sample 1/1, attempt 1)
+    OK (50s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:33:54+00:00] claude-opus-4-8 / ssrf-allowlist-port-confusion / kernel-cpu  (sample 1/1, attempt 1)
+    OK (114s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:35:48+00:00] claude-opus-4-8 / timezone-scheduling / native  (sample 1/1, attempt 1)
+    OK (53s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:36:41+00:00] claude-opus-4-8 / timezone-scheduling / kernel-cpu  (sample 1/1, attempt 1)
+    OK (429s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T11:43:50+00:00] claude-opus-4-8 / timing-attack-comparison / native  (sample 1/1, attempt 1)
+    OK (1478s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:08:28+00:00] claude-opus-4-8 / timing-attack-comparison / kernel-cpu  (sample 1/1, attempt 1)
+    OK (77s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:09:44+00:00] claude-opus-4-8 / tls-chain-ordering-strict / native  (sample 1/1, attempt 1)
+    OK (134s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:11:58+00:00] claude-opus-4-8 / tls-chain-ordering-strict / kernel-cpu  (sample 1/1, attempt 1)
+    OK (124s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:14:02+00:00] claude-opus-4-8 / type-coercion-comparison / native  (sample 1/1, attempt 1)
+    OK (37s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:14:40+00:00] claude-opus-4-8 / type-coercion-comparison / kernel-cpu  (sample 1/1, attempt 1)
+    OK (78s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:15:57+00:00] claude-opus-4-8 / wal-fsync-ghost-ack / native  (sample 1/1, attempt 1)
+    OK (108s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:17:45+00:00] claude-opus-4-8 / wal-fsync-ghost-ack / kernel-cpu  (sample 1/1, attempt 1)
+    OK (144s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:20:10+00:00] claude-opus-4-8 / wrong-operator-discount / native  (sample 1/1, attempt 1)
+    OK (28s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:20:37+00:00] claude-opus-4-8 / wrong-operator-discount / kernel-cpu  (sample 1/1, attempt 1)
+    OK (71s)
+    [F7] sample 1 resolved=true; canonical score preserved
+
+========== claude-sonnet-4-6 (new, arms=['native', 'kernel-cpu']) ==========
+  [2026-06-14T12:21:48+00:00] claude-sonnet-4-6 / api-version-field-drop / native  (sample 1/1, attempt 1)
+    OK (44s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:22:32+00:00] claude-sonnet-4-6 / api-version-field-drop / kernel-cpu  (sample 1/1, attempt 1)
+    OK (139s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:24:51+00:00] claude-sonnet-4-6 / auth-bypass-path-traversal / native  (sample 1/1, attempt 1)
+    OK (44s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:25:35+00:00] claude-sonnet-4-6 / auth-bypass-path-traversal / kernel-cpu  (sample 1/1, attempt 1)
+    OK (72s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:26:47+00:00] claude-sonnet-4-6 / bidi-override-injection / native  (sample 1/1, attempt 1)
+    OK (106s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:28:33+00:00] claude-sonnet-4-6 / bidi-override-injection / kernel-cpu  (sample 1/1, attempt 1)
+    OK (99s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:30:11+00:00] claude-sonnet-4-6 / cache-stale-invalidation / native  (sample 1/1, attempt 1)
+    OK (45s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:30:56+00:00] claude-sonnet-4-6 / cache-stale-invalidation / kernel-cpu  (sample 1/1, attempt 1)
+    OK (110s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:32:46+00:00] claude-sonnet-4-6 / compiler-macro-expansion / native  (sample 1/1, attempt 1)
+    OK (208s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:36:14+00:00] claude-sonnet-4-6 / compiler-macro-expansion / kernel-cpu  (sample 1/1, attempt 1)
+    OK (99s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:37:53+00:00] claude-sonnet-4-6 / data-corruption-concurrent-write / native  (sample 1/1, attempt 1)
+    OK (199s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:41:11+00:00] claude-sonnet-4-6 / data-corruption-concurrent-write / kernel-cpu  (sample 1/1, attempt 1)
+    OK (77s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:42:29+00:00] claude-sonnet-4-6 / deadlock-transfer / native  (sample 1/1, attempt 1)
+    OK (35s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:43:04+00:00] claude-sonnet-4-6 / deadlock-transfer / kernel-cpu  (sample 1/1, attempt 1)
+    OK (100s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:44:43+00:00] claude-sonnet-4-6 / encoding-mojibake / native  (sample 1/1, attempt 1)
+    OK (40s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:45:24+00:00] claude-sonnet-4-6 / encoding-mojibake / kernel-cpu  (sample 1/1, attempt 1)
+    OK (79s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:46:42+00:00] claude-sonnet-4-6 / goroutine-leak-handler / native  (sample 1/1, attempt 1)
+    OK (76s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:47:59+00:00] claude-sonnet-4-6 / goroutine-leak-handler / kernel-cpu  (sample 1/1, attempt 1)
+    OK (105s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:49:43+00:00] claude-sonnet-4-6 / graphql-dataloader-per-request / native  (sample 1/1, attempt 1)
+    OK (97s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:51:21+00:00] claude-sonnet-4-6 / graphql-dataloader-per-request / kernel-cpu  (sample 1/1, attempt 1)
+    OK (128s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:53:29+00:00] claude-sonnet-4-6 / haystack-boot / native  (sample 1/1, attempt 1)
+    OK (63s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:54:32+00:00] claude-sonnet-4-6 / haystack-boot / kernel-cpu  (sample 1/1, attempt 1)
+    OK (94s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:56:06+00:00] claude-sonnet-4-6 / haystack-mint / native  (sample 1/1, attempt 1)
+    OK (44s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:56:49+00:00] claude-sonnet-4-6 / haystack-mint / kernel-cpu  (sample 1/1, attempt 1)
+    OK (99s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:58:28+00:00] claude-sonnet-4-6 / import-cycle-startup / native  (sample 1/1, attempt 1)
+    OK (51s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:59:19+00:00] claude-sonnet-4-6 / import-cycle-startup / kernel-cpu  (sample 1/1, attempt 1)
+    OK (152s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:01:51+00:00] claude-sonnet-4-6 / k8s-assume-cache-silent-drop / native  (sample 1/1, attempt 1)
+    OK (45s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:02:35+00:00] claude-sonnet-4-6 / k8s-assume-cache-silent-drop / kernel-cpu  (sample 1/1, attempt 1)
+    OK (62s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:03:37+00:00] claude-sonnet-4-6 / k8s-scheduler-shutdown-deadlock / native  (sample 1/1, attempt 1)
+    OK (36s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:04:13+00:00] claude-sonnet-4-6 / k8s-scheduler-shutdown-deadlock / kernel-cpu  (sample 1/1, attempt 1)
+    OK (128s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:06:20+00:00] claude-sonnet-4-6 / kernel-panic-ioctl / native  (sample 1/1, attempt 1)
+    OK (122s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:08:23+00:00] claude-sonnet-4-6 / kernel-panic-ioctl / kernel-cpu  (sample 1/1, attempt 1)
+    OK (160s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:11:02+00:00] claude-sonnet-4-6 / linearizability-stale-read / native  (sample 1/1, attempt 1)
+    OK (271s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:15:33+00:00] claude-sonnet-4-6 / linearizability-stale-read / kernel-cpu  (sample 1/1, attempt 1)
+    OK (150s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:18:03+00:00] claude-sonnet-4-6 / memory-leak-event-listener / native  (sample 1/1, attempt 1)
+    OK (57s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:19:00+00:00] claude-sonnet-4-6 / memory-leak-event-listener / kernel-cpu  (sample 1/1, attempt 1)
+    OK (97s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:20:37+00:00] claude-sonnet-4-6 / missing-input-validation / native  (sample 1/1, attempt 1)
+    OK (40s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:21:17+00:00] claude-sonnet-4-6 / missing-input-validation / kernel-cpu  (sample 1/1, attempt 1)
+    OK (120s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:23:17+00:00] claude-sonnet-4-6 / nginx-upstream-port-mismatch / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]   {"type":"result","subtype":"success","is_error":false,"api_error_status":null,"duration_ms":271222,"duration_api_ms":251066,"ttft_ms":2740,"ttft_stream_ms":2341,"time_to_request_ms":22,"n
+  [2026-06-14T13:28:02+00:00] claude-sonnet-4-6 / nginx-upstream-port-mismatch / kernel-cpu  (sample 1/1, attempt 1)
+    OK (83s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:29:25+00:00] claude-sonnet-4-6 / off-by-one-array-slice / native  (sample 1/1, attempt 1)
+    OK (31s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:29:56+00:00] claude-sonnet-4-6 / off-by-one-array-slice / kernel-cpu  (sample 1/1, attempt 1)
+    OK (95s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:31:31+00:00] claude-sonnet-4-6 / off-by-one-pagination / native  (sample 1/1, attempt 1)
+    OK (37s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:32:08+00:00] claude-sonnet-4-6 / off-by-one-pagination / kernel-cpu  (sample 1/1, attempt 1)
+    OK (95s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:33:44+00:00] claude-sonnet-4-6 / performance-cliff-hash / native  (sample 1/1, attempt 1)
+    OK (40s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:34:23+00:00] claude-sonnet-4-6 / performance-cliff-hash / kernel-cpu  (sample 1/1, attempt 1)
+    OK (84s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:35:47+00:00] claude-sonnet-4-6 / postgres-migration-schema-drift / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native] using claude (Claude Code)
+  [native] running claude ...
+  [native]   {"type":"result","subtype":"success","is_error":false,"api_error_status":null,"duration_ms":246509,"duration_api_ms":23
+  [2026-06-14T13:40:06+00:00] claude-sonnet-4-6 / race-condition-counter / native  (sample 1/1, attempt 1)
+    OK (38s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:40:45+00:00] claude-sonnet-4-6 / race-condition-counter / kernel-cpu  (sample 1/1, attempt 1)
+    OK (1628s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:07:53+00:00] claude-sonnet-4-6 / raft-snapshot-commit-gap / native  (sample 1/1, attempt 1)
+    OK (121s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:09:54+00:00] claude-sonnet-4-6 / raft-snapshot-commit-gap / kernel-cpu  (sample 1/1, attempt 1)
+    OK (111s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:11:44+00:00] claude-sonnet-4-6 / rate-limit-bypass-header / native  (sample 1/1, attempt 1)
+    OK (46s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:12:30+00:00] claude-sonnet-4-6 / rate-limit-bypass-header / kernel-cpu  (sample 1/1, attempt 1)
+    OK (193s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:15:43+00:00] claude-sonnet-4-6 / relaxed-ordering-ringbuf / native  (sample 1/1, attempt 1)
+    OK (97s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:17:21+00:00] claude-sonnet-4-6 / relaxed-ordering-ringbuf / kernel-cpu  (sample 1/1, attempt 1)
+    OK (120s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:19:21+00:00] claude-sonnet-4-6 / retry-storm-duplicate-transfer / native  (sample 1/1, attempt 1)
+    OK (186s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:22:26+00:00] claude-sonnet-4-6 / retry-storm-duplicate-transfer / kernel-cpu  (sample 1/1, attempt 1)
+    OK (210s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:25:57+00:00] claude-sonnet-4-6 / silent-data-corruption / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native] using claude (Claude Code)
+  [native] running claude ...
+  [native]   {"type":"result","subtype":"success","is_error":false,"api_error_status":null,"duration_ms":141892,"duration_api_ms":55
+  [2026-06-14T14:28:39+00:00] claude-sonnet-4-6 / silent-data-corruption / kernel-cpu  (sample 1/1, attempt 1)
+    OK (89s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:30:08+00:00] claude-sonnet-4-6 / split-brain-leader-election / native  (sample 1/1, attempt 1)
+    HARD FAIL: 
+**The bug:** `node.go:124` used `>=` instead of `>` in the quorum check:
+
+```go
+// Befor
+
+=== bench summary ===
+0/1 passed, 65393ms total [model=claude-sonnet-4-6, arms=native]
+
+error: 1 scenario(s) 
+  [2026-06-14T14:31:24+00:00] claude-sonnet-4-6 / split-brain-leader-election / kernel-cpu  (sample 1/1, attempt 1)
+    OK (220s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:35:03+00:00] claude-sonnet-4-6 / sql-injection-search / native  (sample 1/1, attempt 1)
+    OK (40s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:35:43+00:00] claude-sonnet-4-6 / ssrf-allowlist-port-confusion / native  (sample 1/1, attempt 1)
+    OK (50s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:36:32+00:00] claude-sonnet-4-6 / ssrf-allowlist-port-confusion / kernel-cpu  (sample 1/1, attempt 1)
+    OK (120s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:38:32+00:00] claude-sonnet-4-6 / timezone-scheduling / native  (sample 1/1, attempt 1)
+    OK (54s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:39:26+00:00] claude-sonnet-4-6 / timing-attack-comparison / native  (sample 1/1, attempt 1)
+    OK (123s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:41:29+00:00] claude-sonnet-4-6 / timing-attack-comparison / kernel-cpu  (sample 1/1, attempt 1)
+    OK (112s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:43:20+00:00] claude-sonnet-4-6 / tls-chain-ordering-strict / native  (sample 1/1, attempt 1)
+    OK (511s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:51:51+00:00] claude-sonnet-4-6 / type-coercion-comparison / native  (sample 1/1, attempt 1)
+    OK (48s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:52:40+00:00] claude-sonnet-4-6 / wal-fsync-ghost-ack / native  (sample 1/1, attempt 1)
+    OK (111s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:54:31+00:00] claude-sonnet-4-6 / wrong-operator-discount / native  (sample 1/1, attempt 1)
+    OK (31s)
+    [F7] sample 1 resolved=true; canonical score preserved
+
+========== summary @ 2026-06-14T14:55:01+00:00 ==========
+  succeeded: 140
+  hard fail: 9
+  gave up:   0
+  skipped:   11
+  total:     160
+
+========== punch list ==========
+  transient_fail   claude-sonnet-4-7 / null-pointer-config / native
+  transient_fail   claude-sonnet-4-7 / null-pointer-config / kernel
+  transient_fail   claude-sonnet-4-7 / null-pointer-config / kernel-cpu
+  transient_fail   claude-haiku-4-7 / null-pointer-config / native
+  transient_fail   claude-opus-4-7 / null-pointer-config / native
+  transient_fail   kimi-k2.6 / null-pointer-config / kernel
+  transient_fail   kimi-k2.6 / null-pointer-config / kernel-cpu
+  failed           claude-haiku-4-5 / encoding-mojibake / kernel-cpu
+  failed           gemini-2.5-flash / auth-bypass-path-traversal / kernel-cpu
+  failed           kimi-k2.5 / api-version-field-drop / kernel-cpu
+  failed           claude-opus-4-6 / auth-bypass-path-traversal / kernel-cpu
+  failed           claude-haiku-4-5 / deadlock-transfer / kernel-cpu
+  failed           claude-haiku-4-5 / off-by-one-pagination / kernel-cpu
+  failed           claude-haiku-4-5 / data-corruption-concurrent-write / kernel-cpu
+  failed           kimi-k2.5 / auth-bypass-path-traversal / kernel
+  failed           gemini-3-flash-preview / api-version-field-drop / kernel-cpu
+  failed           codestral-2508 / api-version-field-drop / kernel-cpu
+  failed           devstral-2512 / cache-stale-invalidation / kernel
+  failed           claude-sonnet-4-6 / cache-stale-invalidation / kernel
+  transient_fail   devstral-medium / encoding-mojibake / kernel
+  transient_fail   claude-haiku-4-5 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   kimi-k2.5 / deadlock-transfer / kernel
+  transient_fail   codestral-2508 / deadlock-transfer / kernel
+  transient_fail   claude-sonnet-4-6 / deadlock-transfer / kernel
+  transient_fail   claude-opus-4-6 / deadlock-transfer / kernel
+  transient_fail   kimi-k2.5 / deadlock-transfer / kernel-cpu
+  transient_fail   devstral-2512 / deadlock-transfer / kernel
+  transient_fail   claude-sonnet-4-6 / encoding-mojibake / kernel
+  transient_fail   claude-opus-4-6 / encoding-mojibake / kernel
+  transient_fail   devstral-2512 / encoding-mojibake / kernel
+  transient_fail   claude-sonnet-4-6 / goroutine-leak-handler / kernel
+  transient_fail   claude-opus-4-6 / goroutine-leak-handler / kernel
+  transient_fail   grok-code-fast-1 / deadlock-transfer / kernel
+  transient_fail   devstral-2512 / goroutine-leak-handler / kernel
+  transient_fail   grok-code-fast-1 / deadlock-transfer / kernel-cpu
+  transient_fail   gemini-3-flash-preview / deadlock-transfer / kernel
+  transient_fail   claude-sonnet-4-6 / haystack-boot / kernel
+  transient_fail   grok-code-fast-1 / encoding-mojibake / kernel
+  transient_fail   grok-code-fast-1 / encoding-mojibake / kernel-cpu
+  transient_fail   claude-opus-4-6 / haystack-boot / kernel
+  transient_fail   gemini-3-flash-preview / encoding-mojibake / kernel
+  transient_fail   claude-sonnet-4-6 / haystack-mint / kernel
+  transient_fail   kimi-k2.5 / encoding-mojibake / kernel-cpu
+  transient_fail   claude-sonnet-4-6 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   claude-opus-4-6 / import-cycle-startup / kernel
+  transient_fail   kimi-k2.5 / goroutine-leak-handler / kernel
+  transient_fail   claude-sonnet-4-6 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   claude-opus-4-6 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   kimi-k2.5 / goroutine-leak-handler / kernel-cpu
+  transient_fail   claude-haiku-4-5 / null-pointer-config / kernel
+  transient_fail   claude-opus-4-6 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   kimi-k2.5 / haystack-boot / kernel
+  transient_fail   claude-haiku-4-5 / off-by-one-array-slice / kernel
+  transient_fail   claude-sonnet-4-6 / linearizability-stale-read / kernel
+  transient_fail   kimi-k2.5 / haystack-boot / kernel-cpu
+  transient_fail   kimi-k2.5 / haystack-mint / kernel
+  transient_fail   claude-sonnet-4-6 / memory-leak-event-listener / kernel
+  transient_fail   claude-opus-4-6 / linearizability-stale-read / kernel
+  transient_fail   kimi-k2.5 / haystack-mint / kernel-cpu
+  transient_fail   claude-haiku-4-5 / postgres-migration-schema-drift / kernel
+  transient_fail   claude-sonnet-4-6 / null-pointer-config / kernel
+  transient_fail   claude-sonnet-4-6 / off-by-one-array-slice / kernel
+  transient_fail   devstral-2512 / haystack-boot / kernel
+  transient_fail   codestral-2508 / encoding-mojibake / kernel
+  transient_fail   claude-sonnet-4-6 / off-by-one-pagination / kernel
+  transient_fail   codestral-2508 / encoding-mojibake / kernel-cpu
+  transient_fail   devstral-2512 / haystack-mint / kernel
+  transient_fail   claude-sonnet-4-6 / postgres-migration-schema-drift / kernel
+  transient_fail   codestral-2508 / goroutine-leak-handler / kernel
+  transient_fail   claude-haiku-4-5 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   devstral-2512 / import-cycle-startup / kernel
+  transient_fail   claude-haiku-4-5 / race-condition-counter / kernel
+  transient_fail   codestral-2508 / goroutine-leak-handler / kernel-cpu
+  transient_fail   claude-sonnet-4-6 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   codestral-2508 / haystack-boot / kernel
+  transient_fail   claude-haiku-4-5 / raft-snapshot-commit-gap / kernel
+  transient_fail   devstral-2512 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   gemini-2.5-flash / deadlock-transfer / kernel
+  transient_fail   codestral-2508 / haystack-boot / kernel-cpu
+  transient_fail   devstral-2512 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   codestral-2508 / haystack-mint / kernel
+  transient_fail   claude-sonnet-4-6 / race-condition-counter / kernel
+  transient_fail   gemini-2.5-flash / encoding-mojibake / kernel
+  transient_fail   codestral-2508 / haystack-mint / kernel-cpu
+  transient_fail   devstral-2512 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   gemini-2.5-flash / goroutine-leak-handler / kernel
+  transient_fail   claude-sonnet-4-6 / raft-snapshot-commit-gap / kernel
+  transient_fail   codestral-2508 / import-cycle-startup / kernel
+  transient_fail   claude-haiku-4-5 / silent-data-corruption / kernel
+  transient_fail   codestral-2508 / import-cycle-startup / kernel-cpu
+  transient_fail   claude-haiku-4-5 / split-brain-leader-election / kernel
+  transient_fail   claude-sonnet-4-6 / relaxed-ordering-ringbuf / kernel
+  transient_fail   devstral-2512 / linearizability-stale-read / kernel
+  transient_fail   gemini-2.5-flash / haystack-boot / kernel
+  transient_fail   codestral-2508 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   codestral-2508 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   devstral-2512 / linearizability-stale-read / kernel-cpu
+  transient_fail   gemini-2.5-flash / haystack-mint / kernel
+  transient_fail   codestral-2508 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   claude-sonnet-4-6 / silent-data-corruption / kernel
+  transient_fail   devstral-2512 / memory-leak-event-listener / kernel
+  failed           codestral-2508 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   gemini-2.5-flash / import-cycle-startup / kernel
+  transient_fail   codestral-2508 / linearizability-stale-read / kernel
+  transient_fail   gemini-2.5-flash / k8s-assume-cache-silent-drop / kernel
+  failed           claude-haiku-4-5 / sql-injection-search / kernel-cpu
+  transient_fail   claude-sonnet-4-6 / split-brain-leader-election / kernel
+  transient_fail   codestral-2508 / linearizability-stale-read / kernel-cpu
+  transient_fail   gemini-2.5-flash / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   claude-haiku-4-5 / timezone-scheduling / kernel
+  transient_fail   codestral-2508 / memory-leak-event-listener / kernel
+  failed           devstral-2512 / missing-input-validation / kernel-cpu
+  transient_fail   codestral-2508 / memory-leak-event-listener / kernel-cpu
+  transient_fail   claude-haiku-4-5 / tls-chain-ordering-strict / kernel
+  transient_fail   devstral-2512 / null-pointer-config / kernel
+  transient_fail   claude-haiku-4-5 / type-coercion-comparison / kernel
+  transient_fail   codestral-2508 / null-pointer-config / kernel
+  transient_fail   devstral-2512 / off-by-one-array-slice / kernel
+  transient_fail   claude-haiku-4-5 / wal-fsync-ghost-ack / kernel
+  transient_fail   gemini-2.5-flash / linearizability-stale-read / kernel
+  transient_fail   codestral-2508 / null-pointer-config / kernel-cpu
+  failed           claude-sonnet-4-6 / sql-injection-search / kernel-cpu
+  transient_fail   devstral-2512 / off-by-one-pagination / kernel
+  transient_fail   codestral-2508 / off-by-one-array-slice / kernel
+  transient_fail   claude-haiku-4-5 / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   claude-haiku-4-5 / wrong-operator-discount / kernel
+  transient_fail   claude-sonnet-4-6 / timezone-scheduling / kernel
+  transient_fail   codestral-2508 / off-by-one-array-slice / kernel-cpu
+  transient_fail   claude-haiku-4-5 / wrong-operator-discount / kernel-cpu
+  transient_fail   claude-sonnet-4-6 / timezone-scheduling / kernel-cpu
+  transient_fail   devstral-2512 / postgres-migration-schema-drift / kernel
+  transient_fail   codestral-2508 / off-by-one-pagination / kernel
+  transient_fail   claude-sonnet-4-6 / tls-chain-ordering-strict / kernel
+  transient_fail   devstral-2512 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   codestral-2508 / off-by-one-pagination / kernel-cpu
+  transient_fail   claude-sonnet-4-6 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   claude-sonnet-4-6 / type-coercion-comparison / kernel
+  transient_fail   codestral-2508 / postgres-migration-schema-drift / kernel
+  transient_fail   claude-sonnet-4-6 / type-coercion-comparison / kernel-cpu
+  transient_fail   codestral-2508 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   claude-sonnet-4-6 / wal-fsync-ghost-ack / kernel
+  transient_fail   codestral-2508 / race-condition-counter / kernel
+  transient_fail   claude-sonnet-4-6 / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   gemini-2.5-flash / memory-leak-event-listener / kernel
+  transient_fail   claude-sonnet-4-6 / wrong-operator-discount / kernel
+  transient_fail   devstral-2512 / race-condition-counter / kernel
+  transient_fail   codestral-2508 / race-condition-counter / kernel-cpu
+  transient_fail   claude-sonnet-4-6 / wrong-operator-discount / kernel-cpu
+  transient_fail   devstral-2512 / race-condition-counter / kernel-cpu
+  transient_fail   codestral-2508 / raft-snapshot-commit-gap / kernel
+  transient_fail   claude-opus-4-6 / linearizability-stale-read / kernel-cpu
+  transient_fail   devstral-medium / goroutine-leak-handler / kernel
+  transient_fail   claude-opus-4-6 / off-by-one-array-slice / kernel
+  transient_fail   claude-opus-4-6 / null-pointer-config / kernel
+  transient_fail   claude-opus-4-6 / off-by-one-pagination / kernel
+  transient_fail   claude-opus-4-6 / memory-leak-event-listener / kernel
+  transient_fail   gemini-2.5-flash / null-pointer-config / kernel
+  transient_fail   claude-opus-4-6 / postgres-migration-schema-drift / kernel
+  transient_fail   devstral-2512 / raft-snapshot-commit-gap / kernel
+  transient_fail   claude-opus-4-6 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   claude-opus-4-6 / memory-leak-event-listener / kernel-cpu
+  transient_fail   claude-opus-4-6 / race-condition-counter / kernel
+  transient_fail   grok-3 / deadlock-transfer / kernel
+  transient_fail   claude-opus-4-6 / null-pointer-config / kernel-cpu
+  transient_fail   claude-opus-4-6 / off-by-one-array-slice / kernel-cpu
+  transient_fail   claude-opus-4-6 / raft-snapshot-commit-gap / kernel
+  transient_fail   claude-opus-4-6 / off-by-one-pagination / kernel-cpu
+  transient_fail   claude-opus-4-6 / silent-data-corruption / kernel
+  transient_fail   claude-opus-4-6 / race-condition-counter / kernel-cpu
+  failed           gemini-2.5-flash / off-by-one-array-slice / kernel
+  transient_fail   claude-opus-4-6 / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   grok-3 / deadlock-transfer / kernel-cpu
+  transient_fail   claude-opus-4-6 / silent-data-corruption / kernel-cpu
+  transient_fail   claude-opus-4-6 / wal-fsync-ghost-ack / kernel
+  transient_fail   claude-opus-4-6 / split-brain-leader-election / kernel
+  transient_fail   claude-opus-4-6 / timezone-scheduling / kernel
+  transient_fail   claude-opus-4-6 / wrong-operator-discount / kernel
+  transient_fail   claude-opus-4-6 / split-brain-leader-election / kernel-cpu
+  transient_fail   claude-opus-4-6 / tls-chain-ordering-strict / kernel
+  transient_fail   grok-3 / encoding-mojibake / kernel
+  transient_fail   claude-opus-4-6 / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   claude-opus-4-6 / timezone-scheduling / kernel-cpu
+  transient_fail   claude-opus-4-6 / type-coercion-comparison / kernel
+  transient_fail   claude-opus-4-6 / wrong-operator-discount / kernel-cpu
+  transient_fail   claude-opus-4-6 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   gemini-2.5-flash / off-by-one-pagination / kernel
+  transient_fail   devstral-2512 / silent-data-corruption / kernel
+  transient_fail   grok-3 / encoding-mojibake / kernel-cpu
+  transient_fail   claude-opus-4-6 / type-coercion-comparison / kernel-cpu
+  transient_fail   devstral-2512 / timezone-scheduling / kernel
+  transient_fail   claude-opus-4-7 / api-version-field-drop / native
+  transient_fail   devstral-2512 / silent-data-corruption / kernel-cpu
+  transient_fail   devstral-2512 / wal-fsync-ghost-ack / kernel
+  transient_fail   devstral-2512 / wrong-operator-discount / kernel
+  transient_fail   devstral-2512 / split-brain-leader-election / kernel
+  transient_fail   devstral-2512 / type-coercion-comparison / kernel
+  failed           devstral-medium / goroutine-leak-handler / kernel-cpu
+  transient_fail   grok-3 / goroutine-leak-handler / kernel
+  transient_fail   codestral-2508 / silent-data-corruption / kernel
+  transient_fail   claude-opus-4-7 / auth-bypass-path-traversal / native
+  transient_fail   devstral-2512 / split-brain-leader-election / kernel-cpu
+  transient_fail   devstral-2512 / tls-chain-ordering-strict / kernel
+  transient_fail   claude-opus-4-7 / bidi-override-injection / native
+  transient_fail   gemini-2.5-flash / postgres-migration-schema-drift / kernel
+  transient_fail   codestral-2508 / silent-data-corruption / kernel-cpu
+  transient_fail   grok-3 / goroutine-leak-handler / kernel-cpu
+  transient_fail   claude-opus-4-7 / cache-stale-invalidation / native
+  transient_fail   devstral-2512 / wrong-operator-discount / kernel-cpu
+  failed           devstral-2512 / timezone-scheduling / kernel-cpu
+  transient_fail   claude-opus-4-7 / compiler-macro-expansion / native
+  transient_fail   devstral-2512 / type-coercion-comparison / kernel-cpu
+  transient_fail   codestral-2508 / split-brain-leader-election / kernel
+  transient_fail   devstral-medium / haystack-boot / kernel
+  transient_fail   devstral-2512 / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   devstral-medium / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   claude-opus-4-7 / data-corruption-concurrent-write / native
+  transient_fail   devstral-2512 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   grok-3 / haystack-boot / kernel
+  transient_fail   devstral-medium / import-cycle-startup / kernel
+  transient_fail   claude-opus-4-7 / deadlock-transfer / native
+  transient_fail   devstral-medium / k8s-assume-cache-silent-drop / kernel
+  transient_fail   codestral-2508 / split-brain-leader-election / kernel-cpu
+  transient_fail   claude-opus-4-7 / deadlock-transfer / kernel
+  transient_fail   grok-3 / haystack-boot / kernel-cpu
+  transient_fail   devstral-medium / haystack-mint / kernel
+  failed           devstral-medium / import-cycle-startup / kernel-cpu
+  transient_fail   claude-opus-4-7 / deadlock-transfer / kernel-cpu
+  transient_fail   devstral-medium / memory-leak-event-listener / kernel
+  transient_fail   claude-opus-4-7 / encoding-mojibake / native
+  transient_fail   grok-3 / haystack-mint / kernel
+  transient_fail   devstral-medium / off-by-one-array-slice / kernel
+  transient_fail   devstral-medium / null-pointer-config / kernel
+  failed           codestral-2508 / ssrf-allowlist-port-confusion / kernel
+  transient_fail   claude-opus-4-7 / encoding-mojibake / kernel
+  transient_fail   devstral-medium / haystack-boot / kernel-cpu
+  transient_fail   grok-3 / haystack-mint / kernel-cpu
+  transient_fail   claude-opus-4-7 / encoding-mojibake / kernel-cpu
+  transient_fail   grok-3 / import-cycle-startup / kernel
+  transient_fail   devstral-medium / linearizability-stale-read / kernel
+  transient_fail   devstral-medium / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   claude-opus-4-7 / goroutine-leak-handler / native
+  transient_fail   devstral-medium / haystack-mint / kernel-cpu
+  failed           devstral-medium / off-by-one-array-slice / kernel-cpu
+  transient_fail   grok-3 / import-cycle-startup / kernel-cpu
+  transient_fail   codestral-2508 / timezone-scheduling / kernel
+  transient_fail   claude-opus-4-7 / goroutine-leak-handler / kernel
+  transient_fail   claude-opus-4-7 / goroutine-leak-handler / kernel-cpu
+  transient_fail   devstral-medium / postgres-migration-schema-drift / kernel
+  transient_fail   grok-3 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   codestral-2508 / timezone-scheduling / kernel-cpu
+  transient_fail   claude-opus-4-7 / graphql-dataloader-per-request / native
+  transient_fail   gemini-2.5-flash / race-condition-counter / kernel
+  transient_fail   devstral-medium / null-pointer-config / kernel-cpu
+  transient_fail   grok-3 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   claude-opus-4-7 / haystack-boot / native
+  transient_fail   claude-opus-4-7 / haystack-boot / kernel
+  transient_fail   claude-opus-4-7 / haystack-boot / kernel-cpu
+  transient_fail   claude-opus-4-7 / haystack-mint / native
+  transient_fail   grok-3 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   codestral-2508 / tls-chain-ordering-strict / kernel
+  failed           gemini-2.5-flash / race-condition-counter / kernel-cpu
+  transient_fail   claude-opus-4-7 / haystack-mint / kernel
+  transient_fail   grok-3 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   codestral-2508 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   claude-opus-4-7 / haystack-mint / kernel-cpu
+  transient_fail   grok-3 / linearizability-stale-read / kernel
+  transient_fail   claude-opus-4-7 / import-cycle-startup / native
+  transient_fail   devstral-medium / off-by-one-pagination / kernel
+  transient_fail   codestral-2508 / type-coercion-comparison / kernel
+  transient_fail   devstral-medium / race-condition-counter / kernel
+  transient_fail   devstral-medium / wrong-operator-discount / kernel
+  transient_fail   claude-opus-4-7 / import-cycle-startup / kernel
+  transient_fail   grok-3 / linearizability-stale-read / kernel-cpu
+  transient_fail   codestral-2508 / type-coercion-comparison / kernel-cpu
+  transient_fail   claude-opus-4-7 / import-cycle-startup / kernel-cpu
+  transient_fail   grok-3 / memory-leak-event-listener / kernel
+  transient_fail   devstral-medium / raft-snapshot-commit-gap / kernel
+  transient_fail   codestral-2508 / wal-fsync-ghost-ack / kernel
+  transient_fail   claude-opus-4-7 / k8s-assume-cache-silent-drop / native
+  transient_fail   grok-3 / memory-leak-event-listener / kernel-cpu
+  failed           gemini-2.5-flash / raft-snapshot-commit-gap / kernel
+  transient_fail   kimi-k2.5 / import-cycle-startup / kernel-cpu
+  transient_fail   codestral-2508 / wrong-operator-discount / kernel
+  transient_fail   gemini-3-flash-preview / goroutine-leak-handler / kernel
+  transient_fail   grok-3 / null-pointer-config / kernel
+  transient_fail   kimi-k2.5 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   codestral-2508 / wrong-operator-discount / kernel-cpu
+  transient_fail   gpt-5-codex / deadlock-transfer / kernel
+  transient_fail   grok-3 / null-pointer-config / kernel-cpu
+  transient_fail   kimi-k2.5 / k8s-assume-cache-silent-drop / kernel-cpu
+  failed           gpt-5-codex / deadlock-transfer / kernel-cpu
+  transient_fail   gemini-2.5-pro / deadlock-transfer / kernel
+  transient_fail   gpt-5-codex / encoding-mojibake / kernel
+  transient_fail   grok-3 / off-by-one-array-slice / kernel
+  transient_fail   kimi-k2.5 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   gemini-3-flash-preview / haystack-boot / kernel
+  transient_fail   gpt-5-codex / encoding-mojibake / kernel-cpu
+  transient_fail   grok-3 / off-by-one-array-slice / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / deadlock-transfer / kernel
+  transient_fail   kimi-k2.5 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   gemini-2.5-pro / deadlock-transfer / kernel-cpu
+  transient_fail   grok-3 / off-by-one-pagination / kernel
+  transient_fail   gpt-5-codex / goroutine-leak-handler / kernel
+  transient_fail   devstral-medium / silent-data-corruption / kernel
+  transient_fail   devstral-medium / split-brain-leader-election / kernel
+  transient_fail   gemini-2.5-pro / encoding-mojibake / kernel
+  transient_fail   claude-opus-4-7 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   gpt-5-codex / goroutine-leak-handler / kernel-cpu
+  transient_fail   devstral-medium / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   kimi-k2.5 / linearizability-stale-read / kernel
+  transient_fail   grok-3-mini / deadlock-transfer / kernel
+  transient_fail   gemini-2.5-pro / encoding-mojibake / kernel-cpu
+  transient_fail   grok-3 / off-by-one-pagination / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / encoding-mojibake / kernel
+  transient_fail   claude-opus-4-7 / k8s-scheduler-shutdown-deadlock / native
+  transient_fail   gemini-2.5-pro / goroutine-leak-handler / kernel
+  transient_fail   devstral-medium / type-coercion-comparison / kernel
+  transient_fail   devstral-medium / relaxed-ordering-ringbuf / kernel-cpu
+  transient_fail   gpt-5-codex / haystack-boot / kernel
+  transient_fail   gemini-3-flash-preview / haystack-boot / kernel-cpu
+  transient_fail   kimi-k2.5 / linearizability-stale-read / kernel-cpu
+  transient_fail   claude-opus-4-7 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   grok-3-mini / deadlock-transfer / kernel-cpu
+  transient_fail   grok-3 / postgres-migration-schema-drift / kernel
+  transient_fail   gpt-5-codex / haystack-boot / kernel-cpu
+  transient_fail   grok-4 / deadlock-transfer / kernel
+  transient_fail   devstral-medium / type-coercion-comparison / kernel-cpu
+  transient_fail   gemini-2.5-pro / goroutine-leak-handler / kernel-cpu
+  transient_fail   kimi-k2.5 / memory-leak-event-listener / kernel
+  transient_fail   gemini-3.1-pro-preview / goroutine-leak-handler / kernel
+  transient_fail   claude-opus-4-7 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   devstral-medium / split-brain-leader-election / kernel-cpu
+  transient_fail   grok-3 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   gpt-5-codex / haystack-mint / kernel
+  transient_fail   devstral-medium / silent-data-corruption / kernel-cpu
+  transient_fail   gpt-5-codex / haystack-mint / kernel-cpu
+  transient_fail   grok-3-mini / encoding-mojibake / kernel
+  transient_fail   grok-4 / deadlock-transfer / kernel-cpu
+  transient_fail   kimi-k2.5 / memory-leak-event-listener / kernel-cpu
+  transient_fail   claude-opus-4-7 / kernel-panic-ioctl / native
+  transient_fail   gpt-5-codex / import-cycle-startup / kernel
+  transient_fail   grok-3 / race-condition-counter / kernel
+  transient_fail   gpt-5-codex / import-cycle-startup / kernel-cpu
+  transient_fail   gemini-2.5-pro / haystack-boot / kernel
+  transient_fail   grok-3-mini / encoding-mojibake / kernel-cpu
+  transient_fail   grok-4 / encoding-mojibake / kernel
+  transient_fail   claude-opus-4-7 / linearizability-stale-read / native
+  transient_fail   gpt-5-codex / k8s-assume-cache-silent-drop / kernel
+  transient_fail   gpt-5-codex / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   devstral-medium / tls-chain-ordering-strict / kernel
+  transient_fail   gemini-2.5-pro / haystack-boot / kernel-cpu
+  transient_fail   grok-3 / race-condition-counter / kernel-cpu
+  transient_fail   devstral-medium / timezone-scheduling / kernel
+  transient_fail   grok-3-mini / goroutine-leak-handler / kernel
+  transient_fail   gemini-3-flash-preview / haystack-mint / kernel
+  transient_fail   kimi-k2.5 / null-pointer-config / kernel
+  transient_fail   claude-opus-4-7 / linearizability-stale-read / kernel
+  transient_fail   grok-4 / encoding-mojibake / kernel-cpu
+  transient_fail   gpt-5-codex / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   gemini-2.5-pro / haystack-mint / kernel
+  transient_fail   grok-3-mini / goroutine-leak-handler / kernel-cpu
+  transient_fail   grok-3 / raft-snapshot-commit-gap / kernel
+  transient_fail   kimi-k2.5 / null-pointer-config / kernel-cpu
+  transient_fail   claude-opus-4-7 / linearizability-stale-read / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / haystack-boot / kernel
+  transient_fail   grok-4 / goroutine-leak-handler / kernel
+  transient_fail   gpt-5-codex / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   devstral-small / k8s-assume-cache-silent-drop / kernel
+  transient_fail   devstral-medium / timezone-scheduling / kernel-cpu
+  transient_fail   gemini-2.5-pro / haystack-mint / kernel-cpu
+  transient_fail   devstral-small / encoding-mojibake / kernel
+  transient_fail   gpt-5-codex / linearizability-stale-read / kernel
+  failed           kimi-k2.5 / off-by-one-array-slice / kernel
+  transient_fail   grok-3 / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   kimi-k2.5 / off-by-one-array-slice / kernel-cpu
+  transient_fail   claude-opus-4-7 / memory-leak-event-listener / native
+  transient_fail   devstral-small / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   gpt-5-codex / linearizability-stale-read / kernel-cpu
+  transient_fail   grok-3-mini / haystack-boot / kernel
+  transient_fail   grok-4 / goroutine-leak-handler / kernel-cpu
+  transient_fail   devstral-medium / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   devstral-small / encoding-mojibake / kernel-cpu
+  transient_fail   gemini-2.5-pro / import-cycle-startup / kernel
+  transient_fail   gpt-5-codex / memory-leak-event-listener / kernel
+  transient_fail   gemini-2.5-pro / import-cycle-startup / kernel-cpu
+  transient_fail   kimi-k2.5 / off-by-one-pagination / kernel
+  transient_fail   claude-opus-4-7 / memory-leak-event-listener / kernel
+  transient_fail   gemini-3-flash-preview / haystack-mint / kernel-cpu
+  transient_fail   grok-3 / relaxed-ordering-ringbuf / kernel
+  transient_fail   devstral-small / memory-leak-event-listener / kernel
+  transient_fail   grok-3-mini / haystack-boot / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / haystack-mint / kernel
+  transient_fail   gpt-5-codex / memory-leak-event-listener / kernel-cpu
+  transient_fail   devstral-small / haystack-mint / kernel
+  transient_fail   gemini-2.5-pro / k8s-assume-cache-silent-drop / kernel
+  transient_fail   grok-4 / haystack-boot / kernel
+  transient_fail   kimi-k2.5 / off-by-one-pagination / kernel-cpu
+  transient_fail   claude-opus-4-7 / memory-leak-event-listener / kernel-cpu
+  transient_fail   grok-3-mini / haystack-mint / kernel
+  transient_fail   gemini-2.5-pro / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   gemini-2.5-pro / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   devstral-small / memory-leak-event-listener / kernel-cpu
+  transient_fail   devstral-small / haystack-mint / kernel-cpu
+  transient_fail   gpt-5-codex / null-pointer-config / kernel
+  transient_fail   gemini-2.5-pro / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   grok-4 / haystack-boot / kernel-cpu
+  transient_fail   devstral-medium / wal-fsync-ghost-ack / kernel
+  transient_fail   gemini-3.1-pro-preview / import-cycle-startup / kernel
+  transient_fail   claude-opus-4-7 / missing-input-validation / native
+  transient_fail   grok-3-mini / haystack-mint / kernel-cpu
+  transient_fail   kimi-k2.5 / postgres-migration-schema-drift / kernel
+  transient_fail   gpt-5-codex / null-pointer-config / kernel-cpu
+  transient_fail   devstral-small / off-by-one-array-slice / kernel
+  transient_fail   devstral-medium / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   grok-4 / haystack-mint / kernel
+  transient_fail   grok-3 / silent-data-corruption / kernel
+  transient_fail   grok-3-mini / import-cycle-startup / kernel
+  transient_fail   kimi-k2.5 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   claude-opus-4-7 / nginx-upstream-port-mismatch / native
+  transient_fail   devstral-small / deadlock-transfer / kernel
+  transient_fail   devstral-small / off-by-one-array-slice / kernel-cpu
+  transient_fail   gpt-5-codex / off-by-one-array-slice / kernel
+  transient_fail   grok-4 / haystack-mint / kernel-cpu
+  transient_fail   devstral-small / split-brain-leader-election / kernel
+  transient_fail   grok-3 / silent-data-corruption / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / k8s-assume-cache-silent-drop / kernel
+  transient_fail   grok-3-mini / import-cycle-startup / kernel-cpu
+  transient_fail   kimi-k2.5 / race-condition-counter / kernel
+  transient_fail   claude-opus-4-7 / off-by-one-array-slice / native
+  transient_fail   gpt-5-codex / off-by-one-array-slice / kernel-cpu
+  transient_fail   devstral-small / race-condition-counter / kernel
+  transient_fail   grok-4 / import-cycle-startup / kernel
+  transient_fail   devstral-small / split-brain-leader-election / kernel-cpu
+  transient_fail   devstral-small / deadlock-transfer / kernel-cpu
+  transient_fail   grok-3 / split-brain-leader-election / kernel
+  transient_fail   grok-3-mini / k8s-assume-cache-silent-drop / kernel
+  transient_fail   claude-opus-4-7 / off-by-one-array-slice / kernel
+  transient_fail   gemini-3-flash-preview / import-cycle-startup / kernel
+  transient_fail   kimi-k2.5 / race-condition-counter / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   devstral-small / goroutine-leak-handler / kernel
+  failed           gpt-5-codex / off-by-one-pagination / kernel
+  failed           grok-4 / import-cycle-startup / kernel-cpu
+  failed           devstral-small / race-condition-counter / kernel-cpu
+  transient_fail   grok-3 / split-brain-leader-election / kernel-cpu
+  transient_fail   devstral-small / haystack-boot / kernel
+  transient_fail   devstral-small / wrong-operator-discount / kernel
+  transient_fail   grok-3-mini / k8s-assume-cache-silent-drop / kernel-cpu
+  failed           claude-opus-4-7 / off-by-one-array-slice / kernel-cpu
+  failed           devstral-small / goroutine-leak-handler / kernel-cpu
+  transient_fail   gpt-5-codex / off-by-one-pagination / kernel-cpu
+  transient_fail   gpt-5-codex / postgres-migration-schema-drift / kernel
+  transient_fail   gpt-5-codex / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   gpt-5-codex / race-condition-counter / kernel
+  transient_fail   gpt-5-codex / race-condition-counter / kernel-cpu
+  transient_fail   grok-4 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   grok-4 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   claude-opus-4-7 / off-by-one-pagination / native
+  transient_fail   grok-4 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   grok-4 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   claude-opus-4-7 / off-by-one-pagination / kernel
+  transient_fail   devstral-small / haystack-boot / kernel-cpu
+  transient_fail   devstral-small / import-cycle-startup / kernel
+  transient_fail   devstral-small / import-cycle-startup / kernel-cpu
+  transient_fail   devstral-small / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   devstral-small / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / linearizability-stale-read / kernel
+  transient_fail   devstral-small / linearizability-stale-read / kernel
+  transient_fail   devstral-small / linearizability-stale-read / kernel-cpu
+  transient_fail   devstral-small / null-pointer-config / kernel
+  transient_fail   devstral-small / null-pointer-config / kernel-cpu
+  transient_fail   gpt-5-codex / raft-snapshot-commit-gap / kernel
+  transient_fail   devstral-small / off-by-one-pagination / kernel
+  transient_fail   gpt-5-codex / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   devstral-small / off-by-one-pagination / kernel-cpu
+  transient_fail   devstral-small / postgres-migration-schema-drift / kernel
+  transient_fail   kimi-k2.5 / raft-snapshot-commit-gap / kernel
+  transient_fail   devstral-small / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   devstral-small / raft-snapshot-commit-gap / kernel
+  transient_fail   kimi-k2.5 / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   devstral-small / raft-snapshot-commit-gap / kernel-cpu
+  failed           devstral-small / retry-storm-duplicate-transfer / kernel
+  transient_fail   claude-opus-4-7 / off-by-one-pagination / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / memory-leak-event-listener / kernel
+  transient_fail   devstral-small / type-coercion-comparison / kernel
+  transient_fail   devstral-small / type-coercion-comparison / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / null-pointer-config / kernel
+  transient_fail   gemini-3.1-pro-preview / off-by-one-array-slice / kernel
+  transient_fail   kimi-k2.5 / type-coercion-comparison / kernel
+  transient_fail   gemini-2.5-pro / linearizability-stale-read / kernel
+  transient_fail   grok-4 / linearizability-stale-read / kernel
+  transient_fail   grok-3-mini / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   devstral-small / wrong-operator-discount / kernel-cpu
+  transient_fail   claude-opus-4-7 / performance-cliff-hash / native
+  transient_fail   kimi-k2.5 / relaxed-ordering-ringbuf / kernel-cpu
+  transient_fail   devstral-small / silent-data-corruption / kernel
+  transient_fail   grok-3 / timezone-scheduling / kernel
+  transient_fail   kimi-k2.5 / type-coercion-comparison / kernel-cpu
+  transient_fail   devstral-small / silent-data-corruption / kernel-cpu
+  transient_fail   gemini-2.5-pro / memory-leak-event-listener / kernel
+  transient_fail   grok-4 / linearizability-stale-read / kernel-cpu
+  transient_fail   gemini-3-flash-preview / k8s-assume-cache-silent-drop / kernel
+  transient_fail   kimi-k2.5 / split-brain-leader-election / kernel
+  transient_fail   grok-3-mini / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / off-by-one-pagination / kernel
+  transient_fail   claude-opus-4-7 / postgres-migration-schema-drift / native
+  transient_fail   grok-3 / timezone-scheduling / kernel-cpu
+  transient_fail   gpt-5-codex / silent-data-corruption / kernel
+  transient_fail   gpt-5-codex / silent-data-corruption / kernel-cpu
+  transient_fail   kimi-k2.5 / silent-data-corruption / kernel
+  transient_fail   grok-4 / memory-leak-event-listener / kernel
+  transient_fail   kimi-k2.5 / split-brain-leader-election / kernel-cpu
+  transient_fail   claude-opus-4-7 / postgres-migration-schema-drift / kernel
+  transient_fail   devstral-small / timezone-scheduling / kernel
+  transient_fail   kimi-k2.5 / silent-data-corruption / kernel-cpu
+  transient_fail   grok-3-mini / linearizability-stale-read / kernel
+  transient_fail   gpt-5-codex / split-brain-leader-election / kernel
+  transient_fail   grok-3 / tls-chain-ordering-strict / kernel
+  transient_fail   gemini-3-flash-preview / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   claude-opus-4-7 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   devstral-small / timezone-scheduling / kernel-cpu
+  transient_fail   grok-4 / memory-leak-event-listener / kernel-cpu
+  transient_fail   gpt-5-codex / split-brain-leader-election / kernel-cpu
+  transient_fail   kimi-k2.5 / wrong-operator-discount / kernel
+  transient_fail   grok-3-mini / linearizability-stale-read / kernel-cpu
+  transient_fail   grok-3 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   kimi-k2.5 / timezone-scheduling / kernel
+  transient_fail   gemini-2.5-flash / type-coercion-comparison / kernel
+  transient_fail   claude-opus-4-7 / race-condition-counter / native
+  transient_fail   gpt-5-codex / timezone-scheduling / kernel
+  transient_fail   devstral-small / tls-chain-ordering-strict / kernel
+  transient_fail   kimi-k2.5 / wrong-operator-discount / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / postgres-migration-schema-drift / kernel
+  transient_fail   gpt-4.1 / deadlock-transfer / kernel
+  transient_fail   kimi-k2.5 / timezone-scheduling / kernel-cpu
+  transient_fail   grok-3-mini / memory-leak-event-listener / kernel
+  transient_fail   grok-3 / type-coercion-comparison / kernel
+  transient_fail   grok-4 / null-pointer-config / kernel
+  transient_fail   claude-opus-4-7 / race-condition-counter / kernel
+  transient_fail   gemini-2.5-pro / off-by-one-array-slice / kernel
+  transient_fail   gpt-5-codex / timezone-scheduling / kernel-cpu
+  transient_fail   devstral-small / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   kimi-k2.5 / tls-chain-ordering-strict / kernel
+  transient_fail   gpt-4.1 / deadlock-transfer / kernel-cpu
+  transient_fail   grok-3 / type-coercion-comparison / kernel-cpu
+  transient_fail   grok-3-mini / memory-leak-event-listener / kernel-cpu
+  transient_fail   gemini-2.5-flash / split-brain-leader-election / kernel
+  transient_fail   grok-4 / null-pointer-config / kernel-cpu
+  transient_fail   claude-opus-4-7 / race-condition-counter / kernel-cpu
+  transient_fail   gemini-3-flash-preview / linearizability-stale-read / kernel
+  transient_fail   gpt-5-codex / tls-chain-ordering-strict / kernel
+  transient_fail   kimi-k2.5 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   grok-3 / wal-fsync-ghost-ack / kernel
+  transient_fail   gpt-4.1 / encoding-mojibake / kernel
+  transient_fail   grok-4 / off-by-one-array-slice / kernel
+  transient_fail   claude-opus-4-7 / raft-snapshot-commit-gap / native
+  transient_fail   gemini-2.5-pro / race-condition-counter / kernel
+  transient_fail   gpt-5-codex / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   grok-3-mini / null-pointer-config / kernel
+  transient_fail   kimi-k2.5 / wal-fsync-ghost-ack / kernel
+  transient_fail   grok-3 / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   grok-4 / off-by-one-array-slice / kernel-cpu
+  transient_fail   gpt-4.1 / encoding-mojibake / kernel-cpu
+  transient_fail   claude-opus-4-7 / raft-snapshot-commit-gap / kernel
+  transient_fail   devstral-small / wal-fsync-ghost-ack / kernel
+  transient_fail   gemini-2.5-flash / split-brain-leader-election / kernel-cpu
+  transient_fail   gpt-5-codex / type-coercion-comparison / kernel
+  transient_fail   grok-3-mini / null-pointer-config / kernel-cpu
+  transient_fail   kimi-k2.5 / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   grok-3 / wrong-operator-discount / kernel
+  transient_fail   gemini-2.5-pro / null-pointer-config / kernel
+  transient_fail   grok-4 / off-by-one-pagination / kernel
+  transient_fail   claude-opus-4-7 / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   gpt-4.1 / goroutine-leak-handler / kernel
+  transient_fail   devstral-small / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   gpt-5-codex / type-coercion-comparison / kernel-cpu
+  transient_fail   grok-3-mini / off-by-one-array-slice / kernel
+  transient_fail   grok-3 / wrong-operator-discount / kernel-cpu
+  transient_fail   claude-opus-4-7 / rate-limit-bypass-header / native
+  transient_fail   grok-4 / off-by-one-pagination / kernel-cpu
+  transient_fail   gemini-3-flash-preview / memory-leak-event-listener / kernel
+  transient_fail   gpt-4.1 / goroutine-leak-handler / kernel-cpu
+  transient_fail   gpt-5-codex / wal-fsync-ghost-ack / kernel
+  transient_fail   grok-3-mini / off-by-one-array-slice / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / race-condition-counter / kernel
+  transient_fail   grok-4 / postgres-migration-schema-drift / kernel
+  transient_fail   claude-opus-4-7 / relaxed-ordering-ringbuf / native
+  transient_fail   gpt-5-codex / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   grok-3-mini / off-by-one-pagination / kernel
+  transient_fail   gemini-2.5-flash / wrong-operator-discount / kernel
+  transient_fail   qwen3-coder / compiler-macro-expansion / kernel
+  transient_fail   gpt-4.1 / haystack-boot / kernel
+  transient_fail   grok-4 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   qwen3-coder / compiler-macro-expansion / kernel-cpu
+  transient_fail   gpt-5-codex / wrong-operator-discount / kernel
+  transient_fail   gemini-3.1-pro-preview / raft-snapshot-commit-gap / kernel
+  transient_fail   grok-3-mini / off-by-one-pagination / kernel-cpu
+  transient_fail   gemini-2.5-pro / null-pointer-config / kernel-cpu
+  transient_fail   qwen3-coder / data-corruption-concurrent-write / kernel
+  transient_fail   gpt-4.1 / haystack-boot / kernel-cpu
+  transient_fail   grok-4.1-fast / deadlock-transfer / kernel
+  transient_fail   gemini-2.5-flash / silent-data-corruption / kernel
+  transient_fail   grok-4 / race-condition-counter / kernel
+  transient_fail   qwen3-coder / data-corruption-concurrent-write / kernel-cpu
+  transient_fail   gpt-5-codex / wrong-operator-discount / kernel-cpu
+  transient_fail   gemini-2.5-flash / silent-data-corruption / kernel-cpu
+  failed           gemini-2.5-flash / sql-injection-search / kernel-cpu
+  transient_fail   gpt-4.1 / haystack-mint / kernel
+  transient_fail   gemini-2.5-pro / off-by-one-pagination / kernel
+  transient_fail   grok-3-mini / postgres-migration-schema-drift / kernel
+  transient_fail   claude-opus-4-7 / silent-data-corruption / native
+  transient_fail   gemini-2.5-flash / tls-chain-ordering-strict / kernel
+  transient_fail   qwen3-coder / deadlock-transfer / kernel
+  transient_fail   gemini-2.5-flash / timezone-scheduling / kernel
+  transient_fail   grok-4 / race-condition-counter / kernel-cpu
+  transient_fail   grok-4.1-fast / deadlock-transfer / kernel-cpu
+  transient_fail   claude-opus-4-7 / silent-data-corruption / kernel
+  failed           gemini-3-flash-preview / missing-input-validation / kernel-cpu
+  transient_fail   gpt-4.1 / haystack-mint / kernel-cpu
+  transient_fail   grok-3-mini / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   claude-opus-4-7 / silent-data-corruption / kernel-cpu
+  transient_fail   grok-4 / raft-snapshot-commit-gap / kernel
+  failed           gemini-2.5-pro / off-by-one-pagination / kernel-cpu
+  transient_fail   qwen3-coder / deadlock-transfer / kernel-cpu
+  transient_fail   gemini-3-flash-preview / null-pointer-config / kernel
+  transient_fail   claude-opus-4-7 / split-brain-leader-election / native
+  transient_fail   gemini-2.5-pro / split-brain-leader-election / kernel
+  transient_fail   gemini-2.5-flash / timezone-scheduling / kernel-cpu
+  transient_fail   grok-4.1-fast / encoding-mojibake / kernel
+  transient_fail   gpt-4.1 / import-cycle-startup / kernel
+  transient_fail   grok-3-mini / race-condition-counter / kernel
+  transient_fail   gemini-2.5-pro / postgres-migration-schema-drift / kernel
+  transient_fail   gemini-3.1-pro-preview / relaxed-ordering-ringbuf / kernel
+  transient_fail   claude-opus-4-7 / split-brain-leader-election / kernel
+  transient_fail   grok-4 / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   grok-4.1-fast / encoding-mojibake / kernel-cpu
+  transient_fail   gpt-4.1 / import-cycle-startup / kernel-cpu
+  transient_fail   qwen3-coder / encoding-mojibake / kernel
+  transient_fail   grok-4-fast / deadlock-transfer / kernel
+  transient_fail   grok-3-mini / race-condition-counter / kernel-cpu
+  transient_fail   claude-opus-4-7 / split-brain-leader-election / kernel-cpu
+  transient_fail   gemini-2.5-flash / wal-fsync-ghost-ack / kernel
+  transient_fail   gpt-4.1 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   grok-4.1-fast / goroutine-leak-handler / kernel
+  transient_fail   qwen3-coder / encoding-mojibake / kernel-cpu
+  transient_fail   gemini-2.5-pro / split-brain-leader-election / kernel-cpu
+  transient_fail   grok-3-mini / raft-snapshot-commit-gap / kernel
+  transient_fail   claude-opus-4-7 / sql-injection-search / native
+  transient_fail   grok-4-fast / deadlock-transfer / kernel-cpu
+  transient_fail   gemini-3-flash-preview / off-by-one-array-slice / kernel
+  transient_fail   gemini-2.5-flash / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   gpt-4.1 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   qwen3-coder / goroutine-leak-handler / kernel
+  transient_fail   grok-3-mini / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   gpt-5.5 / deadlock-transfer / kernel
+  transient_fail   grok-4.1-fast / goroutine-leak-handler / kernel-cpu
+  transient_fail   claude-opus-4-7 / ssrf-allowlist-port-confusion / native
+  transient_fail   grok-4-fast / encoding-mojibake / kernel
+  transient_fail   gemini-3.1-pro-preview / silent-data-corruption / kernel
+  transient_fail   gpt-4.1 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   gemini-2.5-pro / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   grok-4 / silent-data-corruption / kernel
+  transient_fail   qwen3-coder / goroutine-leak-handler / kernel-cpu
+  transient_fail   grok-3-mini / relaxed-ordering-ringbuf / kernel
+  transient_fail   gpt-5.5 / deadlock-transfer / kernel-cpu
+  transient_fail   grok-4-fast / encoding-mojibake / kernel-cpu
+  transient_fail   claude-opus-4-7 / timezone-scheduling / native
+  transient_fail   gpt-4.1 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   grok-4.1-fast / haystack-boot / kernel
+  transient_fail   grok-4 / silent-data-corruption / kernel-cpu
+  transient_fail   gemini-2.5-pro / raft-snapshot-commit-gap / kernel
+  transient_fail   gemini-3-flash-preview / off-by-one-pagination / kernel
+  transient_fail   claude-opus-4-7 / timezone-scheduling / kernel
+  transient_fail   grok-4-fast / goroutine-leak-handler / kernel
+  transient_fail   grok-4.1-fast / haystack-boot / kernel-cpu
+  transient_fail   qwen3-coder / haystack-boot / kernel
+  transient_fail   gemini-3.1-pro-preview / split-brain-leader-election / kernel
+  transient_fail   grok-4 / split-brain-leader-election / kernel
+  transient_fail   gpt-5.5 / encoding-mojibake / kernel
+  transient_fail   gpt-4.1 / linearizability-stale-read / kernel
+  transient_fail   claude-opus-4-7 / timezone-scheduling / kernel-cpu
+  transient_fail   grok-4.1-fast / haystack-mint / kernel
+  transient_fail   qwen3-coder / haystack-boot / kernel-cpu
+  transient_fail   grok-4 / split-brain-leader-election / kernel-cpu
+  transient_fail   grok-4-fast / goroutine-leak-handler / kernel-cpu
+  transient_fail   gpt-5.5 / encoding-mojibake / kernel-cpu
+  transient_fail   grok-3-mini / silent-data-corruption / kernel
+  transient_fail   gpt-4.1 / linearizability-stale-read / kernel-cpu
+  transient_fail   claude-opus-4-7 / timing-attack-comparison / native
+  transient_fail   grok-4.1-fast / haystack-mint / kernel-cpu
+  transient_fail   qwen3-coder / haystack-mint / kernel
+  transient_fail   gemini-2.5-pro / type-coercion-comparison / kernel
+  transient_fail   grok-3-mini / silent-data-corruption / kernel-cpu
+  transient_fail   gpt-4.1 / memory-leak-event-listener / kernel
+  transient_fail   claude-opus-4-7 / tls-chain-ordering-strict / native
+  transient_fail   grok-4-fast / haystack-boot / kernel
+  transient_fail   grok-4 / timezone-scheduling / kernel
+  transient_fail   grok-4.1-fast / import-cycle-startup / kernel
+  transient_fail   gpt-5.5 / goroutine-leak-handler / kernel
+  transient_fail   qwen3-coder / haystack-mint / kernel-cpu
+  transient_fail   gemini-2.5-pro / silent-data-corruption / kernel
+  transient_fail   grok-3-mini / split-brain-leader-election / kernel
+  transient_fail   claude-opus-4-7 / tls-chain-ordering-strict / kernel
+  transient_fail   gpt-4.1 / memory-leak-event-listener / kernel-cpu
+  transient_fail   grok-4 / timezone-scheduling / kernel-cpu
+  transient_fail   grok-4-fast / haystack-boot / kernel-cpu
+  transient_fail   grok-4.1-fast / import-cycle-startup / kernel-cpu
+  transient_fail   qwen3-coder / import-cycle-startup / kernel
+  transient_fail   grok-3-mini / split-brain-leader-election / kernel-cpu
+  transient_fail   gpt-5.5 / goroutine-leak-handler / kernel-cpu
+  transient_fail   claude-opus-4-7 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   grok-4-fast / haystack-mint / kernel
+  transient_fail   grok-4.1-fast / k8s-assume-cache-silent-drop / kernel
+  transient_fail   qwen3-coder / import-cycle-startup / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / timezone-scheduling / kernel
+  failed           gemini-2.5-pro / type-coercion-comparison / kernel-cpu
+  transient_fail   grok-4 / tls-chain-ordering-strict / kernel
+  transient_fail   gemini-3-flash-preview / postgres-migration-schema-drift / kernel
+  transient_fail   gpt-4.1 / null-pointer-config / kernel
+  transient_fail   claude-opus-4-7 / type-coercion-comparison / native
+  transient_fail   grok-4-fast / haystack-mint / kernel-cpu
+  transient_fail   grok-4.1-fast / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   qwen3-coder / k8s-assume-cache-silent-drop / kernel
+  transient_fail   grok-3-mini / timezone-scheduling / kernel
+  transient_fail   grok-4 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   claude-opus-4-7 / type-coercion-comparison / kernel
+  transient_fail   gpt-5.5 / haystack-boot / kernel
+  transient_fail   gpt-4.1 / null-pointer-config / kernel-cpu
+  transient_fail   grok-4-fast / import-cycle-startup / kernel
+  transient_fail   gemini-2.5-pro / tls-chain-ordering-strict / kernel
+  transient_fail   grok-4.1-fast / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   qwen3-coder / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   grok-3-mini / timezone-scheduling / kernel-cpu
+  transient_fail   gemini-2.5-pro / silent-data-corruption / kernel-cpu
+  transient_fail   grok-4 / type-coercion-comparison / kernel
+  transient_fail   gemini-3.1-pro-preview / tls-chain-ordering-strict / kernel
+  transient_fail   gpt-5.5 / haystack-boot / kernel-cpu
+  transient_fail   claude-opus-4-7 / type-coercion-comparison / kernel-cpu
+  transient_fail   gpt-4.1 / off-by-one-array-slice / kernel
+  transient_fail   grok-4-fast / import-cycle-startup / kernel-cpu
+  transient_fail   gemini-3-flash-preview / race-condition-counter / kernel
+  transient_fail   gemini-2.5-pro / wrong-operator-discount / kernel
+  transient_fail   qwen3-coder / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   grok-4.1-fast / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   grok-4 / type-coercion-comparison / kernel-cpu
+  transient_fail   gemini-2.5-pro / timezone-scheduling / kernel
+  transient_fail   grok-3-mini / tls-chain-ordering-strict / kernel
+  transient_fail   claude-opus-4-7 / wal-fsync-ghost-ack / native
+  transient_fail   gpt-4.1 / off-by-one-array-slice / kernel-cpu
+  transient_fail   gpt-5.5 / haystack-mint / kernel
+  transient_fail   grok-4-fast / k8s-assume-cache-silent-drop / kernel
+  transient_fail   qwen3-coder / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   grok-4 / wal-fsync-ghost-ack / kernel
+  transient_fail   claude-opus-4-7 / wal-fsync-ghost-ack / kernel
+  transient_fail   grok-4.1-fast / linearizability-stale-read / kernel
+  transient_fail   gemini-3-flash-preview / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   grok-3-mini / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   gpt-4.1 / off-by-one-pagination / kernel
+  transient_fail   gpt-5.5 / haystack-mint / kernel-cpu
+  transient_fail   grok-4-fast / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / type-coercion-comparison / kernel
+  transient_fail   grok-4 / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   claude-opus-4-7 / wal-fsync-ghost-ack / kernel-cpu
+  failed           gemini-2.5-pro / timezone-scheduling / kernel-cpu
+  transient_fail   qwen3-coder / linearizability-stale-read / kernel
+  transient_fail   grok-3-mini / type-coercion-comparison / kernel
+  transient_fail   gemini-2.5-pro / wal-fsync-ghost-ack / kernel
+  transient_fail   gpt-4.1 / off-by-one-pagination / kernel-cpu
+  transient_fail   grok-4.1-fast / linearizability-stale-read / kernel-cpu
+  transient_fail   grok-4-fast / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   gpt-5.5 / import-cycle-startup / kernel
+  transient_fail   claude-opus-4-7 / wrong-operator-discount / native
+  transient_fail   grok-4 / wrong-operator-discount / kernel
+  transient_fail   qwen3-coder / linearizability-stale-read / kernel-cpu
+  transient_fail   gemini-3-flash-preview / split-brain-leader-election / kernel
+  transient_fail   grok-3-mini / type-coercion-comparison / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / wal-fsync-ghost-ack / kernel
+  transient_fail   grok-4.1-fast / memory-leak-event-listener / kernel
+  transient_fail   gemini-3-flash-preview / raft-snapshot-commit-gap / kernel
+  transient_fail   grok-4-fast / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   gpt-5.5 / import-cycle-startup / kernel-cpu
+  transient_fail   gpt-4.1 / postgres-migration-schema-drift / kernel
+  transient_fail   claude-opus-4-7 / wrong-operator-discount / kernel
+  transient_fail   grok-4 / wrong-operator-discount / kernel-cpu
+  transient_fail   grok-3-mini / wal-fsync-ghost-ack / kernel
+  transient_fail   qwen3-coder / memory-leak-event-listener / kernel
+  transient_fail   gpt-4.1 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   grok-4.1-fast / memory-leak-event-listener / kernel-cpu
+  transient_fail   gpt-5.5 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   claude-opus-4-7 / wrong-operator-discount / kernel-cpu
+  transient_fail   grok-4-fast / linearizability-stale-read / kernel
+  transient_fail   grok-4-fast / linearizability-stale-read / kernel-cpu
+  transient_fail   grok-3-mini / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   qwen3-coder / memory-leak-event-listener / kernel-cpu
+  transient_fail   gpt-4.1 / race-condition-counter / kernel
+  transient_fail   gpt-5.5 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   gemini-3.1-pro-preview / wrong-operator-discount / kernel
+  transient_fail   grok-4-fast / memory-leak-event-listener / kernel
+  transient_fail   gemini-2.5-pro / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   grok-3-mini / wrong-operator-discount / kernel
+  transient_fail   grok-4-fast / memory-leak-event-listener / kernel-cpu
+  transient_fail   grok-4.1-fast / null-pointer-config / kernel
+  transient_fail   gemini-3-flash-preview / type-coercion-comparison / kernel
+  transient_fail   gpt-4.1 / race-condition-counter / kernel-cpu
+  transient_fail   gpt-5.5 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   qwen3-coder / null-pointer-config / kernel
+  transient_fail   grok-3-mini / wrong-operator-discount / kernel-cpu
+  transient_fail   grok-4.1-fast / null-pointer-config / kernel-cpu
+  transient_fail   grok-4-fast / null-pointer-config / kernel
+  transient_fail   gpt-4.1 / raft-snapshot-commit-gap / kernel
+  transient_fail   gpt-5.5 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   gemini-3-flash-preview / relaxed-ordering-ringbuf / kernel
+  transient_fail   qwen3-coder / null-pointer-config / kernel-cpu
+  transient_fail   gemini-3-flash-preview / wrong-operator-discount / kernel
+  transient_fail   grok-4.1-fast / off-by-one-array-slice / kernel
+  transient_fail   o4-mini / deadlock-transfer / kernel
+  transient_fail   gpt-4.1 / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   grok-4-fast / null-pointer-config / kernel-cpu
+  transient_fail   deepseek-r1 / deadlock-transfer / kernel
+  transient_fail   gemini-3-flash-preview / silent-data-corruption / kernel
+  transient_fail   qwen3-coder / off-by-one-array-slice / kernel
+  transient_fail   grok-4.1-fast / off-by-one-array-slice / kernel-cpu
+  transient_fail   grok-4-fast / off-by-one-array-slice / kernel
+  transient_fail   o4-mini / deadlock-transfer / kernel-cpu
+  transient_fail   grok-4-fast / off-by-one-array-slice / kernel-cpu
+  transient_fail   qwen3-coder / off-by-one-array-slice / kernel-cpu
+  transient_fail   deepseek-r1 / deadlock-transfer / kernel-cpu
+  transient_fail   qwen3-coder-flash / deadlock-transfer / kernel
+  transient_fail   grok-4.1-fast / off-by-one-pagination / kernel
+  transient_fail   gpt-5.5 / linearizability-stale-read / kernel
+  transient_fail   gemini-3-flash-preview / tls-chain-ordering-strict / kernel
+  transient_fail   grok-4-fast / off-by-one-pagination / kernel
+  transient_fail   gpt-4.1 / retry-storm-duplicate-transfer / kernel-cpu
+  transient_fail   gpt-4.1 / silent-data-corruption / kernel
+  transient_fail   grok-4-fast / off-by-one-pagination / kernel-cpu
+  transient_fail   qwen3-coder / off-by-one-pagination / kernel
+  transient_fail   o4-mini / encoding-mojibake / kernel
+  transient_fail   grok-4.1-fast / off-by-one-pagination / kernel-cpu
+  transient_fail   gemini-3-flash-preview / timezone-scheduling / kernel
+  transient_fail   gpt-5.5 / linearizability-stale-read / kernel-cpu
+  transient_fail   deepseek-r1 / encoding-mojibake / kernel
+  transient_fail   qwen3-coder-flash / deadlock-transfer / kernel-cpu
+  transient_fail   gpt-4.1 / silent-data-corruption / kernel-cpu
+  transient_fail   grok-4-fast / postgres-migration-schema-drift / kernel
+  transient_fail   qwen3-coder / off-by-one-pagination / kernel-cpu
+  transient_fail   o4-mini / encoding-mojibake / kernel-cpu
+  transient_fail   gpt-4.1 / type-coercion-comparison / kernel
+  transient_fail   deepseek-r1 / encoding-mojibake / kernel-cpu
+  transient_fail   grok-4.1-fast / postgres-migration-schema-drift / kernel
+  transient_fail   gpt-4.1 / split-brain-leader-election / kernel
+  transient_fail   gpt-5.5 / memory-leak-event-listener / kernel
+  transient_fail   qwen3-coder-flash / encoding-mojibake / kernel
+  transient_fail   gpt-4.1 / split-brain-leader-election / kernel-cpu
+  transient_fail   grok-4-fast / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   o4-mini / goroutine-leak-handler / kernel
+  transient_fail   gpt-4.1 / type-coercion-comparison / kernel-cpu
+  transient_fail   deepseek-r1 / goroutine-leak-handler / kernel
+  transient_fail   qwen3-coder / postgres-migration-schema-drift / kernel
+  transient_fail   grok-4.1-fast / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   qwen3-coder-flash / encoding-mojibake / kernel-cpu
+  transient_fail   gpt-5.5 / memory-leak-event-listener / kernel-cpu
+  transient_fail   grok-4-fast / race-condition-counter / kernel
+  transient_fail   gpt-4.1 / timezone-scheduling / kernel
+  transient_fail   gemini-3-flash-preview / wal-fsync-ghost-ack / kernel
+  transient_fail   gpt-4.1 / wrong-operator-discount / kernel
+  transient_fail   qwen3-coder / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   o4-mini / goroutine-leak-handler / kernel-cpu
+  transient_fail   grok-4.1-fast / race-condition-counter / kernel
+  transient_fail   deepseek-r1 / goroutine-leak-handler / kernel-cpu
+  transient_fail   qwen3-coder-flash / goroutine-leak-handler / kernel
+  transient_fail   gpt-4.1 / timezone-scheduling / kernel-cpu
+  transient_fail   gpt-4.1 / wrong-operator-discount / kernel-cpu
+  transient_fail   grok-4-fast / race-condition-counter / kernel-cpu
+  transient_fail   qwen3-coder / race-condition-counter / kernel
+  transient_fail   gpt-4.1 / tls-chain-ordering-strict / kernel
+  transient_fail   gpt-4.1 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   grok-4.1-fast / race-condition-counter / kernel-cpu
+  failed           deepseek-r1 / graphql-dataloader-per-request / kernel
+  transient_fail   gpt-4.1 / wal-fsync-ghost-ack / kernel
+  transient_fail   deepseek-r1 / haystack-boot / kernel
+  transient_fail   grok-4-fast / raft-snapshot-commit-gap / kernel
+  transient_fail   qwen3-coder-flash / goroutine-leak-handler / kernel-cpu
+  transient_fail   o4-mini / haystack-boot / kernel
+  transient_fail   gpt-5.5 / off-by-one-array-slice / kernel
+  transient_fail   qwen3-coder / race-condition-counter / kernel-cpu
+  transient_fail   o3 / encoding-mojibake / kernel
+  transient_fail   gpt-4.1 / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   grok-4.1-fast / raft-snapshot-commit-gap / kernel
+  transient_fail   deepseek-r1 / haystack-boot / kernel-cpu
+  transient_fail   grok-4-fast / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   o4-mini / haystack-boot / kernel-cpu
+  transient_fail   gpt-5.5 / off-by-one-array-slice / kernel-cpu
+  transient_fail   o3 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   qwen3-coder / raft-snapshot-commit-gap / kernel
+  transient_fail   o3 / encoding-mojibake / kernel-cpu
+  transient_fail   qwen3-coder-flash / haystack-boot / kernel
+  transient_fail   grok-4.1-fast / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   o3 / deadlock-transfer / kernel
+  transient_fail   o3 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   o3 / goroutine-leak-handler / kernel
+  transient_fail   o4-mini / haystack-mint / kernel
+  transient_fail   qwen3-coder / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   o3 / haystack-mint / kernel
+  transient_fail   qwen3-coder-flash / haystack-boot / kernel-cpu
+  transient_fail   gpt-5.5 / off-by-one-pagination / kernel
+  transient_fail   deepseek-r1 / haystack-mint / kernel
+  transient_fail   grok-4.1-fast / relaxed-ordering-ringbuf / kernel
+  transient_fail   o4-mini / haystack-mint / kernel-cpu
+  transient_fail   o3 / memory-leak-event-listener / kernel
+  transient_fail   o3 / haystack-mint / kernel-cpu
+  transient_fail   qwen3-coder-flash / haystack-mint / kernel
+  transient_fail   gpt-5.5 / off-by-one-pagination / kernel-cpu
+  transient_fail   deepseek-r1 / haystack-mint / kernel-cpu
+  transient_fail   o3 / goroutine-leak-handler / kernel-cpu
+  transient_fail   o3 / deadlock-transfer / kernel-cpu
+  transient_fail   grok-4-fast / silent-data-corruption / kernel
+  transient_fail   qwen3-coder / relaxed-ordering-ringbuf / kernel-cpu
+  transient_fail   o3 / haystack-boot / kernel
+  transient_fail   o4-mini / import-cycle-startup / kernel
+  transient_fail   grok-4-fast / silent-data-corruption / kernel-cpu
+  transient_fail   qwen3-coder-flash / haystack-mint / kernel-cpu
+  transient_fail   o3 / memory-leak-event-listener / kernel-cpu
+  transient_fail   deepseek-r1 / import-cycle-startup / kernel
+  transient_fail   o3 / haystack-boot / kernel-cpu
+  transient_fail   grok-4-fast / split-brain-leader-election / kernel
+  transient_fail   o3 / import-cycle-startup / kernel
+  transient_fail   grok-4.1-fast / silent-data-corruption / kernel
+  transient_fail   o3 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   o4-mini / import-cycle-startup / kernel-cpu
+  transient_fail   grok-4-fast / split-brain-leader-election / kernel-cpu
+  transient_fail   qwen3-coder-flash / import-cycle-startup / kernel
+  transient_fail   deepseek-r1 / import-cycle-startup / kernel-cpu
+  transient_fail   o3 / off-by-one-array-slice / kernel
+  transient_fail   o3 / import-cycle-startup / kernel-cpu
+  transient_fail   qwen3-coder / silent-data-corruption / kernel
+  transient_fail   o3 / split-brain-leader-election / kernel
+  transient_fail   grok-4.1-fast / silent-data-corruption / kernel-cpu
+  transient_fail   o3 / linearizability-stale-read / kernel
+  transient_fail   o3 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   o4-mini / k8s-assume-cache-silent-drop / kernel
+  transient_fail   grok-4-fast / timezone-scheduling / kernel
+  transient_fail   qwen3-coder-flash / import-cycle-startup / kernel-cpu
+  transient_fail   o3 / off-by-one-pagination / kernel
+  transient_fail   deepseek-r1 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   o3 / off-by-one-array-slice / kernel-cpu
+  transient_fail   o3 / linearizability-stale-read / kernel-cpu
+  transient_fail   qwen3-coder / silent-data-corruption / kernel-cpu
+  transient_fail   o3 / split-brain-leader-election / kernel-cpu
+  transient_fail   grok-4.1-fast / split-brain-leader-election / kernel
+  transient_fail   o3 / null-pointer-config / kernel
+  transient_fail   qwen3-coder-plus / deadlock-transfer / kernel
+  transient_fail   o4-mini / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   grok-4-fast / timezone-scheduling / kernel-cpu
+  transient_fail   qwen3-coder-flash / k8s-assume-cache-silent-drop / kernel
+  transient_fail   deepseek-r1 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   o3 / off-by-one-pagination / kernel-cpu
+  transient_fail   o3 / race-condition-counter / kernel
+  transient_fail   qwen3-coder / split-brain-leader-election / kernel
+  transient_fail   o3 / null-pointer-config / kernel-cpu
+  transient_fail   gpt-5.5 / postgres-migration-schema-drift / kernel
+  transient_fail   grok-4.1-fast / split-brain-leader-election / kernel-cpu
+  transient_fail   o3 / postgres-migration-schema-drift / kernel
+  transient_fail   o3 / wrong-operator-discount / kernel
+  transient_fail   o4-mini / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   qwen3-coder-flash / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   qwen3-coder-plus / deadlock-transfer / kernel-cpu
+  transient_fail   deepseek-r1 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   qwen3-coder / split-brain-leader-election / kernel-cpu
+  transient_fail   o3 / raft-snapshot-commit-gap / kernel
+  transient_fail   grok-4-fast / tls-chain-ordering-strict / kernel
+  transient_fail   o3 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   gpt-5.5 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   o3 / race-condition-counter / kernel-cpu
+  transient_fail   o3 / wrong-operator-discount / kernel-cpu
+  transient_fail   o3 / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   o4-mini / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   qwen3-coder-flash / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   grok-4.1-fast / timezone-scheduling / kernel
+  transient_fail   o3 / silent-data-corruption / kernel
+  transient_fail   deepseek-r1 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   o3 / relaxed-ordering-ringbuf / kernel-cpu
+  transient_fail   qwen3-coder-plus / encoding-mojibake / kernel
+  transient_fail   grok-4-fast / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   gpt-5.5 / race-condition-counter / kernel
+  transient_fail   qwen3-coder / timezone-scheduling / kernel
+  transient_fail   o3 / tls-chain-ordering-strict / kernel
+  transient_fail   o4-mini / linearizability-stale-read / kernel
+  transient_fail   qwen3-coder-flash / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   grok-4.1-fast / timezone-scheduling / kernel-cpu
+  transient_fail   o3 / silent-data-corruption / kernel-cpu
+  transient_fail   qwen3-coder-plus / encoding-mojibake / kernel-cpu
+  transient_fail   grok-4-fast / type-coercion-comparison / kernel
+  transient_fail   deepseek-r1 / linearizability-stale-read / kernel
+  transient_fail   gpt-5.5 / race-condition-counter / kernel-cpu
+  transient_fail   qwen3-coder / timezone-scheduling / kernel-cpu
+  transient_fail   o4-mini / split-brain-leader-election / kernel
+  transient_fail   o3 / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   o4-mini / linearizability-stale-read / kernel-cpu
+  transient_fail   o3 / type-coercion-comparison / kernel
+  transient_fail   o3 / timezone-scheduling / kernel
+  transient_fail   qwen3-coder-plus / goroutine-leak-handler / kernel
+  transient_fail   qwen3-coder-flash / linearizability-stale-read / kernel
+  transient_fail   grok-4.1-fast / tls-chain-ordering-strict / kernel
+  transient_fail   grok-4-fast / type-coercion-comparison / kernel-cpu
+  transient_fail   deepseek-r1 / linearizability-stale-read / kernel-cpu
+  transient_fail   o4-mini / split-brain-leader-election / kernel-cpu
+  transient_fail   o4-mini / null-pointer-config / kernel
+  transient_fail   o3 / timezone-scheduling / kernel-cpu
+  transient_fail   o3 / type-coercion-comparison / kernel-cpu
+  transient_fail   o4-mini / memory-leak-event-listener / kernel
+  transient_fail   qwen3-coder / tls-chain-ordering-strict / kernel
+  transient_fail   gpt-5.5 / raft-snapshot-commit-gap / kernel
+  transient_fail   grok-4-fast / wal-fsync-ghost-ack / kernel
+  transient_fail   grok-4.1-fast / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   qwen3-coder-flash / linearizability-stale-read / kernel-cpu
+  transient_fail   qwen3-coder-plus / goroutine-leak-handler / kernel-cpu
+  transient_fail   deepseek-r1 / memory-leak-event-listener / kernel
+  transient_fail   o3 / wal-fsync-ghost-ack / kernel
+  transient_fail   o4-mini / null-pointer-config / kernel-cpu
+  transient_fail   o4-mini / memory-leak-event-listener / kernel-cpu
+  transient_fail   o4-mini / wrong-operator-discount / kernel
+  transient_fail   qwen3-coder / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   gpt-5.5 / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   grok-4-fast / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   grok-4.1-fast / type-coercion-comparison / kernel
+  transient_fail   qwen3-coder-flash / memory-leak-event-listener / kernel
+  transient_fail   deepseek-r1 / memory-leak-event-listener / kernel-cpu
+  transient_fail   o3 / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   o4-mini / postgres-migration-schema-drift / kernel
+  transient_fail   o4-mini / wrong-operator-discount / kernel-cpu
+  transient_fail   o4-mini / off-by-one-array-slice / kernel
+  transient_fail   qwen3-coder-plus / haystack-boot / kernel
+  transient_fail   qwen3-coder / type-coercion-comparison / kernel
+  transient_fail   grok-4-fast / wrong-operator-discount / kernel
+  transient_fail   grok-4.1-fast / type-coercion-comparison / kernel-cpu
+  transient_fail   o4-mini / off-by-one-array-slice / kernel-cpu
+  transient_fail   qwen3-coder-flash / memory-leak-event-listener / kernel-cpu
+  transient_fail   o4-mini / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   o4-mini / off-by-one-pagination / kernel
+  transient_fail   grok-4-fast / wrong-operator-discount / kernel-cpu
+  transient_fail   qwen3-coder-plus / haystack-boot / kernel-cpu
+  transient_fail   o4-mini / race-condition-counter / kernel
+  transient_fail   qwen3-coder / type-coercion-comparison / kernel-cpu
+  transient_fail   grok-4.1-fast / wal-fsync-ghost-ack / kernel
+  transient_fail   o4-mini / off-by-one-pagination / kernel-cpu
+  transient_fail   deepseek-r1 / null-pointer-config / kernel
+  transient_fail   o4-mini / relaxed-ordering-ringbuf / kernel
+  transient_fail   grok-4.1-fast / wrong-operator-discount / kernel
+  transient_fail   o4-mini / raft-snapshot-commit-gap / kernel
+  transient_fail   o4-mini / race-condition-counter / kernel-cpu
+  transient_fail   qwen3-coder-plus / haystack-mint / kernel
+  transient_fail   qwen3-coder / wal-fsync-ghost-ack / kernel
+  transient_fail   gpt-5.5 / relaxed-ordering-ringbuf / kernel-cpu
+  transient_fail   qwen3-coder-flash / null-pointer-config / kernel
+  transient_fail   grok-4.1-fast / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   o4-mini / raft-snapshot-commit-gap / kernel-cpu
+  transient_fail   deepseek-r1 / null-pointer-config / kernel-cpu
+  transient_fail   o4-mini / relaxed-ordering-ringbuf / kernel-cpu
+  transient_fail   grok-4.1-fast / wrong-operator-discount / kernel-cpu
+  transient_fail   o4-mini / silent-data-corruption / kernel
+  transient_fail   qwen3-coder-plus / haystack-mint / kernel-cpu
+  transient_fail   o4-mini / silent-data-corruption / kernel-cpu
+  transient_fail   o4-mini / type-coercion-comparison / kernel
+  transient_fail   deepseek-r1-0528 / deadlock-transfer / kernel
+  transient_fail   qwen3-coder / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   qwen3-coder-flash / null-pointer-config / kernel-cpu
+  transient_fail   llama-4-maverick / deadlock-transfer / kernel
+  transient_fail   deepseek-r1 / off-by-one-array-slice / kernel
+  transient_fail   o4-mini / timezone-scheduling / kernel
+  transient_fail   qwen3-coder-plus / import-cycle-startup / kernel
+  transient_fail   o4-mini / tls-chain-ordering-strict / kernel
+  transient_fail   o4-mini / timezone-scheduling / kernel-cpu
+  transient_fail   o4-mini / type-coercion-comparison / kernel-cpu
+  transient_fail   grok-4.20 / encoding-mojibake / kernel
+  transient_fail   qwen3-coder / wrong-operator-discount / kernel
+  transient_fail   qwen3-coder-flash / off-by-one-array-slice / kernel
+  transient_fail   deepseek-r1-0528 / deadlock-transfer / kernel-cpu
+  transient_fail   deepseek-r1 / off-by-one-array-slice / kernel-cpu
+  transient_fail   o4-mini / wal-fsync-ghost-ack / kernel
+  transient_fail   o4-mini / tls-chain-ordering-strict / kernel-cpu
+  transient_fail   qwen3-coder-plus / import-cycle-startup / kernel-cpu
+  transient_fail   llama-4-maverick / deadlock-transfer / kernel-cpu
+  transient_fail   gpt-5.5 / silent-data-corruption / kernel
+  transient_fail   o4-mini / wal-fsync-ghost-ack / kernel-cpu
+  transient_fail   grok-4.20 / encoding-mojibake / kernel-cpu
+  transient_fail   qwen3-coder / wrong-operator-discount / kernel-cpu
+  transient_fail   qwen3-coder-flash / off-by-one-array-slice / kernel-cpu
+  transient_fail   deepseek-r1 / off-by-one-pagination / kernel
+  transient_fail   deepseek-r1-0528 / encoding-mojibake / kernel
+  transient_fail   grok-4.20 / goroutine-leak-handler / kernel
+  transient_fail   qwen3-coder-plus / k8s-assume-cache-silent-drop / kernel
+  transient_fail   gpt-5.5 / silent-data-corruption / kernel-cpu
+  transient_fail   grok-4.20 / haystack-mint / kernel
+  transient_fail   grok-4.20 / deadlock-transfer / kernel
+  transient_fail   llama-4-maverick / encoding-mojibake / kernel
+  transient_fail   grok-4.20 / k8s-assume-cache-silent-drop / kernel
+  transient_fail   qwen3-coder-flash / off-by-one-pagination / kernel
+  transient_fail   deepseek-r1 / off-by-one-pagination / kernel-cpu
+  transient_fail   deepseek-r1-0528 / encoding-mojibake / kernel-cpu
+  transient_fail   qwen3-coder-plus / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   grok-4.20 / haystack-mint / kernel-cpu
+  transient_fail   grok-4.20 / goroutine-leak-handler / kernel-cpu
+  transient_fail   llama-4-maverick / encoding-mojibake / kernel-cpu
+  transient_fail   gpt-5.5 / split-brain-leader-election / kernel
+  transient_fail   grok-4.20 / k8s-assume-cache-silent-drop / kernel-cpu
+  transient_fail   qwen3-coder-flash / off-by-one-pagination / kernel-cpu
+  transient_fail   grok-4.20 / haystack-boot / kernel
+  transient_fail   grok-4.20 / deadlock-transfer / kernel-cpu
+  transient_fail   deepseek-r1-0528 / goroutine-leak-handler / kernel
+  transient_fail   qwen3-coder-plus / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   deepseek-r1 / postgres-migration-schema-drift / kernel
+  transient_fail   deepseek-v3.2 / deadlock-transfer / kernel
+  transient_fail   gpt-5.5 / split-brain-leader-election / kernel-cpu
+  transient_fail   grok-4.20 / memory-leak-event-listener / kernel
+  transient_fail   llama-4-maverick / goroutine-leak-handler / kernel
+  transient_fail   grok-4.20 / import-cycle-startup / kernel
+  transient_fail   qwen3-coder-flash / postgres-migration-schema-drift / kernel
+  transient_fail   grok-4.20 / haystack-boot / kernel-cpu
+  transient_fail   deepseek-r1 / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   qwen3-coder-plus / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   deepseek-r1-0528 / goroutine-leak-handler / kernel-cpu
+  transient_fail   grok-4.20 / import-cycle-startup / kernel-cpu
+  transient_fail   grok-4.20 / memory-leak-event-listener / kernel-cpu
+  transient_fail   grok-4.20 / k8s-scheduler-shutdown-deadlock / kernel
+  transient_fail   grok-4.20 / split-brain-leader-election / kernel
+  transient_fail   deepseek-v3.2 / deadlock-transfer / kernel-cpu
+  transient_fail   gpt-5.2 / deadlock-transfer / kernel
+  transient_fail   llama-4-maverick / goroutine-leak-handler / kernel-cpu
+  transient_fail   qwen3-coder-flash / postgres-migration-schema-drift / kernel-cpu
+  transient_fail   grok-4.20 / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  transient_fail   deepseek-r1 / race-condition-counter / kernel
+  transient_fail   grok-4.20 / linearizability-stale-read / kernel
+  transient_fail   qwen3-coder-plus / linearizability-stale-read / kernel
+  transient_fail   grok-4.20 / split-brain-leader-election / kernel-cpu
+  transient_fail   grok-4.20 / off-by-one-array-slice / kernel
+  transient_fail   grok-4.20 / null-pointer-config / kernel
+  transient_fail   qwen3-coder-flash / race-condition-counter / kernel
+  transient_fail   deepseek-v3.2 / encoding-mojibake / kernel
+  transient_fail   deepseek-r1-0528 / haystack-boot / kernel
+  transient_fail   gpt-5.5 / timezone-scheduling / kernel
+  transient_fail   gpt-5.2 / deadlock-transfer / kernel-cpu
+  transient_fail   deepseek-r1 / race-condition-counter / kernel-cpu
+  transient_fail   grok-4.20 / off-by-one-pagination / kernel
+  transient_fail   llama-4-maverick / haystack-boot / kernel
+  transient_fail   grok-4.20 / off-by-one-array-slice / kernel-cpu
+  failed           deepseek-r1 / raft-snapshot-commit-gap / kernel
+  transient_fail   llama-4-maverick / haystack-mint / kernel
+  failed           llama-4-maverick / k8s-assume-cache-silent-drop / kernel
+  failed           llama-4-maverick / k8s-scheduler-shutdown-deadlock / kernel
+  failed           llama-4-maverick / linearizability-stale-read / kernel
+  failed           llama-4-maverick / memory-leak-event-listener / kernel
+  failed           grok-4.20 / raft-snapshot-commit-gap / kernel
+  failed           llama-4-maverick / null-pointer-config / kernel
+  failed           qwen3-coder-plus / missing-input-validation / kernel
+  failed           llama-4-maverick / off-by-one-array-slice / kernel
+  failed           llama-4-maverick / off-by-one-pagination / kernel
+  failed           llama-4-maverick / postgres-migration-schema-drift / kernel
+  failed           llama-4-maverick / race-condition-counter / kernel
+  failed           llama-4-maverick / raft-snapshot-commit-gap / kernel
+  failed           qwen3-coder-flash / relaxed-ordering-ringbuf / kernel
+  failed           llama-4-maverick / silent-data-corruption / kernel
+  failed           llama-4-maverick / split-brain-leader-election / kernel
+  failed           llama-4-maverick / timezone-scheduling / kernel
+  failed           llama-4-maverick / tls-chain-ordering-strict / kernel
+  failed           gemini-3.1-flash-lite-preview / encoding-mojibake / kernel-cpu
+  failed           grok-code-fast-1 / haystack-boot / kernel
+  failed           deepseek-r1-0528 / haystack-mint / kernel
+  failed           deepseek-v3.2 / goroutine-leak-handler / kernel
+  failed           llama-4-maverick / type-coercion-comparison / kernel
+  failed           llama-4-maverick / wal-fsync-ghost-ack / kernel
+  failed           llama-4-maverick / wrong-operator-discount / kernel
+  failed           qwen3-coder-flash / retry-storm-duplicate-transfer / kernel
+  failed           qwen3-coder-flash / silent-data-corruption / kernel
+  failed           qwen3-coder-flash / split-brain-leader-election / kernel
+  failed           grok-4.20 / retry-storm-duplicate-transfer / kernel
+  failed           qwen3-coder-plus / postgres-migration-schema-drift / kernel
+  failed           deepseek-r1-0528 / import-cycle-startup / kernel
+  failed           grok-4.20 / silent-data-corruption / kernel
+  failed           grok-code-fast-1 / haystack-mint / kernel
+  failed           gemini-3.1-flash-lite-preview / haystack-boot / kernel-cpu
+  failed           grok-4.20 / timezone-scheduling / kernel
+  failed           qwen3-coder-flash / timezone-scheduling / kernel
+  failed           grok-code-fast-1 / import-cycle-startup / kernel
+  failed           qwen3-coder-plus / retry-storm-duplicate-transfer / kernel
+  failed           gemini-3.1-flash-lite-preview / haystack-mint / kernel-cpu
+  failed           gemini-3.1-flash-lite-preview / import-cycle-startup / kernel
+  failed           gemini-3.1-flash-lite-preview / import-cycle-startup / kernel-cpu
+  failed           deepseek-r1-0528 / k8s-assume-cache-silent-drop / kernel
+  failed           qwen3-coder-plus / silent-data-corruption / kernel
+  failed           gemini-3.1-flash-lite-preview / k8s-assume-cache-silent-drop / kernel-cpu
+  failed           grok-4.20 / wal-fsync-ghost-ack / kernel
+  failed           gemini-3.1-flash-lite-preview / k8s-scheduler-shutdown-deadlock / kernel
+  failed           gemini-3.1-flash-lite-preview / k8s-scheduler-shutdown-deadlock / kernel-cpu
+  failed           qwen3-coder-plus / split-brain-leader-election / kernel
+  failed           qwen3-coder-flash / wal-fsync-ghost-ack / kernel
+  failed           deepseek-v3.2 / haystack-mint / kernel
+  failed           deepseek-r1-0528 / k8s-scheduler-shutdown-deadlock / kernel
+  failed           grok-code-fast-1 / linearizability-stale-read / kernel
+  failed           deepseek-r1 / retry-storm-duplicate-transfer / kernel
+  failed           gemini-3.1-flash-lite-preview / linearizability-stale-read / kernel
+  failed           deepseek-v3.2 / import-cycle-startup / kernel
+  failed           gemini-3.1-flash-lite-preview / memory-leak-event-listener / kernel
+  failed           deepseek-r1 / silent-data-corruption / kernel
+  failed           grok-code-fast-1 / memory-leak-event-listener / kernel
+  failed           gemini-3.1-flash-lite-preview / missing-input-validation / kernel
+  failed           grok-code-fast-1 / missing-input-validation / kernel
+  failed           gemini-3.1-flash-lite-preview / off-by-one-array-slice / kernel-cpu
+  failed           deepseek-r1 / split-brain-leader-election / kernel
+  failed           deepseek-r1-0528 / linearizability-stale-read / kernel
+  failed           deepseek-r1 / timezone-scheduling / kernel
+  failed           deepseek-r1 / tls-chain-ordering-strict / kernel
+  failed           gemini-3.1-flash-lite-preview / postgres-migration-schema-drift / kernel-cpu
+  failed           gemini-3.1-flash-lite-preview / race-condition-counter / kernel
+  failed           deepseek-r1 / type-coercion-comparison / kernel
+  failed           deepseek-r1 / wal-fsync-ghost-ack / kernel
+  failed           gemini-3.1-flash-lite-preview / race-condition-counter / kernel-cpu
+  failed           deepseek-r1-0528 / memory-leak-event-listener / kernel
+  failed           gemini-3.1-flash-lite-preview / raft-snapshot-commit-gap / kernel
+  failed           grok-code-fast-1 / postgres-migration-schema-drift / kernel
+  failed           gemini-3.1-flash-lite-preview / raft-snapshot-commit-gap / kernel-cpu
+  failed           deepseek-r1 / wrong-operator-discount / kernel
+  failed           deepseek-r1-0528 / missing-input-validation / kernel
+  failed           grok-code-fast-1 / race-condition-counter / kernel
+  failed           grok-code-fast-1 / raft-snapshot-commit-gap / kernel
+  failed           gemini-3.1-flash-lite-preview / silent-data-corruption / kernel-cpu
+  failed           deepseek-r1-0528 / nginx-upstream-port-mismatch / kernel
+  failed           gemini-3.1-flash-lite-preview / split-brain-leader-election / kernel
+  failed           deepseek-v3.2 / missing-input-validation / kernel
+  failed           gpt-5.4 / data-corruption-concurrent-write / native
+  failed           gemini-3.1-flash-lite-preview / timezone-scheduling / kernel
+  failed           gpt-5.4 / data-corruption-concurrent-write / kernel
+  failed           gemini-3.1-flash-lite-preview / timezone-scheduling / kernel-cpu
+  failed           deepseek-r1-0528 / null-pointer-config / kernel
+  failed           gemini-3.1-flash-lite-preview / type-coercion-comparison / kernel
+  failed           deepseek-r1-0528 / off-by-one-array-slice / kernel
+  failed           deepseek-v3.2 / null-pointer-config / kernel
+  failed           gemini-3.1-flash-lite-preview / wal-fsync-ghost-ack / kernel
+  failed           grok-code-fast-1 / retry-storm-duplicate-transfer / kernel
+  failed           deepseek-r1-0528 / off-by-one-pagination / kernel
+  failed           gemini-3.1-flash-lite-preview / wal-fsync-ghost-ack / kernel-cpu
+  failed           grok-code-fast-1 / silent-data-corruption / kernel
+  failed           grok-code-fast-1 / split-brain-leader-election / kernel
+  failed           deepseek-r1-0528 / performance-cliff-hash / kernel
+  failed           deepseek-v3.2 / raft-snapshot-commit-gap / kernel
+  failed           deepseek-r1-0528 / postgres-migration-schema-drift / kernel
+  failed           grok-code-fast-1 / timezone-scheduling / kernel
+  failed           grok-code-fast-1 / tls-chain-ordering-strict / kernel
+  failed           grok-code-fast-1 / type-coercion-comparison / kernel
+  failed           deepseek-r1-0528 / raft-snapshot-commit-gap / kernel
+  failed           gpt-5.4 / postgres-migration-schema-drift / native
+  failed           deepseek-r1-0528 / rate-limit-bypass-header / kernel
+  failed           gpt-5.4 / postgres-migration-schema-drift / kernel
+  failed           gpt-5.4 / postgres-migration-schema-drift / kernel-cpu
+  failed           deepseek-r1-0528 / relaxed-ordering-ringbuf / kernel
+  failed           deepseek-r1-0528 / retry-storm-duplicate-transfer / kernel
+  failed           deepseek-r1-0528 / silent-data-corruption / kernel
+  failed           gpt-5.4 / split-brain-leader-election / kernel
+  failed           gpt-5.4 / split-brain-leader-election / kernel-cpu
+  failed           gpt-5.2 / haystack-boot / kernel-cpu
+  failed           deepseek-r1-0528 / split-brain-leader-election / kernel
+  failed           deepseek-r1-0528 / sql-injection-search / kernel
+  failed           deepseek-r1-0528 / timezone-scheduling / kernel
+  failed           deepseek-r1-0528 / tls-chain-ordering-strict / kernel
+  failed           deepseek-r1-0528 / type-coercion-comparison / kernel
+  failed           deepseek-r1-0528 / wal-fsync-ghost-ack / kernel
+  failed           deepseek-r1-0528 / wrong-operator-discount / kernel
+  failed           gpt-5.2 / silent-data-corruption / kernel
+  failed           gpt-5.2 / silent-data-corruption / kernel-cpu
+  failed           claude-opus-4-8 / postgres-migration-schema-drift / native
+  failed           claude-opus-4-8 / postgres-migration-schema-drift / kernel-cpu
+  failed           claude-opus-4-8 / silent-data-corruption / native
+  failed           claude-opus-4-8 / silent-data-corruption / kernel-cpu
+  failed           claude-opus-4-8 / split-brain-leader-election / native
+  failed           claude-sonnet-4-6 / nginx-upstream-port-mismatch / native
+  failed           claude-sonnet-4-6 / postgres-migration-schema-drift / native
+  failed           claude-sonnet-4-6 / silent-data-corruption / native
+  failed           claude-sonnet-4-6 / split-brain-leader-election / native

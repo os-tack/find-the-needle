@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "encoding-mojibake",
+    "billed_tokens": 257067,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 10178,
+    "cache_read_tokens": 244925,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.246543,
+    "fresh_input_tokens": 1964,
+    "input_tokens": 1964,
+    "output_tokens": 2002,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified \u2014 `test.sh` passes.\n\n**The needle:** `CsvReader` decoded the input CSV as **ISO-8859-1**, but the file is **UTF-8** (e.g. `\u00e9` = bytes `c3 a9`). Each multibyte character was read as two separate Latin-1 chars (mojibake), then re-encoded to UTF-8 by the report writer, corrupting every international name.\n\n**The fix** (`app/CsvReader.java`): decode the CSV as `StandardCharsets.UTF_8`, matching the UTF-8 report output so names round-trip cleanly. All 12 name checks now pass.",
+    "timestamp": "2026-06-14T21:55:04Z",
+    "token_cost": 259069,
+    "tool_uses": 10,
+    "turns_to_fix": 11,
+    "wall_clock": 53.46,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:55:14+00:00"
+  }
+]

@@ -1,0 +1,161 @@
+sha256:43c2ccedbeee9c8bdf186dddc163995d2ebff8d673ff64459184c683ae7e65ba
+2026/06/14 11:21:56 server starting on :8080
+2026/06/14 11:21:58 http: panic serving 127.0.0.1:60806: runtime error: invalid memory address or nil pointer dereference
+goroutine 7 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1873 +0xb0
+panic({0x239720?, 0x477e20?})
+	/usr/local/go/src/runtime/panic.go:920 +0x26c
+main.main.makeStatusHandler.func1({0x2f1fd8, 0x400018a0e0}, 0x4000061ae8?)
+	/app/main.go:47 +0x1a4
+net/http.HandlerFunc.ServeHTTP(0x4000061b08?, {0x2f1fd8?, 0x400018a0e0?}, 0x1ee6a8?)
+	/usr/local/go/src/net/http/server.go:2141 +0x38
+net/http.(*ServeMux).ServeHTTP(0x4b69e0?, {0x2f1fd8, 0x400018a0e0}, 0x4000186100)
+	/usr/local/go/src/net/http/server.go:2519 +0x144
+net/http.serverHandler.ServeHTTP({0x40001804b0?}, {0x2f1fd8?, 0x400018a0e0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2943 +0xbc
+net/http.(*conn).serve(0x40001821b0, {0x2f25e0, 0x40000a4f00})
+	/usr/local/go/src/net/http/server.go:2014 +0x518
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3091 +0x4cc
+  [trial 1] fail (bug detected, expected)
+2026/06/14 11:21:58 server starting on :8080
+2026/06/14 11:22:00 http: panic serving 127.0.0.1:34156: runtime error: invalid memory address or nil pointer dereference
+goroutine 10 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1873 +0xb0
+panic({0x239720?, 0x477e20?})
+	/usr/local/go/src/runtime/panic.go:920 +0x26c
+main.main.makeStatusHandler.func1({0x2f1fd8, 0x400016e1c0}, 0x4000061ae8?)
+	/app/main.go:47 +0x1a4
+net/http.HandlerFunc.ServeHTTP(0x4000061b08?, {0x2f1fd8?, 0x400016e1c0?}, 0x1ee6a8?)
+	/usr/local/go/src/net/http/server.go:2141 +0x38
+net/http.(*ServeMux).ServeHTTP(0x4b69e0?, {0x2f1fd8, 0x400016e1c0}, 0x4000166200)
+	/usr/local/go/src/net/http/server.go:2519 +0x144
+net/http.serverHandler.ServeHTTP({0x400007f6b0?}, {0x2f1fd8?, 0x400016e1c0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2943 +0xbc
+net/http.(*conn).serve(0x4000136750, {0x2f25e0, 0x400007ef00})
+	/usr/local/go/src/net/http/server.go:2014 +0x518
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3091 +0x4cc
+  [trial 2] fail (bug detected, expected)
+2026/06/14 11:22:01 server starting on :8080
+2026/06/14 11:22:03 http: panic serving 127.0.0.1:34188: runtime error: invalid memory address or nil pointer dereference
+goroutine 34 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1873 +0xb0
+panic({0x239720?, 0x477e20?})
+	/usr/local/go/src/runtime/panic.go:920 +0x26c
+main.main.makeStatusHandler.func1({0x2f1fd8, 0x40000b21c0}, 0x400005cae8?)
+	/app/main.go:47 +0x1a4
+net/http.HandlerFunc.ServeHTTP(0x400005cb08?, {0x2f1fd8?, 0x40000b21c0?}, 0x1ee6a8?)
+	/usr/local/go/src/net/http/server.go:2141 +0x38
+net/http.(*ServeMux).ServeHTTP(0x4b69e0?, {0x2f1fd8, 0x40000b21c0}, 0x400019a000)
+	/usr/local/go/src/net/http/server.go:2519 +0x144
+net/http.serverHandler.ServeHTTP({0x4000184090?}, {0x2f1fd8?, 0x40000b21c0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2943 +0xbc
+net/http.(*conn).serve(0x4000188000, {0x2f25e0, 0x400007ef00})
+	/usr/local/go/src/net/http/server.go:2014 +0x518
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3091 +0x4cc
+  [trial 3] fail (bug detected, expected)
+2026/06/14 11:22:03 server starting on :8080
+2026/06/14 11:22:05 http: panic serving 127.0.0.1:34224: runtime error: invalid memory address or nil pointer dereference
+goroutine 19 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1873 +0xb0
+panic({0x239720?, 0x477e20?})
+	/usr/local/go/src/runtime/panic.go:920 +0x26c
+main.main.makeStatusHandler.func1({0x2f1fd8, 0x40001920e0}, 0x4000061ae8?)
+	/app/main.go:47 +0x1a4
+net/http.HandlerFunc.ServeHTTP(0x4000061b08?, {0x2f1fd8?, 0x40001920e0?}, 0x1ee6a8?)
+	/usr/local/go/src/net/http/server.go:2141 +0x38
+net/http.(*ServeMux).ServeHTTP(0x4b69e0?, {0x2f1fd8, 0x40001920e0}, 0x40001ae000)
+	/usr/local/go/src/net/http/server.go:2519 +0x144
+net/http.serverHandler.ServeHTTP({0x40001843c0?}, {0x2f1fd8?, 0x40001920e0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2943 +0xbc
+net/http.(*conn).serve(0x4000182120, {0x2f25e0, 0x400007ef00})
+	/usr/local/go/src/net/http/server.go:2014 +0x518
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3091 +0x4cc
+  [trial 4] fail (bug detected, expected)
+2026/06/14 11:22:05 server starting on :8080
+2026/06/14 11:22:07 http: panic serving 127.0.0.1:34240: runtime error: invalid memory address or nil pointer dereference
+goroutine 21 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1873 +0xb0
+panic({0x239720?, 0x477e20?})
+	/usr/local/go/src/runtime/panic.go:920 +0x26c
+main.main.makeStatusHandler.func1({0x2f1fd8, 0x40001220e0}, 0x400005cae8?)
+	/app/main.go:47 +0x1a4
+net/http.HandlerFunc.ServeHTTP(0x400005cb08?, {0x2f1fd8?, 0x40001220e0?}, 0x1ee6a8?)
+	/usr/local/go/src/net/http/server.go:2141 +0x38
+net/http.(*ServeMux).ServeHTTP(0x4b69e0?, {0x2f1fd8, 0x40001220e0}, 0x4000118100)
+	/usr/local/go/src/net/http/server.go:2519 +0x144
+net/http.serverHandler.ServeHTTP({0x40000a5320?}, {0x2f1fd8?, 0x40001220e0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2943 +0xbc
+net/http.(*conn).serve(0x40000e45a0, {0x2f25e0, 0x40000a4f00})
+	/usr/local/go/src/net/http/server.go:2014 +0x518
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3091 +0x4cc
+  [trial 5] fail (bug detected, expected)
+2026/06/14 11:22:08 server starting on :8080
+2026/06/14 11:22:10 http: panic serving 127.0.0.1:46514: runtime error: invalid memory address or nil pointer dereference
+goroutine 10 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1873 +0xb0
+panic({0x239720?, 0x477e20?})
+	/usr/local/go/src/runtime/panic.go:920 +0x26c
+main.main.makeStatusHandler.func1({0x2f1fd8, 0x40000f61c0}, 0x4000061ae8?)
+	/app/main.go:47 +0x1a4
+net/http.HandlerFunc.ServeHTTP(0x4000061b08?, {0x2f1fd8?, 0x40000f61c0?}, 0x1ee6a8?)
+	/usr/local/go/src/net/http/server.go:2141 +0x38
+net/http.(*ServeMux).ServeHTTP(0x4b69e0?, {0x2f1fd8, 0x40000f61c0}, 0x40000ee200)
+	/usr/local/go/src/net/http/server.go:2519 +0x144
+net/http.serverHandler.ServeHTTP({0x400007f6b0?}, {0x2f1fd8?, 0x40000f61c0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2943 +0xbc
+net/http.(*conn).serve(0x40000be750, {0x2f25e0, 0x400007ef00})
+	/usr/local/go/src/net/http/server.go:2014 +0x518
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3091 +0x4cc
+  [trial 6] fail (bug detected, expected)
+2026/06/14 11:22:10 server starting on :8080
+2026/06/14 11:22:12 http: panic serving 127.0.0.1:46536: runtime error: invalid memory address or nil pointer dereference
+goroutine 20 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1873 +0xb0
+panic({0x239720?, 0x477e20?})
+	/usr/local/go/src/runtime/panic.go:920 +0x26c
+main.main.makeStatusHandler.func1({0x2f1fd8, 0x40001a40e0}, 0x400005cae8?)
+	/app/main.go:47 +0x1a4
+net/http.HandlerFunc.ServeHTTP(0x400005cb08?, {0x2f1fd8?, 0x40001a40e0?}, 0x1ee6a8?)
+	/usr/local/go/src/net/http/server.go:2141 +0x38
+net/http.(*ServeMux).ServeHTTP(0x4b69e0?, {0x2f1fd8, 0x40001a40e0}, 0x400019a100)
+	/usr/local/go/src/net/http/server.go:2519 +0x144
+net/http.serverHandler.ServeHTTP({0x40001844b0?}, {0x2f1fd8?, 0x40001a40e0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2943 +0xbc
+net/http.(*conn).serve(0x40001881b0, {0x2f25e0, 0x400007ef00})
+	/usr/local/go/src/net/http/server.go:2014 +0x518
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3091 +0x4cc
+  [trial 7] fail (bug detected, expected)
+2026/06/14 11:22:12 server starting on :8080
+2026/06/14 11:22:14 http: panic serving 127.0.0.1:46558: runtime error: invalid memory address or nil pointer dereference
+goroutine 23 [running]:
+net/http.(*conn).serve.func1()
+	/usr/local/go/src/net/http/server.go:1873 +0xb0
+panic({0x239720?, 0x477e20?})
+	/usr/local/go/src/runtime/panic.go:920 +0x26c
+main.main.makeStatusHandler.func1({0x2f1fd8, 0x40001901c0}, 0x400005cae8?)
+	/app/main.go:47 +0x1a4
+net/http.HandlerFunc.ServeHTTP(0x400005cb08?, {0x2f1fd8?, 0x40001901c0?}, 0x1ee6a8?)
+	/usr/local/go/src/net/http/server.go:2141 +0x38
+net/http.(*ServeMux).ServeHTTP(0x4b69e0?, {0x2f1fd8, 0x40001901c0}, 0x4000176200)
+	/usr/local/go/src/net/http/server.go:2519 +0x144
+net/http.serverHandler.ServeHTTP({0x400010d6b0?}, {0x2f1fd8?, 0x40001901c0?}, 0x6?)
+	/usr/local/go/src/net/http/server.go:2943 +0xbc
+net/http.(*conn).serve(0x4000152750, {0x2f25e0, 0x400010cf00})
+	/usr/local/go/src/net/http/server.go:2014 +0x518
+created by net/http.(*Server).Serve in goroutine 1
+	/usr/local/go/src/net/http/server.go:3091 +0x4cc
+  [trial 8] fail (bug detected, expected)

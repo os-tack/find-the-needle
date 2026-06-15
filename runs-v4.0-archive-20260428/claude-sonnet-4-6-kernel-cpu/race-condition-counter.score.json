@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "race-condition-counter",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2918,
+  "output_tokens": 1206,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **Test passes!**\n\n## The Needle: Race Condition in `counter.js`\n\n**Problem:** The `incrementCounter()` function used a non-atomic **read-modify-write** pattern:\n1. `GET` the current value from Redis\n2. Add 1 in JavaScript\n3. `SET` the new value back to Redis\n\nWith 100 concurrent requests, multiple requests would read the **same** value simultaneously, all compute the same incremented value, and write it back — causing lost updates (e.g., 100 concurrent requests might only result in a counter of 3–10).\n\n**Fix:** Replace the three-step operation with Redis's built-in atomic **`INCR`** command, which reads and increments the value in a single, indivisible operation — eliminating the race condition entirely.",
+  "timestamp": "2026-04-03T02:12:22Z",
+  "token_cost": 4124,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 27.732
+}

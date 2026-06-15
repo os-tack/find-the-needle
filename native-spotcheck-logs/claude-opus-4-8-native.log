@@ -1,0 +1,16 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=claude-opus-4-8, arms=native]
+
+--- null-pointer-config [native] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-native-claude-opus-4-8-1781429774124 (timeout 660s)...
+  snapshotting workspace...
+  [native] using claude (Claude Code)
+  [native] running claude ...
+  [native]   {"type":"result","subtype":"success","is_error":false,"api_error_status":null,"duration_ms":30576,"duration_api_ms":30502,"ttft_ms":2722,"ttft_stream_ms":2266,"time_to_request_ms":21,"num_turns":8,"result":"Fixed and verified. `PASS`.\n\n**The needle:** `config.json` sets `enable_metrics: true` but omits the `metrics` block, leaving `cfg.Metrics == nil`. In `makeStatusHandler` (`main.go:46-48`), the `EnableMetrics` branch dereferences `cfg.Metrics.Endpoint`, causing a nil-pointer panic on every `/status` request.\n\n**The fix:** In `LoadConfig`, when metrics are enabled but no metrics block is present, default `cfg.Metrics` to `{Endpoint: \"/metrics\", IntervalSec: 60}` — so the pointer is always safe to read when the feature flag says it's on. All three endpoint tests now pass.","stop_reason":"end_turn","session_id":"2da61622-0657-43da-b3f5-47b805c7ac28","total_cost_usd":0.14768275,"usage":{"input_tokens":1823,"cache_creation_input_tokens":7765,"cache_read_input_tokens":99627,"output_tokens":1585,"server_tool_use":{"web_search_requests":0,"web_fetch_requests":0},"service_tier":"standard","cache_creation":{"ephemeral_1h_input_tokens":0,"ephemeral_5m_input_tokens":7765},"inference_geo":"global","iterations":[{"input_tokens":2,"output_tokens":248,"cache_read_input_tokens":23483,"cache_creation_input_tokens":130,"cache_creation":{"ephemeral_5m_input_tokens":130,"ephemeral_1h_input_tokens":0},"type":"message"}],"speed":"standard"},"modelUsage":{"claude-haiku-4-5-20251001":{"inputTokens":513,"outputTokens":17,"cacheReadInputTokens":0,"cacheCreationInputTokens":0,"webSearchRequests":0,"costUSD":0.000598,"contextWindow":200000,"maxOutputTokens":32000},"claude-opus-4-8":{"inputTokens":1823,"outputTokens":1585,"cacheReadInputTokens":99627,"cacheCreationInputTokens":7765,"webSearchRequests":0,"costUSD":0.14708475000000001,"contextWindow":1000000,"maxOutputTokens":64000}},"permission_denials":[],"terminal_reason":"completed","fast_mode_state":"off","uuid":"3a2f5094-2d1d-4f83-963c-be8419f3440b"}
+  [native] complete: 8 turns, 109215+1585 tokens, $0.1477, 7 tools, stop=pass
+  [native] summary: Fixed and verified. `PASS`.
+
+**The needle:** `config.json` sets `enable_metrics: true` but omits the `metrics` block, le
+
+=== bench summary ===
+1/1 passed, 35272ms total [model=claude-opus-4-8, arms=native]

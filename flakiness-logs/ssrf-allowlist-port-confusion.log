@@ -1,0 +1,185 @@
+sha256:d3b0ee19c4c026973aad9fe6034be07de7eddfd5a364294aca94c8ec8d7b6ea4
+Internal metadata service listening on 0.0.0.0:8888 (IPv4)
+Internal metadata service listening on [::1]:8888 (IPv6)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+Preflight OK: internal service reachable on both IPv4 and IPv6
+127.0.0.1 - - [14/Jun/2026 11:26:57] "GET /health HTTP/1.1" 200 -
+PASS: health endpoint OK
+127.0.0.1 - - [14/Jun/2026 11:26:57] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: 127.0.0.1 correctly blocked
+127.0.0.1 - - [14/Jun/2026 11:26:57] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via IPv6 loopback [::1] — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:26:57] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via expanded IPv6 loopback — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:26:57] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: AWS metadata IP correctly blocked
+
+FAIL
+  [trial 1] fail (bug detected, expected)
+Internal metadata service listening on 0.0.0.0:8888 (IPv4)
+Internal metadata service listening on [::1]:8888 (IPv6)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+Preflight OK: internal service reachable on both IPv4 and IPv6
+127.0.0.1 - - [14/Jun/2026 11:26:59] "GET /health HTTP/1.1" 200 -
+PASS: health endpoint OK
+127.0.0.1 - - [14/Jun/2026 11:26:59] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: 127.0.0.1 correctly blocked
+127.0.0.1 - - [14/Jun/2026 11:26:59] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via IPv6 loopback [::1] — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:26:59] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via expanded IPv6 loopback — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:26:59] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: AWS metadata IP correctly blocked
+
+FAIL
+  [trial 2] fail (bug detected, expected)
+Internal metadata service listening on 0.0.0.0:8888 (IPv4)
+Internal metadata service listening on [::1]:8888 (IPv6)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+Preflight OK: internal service reachable on both IPv4 and IPv6
+127.0.0.1 - - [14/Jun/2026 11:27:01] "GET /health HTTP/1.1" 200 -
+PASS: health endpoint OK
+127.0.0.1 - - [14/Jun/2026 11:27:01] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: 127.0.0.1 correctly blocked
+127.0.0.1 - - [14/Jun/2026 11:27:01] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via IPv6 loopback [::1] — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:01] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via expanded IPv6 loopback — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:01] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: AWS metadata IP correctly blocked
+
+FAIL
+  [trial 3] fail (bug detected, expected)
+Internal metadata service listening on 0.0.0.0:8888 (IPv4)
+Internal metadata service listening on [::1]:8888 (IPv6)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+Preflight OK: internal service reachable on both IPv4 and IPv6
+127.0.0.1 - - [14/Jun/2026 11:27:04] "GET /health HTTP/1.1" 200 -
+PASS: health endpoint OK
+127.0.0.1 - - [14/Jun/2026 11:27:04] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: 127.0.0.1 correctly blocked
+127.0.0.1 - - [14/Jun/2026 11:27:04] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via IPv6 loopback [::1] — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:04] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via expanded IPv6 loopback — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:04] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: AWS metadata IP correctly blocked
+
+FAIL
+  [trial 4] fail (bug detected, expected)
+Internal metadata service listening on 0.0.0.0:8888 (IPv4)
+Internal metadata service listening on [::1]:8888 (IPv6)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+Preflight OK: internal service reachable on both IPv4 and IPv6
+127.0.0.1 - - [14/Jun/2026 11:27:06] "GET /health HTTP/1.1" 200 -
+PASS: health endpoint OK
+127.0.0.1 - - [14/Jun/2026 11:27:06] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: 127.0.0.1 correctly blocked
+127.0.0.1 - - [14/Jun/2026 11:27:06] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via IPv6 loopback [::1] — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:06] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via expanded IPv6 loopback — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:06] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: AWS metadata IP correctly blocked
+
+FAIL
+  [trial 5] fail (bug detected, expected)
+Internal metadata service listening on 0.0.0.0:8888 (IPv4)
+Internal metadata service listening on [::1]:8888 (IPv6)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+Preflight OK: internal service reachable on both IPv4 and IPv6
+127.0.0.1 - - [14/Jun/2026 11:27:08] "GET /health HTTP/1.1" 200 -
+PASS: health endpoint OK
+127.0.0.1 - - [14/Jun/2026 11:27:08] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: 127.0.0.1 correctly blocked
+127.0.0.1 - - [14/Jun/2026 11:27:08] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via IPv6 loopback [::1] — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:08] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via expanded IPv6 loopback — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:08] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: AWS metadata IP correctly blocked
+
+FAIL
+  [trial 6] fail (bug detected, expected)
+Internal metadata service listening on 0.0.0.0:8888 (IPv4)
+Internal metadata service listening on [::1]:8888 (IPv6)
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+ * Serving Flask app 'server'
+ * Debug mode: off
+Preflight OK: internal service reachable on both IPv4 and IPv6
+127.0.0.1 - - [14/Jun/2026 11:27:10] "GET /health HTTP/1.1" 200 -
+PASS: health endpoint OK
+127.0.0.1 - - [14/Jun/2026 11:27:10] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: 127.0.0.1 correctly blocked
+127.0.0.1 - - [14/Jun/2026 11:27:10] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via IPv6 loopback [::1] — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:10] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via expanded IPv6 loopback — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:10] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: AWS metadata IP correctly blocked
+
+FAIL
+  [trial 7] fail (bug detected, expected)
+Internal metadata service listening on 0.0.0.0:8888 (IPv4)
+Internal metadata service listening on [::1]:8888 (IPv6)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+Preflight OK: internal service reachable on both IPv4 and IPv6
+127.0.0.1 - - [14/Jun/2026 11:27:13] "GET /health HTTP/1.1" 200 -
+PASS: health endpoint OK
+127.0.0.1 - - [14/Jun/2026 11:27:13] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: 127.0.0.1 correctly blocked
+127.0.0.1 - - [14/Jun/2026 11:27:13] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via IPv6 loopback [::1] — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:13] "POST /webhook/proxy HTTP/1.1" 200 -
+FAIL: SSRF via expanded IPv6 loopback — internal secret leaked
+127.0.0.1 - - [14/Jun/2026 11:27:13] "[31m[1mPOST /webhook/proxy HTTP/1.1[0m" 403 -
+PASS: AWS metadata IP correctly blocked
+
+FAIL
+  [trial 8] fail (bug detected, expected)

@@ -1,0 +1,97 @@
+sha256:7ba02aea955f66feb1c44fd69cf6f8a80d15b86d39235e73acc010db227e2221
+2026/06/14 11:11:23 API server starting on port 18085
+v1 user response fields: avatar_url, bio, created_at, email, id, location, name, role, updated_at
+v2 user response fields: created_at, department, email, id, is_active, name, phone_number, role, updated_at
+
+Checking field compatibility...
+FAIL: v2 API is missing fields that exist in v1: avatar_url bio location
+      Clients upgrading from v1 to v2 will lose data
+FAIL: avatar_url has value 'https://cdn.example.com/avatars/alice.jpg' in v1 but is missing in v2
+FAIL: bio has value in v1 but is missing in v2
+FAIL: location has value 'San Francisco, CA' in v1 but is missing in v2
+PASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)
+  [trial 1] fail (bug detected, expected)
+2026/06/14 11:11:25 API server starting on port 18085
+v1 user response fields: avatar_url, bio, created_at, email, id, location, name, role, updated_at
+v2 user response fields: created_at, department, email, id, is_active, name, phone_number, role, updated_at
+
+Checking field compatibility...
+FAIL: v2 API is missing fields that exist in v1: avatar_url bio location
+      Clients upgrading from v1 to v2 will lose data
+FAIL: avatar_url has value 'https://cdn.example.com/avatars/alice.jpg' in v1 but is missing in v2
+FAIL: bio has value in v1 but is missing in v2
+FAIL: location has value 'San Francisco, CA' in v1 but is missing in v2
+PASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)
+  [trial 2] fail (bug detected, expected)
+2026/06/14 11:11:27 API server starting on port 18085
+v1 user response fields: avatar_url, bio, created_at, email, id, location, name, role, updated_at
+v2 user response fields: created_at, department, email, id, is_active, name, phone_number, role, updated_at
+
+Checking field compatibility...
+FAIL: v2 API is missing fields that exist in v1: avatar_url bio location
+      Clients upgrading from v1 to v2 will lose data
+FAIL: avatar_url has value 'https://cdn.example.com/avatars/alice.jpg' in v1 but is missing in v2
+FAIL: bio has value in v1 but is missing in v2
+FAIL: location has value 'San Francisco, CA' in v1 but is missing in v2
+PASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)
+  [trial 3] fail (bug detected, expected)
+2026/06/14 11:11:28 API server starting on port 18085
+v1 user response fields: avatar_url, bio, created_at, email, id, location, name, role, updated_at
+v2 user response fields: created_at, department, email, id, is_active, name, phone_number, role, updated_at
+
+Checking field compatibility...
+FAIL: v2 API is missing fields that exist in v1: avatar_url bio location
+      Clients upgrading from v1 to v2 will lose data
+FAIL: avatar_url has value 'https://cdn.example.com/avatars/alice.jpg' in v1 but is missing in v2
+FAIL: bio has value in v1 but is missing in v2
+FAIL: location has value 'San Francisco, CA' in v1 but is missing in v2
+PASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)
+  [trial 4] fail (bug detected, expected)
+2026/06/14 11:11:30 API server starting on port 18085
+v1 user response fields: avatar_url, bio, created_at, email, id, location, name, role, updated_at
+v2 user response fields: created_at, department, email, id, is_active, name, phone_number, role, updated_at
+
+Checking field compatibility...
+FAIL: v2 API is missing fields that exist in v1: avatar_url bio location
+      Clients upgrading from v1 to v2 will lose data
+FAIL: avatar_url has value 'https://cdn.example.com/avatars/alice.jpg' in v1 but is missing in v2
+FAIL: bio has value in v1 but is missing in v2
+FAIL: location has value 'San Francisco, CA' in v1 but is missing in v2
+PASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)
+  [trial 5] fail (bug detected, expected)
+2026/06/14 11:11:32 API server starting on port 18085
+v1 user response fields: avatar_url, bio, created_at, email, id, location, name, role, updated_at
+v2 user response fields: created_at, department, email, id, is_active, name, phone_number, role, updated_at
+
+Checking field compatibility...
+FAIL: v2 API is missing fields that exist in v1: avatar_url bio location
+      Clients upgrading from v1 to v2 will lose data
+FAIL: avatar_url has value 'https://cdn.example.com/avatars/alice.jpg' in v1 but is missing in v2
+FAIL: bio has value in v1 but is missing in v2
+FAIL: location has value 'San Francisco, CA' in v1 but is missing in v2
+PASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)
+  [trial 6] fail (bug detected, expected)
+2026/06/14 11:11:33 API server starting on port 18085
+v1 user response fields: avatar_url, bio, created_at, email, id, location, name, role, updated_at
+v2 user response fields: created_at, department, email, id, is_active, name, phone_number, role, updated_at
+
+Checking field compatibility...
+FAIL: v2 API is missing fields that exist in v1: avatar_url bio location
+      Clients upgrading from v1 to v2 will lose data
+FAIL: avatar_url has value 'https://cdn.example.com/avatars/alice.jpg' in v1 but is missing in v2
+FAIL: bio has value in v1 but is missing in v2
+FAIL: location has value 'San Francisco, CA' in v1 but is missing in v2
+PASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)
+  [trial 7] fail (bug detected, expected)
+2026/06/14 11:11:35 API server starting on port 18085
+v1 user response fields: avatar_url, bio, created_at, email, id, location, name, role, updated_at
+v2 user response fields: created_at, department, email, id, is_active, name, phone_number, role, updated_at
+
+Checking field compatibility...
+FAIL: v2 API is missing fields that exist in v1: avatar_url bio location
+      Clients upgrading from v1 to v2 will lose data
+FAIL: avatar_url has value 'https://cdn.example.com/avatars/alice.jpg' in v1 but is missing in v2
+FAIL: bio has value in v1 but is missing in v2
+FAIL: location has value 'San Francisco, CA' in v1 but is missing in v2
+PASS: v2 has new fields (department=Engineering, phone_number=+1-555-0101)
+  [trial 8] fail (bug detected, expected)

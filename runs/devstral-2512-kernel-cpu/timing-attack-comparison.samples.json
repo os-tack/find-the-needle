@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "devstral-2512-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "timing-attack-comparison",
+    "billed_tokens": 80515,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.249015,
+    "fresh_input_tokens": 80515,
+    "input_tokens": 80515,
+    "output_tokens": 498,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 13turns, 80515+498 tokens, $0.2490",
+    "timestamp": "2026-06-15T02:48:33Z",
+    "token_cost": 81013,
+    "tool_uses": 12,
+    "turns_to_fix": 13,
+    "wall_clock": 64.302,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T02:48:43+00:00"
+  }
+]

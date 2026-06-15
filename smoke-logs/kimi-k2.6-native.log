@@ -1,0 +1,18 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=kimi-k2.6, arms=native]
+
+--- null-pointer-config [native] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-native-kimi-k2.6-1781390522134 (timeout 660s)...
+  snapshotting workspace...
+  [native] using kimi (Kimi CLI)
+  [native] running kimi ...
+  [native]       mcp_status=None
+  [native]   )
+  [native]   TurnEnd()
+  [native]   
+  [native]   To resume this session: kimi -r a2ddd9a2-8c03-4e8b-a87d-088a5195c9d5
+  [native] complete: 7 turns, 0+0 tokens, $0.0000, 10 tools, stop=pass
+  [native] summary: To resume this session: kimi -r a2ddd9a2-8c03-4e8b-a87d-088a5195c9d5
+
+=== bench summary ===
+1/1 passed, 27160ms total [model=kimi-k2.6, arms=native]

@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 35638,
+  "output_tokens": 1294,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The fix worked. The test script now passes, confirming that:\n\n1. All v1 fields (`avatar_url`, `bio`, `location`) are now present in v2 responses\n2. The v2 API maintains backward compatibility with v1\n3. The v2 API also includes the new fields (`department`, `phone_number`, `is_active`)\n\nThe needle in the haystack was the missing fields in the `UserV2` struct and the `ToV2()` method in `/app/app/models.go`. By adding back the `AvatarURL`, `Bio`, and `Location` fields to the `UserV2` struct and including them in the conversion method, we've made the v2 API properly backward-compatible with v1.",
+  "timestamp": "2026-04-03T01:15:01Z",
+  "token_cost": 36932,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 21.087
+}

@@ -1,0 +1,33 @@
+sha256:7f51ea6cd517fb85aae880f4626697ccdae0522aba8c37eb7e34ed7b38f0c785
+=== Concurrent Write Integrity Test ===
+--- Building ---
+test.sh: line 15: cargo: command not found
+  [trial 1] fail (bug detected, expected)
+=== Concurrent Write Integrity Test ===
+--- Building ---
+test.sh: line 15: cargo: command not found
+  [trial 2] fail (bug detected, expected)
+=== Concurrent Write Integrity Test ===
+--- Building ---
+test.sh: line 15: cargo: command not found
+  [trial 3] fail (bug detected, expected)
+=== Concurrent Write Integrity Test ===
+--- Building ---
+test.sh: line 15: cargo: command not found
+  [trial 4] fail (bug detected, expected)
+=== Concurrent Write Integrity Test ===
+--- Building ---
+test.sh: line 15: cargo: command not found
+  [trial 5] fail (bug detected, expected)
+=== Concurrent Write Integrity Test ===
+--- Building ---
+test.sh: line 15: cargo: command not found
+  [trial 6] fail (bug detected, expected)
+=== Concurrent Write Integrity Test ===
+--- Building ---
+test.sh: line 15: cargo: command not found
+  [trial 7] fail (bug detected, expected)
+=== Concurrent Write Integrity Test ===
+--- Building ---
+test.sh: line 15: cargo: command not found
+  [trial 8] fail (bug detected, expected)

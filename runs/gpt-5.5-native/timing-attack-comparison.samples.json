@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "timing-attack-comparison",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 102761,
+    "output_tokens": 931,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the timing side channel in [compare.go](/app/app/auth/compare.go:5) by replacing direct string equality with `crypto/subtle.ConstantTimeCompare`.\n\nVerification passed:\n- `./test.sh`\n- `go test ./...` from `/app/app`",
+    "timestamp": "2026-06-14T23:16:21Z",
+    "token_cost": 931,
+    "tool_uses": 10,
+    "turns_to_fix": 1,
+    "wall_clock": 22.422,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:16:31+00:00"
+  }
+]

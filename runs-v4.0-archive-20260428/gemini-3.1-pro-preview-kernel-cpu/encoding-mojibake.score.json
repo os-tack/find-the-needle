@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "encoding-mojibake",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 24057,
+  "output_tokens": 765,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have successfully found the issue and fixed it. \n\n**Summary of Findings:**\n- The `test.sh` script verifies whether international customer names (containing non-ASCII characters like `é`, `ü`, `ø`, etc.) survive a round trip of reading a CSV and writing a report without corruption.\n- When inspecting the Java source code, specifically `app/CsvReader.java`, I found that the charset was hardcoded to `ISO-8859-1` (\"for broad compatibility with legacy systems\"), while the report writer was writing in `UTF-8`.\n- This incorrect mapping meant UTF-8 bytes were read as single-byte ISO-8859-1 characters, leading to characters like \"Ã©\" showing up in the output (a classic encoding mismatch \"needle\").\n- By changing `Charset.forName(\"ISO-8859-1\")` to `Charset.forName(\"UTF-8\")`, the application now correctly interprets the multi-byte characters. The `test.sh` verification passes perfectly, with 0 names corrupted.",
+  "timestamp": "2026-04-03T03:30:33Z",
+  "token_cost": 24822,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 32.259
+}

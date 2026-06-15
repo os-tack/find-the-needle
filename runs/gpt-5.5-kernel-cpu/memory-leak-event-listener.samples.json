@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "memory-leak-event-listener",
+    "billed_tokens": 106158,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.197628,
+    "fresh_input_tokens": 106158,
+    "input_tokens": 106158,
+    "output_tokens": 2565,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 15turns, 106158+2565 tokens, $0.1976",
+    "timestamp": "2026-06-14T22:22:12Z",
+    "token_cost": 108723,
+    "tool_uses": 14,
+    "turns_to_fix": 15,
+    "wall_clock": 102.969,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:22:22+00:00"
+  }
+]

@@ -1,0 +1,313 @@
+[gate] ostk version OK: ostk 7.6.0
+[plan] models=2 benches=40
+[plan] total cells=160 pending=156 skipped=4
+[run] starting at 2026-06-14T12:13:53+00:00
+
+========== deepseek-v4-pro (new, arms=['native', 'kernel']) ==========
+  [2026-06-14T12:13:53+00:00] deepseek-v4-pro / api-version-field-drop / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:14:08+00:00] deepseek-v4-pro / api-version-field-drop / kernel  (sample 1/1, attempt 1)
+    OK (146s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:16:34+00:00] deepseek-v4-pro / auth-bypass-path-traversal / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:16:49+00:00] deepseek-v4-pro / auth-bypass-path-traversal / kernel  (sample 1/1, attempt 1)
+    OK (164s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:19:34+00:00] deepseek-v4-pro / bidi-override-injection / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:19:50+00:00] deepseek-v4-pro / bidi-override-injection / kernel  (sample 1/1, attempt 1)
+    OK (263s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:24:14+00:00] deepseek-v4-pro / cache-stale-invalidation / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:24:28+00:00] deepseek-v4-pro / cache-stale-invalidation / kernel  (sample 1/1, attempt 1)
+    OK (109s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:26:17+00:00] deepseek-v4-pro / compiler-macro-expansion / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:26:32+00:00] deepseek-v4-pro / compiler-macro-expansion / kernel  (sample 1/1, attempt 1)
+    OK (123s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:28:35+00:00] deepseek-v4-pro / data-corruption-concurrent-write / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:28:48+00:00] deepseek-v4-pro / data-corruption-concurrent-write / kernel  (sample 1/1, attempt 1)
+    OK (160s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:31:27+00:00] deepseek-v4-pro / deadlock-transfer / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:32:00+00:00] deepseek-v4-pro / deadlock-transfer / kernel  (sample 1/1, attempt 1)
+    OK (124s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:34:04+00:00] deepseek-v4-pro / encoding-mojibake / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:34:17+00:00] deepseek-v4-pro / encoding-mojibake / kernel  (sample 1/1, attempt 1)
+    OK (135s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:36:32+00:00] deepseek-v4-pro / goroutine-leak-handler / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:37:03+00:00] deepseek-v4-pro / goroutine-leak-handler / kernel  (sample 1/1, attempt 1)
+    OK (185s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:40:08+00:00] deepseek-v4-pro / graphql-dataloader-per-request / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:40:25+00:00] deepseek-v4-pro / graphql-dataloader-per-request / kernel  (sample 1/1, attempt 1)
+    OK (164s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:43:09+00:00] deepseek-v4-pro / haystack-boot / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:43:21+00:00] deepseek-v4-pro / haystack-boot / kernel  (sample 1/1, attempt 1)
+    OK (260s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:47:40+00:00] deepseek-v4-pro / haystack-mint / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:47:52+00:00] deepseek-v4-pro / haystack-mint / kernel  (sample 1/1, attempt 1)
+    OK (304s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:52:56+00:00] deepseek-v4-pro / import-cycle-startup / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:53:08+00:00] deepseek-v4-pro / import-cycle-startup / kernel  (sample 1/1, attempt 1)
+    OK (168s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:55:56+00:00] deepseek-v4-pro / k8s-assume-cache-silent-drop / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:56:08+00:00] deepseek-v4-pro / k8s-assume-cache-silent-drop / kernel  (sample 1/1, attempt 1)
+    OK (187s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T12:59:15+00:00] deepseek-v4-pro / k8s-scheduler-shutdown-deadlock / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T12:59:33+00:00] deepseek-v4-pro / k8s-scheduler-shutdown-deadlock / kernel  (sample 1/1, attempt 1)
+    OK (152s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:02:05+00:00] deepseek-v4-pro / kernel-panic-ioctl / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T13:02:24+00:00] deepseek-v4-pro / kernel-panic-ioctl / kernel  (sample 1/1, attempt 1)
+    OK (389s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:08:53+00:00] deepseek-v4-pro / linearizability-stale-read / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T13:09:11+00:00] deepseek-v4-pro / linearizability-stale-read / kernel  (sample 1/1, attempt 1)
+    OK (696s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:20:47+00:00] deepseek-v4-pro / memory-leak-event-listener / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T13:21:08+00:00] deepseek-v4-pro / memory-leak-event-listener / kernel  (sample 1/1, attempt 1)
+    OK (195s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:24:23+00:00] deepseek-v4-pro / missing-input-validation / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T13:24:41+00:00] deepseek-v4-pro / missing-input-validation / kernel  (sample 1/1, attempt 1)
+    OK (174s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:27:35+00:00] deepseek-v4-pro / nginx-upstream-port-mismatch / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T13:27:48+00:00] deepseek-v4-pro / nginx-upstream-port-mismatch / kernel  (sample 1/1, attempt 1)
+    OK (119s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:29:47+00:00] deepseek-v4-pro / off-by-one-array-slice / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T13:29:59+00:00] deepseek-v4-pro / off-by-one-array-slice / kernel  (sample 1/1, attempt 1)
+    OK (133s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:32:12+00:00] deepseek-v4-pro / off-by-one-pagination / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T13:32:28+00:00] deepseek-v4-pro / off-by-one-pagination / kernel  (sample 1/1, attempt 1)
+    OK (189s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:35:37+00:00] deepseek-v4-pro / performance-cliff-hash / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T13:35:50+00:00] deepseek-v4-pro / performance-cliff-hash / kernel  (sample 1/1, attempt 1)
+    OK (207s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T13:39:17+00:00] deepseek-v4-pro / postgres-migration-schema-drift / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T13:39:29+00:00] deepseek-v4-pro / postgres-migration-schema-drift / kernel  (sample 1/1, attempt 1)
+    HARD FAIL:   [kernel] running with live kernel...
+  [kernel] dispatching via `ostk kernel spawn` (openrouter arm, model=openrouter/deepseek/deepseek-v4-pro)...
+  [kernel] spawn returned: spawned bench (model ope
+  [2026-06-14T14:06:34+00:00] deepseek-v4-pro / race-condition-counter / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:06:55+00:00] deepseek-v4-pro / race-condition-counter / kernel  (sample 1/1, attempt 1)
+    OK (115s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:08:49+00:00] deepseek-v4-pro / raft-snapshot-commit-gap / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:09:02+00:00] deepseek-v4-pro / raft-snapshot-commit-gap / kernel  (sample 1/1, attempt 1)
+    OK (363s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:15:05+00:00] deepseek-v4-pro / rate-limit-bypass-header / native  (sample 1/1, attempt 1)
+    TRANSIENT (will retry):   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [retry] sleeping 10s before attempt 2
+  [2026-06-14T14:15:42+00:00] deepseek-v4-pro / rate-limit-bypass-header / native  (sample 1/1, attempt 2)
+    TRANSIENT (will retry):   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [retry] sleeping 60s before attempt 3
+  [2026-06-14T14:17:10+00:00] deepseek-v4-pro / rate-limit-bypass-header / native  (sample 1/1, attempt 3)
+    TRANSIENT (gave up after 3):   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:17:37+00:00] deepseek-v4-pro / rate-limit-bypass-header / kernel  (sample 1/1, attempt 1)
+    OK (192s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:20:49+00:00] deepseek-v4-pro / relaxed-ordering-ringbuf / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:21:01+00:00] deepseek-v4-pro / relaxed-ordering-ringbuf / kernel  (sample 1/1, attempt 1)
+    OK (270s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:25:31+00:00] deepseek-v4-pro / retry-storm-duplicate-transfer / native  (sample 1/1, attempt 1)
+    OK (19s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:25:51+00:00] deepseek-v4-pro / retry-storm-duplicate-transfer / kernel  (sample 1/1, attempt 1)
+    OK (450s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:33:20+00:00] deepseek-v4-pro / silent-data-corruption / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:33:37+00:00] deepseek-v4-pro / silent-data-corruption / kernel  (sample 1/1, attempt 1)
+    OK (172s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:36:29+00:00] deepseek-v4-pro / split-brain-leader-election / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:36:41+00:00] deepseek-v4-pro / split-brain-leader-election / kernel  (sample 1/1, attempt 1)
+    HARD FAIL:   [kernel] running with live kernel...
+  [kernel] dispatching via `ostk kernel spawn` (openrouter arm, model=openrouter/deepseek/deepseek-v4-pro)...
+  [kernel] spawn returned: spawned bench (model ope
+  [2026-06-14T14:43:21+00:00] deepseek-v4-pro / sql-injection-search / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:43:39+00:00] deepseek-v4-pro / sql-injection-search / kernel  (sample 1/1, attempt 1)
+    OK (216s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:47:15+00:00] deepseek-v4-pro / ssrf-allowlist-port-confusion / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:47:31+00:00] deepseek-v4-pro / ssrf-allowlist-port-confusion / kernel  (sample 1/1, attempt 1)
+    OK (199s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:50:50+00:00] deepseek-v4-pro / timezone-scheduling / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:51:02+00:00] deepseek-v4-pro / timezone-scheduling / kernel  (sample 1/1, attempt 1)
+    OK (243s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:55:05+00:00] deepseek-v4-pro / timing-attack-comparison / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T14:55:17+00:00] deepseek-v4-pro / timing-attack-comparison / kernel  (sample 1/1, attempt 1)
+    OK (154s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T14:57:51+00:00] deepseek-v4-pro / tls-chain-ordering-strict / native  (sample 1/1, attempt 1)
+    HARD FAIL:    2 |     
+   3 |     WORKDIR /build
+--------------------
+ERROR: failed to build: failed to solve: golang:1.22-bookworm: failed to resolve source metadata for docker.io/library/golang:1.22-bookworm: 
+  [2026-06-14T14:58:03+00:00] deepseek-v4-pro / tls-chain-ordering-strict / kernel  (sample 1/1, attempt 1)
+    OK (168s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:00:52+00:00] deepseek-v4-pro / type-coercion-comparison / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T15:01:08+00:00] deepseek-v4-pro / type-coercion-comparison / kernel  (sample 1/1, attempt 1)
+    OK (361s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:07:08+00:00] deepseek-v4-pro / wal-fsync-ghost-ack / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T15:07:23+00:00] deepseek-v4-pro / wal-fsync-ghost-ack / kernel  (sample 1/1, attempt 1)
+    HARD FAIL:   [kernel] running with live kernel...
+  [kernel] dispatching via `ostk kernel spawn` (openrouter arm, model=openrouter/deepseek/deepseek-v4-pro)...
+  [kernel] spawn returned: spawned bench (model ope
+  [2026-06-14T15:15:39+00:00] deepseek-v4-pro / wrong-operator-discount / native  (sample 1/1, attempt 1)
+    HARD FAIL:   [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030
+  [2026-06-14T15:15:51+00:00] deepseek-v4-pro / wrong-operator-discount / kernel  (sample 1/1, attempt 1)
+    HARD FAIL:   [kernel] running with live kernel...
+  [kernel] dispatching via `ostk kernel spawn` (openrouter arm, model=openrouter/deepseek/deepseek-v4-pro)...
+  [kernel] spawn returned: spawned bench (model ope
+
+========== kimi-k2.6 (new, arms=['native', 'kernel']) ==========
+  [2026-06-14T15:19:18+00:00] kimi-k2.6 / api-version-field-drop / native  (sample 1/1, attempt 1)
+    OK (78s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:20:36+00:00] kimi-k2.6 / api-version-field-drop / kernel  (sample 1/1, attempt 1)
+    OK (227s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:24:23+00:00] kimi-k2.6 / auth-bypass-path-traversal / native  (sample 1/1, attempt 1)
+    OK (66s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:25:29+00:00] kimi-k2.6 / auth-bypass-path-traversal / kernel  (sample 1/1, attempt 1)
+    OK (130s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:27:39+00:00] kimi-k2.6 / bidi-override-injection / native  (sample 1/1, attempt 1)
+    OK (52s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:28:31+00:00] kimi-k2.6 / bidi-override-injection / kernel  (sample 1/1, attempt 1)
+    OK (285s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:33:16+00:00] kimi-k2.6 / cache-stale-invalidation / native  (sample 1/1, attempt 1)
+    OK (46s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:34:02+00:00] kimi-k2.6 / cache-stale-invalidation / kernel  (sample 1/1, attempt 1)
+    OK (139s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:36:20+00:00] kimi-k2.6 / compiler-macro-expansion / native  (sample 1/1, attempt 1)
+    OK (35s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:36:55+00:00] kimi-k2.6 / compiler-macro-expansion / kernel  (sample 1/1, attempt 1)
+    OK (161s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:39:36+00:00] kimi-k2.6 / data-corruption-concurrent-write / native  (sample 1/1, attempt 1)
+    OK (43s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:40:19+00:00] kimi-k2.6 / data-corruption-concurrent-write / kernel  (sample 1/1, attempt 1)
+    OK (128s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:42:28+00:00] kimi-k2.6 / deadlock-transfer / native  (sample 1/1, attempt 1)
+    OK (36s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:43:04+00:00] kimi-k2.6 / deadlock-transfer / kernel  (sample 1/1, attempt 1)
+    OK (151s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:45:35+00:00] kimi-k2.6 / encoding-mojibake / native  (sample 1/1, attempt 1)
+    OK (41s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:46:16+00:00] kimi-k2.6 / encoding-mojibake / kernel  (sample 1/1, attempt 1)
+    OK (154s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:48:50+00:00] kimi-k2.6 / goroutine-leak-handler / native  (sample 1/1, attempt 1)
+    OK (115s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:50:45+00:00] kimi-k2.6 / goroutine-leak-handler / kernel  (sample 1/1, attempt 1)
+    OK (386s)
+    [F7] sample 1 resolved=true; canonical score preserved
+  [2026-06-14T15:57:11+00:00] kimi-k2.6 / graphql-dataloader-per-request / native  (sample 1/1, attempt 1)
+    OK (89s)
+    [F7] sample 1 resolved=true; canonical score preserved

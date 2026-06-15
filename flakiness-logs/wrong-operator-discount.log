@@ -1,0 +1,33 @@
+sha256:a6c9b73145672dd488ba12cad8b592963d8cadb57af6f86974433a0873f3aebf
+FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14
+FAIL: Total after 20% discount should be $879.15, got $0.00
+FAIL: 10% discount on $449.99 should be $45.00, got $450.09
+  [trial 1] fail (bug detected, expected)
+FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14
+FAIL: Total after 20% discount should be $879.15, got $0.00
+FAIL: 10% discount on $449.99 should be $45.00, got $450.09
+  [trial 2] fail (bug detected, expected)
+FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14
+FAIL: Total after 20% discount should be $879.15, got $0.00
+FAIL: 10% discount on $449.99 should be $45.00, got $450.09
+  [trial 3] fail (bug detected, expected)
+FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14
+FAIL: Total after 20% discount should be $879.15, got $0.00
+FAIL: 10% discount on $449.99 should be $45.00, got $450.09
+  [trial 4] fail (bug detected, expected)
+FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14
+FAIL: Total after 20% discount should be $879.15, got $0.00
+FAIL: 10% discount on $449.99 should be $45.00, got $450.09
+  [trial 5] fail (bug detected, expected)
+FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14
+FAIL: Total after 20% discount should be $879.15, got $0.00
+FAIL: 10% discount on $449.99 should be $45.00, got $450.09
+  [trial 6] fail (bug detected, expected)
+FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14
+FAIL: Total after 20% discount should be $879.15, got $0.00
+FAIL: 10% discount on $449.99 should be $45.00, got $450.09
+  [trial 7] fail (bug detected, expected)
+FAIL: 20% discount on $1098.94 should be $219.79, got $1099.14
+FAIL: Total after 20% discount should be $879.15, got $0.00
+FAIL: 10% discount on $449.99 should be $45.00, got $450.09
+  [trial 8] fail (bug detected, expected)

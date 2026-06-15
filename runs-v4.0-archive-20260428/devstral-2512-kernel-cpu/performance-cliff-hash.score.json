@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "performance-cliff-hash",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 25166,
+  "output_tokens": 704,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test now passes. The fix was successful. The issue was in the `hashCode()` method of the `Product` class, which was using the `category` field instead of the `sku` field. This caused severe hash collisions, as all products in the same category would land in the same bucket. By changing the `hashCode()` method to use the `sku` field, the items are now distributed evenly across the buckets, resulting in a much better performance.",
+  "timestamp": "2026-04-03T02:46:13Z",
+  "token_cost": 25870,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 14.55
+}

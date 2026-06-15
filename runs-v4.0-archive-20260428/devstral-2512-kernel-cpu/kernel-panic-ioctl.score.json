@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "kernel-panic-ioctl",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 95966,
+  "output_tokens": 354,
+  "resolved": false,
+  "stop_reason": "end_turn",
+  "summary": "Bash",
+  "timestamp": "2026-04-03T02:16:30Z",
+  "token_cost": 96320,
+  "tool_uses": 18,
+  "turns_to_fix": 1,
+  "wall_clock": 15.034
+}

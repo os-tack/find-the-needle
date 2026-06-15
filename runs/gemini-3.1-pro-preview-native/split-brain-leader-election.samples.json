@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "benchmark": "split-brain-leader-election",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 51485,
+    "output_tokens": 962,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have fixed the issue causing the split-brain bug. \n\nThe bug was in `app/cluster/node.go`, where the quorum check mistakenly accepted exactly `totalNodes/2` as a sufficient number of votes (e.g., 2 votes out of 5 was considered enough). I changed the quorum logic to require a strict majority (`finalVotes > totalNodes/2`), which correctly demands at least 3 votes for a cluster of 5.\n\nI also fixed the parameter order in the `became LEADER` logging statement to correctly display the number of votes and the term number.\n\nFinally, I recompiled the binary and verified that running `./test.sh` now completes successfully without detecting any split-brain scenarios.",
+    "timestamp": "2026-06-14T23:17:20Z",
+    "token_cost": 962,
+    "tool_uses": 14,
+    "turns_to_fix": 15,
+    "wall_clock": 69.184,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:17:30+00:00"
+  }
+]

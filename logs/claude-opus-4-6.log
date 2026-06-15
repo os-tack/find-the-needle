@@ -1,0 +1,122 @@
+error: 1 scenario(s) failed
+1/1 passed, 129426ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 38865ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 55333ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 39316ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 45052ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 112978ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 69731ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 30820ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 80976ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 34532ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 27571ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 78399ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 33089ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 26747ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 68143ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 35075ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 127671ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 58463ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 47687ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 150219ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 56841ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 31642ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 108519ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 39817ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 40030ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 102837ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 38318ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 34382ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 105025ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 33701ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 94241ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 31211ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 52979ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 25053ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 104230ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 236632ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 70538ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 160759ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 77607ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 39871ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 88983ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 41380ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 30172ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 114064ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 34978ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 97706ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 25225ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 146688ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 26479ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 19625ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 95713ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 22147ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 26223ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 72779ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 28357ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 30262ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 93778ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 29997ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 191508ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 37807ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 32488ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 106340ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 32693ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 110424ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 58872ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 38718ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 120398ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 36850ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 39689ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 183185ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 45345ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 56281ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 176587ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 61994ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 111169ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 30709ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 99388ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 46973ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 57227ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 29376ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 27222ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 157126ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 36612ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 29209ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 148401ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 34757ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 81740ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 36499ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 230923ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 44195ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 26779ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 116736ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 30537ms total [model=claude-opus-4-6, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 143636ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 78096ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 20011ms total [model=claude-opus-4-6, arms=native]
+1/1 passed, 55389ms total [model=claude-opus-4-6, arms=kernel]
+1/1 passed, 23686ms total [model=claude-opus-4-6, arms=kernel]
+
+=== claude-opus-4-6 DONE: 114/120 scores (pass=98 fail=22 skip=0) ===

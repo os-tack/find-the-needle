@@ -1,0 +1,42 @@
+1/1 passed, 32465ms total [model=grok-3-fast, arms=native]
+1/1 passed, 26033ms total [model=grok-3-fast, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 35202ms total [model=grok-3-fast, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 54091ms total [model=grok-3-fast, arms=native]
+1/1 passed, 23243ms total [model=grok-3-fast, arms=native]
+1/1 passed, 13643ms total [model=grok-3-fast, arms=native]
+1/1 passed, 69123ms total [model=grok-3-fast, arms=native]
+1/1 passed, 32103ms total [model=grok-3-fast, arms=native]
+1/1 passed, 20251ms total [model=grok-3-fast, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 12460ms total [model=grok-3-fast, arms=native]
+1/1 passed, 14194ms total [model=grok-3-fast, arms=native]
+1/1 passed, 75769ms total [model=grok-3-fast, arms=native]
+1/1 passed, 27073ms total [model=grok-3-fast, arms=native]
+1/1 passed, 310195ms total [model=grok-3-fast, arms=native]
+1/1 passed, 52152ms total [model=grok-3-fast, arms=native]
+1/1 passed, 57661ms total [model=grok-3-fast, arms=native]
+1/1 passed, 46819ms total [model=grok-3-fast, arms=native]
+1/1 passed, 26380ms total [model=grok-3-fast, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 17575ms total [model=grok-3-fast, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 26782ms total [model=grok-3-fast, arms=native]
+1/1 passed, 34312ms total [model=grok-3-fast, arms=native]
+1/1 passed, 82357ms total [model=grok-3-fast, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 20966ms total [model=grok-3-fast, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 29928ms total [model=grok-3-fast, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 22863ms total [model=grok-3-fast, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+
+=== grok-3-fast DONE: 119/120 scores (pass=25 fail=15 skip=80) ===

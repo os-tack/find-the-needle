@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2343,
+  "output_tokens": 1412,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. ✅\n\n## Summary\n\n**The Needle:** An **auth bypass via path manipulation** in `/app/app/middleware.go`.\n\n**The Bug:** The `authMiddleware` checked `r.URL.Path` (the *raw*, unmodified request path) to determine if a route needed authentication. However, the custom `Router` *cleaned/normalized* paths (using `path.Clean`) before matching them to handlers. This mismatch meant:\n\n- `//api/admin` → raw path doesn't start with `/api/` → **auth skipped** → router normalizes to `/api/admin` → **protected handler served**\n- `/health/../api/data` → raw path doesn't start with `/api/` → **auth skipped** → router normalizes to `/api/data` → **protected handler served**\n\n**The Fix:** Apply the same `path.Clean` normalization in the middleware *before* checking for the `/api/` prefix, so the middleware and router always agree on what the effective path is.",
+  "timestamp": "2026-04-03T01:15:36Z",
+  "token_cost": 3755,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 32.847
+}

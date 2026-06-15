@@ -1,0 +1,72 @@
+=== needle-bench full matrix (10 parallel) ===
+=== started 2026-04-03T01:11:50Z ===
+=== 31 models × 40 benchmarks ===
+
+========== BATCH 1: models 1–10 of 31 ==========
+  LAUNCH claude-haiku-4-5 (→1043, 3-arm) → logs/claude-haiku-4-5.log
+  LAUNCH claude-sonnet-4-6 (→1044, 3-arm) → logs/claude-sonnet-4-6.log
+  LAUNCH claude-opus-4-6 (→1045, 3-arm) → logs/claude-opus-4-6.log
+  LAUNCH gemini-2.5-flash (→1046, 3-arm) → logs/gemini-2.5-flash.log
+  LAUNCH gemini-2.5-pro (→1047, 3-arm) → logs/gemini-2.5-pro.log
+  LAUNCH gemini-3-flash-preview (→1048, 3-arm) → logs/gemini-3-flash-preview.log
+  LAUNCH gemini-3.1-pro-preview (→1049, 3-arm) → logs/gemini-3.1-pro-preview.log
+  LAUNCH devstral-2512 (→1050, 3-arm) → logs/devstral-2512.log
+  LAUNCH devstral-medium (→1051, 3-arm) → logs/devstral-medium.log
+  LAUNCH devstral-small-latest (→1052, 3-arm) → logs/devstral-small-latest.log
+  waiting for batch 1 (10 models, PIDs: 43288 43290 43292 43295 43302 43308 43331 43345 43362 43376)...
+  batch 1 complete @ 2026-04-03T07:25:38Z
+  total score files: 2822
+
+========== BATCH 2: models 11–20 of 31 ==========
+  LAUNCH kimi-k2.5 (→1053, 3-arm) → logs/kimi-k2.5.log
+  LAUNCH codestral-2508 (→1054, 2-arm) → logs/codestral-2508.log
+  LAUNCH gpt-4.1 (→1055, 2-arm) → logs/gpt-4.1.log
+  LAUNCH gpt-5-codex (→1056, 2-arm) → logs/gpt-5-codex.log
+  LAUNCH o3 (→1057, 2-arm) → logs/o3.log
+  LAUNCH o4-mini (→1058, 2-arm) → logs/o4-mini.log
+  LAUNCH grok-3 (→1059, 2-arm) → logs/grok-3.log
+  LAUNCH grok-3-fast (→1060, 2-arm) → logs/grok-3-fast.log
+  LAUNCH grok-3-mini (→1061, 2-arm) → logs/grok-3-mini.log
+  LAUNCH grok-4 (→1062, 2-arm) → logs/grok-4.log
+  waiting for batch 2 (10 models, PIDs: 41962 41967 41969 41973 41976 41984 41991 42025 42042 42047)...
+  batch 2 complete @ 2026-04-03T07:29:59Z
+  total score files: 2855
+
+========== BATCH 3: models 21–30 of 31 ==========
+  LAUNCH grok-4-fast (→1063, 2-arm) → logs/grok-4-fast.log
+  LAUNCH grok-4.1-fast (→1064, 2-arm) → logs/grok-4.1-fast.log
+  LAUNCH grok-4.20 (→1065, 2-arm) → logs/grok-4.20.log
+  LAUNCH grok-code-fast-1 (→1066, 2-arm) → logs/grok-code-fast-1.log
+  LAUNCH deepseek-r1 (→1067, 2-arm) → logs/deepseek-r1.log
+  LAUNCH deepseek-r1-0528 (→1068, 2-arm) → logs/deepseek-r1-0528.log
+  LAUNCH deepseek-v3.2 (→1069, 2-arm) → logs/deepseek-v3.2.log
+  LAUNCH qwen3-coder (→1070, 2-arm) → logs/qwen3-coder.log
+  LAUNCH qwen3-coder-flash (→1071, 2-arm) → logs/qwen3-coder-flash.log
+  LAUNCH qwen3-coder-plus (→1072, 2-arm) → logs/qwen3-coder-plus.log
+  waiting for batch 3 (10 models, PIDs: 52484 52486 52488 52492 52497 52510 52520 52531 52546 52561)...
+  batch 3 complete @ 2026-04-03T07:33:57Z
+  total score files: 2875
+
+========== BATCH 4: models 31–31 of 31 ==========
+  LAUNCH llama-4-maverick (→1073, 2-arm) → logs/llama-4-maverick.log
+  waiting for batch 4 (1 models, PIDs: 59402)...
+  batch 4 complete @ 2026-04-03T07:34:59Z
+  total score files: 2879
+
+=== matrix complete @ 2026-04-03T07:34:59Z ===
+=== total: 2879 score files ===
+
+=== consolidating scores ===
+/Users/scottmeyer/projects/needle-bench/consolidate_scores.py:243: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "generated": __import__("datetime").datetime.utcnow().isoformat() + "Z",
+Found 73 arm directories in /Users/scottmeyer/projects/needle-bench/runs
+Loaded 2879 score files
+Models: 31
+Benchmarks: 40
+Experiment entries: 1227
+Model aggregates: 31
+
+Grand totals: 1670/2879 solved, 221,855,883 tokens, $149.75 estimated cost
+
+Wrote 2879 entries to /Users/scottmeyer/projects/needle-bench/public/scores.json
+Wrote 1227 experiments + 31 model aggregates to /Users/scottmeyer/projects/needle-bench/public/experiment-scores.json

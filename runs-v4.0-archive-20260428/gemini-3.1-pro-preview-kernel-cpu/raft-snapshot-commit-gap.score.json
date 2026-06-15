@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 71545,
+  "output_tokens": 1445,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Summary of Findings**\n\nI investigated the problem by reading the test script and examining the behavior of the `raft-snapshot simulate` command.\n\n1. **The Issue**: The `raft-snapshot simulate` trace revealed that when `node-3` (a slow follower) was sent a snapshot to catch up, it properly processed the snapshot and set its `lastApplied` index to 10. However, when the node restarted, it outputted `recovery complete: commitIndex=0 lastApplied=0`. Because the recovery phase saw that `savedCommitIndex` was `0` (since it wasn't appropriately updated alongside `lastApplied` during snapshot installation), a failsafe mechanism in the code dragged `lastApplied` back down to match `commitIndex` (0).\n2. **The Consequence**: Because `lastApplied` reset to `0`, `node-3` subsequently replayed all entries from index `1` to `10` when it caught up with the leader, applying those operations a second time and causing the state machine duplication bug.\n3. **The Fix**: In `/app/app/snapshot.go`, I modified the `InstallSnapshot` function. When a follower installs a snapshot from the leader, it inherently represents committed entries. Therefore, I added logic to advance `n.commitIndex = snap.LastIncludedIndex` (if the snapshot's index is greater than the current `commitIndex`), keeping `commitIndex` properly synchronized.\n\nAfter applying the fix, I re-ran `test.sh`. All rounds now pass, and no duplicate transitions occur across the snapshot and restart sequences. The needle has been found and fixed!",
+  "timestamp": "2026-04-03T05:27:41Z",
+  "token_cost": 72990,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 59.688
+}

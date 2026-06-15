@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "kimi-k2.6-kernel",
+    "arm": "kernel",
+    "benchmark": "type-coercion-comparison",
+    "billed_tokens": 50777,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.03030359,
+    "fresh_input_tokens": 50777,
+    "input_tokens": 50777,
+    "output_tokens": 2797,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 13turns, 50777+2797 tokens, $0.0303",
+    "timestamp": "2026-06-15T01:32:06Z",
+    "token_cost": 53574,
+    "tool_uses": 12,
+    "turns_to_fix": 13,
+    "wall_clock": 69.917,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T01:32:16+00:00"
+  }
+]

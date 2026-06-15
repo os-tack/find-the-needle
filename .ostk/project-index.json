@@ -1,0 +1,37 @@
+{
+  "org": "os-tack",
+  "repo": "find-the-needle",
+  "alias": "@find-the-needle",
+  "imported_at": "2026-04-24T01:11:45Z",
+  "files": {
+    "readme": "src/README.md",
+    "config": [
+      "src/package.json",
+      "src/tsconfig.json",
+      "src/Makefile"
+    ],
+    "source_dirs": [
+      "src/src/"
+    ],
+    "docs": [
+      "src/docs/"
+    ]
+  },
+  "stats": {
+    "total_files": 15021,
+    "languages": {
+      "shell": 50,
+      "yaml": 11,
+      "typescript": 2781,
+      "markdown": 404,
+      "python": 56,
+      "json": 4066,
+      "javascript": 3431,
+      "c": 15,
+      "rust": 10,
+      "java": 13,
+      "go": 73,
+      "toml": 5
+    }
+  }
+}

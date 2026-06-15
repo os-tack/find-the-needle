@@ -1,0 +1,65 @@
+sha256:f31fad4982a81428b6b29e2a9efc20ede8b88ab904fe06890559809ec8a03551
+[INFO] 2026-06-14T11:23:27.188Z Counter service listening on port 3000
+Connected to Redis
+[INFO] 2026-06-14T11:23:29.157Z Counter reset to 0
+Firing 100 concurrent increments...
+Expected: 100
+Got:      79
+FAIL: Counter should be 100 but is 79 (lost 21 increments)
+  [trial 1] fail (bug detected, expected)
+[INFO] 2026-06-14T11:23:31.541Z Counter service listening on port 3000
+Connected to Redis
+[INFO] 2026-06-14T11:23:33.500Z Counter reset to 0
+Firing 100 concurrent increments...
+Expected: 100
+Got:      68
+FAIL: Counter should be 100 but is 68 (lost 32 increments)
+  [trial 2] fail (bug detected, expected)
+[INFO] 2026-06-14T11:23:35.866Z Counter service listening on port 3000
+Connected to Redis
+[INFO] 2026-06-14T11:23:37.830Z Counter reset to 0
+Firing 100 concurrent increments...
+Expected: 100
+Got:      74
+FAIL: Counter should be 100 but is 74 (lost 26 increments)
+  [trial 3] fail (bug detected, expected)
+[INFO] 2026-06-14T11:23:40.191Z Counter service listening on port 3000
+Connected to Redis
+[INFO] 2026-06-14T11:23:42.160Z Counter reset to 0
+Firing 100 concurrent increments...
+Expected: 100
+Got:      83
+FAIL: Counter should be 100 but is 83 (lost 17 increments)
+  [trial 4] fail (bug detected, expected)
+[INFO] 2026-06-14T11:23:44.516Z Counter service listening on port 3000
+Connected to Redis
+[INFO] 2026-06-14T11:23:46.479Z Counter reset to 0
+Firing 100 concurrent increments...
+Expected: 100
+Got:      46
+FAIL: Counter should be 100 but is 46 (lost 54 increments)
+  [trial 5] fail (bug detected, expected)
+[INFO] 2026-06-14T11:23:48.829Z Counter service listening on port 3000
+Connected to Redis
+[INFO] 2026-06-14T11:23:50.793Z Counter reset to 0
+Firing 100 concurrent increments...
+Expected: 100
+Got:      68
+FAIL: Counter should be 100 but is 68 (lost 32 increments)
+  [trial 6] fail (bug detected, expected)
+[INFO] 2026-06-14T11:23:53.152Z Counter service listening on port 3000
+Connected to Redis
+[INFO] 2026-06-14T11:23:55.122Z Counter reset to 0
+Firing 100 concurrent increments...
+Expected: 100
+Got:      91
+FAIL: Counter should be 100 but is 91 (lost 9 increments)
+  [trial 7] fail (bug detected, expected)
+[INFO] 2026-06-14T11:23:57.537Z Counter service listening on port 3000
+Connected to Redis
+[INFO] 2026-06-14T11:23:59.507Z Counter reset to 0
+Firing 100 concurrent increments...
+Expected: 100
+Got:      39
+FAIL: Counter should be 100 but is 39 (lost 61 increments)
+  [trial 8] fail (bug detected, expected)

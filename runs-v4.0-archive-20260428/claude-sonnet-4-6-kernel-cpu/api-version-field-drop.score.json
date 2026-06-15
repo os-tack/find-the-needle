@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "api-version-field-drop",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2343,
+  "output_tokens": 1812,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the needle I found and fixed:\n\n## The Bug: Missing Fields in `UserV2` Struct\n\n**Location:** `/app/app/models.go`\n\n**Problem:** The `UserV2` struct was missing three fields that existed in `UserV1`:\n- `avatar_url`\n- `bio`\n- `location`\n\nThese fields were present in the `InternalUser` model and correctly mapped in `ToV1()`, but were **accidentally dropped** when the v2 struct was created during a refactor. This meant any client upgrading from v1 to v2 would **silently lose** avatar, bio, and location data.\n\n**Fix:**\n1. Added the three missing fields (`AvatarURL`, `Bio`, `Location`) back to the `UserV2` struct with their proper JSON tags.\n2. Updated the `ToV2()` method to populate those fields from the `InternalUser`.\n\nThe v2 API is now a **proper superset of v1** — all v1 fields are preserved and the new v2-only fields (`department`, `phone_number`, `is_active`) are additive.",
+  "timestamp": "2026-04-03T01:13:42Z",
+  "token_cost": 4155,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 34.302
+}

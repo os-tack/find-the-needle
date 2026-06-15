@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 267199,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 38828,
+    "cache_read_tokens": 228360,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.263509,
+    "fresh_input_tokens": 11,
+    "input_tokens": 11,
+    "output_tokens": 3251,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 5 functional tests pass and the performance test drops from N+1 (101 queries) to 2 queries \u2014 1 for users, 1 batched for all their posts.\n\n**The fix:** `createContext()` in `context.ts` now calls `createLoaders(db)` and attaches the loaders to the context. Both resolvers were creating fresh `DataLoader` instances on every call (so each loader only ever saw 1 key), and are now replaced with single lines that use `ctx.loaders.userLoader` / `ctx.loaders.postsByAuthorLoader` \u2014 the per-request shared instances that DataLoader needs to batch across all resolver invocations in the same tick.",
+    "timestamp": "2026-06-14T22:04:00Z",
+    "token_cost": 270450,
+    "tool_uses": 11,
+    "turns_to_fix": 12,
+    "wall_clock": 59.763,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:04:10+00:00"
+  }
+]

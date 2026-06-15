@@ -1,0 +1,19 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=devstral-2512, arms=native]
+
+--- null-pointer-config [native] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-native-devstral-2512-1781429806647 (timeout 660s)...
+  snapshotting workspace...
+  [native] using vibe (Mistral Vibe)
+  [native] running vibe ...
+  [native]       "name": null,
+  [native]       "tool_call_id": null,
+  [native]       "message_id": "b2874512-6939-47e2-8370-a6d0d2cf28ae"
+  [native]     }
+  [native]   ]
+  [native] complete: 27 turns, 317603+3001 tokens, $0.0000, 26 tools, stop=fail
+  [native] summary: I seem to be having permission issues with executing commands. Let me try to work within the constraints. Since I unders
+
+=== bench summary ===
+0/1 passed, 55090ms total [model=devstral-2512, arms=native]
+error: 1 scenario(s) failed

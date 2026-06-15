@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 9241,
+  "output_tokens": 855,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The fix works. The deadlock issue has been resolved by calling `s.queue.Close()` before waiting for the `done` channel. This ensures that any goroutine blocked in `Pop()` is unblocked and can exit gracefully.",
+  "timestamp": "2026-04-03T02:14:32Z",
+  "token_cost": 10096,
+  "tool_uses": 6,
+  "turns_to_fix": 1,
+  "wall_clock": 13.789
+}

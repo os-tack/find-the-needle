@@ -1,0 +1,161 @@
+sha256:935131498f64591633fdeb273bdb68b40251f9dc542eb2fac6f5a4ba9e8a5c1e
+=== Performance Cliff Hash Map Test ===
+--- Small dataset (100 items) ---
+=== Performance Benchmark (n=100) ===
+Insert 100 items: 16.04 ms
+Lookup 100 items: 1.91 ms (found 100)
+Average lookup: 19.13 us
+Small dataset: OK
+--- Hash distribution analysis ---
+=== Hash Distribution Analysis ===
+Capacity: 16384
+Size: 10000
+Non-empty buckets: 10 (0.1%)
+Max chain length: 1000
+Avg chain length: 1000.0
+WARNING: max chain length 1000 indicates severe hash collisions
+Detected max chain length: 1000
+FAIL: Max chain length 1000 exceeds 50 — severe hash collisions
+      This indicates hashCode() is not distributing items across buckets
+FAIL: Hash map has severe bucket collisions from bad hashCode()
+  [trial 1] fail (bug detected, expected)
+=== Performance Cliff Hash Map Test ===
+--- Small dataset (100 items) ---
+=== Performance Benchmark (n=100) ===
+Insert 100 items: 7.54 ms
+Lookup 100 items: 3.28 ms (found 100)
+Average lookup: 32.75 us
+Small dataset: OK
+--- Hash distribution analysis ---
+=== Hash Distribution Analysis ===
+Capacity: 16384
+Size: 10000
+Non-empty buckets: 10 (0.1%)
+Max chain length: 1000
+Avg chain length: 1000.0
+WARNING: max chain length 1000 indicates severe hash collisions
+Detected max chain length: 1000
+FAIL: Max chain length 1000 exceeds 50 — severe hash collisions
+      This indicates hashCode() is not distributing items across buckets
+FAIL: Hash map has severe bucket collisions from bad hashCode()
+  [trial 2] fail (bug detected, expected)
+=== Performance Cliff Hash Map Test ===
+--- Small dataset (100 items) ---
+=== Performance Benchmark (n=100) ===
+Insert 100 items: 8.33 ms
+Lookup 100 items: 4.82 ms (found 100)
+Average lookup: 48.16 us
+Small dataset: OK
+--- Hash distribution analysis ---
+=== Hash Distribution Analysis ===
+Capacity: 16384
+Size: 10000
+Non-empty buckets: 10 (0.1%)
+Max chain length: 1000
+Avg chain length: 1000.0
+WARNING: max chain length 1000 indicates severe hash collisions
+Detected max chain length: 1000
+FAIL: Max chain length 1000 exceeds 50 — severe hash collisions
+      This indicates hashCode() is not distributing items across buckets
+FAIL: Hash map has severe bucket collisions from bad hashCode()
+  [trial 3] fail (bug detected, expected)
+=== Performance Cliff Hash Map Test ===
+--- Small dataset (100 items) ---
+=== Performance Benchmark (n=100) ===
+Insert 100 items: 11.08 ms
+Lookup 100 items: 4.60 ms (found 100)
+Average lookup: 45.96 us
+Small dataset: OK
+--- Hash distribution analysis ---
+=== Hash Distribution Analysis ===
+Capacity: 16384
+Size: 10000
+Non-empty buckets: 10 (0.1%)
+Max chain length: 1000
+Avg chain length: 1000.0
+WARNING: max chain length 1000 indicates severe hash collisions
+Detected max chain length: 1000
+FAIL: Max chain length 1000 exceeds 50 — severe hash collisions
+      This indicates hashCode() is not distributing items across buckets
+FAIL: Hash map has severe bucket collisions from bad hashCode()
+  [trial 4] fail (bug detected, expected)
+=== Performance Cliff Hash Map Test ===
+--- Small dataset (100 items) ---
+=== Performance Benchmark (n=100) ===
+Insert 100 items: 8.41 ms
+Lookup 100 items: 4.14 ms (found 100)
+Average lookup: 41.41 us
+Small dataset: OK
+--- Hash distribution analysis ---
+=== Hash Distribution Analysis ===
+Capacity: 16384
+Size: 10000
+Non-empty buckets: 10 (0.1%)
+Max chain length: 1000
+Avg chain length: 1000.0
+WARNING: max chain length 1000 indicates severe hash collisions
+Detected max chain length: 1000
+FAIL: Max chain length 1000 exceeds 50 — severe hash collisions
+      This indicates hashCode() is not distributing items across buckets
+FAIL: Hash map has severe bucket collisions from bad hashCode()
+  [trial 5] fail (bug detected, expected)
+=== Performance Cliff Hash Map Test ===
+--- Small dataset (100 items) ---
+=== Performance Benchmark (n=100) ===
+Insert 100 items: 9.32 ms
+Lookup 100 items: 3.04 ms (found 100)
+Average lookup: 30.43 us
+Small dataset: OK
+--- Hash distribution analysis ---
+=== Hash Distribution Analysis ===
+Capacity: 16384
+Size: 10000
+Non-empty buckets: 10 (0.1%)
+Max chain length: 1000
+Avg chain length: 1000.0
+WARNING: max chain length 1000 indicates severe hash collisions
+Detected max chain length: 1000
+FAIL: Max chain length 1000 exceeds 50 — severe hash collisions
+      This indicates hashCode() is not distributing items across buckets
+FAIL: Hash map has severe bucket collisions from bad hashCode()
+  [trial 6] fail (bug detected, expected)
+=== Performance Cliff Hash Map Test ===
+--- Small dataset (100 items) ---
+=== Performance Benchmark (n=100) ===
+Insert 100 items: 7.83 ms
+Lookup 100 items: 2.64 ms (found 100)
+Average lookup: 26.44 us
+Small dataset: OK
+--- Hash distribution analysis ---
+=== Hash Distribution Analysis ===
+Capacity: 16384
+Size: 10000
+Non-empty buckets: 10 (0.1%)
+Max chain length: 1000
+Avg chain length: 1000.0
+WARNING: max chain length 1000 indicates severe hash collisions
+Detected max chain length: 1000
+FAIL: Max chain length 1000 exceeds 50 — severe hash collisions
+      This indicates hashCode() is not distributing items across buckets
+FAIL: Hash map has severe bucket collisions from bad hashCode()
+  [trial 7] fail (bug detected, expected)
+=== Performance Cliff Hash Map Test ===
+--- Small dataset (100 items) ---
+=== Performance Benchmark (n=100) ===
+Insert 100 items: 7.74 ms
+Lookup 100 items: 4.85 ms (found 100)
+Average lookup: 48.47 us
+Small dataset: OK
+--- Hash distribution analysis ---
+=== Hash Distribution Analysis ===
+Capacity: 16384
+Size: 10000
+Non-empty buckets: 10 (0.1%)
+Max chain length: 1000
+Avg chain length: 1000.0
+WARNING: max chain length 1000 indicates severe hash collisions
+Detected max chain length: 1000
+FAIL: Max chain length 1000 exceeds 50 — severe hash collisions
+      This indicates hashCode() is not distributing items across buckets
+FAIL: Hash map has severe bucket collisions from bad hashCode()
+  [trial 8] fail (bug detected, expected)

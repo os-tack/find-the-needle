@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "k8s-assume-cache-silent-drop",
+    "billed_tokens": 76485,
+    "cache_create_1h_tokens": 5143,
+    "cache_create_5m_tokens": 100,
+    "cache_create_tokens": 5243,
+    "cache_read_tokens": 66520,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.07317825,
+    "fresh_input_tokens": 4722,
+    "input_tokens": 4722,
+    "output_tokens": 1293,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 10turns, 4722+1293 tokens, $0.0732",
+    "timestamp": "2026-06-14T22:15:28Z",
+    "token_cost": 77778,
+    "tool_uses": 14,
+    "turns_to_fix": 10,
+    "wall_clock": 52.108,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:15:38+00:00"
+  }
+]

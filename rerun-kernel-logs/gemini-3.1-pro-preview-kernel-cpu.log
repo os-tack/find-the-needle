@@ -1,0 +1,25 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=gemini-3.1-pro-preview, arms=kernel]
+
+--- null-pointer-config [kernel] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-kernel-gemini-3.1-pro-previ-1781395746041 (timeout 660s)...
+  snapshotting workspace...
+  [kernel] copying local binary: /Users/scottmeyer/projects/haystack/target/x86_64-unknown-linux-musl/release/ostk
+  [kernel] ostk init + sign + embeddings + daemon + boot...
+  [kernel] boot output:
+  [kernel]     needle: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     decision: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     hay: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     draft: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     spec: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     transcript: 1 seen, 0 emitted   (lag: 0)
+  [kernel] POST healthy — boot confidence OK
+  [kernel] running with live kernel...
+  [kernel] dispatching via `ostk kernel spawn` (cpu arm, model=gemini-3.1-pro-preview)...
+  [kernel] spawn returned: spawned bench (model gemini-3.1-pro-preview, budget $100, pid 162)
+  [kernel] agent journaled terminal end_turn; teardown blocks on an orphaned pipe holder and will not exit — scoring from journal + SIGKILL process tree
+  [kernel] complete: 10 turns, 73966+1591 tokens, $0.1670, 15 tools, stop=end_turn
+  [kernel] summary: complete: 10turns, 73966+1591 tokens, $0.1670
+
+=== bench summary ===
+1/1 passed, 73695ms total [model=gemini-3.1-pro-preview, arms=kernel]

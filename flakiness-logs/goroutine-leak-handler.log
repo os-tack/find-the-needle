@@ -1,0 +1,73 @@
+sha256:c70f0e3129a179d374b257d6efff0c4206466ba809657868972bc58b79310564
+2026/06/14 11:16:08 Server starting on port 18080
+Baseline goroutines: 4
+Goroutines after 20 client disconnects: 44
+WARNING: 42 goroutines running (20 active computes)
+Goroutines after 5s wait: 44
+Leaked goroutines above baseline: 40
+FAIL: 40 goroutines still running after clients disconnected
+      Goroutines spawned per request are not cancelled when clients leave
+  [trial 1] fail (bug detected, expected)
+2026/06/14 11:16:17 Server starting on port 18080
+Baseline goroutines: 4
+Goroutines after 20 client disconnects: 44
+WARNING: 42 goroutines running (20 active computes)
+Goroutines after 5s wait: 44
+Leaked goroutines above baseline: 40
+FAIL: 40 goroutines still running after clients disconnected
+      Goroutines spawned per request are not cancelled when clients leave
+  [trial 2] fail (bug detected, expected)
+2026/06/14 11:16:27 Server starting on port 18080
+Baseline goroutines: 4
+Goroutines after 20 client disconnects: 44
+WARNING: 42 goroutines running (20 active computes)
+Goroutines after 5s wait: 44
+Leaked goroutines above baseline: 40
+FAIL: 40 goroutines still running after clients disconnected
+      Goroutines spawned per request are not cancelled when clients leave
+  [trial 3] fail (bug detected, expected)
+2026/06/14 11:16:36 Server starting on port 18080
+Baseline goroutines: 4
+Goroutines after 20 client disconnects: 44
+WARNING: 42 goroutines running (20 active computes)
+Goroutines after 5s wait: 44
+Leaked goroutines above baseline: 40
+FAIL: 40 goroutines still running after clients disconnected
+      Goroutines spawned per request are not cancelled when clients leave
+  [trial 4] fail (bug detected, expected)
+2026/06/14 11:16:46 Server starting on port 18080
+Baseline goroutines: 4
+Goroutines after 20 client disconnects: 44
+WARNING: 42 goroutines running (20 active computes)
+Goroutines after 5s wait: 44
+Leaked goroutines above baseline: 40
+FAIL: 40 goroutines still running after clients disconnected
+      Goroutines spawned per request are not cancelled when clients leave
+  [trial 5] fail (bug detected, expected)
+2026/06/14 11:16:55 Server starting on port 18080
+Baseline goroutines: 4
+Goroutines after 20 client disconnects: 44
+WARNING: 42 goroutines running (20 active computes)
+Goroutines after 5s wait: 44
+Leaked goroutines above baseline: 40
+FAIL: 40 goroutines still running after clients disconnected
+      Goroutines spawned per request are not cancelled when clients leave
+  [trial 6] fail (bug detected, expected)
+2026/06/14 11:17:05 Server starting on port 18080
+Baseline goroutines: 4
+Goroutines after 20 client disconnects: 44
+WARNING: 42 goroutines running (20 active computes)
+Goroutines after 5s wait: 44
+Leaked goroutines above baseline: 40
+FAIL: 40 goroutines still running after clients disconnected
+      Goroutines spawned per request are not cancelled when clients leave
+  [trial 7] fail (bug detected, expected)
+2026/06/14 11:17:14 Server starting on port 18080
+Baseline goroutines: 4
+Goroutines after 20 client disconnects: 44
+WARNING: 42 goroutines running (20 active computes)
+Goroutines after 5s wait: 44
+Leaked goroutines above baseline: 40
+FAIL: 40 goroutines still running after clients disconnected
+      Goroutines spawned per request are not cancelled when clients leave
+  [trial 8] fail (bug detected, expected)

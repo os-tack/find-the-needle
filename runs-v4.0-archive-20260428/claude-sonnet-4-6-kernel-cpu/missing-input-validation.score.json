@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "missing-input-validation",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2341,
+  "output_tokens": 1024,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **Test passes!**\n\n---\n\n### What the bug was\n\n**Location:** `/app/routes.ts` — the `POST /inventory/:sku/adjust` handler\n\n**The needle:** Missing input validation — the endpoint accepted any numeric `quantity` adjustment (including large negative values) without checking whether the result would push inventory below zero.\n\n**The fix:** Added a guard before calling `adjustQuantity`:\n\n```ts\nif (product.quantity + quantity < 0) {\n  res.statusCode = 400;\n  res.end(JSON.stringify({ error: 'adjustment would result in negative inventory' }));\n  return;\n}\n```\n\nThis rejects any adjustment that would make the inventory negative (e.g., subtracting 200 from a stock of 110), returning a `400 Bad Request` instead of silently allowing an impossible inventory state.",
+  "timestamp": "2026-04-03T01:53:45Z",
+  "token_cost": 3365,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 22.424
+}

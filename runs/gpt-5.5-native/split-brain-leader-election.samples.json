@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "split-brain-leader-election",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 277262,
+    "output_tokens": 2993,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the split-brain bug in [node.go](/app/app/cluster/node.go): leader election now requires a true majority with `(totalNodes/2)+1`, so a 2-node minority partition in a 5-node cluster cannot elect a leader. I also corrected the leader log argument order.\n\nAdded a regression test in [node_test.go](/app/app/cluster/node_test.go) covering the minority partition case.\n\nVerification passed:\n- `go test ./...`\n- `./test.sh`\n\nI also rebuilt `/usr/local/bin/split-brain` because `test.sh` invokes that binary from `PATH`.",
+    "timestamp": "2026-06-14T23:08:25Z",
+    "token_cost": 2993,
+    "tool_uses": 25,
+    "turns_to_fix": 1,
+    "wall_clock": 62.602,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:08:35+00:00"
+  }
+]

@@ -1,0 +1,33 @@
+sha256:47b136eaa829cc8bb35702d1c79674bcd3c2b54a1944e2a617bd7df6ae8ef8d5
+=== Code Generation Engine Tests ===
+--- Building ---
+test.sh: line 14: cargo: command not found
+  [trial 1] fail (bug detected, expected)
+=== Code Generation Engine Tests ===
+--- Building ---
+test.sh: line 14: cargo: command not found
+  [trial 2] fail (bug detected, expected)
+=== Code Generation Engine Tests ===
+--- Building ---
+test.sh: line 14: cargo: command not found
+  [trial 3] fail (bug detected, expected)
+=== Code Generation Engine Tests ===
+--- Building ---
+test.sh: line 14: cargo: command not found
+  [trial 4] fail (bug detected, expected)
+=== Code Generation Engine Tests ===
+--- Building ---
+test.sh: line 14: cargo: command not found
+  [trial 5] fail (bug detected, expected)
+=== Code Generation Engine Tests ===
+--- Building ---
+test.sh: line 14: cargo: command not found
+  [trial 6] fail (bug detected, expected)
+=== Code Generation Engine Tests ===
+--- Building ---
+test.sh: line 14: cargo: command not found
+  [trial 7] fail (bug detected, expected)
+=== Code Generation Engine Tests ===
+--- Building ---
+test.sh: line 14: cargo: command not found
+  [trial 8] fail (bug detected, expected)

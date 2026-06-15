@@ -1,0 +1,26 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=claude-sonnet-4-6, arms=kernel]
+
+--- null-pointer-config [kernel] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-kernel-claude-sonnet-4-6-1781394436967 (timeout 660s)...
+  snapshotting workspace...
+  [kernel] copying local binary: /Users/scottmeyer/projects/haystack/target/x86_64-unknown-linux-musl/release/ostk
+  [kernel] ostk init + sign + embeddings + daemon + boot...
+  [kernel] boot output:
+  [kernel]     needle: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     decision: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     hay: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     draft: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     spec: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     transcript: 1 seen, 0 emitted   (lag: 0)
+  [kernel] POST healthy — boot confidence OK
+  [kernel] running with live kernel...
+  [kernel] dispatching via `ostk kernel spawn` (cpu arm, model=claude-sonnet-4-6)...
+  [kernel] spawn returned: spawned bench (model claude-sonnet-4-6, budget $100, pid 169)
+  [kernel] agent journaled end_turn; waiting 15s for clean shutdown...
+  [kernel] no clean shutdown 15s after end_turn — teardown hung; scoring from journal + SIGKILL
+  [kernel] complete: 13 turns, 5983+1929 tokens, $0.1081, 14 tools, stop=end_turn
+  [kernel] summary: complete: 13turns, 5983+1929 tokens, $0.1081
+
+=== bench summary ===
+1/1 passed, 81273ms total [model=claude-sonnet-4-6, arms=kernel]

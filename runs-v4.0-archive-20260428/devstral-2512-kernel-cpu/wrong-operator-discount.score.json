@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wrong-operator-discount",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 18936,
+  "output_tokens": 458,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix is working correctly. The issue was in the `calculate_discount_amount` function where it was using addition (`+`) instead of multiplication (`*`) to calculate the discount amount. The corrected formula now properly calculates the discount as a percentage of the subtotal.",
+  "timestamp": "2026-04-03T03:37:59Z",
+  "token_cost": 19394,
+  "tool_uses": 8,
+  "turns_to_fix": 1,
+  "wall_clock": 8.209
+}

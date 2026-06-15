@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "grok-4.3-kernel",
+    "arm": "kernel",
+    "benchmark": "k8s-assume-cache-silent-drop",
+    "billed_tokens": 68909,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.027721549999999998,
+    "fresh_input_tokens": 68909,
+    "input_tokens": 68909,
+    "output_tokens": 853,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 14turns, 68909+853 tokens, $0.0277",
+    "timestamp": "2026-06-14T23:38:24Z",
+    "token_cost": 69762,
+    "tool_uses": 13,
+    "turns_to_fix": 14,
+    "wall_clock": 53.45,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:38:34+00:00"
+  }
+]

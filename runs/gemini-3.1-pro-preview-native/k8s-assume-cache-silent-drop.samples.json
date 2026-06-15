@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "benchmark": "k8s-assume-cache-silent-drop",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 13490,
+    "output_tokens": 342,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have found the silent drop bug in the `informerUpdate` function within `main.go`, and added the conflict notification by setting `conflictNotified = true` when the assumed object is deleted. Running `test.sh` now confirms the fix and shows `PASS`.",
+    "timestamp": "2026-06-14T22:11:36Z",
+    "token_cost": 342,
+    "tool_uses": 6,
+    "turns_to_fix": 5,
+    "wall_clock": 22.63,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:11:46+00:00"
+  }
+]

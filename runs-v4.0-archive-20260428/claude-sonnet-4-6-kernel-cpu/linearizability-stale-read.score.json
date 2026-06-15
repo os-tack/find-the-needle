@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "linearizability-stale-read",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6146,
+  "output_tokens": 3011,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 3 rounds pass. Here's a summary of the two bugs found and fixed:\n\n## The Needles (Two Bugs)\n\n### Bug 1 — `handler.go` line 88: Stale local read instead of linearizable read\n\n**Problem:** `handleRead` called `h.node.Read(key)` which simply reads from the node's local KV map without any synchronization guarantee. A follower that was partitioned would return stale (empty) data even after the partition healed, because it hadn't yet caught up to the leader's committed state.\n\n**Fix:** Changed the call to `h.node.ReadLinearizable(key)`, which implements the **read-index protocol** — it contacts the leader to get the current commit index, then waits until the local applied index catches up before returning the value.\n\n### Bug 2 — `node.go` `handleHeartbeat`: Missing `advanceCommitIndex` call\n\n**Problem:** `handleHeartbeat` correctly appended log entries piggybacked on the heartbeat, but **never called `advanceCommitIndex`** with the leader's commit index (carried in `msg.Index`). So after a partition healed and the leader sent a heartbeat with the missing entries, the follower would store them in its log but never commit or apply them — leaving `commitIndex` and `appliedIndex` at 0. This meant even `ReadLinearizable` (which waits for `appliedIndex` to catch up) would still fail.\n\n**Fix:** Added the same commit-advancement logic to `handleHeartbeat` that `handleAppendEntries` already had — using `msg.Index` (the leader's commit index) to call `advanceCommitIndex`, capped by the follower's last log index.",
+  "timestamp": "2026-04-03T01:49:36Z",
+  "token_cost": 9157,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 69.709
+}

@@ -1,0 +1,6 @@
+DONE|gemini-3.1-pro-preview|kernel-cpu|resolved=true in=73966 tools=? stop=end_turn rc=0
+DONE|claude-sonnet-4-6|kernel-cpu|resolved=true in=5172 tools=? stop=end_turn rc=0
+DONE|claude-opus-4-8|kernel-cpu|resolved=true in=7671 tools=? stop=end_turn rc=0
+DONE|gpt-5.5|kernel-cpu|resolved=true in=98120 tools=? stop=end_turn rc=0
+DONE|kimi-k2.6|kernel|resolved=true in=113428 tools=? stop=end_turn rc=0
+DONE|devstral-2512|kernel-cpu|resolved=false in=0 tools=? stop=deadline_exceeded rc=1

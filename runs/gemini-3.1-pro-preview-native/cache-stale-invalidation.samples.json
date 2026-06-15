@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "benchmark": "cache-stale-invalidation",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 12951,
+    "output_tokens": 944,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have successfully investigated and resolved the stale cache issues. \n\nI updated `/app/app/server.py` to properly invalidate the necessary cache keys (`products:{product_id}` and `products:list`) upon creating and updating products. The test `/app/test.sh` now passes successfully.",
+    "timestamp": "2026-06-14T21:44:57Z",
+    "token_cost": 944,
+    "tool_uses": 9,
+    "turns_to_fix": 6,
+    "wall_clock": 42.446,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:45:07+00:00"
+  }
+]

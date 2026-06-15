@@ -1,0 +1,6 @@
+1/1 passed, 6322ms total [model=grok-4.20, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 8548ms total [model=grok-4.20, arms=kernel]
+error: 1 scenario(s) failed
+
+=== grok-4.20 DONE: 80/80 scores (pass=2 fail=2 skip=76) ===

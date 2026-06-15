@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "sql-injection-search",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 26388,
+  "output_tokens": 596,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The fix works. The test confirms that the SQL injection vulnerability has been resolved. The search endpoint now uses parameterized queries, which prevents SQL injection attacks.",
+  "timestamp": "2026-04-03T03:26:33Z",
+  "token_cost": 26984,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 14.729
+}

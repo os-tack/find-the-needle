@@ -1,0 +1,42 @@
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 52763ms total [model=gpt-4.1, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 22702ms total [model=gpt-4.1, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 44886ms total [model=gpt-4.1, arms=native]
+1/1 passed, 32509ms total [model=gpt-4.1, arms=native]
+1/1 passed, 16900ms total [model=gpt-4.1, arms=native]
+1/1 passed, 70484ms total [model=gpt-4.1, arms=native]
+1/1 passed, 31086ms total [model=gpt-4.1, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 49443ms total [model=gpt-4.1, arms=native]
+1/1 passed, 36968ms total [model=gpt-4.1, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 20969ms total [model=gpt-4.1, arms=native]
+
+=== gpt-4.1 DONE: 120/120 scores (pass=10 fail=30 skip=80) ===

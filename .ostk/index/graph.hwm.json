@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "hwm": 142,
+  "per_source": {
+    "cache_amp": 142,
+    "commit": 142,
+    "decision": 142,
+    "draft": 142,
+    "fleet_snapshot": 142,
+    "hay": 142,
+    "needle": 142,
+    "spec": 142,
+    "transcript": 142
+  }
+}

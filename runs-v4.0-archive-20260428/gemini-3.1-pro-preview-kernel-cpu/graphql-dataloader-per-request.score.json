@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "graphql-dataloader-per-request",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 61000,
+  "output_tokens": 2059,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I successfully found the needle and fixed it. \n\n### Summary of Findings\n- **The Problem:** The `DataLoader` instances were originally created *inside* individual resolver calls (such as `userPosts` and `postAuthor`), or by calling factory functions from within the resolvers. As a result, every time a resolver executed, a brand new `DataLoader` was instantiated. This defeated the purpose of `DataLoader` because it was not shared across the entire request; it couldn't collect keys from multiple resolver executions to batch them together, which led to the classic N+1 query problem.\n- **The Fix:** I modified `src/context.ts` to attach the loaders to the `GqlContext` that is created once per request (`createContext`). I then updated `src/resolvers/userResolver.ts` and `src/resolvers/postResolver.ts` to reference `ctx.loaders.userLoader` and `ctx.loaders.postsByAuthorLoader` instead of recreating them. \n\nThe test results verify the fix is complete: functional tests continue to pass and the performance test shows the queries went down to exactly 2 DB queries (from what would have been over 100 queries) to load 100 users and their posts, easily passing the requirement of executing `<=15` database queries.",
+  "timestamp": "2026-04-03T03:40:34Z",
+  "token_cost": 63059,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 48.657
+}

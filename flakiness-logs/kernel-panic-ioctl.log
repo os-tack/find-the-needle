@@ -1,0 +1,209 @@
+sha256:13cdca194ea5d012f29c94615badaff7e20acba10957a5a0c79bc3c214b5014d
+=== IOCTL Handler Validation Test ===
+--- Building ---
+make: Entering directory '/app/src'
+rm -f main.o device.o ioctl_handler.o devctl
+make: Leaving directory '/app/src'
+make: Entering directory '/app/src'
+gcc -Wall -Wextra -O2 -c -o main.o main.c
+main.c:1:10: fatal error: stdio.h: No such file or directory
+    1 | #include <stdio.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:13: main.o] Error 1
+make: Leaving directory '/app/src'
+cp: cannot stat '/app/src/devctl': No such file or directory
+--- Normal operation ---
+Running device self-test...
+Self-test PASSED
+ioctl: GET_CONFIG: key 'nonexistent' not found
+OK: self-test passed
+--- Fuzz test with crafted inputs ---
+ioctl: NULL request pointer
+ioctl: SET_CONFIG: NULL key pointer
+test.sh: line 26:    16 Segmentation fault      devctl fuzz
+FAIL: program crashed with signal 11 (segfault = simulated kernel panic)
+FAIL: IOCTL handler crashes or mishandles crafted inputs
+  [trial 1] fail (bug detected, expected)
+=== IOCTL Handler Validation Test ===
+--- Building ---
+make: Entering directory '/app/src'
+rm -f main.o device.o ioctl_handler.o devctl
+make: Leaving directory '/app/src'
+make: Entering directory '/app/src'
+gcc -Wall -Wextra -O2 -c -o main.o main.c
+main.c:1:10: fatal error: stdio.h: No such file or directory
+    1 | #include <stdio.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:13: main.o] Error 1
+make: Leaving directory '/app/src'
+cp: cannot stat '/app/src/devctl': No such file or directory
+--- Normal operation ---
+ioctl: GET_CONFIG: key 'nonexistent' not found
+Running device self-test...
+Self-test PASSED
+OK: self-test passed
+--- Fuzz test with crafted inputs ---
+ioctl: NULL request pointer
+ioctl: SET_CONFIG: NULL key pointer
+test.sh: line 26:    16 Segmentation fault      devctl fuzz
+FAIL: program crashed with signal 11 (segfault = simulated kernel panic)
+FAIL: IOCTL handler crashes or mishandles crafted inputs
+  [trial 2] fail (bug detected, expected)
+=== IOCTL Handler Validation Test ===
+--- Building ---
+make: Entering directory '/app/src'
+rm -f main.o device.o ioctl_handler.o devctl
+make: Leaving directory '/app/src'
+make: Entering directory '/app/src'
+gcc -Wall -Wextra -O2 -c -o main.o main.c
+main.c:1:10: fatal error: stdio.h: No such file or directory
+    1 | #include <stdio.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:13: main.o] Error 1
+make: Leaving directory '/app/src'
+--- Normal operation ---
+cp: cannot stat '/app/src/devctl': No such file or directory
+ioctl: GET_CONFIG: key 'nonexistent' not found
+Running device self-test...
+Self-test PASSED
+OK: self-test passed
+--- Fuzz test with crafted inputs ---
+ioctl: NULL request pointer
+ioctl: SET_CONFIG: NULL key pointer
+test.sh: line 26:    16 Segmentation fault      devctl fuzz
+FAIL: program crashed with signal 11 (segfault = simulated kernel panic)
+FAIL: IOCTL handler crashes or mishandles crafted inputs
+  [trial 3] fail (bug detected, expected)
+=== IOCTL Handler Validation Test ===
+--- Building ---
+make: Entering directory '/app/src'
+rm -f main.o device.o ioctl_handler.o devctl
+make: Leaving directory '/app/src'
+make: Entering directory '/app/src'
+gcc -Wall -Wextra -O2 -c -o main.o main.c
+main.c:1:10: fatal error: stdio.h: No such file or directory
+    1 | #include <stdio.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:13: main.o] Error 1
+make: Leaving directory '/app/src'
+cp: cannot stat '/app/src/devctl': No such file or directory
+--- Normal operation ---
+Running device self-test...
+Self-test PASSED
+ioctl: GET_CONFIG: key 'nonexistent' not found
+OK: self-test passed
+--- Fuzz test with crafted inputs ---
+FAIL: program crashed with signal 11 (segfault = simulated kernel panic)
+FAIL: IOCTL handler crashes or mishandles crafted inputs
+ioctl: NULL request pointer
+ioctl: SET_CONFIG: NULL key pointer
+test.sh: line 26:    16 Segmentation fault      devctl fuzz
+  [trial 4] fail (bug detected, expected)
+=== IOCTL Handler Validation Test ===
+--- Building ---
+make: Entering directory '/app/src'
+rm -f main.o device.o ioctl_handler.o devctl
+make: Leaving directory '/app/src'
+make: Entering directory '/app/src'
+gcc -Wall -Wextra -O2 -c -o main.o main.c
+main.c:1:10: fatal error: stdio.h: No such file or directory
+    1 | #include <stdio.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:13: main.o] Error 1
+make: Leaving directory '/app/src'
+cp: cannot stat '/app/src/devctl': No such file or directory
+--- Normal operation ---
+ioctl: GET_CONFIG: key 'nonexistent' not found
+Running device self-test...
+Self-test PASSED
+OK: self-test passed
+--- Fuzz test with crafted inputs ---
+ioctl: NULL request pointer
+ioctl: SET_CONFIG: NULL key pointer
+test.sh: line 26:    16 Segmentation fault      devctl fuzz
+FAIL: program crashed with signal 11 (segfault = simulated kernel panic)
+FAIL: IOCTL handler crashes or mishandles crafted inputs
+  [trial 5] fail (bug detected, expected)
+=== IOCTL Handler Validation Test ===
+--- Building ---
+make: Entering directory '/app/src'
+rm -f main.o device.o ioctl_handler.o devctl
+make: Leaving directory '/app/src'
+make: Entering directory '/app/src'
+gcc -Wall -Wextra -O2 -c -o main.o main.c
+main.c:1:10: fatal error: stdio.h: No such file or directory
+    1 | #include <stdio.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:13: main.o] Error 1
+make: Leaving directory '/app/src'
+cp: cannot stat '/app/src/devctl': No such file or directory
+--- Normal operation ---
+ioctl: GET_CONFIG: key 'nonexistent' not found
+Running device self-test...
+Self-test PASSED
+OK: self-test passed
+--- Fuzz test with crafted inputs ---
+ioctl: NULL request pointer
+ioctl: SET_CONFIG: NULL key pointer
+test.sh: line 26:    16 Segmentation fault      devctl fuzz
+FAIL: program crashed with signal 11 (segfault = simulated kernel panic)
+FAIL: IOCTL handler crashes or mishandles crafted inputs
+  [trial 6] fail (bug detected, expected)
+=== IOCTL Handler Validation Test ===
+--- Building ---
+make: Entering directory '/app/src'
+rm -f main.o device.o ioctl_handler.o devctl
+make: Leaving directory '/app/src'
+make: Entering directory '/app/src'
+gcc -Wall -Wextra -O2 -c -o main.o main.c
+main.c:1:10: fatal error: stdio.h: No such file or directory
+    1 | #include <stdio.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:13: main.o] Error 1
+make: Leaving directory '/app/src'
+cp: cannot stat '/app/src/devctl': No such file or directory
+--- Normal operation ---
+ioctl: GET_CONFIG: key 'nonexistent' not found
+Running device self-test...
+Self-test PASSED
+OK: self-test passed
+--- Fuzz test with crafted inputs ---
+ioctl: NULL request pointer
+ioctl: SET_CONFIG: NULL key pointer
+test.sh: line 26:    15 Segmentation fault      devctl fuzz
+FAIL: program crashed with signal 11 (segfault = simulated kernel panic)
+FAIL: IOCTL handler crashes or mishandles crafted inputs
+  [trial 7] fail (bug detected, expected)
+=== IOCTL Handler Validation Test ===
+--- Building ---
+make: Entering directory '/app/src'
+rm -f main.o device.o ioctl_handler.o devctl
+make: Leaving directory '/app/src'
+make: Entering directory '/app/src'
+gcc -Wall -Wextra -O2 -c -o main.o main.c
+main.c:1:10: fatal error: stdio.h: No such file or directory
+    1 | #include <stdio.h>
+      |          ^~~~~~~~~
+compilation terminated.
+make: *** [Makefile:13: main.o] Error 1
+make: Leaving directory '/app/src'
+cp: cannot stat '/app/src/devctl': No such file or directory
+--- Normal operation ---
+ioctl: GET_CONFIG: key 'nonexistent' not found
+Running device self-test...
+Self-test PASSED
+OK: self-test passed
+--- Fuzz test with crafted inputs ---
+ioctl: NULL request pointer
+ioctl: SET_CONFIG: NULL key pointer
+test.sh: line 26:    16 Segmentation fault      devctl fuzz
+FAIL: program crashed with signal 11 (segfault = simulated kernel panic)
+FAIL: IOCTL handler crashes or mishandles crafted inputs
+  [trial 8] fail (bug detected, expected)

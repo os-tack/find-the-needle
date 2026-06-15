@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "race-condition-counter",
+    "billed_tokens": 1207851,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 6.631919,
+    "fresh_input_tokens": 1207851,
+    "input_tokens": 1207851,
+    "output_tokens": 970,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 7turns, 1207851+970 tokens, $6.6319",
+    "timestamp": "2026-06-14T22:51:11Z",
+    "token_cost": 1208821,
+    "tool_uses": 6,
+    "turns_to_fix": 7,
+    "wall_clock": 61.914,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:51:21+00:00"
+  }
+]

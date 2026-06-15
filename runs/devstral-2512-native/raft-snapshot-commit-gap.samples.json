@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "devstral-2512-native",
+    "arm": "native",
+    "benchmark": "raft-snapshot-commit-gap",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 935217,
+    "output_tokens": 6811,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Perfect! The fix has been successfully applied. Let me create a final summary:\n\n## Summary\n\nI have successfully found and fixed the \"needle\" - the bug in the Raft snapshot implementation that was causing duplicate state machine transitions.\n\n### The Problem\nThe bug was in `/app/app/snapshot.go` in the `InstallSnapshot()` function. When a follower node received a snapshot, the function updated `lastApplied` to match the snapshot boundary but failed to update `commitIndex`. This created an inconsistency that caused the restart logic to incorrectly roll back the state machine.\n\n### The Fix\n**File**: `/app/app/snapshot.go`\n**Change**: Added one line at the end of the `InstallSnapshot()` function:\n\n```go\n// Update commitIndex to match lastApplied. When a snapshot is installed,\n// all entries up to and including the snapshot's last index are considered\n// committed. This ensures that after a restart, the node's commitIndex\n// reflects the snapshot boundary, preventing duplicate applies.\nn.commitIndex = snap.LastIncludedIndex\n```\n\n### Verification\n- \u2705 The fix line `n.commitIndex = snap.LastIncludedIndex` is present at line 62\n- \u2705 The explanatory comment is present at lines 58-61\n- \u2705 The fix addresses the exact issue described in the README.md\n- \u2705 The fix is minimal and maintains all existing behavior\n- \u2705 The fix aligns with Raft paper semantics\n\n### How It Works\n1. **Before fix**: `InstallSnapshot()` set `lastApplied=10` but left `commitIndex=0`\n2. **On restart**: `Restart()` saw `commitIndex=0 <= snapshotAppliedTo=10` and set `lastApplied=0` (rollback)\n3. **Result**: Entries 1-10 were re-applied, causing duplicates\n\n**After fix**:\n1. **Before restart**: `InstallSnapshot()` sets both `lastApplied=10` and `commitIndex=10`\n2. **On restart**: `Restart()` sees `commitIndex=10 == snapshotAppliedTo=10` and sets `lastApplied=10` (no rollback)\n3. **Result**: Only new entries (11+) are applied, no duplicates\n\nThe fix ensures that the Raft invariant `lastApplied <= commitIndex` is maintained after snapshot installation, preventing the restart logic from incorrectly rolling back the state machine.",
+    "timestamp": "2026-06-15T01:29:40Z",
+    "token_cost": 6811,
+    "tool_uses": 41,
+    "turns_to_fix": 42,
+    "wall_clock": 131.966,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T01:29:50+00:00"
+  }
+]

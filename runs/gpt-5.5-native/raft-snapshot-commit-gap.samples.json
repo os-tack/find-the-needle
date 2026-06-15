@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "raft-snapshot-commit-gap",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 160075,
+    "output_tokens": 1998,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the snapshot install path in [snapshot.go](/app/app/snapshot.go:36).\n\nThe handler now:\n- Compacts log entries covered by the installed snapshot, preserving a matching boundary entry when available.\n- Advances `commitIndex` to at least `LastIncludedIndex`, keeping restart recovery from replaying already-snapshotted entries.\n\nVerification passed:\n\n```text\n./test.sh\nPASS: No duplicate state machine transitions across all rounds\n```",
+    "timestamp": "2026-06-14T22:52:16Z",
+    "token_cost": 1998,
+    "tool_uses": 13,
+    "turns_to_fix": 1,
+    "wall_clock": 55.059,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:52:26+00:00"
+  }
+]

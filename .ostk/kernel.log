@@ -1,0 +1,49 @@
+[daemon] anchor acquired: anchor-1 (started_at 2026-04-24T01:11:53Z)
+[2m2026-04-24T01:11:53.313820Z[0m [32m INFO[0m cpu: creating driver [3mmodel[0m[2m=[0mclaude-opus-4-6 [3mprovider[0m[2m=[0mAnthropic
+[daemon] session manager created (model stays warm, lineage anchor = anchor-1)
+[ostk] kernel socket listening: /Users/scottmeyer/projects/needle-bench/.ostk/ostk.sock (pid 36918)
+[ostk] conn conn-36918-1 closed — detached 1 client handle(s)
+[ostk] conn conn-36918-2 closed (async path) — detached 1 client handle(s)
+[ostk] conn conn-36918-3 closed — detached 1 client handle(s)
+[ostk] conn conn-36918-4 closed — detached 1 client handle(s)
+[ostk] initialized as claude-code-1
+[daemon] firmware uploaded: file_011CaMhwbi5R9w56LqodHUjQ (887 bytes, hash 6d0c6f153fdfb5cd)
+[ostk] conn conn-36918-6 closed — detached 1 client handle(s)
+[ostk] conn conn-36918-7 closed — detached 1 client handle(s)
+[ostk] conn conn-36918-8 closed — detached 1 client handle(s)
+[ostk] conn conn-36918-9 closed — detached 1 client handle(s)
+[ostk] initialized as claude-code-2
+[ostk] conn conn-36918-11 closed — detached 1 client handle(s)
+[ostk] conn conn-36918-12 closed — detached 1 client handle(s)
+[ostk] conn conn-36918-13 closed — detached 1 client handle(s)
+[ostk] conn conn-36918-5 closed — detached 1 client handle(s)
+[daemon] removing stale socket: /Users/scottmeyer/projects/needle-bench/.ostk/ostk.sock
+[listen] reaped 3 stale agent(s): claude-code-1, claude-code-2, scheduler
+[daemon] anchor acquired: anchor-2 (started_at 2026-04-24T01:33:14Z)
+[2m2026-04-24T01:33:14.235052Z[0m [32m INFO[0m cpu: creating driver [3mmodel[0m[2m=[0mclaude-opus-4-6 [3mprovider[0m[2m=[0mAnthropic
+[daemon] session manager created (model stays warm, lineage anchor = anchor-2)
+[ostk] kernel socket listening: /Users/scottmeyer/projects/needle-bench/.ostk/ostk.sock (pid 91482)
+[ostk] conn conn-91482-1 closed — detached 1 client handle(s)
+[ostk] conn conn-91482-2 closed — detached 1 client handle(s)
+[ostk] conn conn-91482-3 closed — detached 1 client handle(s)
+[ostk] conn conn-91482-4 closed — detached 1 client handle(s)
+[ostk] initialized as claude-code-3
+[daemon] firmware uploaded: file_011CaMja1tFGQdbStjkGNrbX (5803 bytes, hash 873d280e94aab366)
+[daemon] removing stale socket: /Users/scottmeyer/projects/needle-bench/.ostk/ostk.sock
+[listen] reaped 2 stale agent(s): scheduler, claude-code-3
+[daemon] anchor acquired: anchor-3 (started_at 2026-04-24T04:06:16Z)
+[2m2026-04-24T04:06:16.811308Z[0m [32m INFO[0m cpu: creating driver [3mmodel[0m[2m=[0mclaude-opus-4-6 [3mprovider[0m[2m=[0mAnthropic
+[daemon] session manager created (model stays warm, lineage anchor = anchor-3)
+[ostk] kernel socket listening: /Users/scottmeyer/projects/needle-bench/.ostk/ostk.sock (pid 48324)
+[ostk] conn conn-48324-2 closed — detached 1 client handle(s)
+[ostk] conn conn-48324-1 closed (async path) — detached 1 client handle(s)
+[ostk] conn conn-48324-3 closed — detached 1 client handle(s)
+[ostk] conn conn-48324-4 closed — detached 1 client handle(s)
+[ostk] initialized as claude-code-4
+[daemon] firmware uploaded: file_011CaMwEuHjQSxUfRqSAX7Cc (5803 bytes, hash c8a30d2d81e0c58a)
+[ostk] conn conn-48324-5 closed — detached 1 client handle(s)
+[ostk] conn conn-48324-6 closed — detached 1 client handle(s)
+[ostk] initialized as claude-code-5
+[ostk] conn conn-48324-8 closed — detached 1 client handle(s)
+[ostk] conn conn-48324-9 closed — detached 1 client handle(s)
+[ostk] conn conn-48324-10 closed — detached 1 client handle(s)

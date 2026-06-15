@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "devstral-2512-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 201616,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.692223,
+    "fresh_input_tokens": 201616,
+    "input_tokens": 201616,
+    "output_tokens": 5825,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 20turns, 201616+5825 tokens, $0.6922",
+    "timestamp": "2026-06-15T00:28:16Z",
+    "token_cost": 207441,
+    "tool_uses": 19,
+    "turns_to_fix": 20,
+    "wall_clock": 55.332,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T00:28:27+00:00"
+  }
+]

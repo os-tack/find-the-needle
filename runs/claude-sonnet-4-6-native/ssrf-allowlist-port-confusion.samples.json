@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "billed_tokens": 159597,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 12144,
+    "cache_read_tokens": 147445,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.1164055,
+    "fresh_input_tokens": 8,
+    "input_tokens": 8,
+    "output_tokens": 1734,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 5 tests pass. The fix adds an `ipaddress.ip_address()` check that canonically handles all IPv6 representations of loopback (`::1`, `0:0:0:0:0:0:0:1`, and any other form), plus private and link-local ranges \u2014 replacing the fragile string-matching approach for IP addresses.",
+    "timestamp": "2026-06-14T23:43:45Z",
+    "token_cost": 161331,
+    "tool_uses": 8,
+    "turns_to_fix": 9,
+    "wall_clock": 36.95,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:43:55+00:00"
+  }
+]

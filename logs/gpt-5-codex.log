@@ -1,0 +1,6 @@
+1/1 passed, 31622ms total [model=gpt-5-codex, arms=kernel]
+1/1 passed, 51148ms total [model=gpt-5-codex, arms=kernel]
+1/1 passed, 22765ms total [model=gpt-5-codex, arms=kernel]
+1/1 passed, 19514ms total [model=gpt-5-codex, arms=kernel]
+
+=== gpt-5-codex DONE: 80/80 scores (pass=4 fail=0 skip=76) ===

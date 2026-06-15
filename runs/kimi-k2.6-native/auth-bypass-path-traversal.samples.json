@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "kimi-k2.6-native",
+    "arm": "native",
+    "benchmark": "auth-bypass-path-traversal",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 14452,
+    "output_tokens": 0,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "To resume this session: kimi -r dc1a36c2-4bfb-4eda-9544-4df864a64b89",
+    "timestamp": "2026-06-14T23:24:40Z",
+    "token_cost": 0,
+    "tool_uses": 4,
+    "turns_to_fix": 4,
+    "wall_clock": 49.436,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:24:51+00:00"
+  }
+]

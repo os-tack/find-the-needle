@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "tls-chain-ordering-strict",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 107390,
+  "output_tokens": 3619,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The test now passes. The issue was that the certificates in the chain were not in the correct order. I reordered them to match RFC 5246 requirements:\n\n1. Leaf certificate (localhost)\n2. Intermediate CA certificate\n3. Root CA certificate\n\nThe fix involved reordering the certificates in the `/certs/chain.pem` file. The test now confirms that the chain is in the correct order.",
+  "timestamp": "2026-04-03T03:33:12Z",
+  "token_cost": 111009,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 31.319
+}

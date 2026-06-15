@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "bidi-override-injection",
+    "billed_tokens": 236739,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 16080,
+    "cache_read_tokens": 220649,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.1680577,
+    "fresh_input_tokens": 10,
+    "input_tokens": 10,
+    "output_tokens": 2729,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 5 tests pass. \n\nThe two bugs were:\n\n- **`auth.py`** (`check_admin_access`): was running the stored username through a BIDI rendering function before comparing to the admin allowlist \u2014 so `\\u202enimda` rendered to `\"admin\"` and bypassed access control. Fixed by comparing the raw stored username directly.\n- **`sanitizer.py`** (`sanitize_username`): wasn't stripping Unicode BIDI control characters, so they passed through to storage. Fixed by adding a regex strip of all Unicode BIDI controls (U+202A\u2013202E, U+2066\u20132069, U+200E/200F) as the first sanitization step.",
+    "timestamp": "2026-06-14T21:38:56Z",
+    "token_cost": 239468,
+    "tool_uses": 11,
+    "turns_to_fix": 12,
+    "wall_clock": 60.573,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:39:06+00:00"
+  }
+]

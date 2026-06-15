@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 24683,
+  "output_tokens": 588,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The test script has passed, confirming that the issue has been resolved. The needle in the haystack was the port mismatch in the NGINX configuration, where the `proxy_pass` directive was pointing to port `5001` instead of the correct port `5000` where the Flask application is running.",
+  "timestamp": "2026-04-03T02:41:08Z",
+  "token_cost": 25271,
+  "tool_uses": 12,
+  "turns_to_fix": 1,
+  "wall_clock": 13.439
+}

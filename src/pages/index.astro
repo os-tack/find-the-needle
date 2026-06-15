@@ -29,6 +29,12 @@ const datasetSchema = {
 >
   <main>
     <h1 class="visually-hidden">needle-bench AI Coding Agent Leaderboard</h1>
+    <div style="background:#fff3cd;border:1px solid #ffe08a;color:#5c4400;padding:.8rem 1rem;border-radius:6px;margin:1rem 0;font-size:.92rem;line-height:1.5;">
+      <strong>New — v7.6.0 schema-unified results (2026-06-15).</strong>
+      Accuracy-verified native-vs-kernel numbers (single-shot, resolved-gated, per-bucket cost) are published here:
+      <a href="/v760.html" style="font-weight:600;text-decoration:underline;">v7.6.0 results &rarr;</a>.
+      The interactive leaderboard below is from an earlier multi-model run and is being rebuilt on the new dataset — read the v7.6.0 page for current figures.
+    </div>
     <div class="experiment-info">
       <p><strong>Three-arm experiment.</strong> 31 models &times; 40 benchmarks &times; 3 arms = 3,641 runs.</p>
       <p class="muted"><strong>Native</strong>: vendor CLI. <strong>Kernel</strong>: ostk via OpenRouter. <strong>CPU</strong>: ostk + optimized driver. Click headers to sort.</p>
@@ -67,6 +73,8 @@ const datasetSchema = {
         </tbody>
       </table>
     </div>
+
+    <p class="bstar-note muted"><sup class="bstar">*</sup> <strong>B*</strong>: kernel solve sourced from the generic OpenRouter kernel (no hand-written native driver for this provider) &mdash; distinct from true <strong>B</strong> (kernel-cpu, native driver).</p>
 
     <div class="totals" id="totals"></div>
 
@@ -131,6 +139,10 @@ const datasetSchema = {
   .group-native { background: rgba(248,81,73,0.08); color: #f85149; }
   .group-kernel { background: rgba(210,153,34,0.08); color: #d29922; }
   .group-cpu { background: rgba(63,185,80,0.08); color: #3fb950; }
+
+  /* B* marker: generic OpenRouter kernel (no native driver) */
+  .bstar { color: #d29922; font-weight: 700; cursor: help; }
+  .bstar-note { font-size: 0.7rem; margin: 0.4rem 0 0; }
 
   #lb th {
     padding: 0.4rem 0.4rem; font-size: 0.6rem; letter-spacing: 0.04em;
@@ -222,6 +234,9 @@ const datasetSchema = {
     native: ArmAgg; kernel: ArmAgg; cpu: ArmAgg;
     price_per_m_input?: number; price_per_m_output?: number;
     native_cli?: string; cpu_driver_status?: string;
+    // B vs B* labeling (frontier-2026): "native_driver" → true B (kernel-cpu),
+    // "generic_kernel" → B* (kernel via OpenRouter, no native driver).
+    kernel_arm_type?: string;
   }
 
   function fmtN(n: number): string { return n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n); }
@@ -231,13 +246,16 @@ const datasetSchema = {
 
   function armPct(a: ArmAgg): number { return a.total > 0 ? a.solved / a.total * 100 : -1; }
 
-  function solveCell(a: ArmAgg, cls: string, label?: string): string {
+  function solveCell(a: ArmAgg, cls: string, label?: string, bStar?: boolean): string {
     if (a.total === 0) {
       if (label === 'no_driver') return `<td class="${cls} col-solve"><span class="pct-na" title="No native CPU driver for this provider">no driver</span></td>`;
       return `<td class="${cls} col-solve"><span class="pct-na">-</span></td>`;
     }
     const pct = armPct(a);
-    return `<td class="${cls} col-solve"><span class="solve-pct ${pctClass(pct)}">${a.solved}/${a.total}</span></td>`;
+    // B* marker: generic OpenRouter kernel (no native driver) — distinguish
+    // from true B (kernel-cpu). See footnote below the table.
+    const star = bStar ? `<sup class="bstar" title="B*: generic OpenRouter kernel, no native driver">*</sup>` : '';
+    return `<td class="${cls} col-solve"><span class="solve-pct ${pctClass(pct)}">${a.solved}/${a.total}</span>${star}</td>`;
   }
 
   function metricCells(a: ArmAgg, cls: string): string {
@@ -295,7 +313,7 @@ const datasetSchema = {
           <td class="col-price">${r.price > 0 ? '$'+r.price.toFixed(2) : '<span class="dim">-</span>'}</td>
           ${solveCell(r.native, 'arm-native')}
           ${metricCells(r.native, 'arm-native')}
-          ${solveCell(r.kernel, 'arm-kernel')}
+          ${solveCell(r.kernel, 'arm-kernel', undefined, r.kernel_arm_type === 'generic_kernel')}
           ${metricCells(r.kernel, 'arm-kernel')}
           ${solveCell(r.cpu, 'arm-cpu', cpuLabel)}
           ${metricCells(r.cpu, 'arm-cpu')}

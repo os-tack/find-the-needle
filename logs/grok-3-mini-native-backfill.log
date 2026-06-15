@@ -1,0 +1,42 @@
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 157494ms total [model=grok-3-mini, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 122632ms total [model=grok-3-mini, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 126969ms total [model=grok-3-mini, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 60830ms total [model=grok-3-mini, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 134510ms total [model=grok-3-mini, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 167142ms total [model=grok-3-mini, arms=native]
+1/1 passed, 134586ms total [model=grok-3-mini, arms=native]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 92402ms total [model=grok-3-mini, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 108643ms total [model=grok-3-mini, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 88358ms total [model=grok-3-mini, arms=native]
+
+=== grok-3-mini DONE: 120/120 scores (pass=10 fail=30 skip=80) ===

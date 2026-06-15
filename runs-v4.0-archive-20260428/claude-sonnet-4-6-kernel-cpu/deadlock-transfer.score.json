@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "deadlock-transfer",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6304,
+  "output_tokens": 1384,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **PASS** — both verification runs completed without deadlock.\n\n---\n\n### The Needle 🪡\n\n**File:** `/app/app/TransferService.java`\n\n**Bug:** Classic **lock-ordering deadlock**. The `transfer()` method always locked accounts in *parameter order* (`from` → `to`). When two threads concurrently ran:\n- Thread 1: `A → B` (locks A, then waits for B)\n- Thread 2: `B → A` (locks B, then waits for A)\n\nEach thread held the lock the other needed → **deadlock**.\n\n**Fix:** Always acquire the two locks in a **consistent global order** (alphabetically by account ID), regardless of which is the source and which is the destination. This guarantees no two threads can form a circular lock-wait cycle.",
+  "timestamp": "2026-04-03T01:22:29Z",
+  "token_cost": 7688,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 30.091
+}

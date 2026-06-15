@@ -1,0 +1,449 @@
+sha256:31b7794ba304ef7b356d67349925413f2eb37857b7100e9030b457ad49d6adec
+kvwal: listening on localhost:9876
+crash-recover: WAL truncated to last sync point
+kvwal: listening on localhost:9876
+LOST key-0000
+LOST key-0001
+LOST key-0002
+LOST key-0003
+LOST key-0004
+LOST key-0005
+LOST key-0006
+LOST key-0007
+LOST key-0008
+LOST key-0009
+LOST key-0010
+LOST key-0011
+LOST key-0012
+LOST key-0013
+LOST key-0014
+LOST key-0015
+LOST key-0016
+LOST key-0017
+LOST key-0018
+LOST key-0019
+LOST key-0020
+LOST key-0021
+LOST key-0022
+LOST key-0023
+LOST key-0024
+LOST key-0025
+LOST key-0026
+LOST key-0027
+LOST key-0028
+LOST key-0029
+LOST key-0030
+LOST key-0031
+LOST key-0032
+LOST key-0033
+LOST key-0034
+LOST key-0035
+LOST key-0036
+LOST key-0037
+LOST key-0038
+LOST key-0039
+LOST key-0040
+LOST key-0041
+LOST key-0042
+LOST key-0043
+LOST key-0044
+LOST key-0045
+LOST key-0046
+LOST key-0047
+LOST key-0048
+LOST key-0049
+summary: 0 OK, 50 LOST out of 50 acked
+FAIL: acknowledged writes lost after crash
+  [trial 1] fail (bug detected, expected)
+kvwal: listening on localhost:9876
+crash-recover: WAL truncated to last sync point
+kvwal: listening on localhost:9876
+LOST key-0000
+LOST key-0001
+LOST key-0002
+LOST key-0003
+LOST key-0004
+LOST key-0005
+LOST key-0006
+LOST key-0007
+LOST key-0008
+LOST key-0009
+LOST key-0010
+LOST key-0011
+LOST key-0012
+LOST key-0013
+LOST key-0014
+LOST key-0015
+LOST key-0016
+LOST key-0017
+LOST key-0018
+LOST key-0019
+LOST key-0020
+LOST key-0021
+LOST key-0022
+LOST key-0023
+LOST key-0024
+LOST key-0025
+LOST key-0026
+LOST key-0027
+LOST key-0028
+LOST key-0029
+LOST key-0030
+LOST key-0031
+LOST key-0032
+LOST key-0033
+LOST key-0034
+LOST key-0035
+LOST key-0036
+LOST key-0037
+LOST key-0038
+LOST key-0039
+LOST key-0040
+LOST key-0041
+LOST key-0042
+LOST key-0043
+LOST key-0044
+LOST key-0045
+LOST key-0046
+LOST key-0047
+LOST key-0048
+LOST key-0049
+summary: 0 OK, 50 LOST out of 50 acked
+FAIL: acknowledged writes lost after crash
+  [trial 2] fail (bug detected, expected)
+kvwal: listening on localhost:9876
+crash-recover: WAL truncated to last sync point
+kvwal: listening on localhost:9876
+LOST key-0000
+LOST key-0001
+LOST key-0002
+LOST key-0003
+LOST key-0004
+LOST key-0005
+LOST key-0006
+LOST key-0007
+LOST key-0008
+LOST key-0009
+LOST key-0010
+LOST key-0011
+LOST key-0012
+LOST key-0013
+LOST key-0014
+LOST key-0015
+LOST key-0016
+LOST key-0017
+LOST key-0018
+LOST key-0019
+LOST key-0020
+LOST key-0021
+LOST key-0022
+LOST key-0023
+LOST key-0024
+LOST key-0025
+LOST key-0026
+LOST key-0027
+LOST key-0028
+LOST key-0029
+LOST key-0030
+LOST key-0031
+LOST key-0032
+LOST key-0033
+LOST key-0034
+LOST key-0035
+LOST key-0036
+LOST key-0037
+LOST key-0038
+LOST key-0039
+LOST key-0040
+LOST key-0041
+LOST key-0042
+LOST key-0043
+LOST key-0044
+LOST key-0045
+LOST key-0046
+LOST key-0047
+LOST key-0048
+LOST key-0049
+summary: 0 OK, 50 LOST out of 50 acked
+FAIL: acknowledged writes lost after crash
+  [trial 3] fail (bug detected, expected)
+kvwal: listening on localhost:9876
+crash-recover: WAL truncated to last sync point
+kvwal: listening on localhost:9876
+LOST key-0000
+LOST key-0001
+LOST key-0002
+LOST key-0003
+LOST key-0004
+LOST key-0005
+LOST key-0006
+LOST key-0007
+LOST key-0008
+LOST key-0009
+LOST key-0010
+LOST key-0011
+LOST key-0012
+LOST key-0013
+LOST key-0014
+LOST key-0015
+LOST key-0016
+LOST key-0017
+LOST key-0018
+LOST key-0019
+LOST key-0020
+LOST key-0021
+LOST key-0022
+LOST key-0023
+LOST key-0024
+LOST key-0025
+LOST key-0026
+LOST key-0027
+LOST key-0028
+LOST key-0029
+LOST key-0030
+LOST key-0031
+LOST key-0032
+LOST key-0033
+LOST key-0034
+LOST key-0035
+LOST key-0036
+LOST key-0037
+LOST key-0038
+LOST key-0039
+LOST key-0040
+LOST key-0041
+LOST key-0042
+LOST key-0043
+LOST key-0044
+LOST key-0045
+LOST key-0046
+LOST key-0047
+LOST key-0048
+LOST key-0049
+summary: 0 OK, 50 LOST out of 50 acked
+FAIL: acknowledged writes lost after crash
+  [trial 4] fail (bug detected, expected)
+kvwal: listening on localhost:9876
+crash-recover: WAL truncated to last sync point
+kvwal: listening on localhost:9876
+LOST key-0000
+LOST key-0001
+LOST key-0002
+LOST key-0003
+LOST key-0004
+LOST key-0005
+LOST key-0006
+LOST key-0007
+LOST key-0008
+LOST key-0009
+LOST key-0010
+LOST key-0011
+LOST key-0012
+LOST key-0013
+LOST key-0014
+LOST key-0015
+LOST key-0016
+LOST key-0017
+LOST key-0018
+LOST key-0019
+LOST key-0020
+LOST key-0021
+LOST key-0022
+LOST key-0023
+LOST key-0024
+LOST key-0025
+LOST key-0026
+LOST key-0027
+LOST key-0028
+LOST key-0029
+LOST key-0030
+LOST key-0031
+LOST key-0032
+LOST key-0033
+LOST key-0034
+LOST key-0035
+LOST key-0036
+LOST key-0037
+LOST key-0038
+LOST key-0039
+LOST key-0040
+LOST key-0041
+LOST key-0042
+LOST key-0043
+LOST key-0044
+LOST key-0045
+LOST key-0046
+LOST key-0047
+LOST key-0048
+LOST key-0049
+summary: 0 OK, 50 LOST out of 50 acked
+FAIL: acknowledged writes lost after crash
+  [trial 5] fail (bug detected, expected)
+kvwal: listening on localhost:9876
+crash-recover: WAL truncated to last sync point
+kvwal: listening on localhost:9876
+LOST key-0000
+LOST key-0001
+LOST key-0002
+LOST key-0003
+LOST key-0004
+LOST key-0005
+LOST key-0006
+LOST key-0007
+LOST key-0008
+LOST key-0009
+LOST key-0010
+LOST key-0011
+LOST key-0012
+LOST key-0013
+LOST key-0014
+LOST key-0015
+LOST key-0016
+LOST key-0017
+LOST key-0018
+LOST key-0019
+LOST key-0020
+LOST key-0021
+LOST key-0022
+LOST key-0023
+LOST key-0024
+LOST key-0025
+LOST key-0026
+LOST key-0027
+LOST key-0028
+LOST key-0029
+LOST key-0030
+LOST key-0031
+LOST key-0032
+LOST key-0033
+LOST key-0034
+LOST key-0035
+LOST key-0036
+LOST key-0037
+LOST key-0038
+LOST key-0039
+LOST key-0040
+LOST key-0041
+LOST key-0042
+LOST key-0043
+LOST key-0044
+LOST key-0045
+LOST key-0046
+LOST key-0047
+LOST key-0048
+LOST key-0049
+summary: 0 OK, 50 LOST out of 50 acked
+FAIL: acknowledged writes lost after crash
+  [trial 6] fail (bug detected, expected)
+kvwal: listening on localhost:9876
+crash-recover: WAL truncated to last sync point
+kvwal: listening on localhost:9876
+LOST key-0000
+LOST key-0001
+LOST key-0002
+LOST key-0003
+LOST key-0004
+LOST key-0005
+LOST key-0006
+LOST key-0007
+LOST key-0008
+LOST key-0009
+LOST key-0010
+LOST key-0011
+LOST key-0012
+LOST key-0013
+LOST key-0014
+LOST key-0015
+LOST key-0016
+LOST key-0017
+LOST key-0018
+LOST key-0019
+LOST key-0020
+LOST key-0021
+LOST key-0022
+LOST key-0023
+LOST key-0024
+LOST key-0025
+LOST key-0026
+LOST key-0027
+LOST key-0028
+LOST key-0029
+LOST key-0030
+LOST key-0031
+LOST key-0032
+LOST key-0033
+LOST key-0034
+LOST key-0035
+LOST key-0036
+LOST key-0037
+LOST key-0038
+LOST key-0039
+LOST key-0040
+LOST key-0041
+LOST key-0042
+LOST key-0043
+LOST key-0044
+LOST key-0045
+LOST key-0046
+LOST key-0047
+LOST key-0048
+LOST key-0049
+summary: 0 OK, 50 LOST out of 50 acked
+FAIL: acknowledged writes lost after crash
+  [trial 7] fail (bug detected, expected)
+kvwal: listening on localhost:9876
+crash-recover: WAL truncated to last sync point
+kvwal: listening on localhost:9876
+LOST key-0000
+LOST key-0001
+LOST key-0002
+LOST key-0003
+LOST key-0004
+LOST key-0005
+LOST key-0006
+LOST key-0007
+LOST key-0008
+LOST key-0009
+LOST key-0010
+LOST key-0011
+LOST key-0012
+LOST key-0013
+LOST key-0014
+LOST key-0015
+LOST key-0016
+LOST key-0017
+LOST key-0018
+LOST key-0019
+LOST key-0020
+LOST key-0021
+LOST key-0022
+LOST key-0023
+LOST key-0024
+LOST key-0025
+LOST key-0026
+LOST key-0027
+LOST key-0028
+LOST key-0029
+LOST key-0030
+LOST key-0031
+LOST key-0032
+LOST key-0033
+LOST key-0034
+LOST key-0035
+LOST key-0036
+LOST key-0037
+LOST key-0038
+LOST key-0039
+LOST key-0040
+LOST key-0041
+LOST key-0042
+LOST key-0043
+LOST key-0044
+LOST key-0045
+LOST key-0046
+LOST key-0047
+LOST key-0048
+LOST key-0049
+summary: 0 OK, 50 LOST out of 50 acked
+FAIL: acknowledged writes lost after crash
+  [trial 8] fail (bug detected, expected)

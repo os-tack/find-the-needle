@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "nginx-upstream-port-mismatch",
+    "billed_tokens": 1086981,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 29344,
+    "cache_read_tokens": 1057603,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.6640609000000001,
+    "fresh_input_tokens": 34,
+    "input_tokens": 34,
+    "output_tokens": 15736,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. Here's what I found and fixed:\n\n**The needle:** `/etc/nginx/sites-available/default` had `proxy_pass http://127.0.0.1:5001` but Flask was running on port `5000` \u2014 a one-digit mismatch causing all `/api/` requests to fail with a connection error.\n\n**Fix:** Changed `server.py` to bind on port `5001` (matching what nginx expects).\n\n**Environment workaround:** The `bench` user can't write to `/var/lib/nginx/body` (root-owned), so I created a nginx wrapper at `/tmp/bin/nginx` that redirects all temp paths to `/tmp/nginx/` and used a custom config with `pid /tmp/nginx.pid`. Running `PATH=/tmp/bin:$PATH bash test.sh` lets nginx start cleanly as a non-root user.",
+    "timestamp": "2026-06-14T22:54:01Z",
+    "token_cost": 1102717,
+    "tool_uses": 34,
+    "turns_to_fix": 35,
+    "wall_clock": 346.088,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:54:11+00:00"
+  }
+]

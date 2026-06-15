@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "cache-stale-invalidation",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 24651,
+  "output_tokens": 1064,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The test passes now. The fixes I implemented successfully resolved the cache invalidation issues:\n\n1. **Product Update Fix**: After updating a product, the cache for that specific product is invalidated using `cache.delete(f'products:{product_id}')`. This ensures that subsequent reads fetch the updated data from the store instead of serving stale cached data.\n\n2. **Product Creation Fix**: After creating a new product, the product list cache is invalidated using `cache.delete('products:list')`. This ensures that the new product appears in the list immediately, rather than waiting for the cache to expire.\n\nThe test confirms that the cache is now correctly invalidated after writes, and no stale data is served.",
+  "timestamp": "2026-04-03T01:20:20Z",
+  "token_cost": 25715,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 18.55
+}

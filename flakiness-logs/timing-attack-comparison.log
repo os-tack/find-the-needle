@@ -1,0 +1,137 @@
+sha256:b3b39cc7a299de2876eeec86ee2f0df1c2617e90df28c53639763c126f7ef9c5
+=== Timing Attack Resistance Test ===
+--- Building ---
+--- Basic auth test ---
+Authentication successful
+OK: correct password accepted
+Authentication failed
+OK: wrong password rejected
+--- Timing side-channel analysis ---
+Running security analysis on compareHashes...
+  Static analysis: uses == operator instead of constant-time comparison
+VULNERABLE: compareHashes does NOT use constant-time comparison
+This enables a timing side-channel attack on the password hash
+  Timing ratio (full_match / no_match): 0.979
+FAIL: Security test failed
+FAIL: timing analysis detected side-channel vulnerability
+FAIL: Authentication comparison leaks timing information
+  [trial 1] fail (bug detected, expected)
+=== Timing Attack Resistance Test ===
+--- Building ---
+--- Basic auth test ---
+Authentication successful
+OK: correct password accepted
+Authentication failed
+OK: wrong password rejected
+--- Timing side-channel analysis ---
+Running security analysis on compareHashes...
+  Static analysis: uses == operator instead of constant-time comparison
+VULNERABLE: compareHashes does NOT use constant-time comparison
+This enables a timing side-channel attack on the password hash
+  Timing ratio (full_match / no_match): 1.044
+FAIL: Security test failed
+FAIL: timing analysis detected side-channel vulnerability
+FAIL: Authentication comparison leaks timing information
+  [trial 2] fail (bug detected, expected)
+=== Timing Attack Resistance Test ===
+--- Building ---
+--- Basic auth test ---
+Authentication successful
+OK: correct password accepted
+Authentication failed
+OK: wrong password rejected
+--- Timing side-channel analysis ---
+Running security analysis on compareHashes...
+  Static analysis: uses == operator instead of constant-time comparison
+VULNERABLE: compareHashes does NOT use constant-time comparison
+This enables a timing side-channel attack on the password hash
+  Timing ratio (full_match / no_match): 0.979
+FAIL: Security test failed
+FAIL: timing analysis detected side-channel vulnerability
+FAIL: Authentication comparison leaks timing information
+  [trial 3] fail (bug detected, expected)
+=== Timing Attack Resistance Test ===
+--- Building ---
+--- Basic auth test ---
+Authentication successful
+OK: correct password accepted
+Authentication failed
+OK: wrong password rejected
+--- Timing side-channel analysis ---
+Running security analysis on compareHashes...
+  Static analysis: uses == operator instead of constant-time comparison
+VULNERABLE: compareHashes does NOT use constant-time comparison
+This enables a timing side-channel attack on the password hash
+  Timing ratio (full_match / no_match): 1.008
+FAIL: Security test failed
+FAIL: timing analysis detected side-channel vulnerability
+FAIL: Authentication comparison leaks timing information
+  [trial 4] fail (bug detected, expected)
+=== Timing Attack Resistance Test ===
+--- Building ---
+--- Basic auth test ---
+Authentication successful
+OK: correct password accepted
+Authentication failed
+OK: wrong password rejected
+--- Timing side-channel analysis ---
+Running security analysis on compareHashes...
+  Static analysis: uses == operator instead of constant-time comparison
+VULNERABLE: compareHashes does NOT use constant-time comparison
+This enables a timing side-channel attack on the password hash
+  Timing ratio (full_match / no_match): 0.976
+FAIL: Security test failed
+FAIL: timing analysis detected side-channel vulnerability
+FAIL: Authentication comparison leaks timing information
+  [trial 5] fail (bug detected, expected)
+=== Timing Attack Resistance Test ===
+--- Building ---
+--- Basic auth test ---
+Authentication successful
+OK: correct password accepted
+Authentication failed
+OK: wrong password rejected
+--- Timing side-channel analysis ---
+Running security analysis on compareHashes...
+  Static analysis: uses == operator instead of constant-time comparison
+VULNERABLE: compareHashes does NOT use constant-time comparison
+This enables a timing side-channel attack on the password hash
+  Timing ratio (full_match / no_match): 0.992
+FAIL: Security test failed
+FAIL: timing analysis detected side-channel vulnerability
+FAIL: Authentication comparison leaks timing information
+  [trial 6] fail (bug detected, expected)
+=== Timing Attack Resistance Test ===
+--- Building ---
+--- Basic auth test ---
+Authentication successful
+OK: correct password accepted
+Authentication failed
+OK: wrong password rejected
+--- Timing side-channel analysis ---
+Running security analysis on compareHashes...
+  Static analysis: uses == operator instead of constant-time comparison
+VULNERABLE: compareHashes does NOT use constant-time comparison
+This enables a timing side-channel attack on the password hash
+  Timing ratio (full_match / no_match): 0.977
+FAIL: Security test failed
+FAIL: timing analysis detected side-channel vulnerability
+FAIL: Authentication comparison leaks timing information
+  [trial 7] fail (bug detected, expected)
+=== Timing Attack Resistance Test ===
+--- Building ---
+--- Basic auth test ---
+Authentication successful
+OK: correct password accepted
+Authentication failed
+OK: wrong password rejected
+--- Timing side-channel analysis ---
+Running security analysis on compareHashes...
+  Static analysis: uses == operator instead of constant-time comparison
+VULNERABLE: compareHashes does NOT use constant-time comparison
+This enables a timing side-channel attack on the password hash
+  Timing ratio (full_match / no_match): 0.985
+FAIL: Security test failed
+FAIL: timing analysis detected side-channel vulnerability
+FAIL: Authentication comparison leaks timing information
+  [trial 8] fail (bug detected, expected)

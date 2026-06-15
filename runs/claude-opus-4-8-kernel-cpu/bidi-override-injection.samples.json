@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "bidi-override-injection",
+    "billed_tokens": 145580,
+    "cache_create_1h_tokens": 10322,
+    "cache_create_5m_tokens": 880,
+    "cache_create_tokens": 11202,
+    "cache_read_tokens": 125957,
+    "control_type": "kernel",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.267221,
+    "fresh_input_tokens": 8421,
+    "input_tokens": 8421,
+    "output_tokens": 3685,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 12turns, 8421+3685 tokens, $0.2672",
+    "timestamp": "2026-06-14T21:41:01Z",
+    "token_cost": 149265,
+    "tool_uses": 15,
+    "turns_to_fix": 12,
+    "wall_clock": 101.527,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:41:12+00:00"
+  }
+]

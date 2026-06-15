@@ -1,0 +1,89 @@
+sha256:59cd09950fee6275b1e0f68b2e8ea037459d7cbd17dc22d87a23a7e14b14ef79
+API server initialized
+2026/06/14 11:11:23 Server starting on port 18082
+Direct /api/users without auth: HTTP 401
+Direct /api/users with auth: HTTP 200
+Double-slash //api/admin without auth: HTTP 200
+FAIL: //api/admin bypassed auth and returned 200
+      Path manipulation allows unauthenticated access to protected endpoints
+Path traversal /health/../api/data without auth: HTTP 200
+FAIL: /health/../api/data bypassed auth and returned 200
+Confirmed: /api/admin contains sensitive data
+  [trial 1] fail (bug detected, expected)
+API server initialized
+2026/06/14 11:11:25 Server starting on port 18082
+Direct /api/users without auth: HTTP 401
+Direct /api/users with auth: HTTP 200
+Double-slash //api/admin without auth: HTTP 200
+FAIL: //api/admin bypassed auth and returned 200
+      Path manipulation allows unauthenticated access to protected endpoints
+Path traversal /health/../api/data without auth: HTTP 200
+FAIL: /health/../api/data bypassed auth and returned 200
+Confirmed: /api/admin contains sensitive data
+  [trial 2] fail (bug detected, expected)
+API server initialized
+2026/06/14 11:11:26 Server starting on port 18082
+Direct /api/users without auth: HTTP 401
+Direct /api/users with auth: HTTP 200
+Double-slash //api/admin without auth: HTTP 200
+FAIL: //api/admin bypassed auth and returned 200
+      Path manipulation allows unauthenticated access to protected endpoints
+Path traversal /health/../api/data without auth: HTTP 200
+FAIL: /health/../api/data bypassed auth and returned 200
+Confirmed: /api/admin contains sensitive data
+  [trial 3] fail (bug detected, expected)
+API server initialized
+2026/06/14 11:11:28 Server starting on port 18082
+Direct /api/users without auth: HTTP 401
+Direct /api/users with auth: HTTP 200
+Double-slash //api/admin without auth: HTTP 200
+FAIL: //api/admin bypassed auth and returned 200
+      Path manipulation allows unauthenticated access to protected endpoints
+Path traversal /health/../api/data without auth: HTTP 200
+FAIL: /health/../api/data bypassed auth and returned 200
+Confirmed: /api/admin contains sensitive data
+  [trial 4] fail (bug detected, expected)
+API server initialized
+2026/06/14 11:11:29 Server starting on port 18082
+Direct /api/users without auth: HTTP 401
+Direct /api/users with auth: HTTP 200
+Double-slash //api/admin without auth: HTTP 200
+FAIL: //api/admin bypassed auth and returned 200
+      Path manipulation allows unauthenticated access to protected endpoints
+Path traversal /health/../api/data without auth: HTTP 200
+FAIL: /health/../api/data bypassed auth and returned 200
+Confirmed: /api/admin contains sensitive data
+  [trial 5] fail (bug detected, expected)
+API server initialized
+2026/06/14 11:11:31 Server starting on port 18082
+Direct /api/users without auth: HTTP 401
+Direct /api/users with auth: HTTP 200
+Double-slash //api/admin without auth: HTTP 200
+FAIL: //api/admin bypassed auth and returned 200
+      Path manipulation allows unauthenticated access to protected endpoints
+Path traversal /health/../api/data without auth: HTTP 200
+FAIL: /health/../api/data bypassed auth and returned 200
+Confirmed: /api/admin contains sensitive data
+  [trial 6] fail (bug detected, expected)
+API server initialized
+2026/06/14 11:11:32 Server starting on port 18082
+Direct /api/users without auth: HTTP 401
+Direct /api/users with auth: HTTP 200
+Double-slash //api/admin without auth: HTTP 200
+FAIL: //api/admin bypassed auth and returned 200
+      Path manipulation allows unauthenticated access to protected endpoints
+Path traversal /health/../api/data without auth: HTTP 200
+FAIL: /health/../api/data bypassed auth and returned 200
+Confirmed: /api/admin contains sensitive data
+  [trial 7] fail (bug detected, expected)
+API server initialized
+2026/06/14 11:11:34 Server starting on port 18082
+Direct /api/users without auth: HTTP 401
+Direct /api/users with auth: HTTP 200
+Double-slash //api/admin without auth: HTTP 200
+FAIL: //api/admin bypassed auth and returned 200
+      Path manipulation allows unauthenticated access to protected endpoints
+Path traversal /health/../api/data without auth: HTTP 200
+FAIL: /health/../api/data bypassed auth and returned 200
+Confirmed: /api/admin contains sensitive data
+  [trial 8] fail (bug detected, expected)

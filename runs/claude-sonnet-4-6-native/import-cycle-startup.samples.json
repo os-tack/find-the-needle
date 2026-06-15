@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "import-cycle-startup",
+    "billed_tokens": 215138,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 11751,
+    "cache_read_tokens": 203377,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.13098235,
+    "fresh_input_tokens": 10,
+    "input_tokens": 10,
+    "output_tokens": 1685,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. The needle was a circular import: `notifications.py` imported `users` to read `DEFAULT_ROLE`, while `users.py` imported `NotificationService` from `notifications`. Fixed by moving `DEFAULT_ROLE` into `config.py`, which both modules can safely import without cycles.",
+    "timestamp": "2026-06-14T22:12:33Z",
+    "token_cost": 216823,
+    "tool_uses": 12,
+    "turns_to_fix": 13,
+    "wall_clock": 75.441,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:12:43+00:00"
+  }
+]

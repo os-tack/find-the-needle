@@ -1,0 +1,121 @@
+sha256:29bb122e672a0b99ddc09c85676cbd90b9417a38320198fbed58bdc024c2f2a6
+=== Import Cycle Startup Tests ===
+
+--- Test 1: Cold start ---
+FAIL: Service crashed on startup
+Output:
+Traceback (most recent call last):
+  File "/app/app/main.py", line 8, in <module>
+    from users import UserManager
+  File "/app/app/users.py", line 10, in <module>
+    from notifications import NotificationService
+  File "/app/app/notifications.py", line 12, in <module>
+    _default_role = users.DEFAULT_ROLE
+                    ^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE' (most likely due to a circular import)
+  [trial 1] fail (bug detected, expected)
+=== Import Cycle Startup Tests ===
+
+--- Test 1: Cold start ---
+FAIL: Service crashed on startup
+Output:
+Traceback (most recent call last):
+  File "/app/app/main.py", line 8, in <module>
+    from users import UserManager
+  File "/app/app/users.py", line 10, in <module>
+    from notifications import NotificationService
+  File "/app/app/notifications.py", line 12, in <module>
+    _default_role = users.DEFAULT_ROLE
+                    ^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE' (most likely due to a circular import)
+  [trial 2] fail (bug detected, expected)
+=== Import Cycle Startup Tests ===
+
+--- Test 1: Cold start ---
+FAIL: Service crashed on startup
+Output:
+Traceback (most recent call last):
+  File "/app/app/main.py", line 8, in <module>
+    from users import UserManager
+  File "/app/app/users.py", line 10, in <module>
+    from notifications import NotificationService
+  File "/app/app/notifications.py", line 12, in <module>
+    _default_role = users.DEFAULT_ROLE
+                    ^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE' (most likely due to a circular import)
+  [trial 3] fail (bug detected, expected)
+=== Import Cycle Startup Tests ===
+
+--- Test 1: Cold start ---
+FAIL: Service crashed on startup
+Output:
+Traceback (most recent call last):
+  File "/app/app/main.py", line 8, in <module>
+    from users import UserManager
+  File "/app/app/users.py", line 10, in <module>
+    from notifications import NotificationService
+  File "/app/app/notifications.py", line 12, in <module>
+    _default_role = users.DEFAULT_ROLE
+                    ^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE' (most likely due to a circular import)
+  [trial 4] fail (bug detected, expected)
+=== Import Cycle Startup Tests ===
+
+--- Test 1: Cold start ---
+FAIL: Service crashed on startup
+Output:
+Traceback (most recent call last):
+  File "/app/app/main.py", line 8, in <module>
+    from users import UserManager
+  File "/app/app/users.py", line 10, in <module>
+    from notifications import NotificationService
+  File "/app/app/notifications.py", line 12, in <module>
+    _default_role = users.DEFAULT_ROLE
+                    ^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE' (most likely due to a circular import)
+  [trial 5] fail (bug detected, expected)
+=== Import Cycle Startup Tests ===
+
+--- Test 1: Cold start ---
+FAIL: Service crashed on startup
+Output:
+Traceback (most recent call last):
+  File "/app/app/main.py", line 8, in <module>
+    from users import UserManager
+  File "/app/app/users.py", line 10, in <module>
+    from notifications import NotificationService
+  File "/app/app/notifications.py", line 12, in <module>
+    _default_role = users.DEFAULT_ROLE
+                    ^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE' (most likely due to a circular import)
+  [trial 6] fail (bug detected, expected)
+=== Import Cycle Startup Tests ===
+
+--- Test 1: Cold start ---
+FAIL: Service crashed on startup
+Output:
+Traceback (most recent call last):
+  File "/app/app/main.py", line 8, in <module>
+    from users import UserManager
+  File "/app/app/users.py", line 10, in <module>
+    from notifications import NotificationService
+  File "/app/app/notifications.py", line 12, in <module>
+    _default_role = users.DEFAULT_ROLE
+                    ^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE' (most likely due to a circular import)
+  [trial 7] fail (bug detected, expected)
+=== Import Cycle Startup Tests ===
+
+--- Test 1: Cold start ---
+FAIL: Service crashed on startup
+Output:
+Traceback (most recent call last):
+  File "/app/app/main.py", line 8, in <module>
+    from users import UserManager
+  File "/app/app/users.py", line 10, in <module>
+    from notifications import NotificationService
+  File "/app/app/notifications.py", line 12, in <module>
+    _default_role = users.DEFAULT_ROLE
+                    ^^^^^^^^^^^^^^^^^^
+AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE' (most likely due to a circular import)
+  [trial 8] fail (bug detected, expected)

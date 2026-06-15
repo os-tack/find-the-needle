@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "deadlock-transfer",
+    "billed_tokens": 127275,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 10379,
+    "cache_read_tokens": 116889,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.09653695,
+    "fresh_input_tokens": 7,
+    "input_tokens": 7,
+    "output_tokens": 1462,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Tests pass. The fix: in `TransferService.java`, before acquiring the two locks, we now pick `first`/`second` by comparing account IDs so every thread locks in the same global order regardless of transfer direction. This eliminates the circular wait that caused the deadlock.",
+    "timestamp": "2026-06-14T21:56:59Z",
+    "token_cost": 128737,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 30.121,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:57:09+00:00"
+  }
+]

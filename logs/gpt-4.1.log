@@ -1,0 +1,8 @@
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 18081ms total [model=gpt-4.1, arms=kernel]
+1/1 passed, 15155ms total [model=gpt-4.1, arms=kernel]
+1/1 passed, 20789ms total [model=gpt-4.1, arms=kernel]
+error: 1 scenario(s) failed
+
+=== gpt-4.1 DONE: 80/80 scores (pass=3 fail=3 skip=74) ===

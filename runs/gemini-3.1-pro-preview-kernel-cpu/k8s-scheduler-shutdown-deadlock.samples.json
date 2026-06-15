@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "k8s-scheduler-shutdown-deadlock",
+    "billed_tokens": 140150,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.298072,
+    "fresh_input_tokens": 140150,
+    "input_tokens": 140150,
+    "output_tokens": 1481,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 17turns, 140150+1481 tokens, $0.2981",
+    "timestamp": "2026-06-14T22:16:00Z",
+    "token_cost": 141631,
+    "tool_uses": 16,
+    "turns_to_fix": 17,
+    "wall_clock": 100.758,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:16:10+00:00"
+  }
+]

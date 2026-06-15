@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "cache-stale-invalidation",
+    "billed_tokens": 212603,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 9884,
+    "cache_read_tokens": 200888,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.214872,
+    "fresh_input_tokens": 1831,
+    "input_tokens": 1831,
+    "output_tokens": 1716,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The needle was a **stale-cache-after-write bug** in `app/server.py`.\n\nThe `Cache` class had `delete()` and `invalidate_prefix()` methods, but the two write handlers never used them:\n\n- `_update_product` mutated the store but left the old product and the product list cached \u2192 reads served stale data for up to the 5-minute TTL.\n- `_create_product` added a product but didn't invalidate the `products:list` cache \u2192 the new product stayed invisible until expiry.\n\nThe fix invalidates the relevant cache keys after each write:\n- On update: delete `products:<id>` and `products:list`.\n- On create: delete `products:list`.\n\n`test.sh` now passes \u2014 updated names and newly created products are immediately visible.",
+    "timestamp": "2026-06-14T21:42:06Z",
+    "token_cost": 214319,
+    "tool_uses": 8,
+    "turns_to_fix": 9,
+    "wall_clock": 53.865,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:42:16+00:00"
+  }
+]

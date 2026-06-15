@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "nginx-upstream-port-mismatch",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2343,
+  "output_tokens": 946,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests passed! ✅\n\n## Summary\n\n**The Needle:** A port mismatch in `/etc/nginx/sites-available/default`.\n\n| | Port |\n|---|---|\n| Flask backend (`server.py`) | **5000** |\n| Nginx `proxy_pass` (buggy) | **5001** ❌ |\n| Nginx `proxy_pass` (fixed) | **5000** ✅ |\n\nNginx was proxying `/api/` requests to port `5001`, but the Flask app was listening on port `5000`. This caused nginx to return a `502 Bad Gateway` for all `/api/data` requests. The fix was a one-character change: `5001` → `5000`.",
+  "timestamp": "2026-04-03T01:59:53Z",
+  "token_cost": 3289,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 21.118
+}

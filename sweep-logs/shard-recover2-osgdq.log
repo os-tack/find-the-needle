@@ -1,0 +1,36 @@
+[gate] ostk version OK: ostk 7.6.0
+[plan] models=5 benches=40
+[plan] total cells=400 pending=0 skipped=400
+[run] starting at 2026-06-14T17:11:37+00:00
+
+========== claude-opus-4-8 (new, arms=['native', 'kernel-cpu']) ==========
+
+========== claude-sonnet-4-6 (new, arms=['native', 'kernel-cpu']) ==========
+
+========== devstral-2512 (new, arms=['native', 'kernel-cpu']) ==========
+
+========== gpt-5.5 (new, arms=['native', 'kernel-cpu']) ==========
+
+========== qwen3-coder (new, arms=['native', 'kernel']) ==========
+
+========== summary @ 2026-06-14T17:11:37+00:00 ==========
+  succeeded: 0
+  hard fail: 0
+  gave up:   0
+  skipped:   400
+  total:     400
+
+[consolidate] running consolidate_scores.py
+Found 94 arm directories in /Users/scottmeyer/projects/needle-bench/runs
+Loaded 717 score files
+Models: 18
+Benchmarks: 40
+Experiment entries: 418
+Model aggregates: 18
+
+Grand totals: 618/717 solved, 120,995,672 tokens, $183.08 estimated cost
+
+Wrote 717 entries to /Users/scottmeyer/projects/needle-bench/public/scores.json
+/Users/scottmeyer/projects/needle-bench/consolidate_scores.py:356: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "generated": __import__("datetime").datetime.utcnow().isoformat() + "Z",
+Wrote 418 experiments + 18 model aggregates to /Users/scottmeyer/projects/needle-bench/public/experiment-scores.json

@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "k8s-scheduler-shutdown-deadlock",
+    "billed_tokens": 122279,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 8546,
+    "cache_read_tokens": 113726,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0821443,
+    "fresh_input_tokens": 7,
+    "input_tokens": 7,
+    "output_tokens": 1024,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed. The deadlock was in `Run()`: it waited on `<-done` before calling `s.queue.Close()`, but the goroutine was stuck in `Pop()` and couldn't exit until the queue was closed. Swapping the order \u2014 close first, then wait \u2014 breaks the cycle.",
+    "timestamp": "2026-06-14T22:16:06Z",
+    "token_cost": 123303,
+    "tool_uses": 5,
+    "turns_to_fix": 6,
+    "wall_clock": 28.545,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:16:17+00:00"
+  }
+]

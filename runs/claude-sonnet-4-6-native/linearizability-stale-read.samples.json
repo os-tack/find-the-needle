@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "linearizability-stale-read",
+    "billed_tokens": 548001,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 29619,
+    "cache_read_tokens": 511965,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.40264975,
+    "fresh_input_tokens": 6417,
+    "input_tokens": 6417,
+    "output_tokens": 7876,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 3 rounds pass. There were two bugs:\n\n1. **`handler.go:88`** \u2014 `handleRead` called `h.node.Read(key)` (a raw local KV read) instead of `h.node.ReadLinearizable(key)`. The linearizable read exists and implements the read-index protocol: it contacts the leader for its commit index, then waits for the local applied index to catch up before serving data.\n\n2. **`node.go` `handleHeartbeat`** \u2014 the follower correctly appended piggybacked log entries from the leader's heartbeat, but never advanced its commit index. Without that, entries were never sent to the apply channel, so `appliedIndex` stayed at 0 and `ReadLinearizable`'s `waitForApply` would always time out. The fix mirrors what `handleAppendEntries` already does: `advanceCommitIndex(min(leaderCommit, lastLogIndex))`.",
+    "timestamp": "2026-06-14T22:23:53Z",
+    "token_cost": 555877,
+    "tool_uses": 17,
+    "turns_to_fix": 18,
+    "wall_clock": 169.398,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:24:03+00:00"
+  }
+]

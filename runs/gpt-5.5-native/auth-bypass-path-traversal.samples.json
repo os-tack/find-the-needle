@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "auth-bypass-path-traversal",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 71704,
+    "output_tokens": 1123,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the auth bypass in [middleware.go](/app/app/middleware.go:12). The middleware now normalizes `r.URL.Path` with the same `path.Clean` logic used by the router before checking whether the request targets `/api/`.\n\nVerification passed:\n\n```text\n./test.sh\nPASS: Auth middleware correctly protects all API routes\n```",
+    "timestamp": "2026-06-14T21:37:01Z",
+    "token_cost": 1123,
+    "tool_uses": 9,
+    "turns_to_fix": 1,
+    "wall_clock": 45.974,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:37:12+00:00"
+  }
+]

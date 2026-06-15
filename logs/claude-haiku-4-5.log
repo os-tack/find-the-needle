@@ -1,0 +1,37 @@
+1/1 passed, 41678ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 26434ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 75350ms total [model=claude-haiku-4-5, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 48279ms total [model=claude-haiku-4-5, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 45750ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 44877ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 24693ms total [model=claude-haiku-4-5, arms=native]
+1/1 passed, 32636ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 16632ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 25160ms total [model=claude-haiku-4-5, arms=native]
+1/1 passed, 33142ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 16868ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 30597ms total [model=claude-haiku-4-5, arms=native]
+1/1 passed, 32402ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 23143ms total [model=claude-haiku-4-5, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 29210ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 15402ms total [model=claude-haiku-4-5, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 91114ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 372125ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 25867ms total [model=claude-haiku-4-5, arms=native]
+1/1 passed, 29172ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 12279ms total [model=claude-haiku-4-5, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 413248ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 43422ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 17332ms total [model=claude-haiku-4-5, arms=native]
+1/1 passed, 20507ms total [model=claude-haiku-4-5, arms=kernel]
+1/1 passed, 9810ms total [model=claude-haiku-4-5, arms=kernel]
+
+=== claude-haiku-4-5 DONE: 117/120 scores (pass=27 fail=8 skip=85) ===

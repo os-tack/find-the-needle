@@ -1,0 +1,25 @@
+sha256:4327989d5d891735ab1d3679e34a1a72c6f637cfcbcb7510a10161800c5c7719
+=== postgres-migration-schema-drift test ===
+bash: line 1: initdb: command not found
+  [trial 1] fail (bug detected, expected)
+=== postgres-migration-schema-drift test ===
+bash: line 1: initdb: command not found
+  [trial 2] fail (bug detected, expected)
+=== postgres-migration-schema-drift test ===
+bash: line 1: initdb: command not found
+  [trial 3] fail (bug detected, expected)
+=== postgres-migration-schema-drift test ===
+bash: line 1: initdb: command not found
+  [trial 4] fail (bug detected, expected)
+=== postgres-migration-schema-drift test ===
+bash: line 1: initdb: command not found
+  [trial 5] fail (bug detected, expected)
+=== postgres-migration-schema-drift test ===
+bash: line 1: initdb: command not found
+  [trial 6] fail (bug detected, expected)
+=== postgres-migration-schema-drift test ===
+bash: line 1: initdb: command not found
+  [trial 7] fail (bug detected, expected)
+=== postgres-migration-schema-drift test ===
+bash: line 1: initdb: command not found
+  [trial 8] fail (bug detected, expected)

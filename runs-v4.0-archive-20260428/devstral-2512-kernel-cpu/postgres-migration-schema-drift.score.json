@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "postgres-migration-schema-drift",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 71315,
+  "output_tokens": 1068,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The test has passed. The issue was that the Go application was using the old column name `status` in its SQL queries, but the database migration had renamed this column to `order_status`. I fixed the SQL queries in the Go code to use the correct column name, and now all tests pass.\n\nThe needle in the haystack was the mismatch between the column name used in the application code (`status`) and the actual column name in the database (`order_status`) after the migration was applied.",
+  "timestamp": "2026-04-03T03:00:37Z",
+  "token_cost": 72383,
+  "tool_uses": 20,
+  "turns_to_fix": 1,
+  "wall_clock": 25.081
+}

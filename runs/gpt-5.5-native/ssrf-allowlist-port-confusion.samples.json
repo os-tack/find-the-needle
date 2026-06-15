@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 125262,
+    "output_tokens": 1556,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the SSRF bypass in [app/validator.py](/workspace/app/validator.py) by parsing host IP literals with `ipaddress` and blocking non-public ranges, including IPv6 loopback forms like `::1` and `0:0:0:0:0:0:0:1`.\n\nVerification: `./test.sh` passes.",
+    "timestamp": "2026-06-14T23:12:21Z",
+    "token_cost": 1556,
+    "tool_uses": 12,
+    "turns_to_fix": 1,
+    "wall_clock": 36.307,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:12:31+00:00"
+  }
+]

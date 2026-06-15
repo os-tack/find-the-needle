@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "nginx-upstream-port-mismatch",
+    "billed_tokens": 63209,
+    "cache_create_1h_tokens": 5322,
+    "cache_create_5m_tokens": 53,
+    "cache_create_tokens": 5375,
+    "cache_read_tokens": 53054,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.06490245,
+    "fresh_input_tokens": 4780,
+    "input_tokens": 4780,
+    "output_tokens": 966,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 8turns, 4780+966 tokens, $0.0649",
+    "timestamp": "2026-06-14T22:54:58Z",
+    "token_cost": 64175,
+    "tool_uses": 11,
+    "turns_to_fix": 8,
+    "wall_clock": 46.266,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:55:08+00:00"
+  }
+]

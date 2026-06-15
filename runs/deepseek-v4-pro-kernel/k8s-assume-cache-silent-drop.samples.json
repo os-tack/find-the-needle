@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-kernel",
+    "arm": "kernel",
+    "benchmark": "k8s-assume-cache-silent-drop",
+    "billed_tokens": 99845,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.017386369999999998,
+    "fresh_input_tokens": 99845,
+    "input_tokens": 99845,
+    "output_tokens": 2955,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 15turns, 99845+2955 tokens, $0.0174",
+    "timestamp": "2026-06-14T23:51:38Z",
+    "token_cost": 102800,
+    "tool_uses": 14,
+    "turns_to_fix": 15,
+    "wall_clock": 59.494,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:51:48+00:00"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 432069,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 20409,
+    "cache_read_tokens": 409690,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.44339925,
+    "fresh_input_tokens": 1970,
+    "input_tokens": 1970,
+    "output_tokens": 4022,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass.\n\n## The needle\n\nThe bug was an **N+1 query problem**: DataLoader instances were being created *inside individual resolver calls* instead of once per request. A DataLoader only batches keys enqueued on the *same instance* within one tick \u2014 so a fresh loader per resolver meant each loader had exactly one key, and batching never fired. Functional tests passed (correct data was still returned); only the performance assertion caught it: 100 users \u2192 1 + 100 = 101 queries.\n\nThe codebase already had the correct machinery (`createLoaders` in `loaders.ts`) \u2014 it just wasn't wired up. The fix:\n\n- **`src/context.ts`** \u2014 create the loaders once per request via `createLoaders(db)` and expose them on the GraphQL context (the file's own comment said they \"should ideally live here\").\n- **`src/resolvers/userResolver.ts`** \u2014 `user` and `userPosts` now use the shared `ctx.loaders.userLoader` / `ctx.loaders.postsByAuthorLoader` instead of building new loaders each call.\n- **`src/resolvers/postResolver.ts`** \u2014 `postAuthor` uses the shared `ctx.loaders.userLoader`; removed the per-call loader factories.\n\nResult: query count dropped from ~101 to **2** (1 for users + 1 batched `WHERE author_id IN (...)` for all their posts), comfortably under the threshold of 15. The `postsByDepartment` JOIN resolver was left untouched \u2014 it's a deliberate red herring (a single correct JOIN, not N+1).",
+    "timestamp": "2026-06-14T22:01:41Z",
+    "token_cost": 436091,
+    "tool_uses": 13,
+    "turns_to_fix": 14,
+    "wall_clock": 100.052,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:01:51+00:00"
+  }
+]

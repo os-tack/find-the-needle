@@ -1,0 +1,18 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=qwen3-coder, arms=native]
+
+--- null-pointer-config [native] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-native-qwen3-coder-1781390559515 (timeout 660s)...
+  snapshotting workspace...
+  [native] no vendor CLI, using opencode fallback...
+  [native] running opencode with model qwen3-coder...
+  [native]       _tag: "ProviderModelNotFoundError",
+  [native]     },
+  [native]     cause: "ProviderModelNotFoundError: \n    at <anonymous> (/$bunfs/root/chunk-0gkqt1a8.js:687:62164)\n    at SessionPrompt.getModel (/$bunfs/root/chunk-a816jtq3.js:1030:1895)\n    at SessionPrompt.getModel (definition) (/$bunfs/root/chunk-a816jtq3.js:1029:1062)\n    at SessionPrompt.run (/$bunfs/root/chunk-a816jtq3.js:1031:1645)\n    at SessionPrompt.run (definition) (/$bunfs/root/chunk-a816jtq3.js:1030:904)\n    at SessionRunState.ensureRunning (/$bunfs/root/chunk-a816jtq3.js:1031:1616)\n    at SessionRunState.ensureRunning (definition) (/$bunfs/root/chunk-a816jtq3.js:2:8040)\n    at SessionPrompt.loop (/$bunfs/root/chunk-a816jtq3.js:1030:628)\n    at SessionPrompt.loop (definition) (/$bunfs/root/chunk-a816jtq3.js:1031:1552)\n    at SessionPrompt.prompt (/$bunfs/root/chunk-g5mq2d49.js:3:13157)\n    at SessionPrompt.prompt (definition) (/$bunfs/root/chunk-a816jtq3.js:1030:247)",
+  [native]   }
+  [native]   {"type":"error","timestamp":1781390561164,"sessionID":"ses_13cd931cdffe0BZzGpm3U8SqRi","error":{"name":"UnknownError","data":{"message":"Unexpected server error. Check server logs for details.","ref":"err_68cbb171"}}}
+  [native] complete: 0 turns, 0+0 tokens, $0.0000, 0 tools, stop=fail
+
+=== bench summary ===
+0/1 passed, 3933ms total [model=qwen3-coder, arms=native]
+error: 1 scenario(s) failed

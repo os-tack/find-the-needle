@@ -1,0 +1,3 @@
+1/1 passed, 191250ms total [model=deepseek-v3.2, arms=kernel]
+
+=== deepseek-v3.2 DONE: 80/80 scores (pass=1 fail=0 skip=79) ===

@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "benchmark": "missing-input-validation",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 19299,
+    "output_tokens": 867,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have found the bug (the \"needle\") which allowed inventory levels to drop below zero, successfully implemented input validation to prevent negative quantities in `inventory.ts`, handled the error gracefully in `routes.ts`, and verified that all tests now pass using `./test.sh`.",
+    "timestamp": "2026-06-14T22:27:46Z",
+    "token_cost": 867,
+    "tool_uses": 12,
+    "turns_to_fix": 7,
+    "wall_clock": 42.852,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:27:56+00:00"
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "devstral-2512-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "encoding-mojibake",
+    "billed_tokens": 134521,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.417273,
+    "fresh_input_tokens": 134521,
+    "input_tokens": 134521,
+    "output_tokens": 914,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 19turns, 134521+914 tokens, $0.4173",
+    "timestamp": "2026-06-15T00:20:04Z",
+    "token_cost": 135435,
+    "tool_uses": 18,
+    "turns_to_fix": 19,
+    "wall_clock": 40.661,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T00:20:14+00:00"
+  }
+]

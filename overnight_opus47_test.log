@@ -1,0 +1,27 @@
+================================================================
+  OVERNIGHT TEST: claude-opus-4-7 / null-pointer-config
+                  arm=kernel  driver=cpu  --local
+                  ostk ostk 4.1.0
+  started: 2026-04-24 00:18:18 CDT
+================================================================
+
+--- pre-flight ---
+ostk processes (should be empty):
+  none
+
+binary:
+-rwxr-xr-x@ 1 scottmeyer  staff  32056088 Apr 23 23:56 /Users/scottmeyer/projects/haystack/target/x86_64-unknown-linux-musl/release/ostk
+
+--- bench invocation ---
+ostk bench: 1 scenario(s) x 1 arm(s) [model=claude-opus-4-7, arms=kernel]
+
+--- null-pointer-config [kernel] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-kernel-claude-opus-4-7-1777007898255 (timeout 660s)...
+  snapshotting workspace...
+  [kernel] copying local binary: /Users/scottmeyer/projects/haystack/target/x86_64-unknown-linux-musl/release/ostk
+  [kernel] ostk init + boot...
+  [kernel] running with live kernel...
+  [kernel] using native CPU driver for claude-opus-4-7
+[2m2026-04-24T05:18:19.208353Z[0m [32m INFO[0m cpu: creating driver [3mmodel[0m[2m=[0mclaude-opus-4-7 [3mprovider[0m[2m=[0mAnthropic
+[2m2026-04-24T05:18:29.587473Z[0m [32m INFO[0m ndarray embeddings: CPU (29528×256)

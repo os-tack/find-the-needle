@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "off-by-one-pagination",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2342,
+  "output_tokens": 941,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**PASS** ✅\n\n### Summary\n\n**The Needle:** An off-by-one bug in `/app/app/app.py` in the pagination offset calculation.\n\n**Buggy code:**\n```python\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n```\n\n**Fixed code:**\n```python\noffset = (page - 1) * per_page\n```\n\nThe erroneous `- (1 if page > 1 else 0)` term subtracted 1 from the offset for any page beyond the first, causing page boundaries to overlap (e.g., page 1 ended at ID 10, and page 2 incorrectly started at ID 10 instead of ID 11). The standard pagination formula `(page - 1) * per_page` correctly computes the slice offset without any overlap or gap.",
+  "timestamp": "2026-04-02T23:50:59Z",
+  "token_cost": 3283,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 21.49
+}

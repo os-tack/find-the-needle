@@ -1,0 +1,6 @@
+1/1 passed, 64714ms total [model=o4-mini, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 49491ms total [model=o4-mini, arms=kernel]
+error: 1 scenario(s) failed
+
+=== o4-mini DONE: 80/80 scores (pass=2 fail=2 skip=76) ===

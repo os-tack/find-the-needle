@@ -1,0 +1,41 @@
+sha256:e8ebef86e0502aa4bc61d453621c50face0c5d1bbb7178eec5b4730a249feb36
+Inventory API running on port 3000
+FAIL: Adjusting by -200 (from 110) should be rejected, but got 200 OK
+FAIL: Inventory went negative (-90). Should never be below 0.
+FAIL: Inventory is negative (-140) — validation is missing
+  [trial 1] fail (bug detected, expected)
+Inventory API running on port 3000
+FAIL: Adjusting by -200 (from 110) should be rejected, but got 200 OK
+FAIL: Inventory went negative (-90). Should never be below 0.
+FAIL: Inventory is negative (-140) — validation is missing
+  [trial 2] fail (bug detected, expected)
+Inventory API running on port 3000
+FAIL: Adjusting by -200 (from 110) should be rejected, but got 200 OK
+FAIL: Inventory went negative (-90). Should never be below 0.
+FAIL: Inventory is negative (-140) — validation is missing
+  [trial 3] fail (bug detected, expected)
+Inventory API running on port 3000
+FAIL: Adjusting by -200 (from 110) should be rejected, but got 200 OK
+FAIL: Inventory went negative (-90). Should never be below 0.
+FAIL: Inventory is negative (-140) — validation is missing
+  [trial 4] fail (bug detected, expected)
+Inventory API running on port 3000
+FAIL: Adjusting by -200 (from 110) should be rejected, but got 200 OK
+FAIL: Inventory went negative (-90). Should never be below 0.
+FAIL: Inventory is negative (-140) — validation is missing
+  [trial 5] fail (bug detected, expected)
+Inventory API running on port 3000
+FAIL: Adjusting by -200 (from 110) should be rejected, but got 200 OK
+FAIL: Inventory went negative (-90). Should never be below 0.
+FAIL: Inventory is negative (-140) — validation is missing
+  [trial 6] fail (bug detected, expected)
+Inventory API running on port 3000
+FAIL: Adjusting by -200 (from 110) should be rejected, but got 200 OK
+FAIL: Inventory went negative (-90). Should never be below 0.
+FAIL: Inventory is negative (-140) — validation is missing
+  [trial 7] fail (bug detected, expected)
+Inventory API running on port 3000
+FAIL: Adjusting by -200 (from 110) should be rejected, but got 200 OK
+FAIL: Inventory went negative (-90). Should never be below 0.
+FAIL: Inventory is negative (-140) — validation is missing
+  [trial 8] fail (bug detected, expected)

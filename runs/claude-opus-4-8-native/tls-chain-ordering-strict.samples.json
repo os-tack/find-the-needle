@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "tls-chain-ordering-strict",
+    "billed_tokens": 479136,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 17170,
+    "cache_read_tokens": 459861,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.5230009999999999,
+    "fresh_input_tokens": 2105,
+    "input_tokens": 2105,
+    "output_tokens": 6986,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "## The needle\n\nThe Dockerfile assembles the server's certificate bundle in the wrong order:\n\n```\ncat /certs/leaf.crt /certs/root.crt /certs/intermediate.crt > /certs/chain.pem\n#                    ^^^^^^^^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^^^\n#   leaf, ROOT, INTERMEDIATE  \u2014 should be leaf, intermediate, root (RFC 5246 \u00a77.4.2)\n```\n\n`tls.X509KeyPair` preserves file order, and `loader.go` passed it straight through, so the server served an out-of-order chain. Lenient clients (curl/Go) build a trust graph and tolerate it; strict sequential validators reject it because `cert[i].Issuer != cert[i+1].Subject`.\n\n## The fix\n\nI made `LoadTLSConfig` resilient to bundle ordering instead of trusting file order. New `orderChain` function in `app/tlssetup/loader.go` parses the certs and reorders them starting from the leaf, each time appending the certificate whose `Subject` equals the current cert's `Issuer`. Any unlinked certs are appended at the end so nothing is silently dropped.\n\nVerified via a temporary package test against the real `/certs/chain.pem`:\n\n```\ncert[0] subject=\"localhost\"            issuer=\"Test Intermediate CA\"\ncert[1] subject=\"Test Intermediate CA\" issuer=\"Test Root CA\"\ncert[2] subject=\"Test Root CA\"         issuer=\"Test Root CA\"\n```\n\nThat satisfies all three test checks: leaf first (Test 3), `cert[i].Issuer == cert[i+1].Subject` throughout (Test 2), and a valid chain for the lenient client (Test 1).\n\n## One caveat on running test.sh\n\nI could **not** run `test.sh` to completion as the `bench` user (uid 1001):\n\n- It builds to `/usr/local/bin/tlsserver`, which is root-owned (`permission denied`).\n- The server can't start anyway as non-root \u2014 `/certs/leaf.key` is `0600` root-only.\n\nThe grader runs `test.sh` as root, where both succeed. I verified the actual fix logic against the real certs (output above) and confirmed a clean `go build`. The source change is what the test rebuilds and exercises.",
+    "timestamp": "2026-06-14T23:32:38Z",
+    "token_cost": 486122,
+    "tool_uses": 16,
+    "turns_to_fix": 17,
+    "wall_clock": 137.603,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T23:32:48+00:00"
+  }
+]

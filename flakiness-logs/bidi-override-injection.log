@@ -1,0 +1,217 @@
+sha256:ab089743462d7bb243102622d79c2366da1da659254adf677f81987156d0f8d4
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:12:02] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+PASS: normal user registration works
+127.0.0.1 - - [14/Jun/2026 11:12:02] "POST /login HTTP/1.1" 200 -
+PASS: normal user login works
+127.0.0.1 - - [14/Jun/2026 11:12:02] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:02] "GET /admin/dashboard HTTP/1.1" 200 -
+PASS: real admin can access dashboard
+127.0.0.1 - - [14/Jun/2026 11:12:02] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:02] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:02] "GET /admin/dashboard HTTP/1.1" 200 -
+FAIL: BIDI-injected user got admin access (privilege escalation)
+127.0.0.1 - - [14/Jun/2026 11:12:02] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: non-admin user correctly denied admin access
+127.0.0.1 - - [14/Jun/2026 11:12:02] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:02] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:02] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: LRO-injected user correctly denied admin access
+
+FAIL
+  [trial 1] fail (bug detected, expected)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:12:04] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+PASS: normal user registration works
+127.0.0.1 - - [14/Jun/2026 11:12:04] "POST /login HTTP/1.1" 200 -
+PASS: normal user login works
+127.0.0.1 - - [14/Jun/2026 11:12:04] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:04] "GET /admin/dashboard HTTP/1.1" 200 -
+PASS: real admin can access dashboard
+127.0.0.1 - - [14/Jun/2026 11:12:04] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:04] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:04] "GET /admin/dashboard HTTP/1.1" 200 -
+FAIL: BIDI-injected user got admin access (privilege escalation)
+127.0.0.1 - - [14/Jun/2026 11:12:04] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: non-admin user correctly denied admin access
+127.0.0.1 - - [14/Jun/2026 11:12:04] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:04] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:04] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: LRO-injected user correctly denied admin access
+
+FAIL
+  [trial 2] fail (bug detected, expected)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:12:07] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+PASS: normal user registration works
+127.0.0.1 - - [14/Jun/2026 11:12:07] "POST /login HTTP/1.1" 200 -
+PASS: normal user login works
+127.0.0.1 - - [14/Jun/2026 11:12:07] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:07] "GET /admin/dashboard HTTP/1.1" 200 -
+PASS: real admin can access dashboard
+127.0.0.1 - - [14/Jun/2026 11:12:07] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:07] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:07] "GET /admin/dashboard HTTP/1.1" 200 -
+FAIL: BIDI-injected user got admin access (privilege escalation)
+127.0.0.1 - - [14/Jun/2026 11:12:07] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: non-admin user correctly denied admin access
+127.0.0.1 - - [14/Jun/2026 11:12:07] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:07] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:07] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: LRO-injected user correctly denied admin access
+
+FAIL
+  [trial 3] fail (bug detected, expected)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:12:09] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+PASS: normal user registration works
+127.0.0.1 - - [14/Jun/2026 11:12:09] "POST /login HTTP/1.1" 200 -
+PASS: normal user login works
+127.0.0.1 - - [14/Jun/2026 11:12:09] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:09] "GET /admin/dashboard HTTP/1.1" 200 -
+PASS: real admin can access dashboard
+127.0.0.1 - - [14/Jun/2026 11:12:09] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:09] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:09] "GET /admin/dashboard HTTP/1.1" 200 -
+FAIL: BIDI-injected user got admin access (privilege escalation)
+127.0.0.1 - - [14/Jun/2026 11:12:09] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: non-admin user correctly denied admin access
+127.0.0.1 - - [14/Jun/2026 11:12:09] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:09] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:09] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: LRO-injected user correctly denied admin access
+
+FAIL
+  [trial 4] fail (bug detected, expected)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:12:11] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+PASS: normal user registration works
+127.0.0.1 - - [14/Jun/2026 11:12:11] "POST /login HTTP/1.1" 200 -
+PASS: normal user login works
+127.0.0.1 - - [14/Jun/2026 11:12:11] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:11] "GET /admin/dashboard HTTP/1.1" 200 -
+PASS: real admin can access dashboard
+127.0.0.1 - - [14/Jun/2026 11:12:11] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:11] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:11] "GET /admin/dashboard HTTP/1.1" 200 -
+FAIL: BIDI-injected user got admin access (privilege escalation)
+127.0.0.1 - - [14/Jun/2026 11:12:11] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: non-admin user correctly denied admin access
+127.0.0.1 - - [14/Jun/2026 11:12:11] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:11] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:11] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: LRO-injected user correctly denied admin access
+
+FAIL
+  [trial 5] fail (bug detected, expected)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:12:13] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+PASS: normal user registration works
+127.0.0.1 - - [14/Jun/2026 11:12:13] "POST /login HTTP/1.1" 200 -
+PASS: normal user login works
+127.0.0.1 - - [14/Jun/2026 11:12:13] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:13] "GET /admin/dashboard HTTP/1.1" 200 -
+PASS: real admin can access dashboard
+127.0.0.1 - - [14/Jun/2026 11:12:13] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:13] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:13] "GET /admin/dashboard HTTP/1.1" 200 -
+FAIL: BIDI-injected user got admin access (privilege escalation)
+127.0.0.1 - - [14/Jun/2026 11:12:13] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: non-admin user correctly denied admin access
+127.0.0.1 - - [14/Jun/2026 11:12:13] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:13] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:13] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: LRO-injected user correctly denied admin access
+
+FAIL
+  [trial 6] fail (bug detected, expected)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:12:16] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+PASS: normal user registration works
+127.0.0.1 - - [14/Jun/2026 11:12:16] "POST /login HTTP/1.1" 200 -
+PASS: normal user login works
+127.0.0.1 - - [14/Jun/2026 11:12:16] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:16] "GET /admin/dashboard HTTP/1.1" 200 -
+PASS: real admin can access dashboard
+127.0.0.1 - - [14/Jun/2026 11:12:16] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:16] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:16] "GET /admin/dashboard HTTP/1.1" 200 -
+FAIL: BIDI-injected user got admin access (privilege escalation)
+127.0.0.1 - - [14/Jun/2026 11:12:16] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: non-admin user correctly denied admin access
+127.0.0.1 - - [14/Jun/2026 11:12:16] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:16] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:16] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: LRO-injected user correctly denied admin access
+
+FAIL
+  [trial 7] fail (bug detected, expected)
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:12:18] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+PASS: normal user registration works
+127.0.0.1 - - [14/Jun/2026 11:12:18] "POST /login HTTP/1.1" 200 -
+PASS: normal user login works
+127.0.0.1 - - [14/Jun/2026 11:12:18] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:18] "GET /admin/dashboard HTTP/1.1" 200 -
+PASS: real admin can access dashboard
+127.0.0.1 - - [14/Jun/2026 11:12:18] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:18] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:18] "GET /admin/dashboard HTTP/1.1" 200 -
+FAIL: BIDI-injected user got admin access (privilege escalation)
+127.0.0.1 - - [14/Jun/2026 11:12:18] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: non-admin user correctly denied admin access
+127.0.0.1 - - [14/Jun/2026 11:12:18] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [14/Jun/2026 11:12:18] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:12:18] "[31m[1mGET /admin/dashboard HTTP/1.1[0m" 403 -
+PASS: LRO-injected user correctly denied admin access
+
+FAIL
+  [trial 8] fail (bug detected, expected)

@@ -1,0 +1,49 @@
+sha256:983b4d817a86d41f1ab87972d7279e560f8cd46924ac629170bd03bfc20da479
+Input file size: 102400 bytes
+Processed /tmp/input.dat -> /tmp/output.dat (65536 bytes)
+Output file size: 65536 bytes
+FAIL: Output size (65536) != input size (102400)
+      Data was silently truncated or corrupted
+  [trial 1] fail (bug detected, expected)
+Input file size: 102400 bytes
+Processed /tmp/input.dat -> /tmp/output.dat (65536 bytes)
+Output file size: 65536 bytes
+FAIL: Output size (65536) != input size (102400)
+      Data was silently truncated or corrupted
+  [trial 2] fail (bug detected, expected)
+Processed /tmp/input.dat -> /tmp/output.dat (65536 bytes)
+Input file size: 102400 bytes
+Output file size: 65536 bytes
+FAIL: Output size (65536) != input size (102400)
+      Data was silently truncated or corrupted
+  [trial 3] fail (bug detected, expected)
+Input file size: 102400 bytes
+Processed /tmp/input.dat -> /tmp/output.dat (65536 bytes)
+Output file size: 65536 bytes
+FAIL: Output size (65536) != input size (102400)
+      Data was silently truncated or corrupted
+  [trial 4] fail (bug detected, expected)
+Input file size: 102400 bytes
+Processed /tmp/input.dat -> /tmp/output.dat (65536 bytes)
+Output file size: 65536 bytes
+FAIL: Output size (65536) != input size (102400)
+      Data was silently truncated or corrupted
+  [trial 5] fail (bug detected, expected)
+Processed /tmp/input.dat -> /tmp/output.dat (65536 bytes)
+Input file size: 102400 bytes
+Output file size: 65536 bytes
+FAIL: Output size (65536) != input size (102400)
+      Data was silently truncated or corrupted
+  [trial 6] fail (bug detected, expected)
+Processed /tmp/input.dat -> /tmp/output.dat (65536 bytes)
+Input file size: 102400 bytes
+Output file size: 65536 bytes
+FAIL: Output size (65536) != input size (102400)
+      Data was silently truncated or corrupted
+  [trial 7] fail (bug detected, expected)
+Input file size: 102400 bytes
+Processed /tmp/input.dat -> /tmp/output.dat (65536 bytes)
+Output file size: 65536 bytes
+FAIL: Output size (65536) != input size (102400)
+      Data was silently truncated or corrupted
+  [trial 8] fail (bug detected, expected)

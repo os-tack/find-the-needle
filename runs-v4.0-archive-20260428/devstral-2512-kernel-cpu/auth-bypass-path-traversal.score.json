@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "auth-bypass-path-traversal",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 44640,
+  "output_tokens": 1064,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Perfect! The fix works. The auth middleware now correctly protects all API routes, even when path manipulation techniques like double slashes (`//api/admin`) or path traversal (`/health/../api/data`) are used. The test confirms that all routes under `/api/` require authentication.",
+  "timestamp": "2026-04-03T01:16:41Z",
+  "token_cost": 45704,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 20.865
+}

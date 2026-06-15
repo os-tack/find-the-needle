@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "type-coercion-comparison",
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 12354,
+  "output_tokens": 553,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "The test passed.\nI modified `utils.js` to correctly parse `min_rating` into an integer, fixing the type coercion comparison bug. I have verified this by running `test.sh`, which reported a \"PASS\".",
+  "timestamp": "2026-04-03T07:12:35Z",
+  "token_cost": 12907,
+  "tool_uses": 7,
+  "turns_to_fix": 1,
+  "wall_clock": 40.192
+}

@@ -1,0 +1,185 @@
+sha256:50a9ac0dde8e4025f57da508418a254bb4dfd78e64942a226df89c369f4ec9b8
+=== Timezone Scheduling Tests ===
+
+--- Daytime events (should work) ---
+OK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC
+OK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC
+OK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC
+
+--- Late night events (the bug zone) ---
+FAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 04:30 UTC
+Due events: 0
+  (no events due)
+FAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 07:45 UTC
+Due events: 0
+  (no events due)
+
+--- Negative tests (should NOT fire) ---
+OK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC
+OK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC
+
+FAIL: 2 test(s) failed
+  [trial 1] fail (bug detected, expected)
+=== Timezone Scheduling Tests ===
+
+--- Daytime events (should work) ---
+OK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC
+OK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC
+OK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC
+
+--- Late night events (the bug zone) ---
+FAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 04:30 UTC
+Due events: 0
+  (no events due)
+FAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 07:45 UTC
+Due events: 0
+  (no events due)
+
+--- Negative tests (should NOT fire) ---
+OK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC
+OK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC
+
+FAIL: 2 test(s) failed
+  [trial 2] fail (bug detected, expected)
+=== Timezone Scheduling Tests ===
+
+--- Daytime events (should work) ---
+OK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC
+OK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC
+OK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC
+
+--- Late night events (the bug zone) ---
+FAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 04:30 UTC
+Due events: 0
+  (no events due)
+FAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 07:45 UTC
+Due events: 0
+  (no events due)
+
+--- Negative tests (should NOT fire) ---
+OK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC
+OK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC
+
+FAIL: 2 test(s) failed
+  [trial 3] fail (bug detected, expected)
+=== Timezone Scheduling Tests ===
+
+--- Daytime events (should work) ---
+OK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC
+OK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC
+OK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC
+
+--- Late night events (the bug zone) ---
+FAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 04:30 UTC
+Due events: 0
+  (no events due)
+FAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 07:45 UTC
+Due events: 0
+  (no events due)
+
+--- Negative tests (should NOT fire) ---
+OK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC
+OK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC
+
+FAIL: 2 test(s) failed
+  [trial 4] fail (bug detected, expected)
+=== Timezone Scheduling Tests ===
+
+--- Daytime events (should work) ---
+OK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC
+OK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC
+OK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC
+
+--- Late night events (the bug zone) ---
+FAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 04:30 UTC
+Due events: 0
+  (no events due)
+FAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 07:45 UTC
+Due events: 0
+  (no events due)
+
+--- Negative tests (should NOT fire) ---
+OK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC
+OK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC
+
+FAIL: 2 test(s) failed
+  [trial 5] fail (bug detected, expected)
+=== Timezone Scheduling Tests ===
+
+--- Daytime events (should work) ---
+OK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC
+OK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC
+OK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC
+
+--- Late night events (the bug zone) ---
+FAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 04:30 UTC
+Due events: 0
+  (no events due)
+FAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 07:45 UTC
+Due events: 0
+  (no events due)
+
+--- Negative tests (should NOT fire) ---
+OK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC
+OK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC
+
+FAIL: 2 test(s) failed
+  [trial 6] fail (bug detected, expected)
+=== Timezone Scheduling Tests ===
+
+--- Daytime events (should work) ---
+OK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC
+OK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC
+OK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC
+
+--- Late night events (the bug zone) ---
+FAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 04:30 UTC
+Due events: 0
+  (no events due)
+FAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 07:45 UTC
+Due events: 0
+  (no events due)
+
+--- Negative tests (should NOT fire) ---
+OK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC
+OK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC
+
+FAIL: 2 test(s) failed
+  [trial 7] fail (bug detected, expected)
+=== Timezone Scheduling Tests ===
+
+--- Daytime events (should work) ---
+OK: EST morning standup - evt-001 fires at 2025-01-15T14:00 UTC
+OK: UTC noon health check - evt-005 fires at 2025-01-15T12:00 UTC
+OK: CET morning report - evt-003 fires at 2025-01-15T07:00 UTC
+
+--- Late night events (the bug zone) ---
+FAIL: EST nightly sync (crosses midnight) - evt-002 should fire at 2025-01-16T04:30 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 04:30 UTC
+Due events: 0
+  (no events due)
+FAIL: PST late cleanup (crosses midnight) - evt-004 should fire at 2025-01-16T07:45 UTC but didn't
+  Output: Checking 6 events at 2025-01-16 07:45 UTC
+Due events: 0
+  (no events due)
+
+--- Negative tests (should NOT fire) ---
+OK: Wrong hour for standup - evt-001 correctly not fired at 2025-01-15T15:00 UTC
+OK: Nightly sync at wrong time - evt-002 correctly not fired at 2025-01-15T23:30 UTC
+
+FAIL: 2 test(s) failed
+  [trial 8] fail (bug detected, expected)

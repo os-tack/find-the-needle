@@ -1,0 +1,6 @@
+1/1 passed, 67208ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 114375ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+
+=== codestral-2508 DONE: 80/80 scores (pass=2 fail=2 skip=76) ===

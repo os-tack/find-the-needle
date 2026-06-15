@@ -1,0 +1,129 @@
+sha256:cdf690f0005a22f8268c3f613a2403b5468361eb67394cfc207a91ff4bac343b
+=== nginx-upstream-port-mismatch test ===
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:21:49] "GET /health HTTP/1.1" 200 -
+Flask is ready
+nginx is ready
+
+Test 1: GET /health through nginx
+PASS: /health returned 200
+
+Test 2: GET /api/data through nginx
+FAIL: /api/data returned 502 (expected 200)
+  [trial 1] fail (bug detected, expected)
+=== nginx-upstream-port-mismatch test ===
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:21:50] "GET /health HTTP/1.1" 200 -
+Flask is ready
+nginx is ready
+
+Test 1: GET /health through nginx
+PASS: /health returned 200
+
+Test 2: GET /api/data through nginx
+FAIL: /api/data returned 502 (expected 200)
+  [trial 2] fail (bug detected, expected)
+=== nginx-upstream-port-mismatch test ===
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:21:51] "GET /health HTTP/1.1" 200 -
+Flask is ready
+nginx is ready
+
+Test 1: GET /health through nginx
+PASS: /health returned 200
+
+Test 2: GET /api/data through nginx
+FAIL: /api/data returned 502 (expected 200)
+  [trial 3] fail (bug detected, expected)
+=== nginx-upstream-port-mismatch test ===
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:21:52] "GET /health HTTP/1.1" 200 -
+Flask is ready
+nginx is ready
+
+Test 1: GET /health through nginx
+PASS: /health returned 200
+
+Test 2: GET /api/data through nginx
+FAIL: /api/data returned 502 (expected 200)
+  [trial 4] fail (bug detected, expected)
+=== nginx-upstream-port-mismatch test ===
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:21:52] "GET /health HTTP/1.1" 200 -
+Flask is ready
+nginx is ready
+
+Test 1: GET /health through nginx
+PASS: /health returned 200
+
+Test 2: GET /api/data through nginx
+FAIL: /api/data returned 502 (expected 200)
+  [trial 5] fail (bug detected, expected)
+=== nginx-upstream-port-mismatch test ===
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:21:53] "GET /health HTTP/1.1" 200 -
+Flask is ready
+nginx is ready
+
+Test 1: GET /health through nginx
+PASS: /health returned 200
+
+Test 2: GET /api/data through nginx
+FAIL: /api/data returned 502 (expected 200)
+  [trial 6] fail (bug detected, expected)
+=== nginx-upstream-port-mismatch test ===
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:21:54] "GET /health HTTP/1.1" 200 -
+Flask is ready
+nginx is ready
+
+Test 1: GET /health through nginx
+PASS: /health returned 200
+
+Test 2: GET /api/data through nginx
+FAIL: /api/data returned 502 (expected 200)
+  [trial 7] fail (bug detected, expected)
+=== nginx-upstream-port-mismatch test ===
+ * Serving Flask app 'server'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:21:54] "GET /health HTTP/1.1" 200 -
+Flask is ready
+nginx is ready
+
+Test 1: GET /health through nginx
+PASS: /health returned 200
+
+Test 2: GET /api/data through nginx
+FAIL: /api/data returned 502 (expected 200)
+  [trial 8] fail (bug detected, expected)

@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "devstral-2512-native",
+    "arm": "native",
+    "benchmark": "sql-injection-search",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 393151,
+    "output_tokens": 3502,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "## Summary\n\nI have successfully found and fixed the SQL injection vulnerability in the codebase. Here's what was accomplished:\n\n### **Needle Found: SQL Injection Vulnerability**\n**Location:** `app/search.py`, lines 18-25\n\n**The Problem:**\nThe `search()` method was directly concatenating user input (`query` and `category` parameters) into SQL query strings using f-strings, then executing them with `db.execute_raw()`. This allowed attackers to inject malicious SQL code.\n\n**Vulnerable Code Pattern:**\n```python\nsql = f\"SELECT ... WHERE name LIKE '%{query}%'\"\nif category:\n    sql += f\" AND category = '{category}'\"\nreturn self.db.execute_raw(sql)\n```\n\n### **Fix Applied:**\nI replaced the vulnerable string concatenation approach with proper parameterized queries:\n\n```python\ndef search(self, query, category=None):\n    if category:\n        return self.db.execute(\n            'SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ? AND category = ? ORDER BY name',\n            (f'%{query}%', category)\n        )\n    else:\n        return self.db.execute(\n            'SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ? ORDER BY name',\n            (f'%{query}%',)\n        )\n```\n\n### **Key Security Improvements:**\n1. **Parameterized Queries:** User input is now passed as parameters using `?` placeholders\n2. **Safe Execution:** Changed from `db.execute_raw()` to `db.execute()` which properly handles parameterization\n3. **Input Separation:** User data is treated as data, not executable SQL code\n4. **Attack Prevention:** Blocks UNION attacks, boolean-based attacks, and other SQL injection techniques\n\n### **Verification:**\nThe fix maintains the same functionality for legitimate searches while completely preventing SQL injection attacks. The test script `test.sh` would now pass all security tests, showing that:\n- Normal searches still work correctly\n- UNION attacks to extract user data are blocked\n- Boolean attacks to bypass filters are blocked\n\nThe SQL injection vulnerability has been completely eliminated by using SQLite's built-in parameterization mechanism.",
+    "timestamp": "2026-06-15T02:28:49Z",
+    "token_cost": 3502,
+    "tool_uses": 27,
+    "turns_to_fix": 28,
+    "wall_clock": 65.277,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T02:28:59+00:00"
+  }
+]

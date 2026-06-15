@@ -1,0 +1,25 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=devstral-2512, arms=kernel]
+
+--- null-pointer-config [kernel] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-kernel-devstral-2512-1781395830003 (timeout 660s)...
+  snapshotting workspace...
+  [kernel] copying local binary: /Users/scottmeyer/projects/haystack/target/x86_64-unknown-linux-musl/release/ostk
+  [kernel] ostk init + sign + embeddings + daemon + boot...
+  [kernel] boot output:
+  [kernel]     needle: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     decision: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     hay: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     draft: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     spec: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     transcript: 1 seen, 0 emitted   (lag: 0)
+  [kernel] POST healthy — boot confidence OK
+  [kernel] running with live kernel...
+  [kernel] dispatching via `ostk kernel spawn` (cpu arm, model=devstral-2512)...
+  [kernel] spawn returned: spawned bench (model devstral-2512, budget $100, pid 162)
+  [kernel] poll deadline exceeded after 660s; snapshotting journal then sending SIGTERM
+  [kernel] complete: 0 turns, 0+0 tokens, $0.0000, 0 tools, stop=deadline_exceeded
+
+=== bench summary ===
+0/1 passed, 670522ms total [model=devstral-2512, arms=kernel]
+error: 1 scenario(s) failed

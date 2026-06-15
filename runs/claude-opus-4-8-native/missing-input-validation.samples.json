@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "missing-input-validation",
+    "billed_tokens": 114522,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 9063,
+    "cache_read_tokens": 103636,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.14969975,
+    "fresh_input_tokens": 1823,
+    "input_tokens": 1823,
+    "output_tokens": 1261,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified \u2014 `test.sh` now passes.\n\n**The needle:** the `POST /inventory/:sku/adjust` endpoint validated only that `quantity` was a number, never that the adjustment would leave inventory non-negative. `Inventory.adjustQuantity` applied the delta unconditionally, so a request like `{\"quantity\": -200}` against a stock of 110 silently produced `-90`.\n\n**The fix** (`routes.ts`): before applying, reject any adjustment where `product.quantity + quantity < 0` with a `400`. Valid positive and in-bounds negative adjustments still succeed.",
+    "timestamp": "2026-06-14T22:31:07Z",
+    "token_cost": 115783,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 28.209,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:31:18+00:00"
+  }
+]

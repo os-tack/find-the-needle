@@ -1,0 +1,18 @@
+{
+  "benchmark": "null-pointer-config",
+  "agent": "claude-haiku-4-5-kernel-cpu",
+  "arm": "kernel",
+  "control_type": "kernel",
+  "timestamp": "2026-04-28T23:19:06Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_fix": 10,
+  "token_cost": 8918,
+  "input_tokens": 7211,
+  "output_tokens": 1707,
+  "estimated_cost_usd": 0.0,
+  "wall_clock": 62.95,
+  "tool_uses": 14,
+  "stop_reason": "end_turn",
+  "summary": "agent.completed: 10turns, 7211+1707 tokens, $0.0000"
+}

@@ -1,0 +1,193 @@
+sha256:89281e2e48ce94385e0b12b9f6c3e558a663552fcbf4da6b272a55f31f2524b4
+=== Linearizability Stale-Read Test ===
+Building...
+--- Round 1 ---
+[1/6] Waiting for leader election...
+      Leader elected: node 2
+      Follower to isolate: node 0
+      Remaining follower: node 1
+[2/6] Stabilizing cluster...
+[3/6] Partitioning node 0 from the cluster...
+[4/6] Writing K=1 via leader (while node is partitioned)...
+      Write acknowledged by leader (committed with majority)
+      Leader commit index: 1
+[5/6] Healing partition (node 0 rejoins)...
+[6/6] Reading K from formerly-isolated node 0...
+      Follower applied index: 0
+      Follower commit index:  0
+      Leader commit index:    1
+FAIL: Key K not found on node 0 (stale read — linearizability violated)
+      A committed write is invisible to a reader. The system claims to
+      be linearizable, but reads are served from stale local state without
+      confirming the applied index is current with the leader's commit index.
+FAIL: Linearizability violation detected in round 1
+FAIL: Reads are not linearizable — stale data returned after partition heal
+  [trial 1] fail (bug detected, expected)
+=== Linearizability Stale-Read Test ===
+Building...
+--- Round 1 ---
+[1/6] Waiting for leader election...
+      Leader elected: node 1
+      Follower to isolate: node 0
+      Remaining follower: node 2
+[2/6] Stabilizing cluster...
+[3/6] Partitioning node 0 from the cluster...
+[4/6] Writing K=1 via leader (while node is partitioned)...
+      Write acknowledged by leader (committed with majority)
+      Leader commit index: 1
+[5/6] Healing partition (node 0 rejoins)...
+[6/6] Reading K from formerly-isolated node 0...
+      Follower applied index: 0
+      Follower commit index:  0
+      Leader commit index:    1
+FAIL: Key K not found on node 0 (stale read — linearizability violated)
+      A committed write is invisible to a reader. The system claims to
+      be linearizable, but reads are served from stale local state without
+      confirming the applied index is current with the leader's commit index.
+FAIL: Linearizability violation detected in round 1
+FAIL: Reads are not linearizable — stale data returned after partition heal
+  [trial 2] fail (bug detected, expected)
+=== Linearizability Stale-Read Test ===
+Building...
+--- Round 1 ---
+[1/6] Waiting for leader election...
+      Leader elected: node 2
+      Follower to isolate: node 0
+      Remaining follower: node 1
+[2/6] Stabilizing cluster...
+[3/6] Partitioning node 0 from the cluster...
+[4/6] Writing K=1 via leader (while node is partitioned)...
+      Write acknowledged by leader (committed with majority)
+      Leader commit index: 1
+[5/6] Healing partition (node 0 rejoins)...
+[6/6] Reading K from formerly-isolated node 0...
+      Follower applied index: 0
+      Follower commit index:  0
+      Leader commit index:    1
+FAIL: Key K not found on node 0 (stale read — linearizability violated)
+      A committed write is invisible to a reader. The system claims to
+      be linearizable, but reads are served from stale local state without
+      confirming the applied index is current with the leader's commit index.
+FAIL: Linearizability violation detected in round 1
+FAIL: Reads are not linearizable — stale data returned after partition heal
+  [trial 3] fail (bug detected, expected)
+=== Linearizability Stale-Read Test ===
+Building...
+--- Round 1 ---
+[1/6] Waiting for leader election...
+      Leader elected: node 0
+      Follower to isolate: node 1
+      Remaining follower: node 2
+[2/6] Stabilizing cluster...
+[3/6] Partitioning node 1 from the cluster...
+[4/6] Writing K=1 via leader (while node is partitioned)...
+      Write acknowledged by leader (committed with majority)
+      Leader commit index: 1
+[5/6] Healing partition (node 1 rejoins)...
+[6/6] Reading K from formerly-isolated node 1...
+      Follower applied index: 0
+      Follower commit index:  0
+      Leader commit index:    1
+FAIL: Key K not found on node 1 (stale read — linearizability violated)
+      A committed write is invisible to a reader. The system claims to
+      be linearizable, but reads are served from stale local state without
+      confirming the applied index is current with the leader's commit index.
+FAIL: Linearizability violation detected in round 1
+FAIL: Reads are not linearizable — stale data returned after partition heal
+  [trial 4] fail (bug detected, expected)
+=== Linearizability Stale-Read Test ===
+Building...
+--- Round 1 ---
+[1/6] Waiting for leader election...
+      Leader elected: node 1
+      Follower to isolate: node 0
+      Remaining follower: node 2
+[2/6] Stabilizing cluster...
+[3/6] Partitioning node 0 from the cluster...
+[4/6] Writing K=1 via leader (while node is partitioned)...
+      Write acknowledged by leader (committed with majority)
+      Leader commit index: 1
+[5/6] Healing partition (node 0 rejoins)...
+[6/6] Reading K from formerly-isolated node 0...
+      Follower applied index: 0
+      Follower commit index:  0
+      Leader commit index:    1
+FAIL: Key K not found on node 0 (stale read — linearizability violated)
+      A committed write is invisible to a reader. The system claims to
+      be linearizable, but reads are served from stale local state without
+      confirming the applied index is current with the leader's commit index.
+FAIL: Linearizability violation detected in round 1
+FAIL: Reads are not linearizable — stale data returned after partition heal
+  [trial 5] fail (bug detected, expected)
+=== Linearizability Stale-Read Test ===
+Building...
+--- Round 1 ---
+[1/6] Waiting for leader election...
+      Leader elected: node 2
+      Follower to isolate: node 0
+      Remaining follower: node 1
+[2/6] Stabilizing cluster...
+[3/6] Partitioning node 0 from the cluster...
+[4/6] Writing K=1 via leader (while node is partitioned)...
+      Write acknowledged by leader (committed with majority)
+      Leader commit index: 1
+[5/6] Healing partition (node 0 rejoins)...
+[6/6] Reading K from formerly-isolated node 0...
+      Follower applied index: 0
+      Follower commit index:  0
+      Leader commit index:    1
+FAIL: Key K not found on node 0 (stale read — linearizability violated)
+      A committed write is invisible to a reader. The system claims to
+      be linearizable, but reads are served from stale local state without
+      confirming the applied index is current with the leader's commit index.
+FAIL: Linearizability violation detected in round 1
+FAIL: Reads are not linearizable — stale data returned after partition heal
+  [trial 6] fail (bug detected, expected)
+=== Linearizability Stale-Read Test ===
+Building...
+--- Round 1 ---
+[1/6] Waiting for leader election...
+      Leader elected: node 0
+      Follower to isolate: node 1
+      Remaining follower: node 2
+[2/6] Stabilizing cluster...
+[3/6] Partitioning node 1 from the cluster...
+[4/6] Writing K=1 via leader (while node is partitioned)...
+      Write acknowledged by leader (committed with majority)
+      Leader commit index: 1
+[5/6] Healing partition (node 1 rejoins)...
+[6/6] Reading K from formerly-isolated node 1...
+      Follower applied index: 0
+      Follower commit index:  0
+      Leader commit index:    1
+FAIL: Key K not found on node 1 (stale read — linearizability violated)
+      A committed write is invisible to a reader. The system claims to
+      be linearizable, but reads are served from stale local state without
+      confirming the applied index is current with the leader's commit index.
+FAIL: Linearizability violation detected in round 1
+FAIL: Reads are not linearizable — stale data returned after partition heal
+  [trial 7] fail (bug detected, expected)
+=== Linearizability Stale-Read Test ===
+Building...
+--- Round 1 ---
+[1/6] Waiting for leader election...
+      Leader elected: node 0
+      Follower to isolate: node 1
+      Remaining follower: node 2
+[2/6] Stabilizing cluster...
+[3/6] Partitioning node 1 from the cluster...
+[4/6] Writing K=1 via leader (while node is partitioned)...
+      Write acknowledged by leader (committed with majority)
+      Leader commit index: 1
+[5/6] Healing partition (node 1 rejoins)...
+[6/6] Reading K from formerly-isolated node 1...
+      Follower applied index: 0
+      Follower commit index:  0
+      Leader commit index:    1
+FAIL: Key K not found on node 1 (stale read — linearizability violated)
+      A committed write is invisible to a reader. The system claims to
+      be linearizable, but reads are served from stale local state without
+      confirming the applied index is current with the leader's commit index.
+FAIL: Linearizability violation detected in round 1
+FAIL: Reads are not linearizable — stale data returned after partition heal
+  [trial 8] fail (bug detected, expected)

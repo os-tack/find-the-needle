@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "kimi-k2.6-native",
+    "arm": "native",
+    "benchmark": "off-by-one-pagination",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 12593,
+    "output_tokens": 0,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "To resume this session: kimi -r 7994274b-aad3-4668-89e6-3226ef667ef0",
+    "timestamp": "2026-06-15T00:49:44Z",
+    "token_cost": 0,
+    "tool_uses": 6,
+    "turns_to_fix": 5,
+    "wall_clock": 24.258,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T00:49:54+00:00"
+  }
+]

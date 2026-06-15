@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 81479,
+  "output_tokens": 1257,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Excellent! The fix is working correctly. Let me summarize what was found and fixed:\n\n## Summary\n\n**Problem Found:**\nThe bug was in the `InstallSnapshot` function in `/app/app/snapshot.go`. When a node received and installed a snapshot, it correctly updated `lastApplied` to the snapshot's last included index, but it failed to update `commitIndex`. This caused issues during node restart:\n\n1. During `InstallSnapshot`: `lastApplied` was set to 10, but `commitIndex` remained at 0\n2. During `Restart()`: The saved `commitIndex` (0) was compared with the restored `lastApplied` (10)\n3. Since `savedCommitIndex (0) <= lastApplied (10)`, the code went to the else branch\n4. In the else branch, `lastApplied` was incorrectly set back to `savedCommitIndex` (0)\n5. This caused entries 1-10 to be reapplied as duplicates when new entries arrived\n\n**Fix Applied:**\nAdded code to update `commitIndex` in the `InstallSnapshot` function:\n\n```go\n// Update commitIndex to match the snapshot boundary.\n// All entries in the snapshot are committed by definition.\nif snap.LastIncludedIndex > n.commitIndex {\n    n.commitIndex = snap.LastIncludedIndex\n}\n```\n\nThis ensures that when a snapshot is installed, both `lastApplied` and `commitIndex` are properly set to the snapshot's last included index, preventing duplicate applies after restart.",
+  "timestamp": "2026-04-03T03:03:42Z",
+  "token_cost": 82736,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 23.657
+}

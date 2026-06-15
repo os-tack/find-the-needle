@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "auth-bypass-path-traversal",
+    "billed_tokens": 132368,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 12047,
+    "cache_read_tokens": 120314,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.10275444999999998,
+    "fresh_input_tokens": 7,
+    "input_tokens": 7,
+    "output_tokens": 1391,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 4 tests pass. The fix was in `middleware.go:18` \u2014 the middleware was checking the raw `r.URL.Path` while the router was normalizing paths via `path.Clean()`, creating a mismatch that allowed `//api/admin` and `/health/../api/data` to bypass authentication. The fix applies the same `path.Clean()` normalization in the middleware before the `/api/` prefix check.",
+    "timestamp": "2026-06-14T21:36:22Z",
+    "token_cost": 133759,
+    "tool_uses": 8,
+    "turns_to_fix": 9,
+    "wall_clock": 30.761,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:36:32+00:00"
+  }
+]

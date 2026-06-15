@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 35329,
+    "output_tokens": 3748,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have fixed the DataLoader N+1 bug (the \"needle\" in this codebase) by moving the initialization of `userLoader` and `postsByAuthorLoader` from the individual resolvers to the per-request `createContext` function in `src/context.ts`. \n\nI also executed `test.sh`, and the results confirmed the fix was successful: all functional tests passed, and the query count during the performance test successfully dropped from an N+1 scaling factor (101 queries) to just 2 DB queries.",
+    "timestamp": "2026-06-14T21:59:49Z",
+    "token_cost": 3748,
+    "tool_uses": 15,
+    "turns_to_fix": 12,
+    "wall_clock": 59.73,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:59:59+00:00"
+  }
+]

@@ -1,0 +1,65 @@
+sha256:8b43f34476e9284fb07159174d91cf8604d2f86d8801d44fb14f6aadf5802c90
+Initial product count: 5
+Original product name: Widget A
+Name after update: UPDATED-NAME-XYZ
+PASS: Product name correctly updated to 'UPDATED-NAME-XYZ'
+Product count after create: 5
+FAIL: Product list has 5 items after create, expected 6
+      List cache is stale — new product not visible
+  [trial 1] fail (bug detected, expected)
+Initial product count: 5
+Original product name: Widget A
+Name after update: UPDATED-NAME-XYZ
+PASS: Product name correctly updated to 'UPDATED-NAME-XYZ'
+Product count after create: 5
+FAIL: Product list has 5 items after create, expected 6
+      List cache is stale — new product not visible
+  [trial 2] fail (bug detected, expected)
+Initial product count: 5
+Original product name: Widget A
+Name after update: UPDATED-NAME-XYZ
+PASS: Product name correctly updated to 'UPDATED-NAME-XYZ'
+Product count after create: 5
+FAIL: Product list has 5 items after create, expected 6
+      List cache is stale — new product not visible
+  [trial 3] fail (bug detected, expected)
+Initial product count: 5
+Original product name: Widget A
+Name after update: UPDATED-NAME-XYZ
+PASS: Product name correctly updated to 'UPDATED-NAME-XYZ'
+Product count after create: 5
+FAIL: Product list has 5 items after create, expected 6
+      List cache is stale — new product not visible
+  [trial 4] fail (bug detected, expected)
+Initial product count: 5
+Original product name: Widget A
+Name after update: UPDATED-NAME-XYZ
+PASS: Product name correctly updated to 'UPDATED-NAME-XYZ'
+Product count after create: 5
+FAIL: Product list has 5 items after create, expected 6
+      List cache is stale — new product not visible
+  [trial 5] fail (bug detected, expected)
+Initial product count: 5
+Original product name: Widget A
+Name after update: UPDATED-NAME-XYZ
+PASS: Product name correctly updated to 'UPDATED-NAME-XYZ'
+Product count after create: 5
+FAIL: Product list has 5 items after create, expected 6
+      List cache is stale — new product not visible
+  [trial 6] fail (bug detected, expected)
+Initial product count: 5
+Original product name: Widget A
+Name after update: UPDATED-NAME-XYZ
+PASS: Product name correctly updated to 'UPDATED-NAME-XYZ'
+Product count after create: 5
+FAIL: Product list has 5 items after create, expected 6
+      List cache is stale — new product not visible
+  [trial 7] fail (bug detected, expected)
+Initial product count: 5
+Original product name: Widget A
+Name after update: UPDATED-NAME-XYZ
+PASS: Product name correctly updated to 'UPDATED-NAME-XYZ'
+Product count after create: 5
+FAIL: Product list has 5 items after create, expected 6
+      List cache is stale — new product not visible
+  [trial 8] fail (bug detected, expected)

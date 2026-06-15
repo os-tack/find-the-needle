@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "missing-input-validation",
+    "billed_tokens": 81607,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.177854,
+    "fresh_input_tokens": 81607,
+    "input_tokens": 81607,
+    "output_tokens": 1220,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 13turns, 81607+1220 tokens, $0.1779",
+    "timestamp": "2026-06-14T22:29:13Z",
+    "token_cost": 82827,
+    "tool_uses": 12,
+    "turns_to_fix": 13,
+    "wall_clock": 77.126,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:29:23+00:00"
+  }
+]

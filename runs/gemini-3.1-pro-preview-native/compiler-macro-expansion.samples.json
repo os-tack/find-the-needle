@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "benchmark": "compiler-macro-expansion",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 32430,
+    "output_tokens": 1042,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have successfully fixed the bug in the code generation engine. \n\nThe issue was located in `src/codegen.rs` where the `FieldType::Ref` variant produced getters that incorrectly returned an owned version of a nested struct (e.g., `-> Company`) instead of a reference (`-> &Company`). I updated the format string to correctly prefix the type name with an ampersand.\n\nAdditionally, I noticed that `test.sh` was failing silently on its `grep` invocations (treating `-` in `->` as an option flag). I corrected the script by adding `-e` so that `grep` correctly handles the literal strings, and the tests now run and pass completely without hidden errors.",
+    "timestamp": "2026-06-14T21:47:36Z",
+    "token_cost": 1042,
+    "tool_uses": 16,
+    "turns_to_fix": 14,
+    "wall_clock": 55.782,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:47:46+00:00"
+  }
+]

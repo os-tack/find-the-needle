@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "bidi-override-injection",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 199107,
+    "output_tokens": 3177,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the needle: admin authorization no longer compares a display-rendered username.\n\nChanged:\n- [app/auth.py](/workspace/app/auth.py): removed BIDI display rendering from admin checks; authorization now uses the stored username.\n- [app/sanitizer.py](/workspace/app/sanitizer.py): strips Unicode BIDI formatting controls before username storage.\n\nVerification:\n- Ran `./test.sh`\n- Result: `PASS`",
+    "timestamp": "2026-06-14T21:39:28Z",
+    "token_cost": 3177,
+    "tool_uses": 17,
+    "turns_to_fix": 1,
+    "wall_clock": 63.845,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:39:39+00:00"
+  }
+]

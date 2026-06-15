@@ -1,0 +1,18 @@
+{
+  "agent": "gemini-3.1-pro-preview-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 274336,
+  "output_tokens": 3449,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "I have found the issues (\"the needle in the haystack\"). There were two layers to the problem that needed to be fixed simultaneously:\n\n1. **The Server Bug**: In `server.go`, the `SET` command was acknowledging the write (`+OK`) as soon as the entry was appended to the memory buffer via `wal.Append()`. However, the actual fsync to stable storage was left to a background goroutine. When a crash occurred immediately after acknowledgment, the background routine hadn't fired yet, and all newly written data was lost upon simulated truncation (recovery). I fixed this by forcing a `wal.Sync()` before sending the `+OK` reply to guarantee durability.\n\n2. **The Hidden Test Flaw**: The test script `test.sh` was verifying data loss using a naive `grep -q \"LOST\"`. Because the client's summary line prints `summary: X OK, 0 LOST out of Y acked`, `grep` matched the word `LOST` even when no data was lost. This \"hidden problem\" made it seem like the server fix wasn't working, causing the test to falsely fail. I fixed the script to use `grep -q \"^LOST\"` so it only flags actual lost keys.\n\nWith both the application logic and the test script validation fixed, `test.sh` now executes the simulated crash and verifies `PASS` successfully.",
+  "timestamp": "2026-04-03T07:23:14Z",
+  "token_cost": 277785,
+  "tool_uses": 38,
+  "turns_to_fix": 1,
+  "wall_clock": 185.38
+}

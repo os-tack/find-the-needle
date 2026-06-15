@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "null-pointer-config",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 4295,
+  "output_tokens": 955,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "✅ **PASS!**\n\n---\n\n### What the bug was\n\n| | Detail |\n|---|---|\n| **File** | `config.json` |\n| **Problem** | `features.enable_metrics` was `true`, but the `\"metrics\"` object was **missing** from the config file |\n| **Effect** | `cfg.Metrics` was a `nil` pointer (`*MetricsConfig`). When `/status` was hit, `makeStatusHandler` tried to dereference `cfg.Metrics.Endpoint` and `cfg.Metrics.IntervalSec` → **nil pointer panic → 500** |\n| **Fix** | Added the `\"metrics\"` block to `config.json` with an `endpoint` and `interval_sec` so the pointer is properly populated |",
+  "timestamp": "2026-04-03T02:01:39Z",
+  "token_cost": 5250,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 20.436
+}

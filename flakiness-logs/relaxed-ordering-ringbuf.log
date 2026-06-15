@@ -1,0 +1,474 @@
+sha256:554118ecd3d859476931fc6a718b01c2f6a6d5e91b3f7b7d39cf556e3aa9cb0b
+=== SPSC Ring Buffer Memory Ordering Test ===
+--- Building with ThreadSanitizer ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -fsanitize=thread -O1 -g -o ringbuf_test_tsan ring_buffer.c main.c
+
+--- Running ThreadSanitizer stress test ---
+test.sh: line 37:    19 Segmentation fault      ./ringbuf_test_tsan 262144 > /tmp/tsan_stdout.log 2> "$TSAN_LOG"
+
+NOTE: ThreadSanitizer cannot run in this container (ASLR/personality restriction).
+      Falling back to multi-run functional correctness test.
+
+--- Building optimized (non-TSan) for correctness check ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -O2 -o ringbuf_test ring_buffer.c main.c
+--- Running multi-iteration correctness test ---
+  Run 1: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 148835 — expected 148835, got 140643
+  Run 2: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 28480 — expected 28480, got 20288
+  Run 3: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 166774 — expected 166774, got 158582
+  Run 4: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 329819 — expected 329819, got 321627
+  Run 5: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 7944 — expected 7944, got 0
+
+FAIL: Data corruption detected — memory ordering bug present
+
+FAIL: Memory ordering bug detected
+  [trial 1] fail (bug detected, expected)
+=== SPSC Ring Buffer Memory Ordering Test ===
+--- Building with ThreadSanitizer ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -fsanitize=thread -O1 -g -o ringbuf_test_tsan ring_buffer.c main.c
+
+--- Running ThreadSanitizer stress test ---
+test.sh: line 37:    19 Segmentation fault      ./ringbuf_test_tsan 262144 > /tmp/tsan_stdout.log 2> "$TSAN_LOG"
+
+NOTE: ThreadSanitizer cannot run in this container (ASLR/personality restriction).
+      Falling back to multi-run functional correctness test.
+
+--- Building optimized (non-TSan) for correctness check ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -O2 -o ringbuf_test ring_buffer.c main.c
+--- Running multi-iteration correctness test ---
+  Run 1: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 159539 — expected 159539, got 151347
+  Run 2: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 13368 — expected 13368, got 5176
+  Run 3: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 416 — expected 416, got 0
+  Run 4: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 141806 — expected 141806, got 133614
+  Run 5: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 13128 — expected 13128, got 4936
+
+FAIL: Data corruption detected — memory ordering bug present
+
+FAIL: Memory ordering bug detected
+  [trial 2] fail (bug detected, expected)
+=== SPSC Ring Buffer Memory Ordering Test ===
+--- Building with ThreadSanitizer ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -fsanitize=thread -O1 -g -o ringbuf_test_tsan ring_buffer.c main.c
+
+--- Running ThreadSanitizer stress test ---
+test.sh: line 37:    19 Segmentation fault      ./ringbuf_test_tsan 262144 > /tmp/tsan_stdout.log 2> "$TSAN_LOG"
+
+NOTE: ThreadSanitizer cannot run in this container (ASLR/personality restriction).
+      Falling back to multi-run functional correctness test.
+
+--- Building optimized (non-TSan) for correctness check ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -O2 -o ringbuf_test ring_buffer.c main.c
+--- Running multi-iteration correctness test ---
+  Run 1: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 199501 — expected 199501, got 191309
+  Run 2: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 137651 — expected 137651, got 129459
+  Run 3: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 155846 — expected 155846, got 147654
+  Run 4: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 140155 — expected 140155, got 131963
+  Run 5: OK
+
+FAIL: Data corruption detected — memory ordering bug present
+
+FAIL: Memory ordering bug detected
+  [trial 3] fail (bug detected, expected)
+=== SPSC Ring Buffer Memory Ordering Test ===
+--- Building with ThreadSanitizer ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -fsanitize=thread -O1 -g -o ringbuf_test_tsan ring_buffer.c main.c
+
+--- Running ThreadSanitizer stress test ---
+test.sh: line 37:    19 Segmentation fault      ./ringbuf_test_tsan 262144 > /tmp/tsan_stdout.log 2> "$TSAN_LOG"
+
+NOTE: ThreadSanitizer cannot run in this container (ASLR/personality restriction).
+      Falling back to multi-run functional correctness test.
+
+--- Building optimized (non-TSan) for correctness check ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -O2 -o ringbuf_test ring_buffer.c main.c
+--- Running multi-iteration correctness test ---
+  Run 1: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 189411 — expected 189411, got 181219
+  Run 2: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 14440 — expected 14440, got 6248
+  Run 3: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 195051 — expected 195051, got 186859
+  Run 4: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 139126 — expected 139126, got 130934
+  Run 5: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 12464 — expected 12464, got 4272
+
+FAIL: Data corruption detected — memory ordering bug present
+
+FAIL: Memory ordering bug detected
+  [trial 4] fail (bug detected, expected)
+=== SPSC Ring Buffer Memory Ordering Test ===
+--- Building with ThreadSanitizer ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -fsanitize=thread -O1 -g -o ringbuf_test_tsan ring_buffer.c main.c
+
+--- Running ThreadSanitizer stress test ---
+test.sh: line 37:    19 Segmentation fault      ./ringbuf_test_tsan 262144 > /tmp/tsan_stdout.log 2> "$TSAN_LOG"
+
+NOTE: ThreadSanitizer cannot run in this container (ASLR/personality restriction).
+      Falling back to multi-run functional correctness test.
+
+--- Building optimized (non-TSan) for correctness check ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -O2 -o ringbuf_test ring_buffer.c main.c
+--- Running multi-iteration correctness test ---
+  Run 1: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 138963 — expected 138963, got 130771
+  Run 2: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 137800 — expected 137800, got 129608
+  Run 3: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 536 — expected 536, got 0
+  Run 4: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 15976 — expected 15976, got 7784
+  Run 5: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 13696 — expected 13696, got 5504
+
+FAIL: Data corruption detected — memory ordering bug present
+
+FAIL: Memory ordering bug detected
+  [trial 5] fail (bug detected, expected)
+=== SPSC Ring Buffer Memory Ordering Test ===
+--- Building with ThreadSanitizer ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -fsanitize=thread -O1 -g -o ringbuf_test_tsan ring_buffer.c main.c
+
+--- Running ThreadSanitizer stress test ---
+test.sh: line 37:    19 Segmentation fault      ./ringbuf_test_tsan 262144 > /tmp/tsan_stdout.log 2> "$TSAN_LOG"
+
+NOTE: ThreadSanitizer cannot run in this container (ASLR/personality restriction).
+      Falling back to multi-run functional correctness test.
+
+--- Building optimized (non-TSan) for correctness check ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -O2 -o ringbuf_test ring_buffer.c main.c
+--- Running multi-iteration correctness test ---
+  Run 1: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 129383 — expected 129383, got 121191
+  Run 2: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 146958 — expected 146958, got 138766
+  Run 3: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 70851 — expected 70851, got 62659
+  Run 4: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 138328 — expected 138328, got 130136
+  Run 5: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 165758 — expected 165758, got 157566
+
+FAIL: Data corruption detected — memory ordering bug present
+
+FAIL: Memory ordering bug detected
+  [trial 6] fail (bug detected, expected)
+=== SPSC Ring Buffer Memory Ordering Test ===
+--- Building with ThreadSanitizer ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -fsanitize=thread -O1 -g -o ringbuf_test_tsan ring_buffer.c main.c
+
+--- Running ThreadSanitizer stress test ---
+test.sh: line 37:    19 Segmentation fault      ./ringbuf_test_tsan 262144 > /tmp/tsan_stdout.log 2> "$TSAN_LOG"
+
+NOTE: ThreadSanitizer cannot run in this container (ASLR/personality restriction).
+      Falling back to multi-run functional correctness test.
+
+--- Building optimized (non-TSan) for correctness check ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -O2 -o ringbuf_test ring_buffer.c main.c
+--- Running multi-iteration correctness test ---
+  Run 1: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 52563 — expected 52563, got 44371
+  Run 2: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 154270 — expected 154270, got 146078
+  Run 3: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 156611 — expected 156611, got 148419
+  Run 4: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 146891 — expected 146891, got 138699
+  Run 5: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 145198 — expected 145198, got 137006
+
+FAIL: Data corruption detected — memory ordering bug present
+
+FAIL: Memory ordering bug detected
+  [trial 7] fail (bug detected, expected)
+=== SPSC Ring Buffer Memory Ordering Test ===
+--- Building with ThreadSanitizer ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -fsanitize=thread -O1 -g -o ringbuf_test_tsan ring_buffer.c main.c
+
+--- Running ThreadSanitizer stress test ---
+test.sh: line 37:    19 Segmentation fault      ./ringbuf_test_tsan 262144 > /tmp/tsan_stdout.log 2> "$TSAN_LOG"
+
+NOTE: ThreadSanitizer cannot run in this container (ASLR/personality restriction).
+      Falling back to multi-run functional correctness test.
+
+--- Building optimized (non-TSan) for correctness check ---
+rm -f ringbuf_test ringbuf_test_tsan
+gcc -std=c11 -pthread -Wall -Wextra -Wpedantic -O2 -o ringbuf_test ring_buffer.c main.c
+--- Running multi-iteration correctness test ---
+  Run 1: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 115406 — expected 115406, got 107214
+  Run 2: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 166870 — expected 166870, got 158678
+  Run 3: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 13168 — expected 13168, got 4976
+  Run 4: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 141262 — expected 141262, got 133070
+  Run 5: FAIL
+=== SPSC Ring Buffer Test ===
+Items:    1048576
+Capacity: 8192
+
+Producer: sent 1048576 items
+Consumer: received 1048576 items
+FAIL: Data integrity error at index 121811 — expected 121811, got 113619
+
+FAIL: Data corruption detected — memory ordering bug present
+
+FAIL: Memory ordering bug detected
+  [trial 8] fail (bug detected, expected)

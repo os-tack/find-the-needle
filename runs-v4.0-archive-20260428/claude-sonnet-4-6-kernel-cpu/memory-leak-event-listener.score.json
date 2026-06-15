@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "memory-leak-event-listener",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 2343,
+  "output_tokens": 1697,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All tests pass. Here's a summary of the **needle** (the bug) and the fix:\n\n---\n\n## The Bug: Event Listener Accumulation (Memory Leak)\n\n**File:** `/app/app/processor.js`\n\n**Problem:** Every call to `processor.process()` registered **two new event listeners** (`data:validated` and `data:error`) on the shared `eventBus`, but **never removed them**. After 500 requests, there were 500+ orphaned listeners — each one closing over the `data` argument, preventing garbage collection. This is a classic Node.js event listener memory leak.\n\n```js\n// BEFORE (buggy) — registers a brand new listener on EVERY request:\nthis.eventBus.on('data:validated', (validatedData) => {\n  this._handleValidated(validatedData, data);  // closes over `data`, leaks memory\n});\nthis.eventBus.on('data:error', (err) => { ... });\n```\n\n**Fix:** Removed the per-request listener registrations entirely. The `process()` method now calls `_validate()` and `_handleValidated()` **directly** (synchronously), and only *emits* events (for the monitor's persistent listeners to react to) — no new listeners are ever added.\n\n```\nBaseline:           listeners=1,  heap=4.42MB\nAfter 500 requests: listeners=1,  heap=5.03MB  ✅ stable\n```",
+  "timestamp": "2026-04-03T01:52:03Z",
+  "token_cost": 4040,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 35.248
+}

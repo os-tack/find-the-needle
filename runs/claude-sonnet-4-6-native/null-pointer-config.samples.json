@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-sonnet-4-6-native",
+    "arm": "native",
+    "benchmark": "null-pointer-config",
+    "billed_tokens": 125739,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 9643,
+    "cache_read_tokens": 116089,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.08618695000000001,
+    "fresh_input_tokens": 7,
+    "input_tokens": 7,
+    "output_tokens": 972,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 3 tests pass. The needle was a nil pointer dereference: `config.json` enabled metrics but omitted the `\"metrics\"` config object, so `cfg.Metrics` was `nil` when `/status` tried to read `cfg.Metrics.Endpoint`.",
+    "timestamp": "2026-06-14T22:55:35Z",
+    "token_cost": 126711,
+    "tool_uses": 8,
+    "turns_to_fix": 9,
+    "wall_clock": 27.192,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:55:45+00:00"
+  }
+]

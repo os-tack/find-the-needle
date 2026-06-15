@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "claude-opus-4-8-native",
+    "arm": "native",
+    "benchmark": "k8s-assume-cache-silent-drop",
+    "billed_tokens": 144299,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 7747,
+    "cache_read_tokens": 134726,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.17133475,
+    "fresh_input_tokens": 1826,
+    "input_tokens": 1826,
+    "output_tokens": 1833,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified \u2014 `./test.sh` passes.\n\n**The needle** was in `informerUpdate` (main.go:73-78): when an informer delivers a newer version of an object that's currently *assumed*, the code did `delete(c.assumed, obj.Key)` silently. The scheduler that made the optimistic `Assume()` call had no way to learn its state was discarded \u2014 pure data loss, mirroring the real k8s `assume_cache.go:426` bug.\n\n**The fix:**\n- Added an `onConflict func(key string, assumed, informer *Object)` callback to `AssumeCache`.\n- `informerUpdate` now invokes it right after dropping the superseded assumed entry, so the assumer is notified instead of silently losing state.\n- `main` registers a handler that flips `conflictNotified` and logs the conflict.\n\nOutput now shows `conflict on pv-0: assumed version=5 dropped for informer version=6` \u2192 `OK: conflict notified` \u2192 `PASS`.",
+    "timestamp": "2026-06-14T22:13:53Z",
+    "token_cost": 146132,
+    "tool_uses": 6,
+    "turns_to_fix": 7,
+    "wall_clock": 36.328,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:14:03+00:00"
+  }
+]

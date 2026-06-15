@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "raft-snapshot-commit-gap",
+  "control_type": "kernel",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 6147,
+  "output_tokens": 1768,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "All 3 rounds pass. ✅\n\n## Summary\n\n**The Needle (Bug):** In `snapshot.go`, `InstallSnapshot()` updated `n.lastApplied` to the snapshot's `LastIncludedIndex` (10) but **never updated `n.commitIndex`** (which stayed at `0`).\n\n**Why it caused duplicates:**\n1. Node3 received a snapshot covering entries 1–10 → `lastApplied=10`, but `commitIndex=0`\n2. On `Restart()`, volatile state is reset. `savedCommitIndex = 0` (was never updated)\n3. Since `savedCommitIndex (0) < snapshotAppliedTo (10)` is **false** (0 is not > 10), the `else` branch ran: `n.lastApplied = 0`, `n.commitIndex = 0`\n4. When the new leader sent `AppendEntries` with `leaderCommit=13`, node3 set `commitIndex=13` and called `applyEntries()`, which applied entries `1..13` — **re-applying keys 1–10 that were already in the snapshot**\n\n**The Fix:** In `InstallSnapshot`, also advance `commitIndex` to match `LastIncludedIndex`. This ensures that on restart, `savedCommitIndex=10 ≥ snapshotAppliedTo=10`, so `lastApplied` stays at `10` (the snapshot boundary) and entries 1–10 are never replayed from the log.",
+  "timestamp": "2026-04-03T02:15:01Z",
+  "token_cost": 7915,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 40.583
+}

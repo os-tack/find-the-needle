@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-kernel-cpu",
+    "arm": "kernel",
+    "benchmark": "goroutine-leak-handler",
+    "billed_tokens": 107023,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.23457799999999998,
+    "fresh_input_tokens": 107023,
+    "input_tokens": 107023,
+    "output_tokens": 1711,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 13turns, 107023+1711 tokens, $0.2346",
+    "timestamp": "2026-06-14T21:58:39Z",
+    "token_cost": 108734,
+    "tool_uses": 12,
+    "turns_to_fix": 13,
+    "wall_clock": 122.837,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T21:58:49+00:00"
+  }
+]

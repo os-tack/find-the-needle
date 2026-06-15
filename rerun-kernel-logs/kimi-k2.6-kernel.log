@@ -1,0 +1,25 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=kimi-k2.6, arms=kernel]
+
+--- null-pointer-config [kernel] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-kernel-kimi-k2.6-1781395853336 (timeout 660s)...
+  snapshotting workspace...
+  [kernel] copying local binary: /Users/scottmeyer/projects/haystack/target/x86_64-unknown-linux-musl/release/ostk
+  [kernel] ostk init + sign + embeddings + daemon + boot...
+  [kernel] boot output:
+  [kernel]     needle: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     decision: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     hay: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     draft: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     spec: 1 seen, 0 emitted   (lag: 0)
+  [kernel]     transcript: 1 seen, 0 emitted   (lag: 0)
+  [kernel] POST healthy — boot confidence OK
+  [kernel] running with live kernel...
+  [kernel] dispatching via `ostk kernel spawn` (openrouter arm, model=openrouter/moonshotai/kimi-k2.6)...
+  [kernel] spawn returned: spawned bench (model openrouter/moonshotai/kimi-k2.6, budget $100, pid 161)
+  [kernel] agent journaled terminal end_turn; teardown blocks on an orphaned pipe holder and will not exit — scoring from journal + SIGKILL process tree
+  [kernel] complete: 22 turns, 113428+3792 tokens, $0.0510, 21 tools, stop=end_turn
+  [kernel] summary: complete: 22turns, 113428+3792 tokens, $0.0510
+
+=== bench summary ===
+1/1 passed, 143165ms total [model=kimi-k2.6, arms=kernel]

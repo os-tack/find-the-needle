@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "deepseek-v4-pro-kernel",
+    "arm": "kernel",
+    "benchmark": "memory-leak-event-listener",
+    "billed_tokens": 84627,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.027596040000000002,
+    "fresh_input_tokens": 84627,
+    "input_tokens": 84627,
+    "output_tokens": 3253,
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "complete: 13turns, 84627+3253 tokens, $0.0276",
+    "timestamp": "2026-06-15T00:02:24Z",
+    "token_cost": 87880,
+    "tool_uses": 12,
+    "turns_to_fix": 13,
+    "wall_clock": 144.724,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-15T00:02:34+00:00"
+  }
+]

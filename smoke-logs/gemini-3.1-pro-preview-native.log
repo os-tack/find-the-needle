@@ -1,0 +1,18 @@
+ostk bench: 1 scenario(s) x 1 arm(s) [model=gemini-3.1-pro-preview, arms=native]
+
+--- null-pointer-config [native] ---
+  building image needle-bench-null-pointer-config (FROM needle-bench-native)...
+  starting container nb-null-pointer-config-native-gemini-3.1-pro-previ-1781390384844 (timeout 660s)...
+  snapshotting workspace...
+  [native] using gemini (Gemini CLI)
+  [native] running gemini ...
+  [native]   harness error: YOLO mode is enabled. All tool calls will be automatically approved.
+  [native]   Approval mode overridden to "default" because the current folder is not trusted.
+  [native]   YOLO mode is enabled. All tool calls will be automatically approved.
+  [native]   Approval mode overridden to "default" because the current folder is not trusted.
+  [native]   [31mGemini CLI is not running in a trusted directory. To proceed, either use `--skip-trust`, set the `GEMINI_CLI_TRUST_WORKSPACE=true` environment variable, or trust this directory in interactive mode. For more details, see https://geminicli.com/docs/cli/trusted-folders/#headless-and-automated-environments[0m
+  [native] complete: 0 turns, 0+0 tokens, $0.0000, 0 tools, stop=fail
+
+=== bench summary ===
+0/1 passed, 3678ms total [model=gemini-3.1-pro-preview, arms=native]
+error: 1 scenario(s) failed

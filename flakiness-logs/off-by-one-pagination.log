@@ -1,0 +1,89 @@
+sha256:2dc13484561cfcdb1e068f41aecdd4dc21588a5891e845a416870363f75aebc3
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:22:41] "GET /products?page=1&per_page=10 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:22:41] "GET /products?page=2&per_page=10 HTTP/1.1" 200 -
+FAIL: Page boundary error. Page 1 ends at ID 10, page 2 starts at ID 10 (expected 11)
+  [trial 1] fail (bug detected, expected)
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:22:43] "GET /products?page=1&per_page=10 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:22:43] "GET /products?page=2&per_page=10 HTTP/1.1" 200 -
+FAIL: Page boundary error. Page 1 ends at ID 10, page 2 starts at ID 10 (expected 11)
+  [trial 2] fail (bug detected, expected)
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:22:45] "GET /products?page=1&per_page=10 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:22:45] "GET /products?page=2&per_page=10 HTTP/1.1" 200 -
+FAIL: Page boundary error. Page 1 ends at ID 10, page 2 starts at ID 10 (expected 11)
+  [trial 3] fail (bug detected, expected)
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:22:48] "GET /products?page=1&per_page=10 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:22:48] "GET /products?page=2&per_page=10 HTTP/1.1" 200 -
+FAIL: Page boundary error. Page 1 ends at ID 10, page 2 starts at ID 10 (expected 11)
+  [trial 4] fail (bug detected, expected)
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:22:50] "GET /products?page=1&per_page=10 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:22:50] "GET /products?page=2&per_page=10 HTTP/1.1" 200 -
+FAIL: Page boundary error. Page 1 ends at ID 10, page 2 starts at ID 10 (expected 11)
+  [trial 5] fail (bug detected, expected)
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:22:52] "GET /products?page=1&per_page=10 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:22:52] "GET /products?page=2&per_page=10 HTTP/1.1" 200 -
+FAIL: Page boundary error. Page 1 ends at ID 10, page 2 starts at ID 10 (expected 11)
+  [trial 6] fail (bug detected, expected)
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:22:54] "GET /products?page=1&per_page=10 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:22:54] "GET /products?page=2&per_page=10 HTTP/1.1" 200 -
+FAIL: Page boundary error. Page 1 ends at ID 10, page 2 starts at ID 10 (expected 11)
+  [trial 7] fail (bug detected, expected)
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.215.4:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [14/Jun/2026 11:22:57] "GET /products?page=1&per_page=10 HTTP/1.1" 200 -
+127.0.0.1 - - [14/Jun/2026 11:22:57] "GET /products?page=2&per_page=10 HTTP/1.1" 200 -
+FAIL: Page boundary error. Page 1 ends at ID 10, page 2 starts at ID 10 (expected 11)
+  [trial 8] fail (bug detected, expected)

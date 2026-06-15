@@ -1,0 +1,122 @@
+error: 1 scenario(s) failed
+1/1 passed, 3979ms total [model=codestral-2508, arms=kernel]
+1/1 passed, 3370ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 4833ms total [model=codestral-2508, arms=kernel]
+1/1 passed, 45146ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 4546ms total [model=codestral-2508, arms=kernel]
+1/1 passed, 4526ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 3039ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 11800ms total [model=codestral-2508, arms=kernel]
+1/1 passed, 6780ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 16902ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 4245ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 296054ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 6624ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 6587ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 12681ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 4462ms total [model=codestral-2508, arms=kernel]
+1/1 passed, 3791ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+1/1 passed, 8432ms total [model=codestral-2508, arms=kernel]
+1/1 passed, 8219ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 26339ms total [model=codestral-2508, arms=kernel]
+1/1 passed, 8200ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 9566ms total [model=codestral-2508, arms=kernel]
+1/1 passed, 9715ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 19396ms total [model=codestral-2508, arms=native]
+error: 1 scenario(s) failed
+1/1 passed, 8811ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 13312ms total [model=codestral-2508, arms=kernel]
+1/1 passed, 3892ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+error: 1 scenario(s) failed
+1/1 passed, 4778ms total [model=codestral-2508, arms=kernel]
+error: 1 scenario(s) failed
+
+=== codestral-2508 DONE: 120/120 scores (pass=28 fail=92 skip=0) ===

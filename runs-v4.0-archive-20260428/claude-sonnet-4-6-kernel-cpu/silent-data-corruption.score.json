@@ -1,0 +1,18 @@
+{
+  "agent": "claude-sonnet-4-6-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "silent-data-corruption",
+  "control_type": "kernel",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 4324,
+  "output_tokens": 1261,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "**Test passes!** ✅\n\n---\n\n### The Needle 🔍\n\nThe bug was in `/app/src/main.rs` in the `process_file` function:\n\n**The Problem:**\n```rust\nlet mut buffer = [0u8; BUFFER_SIZE];  // Fixed 64KB buffer\nlet bytes_read = file.read(&mut buffer)?;  // Single read — silently truncates at 64KB!\nlet data = &buffer[..bytes_read];\n```\n\n`file.read()` only reads **up to** the buffer size (64KB). Any file larger than 64KB was **silently truncated** — the rest of the data was simply discarded.\n\n**The Fix:**\n```rust\nlet mut data = Vec::new();\nfile.read_to_end(&mut data)?;  // Reads the ENTIRE file, regardless of size\n```\n\nUsing `read_to_end()` into a growable `Vec<u8>` ensures the complete file contents are read, no matter how large the file is.",
+  "timestamp": "2026-04-03T02:25:31Z",
+  "token_cost": 5585,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 27.484
+}

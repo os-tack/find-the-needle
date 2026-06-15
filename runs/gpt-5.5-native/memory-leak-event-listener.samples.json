@@ -1,0 +1,28 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "benchmark": "memory-leak-event-listener",
+    "billed_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "fresh_input_tokens": 0,
+    "input_tokens": 87588,
+    "output_tokens": 1635,
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the listener leak in [processor.js](/app/app/processor.js). `DataProcessor` now registers its event listeners once in the constructor and passes request data through the emitted event instead of capturing it in a new closure per request.\n\nVerification passed:\n\n```text\nBaseline: listeners=2, heap=4.43MB\nAfter 500 requests: listeners=2, heap=5.16MB\nPASS: Listener count stable at 2\nPASS: No event listener leak detected\n```",
+    "timestamp": "2026-06-14T22:20:18Z",
+    "token_cost": 1635,
+    "tool_uses": 11,
+    "turns_to_fix": 1,
+    "wall_clock": 41.76,
+    "sample_attempt": 1,
+    "sample_ts": "2026-06-14T22:20:29+00:00"
+  }
+]

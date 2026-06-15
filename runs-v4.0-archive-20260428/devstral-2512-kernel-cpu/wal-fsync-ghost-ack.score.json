@@ -1,0 +1,18 @@
+{
+  "agent": "devstral-2512-kernel-cpu",
+  "arm": "kernel",
+  "benchmark": "wal-fsync-ghost-ack",
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "input_tokens": 62313,
+  "output_tokens": 1641,
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "Great! The test now passes. The fix ensures that the WAL is synced to disk before acknowledging the write to the client, which guarantees that the data is durably written to disk. This prevents data loss in the event of a crash.\n\nThe needle in the haystack was the missing `s.wal.Sync()` call in the `handleCommand` function in `server.go`. The original code only buffered the data and acknowledged the write immediately, leading to data loss if the server crashed before the background sync occurred.",
+  "timestamp": "2026-04-03T03:36:38Z",
+  "token_cost": 63954,
+  "tool_uses": 16,
+  "turns_to_fix": 1,
+  "wall_clock": 27.559
+}
