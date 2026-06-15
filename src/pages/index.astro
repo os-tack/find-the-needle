@@ -37,19 +37,29 @@ const datasetSchema = {
     <div class="lb-container" id="lb-container">
       <table id="lb">
         <thead>
+          <tr id="lb-group-row">
+            <th colspan="2"></th>
+            <th colspan="1" class="group-header group-native">Native</th>
+            <th colspan="1" class="group-header group-cpu">Kernel</th>
+            <th colspan="2" class="group-header group-native">Native (vendor CLI)</th>
+            <th colspan="2" class="group-header group-cpu">Kernel (ostk)</th>
+            <th colspan="2"></th>
+          </tr>
           <tr id="lb-head">
             <th class="col-model" data-key="model">Model</th>
             <th data-key="type" title="B = true kernel (native CpuDriver); B* = generic OpenRouter kernel">Type</th>
-            <th data-key="native_cli">Native CLI</th>
-            <th class="col-solve arm-native" data-key="native_pct">Native solve</th>
-            <th class="col-solve arm-cpu" data-key="kernel_pct">Kernel solve</th>
-            <th class="col-metric arm-cpu" data-key="cost_delta" title="kernel vs native cost, both-solved cells (Anthropic only)">Cost &Delta;</th>
-            <th class="col-metric arm-cpu" data-key="tok_delta" title="kernel vs native tokens, both-solved cells (Anthropic only)">Token &Delta;</th>
-            <th data-key="notes">Notes</th>
+            <th class="col-solve arm-native" data-key="native_solved" title="resolved of 38 published benchmarks">Solve</th>
+            <th class="col-solve arm-cpu" data-key="kernel_solved" title="resolved of 38 published benchmarks">Solve</th>
+            <th class="col-metric arm-native" data-key="native_cost">Cost</th>
+            <th class="col-metric arm-native" data-key="native_tok" title="billed tokens; fresh / cache-read / cache-create breakdown below">Tokens</th>
+            <th class="col-metric arm-cpu" data-key="kernel_cost">Cost</th>
+            <th class="col-metric arm-cpu" data-key="kernel_tok" title="billed tokens; fresh / cache-read / cache-create breakdown below">Tokens</th>
+            <th class="col-metric" data-key="cost_delta" title="kernel vs native cost over both-solved cells (Anthropic only)">Cost &Delta;</th>
+            <th class="col-metric" data-key="tok_delta" title="kernel vs native billed tokens over both-solved cells (Anthropic only)">Tok &Delta;</th>
           </tr>
         </thead>
         <tbody id="lb-body">
-          <tr><td colspan="8" class="empty">Loading...</td></tr>
+          <tr><td colspan="10" class="empty">Loading...</td></tr>
         </tbody>
       </table>
     </div>
@@ -243,25 +253,45 @@ const datasetSchema = {
     const data = await resp.json();
     const rows: any[] = data.models;
 
-    function deltaSpan(d: number): string {
+    const N = data.published_tasks || 38;
+    function fmtTok(n: number): string { return n >= 1e6 ? (n/1e6).toFixed(2)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n); }
+    function usd(n: number): string { return n >= 10 ? '$'+n.toFixed(0) : n >= 1 ? '$'+n.toFixed(2) : '$'+n.toFixed(3); }
+    function delta(d: number | null): string {
       if (d == null) return '<span class="dim">—</span>';
       if (d < 0) return `<span style="color:#3fb950;font-weight:700">${d}%</span>`;
       if (d > 0) return `<span style="color:#f85149;font-weight:700">+${d}%</span>`;
       return '<span class="dim">0%</span>';
     }
-    function solvePct(solved: number, scored: number, p: number, star: string): string {
-      return `<span class="solve-pct ${pctClass(p)}">${solved}/${scored}</span>${star} <span class="dim">${p}%</span>`;
+    function solveCell(solved: number | null, present: boolean, star: string): string {
+      if (!present || solved == null) return '<span class="dim" title="no provider API key — native not run for this model">no native key</span>';
+      return `<span class="solve-pct ${pctClass(solved / N * 100)}">${solved}/${N}</span>${star}`;
+    }
+    function costCell(b: any): string { return b ? usd(b.cost) : '<span class="dim" title="native CLI does not report cost">n/r</span>'; }
+    function tokCell(b: any): string {
+      if (!b) return '<span class="dim" title="native CLI does not report token usage">n/r</span>';
+      return `<div>${fmtTok(b.billed)} <span class="dim" style="font-size:0.85em">billed</span></div>`
+        + `<div style="font-size:0.58rem;color:var(--text-muted);margin-top:1px">fresh ${fmtTok(b.fresh)} · read ${fmtTok(b.cache_read)} · create ${fmtTok(b.cache_create)}</div>`;
     }
 
-    let sortKey = 'kernel_pct';
+    let sortKey = 'kernel_solved';
     let sortDir = -1;
-    const sortVal = (r: any) => {
-      if (sortKey === 'model' || sortKey === 'type' || sortKey === 'native_cli') return r[sortKey];
-      if (sortKey === 'cost_delta' || sortKey === 'tok_delta') return r[sortKey] ?? 999;
-      return r[sortKey] ?? -1;
+    const sval = (r: any) => {
+      const K = r.kernel ?? r.kernel_abs;
+      switch (sortKey) {
+        case 'model': case 'type': return r[sortKey];
+        case 'native_solved': return r.native_solved ?? -1;
+        case 'kernel_solved': return r.kernel_solved ?? -1;
+        case 'native_cost': return r.native?.cost ?? -1;
+        case 'native_tok': return r.native?.billed ?? -1;
+        case 'kernel_cost': return K?.cost ?? -1;
+        case 'kernel_tok': return K?.billed ?? -1;
+        case 'cost_delta': return r.cost_delta ?? 999;
+        case 'tok_delta': return r.tok_delta ?? 999;
+        default: return r.kernel_solved ?? -1;
+      }
     };
     const sort = () => rows.sort((a: any, b: any) => {
-      const av = sortVal(a), bv = sortVal(b);
+      const av = sval(a), bv = sval(b);
       if (av === bv) return 0;
       return sortDir * (typeof av === 'string' ? av.localeCompare(bv) : av - bv);
     });
@@ -270,27 +300,19 @@ const datasetSchema = {
       sort();
       document.getElementById('lb-body')!.innerHTML = rows.map((r: any) => {
         const star = r.type === 'B*' ? '<sup class="bstar" title="generic OpenRouter kernel, no native driver">*</sup>' : '';
-        const nat = r.native_dead
-          ? '<span class="pct-na" title="native key-blocked — no provider API key">key-blocked</span>'
-          : solvePct(r.native_solved, r.scored, r.native_pct, '');
-        const ker = solvePct(r.kernel_solved, r.scored, r.kernel_pct, star);
-        const costD = (r.cost_trusted && r.cost_delta != null) ? deltaSpan(r.cost_delta)
-          : `<span class="dim" title="native cost not reported by ${r.native_cli}">—</span>`;
-        const tokD = (r.cost_trusted && r.tok_delta != null) ? deltaSpan(r.tok_delta) : '<span class="dim">—</span>';
-        const notes: string[] = [];
-        if (r.native_dead) notes.push('native key-blocked — kernel-only');
-        else if (!r.cost_trusted) notes.push('solve-rate only');
-        if (r.split_kernel_only) notes.push(`kernel solved +${r.split_kernel_only} native missed`);
-        if (r.split_native_only) notes.push(`native solved +${r.split_native_only} kernel missed`);
+        const K = r.kernel ?? r.kernel_abs;
+        const natB = r.cost_trusted ? r.native : null;
         return `<tr>
-          <td><span class="model-name">${r.model}</span></td>
+          <td><span class="model-name">${r.model}</span> <span class="dim" style="font-size:0.6rem">${r.native_cli}</span></td>
           <td>${r.type}</td>
-          <td><span class="dim">${r.native_cli}</span></td>
-          <td class="arm-native col-solve">${nat}</td>
-          <td class="arm-cpu col-solve">${ker}</td>
-          <td class="arm-cpu col-metric">${costD}</td>
-          <td class="arm-cpu col-metric">${tokD}</td>
-          <td style="text-align:left;font-size:0.64rem;color:var(--text-muted);white-space:normal">${notes.join('; ')}</td>
+          <td class="arm-native col-solve">${solveCell(r.native_solved, r.native_present, '')}</td>
+          <td class="arm-cpu col-solve">${solveCell(r.kernel_solved, true, star)}</td>
+          <td class="arm-native">${costCell(natB)}</td>
+          <td class="arm-native">${tokCell(natB)}</td>
+          <td class="arm-cpu">${costCell(K)}</td>
+          <td class="arm-cpu">${tokCell(K)}</td>
+          <td>${delta(r.cost_delta)}</td>
+          <td>${delta(r.tok_delta)}</td>
         </tr>`;
       }).join('');
       document.querySelectorAll('#lb-head th').forEach(th => {
@@ -301,17 +323,16 @@ const datasetSchema = {
     document.querySelectorAll('#lb-head th').forEach(th => {
       th.addEventListener('click', () => {
         const key = (th as HTMLElement).dataset.key;
-        if (!key || key === 'notes') return;
+        if (!key) return;
         if (sortKey === key) sortDir *= -1;
-        else { sortKey = key; sortDir = (key === 'model' || key === 'type' || key === 'native_cli') ? 1 : -1; }
+        else { sortKey = key; sortDir = (key === 'model' || key === 'type') ? 1 : -1; }
         render();
       });
     });
-
     render();
 
     const tEl = document.getElementById('totals');
-    if (tEl) tEl.textContent = `${rows.length} models · ${data.published_tasks} benchmarks · single-shot · v7.6.0 (2026-06-15)`;
+    if (tEl) tEl.textContent = `${rows.length} models · ${N} benchmarks · single-shot · per-arm token buckets (fresh / cache-read / cache-create / billed) · v7.6.0`;
   }
 
   init();

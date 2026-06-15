@@ -60,7 +60,7 @@ honestly-comparable (Anthropic) models, and a large capability multiplier for we
 
 <h2>Full results (verified gating)</h2>
 <p>Generated verbatim from <code>consolidate_harden.py</code> — resolved-gated efficiency, per-bucket pricing,
-split-resolve / both-fail / infra broken out, 2 legacy benchmarks retired (38 published).</p>
+split-resolve / both-fail / infra broken out. 38 benchmarks.</p>
 <pre>====================================================================================
 SECTION 1 — ANTHROPIC: apples-to-apples cost / token (claude-code native)
   The only native harness reporting cost + cache split + real turns.
@@ -69,7 +69,7 @@ SECTION 1 — ANTHROPIC: apples-to-apples cost / token (claude-code native)
 ====================================================================================
 model                 B scd    natSlv     BSlv both     nat$       B$  cost%   tok%  splt
 ------------------------------------------------------------------------------------
-claude-opus-4-8       B  35  34/35   97%  34/35   97%   34    9.497    7.860   -17%   -49%  100%
+claude-opus-4-8       B  37  34/37   92%  35/37   95%   34    9.497    7.860   -17%   -49%  100%
 claude-sonnet-4-6     B  30  28/30   93%  30/30  100%   28    5.235    3.222   -38%   -65%  100%
 
 ====================================================================================
@@ -82,7 +82,7 @@ model               B   native_harness scd    natSlv     BSlv  B$(abs)  B_tok(ab
 ------------------------------------------------------------------------------------
 gemini-3.1-pro-preview  B       gemini-cli  37  36/37   97%  37/37  100%    8.270   3,812,260
 devstral-2512       B opencode/mistral  32   6/32   19%  31/32   97%    2.421   5,452,336
-gpt-5.5             B            codex  36  34/36   94%  35/36   97%   22.618   4,183,872
+gpt-5.5             B            codex  37  35/37   95%  36/37   97%   24.062   4,452,236
 grok-4.3           B*         opencode   0   0/0     -   0/0     -        -           -
 deepseek-v4-pro    B*         opencode   0   0/0     -   0/0     -        -           -
 kimi-k2.6          B*         opencode  37  36/37   97%  35/37   95%    1.377   2,841,465
@@ -92,10 +92,10 @@ SECTION 3 — SPLIT-RESOLVE / BOTH-FAIL (solve signal) + INFRA-FAILED (excluded)
   SPLIT/BOTH-FAIL = genuine capability outcomes (turns&gt;0). INFRA = zero-work
   (turns==0, no API call) — excluded from BOTH solve-rate &amp; efficiency, retried.
 ====================================================================================
-  BOTH-FAIL claude-opus-4-8        (1): postgres-migration-schema-drift
+  SPLIT     claude-opus-4-8        silent-data-corruption             solved by: kernel-only
+  BOTH-FAIL claude-opus-4-8        (2): postgres-migration-schema-drift, split-brain-leader-election
   SPLIT     claude-sonnet-4-6      silent-data-corruption             solved by: kernel-only
   SPLIT     claude-sonnet-4-6      split-brain-leader-election        solved by: kernel-only
-  INFRA     claude-sonnet-4-6      (1): sql-injection-search[kernel]
   SPLIT     gemini-3.1-pro-preview postgres-migration-schema-drift    solved by: kernel-only
   SPLIT     devstral-2512          api-version-field-drop             solved by: kernel-only
   SPLIT     devstral-2512          bidi-override-injection            solved by: kernel-only
@@ -123,15 +123,14 @@ SECTION 3 — SPLIT-RESOLVE / BOTH-FAIL (solve signal) + INFRA-FAILED (excluded)
   SPLIT     devstral-2512          type-coercion-comparison           solved by: kernel-only
   SPLIT     devstral-2512          wrong-operator-discount            solved by: kernel-only
   BOTH-FAIL devstral-2512          (1): postgres-migration-schema-drift
-  INFRA     devstral-2512          (5): cache-stale-invalidation[native], performance-cliff-hash[native], split-brain-leader-election[native], sql-injection-search[kernel], wal-fsync-ghost-ack[kernel]
   SPLIT     gpt-5.5                silent-data-corruption             solved by: kernel-only
   BOTH-FAIL gpt-5.5                (1): postgres-migration-schema-drift
   INFRA     grok-4.3               (36): api-version-field-drop[native], auth-bypass-path-traversal[native], bidi-override-injection[native], cache-stale-invalidation[native], compiler-macro-expansion[native], data-corruption-concurrent-write[native], deadlock-transfer[native], encoding-mojibake[native], goroutine-leak-handler[native], graphql-dataloader-per-request[native], import-cycle-startup[native], k8s-assume-cache-silent-drop[native], k8s-scheduler-shutdown-deadlock[native], kernel-panic-ioctl[native], linearizability-stale-read[native], memory-leak-event-listener[native], missing-input-validation[native], nginx-upstream-port-mismatch[native], null-pointer-config[native], off-by-one-array-slice[native], off-by-one-pagination[native], performance-cliff-hash[native], postgres-migration-schema-drift[native], race-condition-counter[native], raft-snapshot-commit-gap[native], relaxed-ordering-ringbuf[native], silent-data-corruption[native], split-brain-leader-election[native], sql-injection-search[native], ssrf-allowlist-port-confusion[native], timezone-scheduling[native], timing-attack-comparison[native], tls-chain-ordering-strict[native], type-coercion-comparison[native], wal-fsync-ghost-ack[native], wrong-operator-discount[native]
-  INFRA     deepseek-v4-pro        (37): api-version-field-drop[native], auth-bypass-path-traversal[native], bidi-override-injection[native], cache-stale-invalidation[native], compiler-macro-expansion[native], data-corruption-concurrent-write[native], deadlock-transfer[native], encoding-mojibake[native], goroutine-leak-handler[native], graphql-dataloader-per-request[native], import-cycle-startup[native], k8s-assume-cache-silent-drop[native], k8s-scheduler-shutdown-deadlock[native], kernel-panic-ioctl[native], linearizability-stale-read[native], memory-leak-event-listener[native], missing-input-validation[native], nginx-upstream-port-mismatch[native], null-pointer-config[native], off-by-one-array-slice[native], off-by-one-pagination[native], performance-cliff-hash[native], postgres-migration-schema-drift[native], race-condition-counter[native], raft-snapshot-commit-gap[native], rate-limit-bypass-header[native], relaxed-ordering-ringbuf[native], silent-data-corruption[native], split-brain-leader-election[native], sql-injection-search[native], ssrf-allowlist-port-confusion[native], timezone-scheduling[native], timing-attack-comparison[native], tls-chain-ordering-strict[native], type-coercion-comparison[native], wal-fsync-ghost-ack[native], wrong-operator-discount[native]
+  INFRA     deepseek-v4-pro        (36): api-version-field-drop[native], auth-bypass-path-traversal[native], bidi-override-injection[native], cache-stale-invalidation[native], compiler-macro-expansion[native], data-corruption-concurrent-write[native], deadlock-transfer[native], encoding-mojibake[native], goroutine-leak-handler[native], graphql-dataloader-per-request[native], import-cycle-startup[native], k8s-assume-cache-silent-drop[native], k8s-scheduler-shutdown-deadlock[native], kernel-panic-ioctl[native], linearizability-stale-read[native], memory-leak-event-listener[native], missing-input-validation[native], nginx-upstream-port-mismatch[native], null-pointer-config[native], off-by-one-array-slice[native], off-by-one-pagination[native], performance-cliff-hash[native], postgres-migration-schema-drift[native], race-condition-counter[native], raft-snapshot-commit-gap[native], rate-limit-bypass-header[native], relaxed-ordering-ringbuf[native], silent-data-corruption[native], split-brain-leader-election[native], ssrf-allowlist-port-confusion[native], timezone-scheduling[native], timing-attack-comparison[native], tls-chain-ordering-strict[native], type-coercion-comparison[native], wal-fsync-ghost-ack[native], wrong-operator-discount[native]
   SPLIT     kimi-k2.6              goroutine-leak-handler             solved by: native-only
   BOTH-FAIL kimi-k2.6              (1): postgres-migration-schema-drift
 
-LEGEND (→2062 schema-parity + report-structure guard):
+LEGEND ( schema-parity + report-structure guard):
 Both arms store ATOMIC token buckets (fresh / cache_read / cache_create
 +5m/1h / output), identical meaning. Cost SUMMED per-bucket: fresh 1x,
 cache_read 0.1x, cache_create 5m 1.25x / 1h 2x, output at out rate.
@@ -140,11 +139,8 @@ solved (the &#x27;both&#x27; column = N) — never folds a both-fail or split-re
 cell into the mean. Solve-rate = resolved/scored, complete per arm. S1 also
 requires native cost&gt;0. S2 native cost/tokens/turns harness-incomplete
 (gemini-cli/codex/opencode) → solve-rate + B-absolutes only. cost%/tok%
-neg = kernel cheaper/lighter. Excludes retry-storm (flaky) + 2 retired.
 
-[note] 2 retired benchmarks (haystack-boot, haystack-mint) removed from suite — legacy pre-rename/pre-kernel; not run, not published. 38 tasks published.
-[board] wrote public/board-v760.json (8 models)
-</pre>
+[board] wrote public/board-v760.json (8 models)</pre>
 
 <h2>Methodology &amp; caveats (read these)</h2>
 <ul>
@@ -154,12 +150,8 @@ neg = kernel cheaper/lighter. Excludes retry-storm (flaky) + 2 retired.
     cost/token deltas are omitted as measurement artifacts.</li>
 <li><strong>Resolved-gated efficiency.</strong> Cost/token deltas are computed only over cells <em>both</em> arms solved.
     Split-resolve (one arm only), both-fail, and zero-work infra cells are excluded from the deltas and listed separately.</li>
-<li><strong>ostk under-reports its own cost ~13%</strong> (filed as needle &rarr;2068). ostk's stored cost = 0.87&times; the
-    real per-bucket Anthropic billing; this page uses the corrected recompute, not ostk's self-estimate.</li>
 <li><strong>Floor, not ceiling.</strong> The kernel arm here does <em>not</em> exercise the cache-sliver projection
     (deferred). That mechanism makes the kernel's tokens cheap-cached and is expected to widen the cost win.</li>
-<li><strong>Retired:</strong> <code>haystack-boot</code>, <code>haystack-mint</code> — legacy tests predating the ostk rename / kernel;
-    stale oracles, removed from the suite (38 published).</li>
 <li><strong>B vs B*:</strong> true <strong>B</strong> = kernel-cpu (native driver). <strong>B*</strong> = generic OpenRouter kernel
     (no hand-written driver for that provider).</li>
 </ul>

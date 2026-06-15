@@ -321,65 +321,72 @@ print(f"\n[note] {len(PUBLISHED_EXCLUDE)} retired benchmarks "
 
 # ---------------------------------------------------------------------------
 # BOARD JSON EMITTER — single source of truth for the live leaderboard.
-# The interactive board (src/pages/index.astro) renders THIS file, so the
-# displayed cells are exactly the verified, resolved-gated, per-bucket numbers.
+# Carries the ACTUAL token buckets (fresh / cache_read / cache_create / billed
+# / output) + cost per arm, solve as N/38, and the Anthropic native-vs-kernel
+# deltas. src/pages/index.astro renders this directly.
 # ---------------------------------------------------------------------------
-_harness = {m[0]: m[3] for m in MODELS}
-_barm = {m[0]: m[1] for m in MODELS}
-_bymodel = {}
-for r in anthropic_rows:
-    (model, label, n_scored, nat_n, b_n, nat_s, b_s, nc,
-     nat_cost, b_cost, cost_d, tok_d, split_cov) = r
-    _bymodel[model] = {
-        "model": model, "type": label, "native_cli": _harness.get(model, ""),
-        "cost_trusted": True, "scored": n_scored,
-        "native_solved": nat_n, "native_pct": round(nat_s * 100, 1) if nat_s is not None else None,
-        "kernel_solved": b_n, "kernel_pct": round(b_s * 100, 1) if b_s is not None else None,
-        "both_n": nc,
-        "cost_native": round(nat_cost, 3) if nat_cost is not None else None,
-        "cost_kernel": round(b_cost, 3) if b_cost is not None else None,
-        "cost_delta": round(cost_d, 1) if cost_d is not None else None,
-        "tok_delta": round(tok_d, 1) if tok_d is not None else None,
-        "b_abs_cost": None, "b_abs_tok": None,
-    }
-for r in solveonly_rows:
-    (model, label, harness, n_scored, nat_n, b_n, nat_s, b_s, b_abs_cost, b_abs_in) = r
-    _bymodel[model] = {
-        "model": model, "type": label, "native_cli": harness,
-        "cost_trusted": False, "scored": n_scored,
-        "native_solved": nat_n, "native_pct": round(nat_s * 100, 1) if nat_s is not None else None,
-        "kernel_solved": b_n, "kernel_pct": round(b_s * 100, 1) if b_s is not None else None,
-        "both_n": None, "cost_native": None, "cost_kernel": None,
-        "cost_delta": None, "tok_delta": None,
-        "b_abs_cost": round(b_abs_cost, 3) if b_abs_cost is not None else None,
-        "b_abs_tok": int(b_abs_in) if b_abs_in is not None else None,
-    }
+PUBLISHED = 38
+# Native CLI actually used per model (the harness that runs --arm native).
+NATIVE_CLI = {
+    "claude-opus-4-8": "claude-code", "claude-sonnet-4-6": "claude-code",
+    "gemini-3.1-pro-preview": "gemini-cli", "devstral-2512": "vibe",
+    "gpt-5.5": "codex", "grok-4.3": "opencode", "deepseek-v4-pro": "opencode",
+    "kimi-k2.6": "opencode",
+}
+
+def _buckets(recs, model):
+    f = r = c = b = o = 0
+    cost = 0.0
+    for rec in recs:
+        f += rec.get("fresh_input_tokens", 0) or 0
+        r += rec.get("cache_read_tokens", 0) or 0
+        c += rec.get("cache_create_tokens", 0) or 0
+        b += rec.get("billed_tokens", 0) or 0
+        o += rec.get("output_tokens", 0) or 0
+        cost += bucket_cost(rec, model)
+    if b == 0:
+        b = f + r + c
+    return {"cost": round(cost, 3), "fresh": f, "cache_read": r,
+            "cache_create": c, "billed": b, "output": o}
+
+def _pub(d):
+    return {bn: rr for bn, rr in d.items()
+            if bn not in PUBLISHED_EXCLUDE and bn not in INVALID}
+
 _board = []
 for model, barm, label, harness in MODELS:
-    rec = _bymodel.get(model)
-    if rec is None:
-        continue
+    natd = _pub(load(model, "native"))
+    Bd = _pub(load(model, barm))
+    cost_trusted = harness in COST_TRUSTED_HARNESS
+    native_ran = any(not is_zero_work(rr) for rr in natd.values())
+    nat_solved = sum(1 for rr in natd.values() if rr.get("resolved"))
+    b_solved = sum(1 for rr in Bd.values() if rr.get("resolved"))
+    both = [bn for bn in (set(natd) & set(Bd))
+            if natd[bn].get("resolved") and Bd[bn].get("resolved")
+            and not is_zero_work(natd[bn]) and not is_zero_work(Bd[bn])]
+    bsolved_cells = [bn for bn in Bd if Bd[bn].get("resolved") and not is_zero_work(Bd[bn])]
     sp = split_log.get(model, [])
-    rec["split_kernel_only"] = sum(1 for _, who in sp if who == "kernel-only")
-    rec["split_native_only"] = sum(1 for _, who in sp if who == "native-only")
-    rec["bothfail"] = len(bothfail_log.get(model, []))
-    # native key-blocked (B* with dead native): scored==0 drops the gated
-    # kernel pct too, so recompute kernel-only solve directly over the B arm.
-    rec["native_dead"] = rec["scored"] == 0
-    if rec["native_dead"]:
-        B = load(model, barm)
-        bc = [b for b, r2 in B.items()
-              if b not in PUBLISHED_EXCLUDE and b not in INVALID
-              and (r2.get("stop_reason") not in EXCLUDE_STOP)
-              and not is_zero_work(r2)]
-        if bc:
-            rec["kernel_solved"] = sum(1 for b in bc if B[b].get("resolved"))
-            rec["scored"] = len(bc)
-            rec["kernel_pct"] = round(rec["kernel_solved"] / len(bc) * 100, 1)
-            rec["b_abs_cost"] = round(sum(bucket_cost(B[b], model) for b in bc if B[b].get("resolved")), 3)
+    rec = {
+        "model": model, "type": label, "native_cli": NATIVE_CLI.get(model, harness),
+        "native_present": native_ran, "published": PUBLISHED, "cost_trusted": cost_trusted,
+        "native_solved": nat_solved if native_ran else None,
+        "kernel_solved": b_solved, "both_n": len(both),
+        "split_kernel_only": sum(1 for _, who in sp if who == "kernel-only"),
+        "split_native_only": sum(1 for _, who in sp if who == "native-only"),
+        "bothfail": len(bothfail_log.get(model, [])),
+        "native": None, "kernel": None, "cost_delta": None, "tok_delta": None,
+        "kernel_abs": _buckets([Bd[bn] for bn in bsolved_cells], model) if bsolved_cells else None,
+    }
+    # Anthropic: full apples-to-apples over both-solved cells, with bucket totals.
+    if cost_trusted and both:
+        rec["native"] = _buckets([natd[bn] for bn in both], model)
+        rec["kernel"] = _buckets([Bd[bn] for bn in both], model)
+        nb, kb = rec["native"]["billed"], rec["kernel"]["billed"]
+        ncst, kcst = rec["native"]["cost"], rec["kernel"]["cost"]
+        rec["cost_delta"] = round((kcst - ncst) / ncst * 100, 1) if ncst else None
+        rec["tok_delta"] = round((kb - nb) / nb * 100, 1) if nb else None
     _board.append(rec)
-_out = {"generated": "2026-06-15", "run": "v7.6.0",
-        "published_tasks": 38, "models": _board}
+_out = {"generated": "2026-06-15", "run": "v7.6.0", "published_tasks": PUBLISHED, "models": _board}
 with open("public/board-v760.json", "w") as _f:
     json.dump(_out, _f, indent=2)
 print(f"[board] wrote public/board-v760.json ({len(_board)} models)")

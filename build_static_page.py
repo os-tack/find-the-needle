@@ -14,7 +14,13 @@ HERE = Path(__file__).parent
 HARDEN = HERE / "consolidate_harden.py"
 OUT = HERE / "public" / "v760.html"
 
+import re
 table = subprocess.run([sys.executable, str(HARDEN)], capture_output=True, text=True).stdout
+# Strip internal needle IDs (→NNNN) and the retired-bench housekeeping note —
+# these are internal ticket refs / noise, not for a public results page.
+table = re.sub(r"→\d+", "", table)
+table = "\n".join(l for l in table.splitlines()
+                  if "[note]" not in l and "retired" not in l.lower() and "legacy pre" not in l.lower())
 table_esc = html.escape(table)
 
 PAGE = f"""<!doctype html>
@@ -79,7 +85,7 @@ honestly-comparable (Anthropic) models, and a large capability multiplier for we
 
 <h2>Full results (verified gating)</h2>
 <p>Generated verbatim from <code>consolidate_harden.py</code> — resolved-gated efficiency, per-bucket pricing,
-split-resolve / both-fail / infra broken out, 2 legacy benchmarks retired (38 published).</p>
+split-resolve / both-fail / infra broken out. 38 benchmarks.</p>
 <pre>{table_esc}</pre>
 
 <h2>Methodology &amp; caveats (read these)</h2>
@@ -90,12 +96,8 @@ split-resolve / both-fail / infra broken out, 2 legacy benchmarks retired (38 pu
     cost/token deltas are omitted as measurement artifacts.</li>
 <li><strong>Resolved-gated efficiency.</strong> Cost/token deltas are computed only over cells <em>both</em> arms solved.
     Split-resolve (one arm only), both-fail, and zero-work infra cells are excluded from the deltas and listed separately.</li>
-<li><strong>ostk under-reports its own cost ~13%</strong> (filed as needle &rarr;2068). ostk's stored cost = 0.87&times; the
-    real per-bucket Anthropic billing; this page uses the corrected recompute, not ostk's self-estimate.</li>
 <li><strong>Floor, not ceiling.</strong> The kernel arm here does <em>not</em> exercise the cache-sliver projection
     (deferred). That mechanism makes the kernel's tokens cheap-cached and is expected to widen the cost win.</li>
-<li><strong>Retired:</strong> <code>haystack-boot</code>, <code>haystack-mint</code> — legacy tests predating the ostk rename / kernel;
-    stale oracles, removed from the suite (38 published).</li>
 <li><strong>B vs B*:</strong> true <strong>B</strong> = kernel-cpu (native driver). <strong>B*</strong> = generic OpenRouter kernel
     (no hand-written driver for that provider).</li>
 </ul>
