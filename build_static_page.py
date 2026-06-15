@@ -28,18 +28,18 @@ PAGE = f"""<!doctype html>
   :root {{ color-scheme: light dark; }}
   body {{ font: 15px/1.6 -apple-system,Segoe UI,Roboto,sans-serif; max-width: 980px;
           margin: 0 auto; padding: 1.5rem; color:#1a1a1a; background:#fff; }}
-  @media (prefers-color-scheme: dark) {{ body {{ color:#e6e6e6; background:#141414; }} a{{color:#7db3ff}} .box{{background:#1e1e1e;border-color:#333}} pre{{background:#0e0e0e;border-color:#333}} }}
+  @media (prefers-color-scheme: dark) {{ body {{ color:#e6e6e6; background:#141414; }} a{{color:#7db3ff}} }}
   h1 {{ font-size: 1.5rem; margin-bottom: .2rem; }}
   .sub {{ color:#888; margin-top:0; }}
   .banner {{ background:#fff3cd; border:1px solid #ffe08a; color:#5c4400; padding:.7rem 1rem;
              border-radius:6px; margin:1rem 0; font-size:.9rem; }}
   @media (prefers-color-scheme: dark) {{ .banner{{background:#2a2410;border-color:#5c4d12;color:#e8d98a}} }}
-  .box {{ background:#f6f8fa; border:1px solid #e1e4e8; border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; }}
+  .box {{ background:rgba(127,127,127,0.08); border:1px solid rgba(127,127,127,0.3); border-radius:8px; padding:1rem 1.2rem; margin:1rem 0; }}
   table.tldr {{ border-collapse:collapse; width:100%; font-size:.92rem; }}
-  table.tldr th, table.tldr td {{ text-align:left; padding:.35rem .6rem; border-bottom:1px solid #e1e4e8; }}
-  @media (prefers-color-scheme: dark) {{ table.tldr th, table.tldr td{{border-color:#333}} }}
-  .win {{ color:#1a7f37; font-weight:600; }}  .neg {{ color:#cf222e; font-weight:600; }}
-  pre {{ background:#f6f8fa; border:1px solid #e1e4e8; border-radius:8px; padding:1rem;
+  table.tldr th, table.tldr td {{ text-align:left; padding:.35rem .6rem; border-bottom:1px solid rgba(127,127,127,0.25); }}
+  .win {{ color:#1a7f37; font-weight:700; }}  .neg {{ color:#cf222e; font-weight:700; }}
+  @media (prefers-color-scheme: dark) {{ .win{{color:#3fb950}} .neg{{color:#f85149}} }}
+  pre {{ background:rgba(127,127,127,0.10); border:1px solid rgba(127,127,127,0.3); border-radius:8px; padding:1rem;
          overflow-x:auto; font: 12px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace; }}
   code {{ font-family: ui-monospace,Menlo,monospace; }}
   h2 {{ font-size:1.15rem; margin-top:1.8rem; border-bottom:1px solid #e1e4e8; padding-bottom:.2rem; }}

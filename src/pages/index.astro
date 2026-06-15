@@ -24,52 +24,32 @@ const datasetSchema = {
 
 <Base
   title="needle-bench — AI coding agent leaderboard on real Docker bugs"
-  description="Open benchmark for AI coding agents. 31 models × 40 benchmarks × 3 arms = 3,641 runs. Deterministic scoring on real bugs frozen as Docker snapshots. Native CLI vs kernel vs native driver."
+  description="Open benchmark for AI coding agents. v7.6.0: 8 frontier models × 38 real-bug Docker benchmarks, native vendor CLI vs ostk kernel. Resolved-gated, per-bucket cost. Deterministic scoring."
   jsonLd={datasetSchema}
 >
   <main>
     <h1 class="visually-hidden">needle-bench AI Coding Agent Leaderboard</h1>
-    <div style="background:#fff3cd;border:1px solid #ffe08a;color:#5c4400;padding:.8rem 1rem;border-radius:6px;margin:1rem 0;font-size:.92rem;line-height:1.5;">
-      <strong>New — v7.6.0 schema-unified results (2026-06-15).</strong>
-      Accuracy-verified native-vs-kernel numbers (single-shot, resolved-gated, per-bucket cost) are published here:
-      <a href="/v760.html" style="font-weight:600;text-decoration:underline;">v7.6.0 results &rarr;</a>.
-      The interactive leaderboard below is from an earlier multi-model run and is being rebuilt on the new dataset — read the v7.6.0 page for current figures.
-    </div>
     <div class="experiment-info">
-      <p><strong>Three-arm experiment.</strong> 31 models &times; 40 benchmarks &times; 3 arms = 3,641 runs.</p>
-      <p class="muted"><strong>Native</strong>: vendor CLI. <strong>Kernel</strong>: ostk via OpenRouter. <strong>CPU</strong>: ostk + optimized driver. Click headers to sort.</p>
+      <p><strong>v7.6.0 &mdash; native vendor CLI vs ostk kernel.</strong> 8 frontier models &times; 38 benchmarks, single-shot (samples=1), captured 2026-06-15. Cost/token &Delta; are resolved-gated (cells both arms solved), per-bucket priced, and shown <em>only</em> for Anthropic &mdash; the one native harness that reports cost.</p>
+      <p class="muted">Cost &Delta; / Token &Delta; = kernel vs native (<span style="color:#3fb950">negative = kernel cheaper/lighter</span>). Click headers to sort. <a href="/v760.html">Full per-cell detail &amp; methodology &rarr;</a></p>
     </div>
 
     <div class="lb-container" id="lb-container">
       <table id="lb">
         <thead>
-          <tr id="lb-group-row">
-            <th colspan="2"></th>
-            <th colspan="4" class="group-header group-native">Native (vendor CLI)</th>
-            <th colspan="4" class="group-header group-kernel">Kernel (OpenRouter)</th>
-            <th colspan="4" class="group-header group-cpu">CPU (optimized driver)</th>
-            <th colspan="1"></th>
-          </tr>
           <tr id="lb-head">
             <th class="col-model" data-key="model">Model</th>
-            <th class="col-price" data-key="price">$/M</th>
-            <th class="col-solve arm-native" data-key="nativePct">Solve</th>
-            <th class="col-metric arm-native" data-key="nativeCost">Cost</th>
-            <th class="col-metric arm-native" data-key="nativeTokens">Tokens</th>
-            <th class="col-metric arm-native last" data-key="nativeTurns">Turns</th>
-            <th class="col-solve arm-kernel" data-key="kernelPct">Solve</th>
-            <th class="col-metric arm-kernel" data-key="kernelCost">Cost</th>
-            <th class="col-metric arm-kernel" data-key="kernelTokens">Tokens</th>
-            <th class="col-metric arm-kernel last" data-key="kernelTurns">Turns</th>
-            <th class="col-solve arm-cpu" data-key="cpuPct">Solve</th>
-            <th class="col-metric arm-cpu" data-key="cpuCost">Cost</th>
-            <th class="col-metric arm-cpu" data-key="cpuTokens">Tokens</th>
-            <th class="col-metric arm-cpu last" data-key="cpuTurns">Turns</th>
-            <th class="col-delta" data-key="bestDelta">&Delta;</th>
+            <th data-key="type" title="B = true kernel (native CpuDriver); B* = generic OpenRouter kernel">Type</th>
+            <th data-key="native_cli">Native CLI</th>
+            <th class="col-solve arm-native" data-key="native_pct">Native solve</th>
+            <th class="col-solve arm-cpu" data-key="kernel_pct">Kernel solve</th>
+            <th class="col-metric arm-cpu" data-key="cost_delta" title="kernel vs native cost, both-solved cells (Anthropic only)">Cost &Delta;</th>
+            <th class="col-metric arm-cpu" data-key="tok_delta" title="kernel vs native tokens, both-solved cells (Anthropic only)">Token &Delta;</th>
+            <th data-key="notes">Notes</th>
           </tr>
         </thead>
         <tbody id="lb-body">
-          <tr><td colspan="15" class="empty">Loading...</td></tr>
+          <tr><td colspan="8" class="empty">Loading...</td></tr>
         </tbody>
       </table>
     </div>
@@ -80,34 +60,26 @@ const datasetSchema = {
 
     <section class="results-summary">
       <h2>Results</h2>
-      <div class="arm-comparison" id="arm-comparison"></div>
 
-      <h3>Key findings</h3>
+      <h3>Key findings (v7.6.0)</h3>
       <ul>
-        <li><strong>Kernel lift</strong>: Claude native 63% &rarr; kernel 100%. Average +28&ndash;42pp for vendor CLI models.</li>
-        <li><strong>100% club</strong>: gpt-5-codex, claude-haiku/sonnet/opus all achieve 100% on kernel-cpu arm.</li>
-        <li><strong>Best value</strong>: kimi-k2.5 (95% solve, $0.71), devstral-small-latest (92%, $0.56).</li>
-        <li><strong>Non-agent models unlock</strong>: codestral-2508 solves 0% through Vibe but 35% through ostk kernel.</li>
-        <li><strong>Cheap models win</strong>: Haiku ($1/M) + kernel = Opus ($5/M) + kernel. The kernel equalizes.</li>
+        <li><strong>Anthropic, apples-to-apples</strong> (over both-solved cells): opus &minus;17% cost / &minus;49% tokens at solve parity; sonnet &minus;38% / &minus;65% with kernel solve 93%&rarr;100%.</li>
+        <li><strong>Capability multiplier for weak tool-users</strong>: devstral 19%&rarr;97% through the kernel &mdash; 25 tasks the native CLI failed, the kernel solved.</li>
+        <li><strong>Solve held or improved</strong> everywhere comparable: gemini 97%&rarr;100%, gpt-5.5 94%&rarr;97%; kimi 97%&rarr;95% is the lone slight regression.</li>
+        <li><strong>Token win is universal; cost win is cache-dependent</strong> &mdash; native's volume is mostly cheap cache-read, so the cost gap trails the token gap.</li>
+        <li><strong>This is a floor</strong> &mdash; the cache-sliver projection is not yet exercised in the kernel arm.</li>
       </ul>
 
       <h3>Methodology</h3>
       <ul>
-        <li>40 Docker benchmarks with real bugs. <code>test.sh</code> exits 0 = fixed.</li>
-        <li>31 models &times; 3 arms &times; 40 benchmarks = 3,641 score files.</li>
-        <li><strong>Native</strong>: vendor CLI (Claude Code, Gemini CLI, Codex, Vibe, Kimi CLI) or OpenCode fallback.</li>
-        <li><strong>Kernel</strong>: ostk agent loop via OpenRouter &mdash; fair comparison, same harness for all models.</li>
-        <li><strong>CPU</strong>: ostk agent loop via native API driver (Anthropic, Google, OpenAI, Mistral). Models without a driver show &ldquo;no driver&rdquo;.</li>
-        <li>Identical prompt across all arms: same system prompt, same user message, same benchmarks.</li>
+        <li>38 Docker benchmarks with real bugs (<code>test.sh</code> exits 0 = fixed). 2 legacy pre-kernel tests retired.</li>
+        <li><strong>Native</strong>: vendor CLI with its own key. <strong>Kernel (B)</strong>: ostk with native CpuDriver. <strong>B*</strong>: ostk via generic OpenRouter (no native driver for that provider).</li>
+        <li>Cost summed per token bucket (fresh 1&times;, cache-read 0.1&times;, cache-create 1.25&times;/2&times;) on a rate card validated to &lt;0.5% of real Anthropic billing.</li>
+        <li>Efficiency &Delta; computed only over cells <em>both</em> arms solved; split-resolve, both-fail, and zero-work infra cells excluded.</li>
+        <li>Cost/token &Delta; shown only for Anthropic &mdash; gemini-cli / codex / opencode native arms don't report cost (solve-rate only).</li>
+        <li>ostk under-reports its own cost ~13%; figures here use the corrected per-bucket recompute, not ostk's self-estimate.</li>
       </ul>
-
-      <h3>Notes</h3>
-      <ul>
-        <li>Native arm varies by vendor: different CLIs, different API constraints, different metric capture.</li>
-        <li>CPU arm only available for providers with a native driver in ostk (Anthropic, Google, OpenAI, Mistral).</li>
-        <li>Kernel arm (OpenRouter) is the controlled comparison &mdash; same harness, same API proxy, same tools.</li>
-        <li>codestral-2508 native unavailable due to Mistral API rate limiting (1 RPS).</li>
-      </ul>
+      <p style="margin-top:0.8rem;"><a href="/v760.html">&rarr; Full verified results, per-cell tables, and caveats (v7.6.0)</a></p>
     </section>
   </main>
 </Base>
@@ -267,60 +239,60 @@ const datasetSchema = {
   }
 
   async function init() {
-    const resp = await fetch('/experiment-scores.json');
+    const resp = await fetch('/board-v760.json');
     const data = await resp.json();
-    const models: ModelData[] = data.models;
+    const rows: any[] = data.models;
 
-    const rows = models.map(m => {
-      const nPct = armPct(m.native);
-      const kPct = armPct(m.kernel);
-      const cPct = armPct(m.cpu);
-      // Best kernel arm pct vs native
-      const bestKernelPct = Math.max(kPct >= 0 ? kPct : 0, cPct >= 0 ? cPct : 0);
-      const delta = nPct >= 0 ? bestKernelPct - nPct : bestKernelPct;
-      // Best overall pct for sorting
-      const bestPct = Math.max(nPct >= 0 ? nPct : 0, kPct >= 0 ? kPct : 0, cPct >= 0 ? cPct : 0);
-      return {
-        ...m,
-        nativePct: nPct, kernelPct: kPct, cpuPct: cPct,
-        nativeCost: m.native.cost, kernelCost: m.kernel.cost, cpuCost: m.cpu.cost,
-        nativeTokens: m.native.tokens, kernelTokens: m.kernel.tokens, cpuTokens: m.cpu.tokens,
-        nativeTurns: m.native.turns, kernelTurns: m.kernel.turns, cpuTurns: m.cpu.turns,
-        bestDelta: delta, bestPct,
-        price: m.price_per_m_input || 0,
-      };
-    });
+    function deltaSpan(d: number): string {
+      if (d == null) return '<span class="dim">—</span>';
+      if (d < 0) return `<span style="color:#3fb950;font-weight:700">${d}%</span>`;
+      if (d > 0) return `<span style="color:#f85149;font-weight:700">+${d}%</span>`;
+      return '<span class="dim">0%</span>';
+    }
+    function solvePct(solved: number, scored: number, p: number, star: string): string {
+      return `<span class="solve-pct ${pctClass(p)}">${solved}/${scored}</span>${star} <span class="dim">${p}%</span>`;
+    }
 
-    let sortKey = 'bestPct';
+    let sortKey = 'kernel_pct';
     let sortDir = -1;
+    const sortVal = (r: any) => {
+      if (sortKey === 'model' || sortKey === 'type' || sortKey === 'native_cli') return r[sortKey];
+      if (sortKey === 'cost_delta' || sortKey === 'tok_delta') return r[sortKey] ?? 999;
+      return r[sortKey] ?? -1;
+    };
     const sort = () => rows.sort((a: any, b: any) => {
-      const av = a[sortKey] ?? 0, bv = b[sortKey] ?? 0;
-      if (av === bv) return (a.price || 99) - (b.price || 99); // tiebreak by price
+      const av = sortVal(a), bv = sortVal(b);
+      if (av === bv) return 0;
       return sortDir * (typeof av === 'string' ? av.localeCompare(bv) : av - bv);
     });
 
     const render = () => {
       sort();
-      const tbody = document.getElementById('lb-body')!;
-      tbody.innerHTML = rows.map(r => {
-        const d = r.bestDelta;
-        const dHtml = d > 0 ? `<span class="delta-pos">+${d.toFixed(0)}</span>`
-          : d < 0 ? `<span class="delta-neg">${d.toFixed(0)}</span>`
-          : `<span class="delta-zero">0</span>`;
-        const cpuLabel = r.cpu_driver_status === 'no_driver' && r.cpu.total === 0 ? 'no_driver' : undefined;
+      document.getElementById('lb-body')!.innerHTML = rows.map((r: any) => {
+        const star = r.type === 'B*' ? '<sup class="bstar" title="generic OpenRouter kernel, no native driver">*</sup>' : '';
+        const nat = r.native_dead
+          ? '<span class="pct-na" title="native key-blocked — no provider API key">key-blocked</span>'
+          : solvePct(r.native_solved, r.scored, r.native_pct, '');
+        const ker = solvePct(r.kernel_solved, r.scored, r.kernel_pct, star);
+        const costD = (r.cost_trusted && r.cost_delta != null) ? deltaSpan(r.cost_delta)
+          : `<span class="dim" title="native cost not reported by ${r.native_cli}">—</span>`;
+        const tokD = (r.cost_trusted && r.tok_delta != null) ? deltaSpan(r.tok_delta) : '<span class="dim">—</span>';
+        const notes: string[] = [];
+        if (r.native_dead) notes.push('native key-blocked — kernel-only');
+        else if (!r.cost_trusted) notes.push('solve-rate only');
+        if (r.split_kernel_only) notes.push(`kernel solved +${r.split_kernel_only} native missed`);
+        if (r.split_native_only) notes.push(`native solved +${r.split_native_only} kernel missed`);
         return `<tr>
-          <td><span class="model-name">${r.model_normalized}</span></td>
-          <td class="col-price">${r.price > 0 ? '$'+r.price.toFixed(2) : '<span class="dim">-</span>'}</td>
-          ${solveCell(r.native, 'arm-native')}
-          ${metricCells(r.native, 'arm-native')}
-          ${solveCell(r.kernel, 'arm-kernel', undefined, r.kernel_arm_type === 'generic_kernel')}
-          ${metricCells(r.kernel, 'arm-kernel')}
-          ${solveCell(r.cpu, 'arm-cpu', cpuLabel)}
-          ${metricCells(r.cpu, 'arm-cpu')}
-          <td class="col-delta">${dHtml}</td>
+          <td><span class="model-name">${r.model}</span></td>
+          <td>${r.type}</td>
+          <td><span class="dim">${r.native_cli}</span></td>
+          <td class="arm-native col-solve">${nat}</td>
+          <td class="arm-cpu col-solve">${ker}</td>
+          <td class="arm-cpu col-metric">${costD}</td>
+          <td class="arm-cpu col-metric">${tokD}</td>
+          <td style="text-align:left;font-size:0.64rem;color:var(--text-muted);white-space:normal">${notes.join('; ')}</td>
         </tr>`;
       }).join('');
-
       document.querySelectorAll('#lb-head th').forEach(th => {
         th.classList.toggle('sorted', (th as HTMLElement).dataset.key === sortKey);
       });
@@ -329,48 +301,17 @@ const datasetSchema = {
     document.querySelectorAll('#lb-head th').forEach(th => {
       th.addEventListener('click', () => {
         const key = (th as HTMLElement).dataset.key;
-        if (!key) return;
+        if (!key || key === 'notes') return;
         if (sortKey === key) sortDir *= -1;
-        else { sortKey = key; sortDir = key === 'model' ? 1 : -1; }
+        else { sortKey = key; sortDir = (key === 'model' || key === 'type' || key === 'native_cli') ? 1 : -1; }
         render();
       });
     });
 
     render();
 
-    // Totals
-    const sum = (fn: (r: any) => number) => rows.reduce((s, r) => s + fn(r), 0);
-    const tScores = sum(r => r.native.total + r.kernel.total + r.cpu.total);
-    const tSolved = sum(r => r.native.solved + r.kernel.solved + r.cpu.solved);
-    const tCost = sum(r => r.native.cost + r.kernel.cost + r.cpu.cost);
-    const tTokens = sum(r => r.native.tokens + r.kernel.tokens + r.cpu.tokens);
-    document.getElementById('totals')!.textContent =
-      `${rows.length} models · ${tScores.toLocaleString()} runs · ${tSolved.toLocaleString()} solved · ${fmtN(tTokens)} tokens · $${tCost.toFixed(2)} spend`;
-
-    // Arm comparison cards
-    const armCard = (key: 'native' | 'kernel' | 'cpu', label: string, colorClass: string) => {
-      // For CPU card, only count models with a working driver
-      const filtered = key === 'cpu' ? rows.filter(r => r.cpu_driver_status === 'tested') : rows;
-      const sumF = (fn: (r: any) => number) => filtered.reduce((s, r) => s + fn(r), 0);
-      const s = sumF(r => r[key].solved), t = sumF(r => r[key].total);
-      const c = sumF(r => r[key].cost), tok = sumF(r => r[key].tokens);
-      const tools = sumF(r => r[key].tools), turns = sumF(r => r[key].turns);
-      const pct = t > 0 ? (s / t * 100).toFixed(0) : '0';
-      const count = key === 'cpu' ? ` · ${filtered.length} models` : '';
-      return `<div class="arm-card">
-        <h4>${label}</h4>
-        <div class="big ${pctClass(Number(pct))}">${pct}% <span style="font-size:0.6em;font-weight:400">(${s}/${t})</span></div>
-        <div class="detail">
-          $${c.toFixed(2)} · ${fmtN(tok)} tokens${count}<br>
-          ${tools.toLocaleString()} tools · ${turns.toLocaleString()} turns
-        </div>
-      </div>`;
-    };
-    document.getElementById('arm-comparison')!.innerHTML =
-      armCard('native', 'Native (vendor CLI)', 'pct-30') +
-      armCard('kernel', 'Kernel (OpenRouter)', 'pct-70') +
-      armCard('cpu', 'CPU (native driver)*', 'pct-90') +
-      '<div style="font-size:0.65rem;color:#484f58;grid-column:1/-1;margin-top:-0.5rem">* still building custom drivers for some providers — kernel (OpenRouter) covers all models</div>';
+    const tEl = document.getElementById('totals');
+    if (tEl) tEl.textContent = `${rows.length} models · ${data.published_tasks} benchmarks · single-shot · v7.6.0 (2026-06-15)`;
   }
 
   init();
