@@ -42,6 +42,8 @@ RATE_CARD = {
     # gemini-3.1-pro-preview: ≤200k tier (Google). Provider slug carries -preview.
     "gemini-3.1-pro-preview": (2.00, 12.00), "gemini-3-flash-preview": (0.50, 3.00),
     "gemini-3.1-flash-lite-preview": (0.10, 0.40),
+    # gemini-3.5-flash: GA 2026, list price $1.50/$9.00 (implicit cache read $0.15).
+    "gemini-3.5-flash": (1.50, 9.00), "gemini-3-5-flash": (1.50, 9.00),
     "gpt-4.1": (2.00, 8.00), "gpt-5-codex": (1.25, 10.00),
     "gpt-5.2": (1.25, 10.00), "gpt-5.4": (1.25, 10.00),
     # gpt-5.5 line: April 23 2026 price hike doubled the GPT-5 line → $5/$30 input/output.
@@ -320,6 +322,7 @@ def consolidate_all(dry_run: bool = False) -> None:
         # Google — native Gemini API
         # gemini-3-1-pro-preview is the frontier-2026 Tier-1 entry (also pre-existing).
         "gemini-2-5-flash", "gemini-2-5-pro", "gemini-3-flash-preview", "gemini-3-1-pro-preview",
+        "gemini-3-5-flash",  # frontier-2026 flash; native GeminiClient cpu driver
         # OpenAI — native API (OpenRouterClient pointed at api.openai.com)
         "gpt-4-1", "gpt-5-codex", "o3", "o4-mini",
         # NOTE: gpt-5.5 / gpt-5.5-pro are NOT here. ostk v7.6.0 has no native
