@@ -367,9 +367,13 @@ const datasetSchema = {
     }
     function costCell(b: any): string { return b ? usd(b.cost) : '<span class="dim" title="native CLI does not report cost">n/r</span>'; }
     function tokCell(b: any): string {
-      if (!b) return '<span class="dim" title="native CLI does not report token usage">n/r</span>';
-      return `<div>${fmtTok(b.billed)} <span class="dim" style="font-size:0.85em">billed</span></div>`
-        + `<div style="font-size:0.58rem;color:var(--text-muted);margin-top:1px">fresh ${fmtTok(b.fresh)} · read ${fmtTok(b.cache_read)} · create ${fmtTok(b.cache_create)}</div>`;
+      if (!b || !b.billed) return '<span class="dim" title="native CLI does not report token usage">n/r</span>';
+      const hasSplit = (b.fresh || 0) + (b.cache_read || 0) + (b.cache_create || 0) > 0;
+      const head = `<div>${fmtTok(b.billed)} <span class="dim" style="font-size:0.85em">billed</span></div>`;
+      const sub = hasSplit
+        ? `<div style="font-size:0.58rem;color:var(--text-muted);margin-top:1px">fresh ${fmtTok(b.fresh)} · read ${fmtTok(b.cache_read)} · create ${fmtTok(b.cache_create)}</div>`
+        : `<div style="font-size:0.58rem;color:var(--text-muted);margin-top:1px" title="native CLI reports a token total but no fresh/cache breakdown">total only · no cache split</div>`;
+      return head + sub;
     }
 
     let sortKey = 'kernel_solved';
@@ -400,7 +404,7 @@ const datasetSchema = {
       document.getElementById('lb-body')!.innerHTML = rows.map((r: any) => {
         const star = r.type === 'B*' ? '<sup class="bstar" title="generic OpenRouter kernel, no native driver">*</sup>' : '';
         const K = r.kernel ?? r.kernel_abs;
-        const natB = r.cost_trusted ? r.native : null;
+        const natB = r.native ?? null;
         return `<tr>
           <td><span class="model-name">${r.model}</span> <span class="dim" style="font-size:0.6rem">${r.native_cli}</span></td>
           <td>${r.type}</td>
