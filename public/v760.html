@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>needle-bench — v7.6.0 schema-unified results (2026-06-15)</title>
+<title>needle-bench — v7.6.0 schema-unified results (2026-06-17)</title>
 <meta name="robots" content="index,follow">
 <style>
   :root { color-scheme: light dark; }
@@ -31,7 +31,7 @@
 <body>
 <p><a href="/">&larr; needle-bench.cc</a></p>
 <h1>needle-bench — v7.6.0 schema-unified results</h1>
-<p class="sub">Native vendor CLI vs ostk kernel · single-shot (samples=1) · captured 2026-06-15</p>
+<p class="sub">Native vendor CLI vs ostk kernel · single-shot (samples=1) · captured 2026-06-17</p>
 
 <div class="banner"><strong>Preliminary static results.</strong> These are the authoritative, accuracy-verified numbers for the v7.6.0 run.
 The interactive leaderboard on the home page is being rebuilt on this dataset and should not be read as current yet.
@@ -69,23 +69,27 @@ SECTION 1 — ANTHROPIC: apples-to-apples cost / token (claude-code native)
 ====================================================================================
 model                 B scd    natSlv     BSlv both     nat$       B$  cost%   tok%  splt
 ------------------------------------------------------------------------------------
-claude-opus-4-8       B  37  34/37   92%  35/37   95%   34    9.497    7.860   -17%   -49%  100%
-claude-sonnet-4-6     B  30  28/30   93%  30/30  100%   28    5.235    3.222   -38%   -65%  100%
+claude-opus-4-8       B  37  34/37   92%  36/37   97%   34    9.373    6.372   -32%   -50%  100%
+claude-sonnet-4-6     B  36  34/36   94%  35/36   97%   34    7.348    3.417   -53%   -70%  100%
 
 ====================================================================================
-SECTION 2 — SOLVE-RATE ONLY (native metrics harness-incomplete)
-  native cost=$0 and/or tokens undercounted and/or turns fake (codex=1).
-  Cross-arm Δ$/Δtok OMITTED (measurement artifact). B$/B_tok = kernel
-  ABSOLUTES over B-solved cells (not a delta).
+SECTION 2 — SOLVE-RATE + native ABSOLUTES (native cache-split incomplete)
+  Cross-arm Δ$/Δtok still OMITTED here (no cache split → not apples-to-
+  apples; the board carries the un-gated delta + native_cost_basis).
+   UN-GATE: nat$/nat_tok now shown for the total tier (gemini-cli/
+  codex/vibe/kimi) — cost is an ALL-FRESH FLOOR (no cache discount, over-
+  states native). B$/B_tok = kernel absolutes over B-solved. grok/deepseek
+  native = key-pending (blank).
 ====================================================================================
-model               B   native_harness scd    natSlv     BSlv  B$(abs)  B_tok(abs)
+model               B   native_harness scd    natSlv     BSlv nat$(abs)    nat_tok  B$(abs)  B_tok(abs)
 ------------------------------------------------------------------------------------
-gemini-3.1-pro-preview  B       gemini-cli  37  36/37   97%  37/37  100%    8.270   3,812,260
-devstral-2512       B opencode/mistral  32   6/32   19%  31/32   97%    2.421   5,452,336
-gpt-5.5             B            codex  37  35/37   95%  36/37   97%   24.062   4,452,236
-grok-4.3           B*         opencode   0   0/0     -   0/0     -        -           -
-deepseek-v4-pro    B*         opencode   0   0/0     -   0/0     -        -           -
-kimi-k2.6          B*         opencode  37  36/37   97%  35/37   95%    1.377   2,841,465
+gemini-3.1-pro-preview  B       gemini-cli  37  36/37   97%  37/37  100%     3.716  4,208,541    8.040   5,184,195
+gemini-3.5-flash    B       gemini-cli  36  36/36  100%  36/36  100%     8.799  7,883,566   11.372   9,150,793
+devstral-2512       B             vibe  30   5/30   17%  28/30   93%     1.498  3,615,795    1.610   3,827,806
+gpt-5.5             B            codex  37  36/37   97%  36/37   97%     6.598  4,871,004   18.876   5,530,554
+grok-4.3           B*         opencode  36  34/36   94%  30/36   83%     4.017  3,172,558    3.254   2,532,728
+deepseek-v4-pro    B*         opencode  36  36/36  100%  35/36   97%     5.380  3,014,310    8.160   4,353,782
+kimi-k2.6          B*             kimi  37  36/37   97%  35/37   95%         -          -    1.420   2,911,943
 
 ====================================================================================
 SECTION 3 — SPLIT-RESOLVE / BOTH-FAIL (solve signal) + INFRA-FAILED (excluded)
@@ -93,19 +97,22 @@ SECTION 3 — SPLIT-RESOLVE / BOTH-FAIL (solve signal) + INFRA-FAILED (excluded)
   (turns==0, no API call) — excluded from BOTH solve-rate &amp; efficiency, retried.
 ====================================================================================
   SPLIT     claude-opus-4-8        silent-data-corruption             solved by: kernel-only
-  BOTH-FAIL claude-opus-4-8        (2): postgres-migration-schema-drift, split-brain-leader-election
+  SPLIT     claude-opus-4-8        split-brain-leader-election        solved by: kernel-only
+  BOTH-FAIL claude-opus-4-8        (1): postgres-migration-schema-drift
   SPLIT     claude-sonnet-4-6      silent-data-corruption             solved by: kernel-only
-  SPLIT     claude-sonnet-4-6      split-brain-leader-election        solved by: kernel-only
+  BOTH-FAIL claude-sonnet-4-6      (1): postgres-migration-schema-drift
+  INFRA     claude-sonnet-4-6      (1): sql-injection-search[kernel]
   SPLIT     gemini-3.1-pro-preview postgres-migration-schema-drift    solved by: kernel-only
+  INFRA     gemini-3.5-flash       (1): sql-injection-search[kernel]
   SPLIT     devstral-2512          api-version-field-drop             solved by: kernel-only
+  SPLIT     devstral-2512          auth-bypass-path-traversal         solved by: kernel-only
   SPLIT     devstral-2512          bidi-override-injection            solved by: kernel-only
   SPLIT     devstral-2512          compiler-macro-expansion           solved by: kernel-only
+  SPLIT     devstral-2512          data-corruption-concurrent-write   solved by: kernel-only
   SPLIT     devstral-2512          deadlock-transfer                  solved by: kernel-only
   SPLIT     devstral-2512          encoding-mojibake                  solved by: kernel-only
   SPLIT     devstral-2512          goroutine-leak-handler             solved by: kernel-only
   SPLIT     devstral-2512          import-cycle-startup               solved by: kernel-only
-  SPLIT     devstral-2512          k8s-assume-cache-silent-drop       solved by: kernel-only
-  SPLIT     devstral-2512          k8s-scheduler-shutdown-deadlock    solved by: kernel-only
   SPLIT     devstral-2512          kernel-panic-ioctl                 solved by: kernel-only
   SPLIT     devstral-2512          linearizability-stale-read         solved by: kernel-only
   SPLIT     devstral-2512          memory-leak-event-listener         solved by: kernel-only
@@ -114,20 +121,25 @@ SECTION 3 — SPLIT-RESOLVE / BOTH-FAIL (solve signal) + INFRA-FAILED (excluded)
   SPLIT     devstral-2512          null-pointer-config                solved by: kernel-only
   SPLIT     devstral-2512          off-by-one-array-slice             solved by: kernel-only
   SPLIT     devstral-2512          off-by-one-pagination              solved by: kernel-only
-  SPLIT     devstral-2512          rate-limit-bypass-header           solved by: kernel-only
+  SPLIT     devstral-2512          raft-snapshot-commit-gap           solved by: kernel-only
   SPLIT     devstral-2512          relaxed-ordering-ringbuf           solved by: kernel-only
   SPLIT     devstral-2512          silent-data-corruption             solved by: kernel-only
-  SPLIT     devstral-2512          ssrf-allowlist-port-confusion      solved by: kernel-only
   SPLIT     devstral-2512          timezone-scheduling                solved by: kernel-only
   SPLIT     devstral-2512          tls-chain-ordering-strict          solved by: kernel-only
-  SPLIT     devstral-2512          type-coercion-comparison           solved by: kernel-only
   SPLIT     devstral-2512          wrong-operator-discount            solved by: kernel-only
-  BOTH-FAIL devstral-2512          (1): postgres-migration-schema-drift
+  BOTH-FAIL devstral-2512          (2): postgres-migration-schema-drift, split-brain-leader-election
+  INFRA     devstral-2512          (7): cache-stale-invalidation[native], k8s-assume-cache-silent-drop[native], k8s-scheduler-shutdown-deadlock[native], performance-cliff-hash[native], sql-injection-search[kernel], type-coercion-comparison[kernel], wal-fsync-ghost-ack[kernel]
+  SPLIT     gpt-5.5                postgres-migration-schema-drift    solved by: native-only
   SPLIT     gpt-5.5                silent-data-corruption             solved by: kernel-only
-  BOTH-FAIL gpt-5.5                (1): postgres-migration-schema-drift
-  INFRA     grok-4.3               (36): api-version-field-drop[native], auth-bypass-path-traversal[native], bidi-override-injection[native], cache-stale-invalidation[native], compiler-macro-expansion[native], data-corruption-concurrent-write[native], deadlock-transfer[native], encoding-mojibake[native], goroutine-leak-handler[native], graphql-dataloader-per-request[native], import-cycle-startup[native], k8s-assume-cache-silent-drop[native], k8s-scheduler-shutdown-deadlock[native], kernel-panic-ioctl[native], linearizability-stale-read[native], memory-leak-event-listener[native], missing-input-validation[native], nginx-upstream-port-mismatch[native], null-pointer-config[native], off-by-one-array-slice[native], off-by-one-pagination[native], performance-cliff-hash[native], postgres-migration-schema-drift[native], race-condition-counter[native], raft-snapshot-commit-gap[native], relaxed-ordering-ringbuf[native], silent-data-corruption[native], split-brain-leader-election[native], sql-injection-search[native], ssrf-allowlist-port-confusion[native], timezone-scheduling[native], timing-attack-comparison[native], tls-chain-ordering-strict[native], type-coercion-comparison[native], wal-fsync-ghost-ack[native], wrong-operator-discount[native]
-  INFRA     deepseek-v4-pro        (36): api-version-field-drop[native], auth-bypass-path-traversal[native], bidi-override-injection[native], cache-stale-invalidation[native], compiler-macro-expansion[native], data-corruption-concurrent-write[native], deadlock-transfer[native], encoding-mojibake[native], goroutine-leak-handler[native], graphql-dataloader-per-request[native], import-cycle-startup[native], k8s-assume-cache-silent-drop[native], k8s-scheduler-shutdown-deadlock[native], kernel-panic-ioctl[native], linearizability-stale-read[native], memory-leak-event-listener[native], missing-input-validation[native], nginx-upstream-port-mismatch[native], null-pointer-config[native], off-by-one-array-slice[native], off-by-one-pagination[native], performance-cliff-hash[native], postgres-migration-schema-drift[native], race-condition-counter[native], raft-snapshot-commit-gap[native], rate-limit-bypass-header[native], relaxed-ordering-ringbuf[native], silent-data-corruption[native], split-brain-leader-election[native], ssrf-allowlist-port-confusion[native], timezone-scheduling[native], timing-attack-comparison[native], tls-chain-ordering-strict[native], type-coercion-comparison[native], wal-fsync-ghost-ack[native], wrong-operator-discount[native]
-  SPLIT     kimi-k2.6              goroutine-leak-handler             solved by: native-only
+  SPLIT     grok-4.3               linearizability-stale-read         solved by: native-only
+  SPLIT     grok-4.3               performance-cliff-hash             solved by: native-only
+  SPLIT     grok-4.3               split-brain-leader-election        solved by: native-only
+  SPLIT     grok-4.3               wal-fsync-ghost-ack                solved by: native-only
+  BOTH-FAIL grok-4.3               (2): postgres-migration-schema-drift, silent-data-corruption
+  INFRA     grok-4.3               (1): cache-stale-invalidation[kernel]
+  SPLIT     deepseek-v4-pro        postgres-migration-schema-drift    solved by: native-only
+  INFRA     deepseek-v4-pro        (1): sql-injection-search[kernel]
+  SPLIT     kimi-k2.6              timezone-scheduling                solved by: native-only
   BOTH-FAIL kimi-k2.6              (1): postgres-migration-schema-drift
 
 LEGEND ( schema-parity + report-structure guard):
@@ -140,7 +152,7 @@ cell into the mean. Solve-rate = resolved/scored, complete per arm. S1 also
 requires native cost&gt;0. S2 native cost/tokens/turns harness-incomplete
 (gemini-cli/codex/opencode) → solve-rate + B-absolutes only. cost%/tok%
 
-[board] wrote public/board-v760.json (8 models)</pre>
+[board] wrote public/board-v760.json (9 models)</pre>
 
 <h2>Methodology &amp; caveats (read these)</h2>
 <ul>
@@ -156,7 +168,7 @@ requires native cost&gt;0. S2 native cost/tokens/turns harness-incomplete
     (no hand-written driver for that provider).</li>
 </ul>
 
-<p class="foot">needle-bench · v7.6.0 · single-shot native-vs-kernel · static snapshot 2026-06-15.
+<p class="foot">needle-bench · v7.6.0 · single-shot native-vs-kernel · static snapshot 2026-06-17.
 Interactive render rebuilding on this data.</p>
 </body>
 </html>

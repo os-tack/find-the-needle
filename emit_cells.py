@@ -19,7 +19,7 @@ EXCLUDE_STOP = {"deadline_exceeded"}
 
 RATE_CARD = {
     "claude-opus-4-8": (5.00, 25.00), "claude-sonnet-4-6": (3.00, 15.00),
-    "gemini-3.1-pro-preview": (2.00, 12.00), "devstral-2512": (0.40, 2.00),
+    "gemini-3.1-pro-preview": (2.00, 12.00), "gemini-3.5-flash": (1.50, 9.00), "devstral-2512": (0.40, 2.00),
     "gpt-5.5": (5.00, 30.00), "grok-4.3": (1.25, 2.50),
     "deepseek-v4-pro": (1.74, 3.48), "kimi-k2.6": (0.40, 1.99),
 }
@@ -30,6 +30,7 @@ MODELS = [
     ("claude-opus-4-8", "kernel-cpu", "B", "claude-code"),
     ("claude-sonnet-4-6", "kernel-cpu", "B", "claude-code"),
     ("gemini-3.1-pro-preview", "kernel-cpu", "B", "gemini-cli"),
+    ("gemini-3.5-flash", "kernel-cpu", "B", "gemini-cli"),
     ("gpt-5.5", "kernel-cpu", "B", "codex"),
     ("devstral-2512", "kernel-cpu", "B", "vibe"),
     ("grok-4.3", "kernel", "B*", "opencode"),
@@ -207,7 +208,7 @@ for model, (nat, B, barm, label, harness) in arms_data.items():
     })
 
 out = {
-    "generated": "2026-06-16", "run": "v7.6.0", "published_tasks": 38,
+    "generated": "2026-06-17", "run": "v7.6.0", "published_tasks": 38,
     "benchmarks": benchmarks, "models": models_out,
 }
 os.makedirs("public", exist_ok=True)

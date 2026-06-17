@@ -38,6 +38,7 @@ RATE_CARD = {
     "claude-opus-4-8": (5.00, 25.00),
     "claude-sonnet-4-6": (3.00, 15.00),
     "gemini-3.1-pro-preview": (2.00, 12.00),
+    "gemini-3.5-flash": (1.50, 9.00),
     "devstral-2512": (0.40, 2.00),
     "gpt-5.5": (5.00, 30.00),
     "grok-4.3": (1.25, 2.50),
@@ -131,6 +132,7 @@ MODELS = [
     ("claude-opus-4-8",        "kernel-cpu", "B",  "claude-code"),
     ("claude-sonnet-4-6",      "kernel-cpu", "B",  "claude-code"),
     ("gemini-3.1-pro-preview", "kernel-cpu", "B",  "gemini-cli"),
+    ("gemini-3.5-flash",        "kernel-cpu", "B",  "gemini-cli"),
     ("devstral-2512",          "kernel-cpu", "B",  "vibe"),
     ("gpt-5.5",                "kernel-cpu", "B",  "codex"),
     ("grok-4.3",               "kernel",     "B*", "opencode"),
@@ -512,7 +514,7 @@ for model, barm, label, harness in MODELS:
         rec["cost_delta"] = round((kcst - ncst) / ncst * 100, 1) if ncst else None
         rec["tok_delta"] = round((kb - nb) / nb * 100, 1) if nb else None
     _board.append(rec)
-_out = {"generated": "2026-06-15", "run": "v7.6.0", "published_tasks": PUBLISHED, "models": _board}
+_out = {"generated": "2026-06-17", "run": "v7.6.0", "published_tasks": PUBLISHED, "models": _board}
 with open("public/board-v760.json", "w") as _f:
     json.dump(_out, _f, indent=2)
 print(f"[board] wrote public/board-v760.json ({len(_board)} models)")

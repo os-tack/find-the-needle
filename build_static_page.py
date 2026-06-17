@@ -28,7 +28,7 @@ PAGE = f"""<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>needle-bench — v7.6.0 schema-unified results (2026-06-15)</title>
+<title>needle-bench — v7.6.0 schema-unified results (2026-06-17)</title>
 <meta name="robots" content="index,follow">
 <style>
   :root {{ color-scheme: light dark; }}
@@ -56,7 +56,7 @@ PAGE = f"""<!doctype html>
 <body>
 <p><a href="/">&larr; needle-bench.cc</a></p>
 <h1>needle-bench — v7.6.0 schema-unified results</h1>
-<p class="sub">Native vendor CLI vs ostk kernel · single-shot (samples=1) · captured 2026-06-15</p>
+<p class="sub">Native vendor CLI vs ostk kernel · single-shot (samples=1) · captured 2026-06-17</p>
 
 <div class="banner"><strong>Preliminary static results.</strong> These are the authoritative, accuracy-verified numbers for the v7.6.0 run.
 The interactive leaderboard on the home page is being rebuilt on this dataset and should not be read as current yet.
@@ -102,7 +102,7 @@ split-resolve / both-fail / infra broken out. 38 benchmarks.</p>
     (no hand-written driver for that provider).</li>
 </ul>
 
-<p class="foot">needle-bench · v7.6.0 · single-shot native-vs-kernel · static snapshot 2026-06-15.
+<p class="foot">needle-bench · v7.6.0 · single-shot native-vs-kernel · static snapshot 2026-06-17.
 Interactive render rebuilding on this data.</p>
 </body>
 </html>
