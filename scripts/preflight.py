@@ -14,6 +14,15 @@ Checks, in order, BEFORE any container or API activity:
                    cpu/providers.rs resolve_provider for kernel/kernel-cpu)
                    are present. "Any of" semantics where the kernel would
                    legitimately fall back to another provider.
+  2b. LIVE PROBES— for each provider an arm will route through, make the FREE
+                   authenticated models-list call and verify (a) the key is
+                   VALID and (b) the EXACT model id EXISTS in the provider's
+                   catalog. On a miss, fail closed printing the closest
+                   matches — a dead key or a wrong-model-name-for-provider
+                   can no longer survive preflight. Keys are resolved env →
+                   .env (repo, then haystack) → `ostk secret env` and are
+                   NEVER printed (source name only). Network-but-free.
+                   Skipped by --offline; --dry-run implies --offline.
   3. docker      — `docker info` succeeds (skipped in --dry-run: zero docker
                    activity during planning).
   4. binary      — the content-hash-pinned musl binary in frozen-bin/ exists
@@ -148,6 +157,248 @@ def key_present(alternatives: list[str]) -> str | None:
 
 
 # ---------------------------------------------------------------------------
+# 2b. live provider probes (free authenticated models-list calls)
+# ---------------------------------------------------------------------------
+# Key resolution order mirrors what the run itself can reach: process env
+# first (what `ostk bench` children inherit), then the repo/haystack .env
+# files, then the ostk secret store (`ostk secret env` — bench.rs
+# resolve_secret path). Values are NEVER printed or logged; only the source.
+ENV_FILES = [ROOT / ".env", Path.home() / "projects/haystack/.env"]
+
+_KEY_CACHE: dict[str, tuple[str, str] | None] = {}
+
+
+def resolve_key(var: str) -> tuple[str, str] | None:
+    """Return (value, source) for an API key var, or None. Sources:
+    'env' | '<path>/.env' | 'ostk-secret'. Value must never be printed."""
+    if var in _KEY_CACHE:
+        return _KEY_CACHE[var]
+    result = None
+    if os.environ.get(var):
+        result = (os.environ[var], "env")
+    if result is None:
+        for env_fp in ENV_FILES:
+            if not env_fp.is_file():
+                continue
+            try:
+                for line in env_fp.read_text().splitlines():
+                    line = line.strip()
+                    if line.startswith("export "):
+                        line = line[len("export "):]
+                    if line.startswith(f"{var}=") and len(line) > len(var) + 1:
+                        val = line.split("=", 1)[1].strip().strip("'\"")
+                        if val:
+                            result = (val, str(env_fp))
+                            break
+            except OSError:
+                continue
+            if result:
+                break
+    if result is None and shutil.which("ostk"):
+        try:
+            proc = subprocess.run(
+                ["ostk", "secret", "env", var], capture_output=True,
+                text=True, timeout=15, cwd=ROOT)
+            for line in (proc.stdout or "").splitlines():
+                line = line.strip()
+                if line.startswith(f"export {var}=") and len(line) > len(var) + 8:
+                    val = line.split("=", 1)[1]
+                    if val:
+                        result = (val, "ostk-secret")
+                        break
+        except (subprocess.TimeoutExpired, OSError):
+            pass
+    _KEY_CACHE[var] = result
+    return result
+
+
+def format_openrouter_model(model: str) -> str:
+    """OpenRouter provider/model id for a roster model — python mirror of
+    haystack cpu/model_registry.rs format_openrouter (keep in lockstep)."""
+    if "/" in model:
+        return model
+    if model.startswith("claude-"):
+        # claude-haiku-4-5 -> anthropic/claude-haiku-4.5 (version dots)
+        parts = model.split("-")
+        if len(parts) >= 2 and parts[-1].isdigit() and parts[-2].isdigit():
+            model = "-".join(parts[:-2]) + f"-{parts[-2]}.{parts[-1]}"
+        return f"anthropic/{model}"
+    if model.startswith("gemini-"):
+        return f"google/{model}"
+    if model.startswith(("gpt-", "o1", "o3", "o4")):
+        return f"openai/{model}"
+    if model.startswith("grok-"):
+        return f"x-ai/{model}"
+    if model.startswith("codestral-"):
+        return f"mistralai/{model}"
+    if model.startswith("devstral-"):
+        return f"mistralai/{model.removesuffix('-latest')}"
+    if model.startswith("mistral-"):
+        return f"mistralai/{model}"
+    if model.startswith(("kimi-", "moonshot-")):
+        return f"moonshotai/{model}"
+    if model.startswith("deepseek-"):
+        return f"deepseek/{model}"
+    if model.startswith("qwen"):
+        return f"qwen/{model}"
+    if model.startswith("llama-"):
+        return f"meta-llama/{model}"
+    return model
+
+
+# provider -> (key env vars [any-of], models-list URL, auth style)
+PROBE_PROVIDERS = {
+    "anthropic":  (["ANTHROPIC_API_KEY"],
+                   "https://api.anthropic.com/v1/models?limit=1000", "anthropic"),
+    "google":     (["GEMINI_API_KEY", "GOOGLE_API_KEY"],
+                   "https://generativelanguage.googleapis.com/v1beta/models?pageSize=1000",
+                   "goog-header"),
+    "openai":     (["OPENAI_API_KEY"], "https://api.openai.com/v1/models", "bearer"),
+    "mistral":    (["MISTRAL_API_KEY"], "https://api.mistral.ai/v1/models", "bearer"),
+    "xai":        (["XAI_API_KEY"], "https://api.x.ai/v1/models", "bearer"),
+    "deepseek":   (["DEEPSEEK_API_KEY"], "https://api.deepseek.com/models", "bearer"),
+    "moonshot":   (["KIMI_API_KEY", "MOONSHOT_API_KEY"],
+                   "https://api.moonshot.ai/v1/models", "bearer"),
+    "openrouter": (["OPENROUTER_API_KEY"],
+                   "https://openrouter.ai/api/v1/models", "bearer"),
+}
+
+
+def probe_plan(model: str, arm: str) -> list[tuple[str, str]]:
+    """(provider, exact-model-id) alternatives for one (model, arm) cell —
+    first alternative whose key resolves gets probed. Mirrors the real
+    routing: bench.rs detect_native_harness for native, providers.rs
+    resolve_provider + format_openrouter for kernel arms. Empty list = no
+    probe applicable (e.g. local mlx)."""
+    m = model.lower()
+    if arm == "native":
+        if m.startswith("claude-"):
+            return [("anthropic", model)]
+        if m.startswith("gemini-"):
+            return [("google", model)]
+        if m.startswith(("gpt-", "o1", "o3", "o4")):
+            return [("openai", model)]
+        if m.startswith(MISTRAL_PREFIXES):
+            return [("mistral", model)]
+        if m.startswith(("kimi-", "moonshot-")):
+            return [("moonshot", model)]
+        if m.startswith("grok-"):
+            return [("xai", model)]
+        if m.startswith("deepseek-"):
+            return [("deepseek", model)]
+        return [("openrouter", format_openrouter_model(model))]
+    if m.startswith("mlx/") or arm == "kernel-mlx":
+        return []
+    if arm == "kernel-cpu":
+        if m.startswith("claude"):
+            return [("anthropic", model)]
+        if m.startswith("gemini"):
+            return [("google", model)]
+        if m.startswith(MISTRAL_PREFIXES):
+            return [("mistral", model)]
+        if m.startswith(("gpt", "o1", "o3")):
+            # OpenRouter if key set, else api.openai.com passthrough
+            return [("openrouter", format_openrouter_model(model)),
+                    ("openai", model)]
+        return [("openrouter", format_openrouter_model(model))]
+    # plain kernel: everything routes via OpenRouter (wire_model)
+    or_model = model.removeprefix("openrouter/") if m.startswith("openrouter/") \
+        else format_openrouter_model(model)
+    return [("openrouter", or_model)]
+
+
+def _http_get_json(url: str, headers: dict) -> tuple[int, dict | None]:
+    """GET url -> (status, parsed json | None). Never raises; never logs
+    headers (they carry the key). On an HTTP error the parsed error body is
+    returned when available (providers put the failure reason there — e.g.
+    Google's API_KEY_INVALID rides an HTTP 400, not a 401)."""
+    import urllib.error
+    import urllib.request
+    req = urllib.request.Request(url, headers=headers)
+    try:
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            return resp.status, json.loads(resp.read())
+    except urllib.error.HTTPError as e:
+        try:
+            return e.code, json.loads(e.read())
+        except Exception:
+            return e.code, None
+    except Exception:
+        return 0, None
+
+
+_CATALOG_CACHE: dict[str, tuple[set | None, str]] = {}
+
+
+def fetch_model_catalog(provider: str, key: str) -> tuple[set | None, str]:
+    """All model ids the provider's FREE models-list endpoint reports for this
+    key. Returns (ids, note); ids=None means the probe itself failed (dead
+    key / network) — note says why, redacted."""
+    if provider in _CATALOG_CACHE:
+        return _CATALOG_CACHE[provider]
+    _, url, auth = PROBE_PROVIDERS[provider]
+    headers = {"User-Agent": "needle-bench-preflight"}
+    if auth == "anthropic":
+        headers["x-api-key"] = key
+        headers["anthropic-version"] = "2023-06-01"
+    elif auth == "goog-header":
+        headers["x-goog-api-key"] = key
+    else:
+        headers["Authorization"] = f"Bearer {key}"
+
+    ids: set[str] = set()
+    status, data = _http_get_json(url, headers)
+    # Google signals a dead key as HTTP 400 INVALID_ARGUMENT/API_KEY_INVALID
+    # (not 401/403) — read the error body so a dead key is reported as a dead
+    # key, not as "unreachable". First live exercise 2026-07-09 hit exactly
+    # this: a stale GEMINI_API_KEY in .env while the keychain held the live one.
+    err_reasons = ""
+    if status != 200 and isinstance(data, dict):
+        err = data.get("error") or {}
+        err_reasons = " ".join(
+            [str(err.get("status", ""))] +
+            [str(d.get("reason", "")) for d in err.get("details", [])
+             if isinstance(d, dict)])
+    if status in (401, 403) or "API_KEY_INVALID" in err_reasons:
+        result = (None, f"key REJECTED by {provider} (HTTP {status}"
+                        f"{', API_KEY_INVALID' if 'API_KEY_INVALID' in err_reasons else ''}"
+                        f") — dead/expired key")
+    elif status != 200 or data is None:
+        result = (None, f"{provider} models-list unreachable (HTTP {status or 'network error'})")
+    else:
+        if provider == "google":
+            while True:
+                for mrow in data.get("models", []):
+                    name = str(mrow.get("name", ""))
+                    ids.add(name.removeprefix("models/"))
+                token = data.get("nextPageToken")
+                if not token:
+                    break
+                status, data = _http_get_json(f"{url}&pageToken={token}", headers)
+                if status != 200 or data is None:
+                    break
+        else:
+            for mrow in data.get("data", []) or []:
+                if isinstance(mrow, dict) and mrow.get("id"):
+                    ids.add(str(mrow["id"]))
+        result = (ids, f"{len(ids)} models visible")
+    _CATALOG_CACHE[provider] = result
+    return result
+
+
+def closest_models(model_id: str, ids: set) -> list[str]:
+    """Closest catalog ids for a fail-closed miss message."""
+    import difflib
+    pool = sorted(ids)
+    hits = difflib.get_close_matches(model_id, pool, n=5, cutoff=0.4)
+    # provider/model catalogs (openrouter): also try matching the bare suffix
+    if "/" not in model_id:
+        suffix_hits = [i for i in pool if i.rsplit("/", 1)[-1] == model_id]
+        hits = suffix_hits + [h for h in hits if h not in suffix_hits]
+    return hits[:5]
+
+
+# ---------------------------------------------------------------------------
 # 3/4. docker + pinned binary
 # ---------------------------------------------------------------------------
 def docker_reachable() -> tuple[bool, str]:
@@ -176,7 +427,9 @@ def sha256_file(path: Path) -> str:
 def check_frozen_pin() -> tuple[Path | None, str | None, list[str]]:
     """Verify the content-hash-pinned musl binary in frozen-bin/.
     Returns (path, verified_sha256, problems). The musl binary is the one that
-    ships into bench containers; ostk-host-* pins are informational."""
+    ships into bench containers; the ostk-host-* pin (the harness that writes
+    score.json) is gated separately in section 4b via the same resolver
+    run_matrix uses (run_matrix_v41.resolve_host_ostk)."""
     problems: list[str] = []
     if not FROZEN_BIN.is_dir():
         return None, None, [f"{FROZEN_BIN} does not exist"]
@@ -204,7 +457,9 @@ def find_local_binary() -> Path | None:
 
 
 def record_binary_identity(model: str, arms: list[str], pinned_sha: str | None,
-                           local_path: Path | None, local_sha: str | None) -> None:
+                           local_path: Path | None, local_sha: str | None,
+                           host_path: Path | None = None,
+                           host_sha: str | None = None) -> None:
     RUNS.mkdir(parents=True, exist_ok=True)
     row = {
         "ts": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -214,6 +469,10 @@ def record_binary_identity(model: str, arms: list[str], pinned_sha: str | None,
         "local_musl_path": str(local_path) if local_path else None,
         "local_musl_sha256": local_sha,
         "local_matches_pin": bool(pinned_sha and local_sha and pinned_sha == local_sha),
+        # Host harness (the binary run_matrix invokes to orchestrate the cell
+        # and write score.json) — a SECOND identity, gated in section 4b.
+        "host_ostk_path": str(host_path) if host_path else None,
+        "host_ostk_sha256": host_sha,
     }
     with BINARY_IDENTITY_LOG.open("a") as f:
         f.write(json.dumps(row) + "\n")
@@ -229,7 +488,11 @@ def main() -> int:
                     help="comma-separated arm subset (default: all roster arms)")
     ap.add_argument("--dry-run", action="store_true",
                     help="planning pass: no docker probe, no identity record; "
-                         "environment problems reported as WOULD-FAIL, exit 0")
+                         "environment problems reported as WOULD-FAIL, exit 0 "
+                         "(implies --offline)")
+    ap.add_argument("--offline", action="store_true",
+                    help="skip the live provider probes (models-list key/model "
+                         "verification). Structural + env checks still run.")
     ap.add_argument("--plan-out", default=None,
                     help="write the resolved plan JSON {model, frontier, arms} here")
     args = ap.parse_args()
@@ -307,8 +570,65 @@ def main() -> int:
         if found:
             report(f"key/{arm}", True, f"{found} set ({note})")
         else:
-            report(f"key/{arm}", False,
-                   f"none of {alternatives} set ({note})", fatal=False)
+            # Not exported — can it at least be resolved? The child process
+            # inherits ENV, so a .env/secret-store-only key still fails the
+            # env check, but the message says exactly where it was found.
+            resolvable = next(
+                ((var, resolve_key(var)) for var in alternatives
+                 if resolve_key(var)), None)
+            if resolvable:
+                var, (_val, source) = resolvable
+                report(f"key/{arm}", False,
+                       f"{var} found in {source} but NOT exported to the "
+                       f"environment — the run inherits the shell env; "
+                       f"export it (value redacted) ({note})", fatal=False)
+            else:
+                report(f"key/{arm}", False,
+                       f"none of {alternatives} set ({note})", fatal=False)
+
+    # 2b. live provider probes (free models-list; key + exact model id) --------
+    offline = args.offline or args.dry_run
+    if offline:
+        print("  [preflight] probe      SKIP  (--offline: no network probes)")
+    else:
+        for arm in arms:
+            plan = probe_plan(args.model, arm)
+            if not plan:
+                report(f"probe/{arm}", True, "no provider probe applicable (local)")
+                continue
+            # first alternative whose key resolves gets probed
+            chosen = None
+            for provider, model_id in plan:
+                key_vars = PROBE_PROVIDERS[provider][0]
+                resolved = next(
+                    ((var, resolve_key(var)) for var in key_vars
+                     if resolve_key(var)), None)
+                if resolved:
+                    chosen = (provider, model_id, resolved)
+                    break
+            if chosen is None:
+                providers = [p for p, _ in plan]
+                report(f"probe/{arm}", False,
+                       f"no key resolvable for provider(s) {providers} "
+                       f"(env, .env, ostk secret all empty) — cannot verify "
+                       f"key or model id")
+                continue
+            provider, model_id, (var, (key_val, source)) = chosen
+            ids, cat_note = fetch_model_catalog(provider, key_val)  # cached per provider
+            if ids is None:
+                report(f"probe/{arm}", False,
+                       f"{provider}: {cat_note} [key: {var} from {source}]")
+                continue
+            if model_id in ids:
+                report(f"probe/{arm}", True,
+                       f"{provider}: key valid ({var} from {source}, "
+                       f"{cat_note}); model '{model_id}' EXISTS")
+            else:
+                close = closest_models(model_id, ids)
+                hint = f" — closest: {close}" if close else ""
+                report(f"probe/{arm}", False,
+                       f"{provider}: key valid but model '{model_id}' NOT in "
+                       f"catalog ({cat_note}){hint}")
 
     # 3. docker ----------------------------------------------------------------
     if args.dry_run:
@@ -352,6 +672,42 @@ def main() -> int:
                   f"pin-reproducible (real runs record both hashes in "
                   f"runs/{BINARY_IDENTITY_LOG.name})")
 
+    # 4b. host bench harness -------------------------------------------------
+    # The binary that ORCHESTRATES cells and WRITES score.json. The musl pin
+    # above only covers the in-container kernel; the Jul-9 smoke ran the HOST
+    # side stale (a Jul-2 dev build from PATH, predating the arm/binary
+    # receipts and the --profile oneshot dispatch fix). run_matrix now
+    # resolves this binary explicitly ($OSTK_BENCH_BIN override, else the
+    # single hash-verified frozen-bin/ostk-host-* pin — never PATH); this
+    # section runs the SAME resolver and gates on it.
+    host_bin = host_sha = None
+    try:
+        host_bin, host_sha = run_matrix_v41.resolve_host_ostk()
+    except SystemExit as e:
+        report("host-bin", False, str(e).removeprefix("ERROR: "), fatal=False)
+    if host_bin is not None:
+        host_src = ("OSTK_BENCH_BIN override" if os.environ.get("OSTK_BENCH_BIN")
+                    else "frozen-bin pin")
+        # ce5b0ff9's write_score embeds the receipt keys as literals in the
+        # binary; a harness without them predates the arm-receipt schema and
+        # writes receipt-less scores (`--version` cannot discriminate: the
+        # stale Jul-2 build also reported 7.7.1 — hence hash + marker gates).
+        if b"requested_arm" not in host_bin.read_bytes():
+            report("host-bin", False,
+                   f"{host_bin} ({host_src}, sha256={host_sha[:16]}…) predates "
+                   f"the arm-receipt schema (no 'requested_arm' literal) — "
+                   f"scores it writes carry no requested_arm/executed_arm/"
+                   f"bench_binary receipts; rebuild + re-pin from haystack "
+                   f">= ce5b0ff9", fatal=False)
+        else:
+            report("host-bin", True,
+                   f"{host_bin.name} ({host_src}, sha256={host_sha[:16]}…) "
+                   f"carries arm receipts")
+        path_ostk = shutil.which("ostk")
+        if path_ostk and sha256_file(Path(path_ostk)) != host_sha:
+            print(f"  [preflight] host-bin   NOTE  PATH ostk ({path_ostk}) differs "
+                  f"from the resolved harness — run_matrix ignores PATH by design")
+
     # ---------------------------------------------------------------------------
     if args.plan_out:
         Path(args.plan_out).write_text(json.dumps(
@@ -370,7 +726,8 @@ def main() -> int:
             print("\npreflight (dry-run) all checks green.")
         return 0
 
-    record_binary_identity(args.model, arms, pinned_sha, local, local_sha)
+    record_binary_identity(args.model, arms, pinned_sha, local, local_sha,
+                           host_bin, host_sha)
     print(f"\npreflight OK — binary identity recorded to {BINARY_IDENTITY_LOG}")
     return 0
 
