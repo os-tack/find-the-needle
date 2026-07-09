@@ -21,7 +21,7 @@ Invoke:
   ./run_matrix_v41.py --retry-failed       # also retry hard-failed cells
 """
 from __future__ import annotations
-import argparse, json, os, subprocess, sys, time
+import argparse, hashlib, json, os, subprocess, sys, time
 from dataclasses import dataclass, field
 from pathlib import Path
 from datetime import datetime, timezone
@@ -29,6 +29,11 @@ from datetime import datetime, timezone
 ROOT = Path(__file__).parent.resolve()
 RUNS = ROOT / "runs"
 STATE = RUNS / ".state.jsonl"
+
+# stall_watch / native_usage live in scripts/ (no package __init__ — path import).
+sys.path.insert(0, str(ROOT / "scripts"))
+import native_usage  # noqa: E402  (native-arm billed-usage capture)
+import stall_watch   # noqa: E402  (merciless per-cell stall detection)
 
 # ---------- roster ----------
 # Each entry: model -> dict(arms=[...], category="existing"|"new", new_in_v41=bool)
@@ -101,6 +106,12 @@ FRONTIER_2026 = {  # model -> arms (exact, no gating)
     # gemini thinking-response/loop work (likely thoughtSignature echo across turns).
     # gemini-3.1-pro-preview remains the gemini frontier data point. (qwen3-coder
     # also dropped — native DashScope key-blocked from ES.)
+    # 2026-07-09: re-rostered for a bounded smoke re-test of the kernel-cpu arm
+    # under the stall-watch machinery (consolidator already carries its
+    # RATE_CARD/CPU_DRIVER_MODELS/NATIVE_CLI_MAP entries). The June-14 stall
+    # above is still the expectation until proven otherwise — do NOT pay for a
+    # full matrix run on this id without a green smoke cell first.
+    "gemini-3.5-flash":  ["native", "kernel-cpu"],
     "devstral-2512":     ["native", "kernel-cpu"],
     # gpt-5.5: runs the kernel-cpu arm but ostk v7.6.0 has no native OpenAI
     # Responses-API driver, so it falls back to generic OpenRouter → labeled B*
@@ -305,9 +316,117 @@ ARM_FLAGS = {
     "kernel-mlx":  ["--arm", "kernel",  "--driver", "mlx", "--local"],
 }
 
+# ---------- host bench harness (explicit binary, never bare PATH ostk) ----------
+# The HOST-side ostk orchestrates every cell and writes score.json — it is a
+# second binary identity, separate from the musl pin that ships INTO the
+# container. Invoking bare `ostk` from PATH silently runs whatever was
+# installed last (the Jul-9 smoke ran a stale Jul-2 dev build that predated
+# the requested_arm/executed_arm/bench_binary receipts and the --profile
+# oneshot dispatch fix). The matrix therefore resolves the harness explicitly:
+#   1. $OSTK_BENCH_BIN — deliberate operator override (hashed + logged, may
+#      differ from the pin for dev runs);
+#   2. the single frozen-bin/ostk-host-<sha256> content-hash pin (the filename
+#      IS the pin record; content hash re-verified before any cell runs).
+# There is NO PATH fallback — missing/corrupt/ambiguous pins fail closed.
+FROZEN_BIN = ROOT / "frozen-bin"
+
+_HOST_OSTK: tuple[Path, str] | None = None
+
+
+def _sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def resolve_host_ostk() -> tuple[Path, str]:
+    """(path, sha256) of the host ostk harness, fail-closed (see block above).
+    Cached: the hash is verified once per process, before the first cell."""
+    global _HOST_OSTK
+    if _HOST_OSTK is not None:
+        return _HOST_OSTK
+    override = os.environ.get("OSTK_BENCH_BIN")
+    if override:
+        p = Path(override).expanduser()
+        if not p.is_file():
+            raise SystemExit(f"ERROR: OSTK_BENCH_BIN={override!r} is not a file")
+        _HOST_OSTK = (p, _sha256_file(p))
+        return _HOST_OSTK
+    pins = sorted(FROZEN_BIN.glob("ostk-host-*"))
+    if not pins:
+        raise SystemExit(
+            "ERROR: no frozen-bin/ostk-host-<sha256> pin and no $OSTK_BENCH_BIN "
+            "override — refusing to fall back to PATH `ostk` (a stale harness "
+            "writes receipt-less scores). Build in haystack, then pin: "
+            "cp target/release/ostk frozen-bin/ostk-host-<its sha256>")
+    if len(pins) > 1:
+        raise SystemExit(
+            f"ERROR: {len(pins)} ostk-host-* pins in frozen-bin/ "
+            f"({', '.join(p.name for p in pins)}) — exactly one must glob; "
+            f"archive the others (see frozen-bin/archive-*/)")
+    pin = pins[0]
+    claimed = pin.name.removeprefix("ostk-host-")
+    actual = _sha256_file(pin)
+    if actual != claimed:
+        raise SystemExit(
+            f"ERROR: HOST PIN CORRUPT: {pin.name} content hash is {actual} "
+            f"(filename claims {claimed}) — re-pin from a trusted build")
+    _HOST_OSTK = (pin, actual)
+    return _HOST_OSTK
+
+
 MAX_RETRIES = 2
 BACKOFF_SEC = [10, 60]  # 2 retries with escalating backoff
-WALL_TIMEOUT_SEC = 1800  # 30min per cell
+WALL_TIMEOUT_SEC = 1800  # legacy flat cap; superseded by cell_deadline_s below
+                         # (kept for external scripts that import it)
+
+# ---------- per-cell hard deadline (stall_watch) ----------
+# The deadline comes from the BENCHMARK'S OWN wall_clock budget (difficulty.json
+# tier, or the SLOW_SCENARIOS override below) plus fixed overhead for container
+# build/boot/score/teardown — capped, so no cell can silently ride a flat
+# 30-minute timeout that dwarfs its real 10-minute budget.
+DEADLINE_OVERHEAD_SEC = 600
+DEADLINE_CAP_SEC = 3600
+
+_DIFFICULTY_WALL: dict[str, int] = {}
+
+
+def _load_difficulty_walls() -> dict[str, int]:
+    """bench -> wall_clock seconds from difficulty.json (empty on trouble)."""
+    if _DIFFICULTY_WALL:
+        return _DIFFICULTY_WALL
+    try:
+        data = json.loads((ROOT / "difficulty.json").read_text())
+        tiers = data.get("tiers", {})
+        for bench, tier in data.get("benchmarks", {}).items():
+            wall = (tiers.get(tier) or {}).get("wall_clock")
+            if wall:
+                _DIFFICULTY_WALL[bench] = int(wall)
+    except (OSError, json.JSONDecodeError, ValueError):
+        pass
+    return _DIFFICULTY_WALL
+
+
+def bench_wall_clock_s(bench: str) -> int:
+    """The benchmark's own wall_clock budget (difficulty tier; SLOW_SCENARIOS
+    override wins when larger; 600s default)."""
+    wall = _load_difficulty_walls().get(bench, 600)
+    return max(wall, SLOW_SCENARIOS.get(bench, 0))
+
+
+def cell_deadline_s(bench: str) -> int:
+    """Per-cell hard deadline: bench budget + overhead, sanely capped."""
+    return min(bench_wall_clock_s(bench) + DEADLINE_OVERHEAD_SEC, DEADLINE_CAP_SEC)
+
+
+def bench_difficulty_tier(bench: str) -> str:
+    try:
+        data = json.loads((ROOT / "difficulty.json").read_text())
+        return data.get("benchmarks", {}).get(bench, "medium")
+    except (OSError, json.JSONDecodeError):
+        return "medium"
 
 # ---------- completeness gate (→2062 / WS2) ----------
 # INFRA_RETRIES is a budget SEPARATE from the transient MAX_RETRIES above.
@@ -364,6 +483,9 @@ def is_valid_score(score: dict) -> bool:
     in_tok = score.get("input_tokens", 0) or 0
     out_tok = score.get("output_tokens", 0) or 0
     if "deadline" in stop:
+        return False
+    if "stall" in stop:
+        # stall_watch killed a no-progress run — infra, not a model verdict.
         return False
     if turns == 0 and (in_tok + out_tok) == 0 and stop != "pass":
         return False
@@ -423,59 +545,84 @@ def classify_failure(output: str, returncode: int) -> str:
     return "failed"
 
 def run_cell(model: str, bench: str, arm: str, dry_run: bool) -> tuple[str, str]:
-    """Invoke ostk bench. Return (status, tail_output).
+    """Invoke ostk bench under stall_watch (merciless stall detection for
+    EVERY arm — journal-completion detector on kernel arms, no-progress
+    watchdog + hard deadline on all arms). Return (status, tail_output).
 
-    A run counts as "success" ONLY if returncode==0 AND a score.json exists AND
-    that score passes is_valid_score. A returncode==0 run that writes an INVALID
-    score (deadline / zero-work / api_error-no-work) is classified as
-    'infra_fail' so the cell_action retry/quarantine path can handle it rather
-    than silently locking in a phantom.
+    A run counts as "success" ONLY if the child completed AND a score.json
+    exists AND that score passes is_valid_score. A completed run that writes
+    an INVALID score (deadline / stall / zero-work / api_error-no-work) is
+    classified as 'infra_fail' so the cell_action retry/quarantine path can
+    handle it rather than silently locking in a phantom.
 
-    SLOW_SCENARIOS bumps the python subprocess timeout so we don't SIGKILL a
-    legitimately-slow cell early, and exports BENCH_WALL_CLOCK_OVERRIDE in the
-    child env (a hook for a future `ostk bench --wall-clock` flag — see the
-    SLOW_SCENARIOS TODO above; the Agentfile `LIMIT wall_clock` still governs
-    the actual in-container model deadline until that flag lands)."""
-    cmd = ["ostk", "bench", bench, "--model", model, *ARM_FLAGS[arm], "--docker"]
+    stall_watch outcomes map as:
+      exit           — child exited by itself: gate on returncode + validity.
+      completed_kill — terminal evidence (score.json landed, or the kernel
+                       journal showed a terminal row) but teardown hung past
+                       grace: the process tree + container were SIGKILLed and
+                       the cell is scored (bench's own score stamped
+                       teardown_masked, or synthesized from the salvaged
+                       journal). Gated on validity like a clean exit.
+      stall_kill /   — no progress past the escalation ladder / hard deadline:
+      deadline_kill    the cell was written as an INVALID score with
+                       stop_reason 'stall' and the matrix CONTINUES
+                       ('infra_fail' → retry within budget, then quarantine).
+
+    BENCH_WALL_CLOCK_OVERRIDE stays exported for SLOW_SCENARIOS (hook for a
+    future `ostk bench --wall-clock` flag; the Agentfile LIMIT still governs
+    the in-container model deadline until that lands)."""
+    cmd = [str(resolve_host_ostk()[0]), "bench", bench, "--model", model,
+           *ARM_FLAGS[arm], "--docker"]
     if dry_run:
         print(f"    DRY-RUN: {' '.join(cmd)}")
         return "success", ""
 
-    # Per-scenario wall-clock override: bump the subprocess timeout and pass a
-    # hint in the child env for the (future) bench.rs flag.
-    timeout_sec = WALL_TIMEOUT_SEC
     child_env = os.environ.copy()
     if bench in SLOW_SCENARIOS:
-        override = SLOW_SCENARIOS[bench]
-        # Give the python subprocess generous headroom over the model's own
-        # wall_clock budget (container spin-up + scoring + teardown overhead).
-        timeout_sec = max(WALL_TIMEOUT_SEC, override + 600)
-        child_env["BENCH_WALL_CLOCK_OVERRIDE"] = str(override)
+        child_env["BENCH_WALL_CLOCK_OVERRIDE"] = str(SLOW_SCENARIOS[bench])
 
     start = time.time()
     try:
-        proc = subprocess.run(
-            cmd, cwd=ROOT,
-            capture_output=True, text=True,
-            timeout=timeout_sec,
-            env=child_env,
+        result = stall_watch.watch_cell(
+            cmd, model=model, bench=bench, arm=arm,
+            score_path=score_path(model, bench, arm),
+            runs_root=RUNS,
+            deadline_s=cell_deadline_s(bench),
+            cwd=ROOT, env=child_env,
+            difficulty_tier=bench_difficulty_tier(bench),
         )
-        elapsed = time.time() - start
-        tail = (proc.stdout + "\n" + proc.stderr).strip().splitlines()[-10:]
-        tail_str = "\n".join(tail)
-        if proc.returncode == 0 and score_exists(model, bench, arm):
-            # Gate the written score: a returncode==0 run that produced an
-            # INVALID score (phantom) is infra, not success.
-            if score_valid(model, bench, arm):
-                return "success", f"({elapsed:.0f}s)"
-            sc = read_score(model, bench, arm) or {}
-            reason = (sc.get("stop_reason", "") or "").lower() or "invalid"
-            return "infra_fail", f"invalid score (stop={reason}) ({elapsed:.0f}s)"
-        return classify_failure(proc.stdout + proc.stderr, proc.returncode), tail_str
-    except subprocess.TimeoutExpired:
-        return "transient_fail", f"timeout after {timeout_sec}s"
     except Exception as e:
         return "failed", f"exception: {e}"
+    elapsed = time.time() - start
+
+    # Native-arm billed-usage capture: enrich the freshly-written score with
+    # the vendor CLI's own telemetry (opencode/kimi/vibe) BEFORE the validity
+    # gate, so zero-billed cells become real-accounting cells at run time.
+    if arm == "native" and score_exists(model, bench, arm):
+        try:
+            did, note = native_usage.enrich_score_file(score_path(model, bench, arm))
+            if did:
+                print(f"    [native-usage] {note}")
+        except Exception as e:  # capture must never fail a run
+            print(f"    [native-usage] WARN: capture failed: {e}", file=sys.stderr)
+
+    if result.status in ("stall_kill", "deadline_kill"):
+        # Cell already written as INVALID reason 'stall'; matrix continues.
+        return "infra_fail", f"stall_watch: {result.detail} ({elapsed:.0f}s)"
+
+    completed = (result.status == "completed_kill"
+                 or (result.status == "exit" and result.returncode == 0))
+    masked_note = " [teardown_masked]" if result.teardown_masked else ""
+    if completed and score_exists(model, bench, arm):
+        if score_valid(model, bench, arm):
+            return "success", f"({elapsed:.0f}s){masked_note}"
+        sc = read_score(model, bench, arm) or {}
+        reason = (sc.get("stop_reason", "") or "").lower() or "invalid"
+        return "infra_fail", f"invalid score (stop={reason}) ({elapsed:.0f}s){masked_note}"
+    if result.status == "completed_kill":
+        # killed after terminal evidence but no trustworthy score landed
+        return "infra_fail", f"stall_watch: {result.detail} ({elapsed:.0f}s)"
+    return classify_failure(result.tail, result.returncode or 1), result.tail
 
 def cell_action(model: str, bench: str, arm: str, state: dict, retry_failed: bool,
                 dry_run: bool = False) -> str:
@@ -565,9 +712,17 @@ def main() -> int:
     args = ap.parse_args()
     samples_max = 1 if args.no_resample else max(1, args.samples)
 
-    # version gate
+    # host harness gate: resolve + hash-verify the explicit host ostk (never
+    # bare PATH) BEFORE planning, so a missing/corrupt pin fails here and not
+    # mid-matrix. resolve_host_ostk raises SystemExit fail-closed.
+    host_bin, host_sha = resolve_host_ostk()
+    print(f"[gate] host ostk: {host_bin} (sha256={host_sha[:16]}…)")
+
+    # version gate (runs the RESOLVED harness, not PATH `ostk` — a version
+    # string alone cannot discriminate same-version stale builds, hence the
+    # content-hash gate above; this remains a cheap sanity label)
     if args.ostk_version_gate:
-        v = subprocess.run(["ostk", "--version"], capture_output=True, text=True).stdout.strip()
+        v = subprocess.run([str(host_bin), "--version"], capture_output=True, text=True).stdout.strip()
         if args.ostk_version_gate not in v:
             print(f"ERROR: ostk version '{v}' does not contain '{args.ostk_version_gate}'", file=sys.stderr)
             return 1

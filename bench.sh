@@ -1,17 +1,28 @@
 #!/usr/bin/env bash
 # bench.sh — one-command operator path: preflight -> run -> validate -> board.
 #
-#   ./bench.sh <model-id> [--arms native,kernel-cpu] [--dry-run] [--no-board]
+#   ./bench.sh <model-id> [--arms native,kernel-cpu] [--bench a,b] [--dry-run]
+#              [--offline] [--no-board]
+#   ./bench.sh --status          # live cell states (stall_watch ledger)
 #
 # Flow (fails closed at every step):
 #   1. PREFLIGHT   scripts/preflight.py — roster resolution, provider env
-#                  key(s) for the model's actual routing, docker daemon,
+#                  key(s) for the model's actual routing, LIVE provider
+#                  probes (free models-list call: key validity + exact model
+#                  id existence, fail-closed with closest matches; skipped by
+#                  --offline; --dry-run implies --offline), docker daemon,
 #                  frozen-bin content-hash pin + local musl binary (hash
 #                  recorded to runs/.binary_identity.jsonl). A failed
 #                  preflight exits nonzero BEFORE any container/API activity.
 #   2. RUN         run_matrix_v41.py — the existing resumable matrix runner
-#                  (per-cell retries, infra quarantine, F7 sampling). Re-run
-#                  the same bench.sh command to resume after interruption.
+#                  (per-cell retries, infra quarantine, F7 sampling), with
+#                  scripts/stall_watch.py wrapped around EVERY cell: journal
+#                  completion detection (kernel arms), no-progress watchdog
+#                  (WARN 90s / probe 180s / SIGKILL 300s -> INVALID 'stall'),
+#                  per-cell hard deadline from the bench's own budget. Every
+#                  transition lands timestamped in runs/.cell_status.jsonl —
+#                  './bench.sh --status' renders it live. Re-run the same
+#                  bench.sh command to resume after interruption.
 #   3. POSTFLIGHT  scripts/validate.py — cell_validity over this model's
 #                  runs/ dirs; any INVALID cell is reported loudly with
 #                  reasons and aborts the pipeline (nonzero exit; the board
@@ -20,6 +31,7 @@
 #                  public/scores.json + public/experiment-scores.json.
 #   5. BOARD       npm run build — astro copies public/ into dist/.
 #
+# --bench a,b restricts the run to specific benchmarks (narrow/smoke runs).
 # --dry-run walks the whole plan (which benchmarks, which arms, estimated
 # cell count) with ZERO network/docker activity, then prints what steps
 # 3-5 would do. See RUNBOOK.md.
@@ -36,15 +48,21 @@ usage() {
 
 MODEL=""
 ARMS=""
+BENCHES=""
 DRY_RUN=0
 NO_BOARD=0
+OFFLINE=0
 
 while (( $# )); do
     case "$1" in
         --arms)     ARMS="${2:?--arms needs a value}"; shift 2 ;;
         --arms=*)   ARMS="${1#--arms=}"; shift ;;
+        --bench)    BENCHES="${2:?--bench needs a value}"; shift 2 ;;
+        --bench=*)  BENCHES="${1#--bench=}"; shift ;;
         --dry-run)  DRY_RUN=1; shift ;;
+        --offline)  OFFLINE=1; shift ;;
         --no-board) NO_BOARD=1; shift ;;
+        --status)   exec python3 "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/scripts/stall_watch.py" --status ;;
         -h|--help)  usage; exit 0 ;;
         -*)         echo "unknown flag: $1" >&2; usage >&2; exit 2 ;;
         *)          if [ -z "$MODEL" ]; then MODEL="$1"; shift
@@ -61,6 +79,7 @@ echo "=== [1/5] PREFLIGHT: $MODEL ==="
 PRE_ARGS=("$MODEL" --plan-out "$PLAN_FILE")
 [ -n "$ARMS" ]     && PRE_ARGS+=(--arms "$ARMS")
 [ "$DRY_RUN" = 1 ] && PRE_ARGS+=(--dry-run)
+[ "$OFFLINE" = 1 ] && PRE_ARGS+=(--offline)
 # set -e: a nonzero preflight aborts here — before any container/API activity.
 python3 "$ROOT/scripts/preflight.py" "${PRE_ARGS[@]}"
 
@@ -73,6 +92,9 @@ echo "=== [2/5] RUN: resumable matrix (arms: $ARM_LIST) ==="
 RUN_CMD=(python3 "$ROOT/run_matrix_v41.py" --model "$MODEL")
 [ "$FRONTIER" = 1 ] && RUN_CMD+=(--frontier)
 for a in $ARM_LIST; do RUN_CMD+=(--arm "$a"); done
+if [ -n "$BENCHES" ]; then
+    for b in ${BENCHES//,/ }; do RUN_CMD+=(--bench "$b"); done
+fi
 [ "$DRY_RUN" = 1 ] && RUN_CMD+=(--dry-run)
 
 set +e
