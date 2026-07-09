@@ -2257,7 +2257,7 @@
   {
    "model": "claude-sonnet-5",
    "type": "B*",
-   "native_cli": "opencode",
+   "native_cli": "claude-code",
    "native_solved": 34,
    "kernel_solved": 36,
    "cells": {

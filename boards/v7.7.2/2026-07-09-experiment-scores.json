@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-09T15:27:45Z",
+ "generated": "2026-07-09T16:14:13Z",
  "ostk_version": "v7.7.2",
  "snapshot": "july09v2",
  "snapshot_policy": "latest = single snapshot per (model, arm) column \u2014 a column never mixes run dates; earlier snapshots are published under boards/v7.7.2/",
@@ -106,7 +106,7 @@
     "arm_type": "generic_kernel",
     "note": "requested-vs-executed arm mismatch: no native driver; executed via generic fallback \u2014 single execution sourced from the kernel-cpu directory"
    },
-   "native_cli": "opencode"
+   "native_cli": "claude-code"
   },
   {
    "model": "claude-fable-5",

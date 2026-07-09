@@ -387,9 +387,13 @@ const datasetSchema = {
     function usd(n: number): string { return n >= 10 ? '$'+n.toFixed(0) : n >= 1 ? '$'+n.toFixed(2) : '$'+n.toFixed(3); }
     function delta(d: number | null, r: any): string {
       if (d == null) {
+        if (r && r.cross_version_pair) {
+          // Suppressed by doctrine, not missing: a bare dash reads as "no
+          // data" when the per-arm absolutes are right there in the row.
+          return `<span class="dim delta-note xver" title="${esc(r.delta_note || 'cross-version pair: delta suppressed')}">&times;ver</span>`;
+        }
         if (r && r.delta_note) {
-          const cls = r.cross_version_pair ? 'delta-note xver' : 'delta-note';
-          return `<span class="dim ${cls}" title="${esc(r.delta_note)}">&mdash;</span>`;
+          return `<span class="dim delta-note" title="${esc(r.delta_note)}">&mdash;</span>`;
         }
         return '<span class="dim">&mdash;</span>';
       }

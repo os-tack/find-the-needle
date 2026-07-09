@@ -516,6 +516,7 @@ def arm_summary(entry: dict, model: str, cost_valid: bool = True,
 NATIVE_CLI_MAP = {
     "claude-haiku-4-5": "claude-code", "claude-sonnet-4-6": "claude-code", "claude-opus-4-6": "claude-code",
     "claude-opus-4-8": "claude-code", "claude-fable-5": "claude-code",
+    "claude-sonnet-5": "claude-code",
     "gemini-2-5-flash": "gemini-cli", "gemini-2-5-pro": "gemini-cli",
     "gemini-3-flash-preview": "gemini-cli", "gemini-3-1-pro-preview": "gemini-cli",
     "gemini-3-5-flash": "gemini-cli",
