@@ -1,0 +1,35 @@
+[
+  {
+    "benchmark": "linearizability-stale-read",
+    "agent": "claude-sonnet-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "requested_arm": "native",
+    "executed_arm": "native",
+    "bench_binary": {
+      "version": "7.7.1",
+      "build_sha": "c8e13be9deaa-dirty",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+    },
+    "timestamp": "2026-07-09T11:36:52Z",
+    "difficulty_tier": "extreme",
+    "resolved": true,
+    "turns_to_fix": 27,
+    "token_cost": 1378546,
+    "input_tokens": 2254,
+    "output_tokens": 12693,
+    "estimated_cost_usd": 1.250728,
+    "fresh_input_tokens": 2254,
+    "cache_read_tokens": 1321905,
+    "cache_create_tokens": 41694,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 1365853,
+    "wall_clock": 224.944,
+    "tool_uses": 26,
+    "stop_reason": "pass",
+    "summary": "Both bugs are fixed. Summary:\n\n1. **`app/handler.go`** \u2014 `handleRead` was calling `node.Read()` (raw local KV lookup) instead of `node.ReadLinearizable()` (the read-index protocol that confirms the applied index against the leader's commit index). Fixed to call `ReadLinearizable`.\n\n2. **`app/raft/node.go`** \u2014 `handleHeartbeat` appended piggybacked catch-up entries to the follower's log but never advanced its commit index, so they were appended but never applied to the KV state machine. Added the same commit-index-advancement logic that `handleAppendEntries` already has.\n\nI can't run `test.sh` as-is here: it does `go build -o /usr/local/bin/kv-cluster`, and that path is owned by `root:root` (mode 755) while the shell runs as `bench` with no `sudo`/`su`/capabilities/user-namespace access available \u2014 so the build step fails with `permission denied` regardless of the code fix. This is an environment/sandbox permission issue, not something related to the bug.\n\nTo verify the actual fix, I built the same source to `/tmp/kv-cluster` and ran `check` 8 times (including the exact partition\u2192write\u2192heal\u2192read scenario from the test): all passed with `Read K=1 from node <isolated>` and `PASS: Linearizable read confirmed`. One earlier run failed on leader election within the 5s timeout (pre-existing timing flakiness unrelated to the linearizability fix, not a stale-read failure).\n\nIf you have a way to grant write access to `/usr/local/bin` in this session (or want me to try something else), let me know \u2014 otherwise the fix is verified correct via the `/tmp` build.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T11:37:03+00:00"
+  }
+]

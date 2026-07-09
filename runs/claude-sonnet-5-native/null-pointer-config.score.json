@@ -1,0 +1,31 @@
+{
+  "benchmark": "null-pointer-config",
+  "agent": "claude-sonnet-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T11:49:21Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_fix": 8,
+  "token_cost": 169995,
+  "input_tokens": 1823,
+  "output_tokens": 1367,
+  "estimated_cost_usd": 0.1937605,
+  "fresh_input_tokens": 1823,
+  "cache_read_tokens": 155245,
+  "cache_create_tokens": 11560,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 168628,
+  "wall_clock": 31.604,
+  "tool_uses": 7,
+  "stop_reason": "pass",
+  "summary": "Fixed and verified. The bug (the \"needle\") was in `config.go`: `LoadConfig` never populated `Metrics` when `enable_metrics: true` but no `metrics` object was present in `config.json`, so `main.go`'s status handler dereferenced a nil `*MetricsConfig` pointer and panicked on `/status`. Added a default `MetricsConfig` in `LoadConfig` when metrics are enabled but unconfigured. `test.sh` now passes."
+}

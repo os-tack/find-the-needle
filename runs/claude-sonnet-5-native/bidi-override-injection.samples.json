@@ -1,0 +1,37 @@
+[
+  {
+    "benchmark": "bidi-override-injection",
+    "agent": "claude-sonnet-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "requested_arm": "native",
+    "executed_arm": "native",
+    "bench_binary": {
+      "version": "7.7.1",
+      "build_sha": "c8e13be9deaa-dirty",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+    },
+    "timestamp": "2026-07-09T11:15:15Z",
+    "difficulty_tier": "extreme",
+    "resolved": true,
+    "turns_to_fix": 7,
+    "token_cost": 253267,
+    "input_tokens": 1827,
+    "output_tokens": 1302,
+    "estimated_cost_usd": 0.25708075,
+    "fresh_input_tokens": 1827,
+    "cache_read_tokens": 234533,
+    "cache_create_tokens": 15605,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 251965,
+    "wall_clock": 35.925,
+    "tool_uses": 6,
+    "stop_reason": "pass",
+    "summary": "All tests pass. The needle was in `app/auth.py:150-152` \u2014 `check_admin_access` compared a BIDI-*rendered* display name (which reverses text after `U+202E`) against the admin allowlist instead of the actual stored username. This let an attacker register as `\\u202enimda` \u2014 stored as-is, but visually rendered \"admin\" \u2014 and get granted admin access. Fixed by checking the raw stored `username` directly against `ADMIN_USERS`. `./test.sh` now reports `PASS` for all cases.",
+    "teardown_masked": true,
+    "teardown_masked_by": "stall_watch",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T11:15:25+00:00"
+  }
+]

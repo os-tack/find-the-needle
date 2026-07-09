@@ -96,6 +96,19 @@ FRONTIER_2026 = {  # model -> arms (exact, no gating)
     # under kernel-cpu, never a redundant plain-kernel twin.
     "claude-fable-5":    ["native", "kernel-cpu"],
     "claude-opus-4-8":   ["native", "kernel-cpu"],
+    # claude-sonnet-5: added 2026-07-09. Tier-1 routing like the other claude
+    # models. The v7.7.1 pinned binaries (musl 6246fda9 / host ceb69933) have
+    # no claude-sonnet-5 CPU model entry — the kernel WOULD dispatch it via
+    # the sonnet-default pricing fallback ($3/$15), but Sonnet 5 is on
+    # INTRODUCTORY pricing ($2/$10) through 2026-08-31, so kernel cells on
+    # this pin would overcount cost 1.5x. Run native-only (`--arms native`)
+    # until a re-pin carries the entry (added to haystack src/cpu/session.rs
+    # 2026-07-09, intro-priced branch, delete on 2026-09-01). Native cost
+    # caveat: CLI-reported costUSD matched neither intro nor standard rate on
+    # spot-check (long-context premium above 200K input suspected) — treat
+    # native cost axis as CLI-estimated; re-price from token counts if it
+    # matters.
+    "claude-sonnet-5":   ["native", "kernel-cpu"],
     "claude-sonnet-4-6": ["native", "kernel-cpu"],
     "gemini-3.1-pro-preview": ["native", "kernel-cpu"],
     # gemini-3.5-flash: DEFERRED 2026-06-14. The is_gemini_3 thinking-config gate

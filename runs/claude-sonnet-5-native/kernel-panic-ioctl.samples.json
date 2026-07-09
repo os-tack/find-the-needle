@@ -1,0 +1,35 @@
+[
+  {
+    "benchmark": "kernel-panic-ioctl",
+    "agent": "claude-sonnet-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "requested_arm": "native",
+    "executed_arm": "native",
+    "bench_binary": {
+      "version": "7.7.1",
+      "build_sha": "c8e13be9deaa-dirty",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+    },
+    "timestamp": "2026-07-09T11:32:55Z",
+    "difficulty_tier": "hard",
+    "resolved": true,
+    "turns_to_fix": 23,
+    "token_cost": 907802,
+    "input_tokens": 2113,
+    "output_tokens": 7216,
+    "estimated_cost_usd": 0.8031565,
+    "fresh_input_tokens": 2113,
+    "cache_read_tokens": 870237,
+    "cache_create_tokens": 28236,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 900586,
+    "wall_clock": 114.866,
+    "tool_uses": 22,
+    "stop_reason": "pass",
+    "summary": "All tests pass now (exit code 0). The permission-denied `cp` to `/usr/local/bin` is just this sandbox's non-root user \u2014 I worked around it with a symlink in `~/bin` so the freshly-built binary is exercised; that's not part of the actual fix.\n\nSummary of the fix in `/app/src/ioctl_handler.c`:\n- `handle_set_config`: added a NULL check for `req->value` and a bounds check rejecting `value_len > MAX_VALUE_LEN`, before they were dereferenced/copied unchecked.\n- `handle_get_config`: added a check that `req->value` is non-NULL and `value_len != 0` \u2014 previously `req->value_len - 1` underflowed to `SIZE_MAX` on a 0-length buffer, causing a massive out-of-bounds `memcpy` into a NULL pointer.\n\nBoth gaps allowed crafted ioctl requests to segfault the handler (simulated kernel panic); `test.sh` now builds cleanly, runs the self-test and fuzz test, and reports `PASS`.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T11:33:07+00:00"
+  }
+]

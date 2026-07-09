@@ -1,0 +1,31 @@
+{
+  "benchmark": "compiler-macro-expansion",
+  "agent": "claude-sonnet-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T11:20:35Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_fix": 40,
+  "token_cost": 1948035,
+  "input_tokens": 4469,
+  "output_tokens": 13208,
+  "estimated_cost_usd": 1.578682,
+  "fresh_input_tokens": 4469,
+  "cache_read_tokens": 1885078,
+  "cache_create_tokens": 45280,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 1934827,
+  "wall_clock": 275.73,
+  "tool_uses": 39,
+  "stop_reason": "pass",
+  "summary": "`target/release/` is an untracked build artifact directory (gitignored elsewhere presumably, but not here) — leaving it as is, it's harmless build output.\n\n## Summary\n\n**The needle:** `src/codegen.rs:72-78` — the `Ref` variant in `generate_getter` produced a getter with an **owned** return type signature (`-> Company`) while the function body returned a **reference** (`&self.company`). This type mismatch is masked for single-level access by Rust's auto-deref, but breaks/produces wrong semantics for chained accessors like `employee.company().address()`.\n\n**Fix:** added `&` to the format string so it generates `-> &Company` / `-> &Address`, matching the actual reference being returned.\n\n**Verification:** `cargo`/`rustc` weren't available to this session's user (only installed under root's home, which wasn't readable), so I installed a local Rust toolchain via rustup and ran the equivalent of test.sh (its literal `cp` to `/usr/local/bin` also requires root, so I redirected to a writable temp path). Both `test-simple` and `test-complex` passed, and the script reported `PASS: All code generation tests passed`. I also verified the fix is load-bearing by temporarily reverting it — `test-complex` then failed with exactly the expected \"returns owned Company instead of &Company\" errors — before restoring the fix.\n\nOne incidental finding: test.sh's shell-level `grep -Fq \"-> Company {\"` check is actually a no-op due to a GNU grep quirk (a pattern starting with `-` is parsed as an invalid option unless preceded by `-e`/`--`), so that particular double-check never fires. It doesn't affect the outcome since the real assertion lives in `runtime.rs::test_complex()`, but flagging it in case you want it tightened up."
+}

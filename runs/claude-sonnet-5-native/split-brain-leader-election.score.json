@@ -1,0 +1,31 @@
+{
+  "benchmark": "split-brain-leader-election",
+  "agent": "claude-sonnet-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T12:08:50Z",
+  "difficulty_tier": "hard",
+  "resolved": false,
+  "turns_to_fix": 15,
+  "token_cost": 475694,
+  "input_tokens": 1968,
+  "output_tokens": 2796,
+  "estimated_cost_usd": 0.45388925,
+  "fresh_input_tokens": 1968,
+  "cache_read_tokens": 446915,
+  "cache_create_tokens": 24015,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 472898,
+  "wall_clock": 56.775,
+  "tool_uses": 14,
+  "stop_reason": "fail",
+  "summary": "The fix works — all 3 rounds pass with `SAFE: leader election handles partitions correctly`.\n\nThe bug was in `app/cluster/node.go:124`. The quorum check `finalVotes >= totalNodes/2` used integer division, so for the 5-node cluster `totalNodes/2` truncates to `2`. That let a 2-node minority partition (e.g., nodes `[0,1]`, where node 0 gets its own vote plus node 1's) satisfy `2 >= 2` and become leader alongside the legitimate leader elected by the 3-node majority partition — the split-brain.\n\nFix: require a strict majority, `finalVotes > totalNodes/2`, so 5 nodes need 3 votes, not 2.\n\nI rebuilt the Go binary to `/app/bin/split-brain` (couldn't overwrite `/usr/local/bin/split-brain` — root-owned, no write permission for the `bench` user) and ran `test.sh` with that directory prepended to `PATH`; all three rounds now report `SAFE`."
+}

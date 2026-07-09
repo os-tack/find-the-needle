@@ -1,0 +1,35 @@
+[
+  {
+    "benchmark": "wal-fsync-ghost-ack",
+    "agent": "claude-sonnet-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "requested_arm": "native",
+    "executed_arm": "native",
+    "bench_binary": {
+      "version": "7.7.1",
+      "build_sha": "c8e13be9deaa-dirty",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+    },
+    "timestamp": "2026-07-09T12:21:04Z",
+    "difficulty_tier": "hard",
+    "resolved": true,
+    "turns_to_fix": 24,
+    "token_cost": 1070880,
+    "input_tokens": 2248,
+    "output_tokens": 11534,
+    "estimated_cost_usd": 1.0116617499999998,
+    "fresh_input_tokens": 2248,
+    "cache_read_tokens": 1025285,
+    "cache_create_tokens": 31813,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 1059346,
+    "wall_clock": 168.276,
+    "tool_uses": 23,
+    "stop_reason": "pass",
+    "summary": "Both runs pass consistently.\n\n## Summary\n\nFound and fixed two bugs:\n\n1. **`server.go`** (the real durability bug): `SET` called `wal.Append()`, which only buffers data in memory, then immediately returned `+OK` \u2014 before the background 100ms sync loop had a chance to `fsync`. A crash between the ack and the next tick lost every \"acknowledged\" write (confirmed: unpatched code lost all 50/50 keys). Fixed by calling `wal.Sync()` synchronously before acking, so `+OK` only goes out once the entry is actually fsynced to disk.\n\n2. **`client.go`** (a reporting bug that masked verification): `VerifyBatch`'s summary line unconditionally printed the literal word `\"LOST\"` (e.g. `\"0 LOST\"`), so `test.sh`'s `grep -q \"LOST\"` check would always fail even with zero real losses. Reworded the summary to say `\"missing\"` instead, so `LOST` only appears in the per-key diagnostic line when a key is truly lost.\n\n`test.sh` now passes reliably (`PASS`, exit 0).",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T12:21:15+00:00"
+  }
+]

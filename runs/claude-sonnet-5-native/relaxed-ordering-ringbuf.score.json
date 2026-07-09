@@ -1,0 +1,31 @@
+{
+  "benchmark": "relaxed-ordering-ringbuf",
+  "agent": "claude-sonnet-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T12:02:07Z",
+  "difficulty_tier": "extreme",
+  "resolved": true,
+  "turns_to_fix": 12,
+  "token_cost": 326486,
+  "input_tokens": 1958,
+  "output_tokens": 4040,
+  "estimated_cost_usd": 0.39275574999999996,
+  "fresh_input_tokens": 1958,
+  "cache_read_tokens": 299423,
+  "cache_create_tokens": 21065,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 322446,
+  "wall_clock": 49.163,
+  "tool_uses": 11,
+  "stop_reason": "pass",
+  "summary": "The test passes. The needle was in `ring_buffer.c`: every atomic load/store used `memory_order_relaxed`, justified by an incorrect claim that x86-TSO makes relaxed ordering safe. That reasoning only covers hardware reordering — it doesn't stop the compiler from reordering the non-atomic slot read/write relative to the atomic index update, which breaks the producer/consumer handoff and causes data corruption under load.\n\nFix: paired the publishing index stores with `memory_order_release` and the corresponding loads with `memory_order_acquire` in both `ringbuf_push` and `ringbuf_pop` (`/app/ring_buffer.c:76-121`), so slot writes/reads are properly ordered relative to the index that announces them. `test.sh` now passes (5/5 correctness runs OK)."
+}

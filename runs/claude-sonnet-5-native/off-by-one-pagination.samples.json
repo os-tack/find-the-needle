@@ -1,0 +1,35 @@
+[
+  {
+    "benchmark": "off-by-one-pagination",
+    "agent": "claude-sonnet-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "requested_arm": "native",
+    "executed_arm": "native",
+    "bench_binary": {
+      "version": "7.7.1",
+      "build_sha": "c8e13be9deaa-dirty",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+    },
+    "timestamp": "2026-07-09T11:50:42Z",
+    "difficulty_tier": "easy",
+    "resolved": true,
+    "turns_to_fix": 7,
+    "token_cost": 232280,
+    "input_tokens": 1827,
+    "output_tokens": 762,
+    "estimated_cost_usd": 0.20464175,
+    "fresh_input_tokens": 1827,
+    "cache_read_tokens": 219080,
+    "cache_create_tokens": 10611,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 231518,
+    "wall_clock": 25.367,
+    "tool_uses": 6,
+    "stop_reason": "pass",
+    "summary": "Fix confirmed: `test.sh` now passes. The bug was in `app/app/app.py:28`, where the offset calculation subtracted an extra 1 for any page after the first, causing pages to overlap by one item. Removed the erroneous subtraction so offset is simply `(page - 1) * per_page`.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T11:50:52+00:00"
+  }
+]
