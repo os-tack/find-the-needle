@@ -1463,27 +1463,6 @@
       "july09-fable-kernel-refusal"
      ],
      "models": {
-      "claude-fable-5": {
-       "native": {
-        "solved": 3,
-        "total": 3,
-        "cost_usd": 0.9478,
-        "cost_cells": 3,
-        "invalid": 0,
-        "cost_invalid": 0,
-        "masked": 0
-       },
-       "ostk": {
-        "solved": 0,
-        "total": 3,
-        "cost_usd": 0.1484,
-        "cost_cells": 3,
-        "invalid": 0,
-        "cost_invalid": 0,
-        "masked": 0,
-        "source_arm": "cpu"
-       }
-      },
       "gemini-3.5-flash": {
        "ostk": {
         "solved": 1,
@@ -1495,14 +1474,35 @@
         "masked": 0,
         "source_arm": "cpu"
        }
+      },
+      "claude-fable-5": {
+       "native": {
+        "solved": 34,
+        "total": 37,
+        "cost_usd": 23.3388,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 9
+       },
+       "ostk": {
+        "solved": 18,
+        "total": 37,
+        "cost_usd": 4.2396,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 6,
+        "source_arm": "cpu"
+       }
       }
      },
      "trust": {
-      "solve_valid_cells": 7,
-      "cost_valid_cells": 7,
+      "solve_valid_cells": 75,
+      "cost_valid_cells": 75,
       "cost_invalid_cells": 0,
       "invalid_cells": 0,
-      "teardown_masked_cells": 0
+      "teardown_masked_cells": 15
      }
     }
    ],

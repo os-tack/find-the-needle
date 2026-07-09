@@ -67,16 +67,18 @@
   },
   {
    "id": "july09-fable-kernel-refusal",
-   "title": "claude-fable-5 kernel-cpu cells end in Anthropic stop_reason=refusal",
+   "title": "claude-fable-5 kernel-cpu refusals \u2014 triggered by ostk squashed tool-output format",
    "window": {
     "from": "2026-07-09",
     "until": "2026-07-09"
    },
    "affects": [
-    "v7.7.1 july09 snapshot: claude-fable-5 kernel-cpu cells (all 3 smoke cells; native arm unaffected)"
+    "v7.7.1 july09 snapshot: claude-fable-5 kernel-cpu (17/38 benches unsolved; 14 of them native solved). native arm unaffected (35/38)."
    ],
-   "effect": "After 2-3 real tool turns the API returns an empty-content response with stop_reason=refusal; the agent completes without editing, the oracle fails, and the cell records resolved=false with real token accounting (solve+cost axes VALID). The unsolved verdict is honest about what happened but reflects a provider refusal on the kernel-arm prompt shape, not a demonstrated capability gap \u2014 treat fable-5 kernel-cpu solve rates as a floor until the AnthropicClient driver prompt is investigated.",
-   "reference": "runs/claude-fable-5-kernel-cpu/*.raw/journal.jsonl (cpu.response.decoded stop_reason=refusal)"
+   "effect": "After 2-3 real tool turns the Anthropic API returns an empty-content response with stop_reason=refusal (journaled as agent exit_code:1); the agent completes without editing, the oracle fails, and the cell records resolved=false with real token accounting (solve+cost axes VALID). This is a provider refusal on the kernel-arm PROMPT SHAPE, not a demonstrated capability gap \u2014 treat fable-5 kernel-cpu solve rate as a FLOOR. The 21 cells the kernel DID solve remain honest, and their matched cost vs native holds (kernel = 26% of native cost / 18% of tokens on the 21 both-solved benches).",
+   "reference": "runs/claude-fable-5-kernel-cpu/*.raw/journal.jsonl (2x cpu.response.decoded stop_reason=refusal per journal); root-cause receipts in the 2026-07-09 bench dossier.",
+   "root_cause": "Bisected against api.anthropic.com by replaying the exact captured in-container request bodies (OSTK_DUMP_REQUEST). The trigger is ostk's own squasher / gen_table COMPRESSED TOOL-OUTPUT format, cumulatively: two dense squashed tool-results (e.g. '@ostk.prime+0 | v7.7.1 | POST 7/7 ... laws: invisible-write | ephemeral', '[ls_uniform] owner:root:root perms_f:mixed:2 ... [ls_anomaly]') cross Fable 5's dual-use safety threshold; rewriting EITHER result to plain text clears the refusal. Refuted as causes: tool-surface size (trimming to coding-only still refuses) and missing framing (an explicit authorized-benchmark system prompt still refuses). Only reducing squashed-output density clears it. Claude Fable 5 ships additional dual-use safety measures; its classifier reads accumulated cryptic/obfuscation-shaped output (compounded by the terse 'find the needle' prompt) as suspicious. The native arm never hits this because the vendor CLI passes plain tool output.",
+   "mitigation": "Operator design decision (NOT auto-applied): soften the squasher rendering for Anthropic frontier models (fable/mythos) \u2014 the only lever that provably works \u2014 or carry a per-model output-format capability flag, or accept+report as-is. Also: some refusal-terminated cells still trip the teardown-hang path because --profile oneshot keys clean exit on end_turn, not refusal; stall_watch SIGKILLs them correctly. A follow-up haystack change could treat refusal as a clean oneshot terminal."
   }
  ]
 }

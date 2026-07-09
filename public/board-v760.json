@@ -21,17 +21,17 @@
  "faults_ref": "boards/FAULTS.json",
  "trust": {
   "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle verdict + arm receipt + not stalled): malformed / no-arm-receipt / arm-mismatch / deadline / zero-work / duplicate-column cells are fully INVALID \u2014 excluded from everything, counted visibly. COST axis (real token/cost accounting): zero token accounting on a completed run keeps the solve verdict and marks cost UNAVAILABLE \u2014 included in solve columns, excluded from cost/token columns, counted visibly, never priced. absent = never run (not invalid).",
-  "solve_valid_cells": 626,
-  "cost_valid_cells": 626,
+  "solve_valid_cells": 694,
+  "cost_valid_cells": 694,
   "cost_invalid_cells": 0,
   "invalid_cells": 10,
-  "policy_excluded_cells": 20,
+  "policy_excluded_cells": 22,
   "invalid_by_reason": {
    "deadline_exceeded": 6,
    "zero_work": 4
   },
   "cost_invalid_by_reason": {},
-  "teardown_masked_cells": 71,
+  "teardown_masked_cells": 86,
   "by_ostk_version": {
    "v7.6.0": {
     "solve_valid_cells": 619,
@@ -40,8 +40,8 @@
     "invalid_cells": 10
    },
    "v7.7.1": {
-    "solve_valid_cells": 7,
-    "cost_valid_cells": 7,
+    "solve_valid_cells": 75,
+    "cost_valid_cells": 75,
     "cost_invalid_cells": 0,
     "invalid_cells": 0
    }
@@ -49,48 +49,6 @@
   "mixed_versions_note": "the totals above aggregate columns executed under more than one binary version (per-version split in by_ostk_version) \u2014 operational bookkeeping, NOT a cross-version comparison. No cross-version delta is published anywhere; versioned boards under boards/<version>/ are single-version."
  },
  "models": [
-  {
-   "model": "claude-fable-5",
-   "type": "B",
-   "native_cli": "claude-code",
-   "native_present": true,
-   "published": 37,
-   "native_solved": 3,
-   "native_total": 3,
-   "kernel_solved": 0,
-   "kernel_total": 3,
-   "both_n": 0,
-   "both_cost_n": 0,
-   "invalid": {
-    "native": 0,
-    "ostk": 0
-   },
-   "cost_invalid": {
-    "native": 0,
-    "ostk": 0
-   },
-   "masked": {
-    "native": 0,
-    "ostk": 0
-   },
-   "native_cost_basis": "bucket-split",
-   "native_cost_bases": {
-    "bucket-split": 3
-   },
-   "source_arm": "cpu",
-   "snapshots": {
-    "native": "july09",
-    "ostk": "july09"
-   },
-   "cross_snapshot_delta": false,
-   "cross_version_pair": false,
-   "delta_note": null,
-   "native": null,
-   "kernel": null,
-   "cost_delta": null,
-   "tok_delta": null,
-   "kernel_abs": null
-  },
   {
    "model": "claude-opus-4-8",
    "type": "B",
@@ -685,6 +643,72 @@
     "billed": 4247606,
     "output": 60747,
     "input_total": 4247606
+   }
+  },
+  {
+   "model": "claude-fable-5",
+   "type": "B",
+   "native_cli": "claude-code",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 34,
+   "native_total": 37,
+   "kernel_solved": 18,
+   "kernel_total": 37,
+   "both_n": 18,
+   "both_cost_n": 18,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 9,
+    "ostk": 6
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 37
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "july09",
+    "ostk": "july09"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 11.508,
+    "fresh": 36288,
+    "cache_read": 4717204,
+    "cache_create": 255311,
+    "billed": 5008803,
+    "output": 64725,
+    "input_total": 5008803
+   },
+   "kernel": {
+    "cost": 2.005,
+    "fresh": 34676,
+    "cache_read": 614579,
+    "cache_create": 38554,
+    "billed": 687809,
+    "output": 11244,
+    "input_total": 687809
+   },
+   "cost_delta": -82.6,
+   "tok_delta": -86.3,
+   "kernel_abs": {
+    "cost": 2.005,
+    "fresh": 34676,
+    "cache_read": 614579,
+    "cache_create": 38554,
+    "billed": 687809,
+    "output": 11244,
+    "input_total": 687809
    }
   }
  ]

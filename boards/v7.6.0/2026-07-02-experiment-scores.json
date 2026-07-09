@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-09T01:00:55Z",
+ "generated": "2026-07-09T04:57:41Z",
  "ostk_version": "v7.6.0",
  "snapshot": "july02",
  "snapshot_policy": "latest = single snapshot per (model, arm) column \u2014 a column never mixes run dates; earlier snapshots are published under boards/v7.6.0/",
@@ -21,7 +21,7 @@
   "cost_valid_cells": 111,
   "cost_invalid_cells": 0,
   "invalid_cells": 0,
-  "policy_excluded_cells": 20,
+  "policy_excluded_cells": 3,
   "invalid_by_reason": {},
   "cost_invalid_by_reason": {},
   "teardown_masked_cells": 0

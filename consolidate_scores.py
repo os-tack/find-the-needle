@@ -482,7 +482,7 @@ NATIVE_CLI_MAP = {
 }
 
 
-def collect_cells() -> tuple[list[dict], int, dict]:
+def collect_cells() -> tuple[list[dict], dict, dict]:
     """Walk runs/ and classify every score file — THE single judgment pass.
 
     Returns (cells, policy_excluded, display_name). Each cell dict carries:
@@ -512,7 +512,7 @@ def collect_cells() -> tuple[list[dict], int, dict]:
     print(f"Found {len(arm_dirs)} arm directories in {RUNS_DIR}")
 
     cells: list[dict] = []
-    policy_excluded = 0                         # PUBLISHED_EXCLUDE benches (not invalid)
+    policy_excluded: dict[str, int] = {}        # PUBLISHED_EXCLUDE benches per snapshot (not invalid)
     display_name: dict[str, str] = {}           # norm → model spelling on disk
 
     for model, arm, dir_path in arm_dirs:
@@ -531,7 +531,15 @@ def collect_cells() -> tuple[list[dict], int, dict]:
             fpath = dir_path / fname
             entry, skip_reason = load_score(fpath)
             if skip_reason == "policy_excluded":
-                policy_excluded += 1
+                # Snapshot-scope the excluded count so a frozen historical
+                # board never drifts when unrelated new data lands. The payload
+                # is not returned by load_score for excluded cells, so re-read
+                # its timestamp directly (mtime fallback via snapshot_of).
+                try:
+                    _snap = snapshot_of(json.load(open(fpath)), fpath)
+                except Exception:
+                    _snap = snapshot_of(None, fpath)
+                policy_excluded[_snap] = policy_excluded.get(_snap, 0) + 1
                 continue
 
             if entry is None:
@@ -576,7 +584,7 @@ def column_snapshots(cells: list[dict]) -> dict:
             for col, col_cells in by_col.items()}
 
 
-def build_experiment_output(cells: list[dict], policy_excluded: int,
+def build_experiment_output(cells: list[dict], policy_excluded,
                             snapshot: str = "latest",
                             quiet: bool = False) -> tuple[dict, list[dict]]:
     """Aggregate classified cells into (experiment_output, flat_scores).
@@ -585,7 +593,19 @@ def build_experiment_output(cells: list[dict], policy_excluded: int,
     column publishes only its newest run-date snapshot — the June/July
     opus+gemini columns never mix). snapshot='june16'/'july02' → the versioned
     board of that run date only.
+
+    `policy_excluded` accepts either the per-snapshot dict from collect_cells
+    (snapshot-scoped — a frozen historical board keeps its own excluded count
+    and never drifts when unrelated new data lands) or a bare int (legacy /
+    test callers). For a specific snapshot only that snapshot's excluded cells
+    are counted; 'latest' sums across all snapshots.
     """
+    if isinstance(policy_excluded, dict):
+        pe_count = (sum(policy_excluded.values()) if snapshot == "latest"
+                    else policy_excluded.get(snapshot, 0))
+    else:
+        pe_count = policy_excluded
+
     def say(*a, **k):
         if not quiet:
             print(*a, **k)
@@ -875,7 +895,7 @@ def build_experiment_output(cells: list[dict], policy_excluded: int,
     say(f"\nValidity (per-axis): {solve_files} SOLVE-valid ({cost_files} cost-valid, "
         f"{len(cost_invalid_cells)} cost-INVALID: solve kept, cost unavailable), "
         f"{len(invalid_cells)} fully INVALID (excluded from all aggregates), "
-        f"{policy_excluded} policy-excluded (PUBLISHED_EXCLUDE)")
+        f"{pe_count} policy-excluded (PUBLISHED_EXCLUDE)")
     if invalid_reasons:
         for reason, n in sorted(invalid_reasons.items(), key=lambda kv: -kv[1]):
             say(f"  INVALID (both axes) {reason}: {n}")
@@ -935,7 +955,7 @@ def build_experiment_output(cells: list[dict], policy_excluded: int,
             "cost_valid_cells": cost_files,
             "cost_invalid_cells": len(cost_invalid_cells),
             "invalid_cells": len(invalid_cells),
-            "policy_excluded_cells": policy_excluded,
+            "policy_excluded_cells": pe_count,
             "invalid_by_reason": dict(sorted(invalid_reasons.items())),
             "cost_invalid_by_reason": dict(sorted(cost_invalid_reasons.items())),
             "teardown_masked_cells": masked_total,
