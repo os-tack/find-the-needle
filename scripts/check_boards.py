@@ -81,7 +81,8 @@ def check_axis_board(path: Path, data: dict) -> None:
         fail(f"{where}: solve_valid - cost_valid != cost_invalid_cells")
     # Deliberately hardcoded (second opinion on consolidate_scores.SNAPSHOTS):
     # extend this tuple in the SAME change that adds a snapshot to the pipeline.
-    if data.get("snapshot") not in ("latest", "june16", "july02", "july09"):
+    if data.get("snapshot") not in ("latest", "june16", "july02", "july09",
+                                    "july09v2"):
         fail(f"{where}: unknown snapshot {data.get('snapshot')!r}")
     for m in data.get("models", []):
         for arm in ("native", "kernel", "cpu", "ostk"):
@@ -115,6 +116,39 @@ def check_aswas(path: Path, data: dict, fault_ids: set) -> None:
     for fid in data.get("faults", []):
         if fid not in fault_ids:
             fail(f"{where}: unknown fault id {fid!r}")
+
+
+# Binary-identity: a published cell must live in the snapshot of the binary
+# it executed on (receipt = cell.bench_binary.version, stamped by ostk bench
+# on clean exits and by stall_watch on synthesized scores). Deliberately an
+# INDEPENDENT duplicate of consolidate_scores' snapshot->version mapping —
+# two-truths by design: drift between the maps surfaces as a failure here.
+SNAPSHOT_BINARY = {"june16": "v7.6.0", "july02": "v7.6.0",
+                   "july09": "v7.7.1", "july09v2": "v7.7.2"}
+# Snapshots sharing one run date (2026-07-09 hosted two pins): a receipt
+# CONTRADICTING its snapshot fails anywhere, but a receipt-less cell in a
+# multi-binary window can only be attributed by default — count it visibly.
+RECEIPT_SPLIT_SNAPSHOTS = {"july09", "july09v2"}
+
+
+def check_binary_identity(path: Path, cells: list) -> None:
+    where = path.relative_to(ROOT)
+    receiptless_split = 0
+    for c in cells:
+        snap = c.get("snapshot")
+        want = SNAPSHOT_BINARY.get(snap)
+        ver = str((c.get("bench_binary") or {}).get("version") or "")
+        if ver:
+            if want and "v" + ver != want:
+                fail(f"{where}: {c.get('agent')}/{c.get('benchmark')}: "
+                     f"binary receipt {ver} filed under snapshot {snap} "
+                     f"({want}) — mis-attribution")
+        elif snap in RECEIPT_SPLIT_SNAPSHOTS:
+            receiptless_split += 1
+    if receiptless_split:
+        print(f"  note: {receiptless_split} receipt-less cells in the "
+              f"multi-binary 2026-07-09 window (pre-receipt scores, "
+              f"attributed to the window's default binary)")
 
 
 def main() -> int:
@@ -211,6 +245,8 @@ def main() -> int:
     board = load(PUBLIC / "board-v760.json")
     cells = load(PUBLIC / "cells-v760.json")
     scores = load(PUBLIC / "scores.json")
+    if isinstance(scores, list):
+        check_binary_identity(PUBLIC / "scores.json", scores)
     if board and exp:
         ostk_solved = {m["model"]: m["ostk"]["solved"] for m in exp["models"]}
         nat_solved = {m["model"]: m["native"]["solved"] for m in exp["models"]}

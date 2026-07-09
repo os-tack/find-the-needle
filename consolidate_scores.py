@@ -53,26 +53,33 @@ EXPERIMENT_OUTPUT = Path(__file__).parent / "public" / "experiment-scores.json"
 # July-2 opus/gemini kernel-cpu + opus native re-run ("july02"). "july09" is
 # the v7.7.1 window (frozen-bin pin rolled 2026-07-09; fable-5 + flash smoke).
 # ---------------------------------------------------------------------------
-OSTK_VERSION = "v7.7.1"                      # current binary (latest board)
-SNAPSHOTS = ("june16", "july02", "july09")   # chronological order
+OSTK_VERSION = "v7.7.2"                      # current binary (latest board)
+SNAPSHOTS = ("june16", "july02", "july09", "july09v2")   # chronological order
 # Run-date boundaries, newest first; a cell belongs to the first snapshot
 # whose boundary its run date reaches. Dates below the oldest → SNAPSHOTS[0].
+# 2026-07-09 hosted TWO binaries (frozen-bin re-pinned v7.7.1→v7.7.2 mid-day),
+# so the date boundary alone cannot attribute that day: snapshot_of() splits
+# july09 → july09v2 by the cell's own bench_binary receipt, never by date.
 SNAPSHOT_BOUNDARIES = (
     ("2026-07-09", "july09"),
     ("2026-07-01", "july02"),
 )
 SNAPSHOT_RUN_DATE = {"june16": "2026-06-16", "july02": "2026-07-02",
-                     "july09": "2026-07-09"}
+                     "july09": "2026-07-09", "july09v2": "2026-07-09"}
 # Binary identity per snapshot: versioned boards land under
 # boards/<SNAPSHOT_OSTK_VERSION[snap]>/ — a run is never re-attributed to a
 # binary it did not execute on (runs/.binary_identity.jsonl is the receipt).
 SNAPSHOT_OSTK_VERSION = {"june16": "v7.6.0", "july02": "v7.6.0",
-                         "july09": "v7.7.1"}
+                         "july09": "v7.7.1", "july09v2": "v7.7.2"}
 # Fault ids (boards/FAULTS.json) attached to each snapshot's published board.
 SNAPSHOT_FAULTS = {
     "june16": ["june16-teardown-masked"],
     "july02": ["july02-cache-read-zero"],
-    "july09": ["july09-fable-kernel-refusal"],
+    "july09": ["july09-fable-kernel-refusal",
+               "july09-opus48-unknown-tool-loop-exit",
+               "july09-f7-earlystop-truncated-votes"],
+    "july09v2": ["july09-f7-earlystop-truncated-votes",
+                 "july09-runcell-exit1-hardfail"],
 }
 # Human-readable one-liners for the ids above; the canonical machine-readable
 # era annotations (windows, commits, affected models) live in boards/FAULTS.json.
@@ -92,6 +99,20 @@ FAULT_NOTES = {
         "unaffected). Cells are VALID resolved=false with real accounting, but "
         "the unsolved verdict reflects a provider refusal on the kernel-arm "
         "prompt shape — treat fable-5 kernel-cpu solve rates as a floor.",
+    "july09-opus48-unknown-tool-loop-exit":
+        "July-9 (v7.7.1): 2 claude-opus-4-8 kernel-cpu cells lost to an agent-"
+        "loop hard-exit on an undeclared tool request (harness defect, not a "
+        "capability gap) — treat opus-4-8 kernel-cpu solve rate as a floor.",
+    "july09-f7-earlystop-truncated-votes":
+        "F7 resampling stopped on any mid-stream solve, locking [F,T] cells at "
+        "1/2 = miss without their deciding third sample. Affected v7.7.1 cells "
+        "publish as-were (solve rates are floors); harness fixed 2026-07-09 "
+        "before the v7.7.2 board.",
+    "july09-runcell-exit1-hardfail":
+        "v7.7.2 capture: run_cell hard-failed clean completed-but-unsolved "
+        "exits (unmasked by the teardown fix); one sonnet-5 kernel cell was "
+        "remediated by cold re-run before publish — no published board carries "
+        "a mis-scored cell. Harness fixed 2026-07-09.",
 }
 
 
@@ -105,6 +126,16 @@ def snapshot_of(entry: dict | None, fpath: Path | None = None) -> str:
             fpath.stat().st_mtime, datetime.timezone.utc).isoformat()
     for boundary, snap in SNAPSHOT_BOUNDARIES:
         if ts[:10] >= boundary:
+            # 2026-07-09 hosted two pins (v7.7.1 → v7.7.2 mid-day): the
+            # cell's own bench_binary receipt decides, never the date. A
+            # cell without a receipt stays in the date snapshot — every
+            # cell since the receipt landed carries one, and mis-filing a
+            # receiptless cell UP into a newer binary would fabricate
+            # attribution.
+            if snap == "july09" and isinstance(entry, dict):
+                ver = str((entry.get("bench_binary") or {}).get("version", ""))
+                if ver.startswith("7.7.2"):
+                    return "july09v2"
             return snap
     return SNAPSHOTS[0]
 

@@ -94,6 +94,33 @@
    "reference": "runs/claude-opus-4-8-kernel-cpu/{relaxed-ordering-ringbuf,tls-chain-ordering-strict}.raw/journal.jsonl (cpu.response.decoded stop_reason=tool_use, then declared_tools row + agent.completed exit_code:1).",
    "root_cause": "haystack agent-loop unknown-tool handling: a tool_use naming an undeclared tool terminates the agent (exit 1) rather than producing an error tool_result the model can recover from. Amplified by a vocabulary collision: the in-container boot envelope reports `needles: 0 open` (ostk work items) while the bench prompt says 'find the needle' (the planted bug), steering models toward the operator-overlay `show` verb.",
    "mitigation": "Scores stand as honest evidence of harness behavior under the v7.7.1 pin. Fix in progress on haystack (in-band unknown-tool error); kernel-arm re-capture of the two cells deferred until the fixed kernel lands in a new content-hash pin — valid cells are never re-rolled on the same binary."
+  },
+  {
+   "id": "july09-f7-earlystop-truncated-votes",
+   "title": "F7 resampling stopped on mid-stream solve — [F,T] cells scored 1/2 miss without their deciding sample",
+   "window": {
+    "until": "2026-07-09"
+   },
+   "affects": [
+    "v7.7.1 july09 snapshot: claude-opus-4-8 kernel-cpu encoding-mojibake (samples [F,T]); claude-fable-5 kernel-cpu deadlock-transfer and linearizability-stale-read (samples [F,T]). Solve rates for those model-arms are FLOORS (opus-4-8 kernel observed ceiling rises to ~37/38 combined with july09-opus48-unknown-tool-loop-exit)."
+   ],
+   "effect": "Two design iterations drifted: the run_matrix F7 loop implemented retry semantics (stop resampling on any resolved sample, canonical score preserved) while consolidate_scores.py:418 scores strict majority over ALL samples taken. A cell that missed sample 1 and solved sample 2 locked in 1/2 = unsolved without ever running the deciding third sample. Cells publish as-were with this annotation.",
+   "reference": "run_matrix_v41.py F7 outer loop (fixed 2026-07-09: once resampling begins, the full sample budget runs and strict majority decides); consolidate_scores.py:418; truncated-vote scan in the 2026-07-09 bench dossier.",
+   "mitigation": "Harness fixed 2026-07-09 before the v7.7.2 board was published. claude-sonnet-5 kernel-cpu silent-data-corruption hit the same truncation during capture and was remediated by a cold re-run under the fixed protocol before publish; it solved on sample 1 of the cold run and publishes as SOLVED under the era's uniform sample-1 trust rule. FULL SAMPLE HISTORY for that cell across the three 2026-07-09 captures: [F] (hard-fail bug, archived at runs-archive/sonnet5-kernel-sdc-hardfail-20260709), [F,T] (this truncation bug, archived at runs-archive/sonnet5-kernel-sdc-truncatedF7-20260709), [T] (canonical). 2 solves in 4 samples — the cell is variance-prone; both re-runs were forced by verified harness bugs before their outcomes were known. The two affected fable cells are superseded by the 2026-07-09 fable kernel re-capture; the opus cell publishes as-was (frozen era, archived pin — valid cells are never re-rolled on a different binary)."
+  },
+  {
+   "id": "july09-runcell-exit1-hardfail",
+   "title": "run_cell hard-failed clean completed-but-unsolved exits — unmasked by the v7.7.2 teardown fix",
+   "window": {
+    "from": "2026-07-09",
+    "until": "2026-07-09"
+   },
+   "affects": [
+    "No published board carries a mis-scored cell from this. Transient during v7.7.2 capture: claude-sonnet-5 kernel-cpu silent-data-corruption was classified hard-fail after a clean unsolved exit and denied F7 resampling; remediated by cold re-run before publish (single-sample capture archived at runs-archive/sonnet5-kernel-sdc-hardfail-20260709; see july09-f7-earlystop-truncated-votes for that cell's full sample history)."
+   ],
+   "effect": "run_cell required returncode==0 to treat a self-exit as completed, but ostk bench exits 1 by design for a completed-but-unsolved scenario ('error: N scenario(s) failed'). The misclassification was invisible before v7.7.2 because unsolved kernel cells always hung at teardown and took the completed_kill path (scored, teardown_masked); the teardown fix (haystack ebcbe2b0) made clean unsolved exits possible for the first time.",
+   "reference": "run_matrix_v41.py run_cell completed-gate (fixed 2026-07-09: a self-exit is completed regardless of returncode; the fresh-valid-score gate decides success); haystack ebcbe2b0 fix(bench).",
+   "mitigation": "Fixed in harness 2026-07-09. Also makes refusal-terminated cells (clean nonzero exits) score correctly for the fable re-capture instead of hard-failing."
   }
  ]
 }
