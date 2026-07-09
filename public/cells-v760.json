@@ -26,8 +26,12 @@
    "note": "F7 resampling stopped on any mid-stream solve, locking [F,T] cells at 1/2 = miss without their deciding third sample. Affected v7.7.1 cells publish as-were (solve rates are floors); harness fixed 2026-07-09 before the v7.7.2 board."
   },
   {
-   "id": "july09-f7-earlystop-truncated-votes",
-   "note": "F7 resampling stopped on any mid-stream solve, locking [F,T] cells at 1/2 = miss without their deciding third sample. Affected v7.7.1 cells publish as-were (solve rates are floors); harness fixed 2026-07-09 before the v7.7.2 board."
+   "id": "july09-sonnet5-native-cli-oprate",
+   "note": "claude-sonnet-5 native COST axis only: the vendor CLI prices sonnet-5 at the Opus 4.8 rate card \u2014 recorded $17.51 vs honest $7.58 intro / $11.36 standard. Tokens and solve axis unaffected; reprice from raw telemetry via scripts/reprice_native.py."
+  },
+  {
+   "id": "july09-fable5-native-opus-fallback",
+   "note": "claude-fable-5 native: 4 security cells silently continued on claude-opus-4-8 after a mid-session classifier stop \u2014 solve attribution for those cells is not pure fable-5 (see FAULTS.json for the cell list)."
   },
   {
    "id": "july09-runcell-exit1-hardfail",
@@ -57,20 +61,6 @@
    "total": 21
   },
   {
-   "name": "encoding-mojibake",
-   "tier": "discriminating",
-   "solve_pct": 86,
-   "solved": 18,
-   "total": 21
-  },
-  {
-   "name": "linearizability-stale-read",
-   "tier": "discriminating",
-   "solve_pct": 86,
-   "solved": 18,
-   "total": 21
-  },
-  {
    "name": "timezone-scheduling",
    "tier": "discriminating",
    "solve_pct": 86,
@@ -85,6 +75,13 @@
    "total": 21
   },
   {
+   "name": "type-coercion-comparison",
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
+  },
+  {
    "name": "wal-fsync-ghost-ack",
    "tier": "floor",
    "solve_pct": 90,
@@ -92,7 +89,7 @@
    "total": 20
   },
   {
-   "name": "deadlock-transfer",
+   "name": "encoding-mojibake",
    "tier": "floor",
    "solve_pct": 90,
    "solved": 19,
@@ -113,7 +110,7 @@
    "total": 21
   },
   {
-   "name": "memory-leak-event-listener",
+   "name": "linearizability-stale-read",
    "tier": "floor",
    "solve_pct": 90,
    "solved": 19,
@@ -134,13 +131,6 @@
    "total": 21
   },
   {
-   "name": "off-by-one-pagination",
-   "tier": "floor",
-   "solve_pct": 90,
-   "solved": 19,
-   "total": 21
-  },
-  {
    "name": "raft-snapshot-commit-gap",
    "tier": "floor",
    "solve_pct": 90,
@@ -149,13 +139,6 @@
   },
   {
    "name": "relaxed-ordering-ringbuf",
-   "tier": "floor",
-   "solve_pct": 90,
-   "solved": 19,
-   "total": 21
-  },
-  {
-   "name": "wrong-operator-discount",
    "tier": "floor",
    "solve_pct": 90,
    "solved": 19,
@@ -176,21 +159,7 @@
    "total": 20
   },
   {
-   "name": "k8s-scheduler-shutdown-deadlock",
-   "tier": "floor",
-   "solve_pct": 95,
-   "solved": 19,
-   "total": 20
-  },
-  {
    "name": "performance-cliff-hash",
-   "tier": "floor",
-   "solve_pct": 95,
-   "solved": 19,
-   "total": 20
-  },
-  {
-   "name": "type-coercion-comparison",
    "tier": "floor",
    "solve_pct": 95,
    "solved": 19,
@@ -232,7 +201,21 @@
    "total": 21
   },
   {
+   "name": "deadlock-transfer",
+   "tier": "floor",
+   "solve_pct": 95,
+   "solved": 20,
+   "total": 21
+  },
+  {
    "name": "kernel-panic-ioctl",
+   "tier": "floor",
+   "solve_pct": 95,
+   "solved": 20,
+   "total": 21
+  },
+  {
+   "name": "memory-leak-event-listener",
    "tier": "floor",
    "solve_pct": 95,
    "solved": 20,
@@ -253,7 +236,21 @@
    "total": 21
   },
   {
+   "name": "off-by-one-pagination",
+   "tier": "floor",
+   "solve_pct": 95,
+   "solved": 20,
+   "total": 21
+  },
+  {
    "name": "race-condition-counter",
+   "tier": "floor",
+   "solve_pct": 95,
+   "solved": 20,
+   "total": 21
+  },
+  {
+   "name": "wrong-operator-discount",
    "tier": "floor",
    "solve_pct": 95,
    "solved": 20,
@@ -272,6 +269,13 @@
    "solve_pct": 100,
    "solved": 21,
    "total": 21
+  },
+  {
+   "name": "k8s-scheduler-shutdown-deadlock",
+   "tier": "floor",
+   "solve_pct": 100,
+   "solved": 20,
+   "total": 20
   },
   {
    "name": "rate-limit-bypass-header",
@@ -399,70 +403,6 @@
       "snapshot": "june16"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 26.3,
-      "billed": 78293,
-      "fresh": 4437,
-      "cache_read": 73856,
-      "cache_create": 0,
-      "output": 1398,
-      "input_total": 78293,
-      "cost": 0.0254,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 15,
-      "wall": 69.0,
-      "billed": 94285,
-      "fresh": 94285,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2092,
-      "input_total": 94285,
-      "cost": 0.1713,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 190.1,
-      "billed": 179941,
-      "fresh": 21861,
-      "cache_read": 158080,
-      "cache_create": 0,
-      "output": 14164,
-      "input_total": 179941,
-      "cost": 0.1148,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 23,
-      "wall": 228.0,
-      "billed": 289409,
-      "fresh": 289409,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 11588,
-      "input_total": 289409,
-      "cost": 0.5439,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "pass",
@@ -527,6 +467,38 @@
       "snapshot": "june16"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 39.8,
+      "billed": 63666,
+      "fresh": 3250,
+      "cache_read": 60416,
+      "cache_create": 0,
+      "output": 2615,
+      "input_total": 63666,
+      "cost": 0.0253,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 162.9,
+      "billed": 69247,
+      "fresh": 69247,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 5723,
+      "input_total": 69247,
+      "cost": 0.1404,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -559,34 +531,34 @@
       "snapshot": "june16"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 5,
-      "wall": 22.7,
-      "billed": 49320,
-      "fresh": 3624,
-      "cache_read": 45696,
+      "turns": 8,
+      "wall": 26.3,
+      "billed": 78293,
+      "fresh": 4437,
+      "cache_read": 73856,
       "cache_create": 0,
-      "output": 1184,
-      "input_total": 49320,
-      "cost": 0.0184,
+      "output": 1398,
+      "input_total": 78293,
+      "cost": 0.0254,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 16,
-      "wall": 75.7,
-      "billed": 107505,
-      "fresh": 107505,
+      "turns": 15,
+      "wall": 69.0,
+      "billed": 94285,
+      "fresh": 94285,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 2397,
-      "input_total": 107505,
-      "cost": 0.1954,
+      "output": 2092,
+      "input_total": 94285,
+      "cost": 0.1713,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -655,34 +627,34 @@
       "snapshot": "june16"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 6,
-      "wall": 44.5,
-      "billed": 61025,
-      "fresh": 4065,
-      "cache_read": 56960,
+      "turns": 9,
+      "wall": 190.1,
+      "billed": 179941,
+      "fresh": 21861,
+      "cache_read": 158080,
       "cache_create": 0,
-      "output": 2466,
-      "input_total": 61025,
-      "cost": 0.0256,
+      "output": 14164,
+      "input_total": 179941,
+      "cost": 0.1148,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 12,
-      "wall": 82.4,
-      "billed": 75345,
-      "fresh": 75345,
+      "turns": 23,
+      "wall": 228.0,
+      "billed": 289409,
+      "fresh": 289409,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 3615,
-      "input_total": 75345,
-      "cost": 0.1437,
+      "output": 11588,
+      "input_total": 289409,
+      "cost": 0.5439,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -751,38 +723,6 @@
       "snapshot": "june16"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 22.9,
-      "billed": 56327,
-      "fresh": 3335,
-      "cache_read": 52992,
-      "cache_create": 0,
-      "output": 1107,
-      "input_total": 56327,
-      "cost": 0.0189,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 14,
-      "wall": 91.0,
-      "billed": 87769,
-      "fresh": 87769,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2746,
-      "input_total": 87769,
-      "cost": 0.1623,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "pass",
@@ -843,38 +783,6 @@
       "output": 7154,
       "input_total": 151060,
       "cost": 0.2877,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 13.7,
-      "billed": 48380,
-      "fresh": 3580,
-      "cache_read": 44800,
-      "cache_create": 0,
-      "output": 762,
-      "input_total": 48380,
-      "cost": 0.0167,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 69.0,
-      "billed": 63070,
-      "fresh": 63070,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1348,
-      "input_total": 63070,
-      "cost": 0.1144,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -943,38 +851,6 @@
       "snapshot": "june16"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 30.1,
-      "billed": 45257,
-      "fresh": 1865,
-      "cache_read": 43392,
-      "cache_create": 0,
-      "output": 1905,
-      "input_total": 45257,
-      "cost": 0.0174,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 106.5,
-      "billed": 58182,
-      "fresh": 58182,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2311,
-      "input_total": 58182,
-      "cost": 0.1093,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "pass",
@@ -1003,38 +879,6 @@
       "output": 4038,
       "input_total": 118849,
       "cost": 0.2208,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 39.8,
-      "billed": 63666,
-      "fresh": 3250,
-      "cache_read": 60416,
-      "cache_create": 0,
-      "output": 2615,
-      "input_total": 63666,
-      "cost": 0.0253,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 162.9,
-      "billed": 69247,
-      "fresh": 69247,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 5723,
-      "input_total": 69247,
-      "cost": 0.1404,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -1199,6 +1043,38 @@
       "snapshot": "june16"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 22.7,
+      "billed": 49320,
+      "fresh": 3624,
+      "cache_read": 45696,
+      "cache_create": 0,
+      "output": 1184,
+      "input_total": 49320,
+      "cost": 0.0184,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 16,
+      "wall": 75.7,
+      "billed": 107505,
+      "fresh": 107505,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2397,
+      "input_total": 107505,
+      "cost": 0.1954,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "pass",
@@ -1227,6 +1103,38 @@
       "output": 7134,
       "input_total": 227708,
       "cost": 0.421,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 44.5,
+      "billed": 61025,
+      "fresh": 4065,
+      "cache_read": 56960,
+      "cache_create": 0,
+      "output": 2466,
+      "input_total": 61025,
+      "cost": 0.0256,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 82.4,
+      "billed": 75345,
+      "fresh": 75345,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 3615,
+      "input_total": 75345,
+      "cost": 0.1437,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -1295,6 +1203,38 @@
       "snapshot": "june16"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 22.9,
+      "billed": 56327,
+      "fresh": 3335,
+      "cache_read": 52992,
+      "cache_create": 0,
+      "output": 1107,
+      "input_total": 56327,
+      "cost": 0.0189,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 91.0,
+      "billed": 87769,
+      "fresh": 87769,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2746,
+      "input_total": 87769,
+      "cost": 0.1623,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -1323,6 +1263,38 @@
       "output": 2196,
       "input_total": 72965,
       "cost": 0.1346,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 13.7,
+      "billed": 48380,
+      "fresh": 3580,
+      "cache_read": 44800,
+      "cache_create": 0,
+      "output": 762,
+      "input_total": 48380,
+      "cost": 0.0167,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 69.0,
+      "billed": 63070,
+      "fresh": 63070,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1348,
+      "input_total": 63070,
+      "cost": 0.1144,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -1387,6 +1359,38 @@
       "output": 6952,
       "input_total": 296709,
       "cost": 0.5405,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 30.1,
+      "billed": 45257,
+      "fresh": 1865,
+      "cache_read": 43392,
+      "cache_create": 0,
+      "output": 1905,
+      "input_total": 45257,
+      "cost": 0.0174,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 106.5,
+      "billed": 58182,
+      "fresh": 58182,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2311,
+      "input_total": 58182,
+      "cost": 0.1093,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -1556,46 +1560,6 @@
       "status": "missing"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 38.0,
-      "billed": 142590,
-      "fresh": 110187,
-      "cache_read": 32403,
-      "cache_create": 0,
-      "output": 4485,
-      "input_total": 142590,
-      "cost": 0.2105,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 16,
-      "wall": 77.0,
-      "billed": 275460,
-      "fresh": 145862,
-      "cache_read": 129598,
-      "cache_create": 0,
-      "output": 7129,
-      "input_total": 275460,
-      "cost": 0.3024,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "pass",
@@ -1636,6 +1600,26 @@
       "status": "missing"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 48.2,
+      "billed": 150847,
+      "fresh": 86081,
+      "cache_read": 64766,
+      "cache_create": 0,
+      "output": 4973,
+      "input_total": 150847,
+      "cost": 0.1836,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -1656,19 +1640,19 @@
       "status": "missing"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
       "turns": 10,
-      "wall": 66.8,
-      "billed": 158796,
-      "fresh": 93891,
-      "cache_read": 64905,
+      "wall": 38.0,
+      "billed": 142590,
+      "fresh": 110187,
+      "cache_read": 32403,
       "cache_create": 0,
-      "output": 6865,
-      "input_total": 158796,
-      "cost": 0.2124,
+      "output": 4485,
+      "input_total": 142590,
+      "cost": 0.2105,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -1716,19 +1700,19 @@
       "status": "missing"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 19,
-      "wall": 87.0,
-      "billed": 309540,
-      "fresh": 163834,
-      "cache_read": 145706,
+      "turns": 16,
+      "wall": 77.0,
+      "billed": 275460,
+      "fresh": 145862,
+      "cache_read": 129598,
       "cache_create": 0,
-      "output": 8637,
-      "input_total": 309540,
-      "cost": 0.3453,
+      "output": 7129,
+      "input_total": 275460,
+      "cost": 0.3024,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -1776,26 +1760,6 @@
       "status": "missing"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 39.6,
-      "billed": 153184,
-      "fresh": 137025,
-      "cache_read": 16159,
-      "cache_create": 0,
-      "output": 3120,
-      "input_total": 153184,
-      "cost": 0.236,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "pass",
@@ -1829,26 +1793,6 @@
       "output": 8708,
       "input_total": 195154,
       "cost": 0.2065,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 27.0,
-      "billed": 122647,
-      "fresh": 122647,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2452,
-      "input_total": 122647,
-      "cost": 0.206,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -1908,26 +1852,6 @@
       "status": "missing"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 39.5,
-      "billed": 96301,
-      "fresh": 96301,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 4321,
-      "input_total": 96301,
-      "cost": 0.1833,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "pass",
@@ -1941,26 +1865,6 @@
       "output": 5877,
       "input_total": 350450,
       "cost": 0.3165,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 48.2,
-      "billed": 150847,
-      "fresh": 86081,
-      "cache_read": 64766,
-      "cache_create": 0,
-      "output": 4973,
-      "input_total": 150847,
-      "cost": 0.1836,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -2068,6 +1972,26 @@
       "status": "missing"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 66.8,
+      "billed": 158796,
+      "fresh": 93891,
+      "cache_read": 64905,
+      "cache_create": 0,
+      "output": 6865,
+      "input_total": 158796,
+      "cost": 0.2124,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "pass",
@@ -2081,6 +2005,26 @@
       "output": 17885,
       "input_total": 337441,
       "cost": 0.3706,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 19,
+      "wall": 87.0,
+      "billed": 309540,
+      "fresh": 163834,
+      "cache_read": 145706,
+      "cache_create": 0,
+      "output": 8637,
+      "input_total": 309540,
+      "cost": 0.3453,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -2128,6 +2072,26 @@
       "status": "missing"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 39.6,
+      "billed": 153184,
+      "fresh": 137025,
+      "cache_read": 16159,
+      "cache_create": 0,
+      "output": 3120,
+      "input_total": 153184,
+      "cost": 0.236,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -2141,6 +2105,26 @@
       "output": 2790,
       "input_total": 115012,
       "cost": 0.1976,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 27.0,
+      "billed": 122647,
+      "fresh": 122647,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2452,
+      "input_total": 122647,
+      "cost": 0.206,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -2181,6 +2165,26 @@
       "output": 10586,
       "input_total": 231086,
       "cost": 0.2774,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 39.5,
+      "billed": 96301,
+      "fresh": 96301,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 4321,
+      "input_total": 96301,
+      "cost": 0.1833,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -2353,70 +2357,6 @@
       "snapshot": "july09v2"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 23.9,
-      "billed": 238496,
-      "fresh": 1956,
-      "cache_read": 223814,
-      "cache_create": 12726,
-      "output": 1107,
-      "input_total": 238496,
-      "cost": 0.2295,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 12,
-      "wall": 71.4,
-      "billed": 116400,
-      "fresh": 5737,
-      "cache_read": 104820,
-      "cache_create": 5843,
-      "output": 1770,
-      "input_total": 116400,
-      "cost": 0.0647,
-      "cost_valid": true,
-      "snapshot": "july09v2"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 27,
-      "wall": 224.9,
-      "billed": 1365853,
-      "fresh": 2254,
-      "cache_read": 1321905,
-      "cache_create": 41694,
-      "output": 12693,
-      "input_total": 1365853,
-      "cost": 1.2507,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 19,
-      "wall": 154.3,
-      "billed": 347414,
-      "fresh": 20699,
-      "cache_read": 305033,
-      "cache_create": 21682,
-      "output": 5828,
-      "input_total": 347414,
-      "cost": 0.2149,
-      "cost_valid": true,
-      "snapshot": "july09v2"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "pass",
@@ -2481,6 +2421,38 @@
       "snapshot": "july09v2"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 26.0,
+      "billed": 167738,
+      "fresh": 1823,
+      "cache_read": 154799,
+      "cache_create": 11116,
+      "output": 1169,
+      "input_total": 167738,
+      "cost": 0.1858,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 52.8,
+      "billed": 83471,
+      "fresh": 4618,
+      "cache_read": 73319,
+      "cache_create": 5534,
+      "output": 1816,
+      "input_total": 83471,
+      "cost": 0.0559,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -2513,34 +2485,34 @@
       "snapshot": "july09v2"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 7,
-      "wall": 35.5,
-      "billed": 252015,
-      "fresh": 1827,
-      "cache_read": 234918,
-      "cache_create": 15270,
-      "output": 2751,
-      "input_total": 252015,
-      "cost": 0.2914,
+      "turns": 10,
+      "wall": 23.9,
+      "billed": 238496,
+      "fresh": 1956,
+      "cache_read": 223814,
+      "cache_create": 12726,
+      "output": 1107,
+      "input_total": 238496,
+      "cost": 0.2295,
       "cost_valid": true,
       "snapshot": "july09"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 9,
-      "wall": 57.9,
-      "billed": 77446,
-      "fresh": 3618,
-      "cache_read": 69000,
-      "cache_create": 4828,
-      "output": 2160,
-      "input_total": 77446,
-      "cost": 0.0547,
+      "turns": 12,
+      "wall": 71.4,
+      "billed": 116400,
+      "fresh": 5737,
+      "cache_read": 104820,
+      "cache_create": 5843,
+      "output": 1770,
+      "input_total": 116400,
+      "cost": 0.0647,
       "cost_valid": true,
       "snapshot": "july09v2"
      }
@@ -2609,34 +2581,34 @@
       "snapshot": "july09v2"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 12,
-      "wall": 34.5,
-      "billed": 207003,
-      "fresh": 1954,
-      "cache_read": 191191,
-      "cache_create": 13858,
-      "output": 1556,
-      "input_total": 207003,
-      "cost": 0.2315,
+      "turns": 27,
+      "wall": 224.9,
+      "billed": 1365853,
+      "fresh": 2254,
+      "cache_read": 1321905,
+      "cache_create": 41694,
+      "output": 12693,
+      "input_total": 1365853,
+      "cost": 1.2507,
       "cost_valid": true,
       "snapshot": "july09"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 14,
-      "wall": 79.8,
-      "billed": 144466,
-      "fresh": 5899,
-      "cache_read": 131376,
-      "cache_create": 7191,
-      "output": 2110,
-      "input_total": 144466,
-      "cost": 0.0772,
+      "turns": 19,
+      "wall": 154.3,
+      "billed": 347414,
+      "fresh": 20699,
+      "cache_read": 305033,
+      "cache_create": 21682,
+      "output": 5828,
+      "input_total": 347414,
+      "cost": 0.2149,
       "cost_valid": true,
       "snapshot": "july09v2"
      }
@@ -2705,38 +2677,6 @@
       "snapshot": "july09v2"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 25.4,
-      "billed": 231518,
-      "fresh": 1827,
-      "cache_read": 219080,
-      "cache_create": 10611,
-      "output": 762,
-      "input_total": 231518,
-      "cost": 0.2046,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 97.5,
-      "billed": 80821,
-      "fresh": 5521,
-      "cache_read": 69340,
-      "cache_create": 5960,
-      "output": 1057,
-      "input_total": 80821,
-      "cost": 0.0504,
-      "cost_valid": true,
-      "snapshot": "july09v2"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "pass",
@@ -2797,38 +2737,6 @@
       "output": 4696,
       "input_total": 150634,
       "cost": 0.1149,
-      "cost_valid": true,
-      "snapshot": "july09v2"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 18.5,
-      "billed": 171603,
-      "fresh": 1952,
-      "cache_read": 157119,
-      "cache_create": 12532,
-      "output": 915,
-      "input_total": 171603,
-      "cost": 0.1901,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 35.1,
-      "billed": 57533,
-      "fresh": 2951,
-      "cache_read": 51253,
-      "cache_create": 3329,
-      "output": 749,
-      "input_total": 57533,
-      "cost": 0.032,
       "cost_valid": true,
       "snapshot": "july09v2"
      }
@@ -2897,38 +2805,6 @@
       "snapshot": "july09v2"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 32.1,
-      "billed": 198296,
-      "fresh": 1825,
-      "cache_read": 186079,
-      "cache_create": 10392,
-      "output": 1321,
-      "input_total": 198296,
-      "cost": 0.2007,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 77.9,
-      "billed": 79894,
-      "fresh": 2726,
-      "cache_read": 73756,
-      "cache_create": 3412,
-      "output": 1824,
-      "input_total": 79894,
-      "cost": 0.047,
-      "cost_valid": true,
-      "snapshot": "july09v2"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "pass",
@@ -2957,38 +2833,6 @@
       "output": 1219,
       "input_total": 95721,
       "cost": 0.0456,
-      "cost_valid": true,
-      "snapshot": "july09v2"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 26.0,
-      "billed": 167738,
-      "fresh": 1823,
-      "cache_read": 154799,
-      "cache_create": 11116,
-      "output": 1169,
-      "input_total": 167738,
-      "cost": 0.1858,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 52.8,
-      "billed": 83471,
-      "fresh": 4618,
-      "cache_read": 73319,
-      "cache_create": 5534,
-      "output": 1816,
-      "input_total": 83471,
-      "cost": 0.0559,
       "cost_valid": true,
       "snapshot": "july09v2"
      }
@@ -3153,6 +2997,38 @@
       "snapshot": "july09v2"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 35.5,
+      "billed": 252015,
+      "fresh": 1827,
+      "cache_read": 234918,
+      "cache_create": 15270,
+      "output": 2751,
+      "input_total": 252015,
+      "cost": 0.2914,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 57.9,
+      "billed": 77446,
+      "fresh": 3618,
+      "cache_read": 69000,
+      "cache_create": 4828,
+      "output": 2160,
+      "input_total": 77446,
+      "cost": 0.0547,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "pass",
@@ -3181,6 +3057,38 @@
       "output": 10776,
       "input_total": 275928,
       "cost": 0.2182,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 34.5,
+      "billed": 207003,
+      "fresh": 1954,
+      "cache_read": 191191,
+      "cache_create": 13858,
+      "output": 1556,
+      "input_total": 207003,
+      "cost": 0.2315,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 79.8,
+      "billed": 144466,
+      "fresh": 5899,
+      "cache_read": 131376,
+      "cache_create": 7191,
+      "output": 2110,
+      "input_total": 144466,
+      "cost": 0.0772,
       "cost_valid": true,
       "snapshot": "july09v2"
      }
@@ -3249,6 +3157,38 @@
       "snapshot": "july09v2"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 25.4,
+      "billed": 231518,
+      "fresh": 1827,
+      "cache_read": 219080,
+      "cache_create": 10611,
+      "output": 762,
+      "input_total": 231518,
+      "cost": 0.2046,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 97.5,
+      "billed": 80821,
+      "fresh": 5521,
+      "cache_read": 69340,
+      "cache_create": 5960,
+      "output": 1057,
+      "input_total": 80821,
+      "cost": 0.0504,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -3277,6 +3217,38 @@
       "output": 1168,
       "input_total": 68827,
       "cost": 0.0407,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 18.5,
+      "billed": 171603,
+      "fresh": 1952,
+      "cache_read": 157119,
+      "cache_create": 12532,
+      "output": 915,
+      "input_total": 171603,
+      "cost": 0.1901,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 35.1,
+      "billed": 57533,
+      "fresh": 2951,
+      "cache_read": 51253,
+      "cache_create": 3329,
+      "output": 749,
+      "input_total": 57533,
+      "cost": 0.032,
       "cost_valid": true,
       "snapshot": "july09v2"
      }
@@ -3341,6 +3313,38 @@
       "output": 4685,
       "input_total": 169465,
       "cost": 0.1315,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 32.1,
+      "billed": 198296,
+      "fresh": 1825,
+      "cache_read": 186079,
+      "cache_create": 10392,
+      "output": 1321,
+      "input_total": 198296,
+      "cost": 0.2007,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 77.9,
+      "billed": 79894,
+      "fresh": 2726,
+      "cache_read": 73756,
+      "cache_create": 3412,
+      "output": 1824,
+      "input_total": 79894,
+      "cost": 0.047,
       "cost_valid": true,
       "snapshot": "july09v2"
      }
@@ -3546,70 +3550,6 @@
       "snapshot": "july02"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 27.3,
-      "billed": 100279,
-      "fresh": 23918,
-      "cache_read": 76361,
-      "cache_create": 0,
-      "output": 1173,
-      "input_total": 100279,
-      "cost": 0.0772,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 54.6,
-      "billed": 48553,
-      "fresh": 48553,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 583,
-      "input_total": 48553,
-      "cost": 0.1041,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 68.6,
-      "billed": 151817,
-      "fresh": 38902,
-      "cache_read": 112915,
-      "cache_create": 0,
-      "output": 2025,
-      "input_total": 151817,
-      "cost": 0.1247,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 19,
-      "wall": 147.2,
-      "billed": 469646,
-      "fresh": 273937,
-      "cache_read": 195709,
-      "cache_create": 0,
-      "output": 2989,
-      "input_total": 469646,
-      "cost": 0.6229,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "pass",
@@ -3674,6 +3614,38 @@
       "snapshot": "july02"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 38.6,
+      "billed": 113473,
+      "fresh": 33187,
+      "cache_read": 80286,
+      "cache_create": 0,
+      "output": 1607,
+      "input_total": 113473,
+      "cost": 0.1017,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 55.2,
+      "billed": 36931,
+      "fresh": 36931,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 808,
+      "input_total": 36931,
+      "cost": 0.0836,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -3706,34 +3678,34 @@
       "snapshot": "july02"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 0,
-      "wall": 58.7,
-      "billed": 0,
-      "fresh": 0,
-      "cache_read": 0,
+      "turns": 9,
+      "wall": 27.3,
+      "billed": 100279,
+      "fresh": 23918,
+      "cache_read": 76361,
       "cache_create": 0,
-      "output": 0,
-      "input_total": 0,
-      "cost": 0.0,
+      "output": 1173,
+      "input_total": 100279,
+      "cost": 0.0772,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 7,
-      "wall": 87.0,
-      "billed": 40206,
-      "fresh": 40206,
+      "turns": 9,
+      "wall": 54.6,
+      "billed": 48553,
+      "fresh": 48553,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 909,
-      "input_total": 40206,
-      "cost": 0.0913,
+      "output": 583,
+      "input_total": 48553,
+      "cost": 0.1041,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -3802,34 +3774,34 @@
       "snapshot": "july02"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 14,
-      "wall": 79.3,
-      "billed": 185703,
-      "fresh": 32674,
-      "cache_read": 153029,
+      "turns": 11,
+      "wall": 68.6,
+      "billed": 151817,
+      "fresh": 38902,
+      "cache_read": 112915,
       "cache_create": 0,
-      "output": 5150,
-      "input_total": 185703,
-      "cost": 0.1578,
+      "output": 2025,
+      "input_total": 151817,
+      "cost": 0.1247,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 11,
-      "wall": 79.6,
-      "billed": 73659,
-      "fresh": 65840,
-      "cache_read": 7819,
+      "turns": 19,
+      "wall": 147.2,
+      "billed": 469646,
+      "fresh": 273937,
+      "cache_read": 195709,
       "cache_create": 0,
-      "output": 1542,
-      "input_total": 73659,
-      "cost": 0.1517,
+      "output": 2989,
+      "input_total": 469646,
+      "cost": 0.6229,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -3898,38 +3870,6 @@
       "snapshot": "july02"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 46.7,
-      "billed": 95521,
-      "fresh": 23173,
-      "cache_read": 72348,
-      "cache_create": 0,
-      "output": 1084,
-      "input_total": 95521,
-      "cost": 0.0738,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 52.4,
-      "billed": 39836,
-      "fresh": 39836,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 594,
-      "input_total": 39836,
-      "cost": 0.0868,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "pass",
@@ -3990,38 +3930,6 @@
       "output": 1770,
       "input_total": 67760,
       "cost": 0.1284,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 17.1,
-      "billed": 59274,
-      "fresh": 7031,
-      "cache_read": 52243,
-      "cache_create": 0,
-      "output": 979,
-      "input_total": 59274,
-      "cost": 0.0363,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 51.2,
-      "billed": 31551,
-      "fresh": 31551,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 742,
-      "input_total": 31551,
-      "cost": 0.072,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -4090,38 +3998,6 @@
       "snapshot": "july02"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 28.4,
-      "billed": 54833,
-      "fresh": 14608,
-      "cache_read": 40225,
-      "cache_create": 0,
-      "output": 1822,
-      "input_total": 54833,
-      "cost": 0.0591,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 92.1,
-      "billed": 102660,
-      "fresh": 83104,
-      "cache_read": 19556,
-      "cache_create": 0,
-      "output": 1131,
-      "input_total": 102660,
-      "cost": 0.1837,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "pass",
@@ -4150,38 +4026,6 @@
       "output": 1045,
       "input_total": 79523,
       "cost": 0.1716,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 38.6,
-      "billed": 113473,
-      "fresh": 33187,
-      "cache_read": 80286,
-      "cache_create": 0,
-      "output": 1607,
-      "input_total": 113473,
-      "cost": 0.1017,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 55.2,
-      "billed": 36931,
-      "fresh": 36931,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 808,
-      "input_total": 36931,
-      "cost": 0.0836,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -4346,6 +4190,38 @@
       "snapshot": "july02"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 0,
+      "wall": 58.7,
+      "billed": 0,
+      "fresh": 0,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 0,
+      "input_total": 0,
+      "cost": 0.0,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 87.0,
+      "billed": 40206,
+      "fresh": 40206,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 909,
+      "input_total": 40206,
+      "cost": 0.0913,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "pass",
@@ -4374,6 +4250,38 @@
       "output": 1143,
       "input_total": 111015,
       "cost": 0.1688,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 79.3,
+      "billed": 185703,
+      "fresh": 32674,
+      "cache_read": 153029,
+      "cache_create": 0,
+      "output": 5150,
+      "input_total": 185703,
+      "cost": 0.1578,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 79.6,
+      "billed": 73659,
+      "fresh": 65840,
+      "cache_read": 7819,
+      "cache_create": 0,
+      "output": 1542,
+      "input_total": 73659,
+      "cost": 0.1517,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -4442,6 +4350,38 @@
       "snapshot": "july02"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 46.7,
+      "billed": 95521,
+      "fresh": 23173,
+      "cache_read": 72348,
+      "cache_create": 0,
+      "output": 1084,
+      "input_total": 95521,
+      "cost": 0.0738,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 52.4,
+      "billed": 39836,
+      "fresh": 39836,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 594,
+      "input_total": 39836,
+      "cost": 0.0868,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -4470,6 +4410,38 @@
       "output": 923,
       "input_total": 55027,
       "cost": 0.1211,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 17.1,
+      "billed": 59274,
+      "fresh": 7031,
+      "cache_read": 52243,
+      "cache_create": 0,
+      "output": 979,
+      "input_total": 59274,
+      "cost": 0.0363,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 51.2,
+      "billed": 31551,
+      "fresh": 31551,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 742,
+      "input_total": 31551,
+      "cost": 0.072,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -4534,6 +4506,38 @@
       "output": 3878,
       "input_total": 181722,
       "cost": 0.3106,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 28.4,
+      "billed": 54833,
+      "fresh": 14608,
+      "cache_read": 40225,
+      "cache_create": 0,
+      "output": 1822,
+      "input_total": 54833,
+      "cost": 0.0591,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 92.1,
+      "billed": 102660,
+      "fresh": 83104,
+      "cache_read": 19556,
+      "cache_create": 0,
+      "output": 1131,
+      "input_total": 102660,
+      "cost": 0.1837,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -4739,70 +4743,6 @@
       "snapshot": "june16"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 19.8,
-      "billed": 69410,
-      "fresh": 6562,
-      "cache_read": 62848,
-      "cache_create": 0,
-      "output": 846,
-      "input_total": 69410,
-      "cost": 0.0896,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 47.8,
-      "billed": 110415,
-      "fresh": 61263,
-      "cache_read": 49152,
-      "cache_create": 0,
-      "output": 669,
-      "input_total": 110415,
-      "cost": 0.351,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 64.1,
-      "billed": 273284,
-      "fresh": 18948,
-      "cache_read": 254336,
-      "cache_create": 0,
-      "output": 2156,
-      "input_total": 273284,
-      "cost": 0.2866,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 92.1,
-      "billed": 443755,
-      "fresh": 296299,
-      "cache_read": 147456,
-      "cache_create": 0,
-      "output": 1332,
-      "input_total": 443755,
-      "cost": 1.5952,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "pass",
@@ -4867,6 +4807,38 @@
       "snapshot": "june16"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 35.1,
+      "billed": 85504,
+      "fresh": 4864,
+      "cache_read": 80640,
+      "cache_create": 0,
+      "output": 971,
+      "input_total": 85504,
+      "cost": 0.0938,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 39.6,
+      "billed": 58017,
+      "fresh": 34465,
+      "cache_read": 23552,
+      "cache_create": 0,
+      "output": 661,
+      "input_total": 58017,
+      "cost": 0.2039,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -4899,34 +4871,34 @@
       "snapshot": "june16"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
       "turns": 1,
-      "wall": 47.1,
-      "billed": 101631,
-      "fresh": 11903,
-      "cache_read": 89728,
+      "wall": 19.8,
+      "billed": 69410,
+      "fresh": 6562,
+      "cache_read": 62848,
       "cache_create": 0,
-      "output": 1114,
-      "input_total": 101631,
-      "cost": 0.1378,
+      "output": 846,
+      "input_total": 69410,
+      "cost": 0.0896,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 12,
-      "wall": 68.9,
-      "billed": 95800,
-      "fresh": 57400,
-      "cache_read": 38400,
+      "turns": 9,
+      "wall": 47.8,
+      "billed": 110415,
+      "fresh": 61263,
+      "cache_read": 49152,
       "cache_create": 0,
-      "output": 2263,
-      "input_total": 95800,
-      "cost": 0.3741,
+      "output": 669,
+      "input_total": 110415,
+      "cost": 0.351,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -4995,34 +4967,34 @@
       "snapshot": "june16"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
       "turns": 1,
-      "wall": 45.6,
-      "billed": 103014,
-      "fresh": 8166,
-      "cache_read": 94848,
+      "wall": 64.1,
+      "billed": 273284,
+      "fresh": 18948,
+      "cache_read": 254336,
       "cache_create": 0,
-      "output": 1393,
-      "input_total": 103014,
-      "cost": 0.13,
+      "output": 2156,
+      "input_total": 273284,
+      "cost": 0.2866,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 12,
-      "wall": 80.7,
-      "billed": 96062,
-      "fresh": 56126,
-      "cache_read": 39936,
+      "turns": 9,
+      "wall": 92.1,
+      "billed": 443755,
+      "fresh": 296299,
+      "cache_read": 147456,
       "cache_create": 0,
-      "output": 2794,
-      "input_total": 96062,
-      "cost": 0.3844,
+      "output": 1332,
+      "input_total": 443755,
+      "cost": 1.5952,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -5091,38 +5063,6 @@
       "snapshot": "june16"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 23.1,
-      "billed": 80625,
-      "fresh": 4081,
-      "cache_read": 76544,
-      "cache_create": 0,
-      "output": 703,
-      "input_total": 80625,
-      "cost": 0.0798,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 15,
-      "wall": 81.2,
-      "billed": 131279,
-      "fresh": 71375,
-      "cache_read": 59904,
-      "cache_create": 0,
-      "output": 1086,
-      "input_total": 131279,
-      "cost": 0.4194,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "pass",
@@ -5183,38 +5123,6 @@
       "output": 2714,
       "input_total": 361154,
       "cost": 1.1177,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 73.8,
-      "billed": 83882,
-      "fresh": 12458,
-      "cache_read": 71424,
-      "cache_create": 0,
-      "output": 749,
-      "input_total": 83882,
-      "cost": 0.1205,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 33.1,
-      "billed": 39178,
-      "fresh": 22282,
-      "cache_read": 16896,
-      "cache_create": 0,
-      "output": 333,
-      "input_total": 39178,
-      "cost": 0.1298,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -5283,38 +5191,6 @@
       "snapshot": "june16"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 31.4,
-      "billed": 107077,
-      "fresh": 4165,
-      "cache_read": 102912,
-      "cache_create": 0,
-      "output": 1101,
-      "input_total": 107077,
-      "cost": 0.1053,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 80.1,
-      "billed": 46518,
-      "fresh": 26550,
-      "cache_read": 19968,
-      "cache_create": 0,
-      "output": 677,
-      "input_total": 46518,
-      "cost": 0.163,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "pass",
@@ -5343,38 +5219,6 @@
       "output": 2276,
       "input_total": 400547,
       "cost": 1.26,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 35.1,
-      "billed": 85504,
-      "fresh": 4864,
-      "cache_read": 80640,
-      "cache_create": 0,
-      "output": 971,
-      "input_total": 85504,
-      "cost": 0.0938,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 39.6,
-      "billed": 58017,
-      "fresh": 34465,
-      "cache_read": 23552,
-      "cache_create": 0,
-      "output": 661,
-      "input_total": 58017,
-      "cost": 0.2039,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -5539,6 +5383,38 @@
       "snapshot": "june16"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 47.1,
+      "billed": 101631,
+      "fresh": 11903,
+      "cache_read": 89728,
+      "cache_create": 0,
+      "output": 1114,
+      "input_total": 101631,
+      "cost": 0.1378,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 68.9,
+      "billed": 95800,
+      "fresh": 57400,
+      "cache_read": 38400,
+      "cache_create": 0,
+      "output": 2263,
+      "input_total": 95800,
+      "cost": 0.3741,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "pass",
@@ -5567,6 +5443,38 @@
       "output": 2028,
       "input_total": 348309,
       "cost": 1.1434,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 45.6,
+      "billed": 103014,
+      "fresh": 8166,
+      "cache_read": 94848,
+      "cache_create": 0,
+      "output": 1393,
+      "input_total": 103014,
+      "cost": 0.13,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 80.7,
+      "billed": 96062,
+      "fresh": 56126,
+      "cache_read": 39936,
+      "cache_create": 0,
+      "output": 2794,
+      "input_total": 96062,
+      "cost": 0.3844,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -5635,6 +5543,38 @@
       "snapshot": "june16"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 23.1,
+      "billed": 80625,
+      "fresh": 4081,
+      "cache_read": 76544,
+      "cache_create": 0,
+      "output": 703,
+      "input_total": 80625,
+      "cost": 0.0798,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 81.2,
+      "billed": 131279,
+      "fresh": 71375,
+      "cache_read": 59904,
+      "cache_create": 0,
+      "output": 1086,
+      "input_total": 131279,
+      "cost": 0.4194,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -5663,6 +5603,38 @@
       "output": 803,
       "input_total": 115666,
       "cost": 0.3835,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 73.8,
+      "billed": 83882,
+      "fresh": 12458,
+      "cache_read": 71424,
+      "cache_create": 0,
+      "output": 749,
+      "input_total": 83882,
+      "cost": 0.1205,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 33.1,
+      "billed": 39178,
+      "fresh": 22282,
+      "cache_read": 16896,
+      "cache_create": 0,
+      "output": 333,
+      "input_total": 39178,
+      "cost": 0.1298,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -5727,6 +5699,38 @@
       "output": 179,
       "input_total": 10492,
       "cost": 0.0371,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 31.4,
+      "billed": 107077,
+      "fresh": 4165,
+      "cache_read": 102912,
+      "cache_create": 0,
+      "output": 1101,
+      "input_total": 107077,
+      "cost": 0.1053,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 80.1,
+      "billed": 46518,
+      "fresh": 26550,
+      "cache_read": 19968,
+      "cache_create": 0,
+      "output": 677,
+      "input_total": 46518,
+      "cost": 0.163,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -5932,70 +5936,6 @@
       "snapshot": "june16"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 25.2,
-      "billed": 101724,
-      "fresh": 13660,
-      "cache_read": 88064,
-      "cache_create": 0,
-      "output": 472,
-      "input_total": 101724,
-      "cost": 0.0099,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 14,
-      "wall": 102.6,
-      "billed": 68654,
-      "fresh": 68654,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2079,
-      "input_total": 68654,
-      "cost": 0.0316,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 293.3,
-      "billed": 210220,
-      "fresh": 27948,
-      "cache_read": 182272,
-      "cache_create": 0,
-      "output": 8352,
-      "input_total": 210220,
-      "cost": 0.0351,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 21,
-      "wall": 360.0,
-      "billed": 169171,
-      "fresh": 169171,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 9402,
-      "input_total": 169171,
-      "cost": 0.0864,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "pass",
@@ -6060,6 +6000,38 @@
       "snapshot": "june16"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 20.8,
+      "billed": 61954,
+      "fresh": 8706,
+      "cache_read": 53248,
+      "cache_create": 0,
+      "output": 536,
+      "input_total": 61954,
+      "cost": 0.0067,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 99.1,
+      "billed": 53106,
+      "fresh": 53106,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2324,
+      "input_total": 53106,
+      "cost": 0.0259,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -6092,34 +6064,34 @@
       "snapshot": "june16"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 5,
-      "wall": 26.4,
-      "billed": 63910,
-      "fresh": 8614,
-      "cache_read": 55296,
+      "turns": 8,
+      "wall": 25.2,
+      "billed": 101724,
+      "fresh": 13660,
+      "cache_read": 88064,
       "cache_create": 0,
-      "output": 1025,
-      "input_total": 63910,
-      "cost": 0.0077,
+      "output": 472,
+      "input_total": 101724,
+      "cost": 0.0099,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 12,
-      "wall": 81.6,
-      "billed": 48543,
-      "fresh": 48543,
+      "turns": 14,
+      "wall": 102.6,
+      "billed": 68654,
+      "fresh": 68654,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 1406,
-      "input_total": 48543,
-      "cost": 0.0222,
+      "output": 2079,
+      "input_total": 68654,
+      "cost": 0.0316,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -6188,34 +6160,34 @@
       "snapshot": "june16"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 6,
-      "wall": 37.0,
-      "billed": 77719,
-      "fresh": 10135,
-      "cache_read": 67584,
+      "turns": 10,
+      "wall": 293.3,
+      "billed": 210220,
+      "fresh": 27948,
+      "cache_read": 182272,
       "cache_create": 0,
-      "output": 1085,
-      "input_total": 77719,
-      "cost": 0.0089,
+      "output": 8352,
+      "input_total": 210220,
+      "cost": 0.0351,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 16,
-      "wall": 202.1,
-      "billed": 71272,
-      "fresh": 71272,
+      "turns": 21,
+      "wall": 360.0,
+      "billed": 169171,
+      "fresh": 169171,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 4654,
-      "input_total": 71272,
-      "cost": 0.0378,
+      "output": 9402,
+      "input_total": 169171,
+      "cost": 0.0864,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -6284,38 +6256,6 @@
       "snapshot": "june16"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 23.6,
-      "billed": 59191,
-      "fresh": 5943,
-      "cache_read": 53248,
-      "cache_create": 0,
-      "output": 446,
-      "input_total": 59191,
-      "cost": 0.0054,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 78.6,
-      "billed": 41221,
-      "fresh": 41221,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1179,
-      "input_total": 41221,
-      "cost": 0.0188,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "pass",
@@ -6376,38 +6316,6 @@
       "output": 7126,
       "input_total": 80595,
       "cost": 0.0464,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 15.6,
-      "billed": 57786,
-      "fresh": 8634,
-      "cache_read": 49152,
-      "cache_create": 0,
-      "output": 279,
-      "input_total": 57786,
-      "cost": 0.006,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 55.5,
-      "billed": 39009,
-      "fresh": 39009,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 942,
-      "input_total": 39009,
-      "cost": 0.0175,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -6476,38 +6384,6 @@
       "snapshot": "june16"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 4,
-      "wall": 18.3,
-      "billed": 44689,
-      "fresh": 5777,
-      "cache_read": 38912,
-      "cache_create": 0,
-      "output": 563,
-      "input_total": 44689,
-      "cost": 0.005,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 47.2,
-      "billed": 27906,
-      "fresh": 27906,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1314,
-      "input_total": 27906,
-      "cost": 0.0138,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "pass",
@@ -6535,38 +6411,6 @@
       "cache_create": 0,
       "output": 1560,
       "input_total": 57094,
-      "cost": 0.0259,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 20.8,
-      "billed": 61954,
-      "fresh": 8706,
-      "cache_read": 53248,
-      "cache_create": 0,
-      "output": 536,
-      "input_total": 61954,
-      "cost": 0.0067,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 99.1,
-      "billed": 53106,
-      "fresh": 53106,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2324,
-      "input_total": 53106,
       "cost": 0.0259,
       "cost_valid": true,
       "snapshot": "june16"
@@ -6732,6 +6576,38 @@
       "snapshot": "june16"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 26.4,
+      "billed": 63910,
+      "fresh": 8614,
+      "cache_read": 55296,
+      "cache_create": 0,
+      "output": 1025,
+      "input_total": 63910,
+      "cost": 0.0077,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 81.6,
+      "billed": 48543,
+      "fresh": 48543,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1406,
+      "input_total": 48543,
+      "cost": 0.0222,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "pass",
@@ -6760,6 +6636,38 @@
       "output": 12851,
       "input_total": 149501,
       "cost": 0.0854,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 37.0,
+      "billed": 77719,
+      "fresh": 10135,
+      "cache_read": 67584,
+      "cache_create": 0,
+      "output": 1085,
+      "input_total": 77719,
+      "cost": 0.0089,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 16,
+      "wall": 202.1,
+      "billed": 71272,
+      "fresh": 71272,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 4654,
+      "input_total": 71272,
+      "cost": 0.0378,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -6828,6 +6736,38 @@
       "snapshot": "june16"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 23.6,
+      "billed": 59191,
+      "fresh": 5943,
+      "cache_read": 53248,
+      "cache_create": 0,
+      "output": 446,
+      "input_total": 59191,
+      "cost": 0.0054,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 78.6,
+      "billed": 41221,
+      "fresh": 41221,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1179,
+      "input_total": 41221,
+      "cost": 0.0188,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -6856,6 +6796,38 @@
       "output": 2034,
       "input_total": 78781,
       "cost": 0.0356,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 15.6,
+      "billed": 57786,
+      "fresh": 8634,
+      "cache_read": 49152,
+      "cache_create": 0,
+      "output": 279,
+      "input_total": 57786,
+      "cost": 0.006,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 55.5,
+      "billed": 39009,
+      "fresh": 39009,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 942,
+      "input_total": 39009,
+      "cost": 0.0175,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -6920,6 +6892,38 @@
       "output": 4141,
       "input_total": 87178,
       "cost": 0.0431,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 4,
+      "wall": 18.3,
+      "billed": 44689,
+      "fresh": 5777,
+      "cache_read": 38912,
+      "cache_create": 0,
+      "output": 563,
+      "input_total": 44689,
+      "cost": 0.005,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 47.2,
+      "billed": 27906,
+      "fresh": 27906,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1314,
+      "input_total": 27906,
+      "cost": 0.0138,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -7125,70 +7129,6 @@
       "snapshot": "june16"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 26.0,
-      "billed": 180202,
-      "fresh": 9,
-      "cache_read": 169383,
-      "cache_create": 10810,
-      "output": 1132,
-      "input_total": 180202,
-      "cost": 0.1084,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 48.8,
-      "billed": 59775,
-      "fresh": 4329,
-      "cache_read": 51416,
-      "cache_create": 4030,
-      "output": 1092,
-      "input_total": 59775,
-      "cost": 0.0599,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 23,
-      "wall": 159.6,
-      "billed": 746438,
-      "fresh": 21,
-      "cache_read": 717742,
-      "cache_create": 28675,
-      "output": 7179,
-      "input_total": 746438,
-      "cost": 0.4306,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 16,
-      "wall": 100.4,
-      "billed": 262634,
-      "fresh": 18330,
-      "cache_read": 225082,
-      "cache_create": 19222,
-      "output": 2513,
-      "input_total": 262634,
-      "cost": 0.2323,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "pass",
@@ -7253,6 +7193,38 @@
       "snapshot": "june16"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 40.6,
+      "billed": 128308,
+      "fresh": 7,
+      "cache_read": 117583,
+      "cache_create": 10718,
+      "output": 1631,
+      "input_total": 128308,
+      "cost": 0.1,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 64.9,
+      "billed": 60184,
+      "fresh": 3817,
+      "cache_read": 52358,
+      "cache_create": 4009,
+      "output": 1185,
+      "input_total": 60184,
+      "cost": 0.06,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -7285,34 +7257,34 @@
       "snapshot": "june16"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 7,
-      "wall": 22.9,
-      "billed": 124536,
-      "fresh": 7,
-      "cache_read": 115287,
-      "cache_create": 9242,
-      "output": 933,
-      "input_total": 124536,
-      "cost": 0.0833,
+      "turns": 10,
+      "wall": 26.0,
+      "billed": 180202,
+      "fresh": 9,
+      "cache_read": 169383,
+      "cache_create": 10810,
+      "output": 1132,
+      "input_total": 180202,
+      "cost": 0.1084,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 11,
-      "wall": 58.2,
-      "billed": 87847,
-      "fresh": 4039,
-      "cache_read": 78683,
-      "cache_create": 5125,
-      "output": 1755,
-      "input_total": 87847,
-      "cost": 0.0813,
+      "turns": 8,
+      "wall": 48.8,
+      "billed": 59775,
+      "fresh": 4329,
+      "cache_read": 51416,
+      "cache_create": 4030,
+      "output": 1092,
+      "input_total": 59775,
+      "cost": 0.0599,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -7381,34 +7353,34 @@
       "snapshot": "june16"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 14,
-      "wall": 44.8,
-      "billed": 220024,
-      "fresh": 10,
-      "cache_read": 207052,
-      "cache_create": 12962,
-      "output": 1901,
-      "input_total": 220024,
-      "cost": 0.1393,
+      "turns": 23,
+      "wall": 159.6,
+      "billed": 746438,
+      "fresh": 21,
+      "cache_read": 717742,
+      "cache_create": 28675,
+      "output": 7179,
+      "input_total": 746438,
+      "cost": 0.4306,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 10,
-      "wall": 66.2,
-      "billed": 81171,
-      "fresh": 4885,
-      "cache_read": 70267,
-      "cache_create": 6019,
-      "output": 1582,
-      "input_total": 81171,
-      "cost": 0.082,
+      "turns": 16,
+      "wall": 100.4,
+      "billed": 262634,
+      "fresh": 18330,
+      "cache_read": 225082,
+      "cache_create": 19222,
+      "output": 2513,
+      "input_total": 262634,
+      "cost": 0.2323,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -7477,38 +7449,6 @@
       "snapshot": "june16"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 37.2,
-      "billed": 125023,
-      "fresh": 7,
-      "cache_read": 115613,
-      "cache_create": 9403,
-      "output": 951,
-      "input_total": 125023,
-      "cost": 0.0842,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 48.0,
-      "billed": 65706,
-      "fresh": 2873,
-      "cache_read": 59316,
-      "cache_create": 3517,
-      "output": 1017,
-      "input_total": 65706,
-      "cost": 0.0549,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "pass",
@@ -7569,38 +7509,6 @@
       "output": 2716,
       "input_total": 160147,
       "cost": 0.1577,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 22.7,
-      "billed": 126155,
-      "fresh": 7,
-      "cache_read": 116820,
-      "cache_create": 9328,
-      "output": 631,
-      "input_total": 126155,
-      "cost": 0.0795,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 12,
-      "wall": 58.3,
-      "billed": 91583,
-      "fresh": 4085,
-      "cache_read": 82552,
-      "cache_create": 4946,
-      "output": 1187,
-      "input_total": 91583,
-      "cost": 0.0734,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -7669,38 +7577,6 @@
       "snapshot": "june16"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 31.8,
-      "billed": 122709,
-      "fresh": 172,
-      "cache_read": 113797,
-      "cache_create": 8740,
-      "output": 1249,
-      "input_total": 122709,
-      "cost": 0.0862,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 62.2,
-      "billed": 67026,
-      "fresh": 3661,
-      "cache_read": 59490,
-      "cache_create": 3875,
-      "output": 1191,
-      "input_total": 67026,
-      "cost": 0.0612,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "pass",
@@ -7729,38 +7605,6 @@
       "output": 1487,
       "input_total": 118948,
       "cost": 0.0958,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 40.6,
-      "billed": 128308,
-      "fresh": 7,
-      "cache_read": 117583,
-      "cache_create": 10718,
-      "output": 1631,
-      "input_total": 128308,
-      "cost": 0.1,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 64.9,
-      "billed": 60184,
-      "fresh": 3817,
-      "cache_read": 52358,
-      "cache_create": 4009,
-      "output": 1185,
-      "input_total": 60184,
-      "cost": 0.06,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -7925,6 +7769,38 @@
       "snapshot": "june16"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 22.9,
+      "billed": 124536,
+      "fresh": 7,
+      "cache_read": 115287,
+      "cache_create": 9242,
+      "output": 933,
+      "input_total": 124536,
+      "cost": 0.0833,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 58.2,
+      "billed": 87847,
+      "fresh": 4039,
+      "cache_read": 78683,
+      "cache_create": 5125,
+      "output": 1755,
+      "input_total": 87847,
+      "cost": 0.0813,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "pass",
@@ -7953,6 +7829,38 @@
       "output": 3337,
       "input_total": 129643,
       "cost": 0.154,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 44.8,
+      "billed": 220024,
+      "fresh": 10,
+      "cache_read": 207052,
+      "cache_create": 12962,
+      "output": 1901,
+      "input_total": 220024,
+      "cost": 0.1393,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 66.2,
+      "billed": 81171,
+      "fresh": 4885,
+      "cache_read": 70267,
+      "cache_create": 6019,
+      "output": 1582,
+      "input_total": 81171,
+      "cost": 0.082,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8021,6 +7929,38 @@
       "snapshot": "june16"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 37.2,
+      "billed": 125023,
+      "fresh": 7,
+      "cache_read": 115613,
+      "cache_create": 9403,
+      "output": 951,
+      "input_total": 125023,
+      "cost": 0.0842,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 48.0,
+      "billed": 65706,
+      "fresh": 2873,
+      "cache_read": 59316,
+      "cache_create": 3517,
+      "output": 1017,
+      "input_total": 65706,
+      "cost": 0.0549,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -8049,6 +7989,38 @@
       "output": 1474,
       "input_total": 95760,
       "cost": 0.0776,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 22.7,
+      "billed": 126155,
+      "fresh": 7,
+      "cache_read": 116820,
+      "cache_create": 9328,
+      "output": 631,
+      "input_total": 126155,
+      "cost": 0.0795,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 58.3,
+      "billed": 91583,
+      "fresh": 4085,
+      "cache_read": 82552,
+      "cache_create": 4946,
+      "output": 1187,
+      "input_total": 91583,
+      "cost": 0.0734,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8113,6 +8085,38 @@
       "output": 4732,
       "input_total": 133746,
       "cost": 0.1751,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 31.8,
+      "billed": 122709,
+      "fresh": 172,
+      "cache_read": 113797,
+      "cache_create": 8740,
+      "output": 1249,
+      "input_total": 122709,
+      "cost": 0.0862,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 62.2,
+      "billed": 67026,
+      "fresh": 3661,
+      "cache_read": 59490,
+      "cache_create": 3875,
+      "output": 1191,
+      "input_total": 67026,
+      "cost": 0.0612,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8318,70 +8322,6 @@
       "snapshot": "june16"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 17.5,
-      "billed": 83990,
-      "fresh": 43350,
-      "cache_read": 40640,
-      "cache_create": 0,
-      "output": 625,
-      "input_total": 83990,
-      "cost": 0.0608,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 35.5,
-      "billed": 67681,
-      "fresh": 67681,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1053,
-      "input_total": 67681,
-      "cost": 0.0872,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 62.4,
-      "billed": 137596,
-      "fresh": 41340,
-      "cache_read": 96256,
-      "cache_create": 0,
-      "output": 1197,
-      "input_total": 137596,
-      "cost": 0.0667,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 16,
-      "wall": 59.3,
-      "billed": 114996,
-      "fresh": 114996,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1699,
-      "input_total": 114996,
-      "cost": 0.148,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "pass",
@@ -8446,6 +8386,38 @@
       "snapshot": "june16"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 136.8,
+      "billed": 62535,
+      "fresh": 8327,
+      "cache_read": 54208,
+      "cache_create": 0,
+      "output": 591,
+      "input_total": 62535,
+      "cost": 0.0187,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 37.1,
+      "billed": 62616,
+      "fresh": 62616,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 817,
+      "input_total": 62616,
+      "cost": 0.0803,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -8478,34 +8450,34 @@
       "snapshot": "june16"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 6,
-      "wall": 14.0,
-      "billed": 53149,
-      "fresh": 14109,
-      "cache_read": 39040,
+      "turns": 9,
+      "wall": 17.5,
+      "billed": 83990,
+      "fresh": 43350,
+      "cache_read": 40640,
       "cache_create": 0,
-      "output": 502,
-      "input_total": 53149,
-      "cost": 0.0238,
+      "output": 625,
+      "input_total": 83990,
+      "cost": 0.0608,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 8,
-      "wall": 29.9,
-      "billed": 43683,
-      "fresh": 43683,
+      "turns": 13,
+      "wall": 35.5,
+      "billed": 67681,
+      "fresh": 67681,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 870,
-      "input_total": 43683,
-      "cost": 0.0568,
+      "output": 1053,
+      "input_total": 67681,
+      "cost": 0.0872,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8574,34 +8546,34 @@
       "snapshot": "june16"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 6,
-      "wall": 23.8,
-      "billed": 49893,
-      "fresh": 7781,
-      "cache_read": 42112,
+      "turns": 11,
+      "wall": 62.4,
+      "billed": 137596,
+      "fresh": 41340,
+      "cache_read": 96256,
       "cache_create": 0,
-      "output": 806,
-      "input_total": 49893,
-      "cost": 0.017,
+      "output": 1197,
+      "input_total": 137596,
+      "cost": 0.0667,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 42.8,
-      "billed": 53573,
-      "fresh": 53573,
+      "status": "fail",
+      "resolved": false,
+      "turns": 16,
+      "wall": 59.3,
+      "billed": 114996,
+      "fresh": 114996,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 1249,
-      "input_total": 53573,
-      "cost": 0.0701,
+      "output": 1699,
+      "input_total": 114996,
+      "cost": 0.148,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8670,38 +8642,6 @@
       "snapshot": "june16"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 17.1,
-      "billed": 52694,
-      "fresh": 8406,
-      "cache_read": 44288,
-      "cache_create": 0,
-      "output": 481,
-      "input_total": 52694,
-      "cost": 0.0172,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 34.1,
-      "billed": 54713,
-      "fresh": 54713,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 644,
-      "input_total": 54713,
-      "cost": 0.07,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "pass",
@@ -8762,38 +8702,6 @@
       "output": 1256,
       "input_total": 68043,
       "cost": 0.0882,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 9.1,
-      "billed": 45980,
-      "fresh": 3548,
-      "cache_read": 42432,
-      "cache_create": 0,
-      "output": 359,
-      "input_total": 45980,
-      "cost": 0.0106,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 34.0,
-      "billed": 64966,
-      "fresh": 64966,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 740,
-      "input_total": 64966,
-      "cost": 0.0831,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8862,38 +8770,6 @@
       "snapshot": "june16"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 12.9,
-      "billed": 40799,
-      "fresh": 8543,
-      "cache_read": 32256,
-      "cache_create": 0,
-      "output": 494,
-      "input_total": 40799,
-      "cost": 0.0159,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 14,
-      "wall": 37.7,
-      "billed": 71382,
-      "fresh": 71382,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 903,
-      "input_total": 71382,
-      "cost": 0.0915,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "pass",
@@ -8922,38 +8798,6 @@
       "output": 1511,
       "input_total": 136920,
       "cost": 0.1749,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 136.8,
-      "billed": 62535,
-      "fresh": 8327,
-      "cache_read": 54208,
-      "cache_create": 0,
-      "output": 591,
-      "input_total": 62535,
-      "cost": 0.0187,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 12,
-      "wall": 37.1,
-      "billed": 62616,
-      "fresh": 62616,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 817,
-      "input_total": 62616,
-      "cost": 0.0803,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9118,6 +8962,38 @@
       "snapshot": "june16"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 14.0,
+      "billed": 53149,
+      "fresh": 14109,
+      "cache_read": 39040,
+      "cache_create": 0,
+      "output": 502,
+      "input_total": 53149,
+      "cost": 0.0238,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 29.9,
+      "billed": 43683,
+      "fresh": 43683,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 870,
+      "input_total": 43683,
+      "cost": 0.0568,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "pass",
@@ -9146,6 +9022,38 @@
       "output": 3168,
       "input_total": 284064,
       "cost": 0.363,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 23.8,
+      "billed": 49893,
+      "fresh": 7781,
+      "cache_read": 42112,
+      "cache_create": 0,
+      "output": 806,
+      "input_total": 49893,
+      "cost": 0.017,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 42.8,
+      "billed": 53573,
+      "fresh": 53573,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1249,
+      "input_total": 53573,
+      "cost": 0.0701,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9214,6 +9122,38 @@
       "snapshot": "june16"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 17.1,
+      "billed": 52694,
+      "fresh": 8406,
+      "cache_read": 44288,
+      "cache_create": 0,
+      "output": 481,
+      "input_total": 52694,
+      "cost": 0.0172,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 34.1,
+      "billed": 54713,
+      "fresh": 54713,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 644,
+      "input_total": 54713,
+      "cost": 0.07,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -9242,6 +9182,38 @@
       "output": 1157,
       "input_total": 82750,
       "cost": 0.1063,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 9.1,
+      "billed": 45980,
+      "fresh": 3548,
+      "cache_read": 42432,
+      "cache_create": 0,
+      "output": 359,
+      "input_total": 45980,
+      "cost": 0.0106,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 34.0,
+      "billed": 64966,
+      "fresh": 64966,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 740,
+      "input_total": 64966,
+      "cost": 0.0831,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9306,6 +9278,38 @@
       "output": 2452,
       "input_total": 171760,
       "cost": 0.2208,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 12.9,
+      "billed": 40799,
+      "fresh": 8543,
+      "cache_read": 32256,
+      "cache_create": 0,
+      "output": 494,
+      "input_total": 40799,
+      "cost": 0.0159,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 37.7,
+      "billed": 71382,
+      "fresh": 71382,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 903,
+      "input_total": 71382,
+      "cost": 0.0915,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9511,70 +9515,6 @@
       "snapshot": "june16"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 0,
-      "wall": 59.1,
-      "billed": 224630,
-      "fresh": 224630,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1722,
-      "input_total": 224630,
-      "cost": 0.0933,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 17,
-      "wall": 38.2,
-      "billed": 117772,
-      "fresh": 117772,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 780,
-      "input_total": 117772,
-      "cost": 0.0487,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 30,
-      "wall": 132.9,
-      "billed": 663949,
-      "fresh": 663949,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2394,
-      "input_total": 663949,
-      "cost": 0.2704,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 17,
-      "wall": 73.1,
-      "billed": 196614,
-      "fresh": 196614,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1959,
-      "input_total": 196614,
-      "cost": 0.0826,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "fail",
@@ -9639,6 +9579,38 @@
       "snapshot": "june16"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 0,
+      "wall": 69.8,
+      "billed": 249161,
+      "fresh": 249161,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1602,
+      "input_total": 249161,
+      "cost": 0.1029,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "deadline",
+      "resolved": false,
+      "turns": 0,
+      "wall": 372.2,
+      "billed": 0,
+      "fresh": 0,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 0,
+      "input_total": 0,
+      "cost": null,
+      "cost_valid": false,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "fail",
@@ -9671,34 +9643,34 @@
       "snapshot": "june16"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "fail",
       "resolved": false,
       "turns": 0,
-      "wall": 113.2,
-      "billed": 671049,
-      "fresh": 671049,
+      "wall": 59.1,
+      "billed": 224630,
+      "fresh": 224630,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 10623,
-      "input_total": 671049,
-      "cost": 0.2897,
+      "output": 1722,
+      "input_total": 224630,
+      "cost": 0.0933,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 31,
-      "wall": 72.1,
-      "billed": 284867,
-      "fresh": 284867,
+      "turns": 17,
+      "wall": 38.2,
+      "billed": 117772,
+      "fresh": 117772,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 3645,
-      "input_total": 284867,
-      "cost": 0.1212,
+      "output": 780,
+      "input_total": 117772,
+      "cost": 0.0487,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9767,34 +9739,34 @@
       "snapshot": "june16"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "fail",
       "resolved": false,
-      "turns": 35,
-      "wall": 111.7,
-      "billed": 511073,
-      "fresh": 511073,
+      "turns": 30,
+      "wall": 132.9,
+      "billed": 663949,
+      "fresh": 663949,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 5393,
-      "input_total": 511073,
-      "cost": 0.2152,
+      "output": 2394,
+      "input_total": 663949,
+      "cost": 0.2704,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 14,
-      "wall": 49.5,
-      "billed": 93505,
-      "fresh": 93505,
+      "turns": 17,
+      "wall": 73.1,
+      "billed": 196614,
+      "fresh": 196614,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 1368,
-      "input_total": 93505,
-      "cost": 0.0401,
+      "output": 1959,
+      "input_total": 196614,
+      "cost": 0.0826,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9863,38 +9835,6 @@
       "snapshot": "june16"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 0,
-      "wall": 50.5,
-      "billed": 210478,
-      "fresh": 210478,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2041,
-      "input_total": 210478,
-      "cost": 0.0883,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 31.8,
-      "billed": 58234,
-      "fresh": 58234,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 406,
-      "input_total": 58234,
-      "cost": 0.0241,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "fail",
@@ -9955,38 +9895,6 @@
       "output": 1658,
       "input_total": 133800,
       "cost": 0.0568,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 0,
-      "wall": 36.4,
-      "billed": 236077,
-      "fresh": 236077,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1591,
-      "input_total": 236077,
-      "cost": 0.0976,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 32.3,
-      "billed": 76732,
-      "fresh": 76732,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 663,
-      "input_total": 76732,
-      "cost": 0.032,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -10055,38 +9963,6 @@
       "snapshot": "june16"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "infra",
-      "resolved": false,
-      "turns": 0,
-      "wall": 1260.8,
-      "billed": 0,
-      "fresh": 0,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 0,
-      "input_total": 0,
-      "cost": null,
-      "cost_valid": false,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 24,
-      "wall": 133.1,
-      "billed": 185479,
-      "fresh": 185479,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 19101,
-      "input_total": 185479,
-      "cost": 0.1124,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "infra",
@@ -10116,38 +9992,6 @@
       "input_total": 69915,
       "cost": 0.0289,
       "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 0,
-      "wall": 69.8,
-      "billed": 249161,
-      "fresh": 249161,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1602,
-      "input_total": 249161,
-      "cost": 0.1029,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "deadline",
-      "resolved": false,
-      "turns": 0,
-      "wall": 372.2,
-      "billed": 0,
-      "fresh": 0,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 0,
-      "input_total": 0,
-      "cost": null,
-      "cost_valid": false,
       "snapshot": "june16"
      }
     },
@@ -10311,6 +10155,38 @@
       "snapshot": "june16"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 0,
+      "wall": 113.2,
+      "billed": 671049,
+      "fresh": 671049,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 10623,
+      "input_total": 671049,
+      "cost": 0.2897,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 31,
+      "wall": 72.1,
+      "billed": 284867,
+      "fresh": 284867,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 3645,
+      "input_total": 284867,
+      "cost": 0.1212,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "fail",
@@ -10339,6 +10215,38 @@
       "output": 2306,
       "input_total": 329981,
       "cost": 0.1366,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 35,
+      "wall": 111.7,
+      "billed": 511073,
+      "fresh": 511073,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 5393,
+      "input_total": 511073,
+      "cost": 0.2152,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 49.5,
+      "billed": 93505,
+      "fresh": 93505,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1368,
+      "input_total": 93505,
+      "cost": 0.0401,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -10407,6 +10315,38 @@
       "snapshot": "june16"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 0,
+      "wall": 50.5,
+      "billed": 210478,
+      "fresh": 210478,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2041,
+      "input_total": 210478,
+      "cost": 0.0883,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 31.8,
+      "billed": 58234,
+      "fresh": 58234,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 406,
+      "input_total": 58234,
+      "cost": 0.0241,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -10435,6 +10375,38 @@
       "output": 623,
       "input_total": 101345,
       "cost": 0.0418,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 0,
+      "wall": 36.4,
+      "billed": 236077,
+      "fresh": 236077,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1591,
+      "input_total": 236077,
+      "cost": 0.0976,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 32.3,
+      "billed": 76732,
+      "fresh": 76732,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 663,
+      "input_total": 76732,
+      "cost": 0.032,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -10499,6 +10471,38 @@
       "output": 3798,
       "input_total": 225788,
       "cost": 0.0979,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "infra",
+      "resolved": false,
+      "turns": 0,
+      "wall": 1260.8,
+      "billed": 0,
+      "fresh": 0,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 0,
+      "input_total": 0,
+      "cost": null,
+      "cost_valid": false,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 24,
+      "wall": 133.1,
+      "billed": 185479,
+      "fresh": 185479,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 19101,
+      "input_total": 185479,
+      "cost": 0.1124,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -10606,7 +10610,7 @@
    "type": "B",
    "native_cli": "claude-code",
    "native_solved": 34,
-   "kernel_solved": 18,
+   "kernel_solved": 24,
    "cells": {
     "postgres-migration-schema-drift": {
      "native": {
@@ -10628,16 +10632,16 @@
       "status": "fail",
       "resolved": false,
       "turns": 3,
-      "wall": 28.8,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 12636,
-      "cache_create": 6669,
-      "output": 152,
-      "input_total": 19954,
-      "cost": 0.1101,
+      "wall": 35.8,
+      "billed": 20082,
+      "fresh": 693,
+      "cache_read": 19098,
+      "cache_create": 291,
+      "output": 114,
+      "input_total": 20082,
+      "cost": 0.0354,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "silent-data-corruption": {
@@ -10659,17 +10663,17 @@
      "kernel": {
       "status": "fail",
       "resolved": false,
-      "turns": 3,
-      "wall": 32.0,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 12636,
-      "cache_create": 6669,
-      "output": 175,
-      "input_total": 19954,
-      "cost": 0.1112,
+      "turns": 9,
+      "wall": 82.1,
+      "billed": 76918,
+      "fresh": 3773,
+      "cache_read": 68991,
+      "cache_create": 4154,
+      "output": 1770,
+      "input_total": 76918,
+      "cost": 0.2471,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "split-brain-leader-election": {
@@ -10691,81 +10695,17 @@
      "kernel": {
       "status": "fail",
       "resolved": false,
-      "turns": 4,
-      "wall": 35.0,
-      "billed": 27517,
-      "fresh": 1126,
-      "cache_read": 25683,
-      "cache_create": 708,
-      "output": 226,
-      "input_total": 27517,
-      "cost": 0.0571,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
       "turns": 10,
-      "wall": 57.6,
-      "billed": 188033,
-      "fresh": 1829,
-      "cache_read": 175945,
-      "cache_create": 10259,
-      "output": 1338,
-      "input_total": 188033,
-      "cost": 0.3894,
+      "wall": 105.0,
+      "billed": 99236,
+      "fresh": 6114,
+      "cache_read": 86816,
+      "cache_create": 6306,
+      "output": 2193,
+      "input_total": 99236,
+      "cost": 0.3364,
       "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 4,
-      "wall": 34.9,
-      "billed": 27416,
-      "fresh": 1027,
-      "cache_read": 25683,
-      "cache_create": 706,
-      "output": 224,
-      "input_total": 27416,
-      "cost": 0.056,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 19,
-      "wall": 218.2,
-      "billed": 560840,
-      "fresh": 2101,
-      "cache_read": 524147,
-      "cache_create": 34592,
-      "output": 11169,
-      "input_total": 560840,
-      "cost": 1.536,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 14,
-      "wall": 154.2,
-      "billed": 197836,
-      "fresh": 15439,
-      "cache_read": 166074,
-      "cache_create": 16323,
-      "output": 4455,
-      "input_total": 197836,
-      "cost": 0.7473,
-      "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "timezone-scheduling": {
@@ -10787,17 +10727,17 @@
      "kernel": {
       "status": "fail",
       "resolved": false,
-      "turns": 3,
-      "wall": 29.6,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 202,
-      "input_total": 19954,
-      "cost": 0.0392,
+      "turns": 11,
+      "wall": 91.1,
+      "billed": 101203,
+      "fresh": 5691,
+      "cache_read": 89550,
+      "cache_create": 5962,
+      "output": 2725,
+      "input_total": 101203,
+      "cost": 0.3572,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "tls-chain-ordering-strict": {
@@ -10819,17 +10759,49 @@
      "kernel": {
       "status": "fail",
       "resolved": false,
-      "turns": 3,
-      "wall": 29.3,
-      "billed": 19952,
-      "fresh": 647,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 174,
-      "input_total": 19952,
-      "cost": 0.0378,
+      "turns": 11,
+      "wall": 96.8,
+      "billed": 116901,
+      "fresh": 6109,
+      "cache_read": 103553,
+      "cache_create": 7239,
+      "output": 3023,
+      "input_total": 116901,
+      "cost": 0.4063,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 40.3,
+      "billed": 115657,
+      "fresh": 1823,
+      "cache_read": 105112,
+      "cache_create": 8722,
+      "output": 1305,
+      "input_total": 115657,
+      "cost": 0.2976,
       "cost_valid": true,
       "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 4,
+      "wall": 43.1,
+      "billed": 27691,
+      "fresh": 1177,
+      "cache_read": 25809,
+      "cache_create": 705,
+      "output": 197,
+      "input_total": 27691,
+      "cost": 0.0562,
+      "cost_valid": true,
+      "snapshot": "july09v2"
      }
     },
     "wal-fsync-ghost-ack": {
@@ -10851,49 +10823,49 @@
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 11,
-      "wall": 104.3,
-      "billed": 128345,
-      "fresh": 9354,
-      "cache_read": 108828,
-      "cache_create": 10163,
-      "output": 3052,
-      "input_total": 128345,
-      "cost": 0.482,
+      "turns": 14,
+      "wall": 129.1,
+      "billed": 157810,
+      "fresh": 9243,
+      "cache_read": 138331,
+      "cache_create": 10236,
+      "output": 3347,
+      "input_total": 157810,
+      "cost": 0.5261,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 8,
-      "wall": 54.8,
-      "billed": 160434,
-      "fresh": 2432,
-      "cache_read": 149109,
-      "cache_create": 8893,
-      "output": 1619,
-      "input_total": 160434,
-      "cost": 0.3655,
+      "turns": 10,
+      "wall": 57.6,
+      "billed": 188033,
+      "fresh": 1829,
+      "cache_read": 175945,
+      "cache_create": 10259,
+      "output": 1338,
+      "input_total": 188033,
+      "cost": 0.3894,
       "cost_valid": true,
       "snapshot": "july09"
      },
      "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 8,
-      "wall": 72.7,
-      "billed": 76657,
-      "fresh": 4387,
-      "cache_read": 66729,
-      "cache_create": 5541,
-      "output": 2306,
-      "input_total": 76657,
-      "cost": 0.2952,
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 91.7,
+      "billed": 119913,
+      "fresh": 6550,
+      "cache_read": 106806,
+      "cache_create": 6557,
+      "output": 1859,
+      "input_total": 119913,
+      "cost": 0.3472,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "goroutine-leak-handler": {
@@ -10915,17 +10887,17 @@
      "kernel": {
       "status": "fail",
       "resolved": false,
-      "turns": 11,
-      "wall": 105.8,
-      "billed": 108674,
-      "fresh": 5067,
-      "cache_read": 96699,
-      "cache_create": 6908,
-      "output": 2887,
-      "input_total": 108674,
-      "cost": 0.3781,
+      "turns": 3,
+      "wall": 41.5,
+      "billed": 20077,
+      "fresh": 688,
+      "cache_read": 19098,
+      "cache_create": 291,
+      "output": 115,
+      "input_total": 20077,
+      "cost": 0.0354,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "import-cycle-startup": {
@@ -10948,48 +10920,48 @@
       "status": "fail",
       "resolved": false,
       "turns": 4,
-      "wall": 31.2,
-      "billed": 27421,
-      "fresh": 1030,
-      "cache_read": 25683,
-      "cache_create": 708,
-      "output": 225,
-      "input_total": 27421,
-      "cost": 0.0561,
+      "wall": 41.6,
+      "billed": 27550,
+      "fresh": 1036,
+      "cache_read": 25809,
+      "cache_create": 705,
+      "output": 196,
+      "input_total": 27550,
+      "cost": 0.0548,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 8,
-      "wall": 60.9,
-      "billed": 165035,
-      "fresh": 2871,
-      "cache_read": 152365,
-      "cache_create": 9799,
-      "output": 1870,
-      "input_total": 165035,
-      "cost": 0.3971,
+      "turns": 19,
+      "wall": 218.2,
+      "billed": 560840,
+      "fresh": 2101,
+      "cache_read": 524147,
+      "cache_create": 34592,
+      "output": 11169,
+      "input_total": 560840,
+      "cost": 1.536,
       "cost_valid": true,
       "snapshot": "july09"
      },
      "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 3,
-      "wall": 37.8,
-      "billed": 19956,
-      "fresh": 651,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 160,
-      "input_total": 19956,
-      "cost": 0.0372,
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 118.3,
+      "billed": 140064,
+      "fresh": 9274,
+      "cache_read": 121235,
+      "cache_create": 9555,
+      "output": 2449,
+      "input_total": 140064,
+      "cost": 0.4559,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "null-pointer-config": {
@@ -11012,16 +10984,16 @@
       "status": "fail",
       "resolved": false,
       "turns": 3,
-      "wall": 30.1,
-      "billed": 19953,
-      "fresh": 648,
-      "cache_read": 19014,
+      "wall": 32.9,
+      "billed": 20076,
+      "fresh": 687,
+      "cache_read": 19098,
       "cache_create": 291,
-      "output": 148,
-      "input_total": 19953,
-      "cost": 0.0365,
+      "output": 115,
+      "input_total": 20076,
+      "cost": 0.0354,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "off-by-one-array-slice": {
@@ -11044,48 +11016,16 @@
       "status": "fail",
       "resolved": false,
       "turns": 3,
-      "wall": 30.8,
-      "billed": 19960,
-      "fresh": 655,
-      "cache_read": 19014,
+      "wall": 32.5,
+      "billed": 20080,
+      "fresh": 691,
+      "cache_read": 19098,
       "cache_create": 291,
-      "output": 219,
-      "input_total": 19960,
-      "cost": 0.0402,
+      "output": 162,
+      "input_total": 20080,
+      "cost": 0.0377,
       "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 46.7,
-      "billed": 157073,
-      "fresh": 1827,
-      "cache_read": 147364,
-      "cache_create": 7882,
-      "output": 997,
-      "input_total": 157073,
-      "cost": 0.314,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 4,
-      "wall": 35.3,
-      "billed": 27491,
-      "fresh": 1112,
-      "cache_read": 25683,
-      "cache_create": 696,
-      "output": 227,
-      "input_total": 27491,
-      "cost": 0.0569,
-      "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "raft-snapshot-commit-gap": {
@@ -11107,17 +11047,17 @@
      "kernel": {
       "status": "fail",
       "resolved": false,
-      "turns": 3,
-      "wall": 31.8,
-      "billed": 19953,
-      "fresh": 648,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 160,
-      "input_total": 19953,
-      "cost": 0.0371,
+      "turns": 4,
+      "wall": 37.0,
+      "billed": 27666,
+      "fresh": 1156,
+      "cache_read": 26100,
+      "cache_create": 410,
+      "output": 194,
+      "input_total": 27666,
+      "cost": 0.0525,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "relaxed-ordering-ringbuf": {
@@ -11140,48 +11080,16 @@
       "status": "pass",
       "resolved": true,
       "turns": 10,
-      "wall": 90.2,
-      "billed": 104399,
-      "fresh": 7270,
-      "cache_read": 88538,
-      "cache_create": 8591,
-      "output": 2924,
-      "input_total": 104399,
-      "cost": 0.4148,
+      "wall": 107.9,
+      "billed": 97976,
+      "fresh": 6245,
+      "cache_read": 84249,
+      "cache_create": 7482,
+      "output": 2990,
+      "input_total": 97976,
+      "cost": 0.3897,
       "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 30.5,
-      "billed": 111231,
-      "fresh": 1823,
-      "cache_read": 102295,
-      "cache_create": 7113,
-      "output": 700,
-      "input_total": 111231,
-      "cost": 0.2444,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 3,
-      "wall": 33.1,
-      "billed": 19952,
-      "fresh": 647,
-      "cache_read": 19305,
-      "cache_create": 0,
-      "output": 196,
-      "input_total": 19952,
-      "cost": 0.0356,
-      "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "sql-injection-search": {
@@ -11203,17 +11111,17 @@
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 3,
-      "wall": 31.0,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 144,
-      "input_total": 19954,
-      "cost": 0.0363,
+      "turns": 4,
+      "wall": 48.7,
+      "billed": 28870,
+      "fresh": 2351,
+      "cache_read": 26100,
+      "cache_create": 419,
+      "output": 223,
+      "input_total": 28870,
+      "cost": 0.066,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "k8s-assume-cache-silent-drop": {
@@ -11236,48 +11144,16 @@
       "status": "fail",
       "resolved": false,
       "turns": 3,
-      "wall": 28.6,
-      "billed": 19953,
-      "fresh": 648,
-      "cache_read": 19305,
+      "wall": 35.6,
+      "billed": 20079,
+      "fresh": 690,
+      "cache_read": 19389,
       "cache_create": 0,
-      "output": 157,
-      "input_total": 19953,
+      "output": 146,
+      "input_total": 20079,
       "cost": 0.0336,
       "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 39.0,
-      "billed": 111573,
-      "fresh": 1823,
-      "cache_read": 102130,
-      "cache_create": 7620,
-      "output": 1088,
-      "input_total": 111573,
-      "cost": 0.27,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 3,
-      "wall": 31.4,
-      "billed": 19953,
-      "fresh": 648,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 148,
-      "input_total": 19953,
-      "cost": 0.0365,
-      "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "performance-cliff-hash": {
@@ -11299,49 +11175,17 @@
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 3,
-      "wall": 28.7,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 155,
-      "input_total": 19954,
-      "cost": 0.0369,
+      "turns": 12,
+      "wall": 92.4,
+      "billed": 102625,
+      "fresh": 4018,
+      "cache_read": 94156,
+      "cache_create": 4451,
+      "output": 1516,
+      "input_total": 102625,
+      "cost": 0.2658,
       "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 40.3,
-      "billed": 115657,
-      "fresh": 1823,
-      "cache_read": 105112,
-      "cache_create": 8722,
-      "output": 1305,
-      "input_total": 115657,
-      "cost": 0.2976,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 79.5,
-      "billed": 72849,
-      "fresh": 2826,
-      "cache_read": 66700,
-      "cache_create": 3323,
-      "output": 1348,
-      "input_total": 72849,
-      "cost": 0.2039,
-      "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "api-version-field-drop": {
@@ -11363,17 +11207,17 @@
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 3,
-      "wall": 30.4,
-      "billed": 19951,
-      "fresh": 646,
-      "cache_read": 12636,
-      "cache_create": 6669,
-      "output": 147,
-      "input_total": 19951,
-      "cost": 0.1098,
+      "turns": 9,
+      "wall": 82.4,
+      "billed": 86710,
+      "fresh": 4580,
+      "cache_read": 70345,
+      "cache_create": 11785,
+      "output": 1757,
+      "input_total": 86710,
+      "cost": 0.3513,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "auth-bypass-path-traversal": {
@@ -11396,16 +11240,16 @@
       "status": "pass",
       "resolved": true,
       "turns": 3,
-      "wall": 30.9,
-      "billed": 19950,
-      "fresh": 645,
-      "cache_read": 19014,
+      "wall": 39.6,
+      "billed": 20077,
+      "fresh": 688,
+      "cache_read": 19098,
       "cache_create": 291,
-      "output": 152,
-      "input_total": 19950,
-      "cost": 0.0367,
+      "output": 160,
+      "input_total": 20077,
+      "cost": 0.0376,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "bidi-override-injection": {
@@ -11428,16 +11272,16 @@
       "status": "pass",
       "resolved": true,
       "turns": 3,
-      "wall": 28.8,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19014,
+      "wall": 32.0,
+      "billed": 20080,
+      "fresh": 691,
+      "cache_read": 19098,
       "cache_create": 291,
-      "output": 150,
-      "input_total": 19954,
-      "cost": 0.0366,
+      "output": 138,
+      "input_total": 20080,
+      "cost": 0.0365,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "compiler-macro-expansion": {
@@ -11460,16 +11304,16 @@
       "status": "pass",
       "resolved": true,
       "turns": 3,
-      "wall": 26.3,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19305,
-      "cache_create": 0,
-      "output": 156,
-      "input_total": 19954,
-      "cost": 0.0336,
+      "wall": 32.2,
+      "billed": 20082,
+      "fresh": 693,
+      "cache_read": 19098,
+      "cache_create": 291,
+      "output": 148,
+      "input_total": 20082,
+      "cost": 0.0371,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "data-corruption-concurrent-write": {
@@ -11492,16 +11336,48 @@
       "status": "pass",
       "resolved": true,
       "turns": 3,
-      "wall": 31.9,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19014,
+      "wall": 38.0,
+      "billed": 20080,
+      "fresh": 691,
+      "cache_read": 19098,
       "cache_create": 291,
-      "output": 132,
-      "input_total": 19954,
-      "cost": 0.0357,
+      "output": 223,
+      "input_total": 20080,
+      "cost": 0.0408,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 54.8,
+      "billed": 160434,
+      "fresh": 2432,
+      "cache_read": 149109,
+      "cache_create": 8893,
+      "output": 1619,
+      "input_total": 160434,
+      "cost": 0.3655,
       "cost_valid": true,
       "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 3,
+      "wall": 55.0,
+      "billed": 20080,
+      "fresh": 691,
+      "cache_read": 19098,
+      "cache_create": 291,
+      "output": 156,
+      "input_total": 20080,
+      "cost": 0.0374,
+      "cost_valid": true,
+      "snapshot": "july09v2"
      }
     },
     "kernel-panic-ioctl": {
@@ -11523,17 +11399,49 @@
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 3,
-      "wall": 25.8,
-      "billed": 19953,
-      "fresh": 648,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 143,
-      "input_total": 19953,
-      "cost": 0.0363,
+      "turns": 4,
+      "wall": 39.0,
+      "billed": 27822,
+      "fresh": 1301,
+      "cache_read": 25809,
+      "cache_create": 712,
+      "output": 205,
+      "input_total": 27822,
+      "cost": 0.058,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 60.9,
+      "billed": 165035,
+      "fresh": 2871,
+      "cache_read": 152365,
+      "cache_create": 9799,
+      "output": 1870,
+      "input_total": 165035,
+      "cost": 0.3971,
       "cost_valid": true,
       "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 96.6,
+      "billed": 99100,
+      "fresh": 4095,
+      "cache_read": 90230,
+      "cache_create": 4775,
+      "output": 2250,
+      "input_total": 99100,
+      "cost": 0.3034,
+      "cost_valid": true,
+      "snapshot": "july09v2"
      }
     },
     "missing-input-validation": {
@@ -11555,17 +11463,17 @@
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 9,
-      "wall": 92.3,
-      "billed": 80363,
-      "fresh": 4854,
-      "cache_read": 70106,
-      "cache_create": 5403,
-      "output": 1610,
-      "input_total": 80363,
-      "cost": 0.2667,
+      "turns": 3,
+      "wall": 36.4,
+      "billed": 20078,
+      "fresh": 689,
+      "cache_read": 19098,
+      "cache_create": 291,
+      "output": 156,
+      "input_total": 20078,
+      "cost": 0.0374,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "nginx-upstream-port-mismatch": {
@@ -11588,16 +11496,48 @@
       "status": "pass",
       "resolved": true,
       "turns": 3,
-      "wall": 28.8,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19014,
+      "wall": 31.8,
+      "billed": 20082,
+      "fresh": 693,
+      "cache_read": 19098,
       "cache_create": 291,
-      "output": 112,
-      "input_total": 19954,
-      "cost": 0.0347,
+      "output": 159,
+      "input_total": 20082,
+      "cost": 0.0376,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 46.7,
+      "billed": 157073,
+      "fresh": 1827,
+      "cache_read": 147364,
+      "cache_create": 7882,
+      "output": 997,
+      "input_total": 157073,
+      "cost": 0.314,
       "cost_valid": true,
       "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 66.5,
+      "billed": 63231,
+      "fresh": 4549,
+      "cache_read": 53925,
+      "cache_create": 4757,
+      "output": 893,
+      "input_total": 63231,
+      "cost": 0.2035,
+      "cost_valid": true,
+      "snapshot": "july09v2"
      }
     },
     "race-condition-counter": {
@@ -11620,16 +11560,48 @@
       "status": "fail",
       "resolved": false,
       "turns": 3,
-      "wall": 35.3,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19305,
+      "wall": 34.9,
+      "billed": 20080,
+      "fresh": 691,
+      "cache_read": 19389,
       "cache_create": 0,
-      "output": 135,
-      "input_total": 19954,
-      "cost": 0.0325,
+      "output": 152,
+      "input_total": 20080,
+      "cost": 0.0339,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 30.5,
+      "billed": 111231,
+      "fresh": 1823,
+      "cache_read": 102295,
+      "cache_create": 7113,
+      "output": 700,
+      "input_total": 111231,
+      "cost": 0.2444,
       "cost_valid": true,
       "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 62.4,
+      "billed": 75414,
+      "fresh": 3651,
+      "cache_read": 68009,
+      "cache_create": 3754,
+      "output": 906,
+      "input_total": 75414,
+      "cost": 0.1967,
+      "cost_valid": true,
+      "snapshot": "july09v2"
      }
     },
     "cache-stale-invalidation": {
@@ -11652,16 +11624,16 @@
       "status": "pass",
       "resolved": true,
       "turns": 3,
-      "wall": 29.3,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19014,
+      "wall": 33.5,
+      "billed": 20080,
+      "fresh": 691,
+      "cache_read": 19098,
       "cache_create": 291,
-      "output": 203,
-      "input_total": 19954,
-      "cost": 0.0393,
+      "output": 155,
+      "input_total": 20080,
+      "cost": 0.0374,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "graphql-dataloader-per-request": {
@@ -11683,17 +11655,49 @@
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 4,
-      "wall": 34.1,
-      "billed": 27458,
-      "fresh": 1096,
-      "cache_read": 25683,
-      "cache_create": 679,
-      "output": 204,
-      "input_total": 27458,
-      "cost": 0.0553,
+      "turns": 15,
+      "wall": 123.8,
+      "billed": 194547,
+      "fresh": 9179,
+      "cache_read": 173047,
+      "cache_create": 12321,
+      "output": 4734,
+      "input_total": 194547,
+      "cost": 0.6555,
+      "cost_valid": true,
+      "snapshot": "july09v2"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 39.0,
+      "billed": 111573,
+      "fresh": 1823,
+      "cache_read": 102130,
+      "cache_create": 7620,
+      "output": 1088,
+      "input_total": 111573,
+      "cost": 0.27,
       "cost_valid": true,
       "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 62.4,
+      "billed": 55934,
+      "fresh": 2720,
+      "cache_read": 50346,
+      "cache_create": 2868,
+      "output": 1529,
+      "input_total": 55934,
+      "cost": 0.1898,
+      "cost_valid": true,
+      "snapshot": "july09v2"
      }
     },
     "rate-limit-bypass-header": {
@@ -11716,16 +11720,16 @@
       "status": "pass",
       "resolved": true,
       "turns": 4,
-      "wall": 42.5,
-      "billed": 27438,
-      "fresh": 1059,
-      "cache_read": 25974,
-      "cache_create": 405,
-      "output": 231,
-      "input_total": 27438,
-      "cost": 0.0532,
+      "wall": 49.8,
+      "billed": 27476,
+      "fresh": 962,
+      "cache_read": 25809,
+      "cache_create": 705,
+      "output": 279,
+      "input_total": 27476,
+      "cost": 0.0582,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "ssrf-allowlist-port-confusion": {
@@ -11747,17 +11751,17 @@
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 3,
-      "wall": 33.5,
-      "billed": 19954,
-      "fresh": 649,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 158,
-      "input_total": 19954,
-      "cost": 0.037,
+      "turns": 4,
+      "wall": 42.1,
+      "billed": 27606,
+      "fresh": 1101,
+      "cache_read": 25809,
+      "cache_create": 696,
+      "output": 242,
+      "input_total": 27606,
+      "cost": 0.0576,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     },
     "timing-attack-comparison": {
@@ -11780,16 +11784,16 @@
       "status": "pass",
       "resolved": true,
       "turns": 4,
-      "wall": 31.7,
-      "billed": 27471,
-      "fresh": 1086,
-      "cache_read": 25683,
-      "cache_create": 702,
-      "output": 223,
-      "input_total": 27471,
-      "cost": 0.0565,
+      "wall": 36.2,
+      "billed": 27635,
+      "fresh": 1126,
+      "cache_read": 26100,
+      "cache_create": 409,
+      "output": 231,
+      "input_total": 27635,
+      "cost": 0.054,
       "cost_valid": true,
-      "snapshot": "july09"
+      "snapshot": "july09v2"
      }
     }
    }
@@ -11897,70 +11901,6 @@
       "snapshot": "july09"
      }
     },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 40.2,
-      "billed": 230251,
-      "fresh": 1962,
-      "cache_read": 219096,
-      "cache_create": 9193,
-      "output": 1828,
-      "input_total": 230251,
-      "cost": 0.2225,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 13,
-      "wall": 76.1,
-      "billed": 127118,
-      "fresh": 5467,
-      "cache_read": 115390,
-      "cache_create": 6261,
-      "output": 2136,
-      "input_total": 127118,
-      "cost": 0.1776,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 45,
-      "wall": 848.7,
-      "billed": 2717793,
-      "fresh": 14711,
-      "cache_read": 2622093,
-      "cache_create": 80989,
-      "output": 38480,
-      "input_total": 2717793,
-      "cost": 2.8528,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 18,
-      "wall": 146.8,
-      "billed": 261865,
-      "fresh": 14842,
-      "cache_read": 222735,
-      "cache_create": 24288,
-      "output": 3856,
-      "input_total": 261865,
-      "cost": 0.4338,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
     "timezone-scheduling": {
      "native": {
       "status": "pass",
@@ -12025,6 +11965,38 @@
       "snapshot": "july09"
      }
     },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 26.1,
+      "billed": 109055,
+      "fresh": 1823,
+      "cache_read": 99847,
+      "cache_create": 7385,
+      "output": 1174,
+      "input_total": 109055,
+      "cost": 0.1345,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 55.0,
+      "billed": 79726,
+      "fresh": 4044,
+      "cache_read": 70423,
+      "cache_create": 5259,
+      "output": 1683,
+      "input_total": 79726,
+      "cost": 0.1304,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -12057,34 +12029,34 @@
       "snapshot": "july09"
      }
     },
-    "deadlock-transfer": {
+    "encoding-mojibake": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 7,
-      "wall": 36.3,
-      "billed": 166475,
-      "fresh": 1827,
-      "cache_read": 153986,
-      "cache_create": 10662,
-      "output": 2179,
-      "input_total": 166475,
-      "cost": 0.2072,
+      "turns": 10,
+      "wall": 40.2,
+      "billed": 230251,
+      "fresh": 1962,
+      "cache_read": 219096,
+      "cache_create": 9193,
+      "output": 1828,
+      "input_total": 230251,
+      "cost": 0.2225,
       "cost_valid": true,
       "snapshot": "july09"
      },
      "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 57.3,
-      "billed": 62778,
-      "fresh": 4034,
-      "cache_read": 53371,
-      "cache_create": 5373,
-      "output": 2263,
-      "input_total": 62778,
-      "cost": 0.137,
+      "status": "fail",
+      "resolved": false,
+      "turns": 13,
+      "wall": 76.1,
+      "billed": 127118,
+      "fresh": 5467,
+      "cache_read": 115390,
+      "cache_create": 6261,
+      "output": 2136,
+      "input_total": 127118,
+      "cost": 0.1776,
       "cost_valid": true,
       "snapshot": "july09"
      }
@@ -12153,34 +12125,34 @@
       "snapshot": "july09"
      }
     },
-    "memory-leak-event-listener": {
+    "linearizability-stale-read": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 8,
-      "wall": 47.2,
-      "billed": 195782,
-      "fresh": 1829,
-      "cache_read": 182615,
-      "cache_create": 11338,
-      "output": 2575,
-      "input_total": 195782,
-      "cost": 0.2357,
+      "turns": 45,
+      "wall": 848.7,
+      "billed": 2717793,
+      "fresh": 14711,
+      "cache_read": 2622093,
+      "cache_create": 80989,
+      "output": 38480,
+      "input_total": 2717793,
+      "cost": 2.8528,
       "cost_valid": true,
       "snapshot": "july09"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 10,
-      "wall": 67.4,
-      "billed": 89130,
-      "fresh": 3935,
-      "cache_read": 79871,
-      "cache_create": 5324,
-      "output": 1800,
-      "input_total": 89130,
-      "cost": 0.1379,
+      "turns": 18,
+      "wall": 146.8,
+      "billed": 261865,
+      "fresh": 14842,
+      "cache_read": 222735,
+      "cache_create": 24288,
+      "output": 3856,
+      "input_total": 261865,
+      "cost": 0.4338,
       "cost_valid": true,
       "snapshot": "july09"
      }
@@ -12249,38 +12221,6 @@
       "snapshot": "july09"
      }
     },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 26.3,
-      "billed": 150701,
-      "fresh": 1827,
-      "cache_read": 142041,
-      "cache_create": 6833,
-      "output": 1030,
-      "input_total": 150701,
-      "cost": 0.1486,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 37.8,
-      "billed": 48165,
-      "fresh": 2355,
-      "cache_read": 43070,
-      "cache_create": 2740,
-      "output": 803,
-      "input_total": 48165,
-      "cost": 0.0705,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
     "raft-snapshot-commit-gap": {
      "native": {
       "status": "pass",
@@ -12341,38 +12281,6 @@
       "output": 472,
       "input_total": 30340,
       "cost": 0.0495,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 15.8,
-      "billed": 105821,
-      "fresh": 1823,
-      "cache_read": 97907,
-      "cache_create": 6091,
-      "output": 624,
-      "input_total": 105821,
-      "cost": 0.1117,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 42.9,
-      "billed": 59850,
-      "fresh": 3521,
-      "cache_read": 52091,
-      "cache_create": 4238,
-      "output": 1063,
-      "input_total": 59850,
-      "cost": 0.0967,
       "cost_valid": true,
       "snapshot": "july09"
      }
@@ -12441,38 +12349,6 @@
       "snapshot": "july09"
      }
     },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 35.9,
-      "billed": 105669,
-      "fresh": 1823,
-      "cache_read": 97215,
-      "cache_create": 6631,
-      "output": 1405,
-      "input_total": 105669,
-      "cost": 0.1343,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 56.0,
-      "billed": 57448,
-      "fresh": 2470,
-      "cache_read": 51453,
-      "cache_create": 3525,
-      "output": 1544,
-      "input_total": 57448,
-      "cost": 0.0987,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
     "performance-cliff-hash": {
      "native": {
       "status": "pass",
@@ -12501,38 +12377,6 @@
       "output": 1579,
       "input_total": 88849,
       "cost": 0.1526,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 26.1,
-      "billed": 109055,
-      "fresh": 1823,
-      "cache_read": 99847,
-      "cache_create": 7385,
-      "output": 1174,
-      "input_total": 109055,
-      "cost": 0.1345,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 55.0,
-      "billed": 79726,
-      "fresh": 4044,
-      "cache_read": 70423,
-      "cache_create": 5259,
-      "output": 1683,
-      "input_total": 79726,
-      "cost": 0.1304,
       "cost_valid": true,
       "snapshot": "july09"
      }
@@ -12697,6 +12541,38 @@
       "snapshot": "july09"
      }
     },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 36.3,
+      "billed": 166475,
+      "fresh": 1827,
+      "cache_read": 153986,
+      "cache_create": 10662,
+      "output": 2179,
+      "input_total": 166475,
+      "cost": 0.2072,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 57.3,
+      "billed": 62778,
+      "fresh": 4034,
+      "cache_read": 53371,
+      "cache_create": 5373,
+      "output": 2263,
+      "input_total": 62778,
+      "cost": 0.137,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
     "kernel-panic-ioctl": {
      "native": {
       "status": "pass",
@@ -12725,6 +12601,38 @@
       "output": 6597,
       "input_total": 276763,
       "cost": 0.4602,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 47.2,
+      "billed": 195782,
+      "fresh": 1829,
+      "cache_read": 182615,
+      "cache_create": 11338,
+      "output": 2575,
+      "input_total": 195782,
+      "cost": 0.2357,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 67.4,
+      "billed": 89130,
+      "fresh": 3935,
+      "cache_read": 79871,
+      "cache_create": 5324,
+      "output": 1800,
+      "input_total": 89130,
+      "cost": 0.1379,
       "cost_valid": true,
       "snapshot": "july09"
      }
@@ -12793,6 +12701,38 @@
       "snapshot": "july09"
      }
     },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 26.3,
+      "billed": 150701,
+      "fresh": 1827,
+      "cache_read": 142041,
+      "cache_create": 6833,
+      "output": 1030,
+      "input_total": 150701,
+      "cost": 0.1486,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 37.8,
+      "billed": 48165,
+      "fresh": 2355,
+      "cache_read": 43070,
+      "cache_create": 2740,
+      "output": 803,
+      "input_total": 48165,
+      "cost": 0.0705,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
     "race-condition-counter": {
      "native": {
       "status": "pass",
@@ -12821,6 +12761,38 @@
       "output": 1801,
       "input_total": 71932,
       "cost": 0.1304,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 15.8,
+      "billed": 105821,
+      "fresh": 1823,
+      "cache_read": 97907,
+      "cache_create": 6091,
+      "output": 624,
+      "input_total": 105821,
+      "cost": 0.1117,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 42.9,
+      "billed": 59850,
+      "fresh": 3521,
+      "cache_read": 52091,
+      "cache_create": 4238,
+      "output": 1063,
+      "input_total": 59850,
+      "cost": 0.0967,
       "cost_valid": true,
       "snapshot": "july09"
      }
@@ -12885,6 +12857,38 @@
       "output": 5013,
       "input_total": 209853,
       "cost": 0.3585,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 35.9,
+      "billed": 105669,
+      "fresh": 1823,
+      "cache_read": 97215,
+      "cache_create": 6631,
+      "output": 1405,
+      "input_total": 105669,
+      "cost": 0.1343,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 56.0,
+      "billed": 57448,
+      "fresh": 2470,
+      "cache_read": 51453,
+      "cache_create": 3525,
+      "output": 1544,
+      "input_total": 57448,
+      "cost": 0.0987,
       "cost_valid": true,
       "snapshot": "july09"
      }
