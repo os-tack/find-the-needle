@@ -1,0 +1,328 @@
+{
+ "generated": "2026-07-09T01:47:44Z",
+ "ostk_version": "v7.7.1",
+ "snapshot": "july09",
+ "snapshot_policy": "latest = single snapshot per (model, arm) column \u2014 a column never mixes run dates; earlier snapshots are published under boards/v7.7.1/",
+ "column_snapshots": {
+  "claude-fable-5/cpu": "july09",
+  "claude-fable-5/native": "july09",
+  "gemini-3-5-flash/cpu": "july09"
+ },
+ "faults": [
+  {
+   "id": "july09-fable-kernel-refusal",
+   "note": "July-9 smoke (v7.7.1): every claude-fable-5 kernel-cpu cell ends in an empty-content stop_reason=refusal after 2-3 real tool turns (native arm unaffected). Cells are VALID resolved=false with real accounting, but the unsolved verdict reflects a provider refusal on the kernel-arm prompt shape \u2014 treat fable-5 kernel-cpu solve rates as a floor."
+  }
+ ],
+ "faults_ref": "boards/FAULTS.json",
+ "trust": {
+  "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle verdict + arm receipt + not stalled): malformed / no-arm-receipt / arm-mismatch / deadline / zero-work / duplicate-column cells are fully INVALID \u2014 excluded from everything, counted visibly. COST axis (real token/cost accounting): zero token accounting on a completed run keeps the solve verdict and marks cost UNAVAILABLE \u2014 included in solve columns, excluded from cost/token columns, counted visibly, never priced. absent = never run (not invalid).",
+  "solve_valid_cells": 7,
+  "cost_valid_cells": 7,
+  "cost_invalid_cells": 0,
+  "invalid_cells": 0,
+  "policy_excluded_cells": 20,
+  "invalid_by_reason": {},
+  "cost_invalid_by_reason": {},
+  "teardown_masked_cells": 0
+ },
+ "invalid_cells": [],
+ "cost_invalid_cells": [],
+ "models": [
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "benchmarks": 3,
+   "native": {
+    "solved": 3,
+    "total": 3,
+    "cost": 0.9478199999999999,
+    "tokens": 459372,
+    "tokens_fresh": 8514,
+    "cost_cells": 3,
+    "tools": 19,
+    "turns": 22,
+    "wall": 134.725,
+    "invalid": 0,
+    "cost_invalid": 0,
+    "masked": 0,
+    "cost_bases": {
+     "bucket-split": 3
+    }
+   },
+   "kernel": {
+    "solved": 0,
+    "total": 0,
+    "cost": 0,
+    "tokens": 0,
+    "tokens_fresh": 0,
+    "cost_cells": 0,
+    "tools": 0,
+    "turns": 0,
+    "wall": 0,
+    "invalid": 0,
+    "cost_invalid": 0,
+    "masked": 0,
+    "cost_bases": {},
+    "status": "not_applicable \u2014 ostk treatment sourced from 'cpu' (kernel_arm_type=native_driver; see 'ostk')"
+   },
+   "cpu": {
+    "solved": 0,
+    "total": 3,
+    "cost": 0.148406,
+    "tokens": 75506,
+    "tokens_fresh": 3433,
+    "cost_cells": 3,
+    "tools": 8,
+    "turns": 11,
+    "wall": 103.31400000000001,
+    "invalid": 0,
+    "cost_invalid": 0,
+    "masked": 0,
+    "cost_bases": {
+     "bucket-split": 3
+    }
+   },
+   "price_per_m_input": 10.0,
+   "price_per_m_output": 50.0,
+   "cpu_driver_status": "tested",
+   "kernel_arm_type": "native_driver",
+   "ostk": {
+    "solved": 0,
+    "total": 3,
+    "cost": 0.148406,
+    "tokens": 75506,
+    "tokens_fresh": 3433,
+    "cost_cells": 3,
+    "tools": 8,
+    "turns": 11,
+    "wall": 103.31400000000001,
+    "invalid": 0,
+    "cost_invalid": 0,
+    "masked": 0,
+    "cost_bases": {
+     "bucket-split": 3
+    },
+    "source_arm": "cpu",
+    "arm_type": "native_driver"
+   },
+   "native_cli": "claude-code"
+  },
+  {
+   "model": "gemini-3.5-flash",
+   "model_normalized": "gemini-3-5-flash",
+   "benchmarks": 1,
+   "native": {
+    "solved": 0,
+    "total": 0,
+    "cost": 0,
+    "tokens": 0,
+    "tokens_fresh": 0,
+    "cost_cells": 0,
+    "tools": 0,
+    "turns": 0,
+    "wall": 0,
+    "invalid": 0,
+    "cost_invalid": 0,
+    "masked": 0,
+    "cost_bases": {}
+   },
+   "kernel": {
+    "solved": 0,
+    "total": 0,
+    "cost": 0,
+    "tokens": 0,
+    "tokens_fresh": 0,
+    "cost_cells": 0,
+    "tools": 0,
+    "turns": 0,
+    "wall": 0,
+    "invalid": 0,
+    "cost_invalid": 0,
+    "masked": 0,
+    "cost_bases": {},
+    "status": "not_applicable \u2014 ostk treatment sourced from 'cpu' (kernel_arm_type=native_driver; see 'ostk')"
+   },
+   "cpu": {
+    "solved": 1,
+    "total": 1,
+    "cost": 0.656611,
+    "tokens": 566434,
+    "tokens_fresh": 380486,
+    "cost_cells": 1,
+    "tools": 30,
+    "turns": 31,
+    "wall": 168.328,
+    "invalid": 0,
+    "cost_invalid": 0,
+    "masked": 0,
+    "cost_bases": {
+     "bucket-split": 1
+    }
+   },
+   "price_per_m_input": 1.5,
+   "price_per_m_output": 9.0,
+   "cpu_driver_status": "tested",
+   "kernel_arm_type": "native_driver",
+   "ostk": {
+    "solved": 1,
+    "total": 1,
+    "cost": 0.656611,
+    "tokens": 566434,
+    "tokens_fresh": 380486,
+    "cost_cells": 1,
+    "tools": 30,
+    "turns": 31,
+    "wall": 168.328,
+    "invalid": 0,
+    "cost_invalid": 0,
+    "masked": 0,
+    "cost_bases": {
+     "bucket-split": 1
+    },
+    "source_arm": "cpu",
+    "arm_type": "native_driver"
+   },
+   "native_cli": "gemini-cli"
+  }
+ ],
+ "benchmarks": [
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "benchmark": "encoding-mojibake",
+   "native": {
+    "resolved": true,
+    "turns": 10,
+    "input_tokens": 1829,
+    "output_tokens": 1338,
+    "billed_input_tokens": 188033,
+    "token_cost": 189371,
+    "cost_usd": 0.389373,
+    "cost_basis": "bucket-split",
+    "cost_valid": true,
+    "teardown_masked": false,
+    "tool_uses": 9,
+    "wall_clock": 57.594,
+    "summary": "The needle was a charset mismatch in `CsvReader.java:18`: the constructor decoded the CSV as ISO-8859-1 (\"for broad compatibility with legacy systems\"), but `customers.csv` is UTF-8. Each multi-byte character (e.g. `\u00e9` = `0xC3 0xA9`) was decoded as two Latin-1 characters, so names like \"Ren\u00e9e Dub\u00f6is\" came out as mojibake in the report \u2014 the UTF-8 writer in `ReportGenerator` then faithfully preserved the garbage.\n\nFix: one line \u2014 read the file with `StandardCharsets.UTF_8` instead. `test.sh` now passes: all 12 name checks OK, including every accented name and city.",
+    "stop_reason": "pass"
+   },
+   "kernel": null,
+   "cpu": {
+    "resolved": false,
+    "turns": 4,
+    "input_tokens": 1027,
+    "output_tokens": 224,
+    "billed_input_tokens": 27416,
+    "token_cost": 27640,
+    "cost_usd": 0.055978,
+    "cost_basis": "bucket-split",
+    "cost_valid": true,
+    "teardown_masked": false,
+    "tool_uses": 3,
+    "wall_clock": 34.876,
+    "summary": "agent.completed: 4turns, 1027+224 tokens, $0.0560",
+    "stop_reason": "exit_code: 1"
+   }
+  },
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "benchmark": "off-by-one-pagination",
+   "native": {
+    "resolved": true,
+    "turns": 7,
+    "input_tokens": 1827,
+    "output_tokens": 997,
+    "billed_input_tokens": 157073,
+    "token_cost": 158070,
+    "cost_usd": 0.314009,
+    "cost_basis": "bucket-split",
+    "cost_valid": true,
+    "teardown_masked": false,
+    "tool_uses": 6,
+    "wall_clock": 46.661,
+    "summary": "Found and fixed the needle. In `app/app.py:28`, the pagination offset was computed as `(page - 1) * per_page - (1 if page > 1 else 0)` \u2014 the extra `- 1` for pages after the first shifted every subsequent page back by one item, so page 2 started with the last item of page 1 (a duplicate at every page boundary). I removed the subtraction so the offset is the standard `(page - 1) * per_page`.\n\n`test.sh` now passes: `PASS: Pagination is correct across page boundaries`.",
+    "stop_reason": "pass"
+   },
+   "kernel": null,
+   "cpu": {
+    "resolved": false,
+    "turns": 4,
+    "input_tokens": 1112,
+    "output_tokens": 227,
+    "billed_input_tokens": 27491,
+    "token_cost": 27718,
+    "cost_usd": 0.056853,
+    "cost_basis": "bucket-split",
+    "cost_valid": true,
+    "teardown_masked": false,
+    "tool_uses": 3,
+    "wall_clock": 35.34,
+    "summary": "agent.completed: 4turns, 1112+227 tokens, $0.0569",
+    "stop_reason": "exit_code: 1"
+   }
+  },
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "benchmark": "wrong-operator-discount",
+   "native": {
+    "resolved": true,
+    "turns": 5,
+    "input_tokens": 1823,
+    "output_tokens": 700,
+    "billed_input_tokens": 111231,
+    "token_cost": 111931,
+    "cost_usd": 0.244438,
+    "cost_basis": "bucket-split",
+    "cost_valid": true,
+    "teardown_masked": false,
+    "tool_uses": 4,
+    "wall_clock": 30.47,
+    "summary": "Found and fixed it. The needle was in `pricing.py:11` \u2014 `calculate_discount_amount` used addition instead of multiplication:\n\n```python\ndiscount = subtotal + discount_percent / 100   # before: $1098.94 + 0.20\ndiscount = subtotal * discount_percent / 100   # after: 20% of $1098.94\n```\n\nDue to operator precedence, the buggy version added a fraction of a dollar to the subtotal instead of taking a percentage of it, so a \"20% discount\" on $1,098.94 came out as $1,099.14 \u2014 more than the whole cart. `test.sh` now passes all four cases: `PASS: Discount calculations are correct`.",
+    "stop_reason": "pass"
+   },
+   "kernel": null,
+   "cpu": {
+    "resolved": false,
+    "turns": 3,
+    "input_tokens": 647,
+    "output_tokens": 196,
+    "billed_input_tokens": 19952,
+    "token_cost": 20148,
+    "cost_usd": 0.035575,
+    "cost_basis": "bucket-split",
+    "cost_valid": true,
+    "teardown_masked": false,
+    "tool_uses": 2,
+    "wall_clock": 33.098,
+    "summary": "agent.completed: 3turns, 647+196 tokens, $0.0356",
+    "stop_reason": "exit_code: 1"
+   }
+  },
+  {
+   "model": "gemini-3.5-flash",
+   "model_normalized": "gemini-3-5-flash",
+   "benchmark": "sql-injection-search",
+   "native": null,
+   "kernel": null,
+   "cpu": {
+    "resolved": true,
+    "turns": 31,
+    "input_tokens": 372754,
+    "output_tokens": 7732,
+    "billed_input_tokens": 558702,
+    "token_cost": 566434,
+    "cost_usd": 0.656611,
+    "cost_basis": "bucket-split",
+    "cost_valid": true,
+    "teardown_masked": false,
+    "tool_uses": 30,
+    "wall_clock": 168.328,
+    "summary": "complete: 31turns, 372754+7732 tokens, $0.6566",
+    "stop_reason": "end_turn"
+   }
+  }
+ ]
+}

@@ -1,0 +1,82 @@
+{
+ "_doc": "Machine-readable era/fault annotations for needle-bench published boards. Referenced by per-board 'faults' lists and boards/index.json. Historical boards publish AS-WERE, clearly era-tagged, and are NEVER re-judged by today's validity rules \u2014 these annotations are the honest context a reader needs instead.",
+ "faults": [
+  {
+   "id": "pre-validity-era",
+   "title": "Published before the fail-closed axis-split validity framework",
+   "window": {
+    "until": "2026-06-14"
+   },
+   "affects": [
+    "pre-v2",
+    "bench-v2",
+    "v4.6.1"
+   ],
+   "effect": "Cells were not judged for arm receipts, deadlines, stalls, zero-work, or token-accounting integrity; silent drops and rate-card cost synthesis are possible anywhere in these boards. Numbers publish as-were, era-tagged, never re-judged.",
+   "reference": "needle-bench 46a35fcd feat(trust): fail-closed bench framework"
+  },
+  {
+   "id": "pre-073d9154-cache-misreporting",
+   "title": "Gemini streaming cache reads misreported before haystack 073d9154",
+   "window": {
+    "until": "2026-06-16"
+   },
+   "affects": [
+    "gemini-* cells in any board generated before 2026-06-16"
+   ],
+   "effect": "cachedContentTokenCount was not captured from streaming responses \u2014 cache_read under-reported (often 0), so gemini input was priced as fresh and cache columns are untrustworthy for those cells.",
+   "reference": "haystack 073d9154 fix(gemini-cache): capture streaming cachedContentTokenCount (measurement bug), 2026-06-16"
+  },
+  {
+   "id": "june16-teardown-masked",
+   "title": "June-16 kernel teardown hang \u2014 watchdog-scored cells",
+   "window": {
+    "from": "2026-06-15",
+    "until": "2026-06-17"
+   },
+   "affects": [
+    "v7.6.0 june16 snapshot: cells with teardown_masked=true (counted per model/arm in the board's masked columns)"
+   ],
+   "effect": "Kernel teardown hung after scoring; the journal+SIGKILL watchdog wrote the score record. The oracle verdict is trusted (test.sh ran to completion) but wall-clock and stop_reason are watchdog artifacts. Cells publish with teardown_masked=true, never silently.",
+   "reference": "annotate_teardown.py; consolidate_scores.load_teardown_sidecar; runs/*/_teardown_masked.json"
+  },
+  {
+   "id": "july02-cache-read-zero",
+   "title": "July-2 re-run reports cache_read=0 \u2014 all input folded into fresh",
+   "window": {
+    "from": "2026-07-02",
+    "until": "2026-07-02"
+   },
+   "affects": [
+    "v7.6.0 july02 snapshot: claude-opus-4-8 native + kernel-cpu, gemini-3.1-pro-preview kernel-cpu"
+   ],
+   "effect": "cache_read_tokens/cache_create_tokens are 0 with the whole input total in fresh_input_tokens (billed == fresh). The accounting is real (cost axis VALID) but bucket-split pricing carries no cache discount and the cache columns are not comparable to cache-split snapshots. For real cache buckets use boards/v7.6.0/2026-06-16-experiment-scores.json.",
+   "reference": "runs/claude-opus-4-8-{native,kernel-cpu}/*.score.json, runs/gemini-3.1-pro-preview-kernel-cpu/*.score.json (timestamp 2026-07-02)"
+  },
+  {
+   "id": "arm-none-era",
+   "title": "arm=None / agent-without-arm-suffix residue (pre arm-receipt fix)",
+   "window": {
+    "until": "2026-06-16"
+   },
+   "affects": [
+    "score payloads with a bare '<model>' agent and arm='default', e.g. runs/claude-opus-4-8/off-by-one-pagination.score.json; any June-era board built before arm receipts were enforced"
+   ],
+   "effect": "The runner dropped the arm from the agent identity, so the executed arm is unattributable. Under axis-split validity such cells fail the arm-receipt check (no_arm_receipt \u2192 fully INVALID on both axes); directories without an arm suffix are not discovered as columns at all. Historical boards that counted them publish as-were with this annotation.",
+   "reference": "cell_validity.split_agent_arm / REASON_NO_ARM_RECEIPT; needle-bench 46a35fcd"
+  },
+  {
+   "id": "july09-fable-kernel-refusal",
+   "title": "claude-fable-5 kernel-cpu cells end in Anthropic stop_reason=refusal",
+   "window": {
+    "from": "2026-07-09",
+    "until": "2026-07-09"
+   },
+   "affects": [
+    "v7.7.1 july09 snapshot: claude-fable-5 kernel-cpu cells (all 3 smoke cells; native arm unaffected)"
+   ],
+   "effect": "After 2-3 real tool turns the API returns an empty-content response with stop_reason=refusal; the agent completes without editing, the oracle fails, and the cell records resolved=false with real token accounting (solve+cost axes VALID). The unsolved verdict is honest about what happened but reflects a provider refusal on the kernel-arm prompt shape, not a demonstrated capability gap \u2014 treat fable-5 kernel-cpu solve rates as a floor until the AnthropicClient driver prompt is investigated.",
+   "reference": "runs/claude-fable-5-kernel-cpu/*.raw/journal.jsonl (cpu.response.decoded stop_reason=refusal)"
+  }
+ ]
+}

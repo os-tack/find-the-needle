@@ -41,13 +41,49 @@ model's `models.txt` uncomment.
 ## Run a model
 
 ```bash
-./bench.sh <model-id> [--arms native,kernel-cpu] [--dry-run] [--no-board]
+./bench.sh <model-id> [--arms native,kernel-cpu] [--bench a,b] [--dry-run]
+           [--offline] [--no-board]
+./bench.sh --status      # live cell states — never wonder what the bench is doing
 ```
 
 - **Preflight fails closed before any spend**: roster, provider env key for
-  the model's real routing (per arm), docker daemon, frozen-bin content-hash
-  pin + the local musl binary that `--local` ships. Verified hashes append to
-  `runs/.binary_identity.jsonl` per launch.
+  the model's real routing (per arm), LIVE provider probes, docker daemon,
+  frozen-bin content-hash pin + the local musl binary that `--local` ships.
+  Verified hashes append to `runs/.binary_identity.jsonl` per launch.
+- **Live probes** (free, authenticated models-list calls): verify the key is
+  VALID and the EXACT model id EXISTS at the provider each arm actually
+  routes through (native vendor endpoints; OpenRouter for kernel arms with
+  the registry-formatted id). A miss fails closed printing the closest
+  catalog matches — dead keys and wrong-model-name-for-provider die here,
+  not 20 minutes into a paid run. Keys resolve env → .env (repo, haystack) →
+  `ostk secret env`; values are never printed. `--offline` skips probes;
+  `--dry-run` implies it.
+- **Stall watch on every cell** (`scripts/stall_watch.py`, wired into
+  run_matrix for kernel AND native arms): (1) completion detector — score
+  landing, or a terminal journal row (agent.completed / end_turn+no-tools)
+  polled from the container every ~2s on kernel arms; terminal evidence + a
+  child still alive after 10s grace = hung teardown → SIGKILL process tree +
+  container, salvage journal, score the cell (bench's own score stamped, or
+  synthesized from the journal), publish `teardown_masked: true` ONLY
+  because the kill was needed. (2) no-progress watchdog — WARN at 90s, probe
+  at 180s (child alive? container state? docker stats), SIGKILL at 300s →
+  the cell is WRITTEN as INVALID reason `stall` and the matrix CONTINUES
+  (infra retry budget, then quarantine). Progress = child output growth,
+  journal growth, container fs activity (vendor CLIs write session files),
+  or score appearance. (3) hard per-cell deadline = the bench's own
+  wall_clock budget + 600s overhead, capped at 3600s. Every transition is
+  timestamped to `runs/.cell_status.jsonl`; `./bench.sh --status` renders
+  it. Thresholds: `OSTK_STALL_{WARN,PROBE,KILL,GRACE,TICK}_S` env overrides.
+  The launcher stdout spools live to `runs/<model>-<arm>/<bench>.launcher.log`.
+- **Native usage capture** (`scripts/native_usage.py`, runs automatically
+  after every native cell, before the validity gate): recovers billed token
+  buckets + provider cost from the vendor CLI's own telemetry in
+  `<bench>.raw/` — opencode `step_finish` JSONL (grok/deepseek), kimi
+  `StatusUpdate/TokenUsage` stream, vibe `vibe-meta.json` session stats —
+  with full provenance (`native_usage_source`, `native_usage_prev`). Where
+  genuinely unavailable on a completed-work cell, the payload is stamped
+  `cost_basis: "unavailable"` explicitly (solve verdict untouched). Sweep
+  historical runs: `python3 scripts/native_usage.py runs/ [--apply]`.
 - **Resumable**: state is `runs/.state.jsonl` (append-only). Interrupt any
   time; re-run the same command to resume. Valid completed cells are skipped;
   INVALID phantoms (deadline / zero-work) are deleted and re-run up to 2
@@ -117,14 +153,16 @@ Regenerate manually: `python3 consolidate_scores.py` then `npm run build`.
   consolidator correctly labels the execution generic_kernel (B*). The board
   annotates this (`ostk.note` on gpt-5.5); don't "fix" it by adding gpt to
   `CPU_DRIVER_MODELS`.
-- **Non-Anthropic native token accounting**: several vendor CLIs report 0
-  billed tokens; those cells are now INVALID
-  (`zero_token_accounting:*` — incl. `:zero_billed` for completed runs whose
-  writer recorded `billed_tokens: 0` with empty buckets), not $0 — and never
-  priced at the rate card (that synthesized native cost 3-29x over the
-  provider-billed truth, flattering the kernel's $/task). The kimi-k2.6,
-  deepseek-v4-pro and grok-4.3 native arms are currently entirely invalid
-  (and most of devstral-2512's). Fix the harness metrics, then re-run.
+- **Non-Anthropic native token accounting** (RECOVERED 2026-07-09): the
+  vendor CLIs' score writer recorded 0 billed tokens, but the raw telemetry
+  survived in `<bench>.raw/` — `scripts/native_usage.py --apply` recovered
+  real buckets + cost for 148 cells (grok-4.3, deepseek-v4-pro, kimi-k2.6:
+  all 38 each; devstral-2512: 34), cross-checked (recovered fresh+cache_read
+  equals the old folded input_tokens exactly). Those cells are VALID again
+  with `native_usage_source` provenance. New native runs capture
+  automatically in run_matrix. Cells with genuinely no telemetry on
+  completed work carry `cost_basis: "unavailable"` (cost axis only — the
+  solve verdict stands).
 - **gemini-3.5 family kernel stall** (deferred 2026-06-14): agent stalls past
   the poll deadline on the 3.x thinking path; verify before paying for any
   gemini-3.5-* matrix run.

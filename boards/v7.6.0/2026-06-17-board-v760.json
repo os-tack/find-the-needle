@@ -1,0 +1,459 @@
+{
+ "schema_era": "harden-board-v760",
+ "era_note": "June-17 leaderboard as served (consolidate_harden.py emitter, retired). Run published at bb4aa6d5 (2026-06-15), board refreshed at 27228dfe 'gpt-5.5 cache fix (0%\u219243%) + gemini-3.5-flash'.",
+ "source_commit": "27228dfe",
+ "source_path": "public/board-v760.json",
+ "captured_from_git": true,
+ "validity": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+ "faults": [
+  "pre-validity-era",
+  "june16-teardown-masked",
+  "arm-none-era"
+ ],
+ "summary": {
+  "models": {
+   "claude-opus-4-8": {
+    "native": {
+     "solved": 34,
+     "total": 38
+    },
+    "kernel": {
+     "solved": 34,
+     "total": 38
+    }
+   },
+   "claude-sonnet-4-6": {
+    "native": {
+     "solved": 35,
+     "total": 38
+    },
+    "kernel": {
+     "solved": 34,
+     "total": 38
+    }
+   },
+   "gemini-3.1-pro-preview": {
+    "native": {
+     "solved": 36,
+     "total": 38
+    },
+    "kernel": {
+     "solved": 33,
+     "total": 38
+    }
+   },
+   "devstral-2512": {
+    "native": {
+     "solved": 6,
+     "total": 38
+    },
+    "kernel": {
+     "solved": 32,
+     "total": 38
+    }
+   },
+   "gpt-5.5": {
+    "native": {
+     "solved": 36,
+     "total": 38
+    },
+    "kernel": {
+     "solved": 35,
+     "total": 38
+    }
+   },
+   "grok-4.3": {
+    "native": {
+     "solved": 35,
+     "total": 38
+    },
+    "kernel": {
+     "solved": 30,
+     "total": 38
+    }
+   },
+   "deepseek-v4-pro": {
+    "native": {
+     "solved": 37,
+     "total": 38
+    },
+    "kernel": {
+     "solved": 35,
+     "total": 38
+    }
+   },
+   "kimi-k2.6": {
+    "native": {
+     "solved": 36,
+     "total": 38
+    },
+    "kernel": {
+     "solved": 35,
+     "total": 38
+    }
+   }
+  },
+  "note": "aggregates read from the artifact's own recorded fields \u2014 not re-judged, not re-priced",
+  "invalid_counts": "unavailable (pre-validity era \u2014 validity was not judged when this board was published)",
+  "masked_counts": "not recorded by the harden emitter"
+ },
+ "data": {
+  "generated": "2026-06-15",
+  "run": "v7.6.0",
+  "published_tasks": 38,
+  "models": [
+   {
+    "model": "claude-opus-4-8",
+    "type": "B",
+    "native_cli": "claude-code",
+    "native_present": true,
+    "published": 38,
+    "cost_trusted": true,
+    "native_cost_basis": "cache-split",
+    "native_solved": 34,
+    "kernel_solved": 34,
+    "both_n": 32,
+    "split_kernel_only": 2,
+    "split_native_only": 2,
+    "bothfail": 1,
+    "native": {
+     "cost": 9.11,
+     "fresh": 62275,
+     "cache_read": 6930472,
+     "cache_create": 415716,
+     "billed": 7408463,
+     "output": 109417,
+     "input_total": 7408463
+    },
+    "kernel": {
+     "cost": 8.886,
+     "fresh": 222244,
+     "cache_read": 4617710,
+     "cache_create": 300098,
+     "billed": 5140052,
+     "output": 101132,
+     "input_total": 5140052
+    },
+    "cost_delta": -2.5,
+    "tok_delta": -30.6,
+    "kernel_abs": {
+     "cost": 9.326,
+     "fresh": 241372,
+     "cache_read": 4826018,
+     "cache_create": 313395,
+     "billed": 5380785,
+     "output": 105474,
+     "input_total": 5380785
+    }
+   },
+   {
+    "model": "claude-sonnet-4-6",
+    "type": "B",
+    "native_cli": "claude-code",
+    "native_present": true,
+    "published": 38,
+    "cost_trusted": true,
+    "native_cost_basis": "cache-split",
+    "native_solved": 35,
+    "kernel_solved": 34,
+    "both_n": 33,
+    "split_kernel_only": 1,
+    "split_native_only": 0,
+    "bothfail": 1,
+    "native": {
+     "cost": 7.209,
+     "fresh": 596,
+     "cache_read": 11137122,
+     "cache_create": 516591,
+     "billed": 11654309,
+     "output": 128563,
+     "input_total": 11654309
+    },
+    "kernel": {
+     "cost": 4.148,
+     "fresh": 221178,
+     "cache_read": 3442047,
+     "cache_create": 251626,
+     "billed": 3914851,
+     "output": 63966,
+     "input_total": 3914851
+    },
+    "cost_delta": -42.5,
+    "tok_delta": -66.4,
+    "kernel_abs": {
+     "cost": 4.237,
+     "fresh": 225514,
+     "cache_read": 3522931,
+     "cache_create": 256595,
+     "billed": 4005040,
+     "output": 65461,
+     "input_total": 4005040
+    }
+   },
+   {
+    "model": "gemini-3.1-pro-preview",
+    "type": "B",
+    "native_cli": "gemini-cli",
+    "native_present": true,
+    "published": 38,
+    "cost_trusted": false,
+    "native_cost_basis": "total-list",
+    "native_solved": 36,
+    "kernel_solved": 33,
+    "both_n": 33,
+    "split_kernel_only": 0,
+    "split_native_only": 2,
+    "bothfail": 1,
+    "native": {
+     "cost": 3.434,
+     "fresh": 876358,
+     "cache_read": 3025025,
+     "cache_create": 0,
+     "billed": 3901383,
+     "output": 89731,
+     "input_total": 3901383
+    },
+    "kernel": {
+     "cost": 7.424,
+     "fresh": 3421526,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 3421526,
+     "output": 48406,
+     "input_total": 3421526
+    },
+    "cost_delta": 116.2,
+    "tok_delta": -12.3,
+    "kernel_abs": {
+     "cost": 7.424,
+     "fresh": 3421526,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 3421526,
+     "output": 48406,
+     "input_total": 3421526
+    }
+   },
+   {
+    "model": "devstral-2512",
+    "type": "B",
+    "native_cli": "vibe",
+    "native_present": true,
+    "published": 38,
+    "cost_trusted": false,
+    "native_cost_basis": "total-only",
+    "native_solved": 6,
+    "kernel_solved": 32,
+    "both_n": 5,
+    "split_kernel_only": 23,
+    "split_native_only": 0,
+    "bothfail": 2,
+    "native": {
+     "cost": 1.498,
+     "fresh": 0,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 3615795,
+     "output": 25596,
+     "input_total": 3615795
+    },
+    "kernel": {
+     "cost": 0.228,
+     "fresh": 540334,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 540334,
+     "output": 6129,
+     "input_total": 540334
+    },
+    "cost_delta": -84.8,
+    "tok_delta": -85.1,
+    "kernel_abs": {
+     "cost": 1.821,
+     "fresh": 4247606,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 4247606,
+     "output": 60747,
+     "input_total": 4247606
+    }
+   },
+   {
+    "model": "gpt-5.5",
+    "type": "B",
+    "native_cli": "codex",
+    "native_present": true,
+    "published": 38,
+    "cost_trusted": false,
+    "native_cost_basis": "total-list",
+    "native_solved": 36,
+    "kernel_solved": 35,
+    "both_n": 34,
+    "split_kernel_only": 1,
+    "split_native_only": 2,
+    "bothfail": 0,
+    "native": {
+     "cost": 6.244,
+     "fresh": 489022,
+     "cache_read": 4071168,
+     "cache_create": 0,
+     "billed": 4560190,
+     "output": 58782,
+     "input_total": 4560190
+    },
+    "kernel": {
+     "cost": 23.47,
+     "fresh": 4379652,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 4379652,
+     "output": 52386,
+     "input_total": 4379652
+    },
+    "cost_delta": 275.9,
+    "tok_delta": -4.0,
+    "kernel_abs": {
+     "cost": 23.915,
+     "fresh": 4461816,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 4461816,
+     "output": 53515,
+     "input_total": 4461816
+    }
+   },
+   {
+    "model": "grok-4.3",
+    "type": "B*",
+    "native_cli": "opencode",
+    "native_present": true,
+    "published": 38,
+    "cost_trusted": false,
+    "native_cost_basis": "self-reported",
+    "native_solved": 35,
+    "kernel_solved": 30,
+    "both_n": 30,
+    "split_kernel_only": 0,
+    "split_native_only": 4,
+    "bothfail": 2,
+    "native": {
+     "cost": 2.678,
+     "fresh": 0,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 2114702,
+     "output": 13811,
+     "input_total": 2114702
+    },
+    "kernel": {
+     "cost": 3.254,
+     "fresh": 2532728,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 2532728,
+     "output": 35325,
+     "input_total": 2532728
+    },
+    "cost_delta": 21.5,
+    "tok_delta": 19.8,
+    "kernel_abs": {
+     "cost": 3.254,
+     "fresh": 2532728,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 2532728,
+     "output": 35325,
+     "input_total": 2532728
+    }
+   },
+   {
+    "model": "deepseek-v4-pro",
+    "type": "B*",
+    "native_cli": "opencode",
+    "native_present": true,
+    "published": 38,
+    "cost_trusted": false,
+    "native_cost_basis": "self-reported",
+    "native_solved": 37,
+    "kernel_solved": 35,
+    "both_n": 35,
+    "split_kernel_only": 0,
+    "split_native_only": 1,
+    "bothfail": 0,
+    "native": {
+     "cost": 5.09,
+     "fresh": 0,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 2851094,
+     "output": 37081,
+     "input_total": 2851094
+    },
+    "kernel": {
+     "cost": 8.16,
+     "fresh": 4353782,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 4353782,
+     "output": 167897,
+     "input_total": 4353782
+    },
+    "cost_delta": 60.3,
+    "tok_delta": 52.7,
+    "kernel_abs": {
+     "cost": 8.16,
+     "fresh": 4353782,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 4353782,
+     "output": 167897,
+     "input_total": 4353782
+    }
+   },
+   {
+    "model": "kimi-k2.6",
+    "type": "B*",
+    "native_cli": "kimi",
+    "native_present": true,
+    "published": 38,
+    "cost_trusted": false,
+    "native_cost_basis": "total-only",
+    "native_solved": 36,
+    "kernel_solved": 35,
+    "both_n": 35,
+    "split_kernel_only": 0,
+    "split_native_only": 1,
+    "bothfail": 1,
+    "native": {
+     "cost": 0.22,
+     "fresh": 0,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 549528,
+     "output": 0,
+     "input_total": 549528
+    },
+    "kernel": {
+     "cost": 1.42,
+     "fresh": 2911943,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 2911943,
+     "output": 128090,
+     "input_total": 2911943
+    },
+    "cost_delta": 545.5,
+    "tok_delta": 429.9,
+    "kernel_abs": {
+     "cost": 1.42,
+     "fresh": 2911943,
+     "cache_read": 0,
+     "cache_create": 0,
+     "billed": 2911943,
+     "output": 128090,
+     "input_total": 2911943
+    }
+   }
+  ]
+ }
+}

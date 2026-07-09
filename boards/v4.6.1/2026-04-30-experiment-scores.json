@@ -1,0 +1,5067 @@
+{
+ "schema_era": "bench-v2-three-arm",
+ "era_note": "v4.6.1 sweep: 9 models, 313 cells, scoped to a single-version run. Commit c7fee7c1 'scores: publish v4.6.1 sweep'.",
+ "source_commit": "c7fee7c1",
+ "source_path": "public/experiment-scores.json",
+ "captured_from_git": true,
+ "validity": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+ "faults": [
+  "pre-validity-era",
+  "pre-073d9154-cache-misreporting"
+ ],
+ "summary": {
+  "models": {
+   "gpt-5.2": {
+    "native": {
+     "solved": 31,
+     "total": 31,
+     "cost_usd": 12.4404
+    },
+    "kernel": {
+     "solved": 31,
+     "total": 32,
+     "cost_usd": 3.458
+    },
+    "cpu": {
+     "solved": 30,
+     "total": 31,
+     "cost_usd": 2.9728
+    }
+   },
+   "gpt-5.5": {
+    "native": {
+     "solved": 5,
+     "total": 5,
+     "cost_usd": 1.1455
+    },
+    "kernel": {
+     "solved": 5,
+     "total": 5,
+     "cost_usd": 1.0395
+    },
+    "cpu": {
+     "solved": 5,
+     "total": 5,
+     "cost_usd": 0.7201
+    }
+   },
+   "qwen3-coder-plus": {
+    "kernel": {
+     "solved": 2,
+     "total": 2,
+     "cost_usd": 0.0823
+    }
+   },
+   "gpt-5.4": {
+    "native": {
+     "solved": 37,
+     "total": 38,
+     "cost_usd": 11.3281
+    },
+    "kernel": {
+     "solved": 36,
+     "total": 38,
+     "cost_usd": 5.6356
+    },
+    "cpu": {
+     "solved": 37,
+     "total": 39,
+     "cost_usd": 2.3506
+    }
+   },
+   "deepseek-v3.2": {
+    "kernel": {
+     "solved": 10,
+     "total": 11,
+     "cost_usd": 0.4166
+    }
+   },
+   "gemini-3.1-flash-lite-preview": {
+    "kernel": {
+     "solved": 12,
+     "total": 18,
+     "cost_usd": 0.1983
+    },
+    "cpu": {
+     "solved": 12,
+     "total": 18,
+     "cost_usd": 0.2218
+    }
+   },
+   "grok-code-fast-1": {
+    "kernel": {
+     "solved": 12,
+     "total": 20,
+     "cost_usd": 0.5393
+    }
+   },
+   "deepseek-r1": {
+    "kernel": {
+     "solved": 3,
+     "total": 8,
+     "cost_usd": 0.0863
+    }
+   },
+   "deepseek-r1-0528": {
+    "kernel": {
+     "solved": 3,
+     "total": 12,
+     "cost_usd": 0.2658
+    }
+   }
+  },
+  "note": "aggregates read from the artifact's own recorded fields \u2014 not re-judged, not re-priced",
+  "invalid_counts": "unavailable (pre-validity era \u2014 validity was not judged when this board was published)",
+  "masked_counts": "unavailable (teardown masking annotation postdates this era)"
+ },
+ "data": {
+  "generated": "2026-04-30T15:40:18.931452Z",
+  "models": [
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmarks": 32,
+    "native": {
+     "solved": 31,
+     "total": 31,
+     "cost": 12.440447999999998,
+     "tokens": 9351274,
+     "tools": 304,
+     "turns": 31,
+     "wall": 1902.0929999999994
+    },
+    "kernel": {
+     "solved": 31,
+     "total": 32,
+     "cost": 3.4580110000000004,
+     "tokens": 4792392,
+     "tools": 635,
+     "turns": 669,
+     "wall": 6156.395000000001
+    },
+    "cpu": {
+     "solved": 30,
+     "total": 31,
+     "cost": 2.9728050000000006,
+     "tokens": 3831230,
+     "tools": 566,
+     "turns": 597,
+     "wall": 5535.572
+    },
+    "price_per_m_input": 1.25,
+    "price_per_m_output": 10.0,
+    "cpu_driver_status": "no_driver",
+    "native_cli": "opencode"
+   },
+   {
+    "model": "gpt-5.5",
+    "model_normalized": "gpt-5-5",
+    "benchmarks": 5,
+    "native": {
+     "solved": 5,
+     "total": 5,
+     "cost": 1.145523,
+     "tokens": 858542,
+     "tools": 63,
+     "turns": 5,
+     "wall": 164.429
+    },
+    "kernel": {
+     "solved": 5,
+     "total": 5,
+     "cost": 1.039476,
+     "tokens": 399535,
+     "tools": 65,
+     "turns": 70,
+     "wall": 534.957
+    },
+    "cpu": {
+     "solved": 5,
+     "total": 5,
+     "cost": 0.720098,
+     "tokens": 271252,
+     "tools": 56,
+     "turns": 61,
+     "wall": 416.683
+    },
+    "price_per_m_input": 1.25,
+    "price_per_m_output": 10.0,
+    "cpu_driver_status": "no_driver",
+    "native_cli": "opencode"
+   },
+   {
+    "model": "qwen3-coder-plus",
+    "model_normalized": "qwen3-coder-plus",
+    "benchmarks": 2,
+    "native": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "kernel": {
+     "solved": 2,
+     "total": 2,
+     "cost": 0.082298,
+     "tokens": 285349,
+     "tools": 30,
+     "turns": 32,
+     "wall": 288.738
+    },
+    "cpu": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "price_per_m_input": 0.65,
+    "price_per_m_output": 3.25,
+    "cpu_driver_status": "no_driver",
+    "native_cli": "opencode"
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmarks": 39,
+    "native": {
+     "solved": 37,
+     "total": 38,
+     "cost": 11.328089000000002,
+     "tokens": 7947182,
+     "tools": 647,
+     "turns": 38,
+     "wall": 2780.234999999999
+    },
+    "kernel": {
+     "solved": 36,
+     "total": 38,
+     "cost": 5.635626999999999,
+     "tokens": 3123514,
+     "tools": 408,
+     "turns": 447,
+     "wall": 3042.7279999999996
+    },
+    "cpu": {
+     "solved": 37,
+     "total": 39,
+     "cost": 2.350572,
+     "tokens": 2437312,
+     "tools": 427,
+     "turns": 467,
+     "wall": 3250.5110000000004
+    },
+    "price_per_m_input": 1.25,
+    "price_per_m_output": 10.0,
+    "cpu_driver_status": "no_driver",
+    "native_cli": "opencode"
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmarks": 11,
+    "native": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "kernel": {
+     "solved": 10,
+     "total": 11,
+     "cost": 0.41656800000000005,
+     "tokens": 2809247,
+     "tools": 254,
+     "turns": 266,
+     "wall": 4241.494000000001
+    },
+    "cpu": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "price_per_m_input": 0.26,
+    "price_per_m_output": 0.38,
+    "cpu_driver_status": "no_driver",
+    "native_cli": "opencode"
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmarks": 18,
+    "native": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "kernel": {
+     "solved": 12,
+     "total": 18,
+     "cost": 0.19828600000000005,
+     "tokens": 1418406,
+     "tools": 233,
+     "turns": 251,
+     "wall": 1412.376
+    },
+    "cpu": {
+     "solved": 12,
+     "total": 18,
+     "cost": 0.221766,
+     "tokens": 2159587,
+     "tools": 255,
+     "turns": 274,
+     "wall": 2187.2219999999998
+    },
+    "price_per_m_input": 0.1,
+    "price_per_m_output": 0.4,
+    "cpu_driver_status": "no_driver",
+    "native_cli": "opencode"
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmarks": 20,
+    "native": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "kernel": {
+     "solved": 12,
+     "total": 20,
+     "cost": 0.5393030000000001,
+     "tokens": 1425848,
+     "tools": 199,
+     "turns": 219,
+     "wall": 6258.529999999999
+    },
+    "cpu": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "price_per_m_input": 0.2,
+    "price_per_m_output": 1.5,
+    "cpu_driver_status": "no_driver",
+    "native_cli": "opencode"
+   },
+   {
+    "model": "deepseek-r1",
+    "model_normalized": "deepseek-r1",
+    "benchmarks": 8,
+    "native": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "kernel": {
+     "solved": 3,
+     "total": 8,
+     "cost": 0.086302,
+     "tokens": 80117,
+     "tools": 8,
+     "turns": 15,
+     "wall": 1155.354
+    },
+    "cpu": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "price_per_m_input": 0.7,
+    "price_per_m_output": 2.5,
+    "cpu_driver_status": "no_driver",
+    "native_cli": "opencode"
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmarks": 12,
+    "native": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "kernel": {
+     "solved": 3,
+     "total": 12,
+     "cost": 0.26576099999999997,
+     "tokens": 353981,
+     "tools": 61,
+     "turns": 65,
+     "wall": 7714.256
+    },
+    "cpu": {
+     "solved": 0,
+     "total": 0,
+     "cost": 0,
+     "tokens": 0,
+     "tools": 0,
+     "turns": 0,
+     "wall": 0
+    },
+    "price_per_m_input": 0.45,
+    "price_per_m_output": 2.15,
+    "cpu_driver_status": "no_driver",
+    "native_cli": "opencode"
+   }
+  ],
+  "benchmarks": [
+   {
+    "model": "deepseek-r1",
+    "model_normalized": "deepseek-r1",
+    "benchmark": "split-brain-leader-election",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 6,
+     "input_tokens": 29287,
+     "output_tokens": 3047,
+     "token_cost": 32334,
+     "cost_usd": 0.028118,
+     "tool_uses": 6,
+     "wall_clock": 464.671,
+     "summary": "agent.completed: 6turns, 29287+3047 tokens, $0.0281",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1",
+    "model_normalized": "deepseek-r1",
+    "benchmark": "sql-injection-search",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 4253,
+     "output_tokens": 816,
+     "token_cost": 5069,
+     "cost_usd": 0.005017,
+     "tool_uses": 0,
+     "wall_clock": 52.455,
+     "summary": "agent.completed: 1turns, 4253+816 tokens, $0.0050",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1",
+    "model_normalized": "deepseek-r1",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 4253,
+     "output_tokens": 1330,
+     "token_cost": 5583,
+     "cost_usd": 0.006302,
+     "tool_uses": 0,
+     "wall_clock": 72.289,
+     "summary": "agent.completed: 1turns, 4253+1330 tokens, $0.0063",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1",
+    "model_normalized": "deepseek-r1",
+    "benchmark": "timezone-scheduling",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 1,
+     "input_tokens": 4253,
+     "output_tokens": 3230,
+     "token_cost": 7483,
+     "cost_usd": 0.011052,
+     "tool_uses": 0,
+     "wall_clock": 155.267,
+     "summary": "agent.completed: 1turns, 4253+3230 tokens, $0.0111",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1",
+    "model_normalized": "deepseek-r1",
+    "benchmark": "timing-attack-comparison",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 4253,
+     "output_tokens": 1072,
+     "token_cost": 5325,
+     "cost_usd": 0.005657,
+     "tool_uses": 0,
+     "wall_clock": 59.073,
+     "summary": "agent.completed: 1turns, 4253+1072 tokens, $0.0057",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1",
+    "model_normalized": "deepseek-r1",
+    "benchmark": "tls-chain-ordering-strict",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 2,
+     "input_tokens": 4047,
+     "output_tokens": 1278,
+     "token_cost": 5325,
+     "cost_usd": 0.006028,
+     "tool_uses": 1,
+     "wall_clock": 70.585,
+     "summary": "agent.completed: 2turns, 4047+1278 tokens, $0.0060",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1",
+    "model_normalized": "deepseek-r1",
+    "benchmark": "wal-fsync-ghost-ack",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 1,
+     "input_tokens": 4253,
+     "output_tokens": 483,
+     "token_cost": 4736,
+     "cost_usd": 0.004185,
+     "tool_uses": 0,
+     "wall_clock": 35.118,
+     "summary": "agent.completed: 1turns, 4253+483 tokens, $0.0042",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1",
+    "model_normalized": "deepseek-r1",
+    "benchmark": "wrong-operator-discount",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 2,
+     "input_tokens": 8729,
+     "output_tokens": 5533,
+     "token_cost": 14262,
+     "cost_usd": 0.019943,
+     "tool_uses": 1,
+     "wall_clock": 245.896,
+     "summary": "agent.completed: 2turns, 8729+5533 tokens, $0.0199",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "linearizability-stale-read",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 6,
+     "input_tokens": 25069,
+     "output_tokens": 3832,
+     "token_cost": 28901,
+     "cost_usd": 0.020888,
+     "tool_uses": 6,
+     "wall_clock": 705.163,
+     "summary": "agent.completed: 6turns, 25069+3832 tokens, $0.0209",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "postgres-migration-schema-drift",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 4,
+     "input_tokens": 16542,
+     "output_tokens": 2531,
+     "token_cost": 19073,
+     "cost_usd": 0.013789,
+     "tool_uses": 4,
+     "wall_clock": 597.751,
+     "summary": "agent.completed: 4turns, 16542+2531 tokens, $0.0138",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "race-condition-counter",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 40467,
+     "output_tokens": 4992,
+     "token_cost": 45459,
+     "cost_usd": 0.031116,
+     "tool_uses": 7,
+     "wall_clock": 514.179,
+     "summary": "agent.completed: 8turns, 40467+4992 tokens, $0.0311",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "raft-snapshot-commit-gap",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 5,
+     "input_tokens": 24670,
+     "output_tokens": 2703,
+     "token_cost": 27373,
+     "cost_usd": 0.018228,
+     "tool_uses": 5,
+     "wall_clock": 583.643,
+     "summary": "agent.completed: 5turns, 24670+2703 tokens, $0.0182",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "relaxed-ordering-ringbuf",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 5,
+     "input_tokens": 23277,
+     "output_tokens": 5351,
+     "token_cost": 28628,
+     "cost_usd": 0.023304,
+     "tool_uses": 5,
+     "wall_clock": 803.895,
+     "summary": "agent.completed: 5turns, 23277+5351 tokens, $0.0233",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "retry-storm-duplicate-transfer",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 3,
+     "input_tokens": 12866,
+     "output_tokens": 3209,
+     "token_cost": 16075,
+     "cost_usd": 0.013429,
+     "tool_uses": 3,
+     "wall_clock": 597.761,
+     "summary": "agent.completed: 3turns, 12866+3209 tokens, $0.0134",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "split-brain-leader-election",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 7,
+     "input_tokens": 34518,
+     "output_tokens": 8072,
+     "token_cost": 42590,
+     "cost_usd": 0.034856,
+     "tool_uses": 7,
+     "wall_clock": 1067.338,
+     "summary": "agent.completed: 7turns, 34518+8072 tokens, $0.0349",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 5,
+     "input_tokens": 21680,
+     "output_tokens": 1655,
+     "token_cost": 23335,
+     "cost_usd": 0.014448,
+     "tool_uses": 5,
+     "wall_clock": 498.121,
+     "summary": "agent.completed: 5turns, 21680+1655 tokens, $0.0144",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "timing-attack-comparison",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 58138,
+     "output_tokens": 12692,
+     "token_cost": 70830,
+     "cost_usd": 0.056738,
+     "tool_uses": 11,
+     "wall_clock": 1222.005,
+     "summary": "agent.completed: 12turns, 58138+12692 tokens, $0.0567",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "tls-chain-ordering-strict",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 1,
+     "input_tokens": 4253,
+     "output_tokens": 237,
+     "token_cost": 4490,
+     "cost_usd": 0.002849,
+     "tool_uses": 0,
+     "wall_clock": 40.029,
+     "summary": "agent.completed: 1turns, 4253+237 tokens, $0.0028",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "wal-fsync-ghost-ack",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 4,
+     "input_tokens": 17789,
+     "output_tokens": 4245,
+     "token_cost": 22034,
+     "cost_usd": 0.018149,
+     "tool_uses": 4,
+     "wall_clock": 759.354,
+     "summary": "agent.completed: 4turns, 17789+4245 tokens, $0.0181",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-r1-0528",
+    "model_normalized": "deepseek-r1-0528",
+    "benchmark": "wrong-operator-discount",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 5,
+     "input_tokens": 21996,
+     "output_tokens": 3197,
+     "token_cost": 25193,
+     "cost_usd": 0.017967,
+     "tool_uses": 4,
+     "wall_clock": 325.017,
+     "summary": "agent.completed: 5turns, 21996+3197 tokens, $0.0180",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "k8s-scheduler-shutdown-deadlock",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 22,
+     "input_tokens": 207793,
+     "output_tokens": 9134,
+     "token_cost": 216927,
+     "cost_usd": 0.034832,
+     "tool_uses": 21,
+     "wall_clock": 384.865,
+     "summary": "agent.completed: 22turns, 207793+9134 tokens, $0.0348",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "kernel-panic-ioctl",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 23,
+     "input_tokens": 202506,
+     "output_tokens": 5376,
+     "token_cost": 207882,
+     "cost_usd": 0.031201,
+     "tool_uses": 22,
+     "wall_clock": 386.889,
+     "summary": "agent.completed: 23turns, 202506+5376 tokens, $0.0312",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "linearizability-stale-read",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 44,
+     "input_tokens": 781007,
+     "output_tokens": 19384,
+     "token_cost": 800391,
+     "cost_usd": 0.118031,
+     "tool_uses": 43,
+     "wall_clock": 1151.171,
+     "summary": "agent.completed: 44turns, 781007+19384 tokens, $0.1180",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "memory-leak-event-listener",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 16,
+     "input_tokens": 107428,
+     "output_tokens": 2703,
+     "token_cost": 110131,
+     "cost_usd": 0.016531,
+     "tool_uses": 15,
+     "wall_clock": 235.438,
+     "summary": "agent.completed: 16turns, 107428+2703 tokens, $0.0165",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "nginx-upstream-port-mismatch",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 28,
+     "input_tokens": 231887,
+     "output_tokens": 3413,
+     "token_cost": 235300,
+     "cost_usd": 0.034161,
+     "tool_uses": 27,
+     "wall_clock": 328.547,
+     "summary": "agent.completed: 28turns, 231887+3413 tokens, $0.0342",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "off-by-one-array-slice",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 15,
+     "input_tokens": 83038,
+     "output_tokens": 2094,
+     "token_cost": 85132,
+     "cost_usd": 0.013109,
+     "tool_uses": 14,
+     "wall_clock": 155.065,
+     "summary": "agent.completed: 15turns, 83038+2094 tokens, $0.0131",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "off-by-one-pagination",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 66307,
+     "output_tokens": 1794,
+     "token_cost": 68101,
+     "cost_usd": 0.010261,
+     "tool_uses": 11,
+     "wall_clock": 160.873,
+     "summary": "agent.completed: 12turns, 66307+1794 tokens, $0.0103",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "performance-cliff-hash",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 37,
+     "input_tokens": 374638,
+     "output_tokens": 4562,
+     "token_cost": 379200,
+     "cost_usd": 0.055545,
+     "tool_uses": 35,
+     "wall_clock": 496.088,
+     "summary": "agent.completed: 37turns, 374638+4562 tokens, $0.0555",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "postgres-migration-schema-drift",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 48,
+     "input_tokens": 556983,
+     "output_tokens": 6904,
+     "token_cost": 563887,
+     "cost_usd": 0.081821,
+     "tool_uses": 47,
+     "wall_clock": 629.915,
+     "summary": "agent.completed: 48turns, 556983+6904 tokens, $0.0818",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "race-condition-counter",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 20,
+     "input_tokens": 135708,
+     "output_tokens": 2938,
+     "token_cost": 138646,
+     "cost_usd": 0.020542,
+     "tool_uses": 19,
+     "wall_clock": 289.933,
+     "summary": "agent.completed: 20turns, 135708+2938 tokens, $0.0205",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "deepseek-v3.2",
+    "model_normalized": "deepseek-v3-2",
+    "benchmark": "raft-snapshot-commit-gap",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 1,
+     "input_tokens": 3544,
+     "output_tokens": 106,
+     "token_cost": 3650,
+     "cost_usd": 0.000534,
+     "tool_uses": 0,
+     "wall_clock": 22.71,
+     "summary": "agent.completed: 1turns, 3544+106 tokens, $0.0005",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "off-by-one-pagination",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 31421,
+     "output_tokens": 402,
+     "token_cost": 31823,
+     "cost_usd": 0.007585,
+     "tool_uses": 8,
+     "wall_clock": 50.432,
+     "summary": "agent.completed: 9turns, 31421+402 tokens, $0.0076",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 30151,
+     "output_tokens": 315,
+     "token_cost": 30466,
+     "cost_usd": 0.003141,
+     "tool_uses": 7,
+     "wall_clock": 51.099,
+     "summary": "agent.completed: 8turns, 30151+315 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "performance-cliff-hash",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 7,
+     "input_tokens": 23487,
+     "output_tokens": 217,
+     "token_cost": 23704,
+     "cost_usd": 0.005327,
+     "tool_uses": 6,
+     "wall_clock": 34.531,
+     "summary": "agent.completed: 7turns, 23487+217 tokens, $0.0053",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 28742,
+     "output_tokens": 217,
+     "token_cost": 28959,
+     "cost_usd": 0.002961,
+     "tool_uses": 7,
+     "wall_clock": 103.274,
+     "summary": "agent.completed: 8turns, 28742+217 tokens, $0.0000",
+     "stop_reason": "exit_code: 1"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "postgres-migration-schema-drift",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 37,
+     "input_tokens": 342167,
+     "output_tokens": 2090,
+     "token_cost": 344257,
+     "cost_usd": 0.028901,
+     "tool_uses": 36,
+     "wall_clock": 207.586,
+     "summary": "agent.completed: 37turns, 342167+2090 tokens, $0.0289",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": false,
+     "turns": 50,
+     "input_tokens": 506580,
+     "output_tokens": 2272,
+     "token_cost": 508852,
+     "cost_usd": 0.051567,
+     "tool_uses": 50,
+     "wall_clock": 681.847,
+     "summary": "agent.completed: 50turns, 506580+2272 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "race-condition-counter",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 7,
+     "input_tokens": 24270,
+     "output_tokens": 300,
+     "token_cost": 24570,
+     "cost_usd": 0.004774,
+     "tool_uses": 6,
+     "wall_clock": 40.833,
+     "summary": "agent.completed: 7turns, 24270+300 tokens, $0.0048",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": false,
+     "turns": 9,
+     "input_tokens": 32237,
+     "output_tokens": 363,
+     "token_cost": 32600,
+     "cost_usd": 0.003369,
+     "tool_uses": 8,
+     "wall_clock": 59.143,
+     "summary": "agent.completed: 9turns, 32237+363 tokens, $0.0000",
+     "stop_reason": "exit_code: 1"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "raft-snapshot-commit-gap",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 8,
+     "input_tokens": 41788,
+     "output_tokens": 339,
+     "token_cost": 42127,
+     "cost_usd": 0.007378,
+     "tool_uses": 7,
+     "wall_clock": 40.598,
+     "summary": "agent.completed: 8turns, 41788+339 tokens, $0.0074",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": false,
+     "turns": 13,
+     "input_tokens": 113575,
+     "output_tokens": 718,
+     "token_cost": 114293,
+     "cost_usd": 0.011645,
+     "tool_uses": 12,
+     "wall_clock": 89.324,
+     "summary": "agent.completed: 13turns, 113575+718 tokens, $0.0000",
+     "stop_reason": "exit_code: 1"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "rate-limit-bypass-header",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 40068,
+     "output_tokens": 419,
+     "token_cost": 40487,
+     "cost_usd": 0.006269,
+     "tool_uses": 9,
+     "wall_clock": 60.132,
+     "summary": "agent.completed: 10turns, 40068+419 tokens, $0.0063",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 30880,
+     "output_tokens": 578,
+     "token_cost": 31458,
+     "cost_usd": 0.003319,
+     "tool_uses": 7,
+     "wall_clock": 72.507,
+     "summary": "agent.completed: 8turns, 30880+578 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "relaxed-ordering-ringbuf",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 6,
+     "input_tokens": 23129,
+     "output_tokens": 335,
+     "token_cost": 23464,
+     "cost_usd": 0.005398,
+     "tool_uses": 5,
+     "wall_clock": 30.936,
+     "summary": "agent.completed: 6turns, 23129+335 tokens, $0.0054",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 69165,
+     "output_tokens": 1409,
+     "token_cost": 70574,
+     "cost_usd": 0.00748,
+     "tool_uses": 10,
+     "wall_clock": 64.385,
+     "summary": "agent.completed: 11turns, 69165+1409 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "retry-storm-duplicate-transfer",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 26,
+     "input_tokens": 154891,
+     "output_tokens": 1698,
+     "token_cost": 156589,
+     "cost_usd": 0.023632,
+     "tool_uses": 25,
+     "wall_clock": 259.483,
+     "summary": "agent.completed: 26turns, 154891+1698 tokens, $0.0236",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 87888,
+     "output_tokens": 2811,
+     "token_cost": 90699,
+     "cost_usd": 0.009913,
+     "tool_uses": 12,
+     "wall_clock": 102.702,
+     "summary": "agent.completed: 13turns, 87888+2811 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "silent-data-corruption",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 62181,
+     "output_tokens": 1907,
+     "token_cost": 64088,
+     "cost_usd": 0.012227,
+     "tool_uses": 12,
+     "wall_clock": 62.306,
+     "summary": "agent.completed: 13turns, 62181+1907 tokens, $0.0122",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": false,
+     "turns": 26,
+     "input_tokens": 183139,
+     "output_tokens": 1905,
+     "token_cost": 185044,
+     "cost_usd": 0.019076,
+     "tool_uses": 23,
+     "wall_clock": 152.527,
+     "summary": "agent.completed: 26turns, 183139+1905 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "split-brain-leader-election",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 10,
+     "input_tokens": 36744,
+     "output_tokens": 292,
+     "token_cost": 37036,
+     "cost_usd": 0.007865,
+     "tool_uses": 9,
+     "wall_clock": 46.27,
+     "summary": "agent.completed: 10turns, 36744+292 tokens, $0.0079",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 22,
+     "input_tokens": 147497,
+     "output_tokens": 879,
+     "token_cost": 148376,
+     "cost_usd": 0.015101,
+     "tool_uses": 21,
+     "wall_clock": 133.893,
+     "summary": "agent.completed: 22turns, 147497+879 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "sql-injection-search",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 6,
+     "input_tokens": 19298,
+     "output_tokens": 405,
+     "token_cost": 19703,
+     "cost_usd": 0.005432,
+     "tool_uses": 5,
+     "wall_clock": 37.146,
+     "summary": "agent.completed: 6turns, 19298+405 tokens, $0.0054",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 28669,
+     "output_tokens": 442,
+     "token_cost": 29111,
+     "cost_usd": 0.003044,
+     "tool_uses": 7,
+     "wall_clock": 48.989,
+     "summary": "agent.completed: 8turns, 28669+442 tokens, $0.0000",
+     "stop_reason": "exit_code: 1"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 71834,
+     "output_tokens": 920,
+     "token_cost": 72754,
+     "cost_usd": 0.010518,
+     "tool_uses": 13,
+     "wall_clock": 72.326,
+     "summary": "agent.completed: 14turns, 71834+920 tokens, $0.0105",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 40538,
+     "output_tokens": 827,
+     "token_cost": 41365,
+     "cost_usd": 0.004385,
+     "tool_uses": 8,
+     "wall_clock": 60.026,
+     "summary": "agent.completed: 9turns, 40538+827 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "timezone-scheduling",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 18,
+     "input_tokens": 87095,
+     "output_tokens": 814,
+     "token_cost": 87909,
+     "cost_usd": 0.012455,
+     "tool_uses": 17,
+     "wall_clock": 79.703,
+     "summary": "agent.completed: 18turns, 87095+814 tokens, $0.0125",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": false,
+     "turns": 9,
+     "input_tokens": 39458,
+     "output_tokens": 958,
+     "token_cost": 40416,
+     "cost_usd": 0.004329,
+     "tool_uses": 8,
+     "wall_clock": 57.976,
+     "summary": "agent.completed: 9turns, 39458+958 tokens, $0.0000",
+     "stop_reason": "exit_code: 1"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "timing-attack-comparison",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 29390,
+     "output_tokens": 340,
+     "token_cost": 29730,
+     "cost_usd": 0.007857,
+     "tool_uses": 8,
+     "wall_clock": 40.447,
+     "summary": "agent.completed: 9turns, 29390+340 tokens, $0.0079",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 51233,
+     "output_tokens": 448,
+     "token_cost": 51681,
+     "cost_usd": 0.005302,
+     "tool_uses": 12,
+     "wall_clock": 73.784,
+     "summary": "agent.completed: 13turns, 51233+448 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "tls-chain-ordering-strict",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 23,
+     "input_tokens": 200905,
+     "output_tokens": 1581,
+     "token_cost": 202486,
+     "cost_usd": 0.020357,
+     "tool_uses": 22,
+     "wall_clock": 115.294,
+     "summary": "agent.completed: 23turns, 200905+1581 tokens, $0.0204",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 85106,
+     "output_tokens": 1512,
+     "token_cost": 86618,
+     "cost_usd": 0.009115,
+     "tool_uses": 13,
+     "wall_clock": 87.845,
+     "summary": "agent.completed: 14turns, 85106+1512 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "type-coercion-comparison",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 8,
+     "input_tokens": 28531,
+     "output_tokens": 203,
+     "token_cost": 28734,
+     "cost_usd": 0.005687,
+     "tool_uses": 7,
+     "wall_clock": 42.871,
+     "summary": "agent.completed: 8turns, 28531+203 tokens, $0.0057",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 50908,
+     "output_tokens": 585,
+     "token_cost": 51493,
+     "cost_usd": 0.005325,
+     "tool_uses": 10,
+     "wall_clock": 66.206,
+     "summary": "agent.completed: 11turns, 50908+585 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "wal-fsync-ghost-ack",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 12,
+     "input_tokens": 67132,
+     "output_tokens": 720,
+     "token_cost": 67852,
+     "cost_usd": 0.009849,
+     "tool_uses": 11,
+     "wall_clock": 54.889,
+     "summary": "agent.completed: 12turns, 67132+720 tokens, $0.0098",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": {
+     "resolved": false,
+     "turns": 35,
+     "input_tokens": 590524,
+     "output_tokens": 2587,
+     "token_cost": 593111,
+     "cost_usd": 0.060087,
+     "tool_uses": 34,
+     "wall_clock": 241.374,
+     "summary": "agent.completed: 35turns, 590524+2587 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gemini-3.1-flash-lite-preview",
+    "model_normalized": "gemini-3-1-flash-lite-preview",
+    "benchmark": "wrong-operator-discount",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 28,
+     "input_tokens": 120135,
+     "output_tokens": 958,
+     "token_cost": 121093,
+     "cost_usd": 0.016775,
+     "tool_uses": 27,
+     "wall_clock": 136.593,
+     "summary": "agent.completed: 28turns, 120135+958 tokens, $0.0168",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 7,
+     "input_tokens": 23939,
+     "output_tokens": 532,
+     "token_cost": 24471,
+     "cost_usd": 0.002607,
+     "tool_uses": 6,
+     "wall_clock": 40.321,
+     "summary": "agent.completed: 7turns, 23939+532 tokens, $0.0000",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "encoding-mojibake",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 24,
+     "input_tokens": 125896,
+     "output_tokens": 4290,
+     "token_cost": 130186,
+     "cost_usd": 0.100954,
+     "tool_uses": 23,
+     "wall_clock": 192.009,
+     "summary": "agent.completed: 24turns, 125896+4290 tokens, $0.1010",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 39190,
+     "output_tokens": 1612,
+     "token_cost": 40802,
+     "cost_usd": 0.037727,
+     "tool_uses": 11,
+     "wall_clock": 82.879,
+     "summary": "agent.completed: 12turns, 39190+1612 tokens, $0.0377",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "goroutine-leak-handler",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 375758,
+     "output_tokens": 3488,
+     "token_cost": 379246,
+     "cost_usd": 0.504578,
+     "tool_uses": 11,
+     "wall_clock": 85.372,
+     "summary": "Fixed the goroutine leak in `app/main.go` by canceling computations via the request context (client disconnect) and a 25s timeout, and by making the delay sleep cancellable.\n\nVerified by running `./test.sh` \u2014 it now passes with `Leaked goroutines above baseline: 0`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 19,
+     "input_tokens": 103577,
+     "output_tokens": 7455,
+     "token_cost": 111032,
+     "cost_usd": 0.1433,
+     "tool_uses": 18,
+     "wall_clock": 253.199,
+     "summary": "agent.completed: 19turns, 103577+7455 tokens, $0.1433",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 52511,
+     "output_tokens": 3463,
+     "token_cost": 55974,
+     "cost_usd": 0.068808,
+     "tool_uses": 13,
+     "wall_clock": 150.146,
+     "summary": "agent.completed: 14turns, 52511+3463 tokens, $0.0688",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "graphql-dataloader-per-request",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 502130,
+     "output_tokens": 4023,
+     "token_cost": 506153,
+     "cost_usd": 0.667893,
+     "tool_uses": 13,
+     "wall_clock": 86.062,
+     "summary": "- Fixed the \u201cneedle\u201d: DataLoader instances are now created **once per request** in `src/context.ts` via `createLoaders()` and shared through `ctx.loaders`.\n- Updated resolvers to use request-scoped loaders instead of creating new ones per field: `src/resolvers/userResolver.ts` and `src/resolvers/postResolver.ts`.\n- Added loader typing export in `src/loaders.ts`.\n\nVerified by running `bash test.sh`: performance query count dropped from 101 to 2, and the script now reports `PASS: All tests passed`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 41,
+     "input_tokens": 384394,
+     "output_tokens": 10572,
+     "token_cost": 394966,
+     "cost_usd": 0.251379,
+     "tool_uses": 39,
+     "wall_clock": 401.085,
+     "summary": "agent.completed: 41turns, 384394+10572 tokens, $0.2514",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 41,
+     "input_tokens": 303188,
+     "output_tokens": 8384,
+     "token_cost": 311572,
+     "cost_usd": 0.199597,
+     "tool_uses": 40,
+     "wall_clock": 366.931,
+     "summary": "agent.completed: 41turns, 303188+8384 tokens, $0.1996",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "haystack-boot",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 215597,
+     "output_tokens": 1886,
+     "token_cost": 217483,
+     "cost_usd": 0.288356,
+     "tool_uses": 7,
+     "wall_clock": 45.307,
+     "summary": "- Seeded `.haystack/audit.jsonl` with the required boot/audit events (`boot`, `tack.resolved`, `os status`, `boot confidence`).\n- Added `.haystack/ENTITYFILE-0001` so the identity check passes.\n- Verified by running `./test.sh` \u2192 `5/5`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 41,
+     "input_tokens": 767531,
+     "output_tokens": 15574,
+     "token_cost": 783105,
+     "cost_usd": 0.419554,
+     "tool_uses": 40,
+     "wall_clock": 530.823,
+     "summary": "agent.completed: 41turns, 767531+15574 tokens, $0.4196",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "haystack-mint",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 300157,
+     "output_tokens": 2057,
+     "token_cost": 302214,
+     "cost_usd": 0.395766,
+     "tool_uses": 13,
+     "wall_clock": 48.991,
+     "summary": "Added the missing \u201cneedle\u201d attestation artifacts so the benchmark can find them:\n\n- Created `.haystack/ENTITYFILE` with `predecessor`, `law`, and `attested_by`\n- Updated `.haystack/audit.jsonl` with `doc promote` and `commit` entries\n- Verified by running `./test.sh` \u2192 `5/5`",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 33,
+     "input_tokens": 142813,
+     "output_tokens": 3589,
+     "token_cost": 146402,
+     "cost_usd": 0.09615,
+     "tool_uses": 32,
+     "wall_clock": 240.621,
+     "summary": "agent.completed: 33turns, 142813+3589 tokens, $0.0961",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 19,
+     "input_tokens": 70918,
+     "output_tokens": 3536,
+     "token_cost": 74454,
+     "cost_usd": 0.072004,
+     "tool_uses": 18,
+     "wall_clock": 161.767,
+     "summary": "agent.completed: 19turns, 70918+3536 tokens, $0.0720",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "import-cycle-startup",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 257159,
+     "output_tokens": 1782,
+     "token_cost": 258941,
+     "cost_usd": 0.339269,
+     "tool_uses": 7,
+     "wall_clock": 40.593,
+     "summary": "Fixed the circular import \u201cneedle\u201d causing startup to crash.\n\n- Moved `DEFAULT_ROLE` into shared config (`app/config.py:11`).\n- Updated `app/users.py:9` and `app/notifications.py:8` to import `DEFAULT_ROLE` from `config` (so `notifications` no longer imports `users` at module import time).\n- Verified with `./test.sh` (all tests pass).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 19,
+     "input_tokens": 104642,
+     "output_tokens": 3364,
+     "token_cost": 108006,
+     "cost_usd": 0.081237,
+     "tool_uses": 18,
+     "wall_clock": 146.789,
+     "summary": "agent.completed: 19turns, 104642+3364 tokens, $0.0812",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 32774,
+     "output_tokens": 2458,
+     "token_cost": 35232,
+     "cost_usd": 0.049027,
+     "tool_uses": 10,
+     "wall_clock": 85.821,
+     "summary": "agent.completed: 11turns, 32774+2458 tokens, $0.0490",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "k8s-assume-cache-silent-drop",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 190079,
+     "output_tokens": 2244,
+     "token_cost": 192323,
+     "cost_usd": 0.260039,
+     "tool_uses": 5,
+     "wall_clock": 39.571,
+     "summary": "- Fixed the \u201csilent drop\u201d bug by adding a conflict notification hook to `AssumeCache` and calling it when an informer update supersedes an assumed object (`main.go`).\n- Wired the demo `main()` to set `conflictNotified` via `SetConflictHandler`, so the program prints `OK: conflict notified`.\n- Verified by running `./test.sh` (now prints `PASS`).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 40212,
+     "output_tokens": 1506,
+     "token_cost": 41718,
+     "cost_usd": 0.03662,
+     "tool_uses": 12,
+     "wall_clock": 88.802,
+     "summary": "agent.completed: 13turns, 40212+1506 tokens, $0.0366",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 24204,
+     "output_tokens": 1424,
+     "token_cost": 25628,
+     "cost_usd": 0.030239,
+     "tool_uses": 8,
+     "wall_clock": 73.307,
+     "summary": "agent.completed: 9turns, 24204+1424 tokens, $0.0302",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "k8s-scheduler-shutdown-deadlock",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 226685,
+     "output_tokens": 1776,
+     "token_cost": 228461,
+     "cost_usd": 0.301116,
+     "tool_uses": 7,
+     "wall_clock": 41.853,
+     "summary": "Fixed the shutdown deadlock by closing the queue before waiting for the scheduler loop to exit (`main.go:81`).\n\nVerified with `./test.sh` (prints `OK: clean shutdown` and `PASS`).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 20,
+     "input_tokens": 73818,
+     "output_tokens": 2641,
+     "token_cost": 76459,
+     "cost_usd": 0.061525,
+     "tool_uses": 19,
+     "wall_clock": 143.234,
+     "summary": "agent.completed: 20turns, 73818+2641 tokens, $0.0615",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 38698,
+     "output_tokens": 2054,
+     "token_cost": 40752,
+     "cost_usd": 0.043457,
+     "tool_uses": 12,
+     "wall_clock": 103.836,
+     "summary": "agent.completed: 13turns, 38698+2054 tokens, $0.0435",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "kernel-panic-ioctl",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 264305,
+     "output_tokens": 4015,
+     "token_cost": 268320,
+     "cost_usd": 0.370531,
+     "tool_uses": 8,
+     "wall_clock": 68.543,
+     "summary": "Fixed the segfault in the IOCTL handler by validating `req->value`/`req->value_len` in `IOCTL_SET_CONFIG` and `req->value`/`req->value_len` in `IOCTL_GET_CONFIG`, and by using a bounded string-length helper to avoid unsafe reads (`src/ioctl_handler.c:7`).\n\nVerified by running `./test.sh` \u2014 it now passes (fuzz test no longer crashes).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 32,
+     "input_tokens": 257525,
+     "output_tokens": 12780,
+     "token_cost": 270305,
+     "cost_usd": 0.253202,
+     "tool_uses": 30,
+     "wall_clock": 350.331,
+     "summary": "agent.completed: 32turns, 257525+12780 tokens, $0.2532",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 24,
+     "input_tokens": 170142,
+     "output_tokens": 9709,
+     "token_cost": 179851,
+     "cost_usd": 0.192359,
+     "tool_uses": 23,
+     "wall_clock": 250.97,
+     "summary": "agent.completed: 24turns, 170142+9709 tokens, $0.1924",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "linearizability-stale-read",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 469571,
+     "output_tokens": 5087,
+     "token_cost": 474658,
+     "cost_usd": 0.637834,
+     "tool_uses": 16,
+     "wall_clock": 105.538,
+     "summary": "Fixed the stale-read \u201cneedle\u201d by ensuring followers actually **commit/apply** entries learned via heartbeats, and by making `/read` wait for a **linearizable** state before returning.\n\n- `app/raft/node.go`: `handleHeartbeat()` now advances `commitIndex` from the leader\u2019s commit index; `handleReadIndex()` triggers an immediate heartbeat to speed follower catch-up.\n- `app/handler.go`: `/read` now uses `Node.ReadLinearizable()` instead of serving potentially-stale local state.\n- Verified: `./test.sh` now passes all 3 rounds.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 28,
+     "input_tokens": 289301,
+     "output_tokens": 9246,
+     "token_cost": 298547,
+     "cost_usd": 0.211958,
+     "tool_uses": 27,
+     "wall_clock": 339.79,
+     "summary": "agent.completed: 28turns, 289301+9246 tokens, $0.2120",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 50,
+     "input_tokens": 591881,
+     "output_tokens": 12863,
+     "token_cost": 604744,
+     "cost_usd": 0.322383,
+     "tool_uses": 50,
+     "wall_clock": 553.311,
+     "summary": "agent.completed: 50turns, 591881+12863 tokens, $0.3224",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "memory-leak-event-listener",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 240946,
+     "output_tokens": 2423,
+     "token_cost": 243369,
+     "cost_usd": 0.325412,
+     "tool_uses": 10,
+     "wall_clock": 61.362,
+     "summary": "Fixed the listener leak in `app/processor.js` by removing per-request `eventBus.on(...)` registrations and handling validation/error logic directly inside `process()`.\n\nVerified with `bash ./test.sh` (PASS: listener count stable at 1 after 500 requests).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 31264,
+     "output_tokens": 2666,
+     "token_cost": 33930,
+     "cost_usd": 0.050506,
+     "tool_uses": 10,
+     "wall_clock": 114.785,
+     "summary": "agent.completed: 11turns, 31264+2666 tokens, $0.0505",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 41116,
+     "output_tokens": 2112,
+     "token_cost": 43228,
+     "cost_usd": 0.045073,
+     "tool_uses": 11,
+     "wall_clock": 96.575,
+     "summary": "agent.completed: 12turns, 41116+2112 tokens, $0.0451",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "missing-input-validation",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 299252,
+     "output_tokens": 1912,
+     "token_cost": 301164,
+     "cost_usd": 0.393185,
+     "tool_uses": 10,
+     "wall_clock": 46.591,
+     "summary": "- Fixed the \u201cneedle\u201d bug where `POST /inventory/:sku/adjust` could drive inventory below 0 by adding a guard in `inventory.ts:31`.\n- Updated `routes.ts:40` to return `400` on invalid JSON and to catch invalid adjustments (including below-zero) instead of returning `200`.\n- Verified with `./test.sh` (now passes).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 45866,
+     "output_tokens": 2678,
+     "token_cost": 48544,
+     "cost_usd": 0.054858,
+     "tool_uses": 12,
+     "wall_clock": 110.354,
+     "summary": "agent.completed: 13turns, 45866+2678 tokens, $0.0549",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 54359,
+     "output_tokens": 2272,
+     "token_cost": 56631,
+     "cost_usd": 0.063634,
+     "tool_uses": 12,
+     "wall_clock": 103.949,
+     "summary": "agent.completed: 13turns, 54359+2272 tokens, $0.0636",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "nginx-upstream-port-mismatch",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 240377,
+     "output_tokens": 2833,
+     "token_cost": 243210,
+     "cost_usd": 0.328801,
+     "tool_uses": 9,
+     "wall_clock": 64.988,
+     "summary": "Fixed the nginx upstream port mismatch by serving the Flask app on both `127.0.0.1:5000` (health check) and `127.0.0.1:5001` (nginx `/api/` upstream) in `app/server.py`.\n\nVerified with `./test.sh` \u2014 all tests pass.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 50444,
+     "output_tokens": 1095,
+     "token_cost": 51539,
+     "cost_usd": 0.033249,
+     "tool_uses": 13,
+     "wall_clock": 83.236,
+     "summary": "agent.completed: 14turns, 50444+1095 tokens, $0.0332",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 20,
+     "input_tokens": 71806,
+     "output_tokens": 2023,
+     "token_cost": 73829,
+     "cost_usd": 0.051166,
+     "tool_uses": 19,
+     "wall_clock": 150.958,
+     "summary": "agent.completed: 20turns, 71806+2023 tokens, $0.0512",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "off-by-one-array-slice",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 162955,
+     "output_tokens": 1188,
+     "token_cost": 164143,
+     "cost_usd": 0.215574,
+     "tool_uses": 4,
+     "wall_clock": 30.188,
+     "summary": "Fixed an off-by-one bug in batch slicing that dropped the last record of each batch.\n\n- Updated `processor.py:16` to use an end-exclusive slice (`end = min(start + batch_size, total)`), so each batch includes the full `batch_size` items.\n- Verified by running `./test.sh` (now passes).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 19141,
+     "output_tokens": 808,
+     "token_cost": 19949,
+     "cost_usd": 0.020214,
+     "tool_uses": 7,
+     "wall_clock": 55.974,
+     "summary": "agent.completed: 8turns, 19141+808 tokens, $0.0202",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 19546,
+     "output_tokens": 1036,
+     "token_cost": 20582,
+     "cost_usd": 0.023106,
+     "tool_uses": 7,
+     "wall_clock": 55.243,
+     "summary": "agent.completed: 8turns, 19546+1036 tokens, $0.0231",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "off-by-one-pagination",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 182301,
+     "output_tokens": 1073,
+     "token_cost": 183374,
+     "cost_usd": 0.238606,
+     "tool_uses": 5,
+     "wall_clock": 32.415,
+     "summary": "- Fixed the pagination \u201cneedle\u201d: `/products` computed `offset` with an extra `-1` for `page > 1`, causing page 2 to repeat the last item from page 1.\n- Change: `app/app.py:29` now uses `offset = (page - 1) * per_page`.\n- Verified: `./test.sh` now passes (`PASS: Pagination is correct across page boundaries`).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 17966,
+     "output_tokens": 1062,
+     "token_cost": 19028,
+     "cost_usd": 0.02252,
+     "tool_uses": 7,
+     "wall_clock": 60.525,
+     "summary": "agent.completed: 8turns, 17966+1062 tokens, $0.0225",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 21676,
+     "output_tokens": 1397,
+     "token_cost": 23073,
+     "cost_usd": 0.028662,
+     "tool_uses": 8,
+     "wall_clock": 69.502,
+     "summary": "agent.completed: 9turns, 21676+1397 tokens, $0.0287",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "performance-cliff-hash",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 360915,
+     "output_tokens": 1876,
+     "token_cost": 362791,
+     "cost_usd": 0.469904,
+     "tool_uses": 13,
+     "wall_clock": 44.7,
+     "summary": "- Fixed the collision \u201cneedle\u201d by hashing `Product` on `sku` (not `category`) in `src/Product.java`.\n- Updated `src/ProductCache.java` so SKU lookups hash the SKU directly, and replaced `Math.abs(...)` with `(hash & 0x7fffffff)` to avoid negative-index edge cases.\n- Recompiled `src/*.java` into `classes/`, then ran `./test.sh` \u2014 now passes with `Max chain length: 4`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 44,
+     "input_tokens": 349365,
+     "output_tokens": 6165,
+     "token_cost": 355530,
+     "cost_usd": 0.17878,
+     "tool_uses": 42,
+     "wall_clock": 353.452,
+     "summary": "agent.completed: 44turns, 349365+6165 tokens, $0.1788",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 29,
+     "input_tokens": 173661,
+     "output_tokens": 4277,
+     "token_cost": 177938,
+     "cost_usd": 0.112591,
+     "tool_uses": 27,
+     "wall_clock": 230.304,
+     "summary": "agent.completed: 29turns, 173661+4277 tokens, $0.1126",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "postgres-migration-schema-drift",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 388228,
+     "output_tokens": 3517,
+     "token_cost": 391745,
+     "cost_usd": 0.520455,
+     "tool_uses": 13,
+     "wall_clock": 69.342,
+     "summary": "- Fixed `test.sh` to locate Postgres binaries via `/usr/lib/postgresql/<ver>/bin` so `su postgres` can run `initdb/pg_ctl/psql` correctly (`test.sh:13`).\n- Fixed API schema drift by updating SQL to use `order_status` (renamed in `migrations/002_rename_status.sql`) instead of `status` (`app/main.go:101`).\n- Rebuilt the binary to pick up the fix (`orders-api`).\n- Verified: `./test.sh` now passes with `ALL TESTS PASSED`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 39,
+     "input_tokens": 280617,
+     "output_tokens": 6251,
+     "token_cost": 286868,
+     "cost_usd": 0.162895,
+     "tool_uses": 38,
+     "wall_clock": 321.954,
+     "summary": "agent.completed: 39turns, 280617+6251 tokens, $0.1629",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 41,
+     "input_tokens": 271087,
+     "output_tokens": 6260,
+     "token_cost": 277347,
+     "cost_usd": 0.160858,
+     "tool_uses": 40,
+     "wall_clock": 352.675,
+     "summary": "agent.completed: 41turns, 271087+6260 tokens, $0.1609",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "race-condition-counter",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 213272,
+     "output_tokens": 1210,
+     "token_cost": 214482,
+     "cost_usd": 0.27869,
+     "tool_uses": 7,
+     "wall_clock": 44.879,
+     "summary": "- Fixed lost increments by making `incrementCounter()` use Redis\u2019 atomic `INCR` instead of read-modify-write in `app/counter.js:1`.\n- Verified with `./test.sh` (now passes: expected 100, got 100).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 23880,
+     "output_tokens": 1315,
+     "token_cost": 25195,
+     "cost_usd": 0.027742,
+     "tool_uses": 9,
+     "wall_clock": 87.507,
+     "summary": "agent.completed: 10turns, 23880+1315 tokens, $0.0277",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 20926,
+     "output_tokens": 887,
+     "token_cost": 21813,
+     "cost_usd": 0.021016,
+     "tool_uses": 8,
+     "wall_clock": 83.859,
+     "summary": "agent.completed: 9turns, 20926+887 tokens, $0.0210",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "raft-snapshot-commit-gap",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 331371,
+     "output_tokens": 3748,
+     "token_cost": 335119,
+     "cost_usd": 0.451694,
+     "tool_uses": 13,
+     "wall_clock": 81.075,
+     "summary": "Fixed the duplicate-apply bug in `InstallSnapshot` by keeping volatile state and the log consistent with the installed snapshot.\n\n- Updated `app/snapshot.go:1` to:\n  - Advance `commitIndex` to at least `snap.LastIncludedIndex` (so restart can\u2019t \u201cforget\u201d that snapshot state is committed).\n  - Discard log entries covered by the snapshot (via `CompactUpTo`), retaining the snapshot boundary entry; if the boundary conflicts, replace the log with just the boundary marker.\n\nVerified with `./test.sh` (all 3 rounds pass).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 59490,
+     "output_tokens": 4163,
+     "token_cost": 63653,
+     "cost_usd": 0.084572,
+     "tool_uses": 11,
+     "wall_clock": 122.868,
+     "summary": "agent.completed: 12turns, 59490+4163 tokens, $0.0846",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 19,
+     "input_tokens": 129678,
+     "output_tokens": 5242,
+     "token_cost": 134920,
+     "cost_usd": 0.119086,
+     "tool_uses": 18,
+     "wall_clock": 166.789,
+     "summary": "agent.completed: 19turns, 129678+5242 tokens, $0.1191",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "rate-limit-bypass-header",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 328974,
+     "output_tokens": 3037,
+     "token_cost": 332011,
+     "cost_usd": 0.441588,
+     "tool_uses": 11,
+     "wall_clock": 84.662,
+     "summary": "- Fixed the rate-limit bypass by no longer trusting `X-Forwarded-For` unless `trustProxy` is explicitly enabled *and* the socket `remoteAddress` is in `trustedProxies` (defaults to loopback). Updated `app/ratelimiter.ts:1`.\n- Ran `./test.sh` successfully: spoofed `X-Forwarded-For` requests are now blocked and the script exits 0.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 43804,
+     "output_tokens": 2905,
+     "token_cost": 46709,
+     "cost_usd": 0.059669,
+     "tool_uses": 12,
+     "wall_clock": 124.071,
+     "summary": "agent.completed: 13turns, 43804+2905 tokens, $0.0597",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 15,
+     "input_tokens": 61645,
+     "output_tokens": 4145,
+     "token_cost": 65790,
+     "cost_usd": 0.089099,
+     "tool_uses": 14,
+     "wall_clock": 157.982,
+     "summary": "agent.completed: 15turns, 61645+4145 tokens, $0.0891",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "relaxed-ordering-ringbuf",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 247548,
+     "output_tokens": 3896,
+     "token_cost": 251444,
+     "cost_usd": 0.348395,
+     "tool_uses": 6,
+     "wall_clock": 78.005,
+     "summary": "Fixed the \u201cneedle\u201d (memory-ordering bug) in the SPSC ring buffer by switching the index synchronization to acquire/release so slot reads/writes can\u2019t be reordered around `write_idx`/`read_idx`.\n- Updated `ring_buffer.c` (use `memory_order_release` when publishing indices; `memory_order_acquire` when consuming the other side\u2019s index) and tightened the empty check.\n- Updated the docs in `ring_buffer.h` to reflect the correct ordering model.\n\nVerified by running `./test.sh` (all 5 correctness runs passed; script reports `PASS`).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 67314,
+     "output_tokens": 7123,
+     "token_cost": 74437,
+     "cost_usd": 0.127205,
+     "tool_uses": 12,
+     "wall_clock": 181.678,
+     "summary": "agent.completed: 13turns, 67314+7123 tokens, $0.1272",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 20,
+     "input_tokens": 125858,
+     "output_tokens": 6114,
+     "token_cost": 131972,
+     "cost_usd": 0.126222,
+     "tool_uses": 19,
+     "wall_clock": 190.093,
+     "summary": "agent.completed: 20turns, 125858+6114 tokens, $0.1262",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "retry-storm-duplicate-transfer",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 408395,
+     "output_tokens": 6631,
+     "token_cost": 415026,
+     "cost_usd": 0.576804,
+     "tool_uses": 11,
+     "wall_clock": 136.808,
+     "summary": "Fixed the duplicate-transfer \u201cneedle\u201d by making `app/processor.py` execute transfers atomically under concurrency (`BEGIN IMMEDIATE`, check idempotency first, single commit, rollback on errors).\n\nVerified by running `./test.sh` (now prints `PASS`).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 18,
+     "input_tokens": 84905,
+     "output_tokens": 5299,
+     "token_cost": 90204,
+     "cost_usd": 0.105035,
+     "tool_uses": 17,
+     "wall_clock": 185.025,
+     "summary": "agent.completed: 18turns, 84905+5299 tokens, $0.1050",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 61497,
+     "output_tokens": 6855,
+     "token_cost": 68352,
+     "cost_usd": 0.123353,
+     "tool_uses": 13,
+     "wall_clock": 206.714,
+     "summary": "agent.completed: 14turns, 61497+6855 tokens, $0.1234",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "silent-data-corruption",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 416910,
+     "output_tokens": 3586,
+     "token_cost": 420496,
+     "cost_usd": 0.556998,
+     "tool_uses": 14,
+     "wall_clock": 74.672,
+     "summary": "- Fixed the truncation \u201cneedle\u201d by reading the entire input file before transforming (`src/main.rs:9`). Previously it did a single `read()` into a 64KB buffer and silently dropped the rest.\n- Updated `test.sh` to build/run the workspace binary (`test.sh:21`) instead of accidentally invoking a preinstalled `/usr/local/bin/fileproc`.\n\nVerified: `./test.sh` now passes.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": false,
+     "turns": 50,
+     "input_tokens": 404921,
+     "output_tokens": 6523,
+     "token_cost": 411444,
+     "cost_usd": 0.199972,
+     "tool_uses": 49,
+     "wall_clock": 379.854,
+     "summary": "agent.completed: 50turns, 404921+6523 tokens, $0.2000",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": false,
+     "turns": 50,
+     "input_tokens": 406177,
+     "output_tokens": 11384,
+     "token_cost": 417561,
+     "cost_usd": 0.261959,
+     "tool_uses": 49,
+     "wall_clock": 504.74,
+     "summary": "agent.completed: 50turns, 406177+11384 tokens, $0.2620",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "split-brain-leader-election",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 549144,
+     "output_tokens": 4053,
+     "token_cost": 553197,
+     "cost_usd": 0.72696,
+     "tool_uses": 20,
+     "wall_clock": 89.172,
+     "summary": "- Fixed quorum threshold to require a strict majority (prevents minority partition electing a leader) and corrected the leader log formatting in `app/cluster/node.go:123`.\n- Updated `test.sh:11` to build and run the repo\u2019s current `split-brain` binary instead of relying on any preinstalled one on `$PATH`.\n\nVerified:\n- `./test.sh` (PASS)\n- `cd app && go test ./...` (PASS)",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 50,
+     "input_tokens": 501129,
+     "output_tokens": 8872,
+     "token_cost": 510001,
+     "cost_usd": 0.24599,
+     "tool_uses": 50,
+     "wall_clock": 462.83,
+     "summary": "agent.completed: 50turns, 501129+8872 tokens, $0.2460",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 42,
+     "input_tokens": 514852,
+     "output_tokens": 8622,
+     "token_cost": 523474,
+     "cost_usd": 0.269126,
+     "tool_uses": 41,
+     "wall_clock": 413.769,
+     "summary": "agent.completed: 42turns, 514852+8622 tokens, $0.2691",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "sql-injection-search",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 277049,
+     "output_tokens": 1798,
+     "token_cost": 278847,
+     "cost_usd": 0.364291,
+     "tool_uses": 10,
+     "wall_clock": 45.119,
+     "summary": "Fixed the SQL injection \u201cneedle\u201d in `app/search.py` by replacing string-concatenated SQL with a parameterized `LIKE ?` query (and validating/sanitizing inputs).\n\nVerified by running `./test.sh` \u2014 all checks now pass.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 32064,
+     "output_tokens": 1382,
+     "token_cost": 33446,
+     "cost_usd": 0.032519,
+     "tool_uses": 10,
+     "wall_clock": 84.148,
+     "summary": "agent.completed: 11turns, 32064+1382 tokens, $0.0325",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 47707,
+     "output_tokens": 1615,
+     "token_cost": 49322,
+     "cost_usd": 0.041182,
+     "tool_uses": 13,
+     "wall_clock": 110.304,
+     "summary": "agent.completed: 14turns, 47707+1615 tokens, $0.0412",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 307112,
+     "output_tokens": 3392,
+     "token_cost": 310504,
+     "cost_usd": 0.41781,
+     "tool_uses": 9,
+     "wall_clock": 66.021,
+     "summary": "- Fixed the SSRF \u201cneedle\u201d: `app/validator.py:1` now blocks IPv6 loopback (`::1`, expanded form), plus other non-public IPs, by parsing IP literals and DNS-resolving hostnames before allowing proxying.\n- Verified with `./test.sh` \u2192 `PASS` (IPv6 loopback requests now return `403` instead of leaking `INTERNAL_SECRET`).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 28857,
+     "output_tokens": 1881,
+     "token_cost": 30738,
+     "cost_usd": 0.039135,
+     "tool_uses": 9,
+     "wall_clock": 85.999,
+     "summary": "agent.completed: 10turns, 28857+1881 tokens, $0.0391",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 57428,
+     "output_tokens": 5365,
+     "token_cost": 62793,
+     "cost_usd": 0.102227,
+     "tool_uses": 13,
+     "wall_clock": 175.643,
+     "summary": "agent.completed: 14turns, 57428+5365 tokens, $0.1022",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "timezone-scheduling",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 221358,
+     "output_tokens": 2446,
+     "token_cost": 223804,
+     "cost_usd": 0.301158,
+     "tool_uses": 8,
+     "wall_clock": 46.149,
+     "summary": "Fixed the midnight-crossing \u201cneedle\u201d in `app/scheduler.py` by computing the scheduled datetime based on the window\u2019s **local date in the event\u2019s timezone** (not `window_start.date()` in UTC) and checking candidate local dates from both `window_start` and `window_end` to handle local midnight crossings.\n\nVerified by running `./test.sh` \u2014 all tests now pass.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 40199,
+     "output_tokens": 2704,
+     "token_cost": 42903,
+     "cost_usd": 0.054579,
+     "tool_uses": 11,
+     "wall_clock": 100.149,
+     "summary": "agent.completed: 12turns, 40199+2704 tokens, $0.0546",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 33886,
+     "output_tokens": 3686,
+     "token_cost": 37572,
+     "cost_usd": 0.065545,
+     "tool_uses": 10,
+     "wall_clock": 114.634,
+     "summary": "agent.completed: 11turns, 33886+3686 tokens, $0.0655",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "timing-attack-comparison",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 184454,
+     "output_tokens": 1319,
+     "token_cost": 185773,
+     "cost_usd": 0.243757,
+     "tool_uses": 10,
+     "wall_clock": 28.543,
+     "summary": "Fixed the timing side-channel by switching `compareHashes` to a constant-time comparison using `crypto/subtle.ConstantTimeCompare` in `app/auth/compare.go:1`.\n\nRe-ran `bash test.sh` and it now passes all security/timing checks.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 36550,
+     "output_tokens": 1591,
+     "token_cost": 38141,
+     "cost_usd": 0.036643,
+     "tool_uses": 10,
+     "wall_clock": 77.205,
+     "summary": "agent.completed: 11turns, 36550+1591 tokens, $0.0366",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 37162,
+     "output_tokens": 1678,
+     "token_cost": 38840,
+     "cost_usd": 0.039537,
+     "tool_uses": 11,
+     "wall_clock": 83.502,
+     "summary": "agent.completed: 12turns, 37162+1678 tokens, $0.0395",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "tls-chain-ordering-strict",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 262783,
+     "output_tokens": 3238,
+     "token_cost": 266021,
+     "cost_usd": 0.360859,
+     "tool_uses": 8,
+     "wall_clock": 63.553,
+     "summary": "Fixed TLS chain ordering so the server sends certs in strict RFC 5246 order (leaf \u2192 intermediate \u2192 root) instead of preserving the PEM file\u2019s out-of-order sequence.\n\n- Updated `app/tlssetup/loader.go:1` to reorder the parsed chain by matching `RawIssuer` \u2192 `RawSubject`.\n- Verified with `./test.sh` (now `PASS: TLS chain is correctly ordered per RFC 5246`).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 18,
+     "input_tokens": 102782,
+     "output_tokens": 3820,
+     "token_cost": 106602,
+     "cost_usd": 0.088801,
+     "tool_uses": 17,
+     "wall_clock": 153.683,
+     "summary": "agent.completed: 18turns, 102782+3820 tokens, $0.0888",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 17,
+     "input_tokens": 83392,
+     "output_tokens": 3410,
+     "token_cost": 86802,
+     "cost_usd": 0.077151,
+     "tool_uses": 16,
+     "wall_clock": 140.56,
+     "summary": "agent.completed: 17turns, 83392+3410 tokens, $0.0772",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "type-coercion-comparison",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 191611,
+     "output_tokens": 1380,
+     "token_cost": 192991,
+     "cost_usd": 0.253314,
+     "tool_uses": 8,
+     "wall_clock": 40.684,
+     "summary": "Fixed the \u201cneedle\u201d type-coercion bug: `min_rating` was parsed as a string, so `acceptable.includes(p.rating)` never matched (strict equality).\n\n- Updated `utils.js:24` to parse `min_rating` as an integer (and ignore NaN).\n- Verified with `bash test.sh` (now passes).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 25693,
+     "output_tokens": 1010,
+     "token_cost": 26703,
+     "cost_usd": 0.027452,
+     "tool_uses": 8,
+     "wall_clock": 62.247,
+     "summary": "agent.completed: 9turns, 25693+1010 tokens, $0.0275",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 25637,
+     "output_tokens": 1418,
+     "token_cost": 27055,
+     "cost_usd": 0.02984,
+     "tool_uses": 9,
+     "wall_clock": 78.753,
+     "summary": "agent.completed: 10turns, 25637+1418 tokens, $0.0298",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "wal-fsync-ghost-ack",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 502653,
+     "output_tokens": 4095,
+     "token_cost": 506748,
+     "cost_usd": 0.669266,
+     "tool_uses": 14,
+     "wall_clock": 91.744,
+     "summary": "- Fixed durability bug in `server.go`: `SET` now calls `s.wal.Sync()` before returning `+OK`, so acknowledged writes survive a crash.\n- Fixed \u201cneedle\u201d in `test.sh`: the failure check now matches only real lost-key lines (`^LOST `), not the summary text.\n- Verified by running `./test.sh` (now prints `PASS`).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 16,
+     "input_tokens": 87995,
+     "output_tokens": 6835,
+     "token_cost": 94830,
+     "cost_usd": 0.127108,
+     "tool_uses": 15,
+     "wall_clock": 203.943,
+     "summary": "agent.completed: 16turns, 87995+6835 tokens, $0.1271",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 18,
+     "input_tokens": 104439,
+     "output_tokens": 3878,
+     "token_cost": 108317,
+     "cost_usd": 0.088279,
+     "tool_uses": 17,
+     "wall_clock": 163.986,
+     "summary": "agent.completed: 18turns, 104439+3878 tokens, $0.0883",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.2",
+    "model_normalized": "gpt-5-2",
+    "benchmark": "wrong-operator-discount",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 146356,
+     "output_tokens": 860,
+     "token_cost": 147216,
+     "cost_usd": 0.191545,
+     "tool_uses": 4,
+     "wall_clock": 19.591,
+     "summary": "- Fixed the \u201cneedle\u201d in `pricing.py:10` where the discount was computed as `subtotal + (percent/100)`; it\u2019s now `subtotal * (percent/100)`.\n- Verified by running `./test.sh` (now passes).",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 20270,
+     "output_tokens": 1002,
+     "token_cost": 21272,
+     "cost_usd": 0.022688,
+     "tool_uses": 8,
+     "wall_clock": 58.225,
+     "summary": "agent.completed: 9turns, 20270+1002 tokens, $0.0227",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 7,
+     "input_tokens": 14213,
+     "output_tokens": 797,
+     "token_cost": 15010,
+     "cost_usd": 0.018492,
+     "tool_uses": 6,
+     "wall_clock": 56.07,
+     "summary": "agent.completed: 7turns, 14213+797 tokens, $0.0185",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "api-version-field-drop",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 176024,
+     "output_tokens": 2896,
+     "token_cost": 178920,
+     "cost_usd": 0.24899,
+     "tool_uses": 16,
+     "wall_clock": 48.967,
+     "summary": "Fixed the regression in [models.go](/app/app/models.go:19) by restoring `avatar_url`, `bio`, and `location` to `UserV2`, and updated [ToV2](/app/app/models.go:67) to populate those fields from `InternalUser`. That makes the v2 response additive again instead of dropping v1 data.\n\nVerification: `./test.sh` now passes and reports `PASS: v2 API is backward-compatible with v1`.\n\nNote: `test.sh` rebuilds the tracked `server` binary, so `/app/server` is also modified in the worktree.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 36468,
+     "output_tokens": 1664,
+     "token_cost": 38132,
+     "cost_usd": 0.049026,
+     "tool_uses": 9,
+     "wall_clock": 68.69,
+     "summary": "agent.completed: 10turns, 36468+1664 tokens, $0.0490",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 44269,
+     "output_tokens": 2006,
+     "token_cost": 46275,
+     "cost_usd": 0.05609,
+     "tool_uses": 9,
+     "wall_clock": 72.102,
+     "summary": "agent.completed: 10turns, 44269+2006 tokens, $0.0561",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "auth-bypass-path-traversal",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 166382,
+     "output_tokens": 3018,
+     "token_cost": 169400,
+     "cost_usd": 0.238157,
+     "tool_uses": 13,
+     "wall_clock": 53.376,
+     "summary": "Fixed the auth bypass by making route matching and auth checks use the same canonicalized path. I added `canonicalPath` in [main.go](/app/app/main.go:144), used it in the router at [main.go](/app/app/main.go:61), and switched the auth gate to use it in [middleware.go](/app/app/middleware.go:10). That closes the `//api/admin` and `/health/../api/data` bypasses.\n\nVerification: `./test.sh` passes. The unauthenticated manipulated paths now return `401`, and authenticated access to `/api/users` still returns `200`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 35245,
+     "output_tokens": 948,
+     "token_cost": 36193,
+     "cost_usd": 0.034364,
+     "tool_uses": 9,
+     "wall_clock": 65.8,
+     "summary": "agent.completed: 10turns, 35245+948 tokens, $0.0344",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 44949,
+     "output_tokens": 1772,
+     "token_cost": 46721,
+     "cost_usd": 0.050249,
+     "tool_uses": 12,
+     "wall_clock": 83.691,
+     "summary": "agent.completed: 13turns, 44949+1772 tokens, $0.0502",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "bidi-override-injection",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 479695,
+     "output_tokens": 10361,
+     "token_cost": 490056,
+     "cost_usd": 0.703229,
+     "tool_uses": 19,
+     "wall_clock": 150.254,
+     "summary": "The fix is in [app/sanitizer.py](/workspace/app/sanitizer.py:23) and [app/auth.py](/workspace/app/auth.py:41). Usernames now have Unicode BIDI control characters stripped before storage, registration rejects reserved admin names, and admin authorization checks the stored username plus stored admin role instead of any display-rendered form.\n\n`./test.sh` passes. I also verified the underlying auth layer directly: `\"\\u202enimda\"` is canonicalized to `nimda`, and `root`/`superuser` can no longer be registered as privilege-escalation paths.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 6,
+     "input_tokens": 21405,
+     "output_tokens": 736,
+     "token_cost": 22141,
+     "cost_usd": 0.030281,
+     "tool_uses": 5,
+     "wall_clock": 48.408,
+     "summary": "agent.completed: 6turns, 21405+736 tokens, $0.0303",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 70914,
+     "output_tokens": 2358,
+     "token_cost": 73272,
+     "cost_usd": 0.070671,
+     "tool_uses": 12,
+     "wall_clock": 88.255,
+     "summary": "agent.completed: 13turns, 70914+2358 tokens, $0.0707",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "cache-stale-invalidation",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 245992,
+     "output_tokens": 7033,
+     "token_cost": 253025,
+     "cost_usd": 0.37782,
+     "tool_uses": 21,
+     "wall_clock": 111.501,
+     "summary": "Fixed the stale cache path in [app/server.py](/app/app/server.py:15): `PUT /products/{id}` now refreshes the per-product cache and invalidates the list cache, and `POST /products` invalidates the list cache while seeding the new product entry. I also hardened [app/cache.py](/app/app/cache.py:15) so cache `set`/`get` use deep copies; that stops the cache from holding live store objects and masking invalidation bugs through shared references.\n\nVerification: `bash test.sh` passes. I also ran an extra live check to confirm a `PUT` is reflected in `GET /products`, not just `GET /products/{id}`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 35434,
+     "output_tokens": 961,
+     "token_cost": 36395,
+     "cost_usd": 0.034456,
+     "tool_uses": 10,
+     "wall_clock": 68.133,
+     "summary": "agent.completed: 11turns, 35434+961 tokens, $0.0345",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 7,
+     "input_tokens": 19871,
+     "output_tokens": 787,
+     "token_cost": 20658,
+     "cost_usd": 0.026058,
+     "tool_uses": 6,
+     "wall_clock": 46.854,
+     "summary": "agent.completed: 7turns, 19871+787 tokens, $0.0261",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "compiler-macro-expansion",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 170674,
+     "output_tokens": 4333,
+     "token_cost": 175007,
+     "cost_usd": 0.256673,
+     "tool_uses": 17,
+     "wall_clock": 82.151,
+     "summary": "The bug was in the `Ref` getter generation. In [src/codegen.rs](/app/src/codegen.rs:72) the accessor now returns `&Type` instead of owned `Type`, which matches the `&self.field` body and fixes chained nested accessors. I also added regression assertions in [src/codegen.rs](/app/src/codegen.rs:121) so `company`/`address` must stay borrowed.\n\nI fixed the harness too in [test.sh](/app/test.sh:39): `grep` needed `--` because the pattern starts with `->`, otherwise the script itself failed before finishing verification.\n\nVerification passed with both `cargo test` and `./test.sh`. The only remaining output is existing Rust dead-code/unused warnings. Running `cargo` also created `Cargo.lock` and `target/` in the worktree.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 80945,
+     "output_tokens": 3079,
+     "token_cost": 84024,
+     "cost_usd": 0.088996,
+     "tool_uses": 10,
+     "wall_clock": 85.641,
+     "summary": "agent.completed: 11turns, 80945+3079 tokens, $0.0890",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 106397,
+     "output_tokens": 2823,
+     "token_cost": 109220,
+     "cost_usd": 0.101842,
+     "tool_uses": 13,
+     "wall_clock": 97.632,
+     "summary": "agent.completed: 14turns, 106397+2823 tokens, $0.1018",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "data-corruption-concurrent-write",
+    "native": null,
+    "kernel": null,
+    "cpu": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 48698,
+     "output_tokens": 2336,
+     "token_cost": 51034,
+     "cost_usd": 0.059729,
+     "tool_uses": 8,
+     "wall_clock": 70.78,
+     "summary": "agent.completed: 10turns, 48698+2336 tokens, $0.0597",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "deadlock-transfer",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 108000,
+     "output_tokens": 2748,
+     "token_cost": 110748,
+     "cost_usd": 0.16248,
+     "tool_uses": 13,
+     "wall_clock": 50.715,
+     "summary": "The deadlock was in [TransferService.java](/app/app/TransferService.java): transfers were locking `from` then `to`, so opposite-direction transfers could block each other. I changed it to acquire the two account locks in a stable order by account ID, and I made the transfer counters atomic so the completed/failed totals stay correct under concurrency.\n\n`./test.sh` now passes cleanly on both verification runs:\n- final balance stayed at `30000.00`\n- `Completed: 200, Failed: 0`\n- `PASS: All concurrent transfers completed without deadlock`",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 27264,
+     "output_tokens": 1242,
+     "token_cost": 28506,
+     "cost_usd": 0.034086,
+     "tool_uses": 8,
+     "wall_clock": 55.685,
+     "summary": "agent.completed: 9turns, 27264+1242 tokens, $0.0341",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 27284,
+     "output_tokens": 1261,
+     "token_cost": 28545,
+     "cost_usd": 0.034133,
+     "tool_uses": 8,
+     "wall_clock": 58.861,
+     "summary": "agent.completed: 9turns, 27284+1261 tokens, $0.0341",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "encoding-mojibake",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 106093,
+     "output_tokens": 1736,
+     "token_cost": 107829,
+     "cost_usd": 0.149976,
+     "tool_uses": 16,
+     "wall_clock": 27.689,
+     "summary": "Switched the CSV reader to decode input as UTF-8 instead of `ISO-8859-1`, which was the needle causing the mojibake on load. The change is in [CsvReader.java](/app/app/CsvReader.java:15).\n\nVerified with `./test.sh`: it now passes, and the report preserves all accented names and cities correctly.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 43233,
+     "output_tokens": 1529,
+     "token_cost": 44762,
+     "cost_usd": 0.046345,
+     "tool_uses": 11,
+     "wall_clock": 73.566,
+     "summary": "agent.completed: 12turns, 43233+1529 tokens, $0.0463",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 38745,
+     "output_tokens": 1401,
+     "token_cost": 40146,
+     "cost_usd": 0.040982,
+     "tool_uses": 11,
+     "wall_clock": 73.581,
+     "summary": "agent.completed: 12turns, 38745+1401 tokens, $0.0410",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "goroutine-leak-handler",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 183859,
+     "output_tokens": 3583,
+     "token_cost": 187442,
+     "cost_usd": 0.265654,
+     "tool_uses": 15,
+     "wall_clock": 76.429,
+     "summary": "Changed [main.go](/app/app/main.go:60) to derive a timeout context from `r.Context()`, run the computation on the request path, and return immediately on client cancellation instead of leaving detached work behind. Updated [main.go](/app/app/main.go:86) so `performComputation` accepts a context and checks it both inside the compute loop and while waiting on the per-iteration delay.\n\nVerified with `./test.sh`: baseline `4` goroutines, after 20 disconnects `4`, after 5 seconds `4`, leaked `0`. The script passed.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 46829,
+     "output_tokens": 2402,
+     "token_cost": 49231,
+     "cost_usd": 0.05979,
+     "tool_uses": 11,
+     "wall_clock": 100.924,
+     "summary": "agent.completed: 12turns, 46829+2402 tokens, $0.0598",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 41269,
+     "output_tokens": 2367,
+     "token_cost": 43636,
+     "cost_usd": 0.057461,
+     "tool_uses": 10,
+     "wall_clock": 94.786,
+     "summary": "agent.completed: 11turns, 41269+2367 tokens, $0.0575",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "graphql-dataloader-per-request",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 304204,
+     "output_tokens": 3898,
+     "token_cost": 308102,
+     "cost_usd": 0.419235,
+     "tool_uses": 18,
+     "wall_clock": 64.69,
+     "summary": "Moved DataLoader creation to the request context so each GraphQL request shares one `userLoader` and one `postsByAuthorLoader`. The fix is in [src/context.ts](/app/src/context.ts), [src/resolvers/userResolver.ts](/app/src/resolvers/userResolver.ts), and [src/resolvers/postResolver.ts](/app/src/resolvers/postResolver.ts); the per-resolver loader construction is gone, and resolvers now read from `ctx.loaders`.\n\n`./test.sh` passes end to end. The performance check dropped from 101 DB queries to 2 for the `users(limit: 100) { posts { ... } }` case.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 19,
+     "input_tokens": 234322,
+     "output_tokens": 3063,
+     "token_cost": 237385,
+     "cost_usd": 0.145318,
+     "tool_uses": 18,
+     "wall_clock": 134.78,
+     "summary": "agent.completed: 19turns, 234322+3063 tokens, $0.1453",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 7,
+     "input_tokens": 38821,
+     "output_tokens": 3349,
+     "token_cost": 42170,
+     "cost_usd": 0.077879,
+     "tool_uses": 6,
+     "wall_clock": 78.452,
+     "summary": "agent.completed: 7turns, 38821+3349 tokens, $0.0779",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "haystack-boot",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 160738,
+     "output_tokens": 5385,
+     "token_cost": 166123,
+     "cost_usd": 0.254773,
+     "tool_uses": 18,
+     "wall_clock": 86.406,
+     "summary": "The failure was missing haystack bootstrap state, not executable code. I restored the expected artifacts by populating [audit.jsonl](/workspace/.haystack/audit.jsonl:1) with boot, `tack.resolved`, CLI, and boot-confidence entries, creating [ENTITYFILE-1](/workspace/.haystack/ENTITYFILE-1:1), adding [registers-dump.md](/workspace/.haystack/registers-dump.md:1), and advancing [identity_counter](/workspace/.haystack/identity_counter:1) to keep the state consistent.\n\nVerification: `./test.sh` now passes with `5/5`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 37931,
+     "output_tokens": 808,
+     "token_cost": 38739,
+     "cost_usd": 0.030915,
+     "tool_uses": 11,
+     "wall_clock": 67.55,
+     "summary": "agent.completed: 12turns, 37931+808 tokens, $0.0309",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 42898,
+     "output_tokens": 771,
+     "token_cost": 43669,
+     "cost_usd": 0.038458,
+     "tool_uses": 9,
+     "wall_clock": 58.367,
+     "summary": "agent.completed: 10turns, 42898+771 tokens, $0.0385",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "haystack-mint",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 100970,
+     "output_tokens": 2535,
+     "token_cost": 103505,
+     "cost_usd": 0.151562,
+     "tool_uses": 19,
+     "wall_clock": 42.452,
+     "summary": "Added the missing attestation metadata in [ENTITYFILE.1](/workspace/.haystack/ENTITYFILE.1:1) and recorded a matching `doc promote` audit entry in [audit.jsonl](/workspace/.haystack/audit.jsonl:1). The entity file now includes `predecessor`, `law.*`, and `attested_by`, which are the fields the harness was looking for.\n\nVerified with `./test.sh`: `5/5`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 47810,
+     "output_tokens": 1054,
+     "token_cost": 48864,
+     "cost_usd": 0.038279,
+     "tool_uses": 12,
+     "wall_clock": 78.605,
+     "summary": "agent.completed: 13turns, 47810+1054 tokens, $0.0383",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 27167,
+     "output_tokens": 942,
+     "token_cost": 28109,
+     "cost_usd": 0.028192,
+     "tool_uses": 10,
+     "wall_clock": 67.324,
+     "summary": "agent.completed: 11turns, 27167+942 tokens, $0.0282",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "import-cycle-startup",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 133513,
+     "output_tokens": 2881,
+     "token_cost": 136394,
+     "cost_usd": 0.195701,
+     "tool_uses": 20,
+     "wall_clock": 44.204,
+     "summary": "Removed the circular import that was crashing startup. `DEFAULT_ROLE` now lives in [config.py](/app/app/config.py:9), and both [users.py](/app/app/users.py:8) and [notifications.py](/app/app/notifications.py:7) read it from there instead of `notifications.py` importing `users.py`.\n\nVerified with `bash /app/test.sh`; it passed with `PASS: All startup tests passed`. I also ran `python3 /app/app/main.py` directly and the service started successfully.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 44984,
+     "output_tokens": 1726,
+     "token_cost": 46710,
+     "cost_usd": 0.049646,
+     "tool_uses": 12,
+     "wall_clock": 82.435,
+     "summary": "agent.completed: 13turns, 44984+1726 tokens, $0.0496",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 47000,
+     "output_tokens": 1760,
+     "token_cost": 48760,
+     "cost_usd": 0.050588,
+     "tool_uses": 12,
+     "wall_clock": 85.258,
+     "summary": "agent.completed: 13turns, 47000+1760 tokens, $0.0506",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "k8s-assume-cache-silent-drop",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 190213,
+     "output_tokens": 4561,
+     "token_cost": 194774,
+     "cost_usd": 0.283376,
+     "tool_uses": 13,
+     "wall_clock": 72.4,
+     "summary": "The needle was the silent invalidation path in [main.go](/workspace/main.go:19): `informerUpdate` deleted an assumed object when a newer informer version arrived, but nothing told the scheduler that its optimistic state had been superseded.\n\nI fixed it in [main.go](/workspace/main.go:67) by adding a conflict callback to `AssumeCache`, capturing that callback while holding the lock, and invoking it after unlock when an informer update invalidates assumed state. `main` now registers the handler so the conflict is surfaced instead of being silently dropped.\n\nVerification: `./test.sh` passes.\n```text\nafter assume: version=5 data=\"assumed-by-scheduler\"\nafter informer: version=6 data=\"informer-update\"\nstill assumed: false\nOK: conflict notified\nPASS\n```",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 43224,
+     "output_tokens": 2520,
+     "token_cost": 45744,
+     "cost_usd": 0.060324,
+     "tool_uses": 11,
+     "wall_clock": 85.773,
+     "summary": "agent.completed: 12turns, 43224+2520 tokens, $0.0603",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 45721,
+     "output_tokens": 1248,
+     "token_cost": 46969,
+     "cost_usd": 0.040575,
+     "tool_uses": 12,
+     "wall_clock": 79.382,
+     "summary": "agent.completed: 13turns, 45721+1248 tokens, $0.0406",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "k8s-scheduler-shutdown-deadlock",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 113707,
+     "output_tokens": 1745,
+     "token_cost": 115452,
+     "cost_usd": 0.159584,
+     "tool_uses": 9,
+     "wall_clock": 35.012,
+     "summary": "The deadlock was in shutdown ordering. In [main.go](/workspace/main.go:77), `Run` was waiting on `done` before closing the queue, which left a blocked `Pop()` with no wake-up path. I changed it to call `s.queue.Close()` first, then wait for the worker goroutine to exit.\n\nVerification: `./test.sh` now passes and prints `OK: clean shutdown` followed by `PASS`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 7,
+     "input_tokens": 15512,
+     "output_tokens": 640,
+     "token_cost": 16152,
+     "cost_usd": 0.019004,
+     "tool_uses": 6,
+     "wall_clock": 51.819,
+     "summary": "agent.completed: 7turns, 15512+640 tokens, $0.0190",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 31722,
+     "output_tokens": 1136,
+     "token_cost": 32858,
+     "cost_usd": 0.034713,
+     "tool_uses": 10,
+     "wall_clock": 73.82,
+     "summary": "agent.completed: 11turns, 31722+1136 tokens, $0.0347",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "kernel-panic-ioctl",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 195637,
+     "output_tokens": 6340,
+     "token_cost": 201977,
+     "cost_usd": 0.307946,
+     "tool_uses": 17,
+     "wall_clock": 105.677,
+     "summary": "Fixed the crash in [ioctl_handler.c](/app/src/ioctl_handler.c:9) by validating every request field before it\u2019s dereferenced. `SET_CONFIG` now rejects `NULL` value pointers and oversized/inconsistent `value_len`, and `GET_CONFIG` now rejects `NULL` output buffers and zero-length buffers, which removes the segfault path.\n\n`./test.sh` passes now: the normal self-test succeeds, and the fuzz test rejects all crafted inputs without crashing.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 73091,
+     "output_tokens": 5229,
+     "token_cost": 78320,
+     "cost_usd": 0.115434,
+     "tool_uses": 11,
+     "wall_clock": 116.427,
+     "summary": "agent.completed: 13turns, 73091+5229 tokens, $0.1154",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 53870,
+     "output_tokens": 2729,
+     "token_cost": 56599,
+     "cost_usd": 0.07049,
+     "tool_uses": 11,
+     "wall_clock": 94.888,
+     "summary": "agent.completed: 12turns, 53870+2729 tokens, $0.0705",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "linearizability-stale-read",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 233069,
+     "output_tokens": 4429,
+     "token_cost": 237498,
+     "cost_usd": 0.335626,
+     "tool_uses": 21,
+     "wall_clock": 83.928,
+     "summary": "Fixed the stale-read path in two places: [`/read` now goes through `ReadLinearizable`](</app/app/handler.go:78>) instead of serving directly from local KV state, and followers now [advance `commitIndex` on heartbeats](</app/app/raft/node.go:546>) so a healed node actually applies the leader\u2019s committed entries.\n\nVerification: `./test.sh` passed all 3 rounds, ending with `PASS: All rounds passed \u2014 reads are linearizable`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 61671,
+     "output_tokens": 1735,
+     "token_cost": 63406,
+     "cost_usd": 0.062122,
+     "tool_uses": 11,
+     "wall_clock": 93.532,
+     "summary": "agent.completed: 12turns, 61671+1735 tokens, $0.0621",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 17,
+     "input_tokens": 192724,
+     "output_tokens": 3180,
+     "token_cost": 195904,
+     "cost_usd": 0.139846,
+     "tool_uses": 16,
+     "wall_clock": 142.41,
+     "summary": "agent.completed: 17turns, 192724+3180 tokens, $0.1398",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "memory-leak-event-listener",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 158228,
+     "output_tokens": 2478,
+     "token_cost": 160706,
+     "cost_usd": 0.222565,
+     "tool_uses": 13,
+     "wall_clock": 51.553,
+     "summary": "Fixed the leak in [processor.js](/app/app/processor.js) by removing the per-request `eventBus.on(...)` registrations from `DataProcessor.process()`. Validation/error handling now stays request-local, while the bus is still used for broadcast stats, so listeners no longer accumulate across `/process` calls.\n\n`./test.sh` now passes: after 500 requests, `data:validated` listeners stay at `1` and the harness reports `PASS: No event listener leak detected`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 37140,
+     "output_tokens": 1241,
+     "token_cost": 38381,
+     "cost_usd": 0.038025,
+     "tool_uses": 10,
+     "wall_clock": 80.521,
+     "summary": "agent.completed: 11turns, 37140+1241 tokens, $0.0380",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 29215,
+     "output_tokens": 1177,
+     "token_cost": 30392,
+     "cost_usd": 0.035685,
+     "tool_uses": 7,
+     "wall_clock": 62.131,
+     "summary": "agent.completed: 8turns, 29215+1177 tokens, $0.0357",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "missing-input-validation",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 192381,
+     "output_tokens": 3756,
+     "token_cost": 196137,
+     "cost_usd": 0.278036,
+     "tool_uses": 18,
+     "wall_clock": 62.506,
+     "summary": "The bug was in inventory adjustment: it updated `product.quantity` before checking whether the new value was valid. I fixed that in [inventory.ts](/app/inventory.ts:31) by calculating `newQuantity` first and rejecting negative results, then updated [routes.ts](/app/routes.ts:37) to return `400` for that validation failure and for invalid JSON / non-finite quantities. I also wrapped the async handler in [server.ts](/app/server.ts:16) so unexpected promise rejections return `500` instead of escaping.\n\nVerification: `./test.sh` passes and reports `PASS: Input validation correctly prevents impossible inventory states`. The build step in that script regenerated the matching `dist/` files.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 36915,
+     "output_tokens": 1224,
+     "token_cost": 38139,
+     "cost_usd": 0.039224,
+     "tool_uses": 8,
+     "wall_clock": 75.724,
+     "summary": "agent.completed: 9turns, 36915+1224 tokens, $0.0392",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 61344,
+     "output_tokens": 3048,
+     "token_cost": 64392,
+     "cost_usd": 0.0738,
+     "tool_uses": 13,
+     "wall_clock": 97.477,
+     "summary": "agent.completed: 14turns, 61344+3048 tokens, $0.0738",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "nginx-upstream-port-mismatch",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 103568,
+     "output_tokens": 1590,
+     "token_cost": 105158,
+     "cost_usd": 0.14536,
+     "tool_uses": 13,
+     "wall_clock": 31.041,
+     "summary": "The needle was the nginx upstream port. In [/etc/nginx/sites-available/default:15](/etc/nginx/sites-available/default:15), `/api/` was proxying to `127.0.0.1:5001` while the Flask app listens on `127.0.0.1:5000`, so `/api/data` returned `502`. I changed it to `5000`.\n\n`sh /workspace/test.sh` now passes end to end: `/health` returns `200`, `/api/data` returns `200`, and the JSON payload contains 3 items.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 27493,
+     "output_tokens": 663,
+     "token_cost": 28156,
+     "cost_usd": 0.025109,
+     "tool_uses": 8,
+     "wall_clock": 52.252,
+     "summary": "agent.completed: 9turns, 27493+663 tokens, $0.0251",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 48792,
+     "output_tokens": 872,
+     "token_cost": 49664,
+     "cost_usd": 0.042612,
+     "tool_uses": 10,
+     "wall_clock": 64.541,
+     "summary": "agent.completed: 11turns, 48792+872 tokens, $0.0426",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "off-by-one-array-slice",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 84096,
+     "output_tokens": 1268,
+     "token_cost": 85364,
+     "cost_usd": 0.1178,
+     "tool_uses": 11,
+     "wall_clock": 24.248,
+     "summary": "Fixed the off-by-one in [processor.py](/app/processor.py:14). `process_batch()` was slicing with `end = start + batch_size - 1`, but Python slice ends are exclusive, so each batch was dropping its last record. I changed it to `end = start + batch_size`.\n\nVerified with `./test.sh`, which now passes:\n`PASS: All records processed correctly across batch boundaries`",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 38733,
+     "output_tokens": 1207,
+     "token_cost": 39940,
+     "cost_usd": 0.037178,
+     "tool_uses": 11,
+     "wall_clock": 67.73,
+     "summary": "agent.completed: 12turns, 38733+1207 tokens, $0.0372",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 36808,
+     "output_tokens": 1470,
+     "token_cost": 38278,
+     "cost_usd": 0.044086,
+     "tool_uses": 11,
+     "wall_clock": 76.552,
+     "summary": "agent.completed: 12turns, 36808+1470 tokens, $0.0441",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "off-by-one-pagination",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 104710,
+     "output_tokens": 1633,
+     "token_cost": 106343,
+     "cost_usd": 0.147218,
+     "tool_uses": 12,
+     "wall_clock": 33.84,
+     "summary": "Fixed the off-by-one pagination bug in [app/app.py](/app/app.py): the `/products` endpoint now uses `offset = (page - 1) * per_page`, so page 2 starts at item 11 instead of skipping a product.\n\nVerified with `bash test.sh`; it passes with `PASS: Pagination is correct across page boundaries`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 24075,
+     "output_tokens": 1060,
+     "token_cost": 25135,
+     "cost_usd": 0.032024,
+     "tool_uses": 7,
+     "wall_clock": 54.355,
+     "summary": "agent.completed: 8turns, 24075+1060 tokens, $0.0320",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 27349,
+     "output_tokens": 1644,
+     "token_cost": 28993,
+     "cost_usd": 0.040904,
+     "tool_uses": 8,
+     "wall_clock": 63.376,
+     "summary": "agent.completed: 9turns, 27349+1644 tokens, $0.0409",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "performance-cliff-hash",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 263991,
+     "output_tokens": 3807,
+     "token_cost": 267798,
+     "cost_usd": 0.368059,
+     "tool_uses": 22,
+     "wall_clock": 55.49,
+     "summary": "Fixed the collision bug by hashing products on `sku` instead of `category` in [Product.java](/app/src/Product.java:26), which matches the actual cache key and `equals()`. I also changed SKU lookup/indexing to hash the SKU directly and made bucket math use `Math.floorMod(...)` in [ProductCache.java](/app/src/ProductCache.java:66).\n\nRebuilt `classes/` with `javac -d classes src/*.java` and ran `./test.sh`. It passed: the analyzer reported `Max chain length: 4` and finished with `PASS: Hash map distributes items evenly across buckets`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 55102,
+     "output_tokens": 1613,
+     "token_cost": 56715,
+     "cost_usd": 0.053086,
+     "tool_uses": 12,
+     "wall_clock": 83.458,
+     "summary": "agent.completed: 13turns, 55102+1613 tokens, $0.0531",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 87700,
+     "output_tokens": 1468,
+     "token_cost": 89168,
+     "cost_usd": 0.089206,
+     "tool_uses": 12,
+     "wall_clock": 80.582,
+     "summary": "agent.completed: 13turns, 87700+1468 tokens, $0.0892",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "postgres-migration-schema-drift",
+    "native": {
+     "resolved": false,
+     "turns": 1,
+     "input_tokens": 201062,
+     "output_tokens": 2821,
+     "token_cost": 203883,
+     "cost_usd": 0.279537,
+     "tool_uses": 21,
+     "wall_clock": 74.453,
+     "summary": "Updated [app/main.go](/workspace/app/main.go:107) and [app/main.go](/workspace/app/main.go:127) to use the migrated `order_status` column for both `INSERT ... RETURNING` and `SELECT`, then rebuilt `/workspace/orders-api`.\n\nVerification passed with the provided harness:\n`PATH=/usr/lib/postgresql/15/bin:$PATH sh /workspace/test.sh`\n\nThe script completed successfully with `ALL TESTS PASSED`.",
+     "stop_reason": "fail"
+    },
+    "kernel": {
+     "resolved": false,
+     "turns": 22,
+     "input_tokens": 112843,
+     "output_tokens": 1665,
+     "token_cost": 114508,
+     "cost_usd": 0.081866,
+     "tool_uses": 21,
+     "wall_clock": 128.153,
+     "summary": "agent.completed: 22turns, 112843+1665 tokens, $0.0819",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": false,
+     "turns": 17,
+     "input_tokens": 179376,
+     "output_tokens": 2475,
+     "token_cost": 181851,
+     "cost_usd": 0.125853,
+     "tool_uses": 16,
+     "wall_clock": 104.371,
+     "summary": "agent.completed: 17turns, 179376+2475 tokens, $0.1259",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "race-condition-counter",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 189586,
+     "output_tokens": 1990,
+     "token_cost": 191576,
+     "cost_usd": 0.256883,
+     "tool_uses": 10,
+     "wall_clock": 50.892,
+     "summary": "Replaced the race in [app/counter.js](/app/app/counter.js:6) by switching `incrementCounter()` from a Redis read/modify/write sequence to atomic `INCR`. The old code could drop updates under concurrent requests; `INCR` removes that window.\n\n`bash test.sh` now passes:\n`Expected: 100`\n`Got: 100`\n`PASS: Counter is correct`",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 6,
+     "input_tokens": 1044168,
+     "output_tokens": 876,
+     "token_cost": 1045044,
+     "cost_usd": 3.649103,
+     "tool_uses": 5,
+     "wall_clock": 65.249,
+     "summary": "agent.completed: 6turns, 1044168+876 tokens, $3.6491",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 72392,
+     "output_tokens": 1385,
+     "token_cost": 73777,
+     "cost_usd": 0.059771,
+     "tool_uses": 10,
+     "wall_clock": 74.097,
+     "summary": "agent.completed: 11turns, 72392+1385 tokens, $0.0598",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "raft-snapshot-commit-gap",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 365211,
+     "output_tokens": 5102,
+     "token_cost": 370313,
+     "cost_usd": 0.507534,
+     "tool_uses": 19,
+     "wall_clock": 80.07,
+     "summary": "The bug was in [`InstallSnapshot`](</app/app/snapshot.go:21>). I fixed two missing state transitions there: the follower now advances `commitIndex` when a snapshot is installed, and it discards the log prefix covered by the snapshot while preserving only the valid boundary entry/suffix when appropriate. That keeps restart recovery aligned with the snapshot boundary instead of replaying entries `1..10`.\n\n`./test.sh` now passes all 3 rounds. I also ran `raft-snapshot simulate` afterward and the trace shows node 3 restarting with `commitIndex=10` / `lastApplied=10`, then applying only entries `11..13`, with no duplicate applies.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 73023,
+     "output_tokens": 1795,
+     "token_cost": 74818,
+     "cost_usd": 0.069227,
+     "tool_uses": 12,
+     "wall_clock": 80.147,
+     "summary": "agent.completed: 13turns, 73023+1795 tokens, $0.0692",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 76623,
+     "output_tokens": 1872,
+     "token_cost": 78495,
+     "cost_usd": 0.069877,
+     "tool_uses": 12,
+     "wall_clock": 86.537,
+     "summary": "agent.completed: 13turns, 76623+1872 tokens, $0.0699",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "rate-limit-bypass-header",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 169419,
+     "output_tokens": 3675,
+     "token_cost": 173094,
+     "cost_usd": 0.248524,
+     "tool_uses": 17,
+     "wall_clock": 75.149,
+     "summary": "Patched [app/ratelimiter.ts](/app/app/ratelimiter.ts:26) so the limiter uses `req.socket.remoteAddress` by default instead of blindly trusting `X-Forwarded-For`. Proxy headers are now only honored when `trustProxy` is explicitly enabled, and the IP is normalized (`::1`, `::ffff:`) so the same client does not get split across buckets. Rebuilt `app/dist/` to keep the compiled output in sync.\n\n`./test.sh` now passes. Normal traffic is capped at 10 of 15 requests, and the rotating `X-Forwarded-For` bypass is blocked with 20 of 30 requests returning `429`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 39811,
+     "output_tokens": 1777,
+     "token_cost": 41588,
+     "cost_usd": 0.048423,
+     "tool_uses": 11,
+     "wall_clock": 97.114,
+     "summary": "agent.completed: 12turns, 39811+1777 tokens, $0.0484",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 37129,
+     "output_tokens": 1335,
+     "token_cost": 38464,
+     "cost_usd": 0.039984,
+     "tool_uses": 9,
+     "wall_clock": 87.58,
+     "summary": "agent.completed: 10turns, 37129+1335 tokens, $0.0400",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "relaxed-ordering-ringbuf",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 162340,
+     "output_tokens": 5248,
+     "token_cost": 167588,
+     "cost_usd": 0.255405,
+     "tool_uses": 14,
+     "wall_clock": 102.837,
+     "summary": "The bug was the index publication path. On this `armv8-a` container, `memory_order_relaxed` let `write_idx`/`read_idx` move independently of the slot accesses, so the consumer could observe a published index before the corresponding value was safely ordered. I fixed that in [ring_buffer.c](/app/ring_buffer.c:80) and [ring_buffer.c](/app/ring_buffer.c:105) by using acquire/release on the cross-thread handoff while keeping thread-owned index reads relaxed, and I updated the stale comments in [ring_buffer.h](/app/ring_buffer.h:4).\n\n`bash test.sh` now passes. ThreadSanitizer still cannot run in this container due its ASLR/personality restriction, so the script fell back to the 5-run optimized correctness check, and all 5 runs passed.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 62281,
+     "output_tokens": 3034,
+     "token_cost": 65315,
+     "cost_usd": 0.078524,
+     "tool_uses": 11,
+     "wall_clock": 89.011,
+     "summary": "agent.completed: 12turns, 62281+3034 tokens, $0.0785",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 55208,
+     "output_tokens": 2570,
+     "token_cost": 57778,
+     "cost_usd": 0.079802,
+     "tool_uses": 11,
+     "wall_clock": 92.038,
+     "summary": "agent.completed: 12turns, 55208+2570 tokens, $0.0798",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "retry-storm-duplicate-transfer",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 635046,
+     "output_tokens": 15158,
+     "token_cost": 650204,
+     "cost_usd": 0.945388,
+     "tool_uses": 28,
+     "wall_clock": 269.439,
+     "summary": "**Changes**\n\nIn [app/processor.py](/workspace/app/processor.py:39) I fixed the transfer path so it is atomic again: the processor now takes the SQLite write lock up front, checks idempotency before mutating balances, validates `amount > 0`, verifies both accounts exist, and commits debit/credit/idempotency recording in one transaction. That removes the half-completed state that could leak through retries and also closes cases where money could disappear on an invalid destination. I also kept `execute_transfer()` compatible for direct imports and added package-safe imports.\n\nIn [app/gateway.py](/workspace/app/gateway.py:48) the gateway now preserves the processor\u2019s HTTP status code instead of flattening everything to `200`, and it returns a `502` if the upstream response is not valid JSON.\n\n**Verification**\n\n`./test.sh` passes cleanly with `A=500`, `B=1500`, `Total=2000`, `PASS`. I also checked the direct edge cases that were previously unsafe: missing destination account, negative amount, and idempotency-key reuse with different transfer details now fail without mutating balances.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 53245,
+     "output_tokens": 2138,
+     "token_cost": 55383,
+     "cost_usd": 0.059199,
+     "tool_uses": 12,
+     "wall_clock": 105.052,
+     "summary": "agent.completed: 13turns, 53245+2138 tokens, $0.0592",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 43665,
+     "output_tokens": 2116,
+     "token_cost": 45781,
+     "cost_usd": 0.057959,
+     "tool_uses": 11,
+     "wall_clock": 98.791,
+     "summary": "agent.completed: 12turns, 43665+2116 tokens, $0.0580",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "silent-data-corruption",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 247383,
+     "output_tokens": 6170,
+     "token_cost": 253553,
+     "cost_usd": 0.370929,
+     "tool_uses": 26,
+     "wall_clock": 99.5,
+     "summary": "Changed [src/main.rs](/app/src/main.rs:1) so `process_file` reads the full input with `fs::read(...)` before transforming and writing it, instead of doing a single 64KB read that silently truncated larger files. I also removed the stale `--stats` warning about an internal buffer limit.\n\nVerification passed. I rebuilt `fileproc`, updated `/usr/local/bin/fileproc` to the fresh build so the harness would run against the fix, then ran `./test.sh` successfully: 102400 bytes in, 102400 bytes out, `PASS`. `cargo test` also passed with 3/3 tests green.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 62565,
+     "output_tokens": 1951,
+     "token_cost": 64516,
+     "cost_usd": 0.058382,
+     "tool_uses": 13,
+     "wall_clock": 88.98,
+     "summary": "agent.completed: 14turns, 62565+1951 tokens, $0.0584",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 15,
+     "input_tokens": 60670,
+     "output_tokens": 1940,
+     "token_cost": 62610,
+     "cost_usd": 0.058087,
+     "tool_uses": 14,
+     "wall_clock": 98.151,
+     "summary": "agent.completed: 15turns, 60670+1940 tokens, $0.0581",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "split-brain-leader-election",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 410344,
+     "output_tokens": 6382,
+     "token_cost": 416726,
+     "cost_usd": 0.57675,
+     "tool_uses": 33,
+     "wall_clock": 113.057,
+     "summary": "Fixed the split-brain bug in [node.go](/app/app/cluster/node.go:123): leadership now requires a strict majority of the full cluster (`totalNodes/2 + 1`), so a 2-node minority in a 5-node partition cannot elect itself leader. I also corrected the leader log output there, and added a regression test in [node_test.go](/app/app/cluster/node_test.go:70) that exercises the partitioned simulation and asserts there is exactly one leader.\n\nI also updated [test.sh](/app/test.sh:7) to build the current source before running, because the original script was calling a stale `/usr/local/bin/split-brain` binary from the image rather than the code in this repo.\n\nVerification passed with `cd /app/app && go test ./...` and `bash /app/test.sh`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": false,
+     "turns": 22,
+     "input_tokens": 145281,
+     "output_tokens": 1533,
+     "token_cost": 146814,
+     "cost_usd": 0.101365,
+     "tool_uses": 21,
+     "wall_clock": 125.673,
+     "summary": "agent.completed: 22turns, 145281+1533 tokens, $0.1014",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": false,
+     "turns": 27,
+     "input_tokens": 189766,
+     "output_tokens": 3277,
+     "token_cost": 193043,
+     "cost_usd": 0.122962,
+     "tool_uses": 26,
+     "wall_clock": 170.685,
+     "summary": "agent.completed: 27turns, 189766+3277 tokens, $0.1230",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "sql-injection-search",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 127719,
+     "output_tokens": 3213,
+     "token_cost": 130932,
+     "cost_usd": 0.191779,
+     "tool_uses": 17,
+     "wall_clock": 52.56,
+     "summary": "The needle was the raw SQL interpolation in [app/search.py](/app/app/search.py). I replaced the interpolated `LIKE` and `category` clauses with parameterized placeholders, so user input is treated as data instead of executable SQL.\n\nVerified with `bash test.sh`: normal search still works, both the `UNION` and `' OR '1'='1` injection cases are blocked, and the script exits successfully.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 37629,
+     "output_tokens": 990,
+     "token_cost": 38619,
+     "cost_usd": 0.041243,
+     "tool_uses": 8,
+     "wall_clock": 58.42,
+     "summary": "agent.completed: 9turns, 37629+990 tokens, $0.0412",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 45065,
+     "output_tokens": 1391,
+     "token_cost": 46456,
+     "cost_usd": 0.045112,
+     "tool_uses": 11,
+     "wall_clock": 79.788,
+     "summary": "agent.completed: 12turns, 45065+1391 tokens, $0.0451",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 183694,
+     "output_tokens": 3447,
+     "token_cost": 187141,
+     "cost_usd": 0.264087,
+     "tool_uses": 11,
+     "wall_clock": 55.4,
+     "summary": "Fixed the SSRF hole in [app/validator.py](/workspace/app/validator.py:23). The validator now parses IPv4 and IPv6 literals with `ipaddress`, blocks loopback/private/link-local/unspecified/reserved/multicast targets, handles IPv4-mapped IPv6 forms, resolves hostnames and rejects any that map to blocked addresses, and only accepts `http`/`https` URLs.\n\nVerification: `./test.sh` passes. The previously failing `http://[::1]:8888/metadata` and `http://[0:0:0:0:0:0:0:1]:8888/metadata` cases now return `403` instead of leaking the internal secret.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 31477,
+     "output_tokens": 1041,
+     "token_cost": 32518,
+     "cost_usd": 0.033827,
+     "tool_uses": 8,
+     "wall_clock": 57.223,
+     "summary": "agent.completed: 9turns, 31477+1041 tokens, $0.0338",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 27433,
+     "output_tokens": 1213,
+     "token_cost": 28646,
+     "cost_usd": 0.032921,
+     "tool_uses": 8,
+     "wall_clock": 62.905,
+     "summary": "agent.completed: 9turns, 27433+1213 tokens, $0.0329",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "timezone-scheduling",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 114247,
+     "output_tokens": 3527,
+     "token_cost": 117774,
+     "cost_usd": 0.178079,
+     "tool_uses": 15,
+     "wall_clock": 58.853,
+     "summary": "Fixed the timezone boundary bug in [scheduler.py](/app/app/scheduler.py:43). `_is_due()` was building each event from the UTC calendar date, which caused late-night events in negative UTC offsets to miss when their local fire time landed after midnight UTC. It now derives the overlapping local date range in the event\u2019s timezone and checks those candidate UTC instants against the window.\n\nVerified with `bash test.sh`: all tests passed, including the cross-midnight cases for `evt-002` and `evt-004`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 52603,
+     "output_tokens": 1777,
+     "token_cost": 54380,
+     "cost_usd": 0.057075,
+     "tool_uses": 12,
+     "wall_clock": 82.419,
+     "summary": "agent.completed: 13turns, 52603+1777 tokens, $0.0571",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 47737,
+     "output_tokens": 1815,
+     "token_cost": 49552,
+     "cost_usd": 0.052392,
+     "tool_uses": 12,
+     "wall_clock": 80.061,
+     "summary": "agent.completed: 13turns, 47737+1815 tokens, $0.0524",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "timing-attack-comparison",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 134408,
+     "output_tokens": 2157,
+     "token_cost": 136565,
+     "cost_usd": 0.18958,
+     "tool_uses": 15,
+     "wall_clock": 37.057,
+     "summary": "The bug was in [app/auth/compare.go](/app/app/auth/compare.go:1): `compareHashes` used `==`, which short-circuited on the first mismatch and leaked timing information. I replaced it with `crypto/subtle.ConstantTimeCompare` and kept the length mismatch guard.\n\n`./test.sh` now passes. Relevant result: static analysis reports `uses crypto/subtle.ConstantTimeCompare`, timing ratio was `0.929`, and the script ended with `PASS: Authentication is constant-time and secure`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 43542,
+     "output_tokens": 1172,
+     "token_cost": 44714,
+     "cost_usd": 0.040899,
+     "tool_uses": 12,
+     "wall_clock": 73.601,
+     "summary": "agent.completed: 13turns, 43542+1172 tokens, $0.0409",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 31609,
+     "output_tokens": 759,
+     "token_cost": 32368,
+     "cost_usd": 0.032807,
+     "tool_uses": 8,
+     "wall_clock": 55.943,
+     "summary": "agent.completed: 9turns, 31609+759 tokens, $0.0328",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "tls-chain-ordering-strict",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 199197,
+     "output_tokens": 4521,
+     "token_cost": 203718,
+     "cost_usd": 0.294206,
+     "tool_uses": 14,
+     "wall_clock": 85.956,
+     "summary": "The fix is in [loader.go](/app/app/tlssetup/loader.go:51). After `tls.X509KeyPair` identifies the leaf, the loader now parses the remaining certificates, walks the issuer chain from the leaf outward, and rewrites `tlsCert.Certificate` into proper RFC 5246 order (`leaf -> intermediate -> root`). It also rejects ambiguous or broken chains instead of silently serving them.\n\nI verified it with `./test.sh`; all checks passed, including the strict chain-order validation.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 58929,
+     "output_tokens": 1767,
+     "token_cost": 60696,
+     "cost_usd": 0.05978,
+     "tool_uses": 12,
+     "wall_clock": 91.497,
+     "summary": "agent.completed: 13turns, 58929+1767 tokens, $0.0598",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 59251,
+     "output_tokens": 2595,
+     "token_cost": 61846,
+     "cost_usd": 0.070989,
+     "tool_uses": 9,
+     "wall_clock": 85.009,
+     "summary": "agent.completed: 10turns, 59251+2595 tokens, $0.0710",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "type-coercion-comparison",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 137901,
+     "output_tokens": 1817,
+     "token_cost": 139718,
+     "cost_usd": 0.190546,
+     "tool_uses": 13,
+     "wall_clock": 35.504,
+     "summary": "The bug was in [`utils.js`](/app/utils.js:20): `min_rating` was being left as a string, which broke the rating filter\u2019s strict comparisons. I changed it to parse as an integer before it reaches `filterProducts`.\n\nVerification: `./test.sh` now passes with `PASS: Rating filter returns correct results`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 11,
+     "input_tokens": 34601,
+     "output_tokens": 1228,
+     "token_cost": 35829,
+     "cost_usd": 0.036667,
+     "tool_uses": 10,
+     "wall_clock": 66.285,
+     "summary": "agent.completed: 11turns, 34601+1228 tokens, $0.0367",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 25036,
+     "output_tokens": 808,
+     "token_cost": 25844,
+     "cost_usd": 0.026038,
+     "tool_uses": 8,
+     "wall_clock": 57.329,
+     "summary": "agent.completed: 9turns, 25036+808 tokens, $0.0260",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "wal-fsync-ghost-ack",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 431204,
+     "output_tokens": 10485,
+     "token_cost": 441689,
+     "cost_usd": 0.643855,
+     "tool_uses": 29,
+     "wall_clock": 170.165,
+     "summary": "Fixed the durability bug by making `SET` wait for an explicit WAL flush/fsync before returning `+OK` in [server.go](/workspace/server.go:80). I also moved sync-marker persistence into the WAL itself so crash recovery tracks the real durable boundary, including startup initialization and normal syncs in [wal.go](/workspace/wal.go:57), [wal.go](/workspace/wal.go:123), and [wal.go](/workspace/wal.go:226).\n\nThere was a second needle in the test harness: [test.sh](/workspace/test.sh:39) was grepping for `LOST` anywhere, so the success summary `0 LOST` still failed the script. That check now only matches actual lost-key lines. Verification: `./test.sh` now completes with `summary: 50 OK, 0 LOST out of 50 acked` and `PASS`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 15,
+     "input_tokens": 87936,
+     "output_tokens": 2545,
+     "token_cost": 90481,
+     "cost_usd": 0.077727,
+     "tool_uses": 14,
+     "wall_clock": 105.474,
+     "summary": "agent.completed: 15turns, 87936+2545 tokens, $0.0777",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 21,
+     "input_tokens": 183714,
+     "output_tokens": 5512,
+     "token_cost": 189226,
+     "cost_usd": 0.152589,
+     "tool_uses": 20,
+     "wall_clock": 163.182,
+     "summary": "agent.completed: 21turns, 183714+5512 tokens, $0.1526",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.4",
+    "model_normalized": "gpt-5-4",
+    "benchmark": "wrong-operator-discount",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 103350,
+     "output_tokens": 1600,
+     "token_cost": 104950,
+     "cost_usd": 0.145187,
+     "tool_uses": 11,
+     "wall_clock": 24.814,
+     "summary": "Fixed the needle in [pricing.py](/app/pricing.py:11): the discount calculation was using `+` instead of multiplying the subtotal by the percentage fraction. It now computes `subtotal * (discount_percent / 100)`.\n\nVerification: ran `sh test.sh` in `/app`, and it passed with `PASS: Discount calculations are correct`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 6,
+     "input_tokens": 16583,
+     "output_tokens": 538,
+     "token_cost": 17121,
+     "cost_usd": 0.019288,
+     "tool_uses": 5,
+     "wall_clock": 36.622,
+     "summary": "agent.completed: 6turns, 16583+538 tokens, $0.0193",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 7,
+     "input_tokens": 15395,
+     "output_tokens": 748,
+     "token_cost": 16143,
+     "cost_usd": 0.01918,
+     "tool_uses": 6,
+     "wall_clock": 42.942,
+     "summary": "agent.completed: 7turns, 15395+748 tokens, $0.0192",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.5",
+    "model_normalized": "gpt-5-5",
+    "benchmark": "timing-attack-comparison",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 97585,
+     "output_tokens": 1071,
+     "token_cost": 98656,
+     "cost_usd": 0.132691,
+     "tool_uses": 11,
+     "wall_clock": 19.139,
+     "summary": "Fixed the timing leak in [compare.go](/app/app/auth/compare.go:3) by replacing string equality with `crypto/subtle.ConstantTimeCompare`.\n\nVerification passed:\n\n```text\nPASS: All security tests passed\nPASS: Authentication is constant-time and secure\n```",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 24806,
+     "output_tokens": 528,
+     "token_cost": 25334,
+     "cost_usd": 0.077662,
+     "tool_uses": 8,
+     "wall_clock": 51.98,
+     "summary": "agent.completed: 9turns, 24806+528 tokens, $0.0777",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 28086,
+     "output_tokens": 507,
+     "token_cost": 28593,
+     "cost_usd": 0.079608,
+     "tool_uses": 8,
+     "wall_clock": 49.055,
+     "summary": "agent.completed: 9turns, 28086+507 tokens, $0.0796",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.5",
+    "model_normalized": "gpt-5-5",
+    "benchmark": "tls-chain-ordering-strict",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 237363,
+     "output_tokens": 3201,
+     "token_cost": 240564,
+     "cost_usd": 0.328714,
+     "tool_uses": 17,
+     "wall_clock": 56.616,
+     "summary": "Implemented the fix in [app/tlssetup/loader.go](/app/app/tlssetup/loader.go): after loading the key pair, the loader now reorders the certificate chain so each certificate is followed by its actual issuer, using both issuer/subject DN matching and signature verification.\n\nVerification passed:\n\n```text\ngo test ./...\n./test.sh\nPASS: TLS chain is correctly ordered per RFC 5246\n```",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 22,
+     "input_tokens": 153285,
+     "output_tokens": 2825,
+     "token_cost": 156110,
+     "cost_usd": 0.362727,
+     "tool_uses": 21,
+     "wall_clock": 161.238,
+     "summary": "agent.completed: 22turns, 153285+2825 tokens, $0.3627",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 15,
+     "input_tokens": 75495,
+     "output_tokens": 2060,
+     "token_cost": 77555,
+     "cost_usd": 0.222699,
+     "tool_uses": 14,
+     "wall_clock": 106.851,
+     "summary": "agent.completed: 15turns, 75495+2060 tokens, $0.2227",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.5",
+    "model_normalized": "gpt-5-5",
+    "benchmark": "type-coercion-comparison",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 147435,
+     "output_tokens": 1083,
+     "token_cost": 148518,
+     "cost_usd": 0.195124,
+     "tool_uses": 11,
+     "wall_clock": 30.077,
+     "summary": "Fixed the needle in [utils.js](/app/utils.js:21): `min_rating` is now parsed as an integer before filtering, matching the numeric product ratings.\n\nVerification passed:\n\n```text\nPASS: Rating filter returns correct results\n```",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 51936,
+     "output_tokens": 1506,
+     "token_cost": 53442,
+     "cost_usd": 0.141276,
+     "tool_uses": 13,
+     "wall_clock": 93.373,
+     "summary": "agent.completed: 14turns, 51936+1506 tokens, $0.1413",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 52846,
+     "output_tokens": 1549,
+     "token_cost": 54395,
+     "cost_usd": 0.147116,
+     "tool_uses": 13,
+     "wall_clock": 93.844,
+     "summary": "agent.completed: 14turns, 52846+1549 tokens, $0.1471",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.5",
+    "model_normalized": "gpt-5-5",
+    "benchmark": "wal-fsync-ghost-ack",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 275043,
+     "output_tokens": 2150,
+     "token_cost": 277193,
+     "cost_usd": 0.365304,
+     "tool_uses": 15,
+     "wall_clock": 43.839,
+     "summary": "Fixed the crash durability bug.\n\nChanged [server.go](/workspace/server.go) so `SET` fsyncs the WAL before returning `+OK`, making acknowledged writes recoverable after the simulated crash.\n\nAlso changed [client.go](/workspace/client.go) so the summary says `missing` instead of `LOST`; `LOST` now only appears for actual lost-key lines, which matches how `test.sh` checks failures.\n\nVerification:\n\n```text\nsummary: 50 OK, 0 missing out of 50 acked\nPASS\n```",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 13,
+     "input_tokens": 122967,
+     "output_tokens": 4522,
+     "token_cost": 127489,
+     "cost_usd": 0.328863,
+     "tool_uses": 12,
+     "wall_clock": 154.54,
+     "summary": "agent.completed: 13turns, 122967+4522 tokens, $0.3289",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 17,
+     "input_tokens": 90702,
+     "output_tokens": 2590,
+     "token_cost": 93292,
+     "cost_usd": 0.22017,
+     "tool_uses": 16,
+     "wall_clock": 126.897,
+     "summary": "agent.completed: 17turns, 90702+2590 tokens, $0.2202",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "gpt-5.5",
+    "model_normalized": "gpt-5-5",
+    "benchmark": "wrong-operator-discount",
+    "native": {
+     "resolved": true,
+     "turns": 1,
+     "input_tokens": 92848,
+     "output_tokens": 763,
+     "token_cost": 93611,
+     "cost_usd": 0.12369,
+     "tool_uses": 9,
+     "wall_clock": 14.758,
+     "summary": "Fixed the discount calculation in [pricing.py](/app/pricing.py:9): it now uses `subtotal * discount_percent / 100` instead of adding the percentage fraction to the subtotal.\n\nVerification: `./test.sh` passes with `PASS: Discount calculations are correct`.",
+     "stop_reason": "pass"
+    },
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 35932,
+     "output_tokens": 1228,
+     "token_cost": 37160,
+     "cost_usd": 0.128948,
+     "tool_uses": 11,
+     "wall_clock": 73.826,
+     "summary": "agent.completed: 12turns, 35932+1228 tokens, $0.1289",
+     "stop_reason": "end_turn"
+    },
+    "cpu": {
+     "resolved": true,
+     "turns": 6,
+     "input_tokens": 17037,
+     "output_tokens": 380,
+     "token_cost": 17417,
+     "cost_usd": 0.050505,
+     "tool_uses": 5,
+     "wall_clock": 40.036,
+     "summary": "agent.completed: 6turns, 17037+380 tokens, $0.0505",
+     "stop_reason": "end_turn"
+    }
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "nginx-upstream-port-mismatch",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 12,
+     "input_tokens": 63983,
+     "output_tokens": 16188,
+     "token_cost": 80171,
+     "cost_usd": 0.028971,
+     "tool_uses": 11,
+     "wall_clock": 355.318,
+     "summary": "agent.completed: 12turns, 63983+16188 tokens, $0.0290",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "null-pointer-config",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 42952,
+     "output_tokens": 14193,
+     "token_cost": 57145,
+     "cost_usd": 0.025228,
+     "tool_uses": 9,
+     "wall_clock": 273.033,
+     "summary": "agent.completed: 10turns, 42952+14193 tokens, $0.0252",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "off-by-one-array-slice",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 31589,
+     "output_tokens": 5941,
+     "token_cost": 37530,
+     "cost_usd": 0.011719,
+     "tool_uses": 7,
+     "wall_clock": 186.269,
+     "summary": "agent.completed: 8turns, 31589+5941 tokens, $0.0117",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "off-by-one-pagination",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 9,
+     "input_tokens": 36319,
+     "output_tokens": 3129,
+     "token_cost": 39448,
+     "cost_usd": 0.006835,
+     "tool_uses": 8,
+     "wall_clock": 66.952,
+     "summary": "agent.completed: 9turns, 36319+3129 tokens, $0.0068",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "performance-cliff-hash",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 36141,
+     "output_tokens": 11202,
+     "token_cost": 47343,
+     "cost_usd": 0.017952,
+     "tool_uses": 7,
+     "wall_clock": 134.433,
+     "summary": "agent.completed: 8turns, 36141+11202 tokens, $0.0180",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "postgres-migration-schema-drift",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 19,
+     "input_tokens": 118870,
+     "output_tokens": 34435,
+     "token_cost": 153305,
+     "cost_usd": 0.057312,
+     "tool_uses": 18,
+     "wall_clock": 374.077,
+     "summary": "agent.completed: 19turns, 118870+34435 tokens, $0.0573",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "race-condition-counter",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 9,
+     "input_tokens": 39061,
+     "output_tokens": 11777,
+     "token_cost": 50838,
+     "cost_usd": 0.021943,
+     "tool_uses": 8,
+     "wall_clock": 340.973,
+     "summary": "agent.completed: 9turns, 39061+11777 tokens, $0.0219",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "raft-snapshot-commit-gap",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 8,
+     "input_tokens": 41307,
+     "output_tokens": 2231,
+     "token_cost": 43538,
+     "cost_usd": 0.006884,
+     "tool_uses": 7,
+     "wall_clock": 79.641,
+     "summary": "agent.completed: 8turns, 41307+2231 tokens, $0.0069",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "rate-limit-bypass-header",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 6,
+     "input_tokens": 22587,
+     "output_tokens": 1194,
+     "token_cost": 23781,
+     "cost_usd": 0.00304,
+     "tool_uses": 6,
+     "wall_clock": 377.966,
+     "summary": "agent.completed: 6turns, 22587+1194 tokens, $0.0030",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "relaxed-ordering-ringbuf",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 89816,
+     "output_tokens": 44671,
+     "token_cost": 134487,
+     "cost_usd": 0.078259,
+     "tool_uses": 13,
+     "wall_clock": 950.106,
+     "summary": "agent.completed: 14turns, 89816+44671 tokens, $0.0783",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "retry-storm-duplicate-transfer",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 20,
+     "input_tokens": 117905,
+     "output_tokens": 40131,
+     "token_cost": 158036,
+     "cost_usd": 0.064762,
+     "tool_uses": 19,
+     "wall_clock": 458.249,
+     "summary": "agent.completed: 20turns, 117905+40131 tokens, $0.0648",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "split-brain-leader-election",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 14,
+     "input_tokens": 62373,
+     "output_tokens": 25696,
+     "token_cost": 88069,
+     "cost_usd": 0.044747,
+     "tool_uses": 12,
+     "wall_clock": 560.481,
+     "summary": "agent.completed: 14turns, 62373+25696 tokens, $0.0447",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "sql-injection-search",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 23,
+     "input_tokens": 138612,
+     "output_tokens": 32333,
+     "token_cost": 170945,
+     "cost_usd": 0.056714,
+     "tool_uses": 22,
+     "wall_clock": 488.828,
+     "summary": "agent.completed: 23turns, 138612+32333 tokens, $0.0567",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 15,
+     "input_tokens": 68747,
+     "output_tokens": 21919,
+     "token_cost": 90666,
+     "cost_usd": 0.042663,
+     "tool_uses": 13,
+     "wall_clock": 473.031,
+     "summary": "agent.completed: 15turns, 68747+21919 tokens, $0.0427",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "timezone-scheduling",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 7,
+     "input_tokens": 32277,
+     "output_tokens": 2196,
+     "token_cost": 34473,
+     "cost_usd": 0.006087,
+     "tool_uses": 6,
+     "wall_clock": 103.682,
+     "summary": "agent.completed: 7turns, 32277+2196 tokens, $0.0061",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "timing-attack-comparison",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 6,
+     "input_tokens": 21202,
+     "output_tokens": 2658,
+     "token_cost": 23860,
+     "cost_usd": 0.00651,
+     "tool_uses": 5,
+     "wall_clock": 86.143,
+     "summary": "agent.completed: 6turns, 21202+2658 tokens, $0.0065",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "tls-chain-ordering-strict",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 5,
+     "input_tokens": 16635,
+     "output_tokens": 2962,
+     "token_cost": 19597,
+     "cost_usd": 0.005462,
+     "tool_uses": 5,
+     "wall_clock": 400.817,
+     "summary": "agent.completed: 5turns, 16635+2962 tokens, $0.0055",
+     "stop_reason": "exit_code: 1"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "type-coercion-comparison",
+    "native": null,
+    "kernel": {
+     "resolved": false,
+     "turns": 4,
+     "input_tokens": 14517,
+     "output_tokens": 1398,
+     "token_cost": 15915,
+     "cost_usd": 0.004178,
+     "tool_uses": 3,
+     "wall_clock": 41.916,
+     "summary": "agent.completed: 4turns, 14517+1398 tokens, $0.0042",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "wal-fsync-ghost-ack",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 14,
+     "input_tokens": 98046,
+     "output_tokens": 19457,
+     "token_cost": 117503,
+     "cost_usd": 0.040045,
+     "tool_uses": 13,
+     "wall_clock": 418.257,
+     "summary": "agent.completed: 14turns, 98046+19457 tokens, $0.0400",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "grok-code-fast-1",
+    "model_normalized": "grok-code-fast-1",
+    "benchmark": "wrong-operator-discount",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 8,
+     "input_tokens": 33939,
+     "output_tokens": 5259,
+     "token_cost": 39198,
+     "cost_usd": 0.009992,
+     "tool_uses": 7,
+     "wall_clock": 88.358,
+     "summary": "agent.completed: 8turns, 33939+5259 tokens, $0.0100",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "qwen3-coder-plus",
+    "model_normalized": "qwen3-coder-plus",
+    "benchmark": "wal-fsync-ghost-ack",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 22,
+     "input_tokens": 221164,
+     "output_tokens": 5172,
+     "token_cost": 226336,
+     "cost_usd": 0.061058,
+     "tool_uses": 21,
+     "wall_clock": 220.854,
+     "summary": "agent.completed: 22turns, 221164+5172 tokens, $0.0611",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   },
+   {
+    "model": "qwen3-coder-plus",
+    "model_normalized": "qwen3-coder-plus",
+    "benchmark": "wrong-operator-discount",
+    "native": null,
+    "kernel": {
+     "resolved": true,
+     "turns": 10,
+     "input_tokens": 58109,
+     "output_tokens": 904,
+     "token_cost": 59013,
+     "cost_usd": 0.02124,
+     "tool_uses": 9,
+     "wall_clock": 67.884,
+     "summary": "agent.completed: 10turns, 58109+904 tokens, $0.0212",
+     "stop_reason": "end_turn"
+    },
+    "cpu": null
+   }
+  ]
+ }
+}

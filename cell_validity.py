@@ -2,22 +2,37 @@
 """
 cell_validity.py — fail-closed cell classification for the needle-bench score pipeline.
 
-TRUST DOCTRINE: the bench FAILS CLOSED. A cell with missing/zero token
-accounting on a completed run, a mismatched requested-vs-executed arm, or a
-malformed payload is INVALID — excluded from aggregates, counted visibly.
-Never a silent 0, never a silent pass.
+TRUST DOCTRINE: the bench FAILS CLOSED and is judged PER AXIS. A cell carries
+two independently trustworthy claims:
 
-Every (model, benchmark, arm) cell is one of THREE states — the distinction
-between the last two is the whole point of this module:
+  SOLVE axis — the oracle verdict (test.sh pass/fail) plus the arm receipt:
+           did THIS arm actually run, finish inside its deadline, and do real
+           work? Poisoned by: malformed payload, missing/mismatched arm
+           receipt, deadline stall, zero-work bootstrap glitch, or a
+           duplicate-column presentation of one execution.
+  COST axis — token/cost accounting: is the billing record real? Poisoned by:
+           zero/absent token accounting on a completed run (no input, no
+           output, or a billing-aware writer that recorded billed=0 with
+           empty buckets).
 
-  VALID    score file present, well-formed, the arm receipt matches the
-           requested arm, and token accounting is real for the work claimed.
-           Enters aggregates.
-  INVALID  score file present but untrustworthy. Excluded from ALL published
-           aggregates and counted VISIBLY per model/arm with a reason code.
-  absent   no score file at all — the cell was legitimately never run.
-           Absent is NOT invalid: it contributes nothing, is not counted as
-           a failure, and shows up only as a missing cell.
+A SOLVE-axis failure kills BOTH axes (a stalled or receipt-less run has no
+trustworthy verdict AND no attributable spend). A COST-axis failure does NOT
+destroy a valid solve verdict — the oracle still ran and the arm receipt still
+matches; the cell keeps its solve verdict and its cost axis is marked
+UNAVAILABLE (excluded from cost/token aggregates, counted visibly, and NEVER
+priced — a fabricated rate-card number is worse than a visible gap).
+
+Every (model, benchmark, arm) cell is therefore one of FOUR states:
+
+  VALID         both axes trustworthy. Enters solve AND cost aggregates.
+  COST_INVALID  solve axis trustworthy, cost axis unavailable. Enters solve
+                aggregates; excluded from cost/token aggregates; counted
+                VISIBLY per model/arm with a reason code; never priced.
+  INVALID       solve axis untrustworthy (which drags cost down with it).
+                Excluded from ALL published aggregates, counted VISIBLY.
+  absent        no score file at all — the cell was legitimately never run.
+                Absent is NOT invalid: it contributes nothing, is not counted
+                as a failure, and shows up only as a missing cell.
 
 Importable by consolidate_scores.py (and any future consolidator); stdlib only.
 """
@@ -28,6 +43,7 @@ from typing import NamedTuple
 
 VALID = "valid"
 INVALID = "invalid"
+COST_INVALID = "cost_invalid"
 
 # ---------------------------------------------------------------------------
 # Reason codes (stable strings — they key the board's invalid_by_reason
@@ -37,6 +53,7 @@ REASON_MALFORMED = "malformed_payload"            # unparseable / not a score di
 REASON_NO_ARM_RECEIPT = "no_arm_receipt"          # payload carries no executed-arm evidence
 REASON_ARM_MISMATCH = "arm_mismatch"              # requested arm != executed arm
 REASON_DEADLINE = "deadline_exceeded"             # infra deadline, not a model verdict
+REASON_STALL = "stall"                            # stall_watch killed a no-progress run
 REASON_ZERO_WORK = "zero_work"                    # 0 turns + 0 tokens (bootstrap race etc.)
 REASON_ZERO_TOKEN_INPUT = "zero_token_accounting:no_input"    # completed run, no input-side tokens
 REASON_ZERO_TOKEN_OUTPUT = "zero_token_accounting:no_output"  # completed run, no output tokens
@@ -51,14 +68,43 @@ REASON_ZERO_BILLED = "zero_token_accounting:zero_billed"
 REASON_NATIVE_DRIVER_DUP = "native_driver_duplicate_column"
 REASON_GENERIC_KERNEL_DUP = "generic_kernel_duplicate_column"
 
+# ---------------------------------------------------------------------------
+# Axis assignment. SOLVE-axis reasons poison BOTH axes (no trustworthy verdict
+# means no attributable spend either); COST-axis reasons leave the solve
+# verdict standing and mark the cost axis unavailable. The dedup reasons are
+# solve-axis: one execution surfacing in two columns is a presentation fault
+# on the whole cell, not a billing gap.
+# ---------------------------------------------------------------------------
+SOLVE_AXIS_REASONS = frozenset({
+    REASON_MALFORMED, REASON_NO_ARM_RECEIPT, REASON_ARM_MISMATCH,
+    REASON_DEADLINE, REASON_STALL, REASON_ZERO_WORK,
+    REASON_NATIVE_DRIVER_DUP, REASON_GENERIC_KERNEL_DUP,
+})
+COST_AXIS_REASONS = frozenset({
+    REASON_ZERO_TOKEN_INPUT, REASON_ZERO_TOKEN_OUTPUT, REASON_ZERO_BILLED,
+})
+
+
+def reason_axis(reason: str) -> str:
+    """'solve' | 'cost' for a (possibly detail-suffixed) reason code."""
+    base = reason.split(":requested", 1)[0]
+    if base in COST_AXIS_REASONS:
+        return "cost"
+    return "solve"  # fail closed: unknown reasons poison the whole cell
+
+
 # Arm names as used by runs/ directory suffixes. Order matters: "kernel-cpu"
 # must be tested before "kernel" (suffix containment).
 ARM_SUFFIXES = ("native", "kernel-cpu", "kernel")
 
 
 class Classification(NamedTuple):
-    status: str          # VALID | INVALID
-    reasons: list[str]   # empty when VALID
+    status: str               # VALID | COST_INVALID | INVALID
+    reasons: list[str]        # all reasons, both axes (empty when VALID)
+    solve_valid: bool         # oracle verdict + arm receipt + not stalled
+    cost_valid: bool          # real token/cost accounting present
+    solve_reasons: list[str]  # solve-axis reasons (kill both axes)
+    cost_reasons: list[str]   # cost-axis reasons (cost unavailable only)
 
 
 def normalize_arm(arm: str | None) -> str | None:
@@ -121,8 +167,29 @@ def token_accounting(entry: dict) -> tuple[int, int]:
     return input_side, output
 
 
+def classify_reasons(reasons: list[str]) -> Classification:
+    """Split collected reasons into the two axes and derive the cell status.
+
+    SOLVE-axis reasons → INVALID (both axes dead). COST-axis-only reasons →
+    COST_INVALID (solve verdict stands; cost unavailable, never priced).
+    Used by classify_cell and by the consolidator when it appends
+    whole-tree reasons (dedup) after per-cell classification."""
+    solve_reasons = [r for r in reasons if reason_axis(r) == "solve"]
+    cost_reasons = [r for r in reasons if reason_axis(r) == "cost"]
+    solve_valid = not solve_reasons
+    cost_valid = not reasons  # any solve-axis fault kills cost too
+    if not solve_valid:
+        status = INVALID
+    elif not cost_valid:
+        status = COST_INVALID
+    else:
+        status = VALID
+    return Classification(status, list(reasons), solve_valid, cost_valid,
+                          solve_reasons, cost_reasons)
+
+
 def classify_cell(entry: object, requested_arm: str | None = None) -> Classification:
-    """Fail-closed classification of a single loaded score payload.
+    """Fail-closed, per-axis classification of a single loaded score payload.
 
     `requested_arm` is the arm implied by the runs/ directory the file was
     found in ('native' | 'kernel' | 'kernel-cpu'); pass None to skip the
@@ -163,9 +230,16 @@ def classify_cell(entry: object, requested_arm: str | None = None) -> Classifica
                          tokens is a legitimate zero-cost cell (a handful of
                          benches resolve via passive verification with no
                          agent turns) and stays VALID.
+
+    AXIS SPLIT: malformed / no_arm_receipt / arm_mismatch / deadline /
+    zero_work are SOLVE-axis reasons → the cell is fully INVALID. The three
+    zero_token_accounting reasons are COST-axis reasons → the cell is
+    COST_INVALID: its oracle verdict and arm receipt stand (it enters solve
+    aggregates) while its cost axis is UNAVAILABLE (excluded from cost/token
+    aggregates, never priced). See module docstring.
     """
     if not isinstance(entry, dict) or "benchmark" not in entry:
-        return Classification(INVALID, [REASON_MALFORMED])
+        return classify_reasons([REASON_MALFORMED])
 
     reasons: list[str] = []
 
@@ -184,6 +258,10 @@ def classify_cell(entry: object, requested_arm: str | None = None) -> Classifica
 
     if "deadline" in stop:
         reasons.append(REASON_DEADLINE)
+    elif "stall" in stop:
+        # stall_watch killed a no-progress run and wrote the cell as INVALID
+        # reason 'stall' — an infra verdict, never a model verdict.
+        reasons.append(REASON_STALL)
     elif turns == 0 and input_side + output == 0 and stop != "pass":
         reasons.append(REASON_ZERO_WORK)
     else:
@@ -204,6 +282,4 @@ def classify_cell(entry: object, requested_arm: str | None = None) -> Classifica
                 # completed run — harness-incomplete (see REASON_ZERO_BILLED).
                 reasons.append(REASON_ZERO_BILLED)
 
-    if reasons:
-        return Classification(INVALID, reasons)
-    return Classification(VALID, [])
+    return classify_reasons(reasons)

@@ -8,11 +8,19 @@ loads score files, and produces:
   public/scores.json          — flat list of all scores (best per model+bench+arm)
   public/experiment-scores.json — three-arm comparison (native/kernel/kernel-cpu)
 
-TRUST DOCTRINE (fail-closed; see cell_validity.py):
-  - Every cell is VALID, INVALID(reason), or absent (never run). INVALID cells
-    (malformed payload, arm-receipt mismatch, deadline, zero-work, or zero/absent
-    token accounting on a completed run) are EXCLUDED from all aggregates and
-    counted VISIBLY per model/arm — never a silent 0, never a silent pass.
+TRUST DOCTRINE (fail-closed, judged PER AXIS; see cell_validity.py):
+  - Every cell is judged on two axes. SOLVE axis: oracle verdict + arm receipt
+    + not stalled (malformed / no-receipt / arm-mismatch / deadline / zero-work
+    / duplicate-column cells are fully INVALID — excluded from everything,
+    counted visibly). COST axis: real token/cost accounting (zero token
+    accounting on a completed run marks the cost axis UNAVAILABLE — the cell
+    KEEPS its solve verdict, enters solve columns, is excluded from cost/token
+    columns with a visible count, and is NEVER priced). absent = never run.
+  - SNAPSHOTS: every cell carries a run-date snapshot (from its payload
+    timestamp). The published 'latest' board is SINGLE-SNAPSHOT PER COLUMN —
+    a (model, arm) column whose cells span several run dates publishes only
+    its latest snapshot (no June/July keep-best mixing); earlier snapshots
+    are published as their own versioned boards under boards/<ostk-version>/.
   - DEDUP: for kernel_arm_type=native_driver models one execution serves both
     the kernel and cpu treatments; it is presented under the single 'ostk' view
     (source_arm-annotated) and can never appear in two aggregated columns
@@ -37,6 +45,68 @@ import cell_validity
 RUNS_DIR = Path(__file__).parent / "runs"
 SCORES_OUTPUT = Path(__file__).parent / "public" / "scores.json"
 EXPERIMENT_OUTPUT = Path(__file__).parent / "public" / "experiment-scores.json"
+
+# ---------------------------------------------------------------------------
+# Run-date snapshots (versioned publishing). A snapshot is a run-date window;
+# cells are assigned by their payload timestamp. v7.6.0 has two: the June
+# 15-17 original run ("june16", includes the *.recovered-june16 twins) and the
+# July-2 opus/gemini kernel-cpu + opus native re-run ("july02"). "july09" is
+# the v7.7.1 window (frozen-bin pin rolled 2026-07-09; fable-5 + flash smoke).
+# ---------------------------------------------------------------------------
+OSTK_VERSION = "v7.7.1"                      # current binary (latest board)
+SNAPSHOTS = ("june16", "july02", "july09")   # chronological order
+# Run-date boundaries, newest first; a cell belongs to the first snapshot
+# whose boundary its run date reaches. Dates below the oldest → SNAPSHOTS[0].
+SNAPSHOT_BOUNDARIES = (
+    ("2026-07-09", "july09"),
+    ("2026-07-01", "july02"),
+)
+SNAPSHOT_RUN_DATE = {"june16": "2026-06-16", "july02": "2026-07-02",
+                     "july09": "2026-07-09"}
+# Binary identity per snapshot: versioned boards land under
+# boards/<SNAPSHOT_OSTK_VERSION[snap]>/ — a run is never re-attributed to a
+# binary it did not execute on (runs/.binary_identity.jsonl is the receipt).
+SNAPSHOT_OSTK_VERSION = {"june16": "v7.6.0", "july02": "v7.6.0",
+                         "july09": "v7.7.1"}
+# Fault ids (boards/FAULTS.json) attached to each snapshot's published board.
+SNAPSHOT_FAULTS = {
+    "june16": ["june16-teardown-masked"],
+    "july02": ["july02-cache-read-zero"],
+    "july09": ["july09-fable-kernel-refusal"],
+}
+# Human-readable one-liners for the ids above; the canonical machine-readable
+# era annotations (windows, commits, affected models) live in boards/FAULTS.json.
+FAULT_NOTES = {
+    "june16-teardown-masked":
+        "June-16 era: kernel teardown hang — a subset of cells were scored by "
+        "the journal+SIGKILL watchdog and publish with teardown_masked=true "
+        "(counted per model/arm).",
+    "july02-cache-read-zero":
+        "July-2 re-run (opus/gemini-3.1 kernel-cpu + opus native): "
+        "cache_read/cache_create report 0 with ALL input folded into fresh — "
+        "accounting is real (cost axis valid) but carries no cache split; see "
+        "boards/v7.6.0/2026-06-16-experiment-scores.json for real cache buckets.",
+    "july09-fable-kernel-refusal":
+        "July-9 smoke (v7.7.1): every claude-fable-5 kernel-cpu cell ends in an "
+        "empty-content stop_reason=refusal after 2-3 real tool turns (native arm "
+        "unaffected). Cells are VALID resolved=false with real accounting, but "
+        "the unsolved verdict reflects a provider refusal on the kernel-arm "
+        "prompt shape — treat fable-5 kernel-cpu solve rates as a floor.",
+}
+
+
+def snapshot_of(entry: dict | None, fpath: Path | None = None) -> str:
+    """Snapshot for a cell: payload timestamp first; file mtime as the
+    fail-closed fallback for malformed payloads (no timestamp to trust)."""
+    ts = (entry.get("timestamp") or "") if isinstance(entry, dict) else ""
+    if not ts and fpath is not None:
+        import datetime
+        ts = datetime.datetime.fromtimestamp(
+            fpath.stat().st_mtime, datetime.timezone.utc).isoformat()
+    for boundary, snap in SNAPSHOT_BOUNDARIES:
+        if ts[:10] >= boundary:
+            return snap
+    return SNAPSHOTS[0]
 
 # Benchmarks excluded from PUBLISHED aggregates (score files kept on disk; see
 # REPORT §2 Appendix). retry-storm-duplicate-transfer: flaky (1/8 spurious).
@@ -361,11 +431,22 @@ def load_score(fpath: Path) -> tuple[dict | None, str | None]:
     return data, None
 
 
-def arm_summary(entry: dict, model: str) -> dict:
-    """Extract per-arm summary fields from a score entry."""
-    cost, basis = compute_cost_ex(entry, model)
+def arm_summary(entry: dict, model: str, cost_valid: bool = True,
+                cost_reasons: list | None = None) -> dict:
+    """Extract per-arm summary fields from a score entry.
+
+    AXIS SPLIT: when the cell's cost axis is unavailable (cost_valid=False)
+    the solve fields stand but cost_usd is None with cost_basis='unavailable'
+    — never a rate-card synthesis over untrustworthy accounting. Raw token
+    fields are passed through as recorded (they are the payload), flagged by
+    cost_valid=False so no consumer sums them into a cost aggregate."""
+    if cost_valid:
+        cost, basis = compute_cost_ex(entry, model)
+        cost_usd = round(cost, 6)
+    else:
+        cost_usd, basis = None, "unavailable"
     billed_input, _split = total_input_tokens(entry)
-    return {
+    out = {
         "resolved": bool(entry.get("resolved", False)),
         "turns": entry.get("turns_to_fix", 0) or 0,
         "input_tokens": entry.get("input_tokens", 0) or 0,
@@ -374,23 +455,51 @@ def arm_summary(entry: dict, model: str) -> dict:
         # honest token column; `input_tokens` above is fresh-only post-→2062.
         "billed_input_tokens": billed_input,
         "token_cost": entry.get("token_cost", 0) or 0,
-        "cost_usd": round(cost, 6),
+        "cost_usd": cost_usd,
         "cost_basis": basis,
+        "cost_valid": cost_valid,
         "teardown_masked": bool(entry.get("teardown_masked", False)),
         "tool_uses": entry.get("tool_uses", 0) or 0,
         "wall_clock": entry.get("wall_clock", 0) or 0,
         "summary": entry.get("summary", ""),
         "stop_reason": entry.get("stop_reason", ""),
     }
+    if not cost_valid and cost_reasons:
+        out["cost_unavailable_reasons"] = list(cost_reasons)
+    return out
 
 
-def consolidate_all(dry_run: bool = False) -> None:
-    """Main consolidation: walk runs/, produce scores.json + experiment-scores.json."""
+# Native CLI actually used per model (the harness that runs --arm native).
+NATIVE_CLI_MAP = {
+    "claude-haiku-4-5": "claude-code", "claude-sonnet-4-6": "claude-code", "claude-opus-4-6": "claude-code",
+    "claude-opus-4-8": "claude-code", "claude-fable-5": "claude-code",
+    "gemini-2-5-flash": "gemini-cli", "gemini-2-5-pro": "gemini-cli",
+    "gemini-3-flash-preview": "gemini-cli", "gemini-3-1-pro-preview": "gemini-cli",
+    "gemini-3-5-flash": "gemini-cli",
+    "gpt-4-1": "codex", "gpt-5-codex": "codex", "o4-mini": "codex", "gpt-5-5": "codex",
+    "devstral-2512": "vibe", "devstral-medium": "vibe", "devstral-small-latest": "vibe",
+    "kimi-k2-5": "kimi-cli", "kimi-k2-6": "kimi",
+}
+
+
+def collect_cells() -> tuple[list[dict], int, dict]:
+    """Walk runs/ and classify every score file — THE single judgment pass.
+
+    Returns (cells, policy_excluded, display_name). Each cell dict carries:
+      model, norm, arm (dir suffix), arm_key (native|kernel|cpu), benchmark,
+      file (repo-relative), entry (payload dict | None), cls
+      (cell_validity.Classification with dedup reasons folded in), snapshot,
+      teardown_masked.
+
+    The public board, the versioned snapshot boards, and the board-v760 /
+    cells-v760 adapters (publish_boards.py) ALL consume this — no sibling
+    pipeline may re-judge cells (consolidate_harden.py / emit_cells.py are
+    retired and refuse to run).
+    """
     if not RUNS_DIR.exists():
         print(f"ERROR: {RUNS_DIR} not found", file=sys.stderr)
         sys.exit(1)
 
-    # Discover arm directories
     arm_dirs: list[tuple[str, str, Path]] = []  # (model, arm, path)
     arms_by_model: dict[str, set] = {}  # norm → set of arms present on disk
     for entry in sorted(RUNS_DIR.iterdir()):
@@ -398,41 +507,14 @@ def consolidate_all(dry_run: bool = False) -> None:
             continue
         m = ARM_PATTERN.match(entry.name)
         if m:
-            model = m.group(1)
-            arm = m.group(2)
-            arm_dirs.append((model, arm, entry))
-            arms_by_model.setdefault(normalize_model(model), set()).add(arm)
-
+            arm_dirs.append((m.group(1), m.group(2), entry))
+            arms_by_model.setdefault(normalize_model(m.group(1)), set()).add(m.group(2))
     print(f"Found {len(arm_dirs)} arm directories in {RUNS_DIR}")
 
-    # Load all scores.
-    # scores.json contract (module docstring): ONE entry per (model, bench,
-    # arm) — best by the same keep-best rule as the board (resolved > not,
-    # then fewer turns). Multiple score files for one cell (e.g. a canonical
-    # payload plus a *.recovered-june16.score.json twin) collapse here so no
-    # consumer summing the flat file ever double-counts a cell.
-    best_scores: dict[tuple[str, str, str], dict] = {}  # (norm, bench, arm_key) → entry
-    # Keyed by (normalized_model, benchmark) → {model, benchmark, native, kernel, cpu}
-    experiments: dict[tuple[str, str], dict] = {}
-
-    def keeps_best(new: dict, cur: dict | None) -> bool:
-        """Keep-best rule shared with the board cells: resolved > not, then
-        fewer turns (ties keep the incumbent — deterministic walk order)."""
-        if cur is None:
-            return True
-        new_res, cur_res = bool(new.get("resolved")), bool(cur.get("resolved"))
-        if new_res != cur_res:
-            return new_res
-        return (new.get("turns_to_fix") or 0) < (cur.get("turns_to_fix") or 0)
-
-    # ---- fail-closed bookkeeping (INVALID ≠ absent) ----
-    invalid_cells: list[dict] = []              # visible per-cell records
-    invalid_counts: Counter = Counter()         # (norm, arm_key) → count
-    invalid_reasons: Counter = Counter()        # reason code → count
+    cells: list[dict] = []
     policy_excluded = 0                         # PUBLISHED_EXCLUDE benches (not invalid)
     display_name: dict[str, str] = {}           # norm → model spelling on disk
 
-    total_files = 0
     for model, arm, dir_path in arm_dirs:
         norm = normalize_model(model)
         display_name.setdefault(norm, model)
@@ -452,9 +534,10 @@ def consolidate_all(dry_run: bool = False) -> None:
                 policy_excluded += 1
                 continue
 
-            bench_name = fname.removesuffix(".score.json")
             if entry is None:
+                bench_name = fname.removesuffix(".score.json")
                 reasons = [skip_reason or cell_validity.REASON_MALFORMED]
+                masked = False
             else:
                 bench_name = entry["benchmark"]
                 # TEARDOWN VISIBILITY: payload field wins; else the sidecar
@@ -462,61 +545,182 @@ def consolidate_all(dry_run: bool = False) -> None:
                 entry["teardown_masked"] = bool(
                     entry.get("teardown_masked") or bench_name in masked_set
                 )
-                cls = cell_validity.classify_cell(entry, requested_arm=arm)
-                reasons = list(cls.reasons)
+                masked = entry["teardown_masked"]
+                reasons = list(cell_validity.classify_cell(entry, requested_arm=arm).reasons)
                 if dup_reason:
                     reasons.append(dup_reason)
 
-            if reasons:
-                # INVALID: excluded from ALL aggregates, counted visibly.
-                invalid_cells.append({
-                    "model": model,
-                    "model_normalized": norm,
-                    "arm": arm_key,
-                    "benchmark": bench_name,
-                    "file": str(fpath.relative_to(RUNS_DIR.parent)),
-                    "reasons": reasons,
-                    "teardown_masked": bool(entry.get("teardown_masked")) if entry else False,
-                })
-                invalid_counts[(norm, arm_key)] += 1
-                for r in reasons:
-                    invalid_reasons[r.split(":", 1)[0]] += 1
-                continue
+            cells.append({
+                "model": model, "norm": norm, "arm": arm, "arm_key": arm_key,
+                "benchmark": bench_name,
+                "file": str(fpath.relative_to(RUNS_DIR.parent)),
+                "entry": entry,
+                "cls": cell_validity.classify_reasons(reasons),
+                "snapshot": snapshot_of(entry, fpath),
+                "teardown_masked": masked,
+            })
+    return cells, policy_excluded, display_name
 
-            total_files += 1
 
-            benchmark = entry["benchmark"]
+def column_snapshots(cells: list[dict]) -> dict:
+    """(norm, arm_key) → the column's published snapshot for the LATEST board:
+    the NEWEST snapshot with any cell, unconditionally. If a column's newest
+    re-run is all-invalid, that newest run still wins and its invalidity is
+    published loudly — a broken re-run must never silently revert the board
+    to stale data (the older snapshot stays visible in its own versioned
+    board under boards/<version>/)."""
+    by_col: dict[tuple, list] = {}
+    for c in cells:
+        by_col.setdefault((c["norm"], c["arm_key"]), []).append(c)
+    return {col: max((c["snapshot"] for c in col_cells), key=SNAPSHOTS.index)
+            for col, col_cells in by_col.items()}
+
+
+def build_experiment_output(cells: list[dict], policy_excluded: int,
+                            snapshot: str = "latest",
+                            quiet: bool = False) -> tuple[dict, list[dict]]:
+    """Aggregate classified cells into (experiment_output, flat_scores).
+
+    snapshot='latest' → single-snapshot-per-column board (each (model, arm)
+    column publishes only its newest run-date snapshot — the June/July
+    opus+gemini columns never mix). snapshot='june16'/'july02' → the versioned
+    board of that run date only.
+    """
+    def say(*a, **k):
+        if not quiet:
+            print(*a, **k)
+
+    col_supersessions: dict[str, dict] = {}
+    if snapshot == "latest":
+        chosen = column_snapshots(cells)
+        use = [c for c in cells if chosen[(c["norm"], c["arm_key"])] == c["snapshot"]]
+        col_snap_meta = {f"{n}/{a}": s for (n, a), s in sorted(chosen.items())}
+        # Eviction disclosure: newest-wins is the documented column policy,
+        # but a column flip must never be SILENT — a single-bench re-run that
+        # displaces a fuller older snapshot (gemini-3.5-flash cpu: 1 july09
+        # cell evicted 36 june16 cells) is recorded here, in the artifact,
+        # with the displaced cell counts. The displaced snapshot stays fully
+        # published in its own versioned board under boards/<version>/.
+        col_snap_counts: dict[tuple, Counter] = {}
+        for c in cells:
+            col_snap_counts.setdefault(
+                (c["norm"], c["arm_key"]), Counter())[c["snapshot"]] += 1
+        for (n, a), snap_counts in sorted(col_snap_counts.items()):
+            if len(snap_counts) > 1:
+                win = chosen[(n, a)]
+                col_supersessions[f"{n}/{a}"] = {
+                    "published_snapshot": win,
+                    "published_cells": snap_counts[win],
+                    "displaced_cells": {s: cnt for s, cnt in
+                                        sorted(snap_counts.items()) if s != win},
+                }
+    elif snapshot in SNAPSHOTS:
+        use = [c for c in cells if c["snapshot"] == snapshot]
+        col_snap_meta = {f"{c['norm']}/{c['arm_key']}": snapshot for c in use}
+    else:
+        raise ValueError(f"unknown snapshot {snapshot!r}")
+
+    # scores.json contract (module docstring): ONE entry per (model, bench,
+    # arm) — best by the same keep-best rule as the board (resolved > not,
+    # then fewer turns, then cost-valid beats cost-unavailable). Multiple
+    # score files for one cell collapse here so no consumer summing the flat
+    # file ever double-counts a cell.
+    best_scores: dict[tuple[str, str, str], dict] = {}
+    experiments: dict[tuple[str, str], dict] = {}
+
+    def keeps_best(new: dict, cur: dict | None) -> bool:
+        if cur is None:
+            return True
+        new_res, cur_res = bool(new.get("resolved")), bool(cur.get("resolved"))
+        if new_res != cur_res:
+            return new_res
+        nt, ct = (new.get("turns_to_fix") or 0), (cur.get("turns_to_fix") or 0)
+        if nt != ct:
+            return nt < ct
+        return bool(new.get("cost_valid")) and not bool(cur.get("cost_valid"))
+
+    # ---- fail-closed, per-axis bookkeeping (INVALID ≠ COST_INVALID ≠ absent) ----
+    invalid_cells: list[dict] = []              # solve-axis faults: fully invalid
+    cost_invalid_cells: list[dict] = []         # solve kept, cost unavailable
+    invalid_counts: Counter = Counter()         # (norm, arm_key) → count
+    cost_invalid_counts: Counter = Counter()
+    invalid_reasons: Counter = Counter()        # reason code → count
+    cost_invalid_reasons: Counter = Counter()   # full subtype (zero_token_accounting:*)
+    display_name: dict[str, str] = {}
+    solve_files = 0                             # files entering solve aggregates
+    cost_files = 0                              # ...whose cost axis is also valid
+
+    for c in use:
+        cls = c["cls"]
+        entry = c["entry"]
+        model, norm, arm_key = c["model"], c["norm"], c["arm_key"]
+        display_name.setdefault(norm, model)
+        record = {
+            "model": model, "model_normalized": norm, "arm": arm_key,
+            "benchmark": c["benchmark"], "file": c["file"],
+            "snapshot": c["snapshot"],
+            "teardown_masked": c["teardown_masked"],
+        }
+        if not cls.solve_valid:
+            # SOLVE-axis fault: fully INVALID — excluded from ALL aggregates,
+            # counted visibly (cost-axis reasons ride along in `reasons`).
+            invalid_cells.append({**record, "axis": "solve", "reasons": cls.reasons})
+            invalid_counts[(norm, arm_key)] += 1
+            for r in cls.reasons:
+                invalid_reasons[r.split(":", 1)[0]] += 1
+            continue
+
+        solve_files += 1
+        if cls.cost_valid:
+            cost_files += 1
             cost, cost_basis = compute_cost_ex(entry, model)
             entry["computed_cost_usd"] = cost
             entry["cost_basis"] = cost_basis
+        else:
+            # COST-axis fault: the solve verdict STANDS (oracle + receipt are
+            # good); cost is UNAVAILABLE — excluded from cost/token columns,
+            # counted visibly, NEVER priced (no rate-card synthesis).
+            cost_invalid_cells.append({**record, "axis": "cost",
+                                       "reasons": cls.cost_reasons,
+                                       "resolved": bool(entry.get("resolved"))})
+            cost_invalid_counts[(norm, arm_key)] += 1
+            for r in cls.cost_reasons:
+                cost_invalid_reasons[r] += 1
+            entry["computed_cost_usd"] = None
+            entry["cost_basis"] = "unavailable"
+        entry["cost_valid"] = cls.cost_valid
+        entry["snapshot"] = c["snapshot"]
 
-            # Flat scores list — best-per-cell (see contract note above).
-            sk = (norm, benchmark, arm_key)
-            if keeps_best(entry, best_scores.get(sk)):
-                best_scores[sk] = entry
+        benchmark = c["benchmark"]
+        sk = (norm, benchmark, arm_key)
+        if keeps_best(entry, best_scores.get(sk)):
+            best_scores[sk] = entry
 
-            # Experiment grouping
-            ek = (norm, benchmark)
-            if ek not in experiments:
-                experiments[ek] = {
-                    "model": model,
-                    "model_normalized": norm,
-                    "benchmark": benchmark,
-                    "native": None,
-                    "kernel": None,
-                    "cpu": None,
-                }
+        # Experiment grouping
+        ek = (norm, benchmark)
+        if ek not in experiments:
+            experiments[ek] = {
+                "model": model,
+                "model_normalized": norm,
+                "benchmark": benchmark,
+                "native": None,
+                "kernel": None,
+                "cpu": None,
+            }
 
-            current = experiments[ek][arm_key]
-            summary = arm_summary(entry, model)
+        current = experiments[ek][arm_key]
+        summary = arm_summary(entry, model, cls.cost_valid, cls.cost_reasons)
 
-            # Keep best: resolved > not, then fewer turns
-            if current is None:
-                experiments[ek][arm_key] = summary
-            elif summary["resolved"] and not current["resolved"]:
-                experiments[ek][arm_key] = summary
-            elif summary["resolved"] == current["resolved"] and summary["turns"] < current["turns"]:
-                experiments[ek][arm_key] = summary
+        # Keep best: resolved > not, then fewer turns, then cost-valid
+        if current is None:
+            experiments[ek][arm_key] = summary
+        elif summary["resolved"] and not current["resolved"]:
+            experiments[ek][arm_key] = summary
+        elif summary["resolved"] == current["resolved"] and summary["turns"] < current["turns"]:
+            experiments[ek][arm_key] = summary
+        elif (summary["resolved"] == current["resolved"] and summary["turns"] == current["turns"]
+              and summary["cost_valid"] and not current["cost_valid"]):
+            experiments[ek][arm_key] = summary
 
     # Materialize the deduped flat list (insertion order = walk order).
     all_scores = list(best_scores.values())
@@ -524,10 +728,15 @@ def consolidate_all(dry_run: bool = False) -> None:
     # Build experiment output with model aggregates
     exp_list = sorted(experiments.values(), key=lambda e: (e["model"], e["benchmark"]))
 
-    # Compute per-model aggregates for the experiment data
+    # Compute per-model aggregates for the experiment data.
+    # AXIS SPLIT: solved/total (+ turns/tools/wall — work receipts) are the
+    # SOLVE axis and include cost-invalid cells; cost/tokens are the COST axis
+    # and sum ONLY over cost-valid cells (cost_cells = how many), so a $/task
+    # or tok/task mean divides by cost_cells, never by total.
     def _empty_arm_agg() -> dict:
         return {"solved": 0, "total": 0, "cost": 0, "tokens": 0, "tokens_fresh": 0,
-                "tools": 0, "turns": 0, "wall": 0, "invalid": 0, "masked": 0,
+                "cost_cells": 0, "tools": 0, "turns": 0, "wall": 0,
+                "invalid": 0, "cost_invalid": 0, "masked": 0,
                 "cost_bases": {}}
 
     def _empty_model_agg(model: str, norm: str) -> dict:
@@ -553,27 +762,34 @@ def consolidate_all(dry_run: bool = False) -> None:
                 agg["total"] += 1
                 if arm_data["resolved"]:
                     agg["solved"] += 1
-                agg["cost"] += arm_data["cost_usd"]
-                # tokens = grand-total input INCL. cache traffic + output (the
-                # old input+output was fresh-only post-→2062 and inverted the
-                # Anthropic token comparison); tokens_fresh keeps the old
-                # fresh-only number for continuity/debugging.
-                agg["tokens"] += arm_data["billed_input_tokens"] + arm_data["output_tokens"]
-                agg["tokens_fresh"] += arm_data["input_tokens"] + arm_data["output_tokens"]
                 agg["tools"] += arm_data["tool_uses"]
                 agg["turns"] += arm_data["turns"]
                 agg["wall"] += arm_data["wall_clock"]
                 if arm_data["teardown_masked"]:
                     agg["masked"] += 1
+                if arm_data["cost_valid"]:
+                    agg["cost_cells"] += 1
+                    agg["cost"] += arm_data["cost_usd"]
+                    # tokens = grand-total input INCL. cache traffic + output
+                    # (the old input+output was fresh-only post-→2062 and
+                    # inverted the Anthropic token comparison); tokens_fresh
+                    # keeps the old fresh-only number for continuity.
+                    agg["tokens"] += arm_data["billed_input_tokens"] + arm_data["output_tokens"]
+                    agg["tokens_fresh"] += arm_data["input_tokens"] + arm_data["output_tokens"]
                 basis = arm_data.get("cost_basis", "unpriced")
                 agg["cost_bases"][basis] = agg["cost_bases"].get(basis, 0) + 1
 
-    # Attach visible INVALID counts (a model whose cells are ALL invalid still
-    # gets a row — invisible exclusion is exactly what fail-closed forbids).
+    # Attach visible INVALID + COST-INVALID counts (a model whose cells are
+    # ALL invalid still gets a row — invisible exclusion is exactly what
+    # fail-closed forbids).
     for (norm, arm_key), count in invalid_counts.items():
         if norm not in model_agg:
             model_agg[norm] = _empty_model_agg(display_name.get(norm, norm), norm)
         model_agg[norm][arm_key]["invalid"] = count
+    for (norm, arm_key), count in cost_invalid_counts.items():
+        if norm not in model_agg:
+            model_agg[norm] = _empty_model_agg(display_name.get(norm, norm), norm)
+        model_agg[norm][arm_key]["cost_invalid"] = count
 
     # Add rate card info + CPU driver status
     for norm, agg in model_agg.items():
@@ -633,15 +849,6 @@ def consolidate_all(dry_run: bool = False) -> None:
                     f"(kernel_arm_type={agg['kernel_arm_type']}; see 'ostk')")
 
         # Native CLI label — what actually runs for --arm native
-        NATIVE_CLI_MAP = {
-            "claude-haiku-4-5": "claude-code", "claude-sonnet-4-6": "claude-code", "claude-opus-4-6": "claude-code",
-            "claude-opus-4-8": "claude-code", "claude-fable-5": "claude-code",
-            "gemini-2-5-flash": "gemini-cli", "gemini-2-5-pro": "gemini-cli",
-            "gemini-3-flash-preview": "gemini-cli", "gemini-3-1-pro-preview": "gemini-cli",
-            "gpt-4-1": "codex", "gpt-5-codex": "codex", "o4-mini": "codex",
-            "devstral-2512": "vibe", "devstral-medium": "vibe", "devstral-small-latest": "vibe",
-            "kimi-k2-5": "kimi-cli",
-        }
         agg["native_cli"] = NATIVE_CLI_MAP.get(norm, "opencode")
 
     agg_list = sorted(model_agg.values(), key=lambda a: (
@@ -655,32 +862,153 @@ def consolidate_all(dry_run: bool = False) -> None:
     models = sorted(set(e["model_normalized"] for e in exp_list))
     benchmarks = sorted(set(e["benchmark"] for e in exp_list))
 
-    print(f"Loaded {total_files} score files")
-    print(f"Models: {len(models)}")
-    print(f"Benchmarks: {len(benchmarks)}")
-    print(f"Experiment entries: {len(exp_list)}")
-    print(f"Model aggregates: {len(agg_list)}")
+    say(f"[{snapshot}] Loaded {solve_files} solve-valid score files "
+        f"({cost_files} also cost-valid)")
+    say(f"Models: {len(models)}")
+    say(f"Benchmarks: {len(benchmarks)}")
+    say(f"Experiment entries: {len(exp_list)}")
+    say(f"Model aggregates: {len(agg_list)}")
 
-    # Fail-closed accounting — INVALID is visible, absent is silent.
+    # Fail-closed, per-axis accounting — INVALID is visible, absent is silent.
     masked_total = sum(agg[a]["masked"] for agg in model_agg.values()
                        for a in ("native", "kernel", "cpu"))
-    print(f"\nValidity: {total_files} VALID, {len(invalid_cells)} INVALID "
-          f"(excluded from aggregates, counted per model/arm), "
-          f"{policy_excluded} policy-excluded (PUBLISHED_EXCLUDE)")
+    say(f"\nValidity (per-axis): {solve_files} SOLVE-valid ({cost_files} cost-valid, "
+        f"{len(cost_invalid_cells)} cost-INVALID: solve kept, cost unavailable), "
+        f"{len(invalid_cells)} fully INVALID (excluded from all aggregates), "
+        f"{policy_excluded} policy-excluded (PUBLISHED_EXCLUDE)")
     if invalid_reasons:
         for reason, n in sorted(invalid_reasons.items(), key=lambda kv: -kv[1]):
-            print(f"  INVALID {reason}: {n}")
-    print(f"Teardown-masked cells (watchdog-scored, published with flag): {masked_total}")
+            say(f"  INVALID (both axes) {reason}: {n}")
+    if cost_invalid_reasons:
+        for reason, n in sorted(cost_invalid_reasons.items(), key=lambda kv: -kv[1]):
+            say(f"  COST-INVALID (solve kept) {reason}: {n}")
+    say(f"Teardown-masked cells (watchdog-scored, published with flag): {masked_total}")
 
-    # Grand totals (VALID cells, best-per-cell deduped; tokens incl. cache traffic)
+    # Grand totals (solve axis over all published cells; cost/token axis over
+    # cost-valid cells only — never a synthesized number in the sum)
     grand_solved = sum(1 for s in all_scores if s.get("resolved"))
-    grand_cost = sum(s.get("computed_cost_usd", 0) for s in all_scores)
-    grand_tokens = sum(total_input_tokens(s)[0] + (s.get("output_tokens", 0) or 0) for s in all_scores)
-    print(f"\nGrand totals: {grand_solved}/{len(all_scores)} solved, "
-          f"{grand_tokens:,} tokens, ${grand_cost:,.2f} estimated cost")
+    cost_valid_scores = [s for s in all_scores if s.get("cost_valid")]
+    grand_cost = sum(s.get("computed_cost_usd") or 0 for s in cost_valid_scores)
+    grand_tokens = sum(total_input_tokens(s)[0] + (s.get("output_tokens", 0) or 0)
+                       for s in cost_valid_scores)
+    say(f"\nGrand totals: {grand_solved}/{len(all_scores)} solved (solve axis); "
+        f"{grand_tokens:,} tokens, ${grand_cost:,.2f} cost over "
+        f"{len(cost_valid_scores)} cost-valid cells")
+
+    # Fault annotations for this board (machine-readable ids → boards/FAULTS.json)
+    snaps_present = sorted({c["snapshot"] for c in use}, key=SNAPSHOTS.index)
+    faults = []
+    for s in snaps_present:
+        for fid in SNAPSHOT_FAULTS.get(s, []):
+            faults.append({"id": fid, "note": FAULT_NOTES.get(fid, "")})
+
+    import datetime as _dt
+    experiment_output = {
+        "generated": _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        # A versioned snapshot board carries the binary it actually ran on;
+        # the latest (mixed-column) view reports the current binary.
+        "ostk_version": SNAPSHOT_OSTK_VERSION.get(snapshot, OSTK_VERSION),
+        "snapshot": snapshot,
+        "snapshot_policy": ("latest = single snapshot per (model, arm) column — "
+                            "a column never mixes run dates; earlier snapshots "
+                            "are published under boards/"
+                            + SNAPSHOT_OSTK_VERSION.get(snapshot, OSTK_VERSION)
+                            + "/"),
+        "column_snapshots": col_snap_meta,
+        "faults": faults,
+        "faults_ref": "boards/FAULTS.json",
+        # Fail-closed doctrine block: fully-INVALID cells are excluded from
+        # every aggregate; COST-INVALID cells enter solve columns only. Both
+        # are counted here and per model/arm — never a silent 0.
+        "trust": {
+            "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle "
+                        "verdict + arm receipt + not stalled): malformed / "
+                        "no-arm-receipt / arm-mismatch / deadline / zero-work / "
+                        "duplicate-column cells are fully INVALID — excluded "
+                        "from everything, counted visibly. COST axis (real "
+                        "token/cost accounting): zero token accounting on a "
+                        "completed run keeps the solve verdict and marks cost "
+                        "UNAVAILABLE — included in solve columns, excluded "
+                        "from cost/token columns, counted visibly, never "
+                        "priced. absent = never run (not invalid).",
+            "solve_valid_cells": solve_files,
+            "cost_valid_cells": cost_files,
+            "cost_invalid_cells": len(cost_invalid_cells),
+            "invalid_cells": len(invalid_cells),
+            "policy_excluded_cells": policy_excluded,
+            "invalid_by_reason": dict(sorted(invalid_reasons.items())),
+            "cost_invalid_by_reason": dict(sorted(cost_invalid_reasons.items())),
+            "teardown_masked_cells": masked_total,
+        },
+        "invalid_cells": invalid_cells,
+        "cost_invalid_cells": cost_invalid_cells,
+        "models": agg_list,
+        "benchmarks": exp_list,
+    }
+
+    # LATEST-only honesty riders (versioned snapshot boards are single-version
+    # and append-only — their payloads must stay byte-identical, so nothing
+    # below touches a non-latest build).
+    if snapshot == "latest":
+        # Per-snapshot binary attribution: which execution version each
+        # published column ran on (finding: the single ostk_version tag hid
+        # that the rolling view mixes v7.6.0 and v7.7.1 executions).
+        experiment_output["ostk_versions"] = {
+            s: SNAPSHOT_OSTK_VERSION.get(s, OSTK_VERSION) for s in snaps_present}
+        experiment_output["ostk_version_note"] = (
+            "ostk_version is the CURRENT binary; columns in this rolling view "
+            "executed under the version of their snapshot — see ostk_versions "
+            "+ column_snapshots for per-column attribution.")
+        if col_supersessions:
+            experiment_output["column_supersessions"] = col_supersessions
+            experiment_output["column_supersessions_note"] = (
+                "columns whose newest snapshot displaced older cells "
+                "(newest-wins policy). Displaced counts are published here so "
+                "a partial re-run can never silently shrink a column; the "
+                "displaced snapshot remains fully published under "
+                "boards/<version>/.")
+        # Per-version trust breakdown: the board-level totals above span
+        # execution versions; the split keeps them honest bookkeeping rather
+        # than an implied cross-version comparison.
+        by_ver: dict[str, Counter] = {}
+        for c in use:
+            ver = SNAPSHOT_OSTK_VERSION.get(c["snapshot"], OSTK_VERSION)
+            cnt = by_ver.setdefault(ver, Counter())
+            if not c["cls"].solve_valid:
+                cnt["invalid_cells"] += 1
+            else:
+                cnt["solve_valid_cells"] += 1
+                cnt["cost_valid_cells" if c["cls"].cost_valid
+                    else "cost_invalid_cells"] += 1
+        if len(by_ver) > 1:
+            experiment_output["trust"]["by_ostk_version"] = {
+                v: {k: cnt.get(k, 0) for k in
+                    ("solve_valid_cells", "cost_valid_cells",
+                     "cost_invalid_cells", "invalid_cells")}
+                for v, cnt in sorted(by_ver.items())}
+            experiment_output["trust"]["mixed_versions_note"] = (
+                "the totals above aggregate columns executed under more than "
+                "one binary version (per-version split in by_ostk_version) — "
+                "operational bookkeeping, NOT a cross-version comparison. No "
+                "cross-version delta is published anywhere; versioned boards "
+                "under boards/<version>/ are single-version.")
+    return experiment_output, all_scores
+
+
+def consolidate_all(dry_run: bool = False) -> None:
+    """Main consolidation: walk runs/, produce scores.json + experiment-scores.json
+    (the LATEST board — single snapshot per column). Versioned snapshot boards
+    + the board-v760/cells-v760 adapters live in publish_boards.py, which
+    consumes the same collect_cells/build_experiment_output pass."""
+    cells, policy_excluded, _display = collect_cells()
+    experiment_output, all_scores = build_experiment_output(
+        cells, policy_excluded, snapshot="latest")
+    exp_list = experiment_output["benchmarks"]
+    agg_list = experiment_output["models"]
 
     if dry_run:
-        print(f"\n[dry-run] Would write {len(all_scores)} scores + {len(exp_list)} experiments + {len(agg_list)} aggregates")
+        print(f"\n[dry-run] Would write {len(all_scores)} scores + "
+              f"{len(exp_list)} experiments + {len(agg_list)} aggregates")
         return
 
     # Write scores.json
@@ -690,27 +1018,6 @@ def consolidate_all(dry_run: bool = False) -> None:
         f.write("\n")
     print(f"\nWrote {len(all_scores)} entries to {SCORES_OUTPUT}")
 
-    # Write experiment-scores.json with both per-benchmark and aggregates
-    experiment_output = {
-        "generated": __import__("datetime").datetime.utcnow().isoformat() + "Z",
-        # Fail-closed doctrine block: INVALID cells are excluded from every
-        # aggregate above but counted here (and per model/arm as
-        # models[].{native,kernel,cpu}.invalid) — never a silent 0.
-        "trust": {
-            "doctrine": "fail-closed: malformed / arm-mismatch / deadline / "
-                        "zero-work / zero-token-accounting cells are INVALID — "
-                        "excluded from aggregates, counted visibly. "
-                        "absent = never run (not invalid).",
-            "valid_cells": total_files,
-            "invalid_cells": len(invalid_cells),
-            "policy_excluded_cells": policy_excluded,
-            "invalid_by_reason": dict(sorted(invalid_reasons.items())),
-            "teardown_masked_cells": masked_total,
-        },
-        "invalid_cells": invalid_cells,
-        "models": agg_list,
-        "benchmarks": exp_list,
-    }
     with open(EXPERIMENT_OUTPUT, "w") as f:
         json.dump(experiment_output, f, indent=2)
         f.write("\n")

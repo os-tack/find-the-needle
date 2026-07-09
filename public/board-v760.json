@@ -1,403 +1,691 @@
 {
-  "generated": "2026-06-17",
-  "run": "v7.6.0",
-  "published_tasks": 38,
-  "models": [
-    {
-      "model": "claude-opus-4-8",
-      "type": "B",
-      "native_cli": "claude-code",
-      "native_present": true,
-      "published": 38,
-      "cost_trusted": true,
-      "native_cost_basis": "cache-split",
-      "native_solved": 34,
-      "kernel_solved": 36,
-      "both_n": 34,
-      "split_kernel_only": 2,
-      "split_native_only": 0,
-      "bothfail": 1,
-      "native": {
-        "cost": 9.373,
-        "fresh": 65921,
-        "cache_read": 7127762,
-        "cache_create": 429568,
-        "billed": 7623251,
-        "output": 111800,
-        "input_total": 7623251
-      },
-      "kernel": {
-        "cost": 6.372,
-        "fresh": 206390,
-        "cache_read": 3299727,
-        "cache_create": 274929,
-        "billed": 3781046,
-        "output": 78881,
-        "input_total": 3781046
-      },
-      "cost_delta": -32.0,
-      "tok_delta": -50.4,
-      "kernel_abs": {
-        "cost": 6.752,
-        "fresh": 216995,
-        "cache_read": 3547182,
-        "cache_create": 288580,
-        "billed": 4052757,
-        "output": 83609,
-        "input_total": 4052757
-      }
-    },
-    {
-      "model": "claude-sonnet-4-6",
-      "type": "B",
-      "native_cli": "claude-code",
-      "native_present": true,
-      "published": 38,
-      "cost_trusted": true,
-      "native_cost_basis": "cache-split",
-      "native_solved": 35,
-      "kernel_solved": 35,
-      "both_n": 34,
-      "split_kernel_only": 1,
-      "split_native_only": 0,
-      "bothfail": 1,
-      "native": {
-        "cost": 7.348,
-        "fresh": 606,
-        "cache_read": 11344174,
-        "cache_create": 529553,
-        "billed": 11874333,
-        "output": 130464,
-        "input_total": 11874333
-      },
-      "kernel": {
-        "cost": 3.417,
-        "fresh": 214095,
-        "cache_read": 3159920,
-        "cache_create": 246670,
-        "billed": 3620685,
-        "output": 60105,
-        "input_total": 3620685
-      },
-      "cost_delta": -53.5,
-      "tok_delta": -69.5,
-      "kernel_abs": {
-        "cost": 3.529,
-        "fresh": 219179,
-        "cache_read": 3301044,
-        "cache_create": 253888,
-        "billed": 3774111,
-        "output": 61929,
-        "input_total": 3774111
-      }
-    },
-    {
-      "model": "gemini-3.1-pro-preview",
-      "type": "B",
-      "native_cli": "gemini-cli",
-      "native_present": true,
-      "published": 38,
-      "cost_trusted": false,
-      "native_cost_basis": "total-list",
-      "native_solved": 36,
-      "kernel_solved": 37,
-      "both_n": 36,
-      "split_kernel_only": 1,
-      "split_native_only": 0,
-      "bothfail": 0,
-      "native": {
-        "cost": 3.716,
-        "fresh": 953568,
-        "cache_read": 3254973,
-        "cache_create": 0,
-        "billed": 4208541,
-        "output": 96507,
-        "input_total": 4208541
-      },
-      "kernel": {
-        "cost": 7.477,
-        "fresh": 3288042,
-        "cache_read": 1478543,
-        "cache_create": 0,
-        "billed": 4766585,
-        "output": 50446,
-        "input_total": 4766585
-      },
-      "cost_delta": 101.2,
-      "tok_delta": 13.3,
-      "kernel_abs": {
-        "cost": 8.04,
-        "fresh": 3541117,
-        "cache_read": 1643078,
-        "cache_create": 0,
-        "billed": 5184195,
-        "output": 52423,
-        "input_total": 5184195
-      }
-    },
-    {
-      "model": "gemini-3.5-flash",
-      "type": "B",
-      "native_cli": "gemini-cli",
-      "native_present": true,
-      "published": 38,
-      "cost_trusted": false,
-      "native_cost_basis": "total-list",
-      "native_solved": 37,
-      "kernel_solved": 36,
-      "both_n": 36,
-      "split_kernel_only": 0,
-      "split_native_only": 0,
-      "bothfail": 0,
-      "native": {
-        "cost": 8.799,
-        "fresh": 3998059,
-        "cache_read": 3885507,
-        "cache_create": 0,
-        "billed": 7883566,
-        "output": 246608,
-        "input_total": 7883566
-      },
-      "kernel": {
-        "cost": 11.372,
-        "fresh": 6769209,
-        "cache_read": 2381584,
-        "cache_create": 0,
-        "billed": 9150793,
-        "output": 95648,
-        "input_total": 9150793
-      },
-      "cost_delta": 29.2,
-      "tok_delta": 16.1,
-      "kernel_abs": {
-        "cost": 11.372,
-        "fresh": 6769209,
-        "cache_read": 2381584,
-        "cache_create": 0,
-        "billed": 9150793,
-        "output": 95648,
-        "input_total": 9150793
-      }
-    },
-    {
-      "model": "devstral-2512",
-      "type": "B",
-      "native_cli": "vibe",
-      "native_present": true,
-      "published": 38,
-      "cost_trusted": false,
-      "native_cost_basis": "total-only",
-      "native_solved": 6,
-      "kernel_solved": 32,
-      "both_n": 5,
-      "split_kernel_only": 23,
-      "split_native_only": 0,
-      "bothfail": 2,
-      "native": {
-        "cost": 1.498,
-        "fresh": 0,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 3615795,
-        "output": 25596,
-        "input_total": 3615795
-      },
-      "kernel": {
-        "cost": 0.228,
-        "fresh": 540334,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 540334,
-        "output": 6129,
-        "input_total": 540334
-      },
-      "cost_delta": -84.8,
-      "tok_delta": -85.1,
-      "kernel_abs": {
-        "cost": 1.821,
-        "fresh": 4247606,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 4247606,
-        "output": 60747,
-        "input_total": 4247606
-      }
-    },
-    {
-      "model": "gpt-5.5",
-      "type": "B",
-      "native_cli": "codex",
-      "native_present": true,
-      "published": 38,
-      "cost_trusted": false,
-      "native_cost_basis": "total-list",
-      "native_solved": 36,
-      "kernel_solved": 36,
-      "both_n": 35,
-      "split_kernel_only": 1,
-      "split_native_only": 1,
-      "bothfail": 0,
-      "native": {
-        "cost": 6.381,
-        "fresh": 497968,
-        "cache_read": 4179840,
-        "cache_create": 0,
-        "billed": 4677808,
-        "output": 60050,
-        "input_total": 4677808
-      },
-      "kernel": {
-        "cost": 18.507,
-        "fresh": 3119753,
-        "cache_read": 2301952,
-        "cache_create": 0,
-        "billed": 5421705,
-        "output": 58569,
-        "input_total": 5421705
-      },
-      "cost_delta": 190.0,
-      "tok_delta": 15.9,
-      "kernel_abs": {
-        "cost": 18.876,
-        "fresh": 3182522,
-        "cache_read": 2348032,
-        "cache_create": 0,
-        "billed": 5530554,
-        "output": 59644,
-        "input_total": 5530554
-      }
-    },
-    {
-      "model": "grok-4.3",
-      "type": "B*",
-      "native_cli": "opencode",
-      "native_present": true,
-      "published": 38,
-      "cost_trusted": false,
-      "native_cost_basis": "self-reported",
-      "native_solved": 35,
-      "kernel_solved": 30,
-      "both_n": 30,
-      "split_kernel_only": 0,
-      "split_native_only": 4,
-      "bothfail": 2,
-      "native": {
-        "cost": 2.678,
-        "fresh": 0,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 2114702,
-        "output": 13811,
-        "input_total": 2114702
-      },
-      "kernel": {
-        "cost": 3.254,
-        "fresh": 2532728,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 2532728,
-        "output": 35325,
-        "input_total": 2532728
-      },
-      "cost_delta": 21.5,
-      "tok_delta": 19.8,
-      "kernel_abs": {
-        "cost": 3.254,
-        "fresh": 2532728,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 2532728,
-        "output": 35325,
-        "input_total": 2532728
-      }
-    },
-    {
-      "model": "deepseek-v4-pro",
-      "type": "B*",
-      "native_cli": "opencode",
-      "native_present": true,
-      "published": 38,
-      "cost_trusted": false,
-      "native_cost_basis": "self-reported",
-      "native_solved": 37,
-      "kernel_solved": 35,
-      "both_n": 35,
-      "split_kernel_only": 0,
-      "split_native_only": 1,
-      "bothfail": 0,
-      "native": {
-        "cost": 5.09,
-        "fresh": 0,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 2851094,
-        "output": 37081,
-        "input_total": 2851094
-      },
-      "kernel": {
-        "cost": 8.16,
-        "fresh": 4353782,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 4353782,
-        "output": 167897,
-        "input_total": 4353782
-      },
-      "cost_delta": 60.3,
-      "tok_delta": 52.7,
-      "kernel_abs": {
-        "cost": 8.16,
-        "fresh": 4353782,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 4353782,
-        "output": 167897,
-        "input_total": 4353782
-      }
-    },
-    {
-      "model": "kimi-k2.6",
-      "type": "B*",
-      "native_cli": "kimi",
-      "native_present": true,
-      "published": 38,
-      "cost_trusted": false,
-      "native_cost_basis": "total-only",
-      "native_solved": 36,
-      "kernel_solved": 35,
-      "both_n": 35,
-      "split_kernel_only": 0,
-      "split_native_only": 1,
-      "bothfail": 1,
-      "native": {
-        "cost": 0.22,
-        "fresh": 0,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 549528,
-        "output": 0,
-        "input_total": 549528
-      },
-      "kernel": {
-        "cost": 1.42,
-        "fresh": 2911943,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 2911943,
-        "output": 128090,
-        "input_total": 2911943
-      },
-      "cost_delta": 545.5,
-      "tok_delta": 429.9,
-      "kernel_abs": {
-        "cost": 1.42,
-        "fresh": 2911943,
-        "cache_read": 0,
-        "cache_create": 0,
-        "billed": 2911943,
-        "output": 128090,
-        "input_total": 2911943
-      }
-    }
-  ]
+ "generated": "2026-07-09",
+ "run": "v7.7.1",
+ "snapshot": "latest",
+ "pipeline": "publish_boards.py \u2190 consolidate_scores.py (axis-split validity)",
+ "published_tasks": 37,
+ "faults": [
+  {
+   "id": "june16-teardown-masked",
+   "note": "June-16 era: kernel teardown hang \u2014 a subset of cells were scored by the journal+SIGKILL watchdog and publish with teardown_masked=true (counted per model/arm)."
+  },
+  {
+   "id": "july02-cache-read-zero",
+   "note": "July-2 re-run (opus/gemini-3.1 kernel-cpu + opus native): cache_read/cache_create report 0 with ALL input folded into fresh \u2014 accounting is real (cost axis valid) but carries no cache split; see boards/v7.6.0/2026-06-16-experiment-scores.json for real cache buckets."
+  },
+  {
+   "id": "july09-fable-kernel-refusal",
+   "note": "July-9 smoke (v7.7.1): every claude-fable-5 kernel-cpu cell ends in an empty-content stop_reason=refusal after 2-3 real tool turns (native arm unaffected). Cells are VALID resolved=false with real accounting, but the unsolved verdict reflects a provider refusal on the kernel-arm prompt shape \u2014 treat fable-5 kernel-cpu solve rates as a floor."
+  }
+ ],
+ "faults_ref": "boards/FAULTS.json",
+ "trust": {
+  "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle verdict + arm receipt + not stalled): malformed / no-arm-receipt / arm-mismatch / deadline / zero-work / duplicate-column cells are fully INVALID \u2014 excluded from everything, counted visibly. COST axis (real token/cost accounting): zero token accounting on a completed run keeps the solve verdict and marks cost UNAVAILABLE \u2014 included in solve columns, excluded from cost/token columns, counted visibly, never priced. absent = never run (not invalid).",
+  "solve_valid_cells": 626,
+  "cost_valid_cells": 626,
+  "cost_invalid_cells": 0,
+  "invalid_cells": 10,
+  "policy_excluded_cells": 20,
+  "invalid_by_reason": {
+   "deadline_exceeded": 6,
+   "zero_work": 4
+  },
+  "cost_invalid_by_reason": {},
+  "teardown_masked_cells": 71,
+  "by_ostk_version": {
+   "v7.6.0": {
+    "solve_valid_cells": 619,
+    "cost_valid_cells": 619,
+    "cost_invalid_cells": 0,
+    "invalid_cells": 10
+   },
+   "v7.7.1": {
+    "solve_valid_cells": 7,
+    "cost_valid_cells": 7,
+    "cost_invalid_cells": 0,
+    "invalid_cells": 0
+   }
+  },
+  "mixed_versions_note": "the totals above aggregate columns executed under more than one binary version (per-version split in by_ostk_version) \u2014 operational bookkeeping, NOT a cross-version comparison. No cross-version delta is published anywhere; versioned boards under boards/<version>/ are single-version."
+ },
+ "models": [
+  {
+   "model": "claude-fable-5",
+   "type": "B",
+   "native_cli": "claude-code",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 3,
+   "native_total": 3,
+   "kernel_solved": 0,
+   "kernel_total": 3,
+   "both_n": 0,
+   "both_cost_n": 0,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 3
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "july09",
+    "ostk": "july09"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": null,
+   "kernel": null,
+   "cost_delta": null,
+   "tok_delta": null,
+   "kernel_abs": null
+  },
+  {
+   "model": "claude-opus-4-8",
+   "type": "B",
+   "native_cli": "claude-code",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 36,
+   "native_total": 37,
+   "kernel_solved": 37,
+   "kernel_total": 37,
+   "both_n": 36,
+   "both_cost_n": 36,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 37
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "july02",
+    "ostk": "july02"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 11.07,
+    "fresh": 1887908,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 1887908,
+    "output": 65204,
+    "input_total": 1887908
+   },
+   "kernel": {
+    "cost": 11.209,
+    "fresh": 1909765,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 1909765,
+    "output": 66400,
+    "input_total": 1909765
+   },
+   "cost_delta": 1.3,
+   "tok_delta": 1.2,
+   "kernel_abs": {
+    "cost": 12.015,
+    "fresh": 2051077,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 2051077,
+    "output": 70375,
+    "input_total": 2051077
+   }
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "type": "B*",
+   "native_cli": "opencode",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 37,
+   "native_total": 37,
+   "kernel_solved": 35,
+   "kernel_total": 36,
+   "both_n": 35,
+   "both_cost_n": 35,
+   "invalid": {
+    "native": 0,
+    "ostk": 1
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 37
+   },
+   "source_arm": "kernel",
+   "snapshots": {
+    "native": "june16",
+    "ostk": "june16"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 1.125,
+    "fresh": 211350,
+    "cache_read": 2639744,
+    "cache_create": 0,
+    "billed": 2851094,
+    "output": 85625,
+    "input_total": 2851094
+   },
+   "kernel": {
+    "cost": 8.16,
+    "fresh": 4353782,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 4353782,
+    "output": 167897,
+    "input_total": 4353782
+   },
+   "cost_delta": 625.3,
+   "tok_delta": 52.7,
+   "kernel_abs": {
+    "cost": 8.16,
+    "fresh": 4353782,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 4353782,
+    "output": 167897,
+    "input_total": 4353782
+   }
+  },
+  {
+   "model": "gemini-3.5-flash",
+   "type": "B",
+   "native_cli": "gemini-cli",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 37,
+   "native_total": 37,
+   "kernel_solved": 1,
+   "kernel_total": 1,
+   "both_n": 1,
+   "both_cost_n": 1,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 35,
+    "unpriced": 2
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "june16",
+    "ostk": "july09"
+   },
+   "cross_snapshot_delta": true,
+   "cross_version_pair": true,
+   "delta_note": "SUPPRESSED: native (june16, v7.6.0) and ostk (july09, v7.7.1) columns executed under different binary versions \u2014 no cross-version delta is published anywhere (boards/index.json doctrine); compare within one version's board instead",
+   "native": {
+    "cost": 0.194,
+    "fresh": 99661,
+    "cache_read": 64768,
+    "cache_create": 0,
+    "billed": 164429,
+    "output": 3906,
+    "input_total": 164429
+   },
+   "kernel": {
+    "cost": 0.657,
+    "fresh": 372754,
+    "cache_read": 185948,
+    "cache_create": 0,
+    "billed": 558702,
+    "output": 7732,
+    "input_total": 558702
+   },
+   "cost_delta": null,
+   "tok_delta": null,
+   "kernel_abs": {
+    "cost": 0.657,
+    "fresh": 372754,
+    "cache_read": 185948,
+    "cache_create": 0,
+    "billed": 558702,
+    "output": 7732,
+    "input_total": 558702
+   }
+  },
+  {
+   "model": "gemini-3.1-pro-preview",
+   "type": "B",
+   "native_cli": "gemini-cli",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 36,
+   "native_total": 37,
+   "kernel_solved": 35,
+   "kernel_total": 37,
+   "both_n": 34,
+   "both_cost_n": 34,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 34,
+    "unpriced": 3
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "june16",
+    "ostk": "july02"
+   },
+   "cross_snapshot_delta": true,
+   "cross_version_pair": false,
+   "delta_note": "native and ostk columns come from different run-date snapshots (see faults: july02 reports cache_read=0, so pair cost bases differ)",
+   "native": {
+    "cost": 3.655,
+    "fresh": 937959,
+    "cache_read": 3186590,
+    "cache_create": 0,
+    "billed": 4124549,
+    "output": 95122,
+    "input_total": 4124549
+   },
+   "kernel": {
+    "cost": 5.509,
+    "fresh": 2427731,
+    "cache_read": 701446,
+    "cache_create": 0,
+    "billed": 3129177,
+    "output": 42772,
+    "input_total": 3129177
+   },
+   "cost_delta": 50.7,
+   "tok_delta": -24.1,
+   "kernel_abs": {
+    "cost": 5.827,
+    "fresh": 2572028,
+    "cache_read": 755954,
+    "cache_create": 0,
+    "billed": 3327982,
+    "output": 44335,
+    "input_total": 3327982
+   }
+  },
+  {
+   "model": "gpt-5.5",
+   "type": "B*",
+   "native_cli": "codex",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 36,
+   "native_total": 37,
+   "kernel_solved": 36,
+   "kernel_total": 37,
+   "both_n": 35,
+   "both_cost_n": 35,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 36
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 37
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "june16",
+    "ostk": "june16"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 6.381,
+    "fresh": 497968,
+    "cache_read": 4179840,
+    "cache_create": 0,
+    "billed": 4677808,
+    "output": 60050,
+    "input_total": 4677808
+   },
+   "kernel": {
+    "cost": 18.507,
+    "fresh": 3119753,
+    "cache_read": 2301952,
+    "cache_create": 0,
+    "billed": 5421705,
+    "output": 58569,
+    "input_total": 5421705
+   },
+   "cost_delta": 190.0,
+   "tok_delta": 15.9,
+   "kernel_abs": {
+    "cost": 18.876,
+    "fresh": 3182522,
+    "cache_read": 2348032,
+    "cache_create": 0,
+    "billed": 5530554,
+    "output": 59644,
+    "input_total": 5530554
+   }
+  },
+  {
+   "model": "kimi-k2.6",
+   "type": "B*",
+   "native_cli": "kimi",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 36,
+   "native_total": 37,
+   "kernel_solved": 35,
+   "kernel_total": 37,
+   "both_n": 35,
+   "both_cost_n": 35,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 37
+   },
+   "source_arm": "kernel",
+   "snapshots": {
+    "native": "june16",
+    "ostk": "june16"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 0.327,
+    "fresh": 386585,
+    "cache_read": 2390016,
+    "cache_create": 0,
+    "billed": 2776601,
+    "output": 38486,
+    "input_total": 2776601
+   },
+   "kernel": {
+    "cost": 1.42,
+    "fresh": 2911943,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 2911943,
+    "output": 128090,
+    "input_total": 2911943
+   },
+   "cost_delta": 334.3,
+   "tok_delta": 4.9,
+   "kernel_abs": {
+    "cost": 1.42,
+    "fresh": 2911943,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 2911943,
+    "output": 128090,
+    "input_total": 2911943
+   }
+  },
+  {
+   "model": "claude-sonnet-4-6",
+   "type": "B",
+   "native_cli": "claude-code",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 35,
+   "native_total": 37,
+   "kernel_solved": 35,
+   "kernel_total": 36,
+   "both_n": 34,
+   "both_cost_n": 34,
+   "invalid": {
+    "native": 0,
+    "ostk": 1
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 35
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 37
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "june16",
+    "ostk": "june16"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 7.348,
+    "fresh": 606,
+    "cache_read": 11344174,
+    "cache_create": 529553,
+    "billed": 11874333,
+    "output": 130464,
+    "input_total": 11874333
+   },
+   "kernel": {
+    "cost": 3.417,
+    "fresh": 214095,
+    "cache_read": 3159920,
+    "cache_create": 246670,
+    "billed": 3620685,
+    "output": 60105,
+    "input_total": 3620685
+   },
+   "cost_delta": -53.5,
+   "tok_delta": -69.5,
+   "kernel_abs": {
+    "cost": 3.529,
+    "fresh": 219179,
+    "cache_read": 3301044,
+    "cache_create": 253888,
+    "billed": 3774111,
+    "output": 61929,
+    "input_total": 3774111
+   }
+  },
+  {
+   "model": "grok-4.3",
+   "type": "B*",
+   "native_cli": "opencode",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 35,
+   "native_total": 37,
+   "kernel_solved": 30,
+   "kernel_total": 36,
+   "both_n": 30,
+   "both_cost_n": 30,
+   "invalid": {
+    "native": 0,
+    "ostk": 1
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 37
+   },
+   "source_arm": "kernel",
+   "snapshots": {
+    "native": "june16",
+    "ostk": "june16"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 0.853,
+    "fresh": 470862,
+    "cache_read": 1643840,
+    "cache_create": 0,
+    "billed": 2114702,
+    "output": 23495,
+    "input_total": 2114702
+   },
+   "kernel": {
+    "cost": 3.254,
+    "fresh": 2532728,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 2532728,
+    "output": 35325,
+    "input_total": 2532728
+   },
+   "cost_delta": 281.5,
+   "tok_delta": 19.8,
+   "kernel_abs": {
+    "cost": 3.254,
+    "fresh": 2532728,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 2532728,
+    "output": 35325,
+    "input_total": 2532728
+   }
+  },
+  {
+   "model": "devstral-2512",
+   "type": "B",
+   "native_cli": "vibe",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 6,
+   "native_total": 33,
+   "kernel_solved": 32,
+   "kernel_total": 34,
+   "both_n": 5,
+   "both_cost_n": 5,
+   "invalid": {
+    "native": 4,
+    "ostk": 3
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 33
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "june16",
+    "ostk": "june16"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 1.498,
+    "fresh": 3615795,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 3615795,
+    "output": 25596,
+    "input_total": 3615795
+   },
+   "kernel": {
+    "cost": 0.228,
+    "fresh": 540334,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 540334,
+    "output": 6129,
+    "input_total": 540334
+   },
+   "cost_delta": -84.8,
+   "tok_delta": -85.1,
+   "kernel_abs": {
+    "cost": 1.821,
+    "fresh": 4247606,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 4247606,
+    "output": 60747,
+    "input_total": 4247606
+   }
+  }
+ ]
 }

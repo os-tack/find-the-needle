@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Tests for consolidate_scores.py — cost-inversion fix, fail-closed validity,
-native_driver dedup, teardown_masked passthrough, absent-vs-INVALID.
+"""Tests for consolidate_scores.py — cost-inversion fix, fail-closed PER-AXIS
+validity (solve vs cost), native_driver dedup, teardown_masked passthrough,
+absent-vs-INVALID-vs-COST_INVALID, run-date snapshot selection.
 
 Offline, stdlib-only, runs in seconds:  python3 -m unittest discover -s tests
 """
@@ -17,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import consolidate_scores as cs
 import cell_validity as cv
+import publish_boards as pb
 
 
 # ---------------------------------------------------------------------------
@@ -251,22 +253,38 @@ class TestConsolidateTree(unittest.TestCase):
         self.build_default_tree()
         board, scores, _ = self.consolidate()
 
-        # ---- trust block present & counts correct ----
+        # ---- trust block present & per-axis counts correct ----
         trust = board["trust"]
-        # valid: sonnet native + sonnet cpu + gpt cpu + devstral native = 4
-        self.assertEqual(trust["valid_cells"], 4)
-        # invalid: sonnet dup kernel + sonnet deadline + kimi zero-output
-        #          + grok zero-billed = 4
-        self.assertEqual(trust["invalid_cells"], 4)
+        # SOLVE-valid: sonnet native + sonnet cpu + gpt cpu + devstral native
+        #              + grok native (cost-invalid) + kimi native (cost-invalid) = 6
+        self.assertEqual(trust["solve_valid_cells"], 6)
+        # ...of which both-axes valid = 4 (grok/kimi native cost axis unavailable)
+        self.assertEqual(trust["cost_valid_cells"], 4)
+        self.assertEqual(trust["cost_invalid_cells"], 2)
+        # fully INVALID (solve axis): sonnet dup kernel + sonnet deadline = 2.
+        # AXIS SPLIT: kimi zero-output + grok zero-billed are NO LONGER here —
+        # their solve verdicts are redeemed; only their cost axis is dead.
+        self.assertEqual(trust["invalid_cells"], 2)
         self.assertEqual(trust["invalid_by_reason"].get(cv.REASON_NATIVE_DRIVER_DUP), 1)
         self.assertEqual(trust["invalid_by_reason"].get(cv.REASON_DEADLINE), 1)
-        self.assertEqual(trust["invalid_by_reason"].get("zero_token_accounting"), 2)
+        self.assertNotIn("zero_token_accounting", trust["invalid_by_reason"])
+        # cost-axis histogram keeps the full subtype (visible per class)
+        self.assertEqual(trust["cost_invalid_by_reason"].get(cv.REASON_ZERO_BILLED), 1)
+        self.assertEqual(trust["cost_invalid_by_reason"].get(cv.REASON_ZERO_TOKEN_OUTPUT), 1)
 
-        # ---- scores.json holds only VALID cells ----
-        self.assertEqual(len(scores), 4)
+        # ---- scores.json holds every SOLVE-valid cell; cost axis flagged ----
+        self.assertEqual(len(scores), 6)
         for s in scores:
             self.assertIn("cost_basis", s)
             self.assertIn("teardown_masked", s)
+            self.assertIn("cost_valid", s)
+        by_agent = {s["agent"]: s for s in scores}
+        # cost-invalid cells are published with an UNAVAILABLE cost axis —
+        # never a rate-card synthesis, never a silent $0
+        for agent in ("grok-4.3-native", "kimi-k2.6-native"):
+            self.assertFalse(by_agent[agent]["cost_valid"])
+            self.assertIsNone(by_agent[agent]["computed_cost_usd"])
+            self.assertEqual(by_agent[agent]["cost_basis"], "unavailable")
 
         # ---- DEDUP: one execution never in two columns ----
         sonnet = self.model_row(board, "claude-sonnet-4-6")
@@ -299,20 +317,40 @@ class TestConsolidateTree(unittest.TestCase):
         self.assertEqual(gpt["ostk"]["source_arm"], "cpu")
         self.assertIn("note", gpt["ostk"])
 
-        # ---- absent vs INVALID ----
+        # ---- absent vs INVALID vs COST_INVALID (the axis split) ----
         grok = self.model_row(board, "grok-4-3")
         self.assertEqual(grok["kernel"]["total"], 0)
         self.assertEqual(grok["kernel"]["invalid"], 0)      # absent = never run
-        # grok native: zero-billed harness-incomplete → INVALID, never priced
-        self.assertEqual(grok["native"]["total"], 0)
-        self.assertEqual(grok["native"]["invalid"], 1)
-        grok_inv = [c for c in board["invalid_cells"] if c["model"] == "grok-4.3"]
-        self.assertEqual(len(grok_inv), 1)
-        self.assertIn(cv.REASON_ZERO_BILLED, grok_inv[0]["reasons"])
+        # grok native: zero-billed harness-incomplete → SOLVE verdict REDEEMED
+        # (enters solve columns), cost axis unavailable (excluded from cost
+        # columns, counted visibly, never priced).
+        self.assertEqual(grok["native"]["total"], 1)
+        self.assertEqual(grok["native"]["solved"], 1)
+        self.assertEqual(grok["native"]["invalid"], 0)
+        self.assertEqual(grok["native"]["cost_invalid"], 1)
+        self.assertEqual(grok["native"]["cost_cells"], 0)
+        self.assertEqual(grok["native"]["cost"], 0)
+        self.assertEqual(grok["native"]["tokens"], 0)       # cost axis excluded
+        self.assertEqual(grok["native"]["cost_bases"], {"unavailable": 1})
+        grok_ci = [c for c in board["cost_invalid_cells"] if c["model"] == "grok-4.3"]
+        self.assertEqual(len(grok_ci), 1)
+        self.assertIn(cv.REASON_ZERO_BILLED, grok_ci[0]["reasons"])
+        self.assertEqual(grok_ci[0]["axis"], "cost")
+        # ...and NOT in the fully-invalid list
+        self.assertFalse([c for c in board["invalid_cells"] if c["model"] == "grok-4.3"])
         kimi = self.model_row(board, "kimi-k2-6")
-        self.assertIsNotNone(kimi)                          # all-invalid model still visible
-        self.assertEqual(kimi["native"]["total"], 0)
-        self.assertEqual(kimi["native"]["invalid"], 1)      # INVALID = counted
+        self.assertIsNotNone(kimi)
+        self.assertEqual(kimi["native"]["total"], 1)        # solve verdict kept
+        self.assertEqual(kimi["native"]["solved"], 1)
+        self.assertEqual(kimi["native"]["cost_invalid"], 1)
+        self.assertEqual(kimi["native"]["cost_cells"], 0)
+        # per-bench arm summary carries the axis flag + unavailable cost
+        kimi_bench = [b for b in board["benchmarks"]
+                      if b["model_normalized"] == "kimi-k2-6"][0]
+        self.assertTrue(kimi_bench["native"]["resolved"])
+        self.assertFalse(kimi_bench["native"]["cost_valid"])
+        self.assertIsNone(kimi_bench["native"]["cost_usd"])
+        self.assertEqual(kimi_bench["native"]["cost_basis"], "unavailable")
 
         # ---- token/cost inversion fixed at board level ----
         # native billed 125,974 total vs kernel 66,723: the fresh-only column
@@ -321,17 +359,23 @@ class TestConsolidateTree(unittest.TestCase):
         self.assertEqual(sonnet["cpu"]["tokens"], 65706 + 1017)
         self.assertGreater(sonnet["native"]["tokens"], sonnet["cpu"]["tokens"])
         self.assertGreater(sonnet["native"]["cost"], sonnet["cpu"]["cost"])
-        # devstral native (present-but-zero, no est) priced from
-        # input_tokens via the explicit total-as-fresh floor, not ~$0
+        # cost_cells makes the $/task denominator honest (== cost-valid cells)
+        self.assertEqual(sonnet["native"]["cost_cells"], 1)
+        # devstral native (present-but-zero, no est, NOT completed so the
+        # zero-billed rule does not fire) priced from input_tokens via the
+        # explicit total-as-fresh floor, not ~$0
         dev = self.model_row(board, "devstral-2512")
         self.assertGreater(dev["native"]["cost"], 0.02)
         self.assertEqual(dev["native"]["cost_bases"], {"total-as-fresh": 1})
 
     def test_arm_mismatch_cell_is_invalid(self):
+        # A receipt failure is a SOLVE-axis fault: fully INVALID on both axes
+        # (never redeemed by good token accounting).
         bad = sonnet_native_cell()
         self.write_cell("claude-sonnet-4-6-kernel-cpu", "bench-a", bad)  # native receipt in cpu dir
         board, scores, _ = self.consolidate()
-        self.assertEqual(board["trust"]["valid_cells"], 0)
+        self.assertEqual(board["trust"]["solve_valid_cells"], 0)
+        self.assertEqual(board["trust"]["cost_invalid_cells"], 0)
         self.assertEqual(board["trust"]["invalid_cells"], 1)
         self.assertEqual(board["trust"]["invalid_by_reason"].get(cv.REASON_ARM_MISMATCH), 1)
         self.assertEqual(scores, [])
@@ -350,6 +394,7 @@ class TestConsolidateTree(unittest.TestCase):
         board, _, _ = self.consolidate()
         self.assertEqual(board["trust"]["policy_excluded_cells"], 1)
         self.assertEqual(board["trust"]["invalid_cells"], 0)
+        self.assertEqual(board["trust"]["cost_invalid_cells"], 0)
 
     def test_generic_kernel_dup_when_both_dirs(self):
         # generic_kernel model with BOTH -kernel and -kernel-cpu → kernel-cpu
@@ -381,9 +426,191 @@ class TestConsolidateTree(unittest.TestCase):
         (d / "bench-a.recovered-june16.score.json").write_text(json.dumps(worse))
         self.write_cell("claude-sonnet-4-6-kernel-cpu", "bench-a", sonnet_kernel_cell())
         board, scores, _ = self.consolidate()
-        self.assertEqual(board["trust"]["valid_cells"], 2)   # two valid FILES...
+        self.assertEqual(board["trust"]["solve_valid_cells"], 2)  # two valid FILES...
         self.assertEqual(len(scores), 1)                     # ...ONE published cell
         self.assertTrue(scores[0]["resolved"])               # the keep-best winner
+
+
+class TestSnapshots(unittest.TestCase):
+    """Run-date snapshot selection: the LATEST board is single-snapshot per
+    (model, arm) column — a re-run eclipses the earlier run outright (even a
+    worse one; keep-best never mixes run dates), and the earlier run remains
+    available as its own versioned snapshot board."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        root = Path(self._tmp.name)
+        self.runs = root / "runs"
+        self.runs.mkdir()
+        self._saved = (cs.RUNS_DIR, cs.SCORES_OUTPUT, cs.EXPERIMENT_OUTPUT)
+        cs.RUNS_DIR = self.runs
+        cs.SCORES_OUTPUT = root / "public" / "scores.json"
+        cs.EXPERIMENT_OUTPUT = root / "public" / "experiment-scores.json"
+        d = self.runs / "claude-sonnet-4-6-kernel-cpu"
+        d.mkdir()
+        june = sonnet_kernel_cell()          # resolved=True, 2026-06-16
+        july = sonnet_kernel_cell()
+        july.update({"resolved": False, "turns_to_fix": 12,
+                     "timestamp": "2026-07-02T13:00:00Z"})
+        (d / "bench-a.recovered-june16.score.json").write_text(json.dumps(june))
+        (d / "bench-a.score.json").write_text(json.dumps(july))
+        # native arm ran ONLY in June — its column stays june16 in the latest
+        # board (single-snapshot per column, not per board).
+        (self.runs / "claude-sonnet-4-6-native").mkdir()
+        (self.runs / "claude-sonnet-4-6-native" / "bench-a.score.json").write_text(
+            json.dumps(sonnet_native_cell()))
+
+    def tearDown(self):
+        cs.RUNS_DIR, cs.SCORES_OUTPUT, cs.EXPERIMENT_OUTPUT = self._saved
+        self._tmp.cleanup()
+
+    def collect(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            return cs.collect_cells()
+
+    def test_latest_is_single_snapshot_per_column(self):
+        cells, pe, _ = self.collect()
+        board, scores = cs.build_experiment_output(cells, pe, snapshot="latest", quiet=True)
+        row = [m for m in board["models"] if m["model_normalized"] == "claude-sonnet-4-6"][0]
+        # July eclipses June even though June's cell was resolved and July's
+        # is not — a re-run replaces, keep-best never mixes run dates.
+        self.assertEqual(row["cpu"]["total"], 1)
+        self.assertEqual(row["cpu"]["solved"], 0)
+        self.assertEqual(board["column_snapshots"]["claude-sonnet-4-6/cpu"], "july02")
+        self.assertEqual(board["column_snapshots"]["claude-sonnet-4-6/native"], "june16")
+        cpu_scores = [s for s in scores if s.get("agent", "").endswith("kernel-cpu")]
+        self.assertEqual(len(cpu_scores), 1)
+        self.assertEqual(cpu_scores[0]["snapshot"], "july02")
+
+    def test_snapshot_boards_are_pure(self):
+        cells, pe, _ = self.collect()
+        june_board, june_scores = cs.build_experiment_output(
+            cells, pe, snapshot="june16", quiet=True)
+        july_board, july_scores = cs.build_experiment_output(
+            cells, pe, snapshot="july02", quiet=True)
+        jrow = [m for m in june_board["models"] if m["model_normalized"] == "claude-sonnet-4-6"][0]
+        self.assertEqual(jrow["cpu"]["solved"], 1)          # June cell preserved
+        self.assertEqual(jrow["native"]["total"], 1)        # native ran in June
+        yrow = [m for m in july_board["models"] if m["model_normalized"] == "claude-sonnet-4-6"][0]
+        self.assertEqual(yrow["cpu"]["total"], 1)
+        self.assertEqual(yrow["cpu"]["solved"], 0)
+        self.assertEqual(yrow["native"]["total"], 0)        # native absent in July
+        self.assertTrue(all(s["snapshot"] == "june16" for s in june_scores))
+        self.assertTrue(all(s["snapshot"] == "july02" for s in july_scores))
+
+    def test_snapshot_faults_annotated(self):
+        cells, pe, _ = self.collect()
+        board, _ = cs.build_experiment_output(cells, pe, snapshot="july02", quiet=True)
+        self.assertIn("july02-cache-read-zero", [f["id"] for f in board["faults"]])
+        latest, _ = cs.build_experiment_output(cells, pe, snapshot="latest", quiet=True)
+        ids = [f["id"] for f in latest["faults"]]
+        self.assertIn("june16-teardown-masked", ids)   # native column is june16
+        self.assertIn("july02-cache-read-zero", ids)   # cpu column is july02
+
+    def test_column_supersessions_disclosed(self):
+        # The July re-run displaced the June cpu cell: the eviction must be
+        # DECLARED in the latest board (a partial re-run can never silently
+        # shrink a column — the gemini-3.5-flash 1-cell smoke evicted 36).
+        cells, pe, _ = self.collect()
+        latest, _ = cs.build_experiment_output(cells, pe, snapshot="latest", quiet=True)
+        sup = latest["column_supersessions"]
+        self.assertEqual(sup["claude-sonnet-4-6/cpu"], {
+            "published_snapshot": "july02",
+            "published_cells": 1,
+            "displaced_cells": {"june16": 1},
+        })
+        self.assertNotIn("claude-sonnet-4-6/native", sup)  # single-snapshot column
+        # same-version columns → no mixed-version trust split needed
+        self.assertNotIn("by_ostk_version", latest["trust"])
+        self.assertEqual(latest["ostk_versions"],
+                         {"june16": "v7.6.0", "july02": "v7.6.0"})
+
+    def test_versioned_boards_carry_no_latest_riders(self):
+        # Versioned snapshot boards are append-only: the latest-only honesty
+        # riders must never perturb their payloads.
+        cells, pe, _ = self.collect()
+        for snap in ("june16", "july02"):
+            board, _ = cs.build_experiment_output(cells, pe, snapshot=snap, quiet=True)
+            for key in ("column_supersessions", "ostk_versions", "ostk_version_note"):
+                self.assertNotIn(key, board, f"{key} leaked into {snap} board")
+            self.assertNotIn("by_ostk_version", board["trust"])
+            self.assertNotIn("mixed_versions_note", board["trust"])
+
+
+class TestMixedVersionBoard(unittest.TestCase):
+    """Cross-VERSION machinery: when the latest board's columns span binary
+    versions (june16 = v7.6.0 vs july09 = v7.7.1), the trust totals must carry
+    a per-version split, and the board-v760 adapter must SUPPRESS the pair
+    delta outright (boards/index.json doctrine: no cross-version delta is
+    published anywhere). Same-version cross-snapshot deltas stay published
+    flagged (gemini-3.1 native june16 vs cpu july02, both v7.6.0)."""
+
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        root = Path(self._tmp.name)
+        self.runs = root / "runs"
+        self.runs.mkdir()
+        self._saved = (cs.RUNS_DIR, cs.SCORES_OUTPUT, cs.EXPERIMENT_OUTPUT)
+        cs.RUNS_DIR = self.runs
+        cs.SCORES_OUTPUT = root / "public" / "scores.json"
+        cs.EXPERIMENT_OUTPUT = root / "public" / "experiment-scores.json"
+        # native ran in June (v7.6.0); cpu re-ran on the v7.7.1 pin (july09).
+        (self.runs / "claude-sonnet-4-6-native").mkdir()
+        (self.runs / "claude-sonnet-4-6-native" / "bench-a.score.json").write_text(
+            json.dumps(sonnet_native_cell()))
+        d = self.runs / "claude-sonnet-4-6-kernel-cpu"
+        d.mkdir()
+        july9 = sonnet_kernel_cell()
+        july9["timestamp"] = "2026-07-09T04:00:00Z"
+        (d / "bench-a.score.json").write_text(json.dumps(july9))
+
+    def tearDown(self):
+        cs.RUNS_DIR, cs.SCORES_OUTPUT, cs.EXPERIMENT_OUTPUT = self._saved
+        self._tmp.cleanup()
+
+    def build(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            cells, pe, _ = cs.collect_cells()
+        latest, _ = cs.build_experiment_output(cells, pe, snapshot="latest", quiet=True)
+        by_col = pb.best_by_column(pb.latest_cells(cells))
+        return latest, pb.emit_board(latest, by_col, published=1)
+
+    def test_mixed_version_trust_split_sums_to_totals(self):
+        latest, _ = self.build()
+        self.assertEqual(latest["ostk_versions"],
+                         {"june16": "v7.6.0", "july09": "v7.7.1"})
+        by_ver = latest["trust"]["by_ostk_version"]
+        self.assertEqual(set(by_ver), {"v7.6.0", "v7.7.1"})
+        for k in ("solve_valid_cells", "cost_valid_cells",
+                  "cost_invalid_cells", "invalid_cells"):
+            self.assertEqual(sum(v[k] for v in by_ver.values()),
+                             latest["trust"][k], k)
+        self.assertIn("mixed_versions_note", latest["trust"])
+
+    def test_cross_version_pair_delta_suppressed(self):
+        _, board = self.build()
+        row = [m for m in board["models"] if m["model"] == "claude-sonnet-4-6"][0]
+        self.assertTrue(row["cross_snapshot_delta"])
+        self.assertTrue(row["cross_version_pair"])
+        self.assertIsNone(row["cost_delta"])
+        self.assertIsNone(row["tok_delta"])
+        self.assertTrue(row["delta_note"].startswith("SUPPRESSED"))
+        self.assertEqual(row["both_cost_n"], 1)   # the pair itself stays visible
+
+    def test_same_version_cross_snapshot_delta_still_published(self):
+        # Move the cpu re-run back to july02 (same v7.6.0 binary as june16):
+        # the delta must publish, flagged — behavior unchanged from before.
+        d = self.runs / "claude-sonnet-4-6-kernel-cpu"
+        july2 = sonnet_kernel_cell()
+        july2["timestamp"] = "2026-07-02T13:00:00Z"
+        (d / "bench-a.score.json").write_text(json.dumps(july2))
+        _, board = self.build()
+        row = [m for m in board["models"] if m["model"] == "claude-sonnet-4-6"][0]
+        self.assertTrue(row["cross_snapshot_delta"])
+        self.assertFalse(row["cross_version_pair"])
+        self.assertIsNotNone(row["cost_delta"])
+        self.assertIsNotNone(row["tok_delta"])
+        self.assertIn("different run-date snapshots", row["delta_note"])
 
 
 if __name__ == "__main__":
