@@ -22,7 +22,7 @@ COPY . .
 RUN chmod +x test.sh
 
 # Install Rust toolchain in final image so agent can rebuild
-RUN apt-get update -qq && apt-get install -y --no-install-recommends curl gcc && \
+RUN apt-get update -qq && apt-get install -y --no-install-recommends ca-certificates curl gcc libc6-dev && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain 1.82.0 && \
     rm -rf /var/lib/apt/lists/*
 

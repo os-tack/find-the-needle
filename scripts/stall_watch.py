@@ -47,6 +47,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import signal
 import subprocess
 import sys
@@ -84,6 +85,26 @@ TERMINAL_LIFECYCLE_EVENTS = {
     "api.error",
 }
 
+# A cell is "resolved" ONLY when a harness-executed `bash test.sh` exits 0.
+# The model *inspecting* test.sh (cat/ls/grep/head) must never be mistaken for
+# *running* it — that substring confusion let a read-only `cat test.sh` (exit
+# 0) get scored as a passing test run. Ported verbatim from run_arms.py's
+# _TEST_EXEC_RE / _is_test_execution — keep the two definitions in lockstep.
+_TEST_EXEC_RE = re.compile(
+    r"(?:^|[\s;&|(])"
+    r"(?:"
+    r"(?:bash|sh)\s+(?:\S*/)?test\.sh"   # bash test.sh / sh path/test.sh
+    r"|\.?/(?:\S*/)?test\.sh"            # ./test.sh / /abs/test.sh
+    r")"
+    r"(?:\s|$|[;&|)])"
+)
+
+
+def _is_test_execution(cmd: str) -> bool:
+    """True iff the model's bash command actually *runs* test.sh, as opposed to
+    inspecting it (cat/ls/grep/head test.sh)."""
+    return bool(_TEST_EXEC_RE.search(cmd))
+
 # Candidate in-container journal locations ({workdir}/.ostk/journal.jsonl —
 # scenario workdirs are /app or /workspace across the suite).
 JOURNAL_CANDIDATES = ("/app/.ostk/journal.jsonl", "/workspace/.ostk/journal.jsonl")
@@ -115,6 +136,34 @@ def journaled_end_turn_complete(row: dict) -> bool:
     if isinstance(tc, list):
         return len(tc) == 0
     return False
+
+
+_TERMINAL_STOP_REASONS = {
+    "end_turn", "stop_sequence", "refusal", "max_tokens",
+    "model_context_window_exceeded",
+}
+
+
+def journaled_terminal_stop_reason(row: dict) -> str | None:
+    """Python mirror of haystack bench.rs journaled_terminal_stop_reason: the
+    TRUE API-level terminal stop_reason of a cpu.response.decoded row with no
+    pending tool_calls (broadened beyond end_turn to refusal/max_tokens/etc —
+    keep in lockstep with bench.rs)."""
+    if row.get("event") != "cpu.response.decoded":
+        return None
+    tc = row.get("tool_calls")
+    if tc is None:
+        pending = False
+    elif isinstance(tc, (int, float)):
+        pending = tc != 0
+    elif isinstance(tc, list):
+        pending = len(tc) != 0
+    else:
+        pending = True
+    if pending:
+        return None
+    sr = row.get("stop_reason")
+    return sr if sr in _TERMINAL_STOP_REASONS else None
 
 
 def iter_journal_rows(journal_text: str):
@@ -151,11 +200,18 @@ def parse_journal_metrics(journal_text: str) -> dict:
         "billed_tokens": 0,
         "stop_reason": "", "summary": "", "end_turn_reached": False,
         "last_test_exit": None,
+        # →stop-reason-masking fix: the TRUE API-level terminal stop_reason
+        # from the last terminal cpu.response.decoded row, tracked separately
+        # from the process-exit-derived `stop_reason` below.
+        "journaled_stop_reason": None,
     }
     for row in iter_journal_rows(journal_text):
         ev = row.get("event", "")
         if journaled_end_turn_complete(row):
             m["end_turn_reached"] = True
+        jr = journaled_terminal_stop_reason(row)
+        if jr is not None:
+            m["journaled_stop_reason"] = jr
         if ev == "api.call":
             m["turns"] += 1
             for k in ("input_tokens", "output_tokens", "cache_read_tokens",
@@ -167,22 +223,34 @@ def parse_journal_metrics(journal_text: str) -> dict:
             m["tool_uses"] += 1
         elif ev == "tool.bash":
             cmd = str(row.get("cmd", ""))
-            if "test.sh" in cmd and row.get("exit_code") is not None:
+            if _is_test_execution(cmd) and row.get("exit_code") is not None:
                 m["last_test_exit"] = int(row.get("exit_code"))
         elif ev in TERMINAL_LIFECYCLE_EVENTS:
             if ev == "api.error":
                 m["stop_reason"] = "api_error"
+                m["process_exit"] = "api_error"
                 m["summary"] = str(row.get("error", ""))
             else:
                 exit_code = row.get("exit_code", -1)
                 if ev == "agent.completed" and exit_code == 0:
                     m["stop_reason"] = "end_turn"
                 elif ev == "agent.completed":
-                    m["stop_reason"] = f"exit_code: {exit_code}"
+                    exit_label = f"exit_code: {exit_code}"
+                    m["process_exit"] = exit_label
+                    # THE FIX: prefer the journaled TRUE stop_reason (refusal /
+                    # max_tokens / etc.) over the bare process exit_code — a
+                    # model refusal makes `run_loop` return Err(Refusal), which
+                    # exits the kernel process non-zero even though the API
+                    # told us exactly why. Only fall back to the exit-code
+                    # label when the journal has no terminal decoded row at all
+                    # (e.g. died before any response was decoded).
+                    m["stop_reason"] = m["journaled_stop_reason"] or exit_label
                 else:
                     m["stop_reason"] = ev
+                    m.setdefault("process_exit", ev)
     if not m["stop_reason"]:
         m["stop_reason"] = "end_turn" if m["end_turn_reached"] else "watchdog_no_terminal"
+    m.setdefault("process_exit", None)
     return m
 
 
@@ -223,6 +291,7 @@ def score_from_journal(journal_text: str, *, model: str, bench: str, arm: str,
         "billed_tokens": m["billed_tokens"],
         "estimated_cost_usd": round(m["cost_usd"], 6),
         "stop_reason": m["stop_reason"],
+        "process_exit": m.get("process_exit"),
         "summary": m["summary"] or (
             f"{m['stop_reason']}: {m['turns']}turns, "
             f"{m['input_tokens']}+{m['output_tokens']} tokens, "

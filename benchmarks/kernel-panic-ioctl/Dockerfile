@@ -9,7 +9,7 @@ RUN make
 
 FROM debian:bookworm-slim
 
-RUN apt-get update -qq && apt-get install -y --no-install-recommends bash git gcc make && \
+RUN apt-get update -qq && apt-get install -y --no-install-recommends bash git gcc make libc6-dev linux-libc-dev && \
     git config --global user.email "bench@needle-bench.cc" && \
     git config --global user.name "needle-bench"
 

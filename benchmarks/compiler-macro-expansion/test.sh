@@ -36,11 +36,11 @@ echo "Generated code written to /tmp/generated.rs"
 # Check that Ref-typed fields have reference return types.
 # Use fixed-string grep (-F) to match "-> Company {" literally.
 # The bug produces "-> Company {" (owned); the fix produces "-> &Company {" (reference).
-if grep -Fq "-> Company {" /tmp/generated.rs && ! grep -Fq "-> &Company {" /tmp/generated.rs; then
+if grep -Fq -- "-> Company {" /tmp/generated.rs && ! grep -Fq -- "-> &Company {" /tmp/generated.rs; then
     echo "FAIL: company getter returns owned type instead of reference"
     FAIL=1
 fi
-if grep -Fq "-> Address {" /tmp/generated.rs && ! grep -Fq "-> &Address {" /tmp/generated.rs; then
+if grep -Fq -- "-> Address {" /tmp/generated.rs && ! grep -Fq -- "-> &Address {" /tmp/generated.rs; then
     echo "FAIL: address getter returns owned type instead of reference"
     FAIL=1
 fi
