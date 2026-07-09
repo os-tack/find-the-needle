@@ -50,27 +50,46 @@ EXPERIMENT_OUTPUT = Path(__file__).parent / "public" / "experiment-scores.json"
 # Run-date snapshots (versioned publishing). A snapshot is a run-date window;
 # cells are assigned by their payload timestamp. v7.6.0 has two: the June
 # 15-17 original run ("june16", includes the *.recovered-june16 twins) and the
-# July-2 opus/gemini kernel-cpu + opus native re-run ("july02"). "july09" is
-# the v7.7.1 window (frozen-bin pin rolled 2026-07-09; fable-5 + flash smoke).
+# July-2 opus/gemini kernel-cpu + opus native re-run ("july02"). 2026-07-09
+# hosted THREE frozen-bin pins in one day — v7.7.1 ("july09"; fable-5 + flash
+# smoke), v7.7.2 ("july09v2"), and v7.7.3 ("july09v3", the current latest).
 # ---------------------------------------------------------------------------
-OSTK_VERSION = "v7.7.2"                      # current binary (latest board)
-SNAPSHOTS = ("june16", "july02", "july09", "july09v2")   # chronological order
+OSTK_VERSION = "v7.7.3"                      # current binary (latest board)
+# Chronological order — MUST stay oldest→newest: downstream ranking uses
+# SNAPSHOTS.index (see published_snapshot_for / consolidate_all) to pick the
+# newest snapshot per column, so a new pin is APPENDED, never inserted.
+SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3")
+# F2 FIX — RECEIPT-DRIVEN SNAPSHOT IDENTITY. The cell's own bench_binary.version
+# receipt is the RELIABLE attribution signal; the hand-maintained date ladder
+# below can only split the v7.6.0 june16/july02 pair (same binary, different run
+# windows) and is used ONLY as the fallback for cells with no known version
+# receipt. Any cell whose version maps here is filed by receipt regardless of
+# its payload date. v7.6.0 is intentionally ABSENT (date-ambiguous). Newest
+# first for readability; matching is exact-or-dotted-prefix (see snapshot_of).
+SNAPSHOT_BY_VERSION = (
+    ("7.7.3", "july09v3"),   # 2026-07-09 third pin (current latest board)
+    ("7.7.2", "july09v2"),   # 2026-07-09 second pin
+    ("7.7.1", "july09"),     # 2026-07-09 first pin
+)
 # Run-date boundaries, newest first; a cell belongs to the first snapshot
 # whose boundary its run date reaches. Dates below the oldest → SNAPSHOTS[0].
-# 2026-07-09 hosted TWO binaries (frozen-bin re-pinned v7.7.1→v7.7.2 mid-day),
-# so the date boundary alone cannot attribute that day: snapshot_of() splits
-# july09 → july09v2 by the cell's own bench_binary receipt, never by date.
+# 2026-07-09 hosted multiple binaries, so the date boundary alone cannot
+# attribute that day; the version receipt (SNAPSHOT_BY_VERSION) decides. A
+# receiptless 2026-07-09 cell stays in "july09" (the day's OLDEST binary) —
+# fail-closed, never promoted into a newer binary it may not have executed on.
 SNAPSHOT_BOUNDARIES = (
     ("2026-07-09", "july09"),
     ("2026-07-01", "july02"),
 )
 SNAPSHOT_RUN_DATE = {"june16": "2026-06-16", "july02": "2026-07-02",
-                     "july09": "2026-07-09", "july09v2": "2026-07-09"}
+                     "july09": "2026-07-09", "july09v2": "2026-07-09",
+                     "july09v3": "2026-07-09"}
 # Binary identity per snapshot: versioned boards land under
 # boards/<SNAPSHOT_OSTK_VERSION[snap]>/ — a run is never re-attributed to a
 # binary it did not execute on (runs/.binary_identity.jsonl is the receipt).
 SNAPSHOT_OSTK_VERSION = {"june16": "v7.6.0", "july02": "v7.6.0",
-                         "july09": "v7.7.1", "july09v2": "v7.7.2"}
+                         "july09": "v7.7.1", "july09v2": "v7.7.2",
+                         "july09v3": "v7.7.3"}
 # Fault ids (boards/FAULTS.json) attached to each snapshot's published board.
 SNAPSHOT_FAULTS = {
     "june16": ["june16-teardown-masked"],
@@ -82,6 +101,10 @@ SNAPSHOT_FAULTS = {
                "july09-fable5-native-opus-fallback"],
     "july09v2": ["july09-f7-earlystop-truncated-votes",
                  "july09-runcell-exit1-hardfail"],
+    # v7.7.3 (current latest): F7 early-stop + runcell hard-fail both fixed
+    # before this pin; retry-cost accounting is now summed across attempts
+    # (see load_score F3). No known era faults yet.
+    "july09v3": [],
 }
 # Human-readable one-liners for the ids above; the canonical machine-readable
 # era annotations (windows, commits, affected models) live in boards/FAULTS.json.
@@ -128,9 +151,44 @@ FAULT_NOTES = {
 }
 
 
+def snapshot_for_version(version: str) -> str | None:
+    """Map a bench_binary.version receipt to its snapshot, or None when the
+    version is empty or not one we recognise. Matching is exact-or-dotted-prefix
+    so a build-suffixed receipt (e.g. '7.7.3.1') still resolves while '7.7.30'
+    does NOT collide with '7.7.3'."""
+    v = (version or "").strip()
+    if not v:
+        return None
+    for prefix, snap in SNAPSHOT_BY_VERSION:
+        if v == prefix or v.startswith(prefix + "."):
+            return snap
+    return None
+
+
 def snapshot_of(entry: dict | None, fpath: Path | None = None) -> str:
-    """Snapshot for a cell: payload timestamp first; file mtime as the
-    fail-closed fallback for malformed payloads (no timestamp to trust)."""
+    """Snapshot for a cell — RECEIPT-FIRST (F2 fix).
+
+    The cell's own bench_binary.version receipt is the reliable attribution
+    signal, so any cell carrying a version that maps to a known snapshot
+    (SNAPSHOT_BY_VERSION) is filed by that receipt REGARDLESS of its payload
+    date. This is what keeps a 2026-07-09 v7.7.3 cell out of the v7.7.1
+    "july09" bucket (the old date-ladder special-case only knew v7.7.2).
+
+    The date ladder is the FALLBACK for cells with no known version receipt —
+    it distinguishes the v7.6.0 june16/july02 pair (one binary, two run windows,
+    so a receipt cannot split them) and, fail-closed, keeps a receiptless
+    2026-07-09 cell in "july09" (the day's OLDEST binary). A receiptless cell
+    is NEVER promoted into a newer binary it may not have executed on.
+
+    Payload timestamp drives the date ladder; file mtime is the last-resort
+    fallback for malformed payloads with no timestamp to trust."""
+    # 1. Version receipt — the reliable signal. Wins over the date ladder.
+    if isinstance(entry, dict):
+        snap = snapshot_for_version(
+            str((entry.get("bench_binary") or {}).get("version", "") or ""))
+        if snap is not None:
+            return snap
+    # 2. Fail-closed date ladder for receiptless / unknown-version cells.
     ts = (entry.get("timestamp") or "") if isinstance(entry, dict) else ""
     if not ts and fpath is not None:
         import datetime
@@ -138,16 +196,6 @@ def snapshot_of(entry: dict | None, fpath: Path | None = None) -> str:
             fpath.stat().st_mtime, datetime.timezone.utc).isoformat()
     for boundary, snap in SNAPSHOT_BOUNDARIES:
         if ts[:10] >= boundary:
-            # 2026-07-09 hosted two pins (v7.7.1 → v7.7.2 mid-day): the
-            # cell's own bench_binary receipt decides, never the date. A
-            # cell without a receipt stays in the date snapshot — every
-            # cell since the receipt landed carries one, and mis-filing a
-            # receiptless cell UP into a newer binary would fabricate
-            # attribution.
-            if snap == "july09" and isinstance(entry, dict):
-                ver = str((entry.get("bench_binary") or {}).get("version", ""))
-                if ver.startswith("7.7.2"):
-                    return "july09v2"
             return snap
     return SNAPSHOTS[0]
 
@@ -221,6 +269,9 @@ CPU_DRIVER_MODELS = {
     "claude-haiku-4-5", "claude-sonnet-4-6", "claude-opus-4-6",
     "claude-opus-4-8",  # frontier-2026 Tier-1
     "claude-fable-5",   # frontier-2026 Tier-1 (added 2026-07-09)
+    "claude-sonnet-5",  # frontier-2026 Tier-1: native CpuDriver via AnthropicClient
+                        # (same route as opus-4-8 / fable-5). F6 fix — was
+                        # mislabeled generic_kernel (no driver) on the board.
     # Google — native Gemini API
     # gemini-3-1-pro-preview is the frontier-2026 Tier-1 entry (also pre-existing).
     "gemini-2-5-flash", "gemini-2-5-pro", "gemini-3-flash-preview", "gemini-3-1-pro-preview",
@@ -429,6 +480,16 @@ def load_score(fpath: Path) -> tuple[dict | None, str | None]:
     F7: if a sibling `<bench>.samples.json` exists, fold majority-vote +
     variance from the samples sidecar into the returned entry.
 
+    F3 — RETRY-COST TRUTH: F7 runs up to 3 samples, resampling only after a
+    miss, and the canonical `<bench>.score.json` mirrors only the FINAL attempt.
+    So an initially-failing cell would publish just its last try's spend while a
+    first-pass success publishes its single full spend — non-comparable $/task.
+    When N>1 attempts exist, the token & cost fields are OVERWRITTEN with the
+    TRUE TOTAL SPEND summed across every attempt (priced downstream on the same
+    per-bucket basis as a single-shot cell); the final-attempt values are kept
+    under `final_attempt_*` and the count under `retry_attempts`. Resolution and
+    turns remain majority-vote / final (unchanged).
+
     NOTE: the old silent quality gate (deadline / zero-work cells returning
     None) moved to cell_validity.classify_cell — those cells are now VISIBLY
     INVALID and counted per model/arm instead of vanishing (fail-closed).
@@ -469,6 +530,28 @@ def load_score(fpath: Path) -> tuple[dict | None, str | None]:
                     data["wall_clock_min"] = min(walls)
                     data["wall_clock_max"] = max(walls)
                     data["wall_clock_mean"] = sum(walls) / n
+                if n > 1:
+                    # F3 — fold TOTAL retry spend (sum across attempts) into the
+                    # token & cost fields. compute_cost_ex / total_input_tokens
+                    # then price the full spend from the summed atomic buckets on
+                    # the same basis as a single-shot cell. A field is summed
+                    # only when at least one attempt reports a non-None value, so
+                    # an all-None `fresh_input_tokens` is left untouched (keeps
+                    # compute_cost_ex on its legacy path, no present-but-zero
+                    # flip). None is treated as 0 within the sum.
+                    TOTAL_SPEND_FIELDS = (
+                        "input_tokens", "output_tokens", "token_cost",
+                        "estimated_cost_usd", "fresh_input_tokens",
+                        "cache_read_tokens", "cache_create_tokens",
+                        "cache_create_5m_tokens", "cache_create_1h_tokens",
+                        "tool_uses",
+                    )
+                    data["retry_attempts"] = n
+                    for field in TOTAL_SPEND_FIELDS:
+                        if not any(s.get(field) is not None for s in samples):
+                            continue
+                        data[f"final_attempt_{field}"] = data.get(field)
+                        data[field] = sum((s.get(field) or 0) for s in samples)
         except Exception as e:
             print(f"  WARN: samples sidecar unreadable {samples_fp} — {e}", file=sys.stderr)
     return data, None
