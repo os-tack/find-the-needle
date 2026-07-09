@@ -2,7 +2,7 @@
   "agent": "devstral-2512-native",
   "arm": "native",
   "benchmark": "split-brain-leader-election",
-  "billed_tokens": 0,
+  "billed_tokens": 340925,
   "cache_create_1h_tokens": 0,
   "cache_create_5m_tokens": 0,
   "cache_create_tokens": 0,
@@ -10,15 +10,33 @@
   "control_type": "native",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "fresh_input_tokens": 0,
+  "fresh_input_tokens": 340925,
   "input_tokens": 340925,
   "output_tokens": 2176,
   "resolved": false,
   "stop_reason": "fail",
   "summary": "## Summary\n\nI have identified the needle - the bug in the leader election protocol!\n\n**The Bug**: In `app/cluster/node.go` at line 124, the quorum check uses:\n```go\nif finalVotes >= totalNodes/2 {\n```\n\n**The Problem**: \n- For a 5-node cluster, `totalNodes/2 = 2` (integer division)\n- This allows a candidate to win with only 2 votes\n- In a network partition, both sides can get 2 votes and become leaders\n- This violates the single-leader invariant and causes split-brain\n\n**The Fix**: Change line 124 to:\n```go\nif finalVotes > totalNodes/2 {\n```\n\n**Why This Works**:\n- For 5 nodes: `5/2 = 2`, so `finalVotes > 2` means at least 3 votes\n- A 3-node partition can get 3 votes and elect a leader\n- A 2-node partition can only get 2 votes, which is not enough\n- This ensures only the majority partition can elect a leader\n\nThe fix requires changing the `>=` operator to `>` to ensure a true majority (more than half) is required for leader election, preventing split-brain scenarios under network partitions.",
   "timestamp": "2026-06-15T20:50:15Z",
-  "token_cost": 2176,
+  "token_cost": 343101,
   "tool_uses": 27,
   "turns_to_fix": 28,
-  "wall_clock": 52.001
+  "wall_clock": 52.001,
+  "native_usage_source": "vibe_meta",
+  "native_usage": {
+    "source": "vibe_meta",
+    "api_calls": 29,
+    "fresh_input_tokens": 340925,
+    "cache_read_tokens": 0,
+    "cache_create_tokens": 0,
+    "output_tokens": 2176,
+    "reasoning_tokens": 0,
+    "billed_tokens": 340925,
+    "cost_usd": null
+  },
+  "native_usage_prev": {
+    "input_tokens": 340925,
+    "output_tokens": 2176,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.0
+  }
 }

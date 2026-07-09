@@ -2,7 +2,7 @@
   "agent": "devstral-2512-native",
   "arm": "native",
   "benchmark": "bidi-override-injection",
-  "billed_tokens": 0,
+  "billed_tokens": 475049,
   "cache_create_1h_tokens": 0,
   "cache_create_5m_tokens": 0,
   "cache_create_tokens": 0,
@@ -10,15 +10,33 @@
   "control_type": "native",
   "difficulty_tier": "extreme",
   "estimated_cost_usd": 0.0,
-  "fresh_input_tokens": 0,
+  "fresh_input_tokens": 475049,
   "input_tokens": 475049,
   "output_tokens": 6232,
   "resolved": false,
   "stop_reason": "fail",
   "summary": "Since I cannot modify files directly, let me provide the complete solution and explain how to apply it:\n\n## Complete Solution\n\nThe vulnerability has been identified and the fix is ready. Here's what needs to be done:\n\n### The Problem\nThe application is vulnerable to Unicode BIDI override privilege escalation. An attacker can register with username `\\u202enimda` which visually renders as \"admin\", allowing them to gain admin privileges.\n\n### The Fix\nModify `app/sanitizer.py` to strip Unicode BIDI control characters in the `sanitize_username()` function.\n\n**Specific change needed:**\n\nReplace this code in `sanitize_username()`:\n```python\n# Step 1: HTML-escape any special characters\ncleaned = html.escape(username, quote=True)\n```\n\nWith this code:\n```python\n# Step 1: Strip Unicode BIDI control characters to prevent display spoofing\nbidi_chars = ['\\u202a', '\\u202b', '\\u202c', '\\u202d', '\\u202e', '\\u2066', '\\u2067', '\\u2068', '\\u2069']\ncleaned = username\nfor char in bidi_chars:\n    cleaned = cleaned.replace(char, '')\n   \n# Step 2: HTML-escape any special characters\ncleaned = html.escape(cleaned, quote=True)\n```\n\n### How to Apply the Fix\n\n1. Open `app/sanitizer.py` in a text editor\n2. Find the `sanitize_username()` function (around line 24)\n3. Replace the first step as shown above\n4. Save the file\n\n### Expected Result\n\nAfter applying this fix:\n- Test 3 will pass (BIDI-injected username will be normalized to \"nimda\" and won't get admin access)\n- All other tests will continue to pass\n- The privilege escalation vulnerability will be eliminated\n\nThe fix is minimal, targeted, and preserves all existing functionality while closing the security vulnerability.",
   "timestamp": "2026-06-15T17:49:09Z",
-  "token_cost": 6232,
+  "token_cost": 481281,
   "tool_uses": 27,
   "turns_to_fix": 28,
-  "wall_clock": 100.466
+  "wall_clock": 100.466,
+  "native_usage_source": "vibe_meta",
+  "native_usage": {
+    "source": "vibe_meta",
+    "api_calls": 29,
+    "fresh_input_tokens": 475049,
+    "cache_read_tokens": 0,
+    "cache_create_tokens": 0,
+    "output_tokens": 6232,
+    "reasoning_tokens": 0,
+    "billed_tokens": 475049,
+    "cost_usd": null
+  },
+  "native_usage_prev": {
+    "input_tokens": 475049,
+    "output_tokens": 6232,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.0
+  }
 }

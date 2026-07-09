@@ -2,7 +2,7 @@
   "agent": "devstral-2512-native",
   "arm": "native",
   "benchmark": "kernel-panic-ioctl",
-  "billed_tokens": 0,
+  "billed_tokens": 280860,
   "cache_create_1h_tokens": 0,
   "cache_create_5m_tokens": 0,
   "cache_create_tokens": 0,
@@ -10,15 +10,33 @@
   "control_type": "native",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "fresh_input_tokens": 0,
+  "fresh_input_tokens": 280860,
   "input_tokens": 280860,
   "output_tokens": 1476,
   "resolved": false,
   "stop_reason": "fail",
-  "summary": "Great! So both `handle_set_config` and `handle_get_config` validate `req->key` but neither validates `req->value`. This is the needle - the missing validation.\n\nLet me create a summary of what needs to be fixed:\n\n## Summary of the Issue\n\nThe ioctl handler has inconsistent pointer validation. While it correctly validates:\n\n1. ✅ `dev` pointer in `handle_ioctl` (line 105-108)\n2. ✅ `req` pointer in `handle_ioctl` (line 111-114)  \n3. ✅ `req->key` in `handle_set_config` (line 35-38)\n4. ✅ `req->key` in `handle_get_config` (line 76-79)\n\nIt fails to validate:\n\n1. ❌ `req->value` in `handle_set_config` (line 66) - used in `memcpy(entry->value, req->value, copy_len)`\n2. ❌ `req->value` in `handle_get_config` (line 92) - used in `memcpy(req->value, entry->value, copy_len)`\n\n## The Fix\n\nAdd NULL pointer validation for `req->value` in both functions, similar to the existing `req->key` validation:\n\n**In `handle_set_config` (around line 61):**\n```c\n/* Validate value pointer */\nif (!req->value) {\n    fprintf(stderr, \"ioctl: SET_CONFIG: NULL value pointer\\n\");\n    return -1;\n}\n```\n\n**In `handle_get_config` (around line 87):**\n```c\n/* Validate value buffer pointer */\nif (!req->value) {\n    fprintf(stderr, \"ioctl: GET_CONFIG: NULL value buffer pointer\\n\");\n    return -1;\n}\n```\n\nThe needle is the missing validation of `req->value` pointers before they are used in `memcpy` operations.",
+  "summary": "Great! So both `handle_set_config` and `handle_get_config` validate `req->key` but neither validates `req->value`. This is the needle - the missing validation.\n\nLet me create a summary of what needs to be fixed:\n\n## Summary of the Issue\n\nThe ioctl handler has inconsistent pointer validation. While it correctly validates:\n\n1. \u2705 `dev` pointer in `handle_ioctl` (line 105-108)\n2. \u2705 `req` pointer in `handle_ioctl` (line 111-114)  \n3. \u2705 `req->key` in `handle_set_config` (line 35-38)\n4. \u2705 `req->key` in `handle_get_config` (line 76-79)\n\nIt fails to validate:\n\n1. \u274c `req->value` in `handle_set_config` (line 66) - used in `memcpy(entry->value, req->value, copy_len)`\n2. \u274c `req->value` in `handle_get_config` (line 92) - used in `memcpy(req->value, entry->value, copy_len)`\n\n## The Fix\n\nAdd NULL pointer validation for `req->value` in both functions, similar to the existing `req->key` validation:\n\n**In `handle_set_config` (around line 61):**\n```c\n/* Validate value pointer */\nif (!req->value) {\n    fprintf(stderr, \"ioctl: SET_CONFIG: NULL value pointer\\n\");\n    return -1;\n}\n```\n\n**In `handle_get_config` (around line 87):**\n```c\n/* Validate value buffer pointer */\nif (!req->value) {\n    fprintf(stderr, \"ioctl: GET_CONFIG: NULL value buffer pointer\\n\");\n    return -1;\n}\n```\n\nThe needle is the missing validation of `req->value` pointers before they are used in `memcpy` operations.",
   "timestamp": "2026-06-15T19:13:04Z",
-  "token_cost": 1476,
+  "token_cost": 282336,
   "tool_uses": 19,
   "turns_to_fix": 20,
-  "wall_clock": 62.974
+  "wall_clock": 62.974,
+  "native_usage_source": "vibe_meta",
+  "native_usage": {
+    "source": "vibe_meta",
+    "api_calls": 21,
+    "fresh_input_tokens": 280860,
+    "cache_read_tokens": 0,
+    "cache_create_tokens": 0,
+    "output_tokens": 1476,
+    "reasoning_tokens": 0,
+    "billed_tokens": 280860,
+    "cost_usd": null
+  },
+  "native_usage_prev": {
+    "input_tokens": 280860,
+    "output_tokens": 1476,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.0
+  }
 }

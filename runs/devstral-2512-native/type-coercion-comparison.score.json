@@ -2,7 +2,7 @@
   "agent": "devstral-2512-native",
   "arm": "native",
   "benchmark": "type-coercion-comparison",
-  "billed_tokens": 0,
+  "billed_tokens": 249161,
   "cache_create_1h_tokens": 0,
   "cache_create_5m_tokens": 0,
   "cache_create_tokens": 0,
@@ -10,15 +10,33 @@
   "control_type": "native",
   "difficulty_tier": "easy",
   "estimated_cost_usd": 0.0,
-  "fresh_input_tokens": 0,
+  "fresh_input_tokens": 249161,
   "input_tokens": 249161,
   "output_tokens": 1602,
   "resolved": false,
   "stop_reason": "fail",
   "summary": "",
   "timestamp": "2026-06-15T21:35:40Z",
-  "token_cost": 1602,
+  "token_cost": 250763,
   "tool_uses": 0,
   "turns_to_fix": 0,
-  "wall_clock": 69.803
+  "wall_clock": 69.803,
+  "native_usage_source": "vibe_meta",
+  "native_usage": {
+    "source": "vibe_meta",
+    "api_calls": 21,
+    "fresh_input_tokens": 249161,
+    "cache_read_tokens": 0,
+    "cache_create_tokens": 0,
+    "output_tokens": 1602,
+    "reasoning_tokens": 0,
+    "billed_tokens": 249161,
+    "cost_usd": null
+  },
+  "native_usage_prev": {
+    "input_tokens": 249161,
+    "output_tokens": 1602,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.0
+  }
 }

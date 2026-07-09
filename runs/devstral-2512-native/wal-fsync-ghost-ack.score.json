@@ -2,7 +2,7 @@
   "agent": "devstral-2512-native",
   "arm": "native",
   "benchmark": "wal-fsync-ghost-ack",
-  "billed_tokens": 0,
+  "billed_tokens": 378257,
   "cache_create_1h_tokens": 0,
   "cache_create_5m_tokens": 0,
   "cache_create_tokens": 0,
@@ -10,15 +10,33 @@
   "control_type": "native",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "fresh_input_tokens": 0,
+  "fresh_input_tokens": 378257,
   "input_tokens": 378257,
   "output_tokens": 4024,
   "resolved": false,
   "stop_reason": "fail",
-  "summary": "Let me try a different approach. Since I can't execute commands or edit files, let me provide the exact solution:\n\n## Analysis of the Bug\n\nThe \"needle\" is the durability bug in the server's SET command handling. Here's what happens:\n\n1. **Current buggy flow:**\n   - Client sends `SET key=value`\n   - Server calls `wal.Append()` - buffers data, returns immediately\n   - Server calls `writeSyncOffset()` - writes OLD `lastSyncOffset` to `.sync` file\n   - Server sends `+OK` to client\n   - Background sync happens later (every 100ms)\n   - If crash happens before sync, data is lost but client thinks it's durable\n\n2. **The fix:**\n   - After `wal.Append()`, call `wal.Sync()` to force immediate fsync\n   - Then call `writeSyncOffset()` to write the UPDATED `lastSyncOffset`\n   - Then send `+OK` to client\n\n## Exact Code Changes Needed\n\nIn `server.go`, replace lines 80-90:\n\n```go\n// Write to WAL first — this is the \"durable\" path.\n// BUG: Append only buffers the data; fsync happens in the\n// background. But we send +OK immediately, leading the client\n// to believe the write is durable.\nif err := s.wal.Append(key, value); err != nil {\n    return fmt.Sprintf(\"-ERR wal: %v\", err)\n}\n\n// Update the sync-offset sidecar so crash-recover knows\n// the safe truncation point.\ns.writeSyncOffset()\n```\n\nWith:\n\n```go\n// Write to WAL first — this is the \"durable\" path.\n// We must fsync before acknowledging to ensure durability.\nif err := s.wal.Append(key, value); err != nil {\n    return fmt.Sprintf(\"-ERR wal: %v\", err)\n}\n\n// Sync to disk immediately to ensure durability before ack\nif err := s.wal.Sync(); err != nil {\n    return fmt.Sprintf(\"-ERR sync: %v\", err)\n}\n\n// Update the sync-offset sidecar so crash-recover knows\n// the safe truncation point.\ns.writeSyncOffset()\n```\n\nThis ensures that when the server sends `+OK` to the client, the data has actually been durably written to disk, so it will survive a crash.",
+  "summary": "Let me try a different approach. Since I can't execute commands or edit files, let me provide the exact solution:\n\n## Analysis of the Bug\n\nThe \"needle\" is the durability bug in the server's SET command handling. Here's what happens:\n\n1. **Current buggy flow:**\n   - Client sends `SET key=value`\n   - Server calls `wal.Append()` - buffers data, returns immediately\n   - Server calls `writeSyncOffset()` - writes OLD `lastSyncOffset` to `.sync` file\n   - Server sends `+OK` to client\n   - Background sync happens later (every 100ms)\n   - If crash happens before sync, data is lost but client thinks it's durable\n\n2. **The fix:**\n   - After `wal.Append()`, call `wal.Sync()` to force immediate fsync\n   - Then call `writeSyncOffset()` to write the UPDATED `lastSyncOffset`\n   - Then send `+OK` to client\n\n## Exact Code Changes Needed\n\nIn `server.go`, replace lines 80-90:\n\n```go\n// Write to WAL first \u2014 this is the \"durable\" path.\n// BUG: Append only buffers the data; fsync happens in the\n// background. But we send +OK immediately, leading the client\n// to believe the write is durable.\nif err := s.wal.Append(key, value); err != nil {\n    return fmt.Sprintf(\"-ERR wal: %v\", err)\n}\n\n// Update the sync-offset sidecar so crash-recover knows\n// the safe truncation point.\ns.writeSyncOffset()\n```\n\nWith:\n\n```go\n// Write to WAL first \u2014 this is the \"durable\" path.\n// We must fsync before acknowledging to ensure durability.\nif err := s.wal.Append(key, value); err != nil {\n    return fmt.Sprintf(\"-ERR wal: %v\", err)\n}\n\n// Sync to disk immediately to ensure durability before ack\nif err := s.wal.Sync(); err != nil {\n    return fmt.Sprintf(\"-ERR sync: %v\", err)\n}\n\n// Update the sync-offset sidecar so crash-recover knows\n// the safe truncation point.\ns.writeSyncOffset()\n```\n\nThis ensures that when the server sends `+OK` to the client, the data has actually been durably written to disk, so it will survive a crash.",
   "timestamp": "2026-06-15T21:43:17Z",
-  "token_cost": 4024,
+  "token_cost": 382281,
   "tool_uses": 22,
   "turns_to_fix": 23,
-  "wall_clock": 73.03
+  "wall_clock": 73.03,
+  "native_usage_source": "vibe_meta",
+  "native_usage": {
+    "source": "vibe_meta",
+    "api_calls": 24,
+    "fresh_input_tokens": 378257,
+    "cache_read_tokens": 0,
+    "cache_create_tokens": 0,
+    "output_tokens": 4024,
+    "reasoning_tokens": 0,
+    "billed_tokens": 378257,
+    "cost_usd": null
+  },
+  "native_usage_prev": {
+    "input_tokens": 378257,
+    "output_tokens": 4024,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.0
+  }
 }

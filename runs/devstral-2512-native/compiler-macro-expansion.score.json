@@ -2,7 +2,7 @@
   "agent": "devstral-2512-native",
   "arm": "native",
   "benchmark": "compiler-macro-expansion",
-  "billed_tokens": 0,
+  "billed_tokens": 644423,
   "cache_create_1h_tokens": 0,
   "cache_create_5m_tokens": 0,
   "cache_create_tokens": 0,
@@ -10,15 +10,33 @@
   "control_type": "native",
   "difficulty_tier": "hard",
   "estimated_cost_usd": 0.0,
-  "fresh_input_tokens": 0,
+  "fresh_input_tokens": 644423,
   "input_tokens": 644423,
   "output_tokens": 5466,
   "resolved": false,
   "stop_reason": "fail",
   "summary": "I'm unable to make the edit due to tool restrictions. However, I have clearly identified the issue and the solution:\n\n## Summary\n\n**The Needle Found:** The bug is in `src/codegen.rs` at line 75.\n\n**Current (Buggy) Code:**\n```rust\n\"    pub fn {}(&self) -> {} {{\\n        &self.{}\\n    }}\\n\\n\",\n```\n\n**Should Be (Fixed):**\n```rust\n\"    pub fn {}(&self) -> &{} {{\\n        &self.{}\\n    }}\\n\\n\",\n```\n\n**The Fix:** Add an ampersand (`&`) before `{}` in the return type to change it from returning an owned value to returning a reference.\n\nThis change will make the generated getters return references (`&Company`, `&Address`) instead of owned values (`Company`, `Address`), which matches the test expectations in `test.sh` and fixes the code generation bug.\n\nThe test script `test.sh` will pass once this single character change is made, as it specifically checks for the correct reference-based return types in the generated code.",
   "timestamp": "2026-06-15T18:04:30Z",
-  "token_cost": 5466,
+  "token_cost": 649889,
   "tool_uses": 37,
   "turns_to_fix": 38,
-  "wall_clock": 153.248
+  "wall_clock": 153.248,
+  "native_usage_source": "vibe_meta",
+  "native_usage": {
+    "source": "vibe_meta",
+    "api_calls": 39,
+    "fresh_input_tokens": 644423,
+    "cache_read_tokens": 0,
+    "cache_create_tokens": 0,
+    "output_tokens": 5466,
+    "reasoning_tokens": 0,
+    "billed_tokens": 644423,
+    "cost_usd": null
+  },
+  "native_usage_prev": {
+    "input_tokens": 644423,
+    "output_tokens": 5466,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.0
+  }
 }

@@ -2,7 +2,7 @@
   "agent": "devstral-2512-native",
   "arm": "native",
   "benchmark": "raft-snapshot-commit-gap",
-  "billed_tokens": 0,
+  "billed_tokens": 710130,
   "cache_create_1h_tokens": 0,
   "cache_create_5m_tokens": 0,
   "cache_create_tokens": 0,
@@ -10,15 +10,33 @@
   "control_type": "native",
   "difficulty_tier": "extreme",
   "estimated_cost_usd": 0.0,
-  "fresh_input_tokens": 0,
+  "fresh_input_tokens": 710130,
   "input_tokens": 710130,
   "output_tokens": 4481,
   "resolved": false,
   "stop_reason": "fail",
   "summary": "Perfect! This confirms my analysis. The comment on lines 351-354 explicitly states:\n\n> \"If commitIndex was properly set during InstallSnapshot, this path would correctly set lastApplied = snapshotAppliedTo. But if commitIndex was never updated, savedCommitIndex could be 0, and lastApplied gets dragged back down to match.\"\n\nThis is exactly the bug! The code even acknowledges that `commitIndex` should be updated during `InstallSnapshot`, but it's not currently being done.\n\nNow I understand the issue completely. The fix is to add the missing `commitIndex` update in the `InstallSnapshot` function.\n\nSince I cannot modify files directly due to permission restrictions, let me provide the complete solution:\n\n## Complete Solution\n\n**File to modify**: `/app/app/snapshot.go`\n\n**Location**: In the `InstallSnapshot` function, after line 56\n\n**Change**: Add the following code after `n.lastApplied = snap.LastIncludedIndex`:\n\n```go\n// Update commitIndex to match the snapshot boundary.\n// All entries up to and including lastIncludedIndex are committed\n// and applied, so commitIndex must reflect this to prevent duplicate\n// applies after restart.\nif snap.LastIncludedIndex > n.commitIndex {\n    n.commitIndex = snap.LastIncludedIndex\n}\n```\n\nThis fix ensures that when a snapshot is installed:\n1. `lastApplied` is set to the snapshot boundary (already done)\n2. `commitIndex` is also set to the snapshot boundary (new fix)\n\nAfter restart, the node will correctly know that all entries up to the snapshot boundary have been committed and applied, preventing the duplicate state machine transitions.\n\nThe fix is minimal, targeted, and directly addresses the root cause identified in the code comments and the test failure description.",
   "timestamp": "2026-06-15T20:33:43Z",
-  "token_cost": 4481,
+  "token_cost": 714611,
   "tool_uses": 37,
   "turns_to_fix": 38,
-  "wall_clock": 174.865
+  "wall_clock": 174.865,
+  "native_usage_source": "vibe_meta",
+  "native_usage": {
+    "source": "vibe_meta",
+    "api_calls": 39,
+    "fresh_input_tokens": 710130,
+    "cache_read_tokens": 0,
+    "cache_create_tokens": 0,
+    "output_tokens": 4481,
+    "reasoning_tokens": 0,
+    "billed_tokens": 710130,
+    "cost_usd": null
+  },
+  "native_usage_prev": {
+    "input_tokens": 710130,
+    "output_tokens": 4481,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.0
+  }
 }

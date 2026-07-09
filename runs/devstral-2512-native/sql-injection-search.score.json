@@ -2,7 +2,7 @@
   "agent": "devstral-2512-native",
   "arm": "native",
   "benchmark": "sql-injection-search",
-  "billed_tokens": 0,
+  "billed_tokens": 599152,
   "cache_create_1h_tokens": 0,
   "cache_create_5m_tokens": 0,
   "cache_create_tokens": 0,
@@ -10,15 +10,33 @@
   "control_type": "native",
   "difficulty_tier": "medium",
   "estimated_cost_usd": 0.0,
-  "fresh_input_tokens": 0,
+  "fresh_input_tokens": 599152,
   "input_tokens": 599152,
   "output_tokens": 4740,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Perfect! The verification shows that the SQL injection vulnerability has been successfully fixed:\n\n## Summary of the Fix\n\n**The Needle Found:** SQL injection vulnerability in `app/search.py`\n\n**The Problem:**\n- The `search()` method was using f-string concatenation to directly insert user input into SQL queries\n- Used `execute_raw()` which executes raw SQL strings without parameterization\n- Lines 18 and 21 had: `f\"SELECT ... WHERE name LIKE '%{query}%'\"` and `f\" AND category = '{category}'\"`\n\n**The Fix Applied:**\n1. **Replaced f-string concatenation with parameterized queries:**\n   - Changed `f\"SELECT ... WHERE name LIKE '%{query}%'\"` to `\"SELECT ... WHERE name LIKE ?\"`\n   - Changed `f\" AND category = '{category}'\"` to `\" AND category = ?\"`\n\n2. **Replaced `execute_raw()` with `execute()`:**\n   - Changed `return self.db.execute_raw(sql)` to `return self.db.execute(sql, params)`\n\n3. **Added proper parameter handling:**\n   - Created `params = [f\"%{query}%\"]` list for the LIKE clause\n   - Appended category to params when present: `params.append(category)`\n\n**Verification Results:**\n- ✅ **0 vulnerable `execute_raw` calls** (was 1)\n- ✅ **1 parameterized query usage** (`execute(sql, params)`)\n- ✅ **1 parameterized LIKE clause** (`LIKE ?`)\n- ✅ **1 parameterized category filter** (`category = ?`)\n- ✅ **0 vulnerable f-string concatenations** (was 2)\n\nThe SQL injection vulnerability has been completely eliminated. User input is now properly sanitized through SQLite parameterized queries, preventing UNION attacks, boolean-based attacks, and any other SQL injection techniques that the test script was checking for.",
+  "summary": "Perfect! The verification shows that the SQL injection vulnerability has been successfully fixed:\n\n## Summary of the Fix\n\n**The Needle Found:** SQL injection vulnerability in `app/search.py`\n\n**The Problem:**\n- The `search()` method was using f-string concatenation to directly insert user input into SQL queries\n- Used `execute_raw()` which executes raw SQL strings without parameterization\n- Lines 18 and 21 had: `f\"SELECT ... WHERE name LIKE '%{query}%'\"` and `f\" AND category = '{category}'\"`\n\n**The Fix Applied:**\n1. **Replaced f-string concatenation with parameterized queries:**\n   - Changed `f\"SELECT ... WHERE name LIKE '%{query}%'\"` to `\"SELECT ... WHERE name LIKE ?\"`\n   - Changed `f\" AND category = '{category}'\"` to `\" AND category = ?\"`\n\n2. **Replaced `execute_raw()` with `execute()`:**\n   - Changed `return self.db.execute_raw(sql)` to `return self.db.execute(sql, params)`\n\n3. **Added proper parameter handling:**\n   - Created `params = [f\"%{query}%\"]` list for the LIKE clause\n   - Appended category to params when present: `params.append(category)`\n\n**Verification Results:**\n- \u2705 **0 vulnerable `execute_raw` calls** (was 1)\n- \u2705 **1 parameterized query usage** (`execute(sql, params)`)\n- \u2705 **1 parameterized LIKE clause** (`LIKE ?`)\n- \u2705 **1 parameterized category filter** (`category = ?`)\n- \u2705 **0 vulnerable f-string concatenations** (was 2)\n\nThe SQL injection vulnerability has been completely eliminated. User input is now properly sanitized through SQLite parameterized queries, preventing UNION attacks, boolean-based attacks, and any other SQL injection techniques that the test script was checking for.",
   "timestamp": "2026-06-15T20:52:25Z",
-  "token_cost": 4740,
+  "token_cost": 603892,
   "tool_uses": 38,
   "turns_to_fix": 39,
-  "wall_clock": 69.326
+  "wall_clock": 69.326,
+  "native_usage_source": "vibe_meta",
+  "native_usage": {
+    "source": "vibe_meta",
+    "api_calls": 40,
+    "fresh_input_tokens": 599152,
+    "cache_read_tokens": 0,
+    "cache_create_tokens": 0,
+    "output_tokens": 4740,
+    "reasoning_tokens": 0,
+    "billed_tokens": 599152,
+    "cost_usd": null
+  },
+  "native_usage_prev": {
+    "input_tokens": 599152,
+    "output_tokens": 4740,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.0
+  }
 }
