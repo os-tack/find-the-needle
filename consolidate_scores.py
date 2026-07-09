@@ -77,7 +77,9 @@ SNAPSHOT_FAULTS = {
     "july02": ["july02-cache-read-zero"],
     "july09": ["july09-fable-kernel-refusal",
                "july09-opus48-unknown-tool-loop-exit",
-               "july09-f7-earlystop-truncated-votes"],
+               "july09-f7-earlystop-truncated-votes",
+               "july09-sonnet5-native-cli-oprate",
+               "july09-fable5-native-opus-fallback"],
     "july09v2": ["july09-f7-earlystop-truncated-votes",
                  "july09-runcell-exit1-hardfail"],
 }
@@ -113,6 +115,16 @@ FAULT_NOTES = {
         "exits (unmasked by the teardown fix); one sonnet-5 kernel cell was "
         "remediated by cold re-run before publish — no published board carries "
         "a mis-scored cell. Harness fixed 2026-07-09.",
+    "july09-sonnet5-native-cli-oprate":
+        "claude-sonnet-5 native COST axis only: the vendor CLI prices "
+        "sonnet-5 at the Opus 4.8 rate card — recorded $17.51 vs honest "
+        "$7.58 intro / $11.36 standard. Tokens and solve axis unaffected; "
+        "reprice from raw telemetry via scripts/reprice_native.py.",
+    "july09-fable5-native-opus-fallback":
+        "claude-fable-5 native: 4 security cells silently continued on "
+        "claude-opus-4-8 after a mid-session classifier stop — solve "
+        "attribution for those cells is not pure fable-5 (see FAULTS.json "
+        "for the cell list).",
 }
 
 

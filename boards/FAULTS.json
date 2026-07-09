@@ -121,6 +121,34 @@
    "effect": "run_cell required returncode==0 to treat a self-exit as completed, but ostk bench exits 1 by design for a completed-but-unsolved scenario ('error: N scenario(s) failed'). The misclassification was invisible before v7.7.2 because unsolved kernel cells always hung at teardown and took the completed_kill path (scored, teardown_masked); the teardown fix (haystack ebcbe2b0) made clean unsolved exits possible for the first time.",
    "reference": "run_matrix_v41.py run_cell completed-gate (fixed 2026-07-09: a self-exit is completed regardless of returncode; the fresh-valid-score gate decides success); haystack ebcbe2b0 fix(bench).",
    "mitigation": "Fixed in harness 2026-07-09. Also makes refusal-terminated cells (clean nonzero exits) score correctly for the fable re-capture instead of hard-failing."
+  },
+  {
+   "id": "july09-sonnet5-native-cli-oprate",
+   "title": "claude-sonnet-5 native cost axis inflated — vendor CLI prices sonnet-5 at the Opus 4.8 rate card",
+   "window": {
+    "from": "2026-07-09",
+    "until": "2026-07-09"
+   },
+   "affects": [
+    "v7.7.1 july09 snapshot: claude-sonnet-5 native COST axis only (recorded $17.51 total; honest $7.58 at intro rates / $11.36 at standard). Solve axis and token counts unaffected."
+   ],
+   "effect": "estimated_cost_usd is copied from the Claude Code CLI's own telemetry, and the CLI's price table maps claude-sonnet-5 to the Opus 4.8 rate card ($5/$25/$0.50/$6.25 per MTok) instead of Sonnet 5's $2/$10 introductory (through 2026-08-31) / $3/$15 standard — a uniform 2.5x (intro) / 1.67x (standard) overcharge on every sonnet native cell. Proven by exact linear-fit recovery of the CLI's effective rates from all 38 cells (max residual ~1e-15); opus-4-8 and fable-5 recover their genuine published rates (zero delta), so only sonnet-5 is mis-tiered. The long-context-premium hypothesis is disproven (200K window cap, flat-rate fit, docs confirm 1M at standard pricing). One cell (nginx-upstream-port-mismatch) additionally recorded $0 cost despite real tokens.",
+   "reference": "scripts/reprice_native.py (pinned source-verified rate table, per-model repricing); cost-repricing findings 2026-07-09; runs/claude-sonnet-5-native/*.raw/native.stdout modelUsage.",
+   "mitigation": "Recorded cells publish as-were with this annotation (cost_basis stays CLI-self-reported). Honest totals are reproducible from raw telemetry via scripts/reprice_native.py. Board-level cost restatement is an operator data-policy decision, deferred to the full clean re-capture."
+  },
+  {
+   "id": "july09-fable5-native-opus-fallback",
+   "title": "claude-fable-5 native: 4 security cells silently served partly by Opus 4.8 (classifier fallback)",
+   "window": {
+    "from": "2026-07-09",
+    "until": "2026-07-09"
+   },
+   "affects": [
+    "v7.7.1 july09 snapshot: claude-fable-5 native cells auth-bypass-path-traversal, bidi-override-injection, rate-limit-bypass-header, ssrf-allowlist-port-confusion."
+   ],
+   "effect": "Fable 5's cyber-safety classifier tripped mid-session on these security-flavored benches and the vendor CLI silently continued the session on claude-opus-4-8. Raw per-model telemetry (modelUsage) shows three billable models per cell (haiku sidecar + partial fable + opus); the score-file aggregate blends fable+opus tokens into one bucket (verified: auth-bypass fresh 1956 = fable 1815 + opus 141). Solve attribution for these 4 cells is NOT pure fable-5, and any single-rate cost treatment of the aggregate is wrong by construction.",
+   "reference": "runs/claude-fable-5-native/*.raw/native.stdout modelUsage; scripts/reprice_native.py findings §6.",
+   "mitigation": "Cells publish as-were with this annotation. Handling (annotate-only vs exclude vs re-run) is deferred to the operator's full clean re-capture; the kernel arm is unaffected (single-model by construction)."
   }
  ]
 }
