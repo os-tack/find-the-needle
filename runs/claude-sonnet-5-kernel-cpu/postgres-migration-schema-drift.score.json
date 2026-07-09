@@ -1,0 +1,33 @@
+{
+  "benchmark": "postgres-migration-schema-drift",
+  "agent": "claude-sonnet-5-kernel-cpu",
+  "arm": "kernel-cpu",
+  "control_type": "kernel-cpu",
+  "timestamp": "2026-07-09T13:34:22+00:00",
+  "difficulty_tier": "hard",
+  "resolved": false,
+  "resolution_source": "container:test.sh",
+  "turns_to_fix": 19,
+  "tool_uses": 18,
+  "token_cost": 12457,
+  "input_tokens": 9631,
+  "output_tokens": 2826,
+  "fresh_input_tokens": 9631,
+  "cache_read_tokens": 230476,
+  "cache_create_tokens": 10687,
+  "cache_create_5m_tokens": 10687,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 250794,
+  "estimated_cost_usd": 0.120335,
+  "stop_reason": "end_turn",
+  "summary": "end_turn: 19turns, 9631+2826 tokens, $0.1203 (scored by stall_watch from journal)",
+  "wall_clock": 122.2,
+  "teardown_masked": true,
+  "scored_by": "stall_watch:journal",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-c41c904386885c11aeafa7cd81f65213c1c9cc32288bbcaac4340caaad59d243",
+    "version": "7.7.2"
+  },
+  "bench_binary_backfilled": "backfilled 2026-07-09: stall_watch score synthesis predated receipt stamping; binary identity proven by launcher.log + run_matrix state timestamps vs the 12:56Z v7.7.2 pin preflight"
+}

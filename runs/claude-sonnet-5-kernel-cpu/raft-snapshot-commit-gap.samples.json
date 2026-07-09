@@ -1,0 +1,35 @@
+[
+  {
+    "agent": "claude-sonnet-5-kernel-cpu",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-c41c904386885c11aeafa7cd81f65213c1c9cc32288bbcaac4340caaad59d243",
+      "version": "7.7.2"
+    },
+    "benchmark": "raft-snapshot-commit-gap",
+    "billed_tokens": 122947,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 13266,
+    "cache_create_tokens": 13266,
+    "cache_read_tokens": 96929,
+    "control_type": "kernel",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.1084848,
+    "executed_arm": "kernel-cpu",
+    "fresh_input_tokens": 12752,
+    "input_tokens": 12752,
+    "output_tokens": 3043,
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 10turns, 12752+3043 tokens, $0.1085",
+    "timestamp": "2026-07-09T13:36:30Z",
+    "token_cost": 125990,
+    "tool_uses": 9,
+    "turns_to_fix": 10,
+    "wall_clock": 75.188,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T13:36:34+00:00"
+  }
+]

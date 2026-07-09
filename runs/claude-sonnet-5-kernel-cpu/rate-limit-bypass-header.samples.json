@@ -1,0 +1,35 @@
+[
+  {
+    "agent": "claude-sonnet-5-kernel-cpu",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-c41c904386885c11aeafa7cd81f65213c1c9cc32288bbcaac4340caaad59d243",
+      "version": "7.7.2"
+    },
+    "benchmark": "rate-limit-bypass-header",
+    "billed_tokens": 85583,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 6432,
+    "cache_create_tokens": 6432,
+    "cache_read_tokens": 73468,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0599096,
+    "executed_arm": "kernel-cpu",
+    "fresh_input_tokens": 5683,
+    "input_tokens": 5683,
+    "output_tokens": 1777,
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 9turns, 5683+1777 tokens, $0.0599",
+    "timestamp": "2026-07-09T13:37:43Z",
+    "token_cost": 87360,
+    "tool_uses": 13,
+    "turns_to_fix": 9,
+    "wall_clock": 69.2,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T13:37:45+00:00"
+  }
+]
