@@ -40,13 +40,59 @@ jobs:
             echo "Building $dir..."
             docker build -t "needle-bench-$name" "$dir" || exit 1
           done
-      - name: Verify solutions
+      - name: Verify oracle (unpatched FAILS, patched PASSES)
         if: steps.changed.outputs.dirs != ''
         run: |
           for name in ${{ steps.changed.outputs.dirs }}; do
             [ "$name" = "_template" ] && continue
             dir="benchmarks/$name"
-            echo "Verifying $name..."
-            docker run --rm -v "$(pwd)/$dir/.bench:/workspace/.bench:ro" "needle-bench-$name" \
-              bash -c "cd /workspace && git init -q && git add -A && git commit -q -m init && git apply .bench/solution.patch && bash test.sh" || exit 1
+            img="needle-bench-$name"
+            bench_abs="$(pwd)/$dir/.bench"
+
+            # Direction 1 — BASELINE: the UNPATCHED fixture must FAIL.
+            # A fresh container runs test.sh in the image's native WORKDIR against
+            # the pristine (bugged) tree. A live oracle detects the planted bug and
+            # exits nonzero. If it exits 0, the test proves nothing — a solved run
+            # is indistinguishable from an unsolved one — so we fail CI.
+            #
+            # We check BOTH invocations the fixture is subject to:
+            #   1) `bash test.sh`  — the canonical scorer oracle (run_arms.py /
+            #      runner.py resolve a cell only when a harness `bash test.sh`
+            #      exits 0). Catches interpreter-independent dead assertions, e.g.
+            #      compiler-macro-expansion's `grep -Fq "-> Company {"` (pattern
+            #      starts with `-`, so grep treats it as flags and the assertion is
+            #      silently dead — unpatched still exits 0).
+            #   2) `./test.sh`     — honoring the fixture's own shebang, the way
+            #      agents are told to run it. Catches shebang/interpreter defects
+            #      that `bash test.sh` masks, e.g. bidi-override-injection's old
+            #      `#!/bin/sh` (dash's printf does not emit the \xNN BIDI bytes, so
+            #      the attack is never injected and the unpatched tree exits 0).
+            # If EITHER invocation passes on the pristine tree, the oracle is dead.
+            echo "== $name: baseline (unpatched tree must fail) =="
+            if docker run --rm "$img" bash -c "bash test.sh"; then
+              echo "FAIL: dead/weak oracle — unpatched fixture passes 'bash test.sh' (exit 0)."
+              echo "      test.sh does not detect the planted bug; a solved run is"
+              echo "      indistinguishable from an unsolved one."
+              exit 1
+            fi
+            if docker run --rm "$img" bash -c "chmod +x ./test.sh 2>/dev/null; ./test.sh"; then
+              echo "FAIL: dead/weak oracle — unpatched fixture passes './test.sh' (shebang, exit 0)."
+              echo "      The interpreter named in test.sh's shebang does not detect the"
+              echo "      planted bug (e.g. a #!/bin/sh shebang over bash-only constructs)."
+              exit 1
+            fi
+            echo "OK: $name baseline fails as expected (bash + shebang)"
+
+            # Direction 2 — SOLUTION: the PATCHED fixture must PASS.
+            # Fresh container: git-init the WORKDIR tree, apply solution.patch (its
+            # a/ b/ paths resolve against the image's WORKDIR — the patch's source
+            # root, so this works for both /app and /workspace layouts), rebuild via
+            # test.sh, and require exit 0.
+            echo "== $name: solution (patched tree must pass) =="
+            docker run --rm -v "$bench_abs:/bench-ro:ro" "$img" \
+              bash -c "git init -q && git add -A && git commit -q -m init && git apply /bench-ro/solution.patch && bash test.sh" || {
+                echo "FAIL: solution.patch does not make test.sh pass for $name"
+                exit 1
+              }
+            echo "OK: $name solution passes"
           done
