@@ -21,17 +21,17 @@
  "faults_ref": "boards/FAULTS.json",
  "trust": {
   "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle verdict + arm receipt + not stalled): malformed / no-arm-receipt / arm-mismatch / deadline / zero-work / duplicate-column cells are fully INVALID \u2014 excluded from everything, counted visibly. COST axis (real token/cost accounting): zero token accounting on a completed run keeps the solve verdict and marks cost UNAVAILABLE \u2014 included in solve columns, excluded from cost/token columns, counted visibly, never priced. absent = never run (not invalid).",
-  "solve_valid_cells": 694,
-  "cost_valid_cells": 694,
+  "solve_valid_cells": 731,
+  "cost_valid_cells": 731,
   "cost_invalid_cells": 0,
   "invalid_cells": 10,
-  "policy_excluded_cells": 21,
+  "policy_excluded_cells": 22,
   "invalid_by_reason": {
    "deadline_exceeded": 6,
    "zero_work": 4
   },
   "cost_invalid_by_reason": {},
-  "teardown_masked_cells": 107,
+  "teardown_masked_cells": 116,
   "by_ostk_version": {
    "v7.6.0": {
     "solve_valid_cells": 545,
@@ -40,8 +40,8 @@
     "invalid_cells": 10
    },
    "v7.7.1": {
-    "solve_valid_cells": 149,
-    "cost_valid_cells": 149,
+    "solve_valid_cells": 186,
+    "cost_valid_cells": 186,
     "cost_invalid_cells": 0,
     "invalid_cells": 0
    }
@@ -710,6 +710,49 @@
     "output": 75709,
     "input_total": 3626935
    }
+  },
+  {
+   "model": "claude-sonnet-5",
+   "type": "B*",
+   "native_cli": "opencode",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 34,
+   "native_total": 37,
+   "kernel_solved": 0,
+   "kernel_total": 0,
+   "both_n": 0,
+   "both_cost_n": 0,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 9,
+    "ostk": 0
+   },
+   "native_cost_basis": "self-reported",
+   "native_cost_bases": {
+    "self-reported": 36,
+    "unpriced": 1
+   },
+   "source_arm": "kernel",
+   "snapshots": {
+    "native": "july09",
+    "ostk": null
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": null,
+   "kernel": null,
+   "cost_delta": null,
+   "tok_delta": null,
+   "kernel_abs": null
   }
  ]
 }

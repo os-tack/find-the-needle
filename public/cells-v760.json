@@ -22,261 +22,261 @@
   {
    "name": "postgres-migration-schema-drift",
    "tier": "ceiling",
-   "solve_pct": 21,
+   "solve_pct": 20,
    "solved": 4,
-   "total": 19
+   "total": 20
   },
   {
    "name": "silent-data-corruption",
    "tier": "discriminating",
-   "solve_pct": 53,
+   "solve_pct": 50,
    "solved": 10,
-   "total": 19
+   "total": 20
   },
   {
    "name": "split-brain-leader-election",
    "tier": "discriminating",
-   "solve_pct": 68,
+   "solve_pct": 65,
    "solved": 13,
-   "total": 19
+   "total": 20
   },
   {
    "name": "encoding-mojibake",
    "tier": "discriminating",
-   "solve_pct": 84,
-   "solved": 16,
-   "total": 19
+   "solve_pct": 85,
+   "solved": 17,
+   "total": 20
   },
   {
    "name": "linearizability-stale-read",
    "tier": "discriminating",
-   "solve_pct": 84,
-   "solved": 16,
-   "total": 19
+   "solve_pct": 85,
+   "solved": 17,
+   "total": 20
   },
   {
    "name": "timezone-scheduling",
    "tier": "discriminating",
-   "solve_pct": 84,
-   "solved": 16,
-   "total": 19
+   "solve_pct": 85,
+   "solved": 17,
+   "total": 20
   },
   {
    "name": "tls-chain-ordering-strict",
    "tier": "discriminating",
-   "solve_pct": 84,
-   "solved": 16,
-   "total": 19
+   "solve_pct": 85,
+   "solved": 17,
+   "total": 20
   },
   {
    "name": "wal-fsync-ghost-ack",
    "tier": "discriminating",
    "solve_pct": 89,
-   "solved": 16,
-   "total": 18
+   "solved": 17,
+   "total": 19
   },
   {
    "name": "deadlock-transfer",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "goroutine-leak-handler",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "import-cycle-startup",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "memory-leak-event-listener",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "null-pointer-config",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "off-by-one-array-slice",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "off-by-one-pagination",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "raft-snapshot-commit-gap",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "relaxed-ordering-ringbuf",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "wrong-operator-discount",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "sql-injection-search",
    "tier": "floor",
    "solve_pct": 94,
-   "solved": 16,
-   "total": 17
+   "solved": 17,
+   "total": 18
   },
   {
    "name": "k8s-assume-cache-silent-drop",
    "tier": "floor",
-   "solve_pct": 94,
-   "solved": 17,
-   "total": 18
+   "solve_pct": 95,
+   "solved": 18,
+   "total": 19
   },
   {
    "name": "k8s-scheduler-shutdown-deadlock",
    "tier": "floor",
-   "solve_pct": 94,
-   "solved": 17,
-   "total": 18
+   "solve_pct": 95,
+   "solved": 18,
+   "total": 19
   },
   {
    "name": "performance-cliff-hash",
    "tier": "floor",
-   "solve_pct": 94,
-   "solved": 17,
-   "total": 18
+   "solve_pct": 95,
+   "solved": 18,
+   "total": 19
   },
   {
    "name": "type-coercion-comparison",
    "tier": "floor",
-   "solve_pct": 94,
-   "solved": 17,
-   "total": 18
+   "solve_pct": 95,
+   "solved": 18,
+   "total": 19
   },
   {
    "name": "api-version-field-drop",
    "tier": "floor",
    "solve_pct": 95,
-   "solved": 18,
-   "total": 19
+   "solved": 19,
+   "total": 20
   },
   {
    "name": "auth-bypass-path-traversal",
    "tier": "floor",
    "solve_pct": 95,
-   "solved": 18,
-   "total": 19
+   "solved": 19,
+   "total": 20
   },
   {
    "name": "bidi-override-injection",
    "tier": "floor",
    "solve_pct": 95,
-   "solved": 18,
-   "total": 19
+   "solved": 19,
+   "total": 20
   },
   {
    "name": "compiler-macro-expansion",
    "tier": "floor",
    "solve_pct": 95,
-   "solved": 18,
-   "total": 19
+   "solved": 19,
+   "total": 20
   },
   {
    "name": "data-corruption-concurrent-write",
    "tier": "floor",
    "solve_pct": 95,
-   "solved": 18,
-   "total": 19
+   "solved": 19,
+   "total": 20
   },
   {
    "name": "kernel-panic-ioctl",
    "tier": "floor",
    "solve_pct": 95,
-   "solved": 18,
-   "total": 19
+   "solved": 19,
+   "total": 20
   },
   {
    "name": "missing-input-validation",
    "tier": "floor",
    "solve_pct": 95,
-   "solved": 18,
-   "total": 19
+   "solved": 19,
+   "total": 20
   },
   {
    "name": "nginx-upstream-port-mismatch",
    "tier": "floor",
    "solve_pct": 95,
-   "solved": 18,
-   "total": 19
+   "solved": 19,
+   "total": 20
   },
   {
    "name": "race-condition-counter",
    "tier": "floor",
    "solve_pct": 95,
-   "solved": 18,
-   "total": 19
+   "solved": 19,
+   "total": 20
   },
   {
    "name": "cache-stale-invalidation",
    "tier": "floor",
    "solve_pct": 100,
-   "solved": 17,
-   "total": 17
+   "solved": 18,
+   "total": 18
   },
   {
    "name": "graphql-dataloader-per-request",
    "tier": "floor",
    "solve_pct": 100,
-   "solved": 19,
-   "total": 19
+   "solved": 20,
+   "total": 20
   },
   {
    "name": "rate-limit-bypass-header",
    "tier": "floor",
    "solve_pct": 100,
-   "solved": 19,
-   "total": 19
+   "solved": 20,
+   "total": 20
   },
   {
    "name": "ssrf-allowlist-port-confusion",
    "tier": "floor",
    "solve_pct": 100,
-   "solved": 19,
-   "total": 19
+   "solved": 20,
+   "total": 20
   },
   {
    "name": "timing-attack-comparison",
    "tier": "floor",
    "solve_pct": 100,
-   "solved": 19,
-   "total": 19
+   "solved": 20,
+   "total": 20
   }
  ],
  "models": [
@@ -11774,6 +11774,755 @@
       "cost": 0.1321,
       "cost_valid": true,
       "snapshot": "july09"
+     }
+    }
+   }
+  },
+  {
+   "model": "claude-sonnet-5",
+   "type": "B*",
+   "native_cli": "opencode",
+   "native_solved": 34,
+   "kernel_solved": 0,
+   "cells": {
+    "postgres-migration-schema-drift": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 27,
+      "wall": 172.6,
+      "billed": 1094439,
+      "fresh": 2254,
+      "cache_read": 1066356,
+      "cache_create": 25829,
+      "output": 10258,
+      "input_total": 1094439,
+      "cost": 0.9629,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "silent-data-corruption": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 17,
+      "wall": 86.7,
+      "billed": 578092,
+      "fresh": 1974,
+      "cache_read": 559896,
+      "cache_create": 16222,
+      "output": 3164,
+      "input_total": 578092,
+      "cost": 0.4709,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "split-brain-leader-election": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 15,
+      "wall": 56.8,
+      "billed": 472898,
+      "fresh": 1968,
+      "cache_read": 446915,
+      "cache_create": 24015,
+      "output": 2796,
+      "input_total": 472898,
+      "cost": 0.4539,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 23.9,
+      "billed": 238496,
+      "fresh": 1956,
+      "cache_read": 223814,
+      "cache_create": 12726,
+      "output": 1107,
+      "input_total": 238496,
+      "cost": 0.2295,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "linearizability-stale-read": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 27,
+      "wall": 224.9,
+      "billed": 1365853,
+      "fresh": 2254,
+      "cache_read": 1321905,
+      "cache_create": 41694,
+      "output": 12693,
+      "input_total": 1365853,
+      "cost": 1.2507,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "timezone-scheduling": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 39.5,
+      "billed": 254404,
+      "fresh": 1827,
+      "cache_read": 236828,
+      "cache_create": 15749,
+      "output": 3209,
+      "input_total": 254404,
+      "cost": 0.3068,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 38,
+      "wall": 271.1,
+      "billed": 1798345,
+      "fresh": 2405,
+      "cache_read": 1757124,
+      "cache_create": 38816,
+      "output": 16690,
+      "input_total": 1798345,
+      "cost": 1.551,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "wal-fsync-ghost-ack": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 24,
+      "wall": 168.3,
+      "billed": 1059346,
+      "fresh": 2248,
+      "cache_read": 1025285,
+      "cache_create": 31813,
+      "output": 11534,
+      "input_total": 1059346,
+      "cost": 1.0117,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 35.5,
+      "billed": 252015,
+      "fresh": 1827,
+      "cache_read": 234918,
+      "cache_create": 15270,
+      "output": 2751,
+      "input_total": 252015,
+      "cost": 0.2914,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "goroutine-leak-handler": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 57.1,
+      "billed": 251344,
+      "fresh": 1956,
+      "cache_read": 234762,
+      "cache_create": 14626,
+      "output": 2487,
+      "input_total": 251344,
+      "cost": 0.2813,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "import-cycle-startup": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 34.7,
+      "billed": 243693,
+      "fresh": 1956,
+      "cache_read": 227738,
+      "cache_create": 13999,
+      "output": 1585,
+      "input_total": 243693,
+      "cost": 0.2514,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 34.5,
+      "billed": 207003,
+      "fresh": 1954,
+      "cache_read": 191191,
+      "cache_create": 13858,
+      "output": 1556,
+      "input_total": 207003,
+      "cost": 0.2315,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "null-pointer-config": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 31.6,
+      "billed": 168628,
+      "fresh": 1823,
+      "cache_read": 155245,
+      "cache_create": 11560,
+      "output": 1367,
+      "input_total": 168628,
+      "cost": 0.1938,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "off-by-one-array-slice": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 33.8,
+      "billed": 238988,
+      "fresh": 1827,
+      "cache_read": 225354,
+      "cache_create": 11807,
+      "output": 791,
+      "input_total": 238988,
+      "cost": 0.216,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 25.4,
+      "billed": 231518,
+      "fresh": 1827,
+      "cache_read": 219080,
+      "cache_create": 10611,
+      "output": 762,
+      "input_total": 231518,
+      "cost": 0.2046,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "raft-snapshot-commit-gap": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 23,
+      "wall": 132.8,
+      "billed": 885767,
+      "fresh": 2107,
+      "cache_read": 849495,
+      "cache_create": 34165,
+      "output": 9790,
+      "input_total": 885767,
+      "cost": 0.8942,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "relaxed-ordering-ringbuf": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 49.2,
+      "billed": 322446,
+      "fresh": 1958,
+      "cache_read": 299423,
+      "cache_create": 21065,
+      "output": 4040,
+      "input_total": 322446,
+      "cost": 0.3928,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 18.5,
+      "billed": 171603,
+      "fresh": 1952,
+      "cache_read": 157119,
+      "cache_create": 12532,
+      "output": 915,
+      "input_total": 171603,
+      "cost": 0.1901,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "sql-injection-search": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 25.8,
+      "billed": 207976,
+      "fresh": 1954,
+      "cache_read": 192159,
+      "cache_create": 13863,
+      "output": 1170,
+      "input_total": 207976,
+      "cost": 0.2223,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "k8s-assume-cache-silent-drop": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 27.4,
+      "billed": 235749,
+      "fresh": 1827,
+      "cache_read": 222572,
+      "cache_create": 11350,
+      "output": 1722,
+      "input_total": 235749,
+      "cost": 0.235,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 32.1,
+      "billed": 198296,
+      "fresh": 1825,
+      "cache_read": 186079,
+      "cache_create": 10392,
+      "output": 1321,
+      "input_total": 198296,
+      "cost": 0.2007,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "performance-cliff-hash": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 30.6,
+      "billed": 232093,
+      "fresh": 1956,
+      "cache_read": 219415,
+      "cache_create": 10722,
+      "output": 901,
+      "input_total": 232093,
+      "cost": 0.2096,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 26.0,
+      "billed": 167738,
+      "fresh": 1823,
+      "cache_read": 154799,
+      "cache_create": 11116,
+      "output": 1169,
+      "input_total": 167738,
+      "cost": 0.1858,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "api-version-field-drop": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 35.6,
+      "billed": 282584,
+      "fresh": 1958,
+      "cache_read": 241519,
+      "cache_create": 39107,
+      "output": 1761,
+      "input_total": 282584,
+      "cost": 0.4196,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 26.6,
+      "billed": 206385,
+      "fresh": 1825,
+      "cache_read": 191550,
+      "cache_create": 13010,
+      "output": 1365,
+      "input_total": 206385,
+      "cost": 0.2209,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "bidi-override-injection": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 35.9,
+      "billed": 251965,
+      "fresh": 1827,
+      "cache_read": 234533,
+      "cache_create": 15605,
+      "output": 1302,
+      "input_total": 251965,
+      "cost": 0.2571,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "compiler-macro-expansion": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 40,
+      "wall": 275.7,
+      "billed": 1934827,
+      "fresh": 4469,
+      "cache_read": 1885078,
+      "cache_create": 45280,
+      "output": 13208,
+      "input_total": 1934827,
+      "cost": 1.5787,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "data-corruption-concurrent-write": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 28,
+      "wall": 259.9,
+      "billed": 1211720,
+      "fresh": 2256,
+      "cache_read": 1178682,
+      "cache_create": 30782,
+      "output": 12518,
+      "input_total": 1211720,
+      "cost": 1.1066,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 23,
+      "wall": 114.9,
+      "billed": 900586,
+      "fresh": 2113,
+      "cache_read": 870237,
+      "cache_create": 28236,
+      "output": 7216,
+      "input_total": 900586,
+      "cost": 0.8032,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "missing-input-validation": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 22.9,
+      "billed": 173878,
+      "fresh": 1823,
+      "cache_read": 159140,
+      "cache_create": 12915,
+      "output": 1040,
+      "input_total": 173878,
+      "cost": 0.196,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 0,
+      "wall": 297.8,
+      "billed": 0,
+      "fresh": 0,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 0,
+      "input_total": 0,
+      "cost": 0.0,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "race-condition-counter": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 31.6,
+      "billed": 233923,
+      "fresh": 1827,
+      "cache_read": 221070,
+      "cache_create": 11026,
+      "output": 1183,
+      "input_total": 233923,
+      "cost": 0.2188,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "cache-stale-invalidation": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 23.1,
+      "billed": 206679,
+      "fresh": 1954,
+      "cache_read": 191311,
+      "cache_create": 13414,
+      "output": 1081,
+      "input_total": 206679,
+      "cost": 0.2169,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "graphql-dataloader-per-request": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 17,
+      "wall": 55.1,
+      "billed": 478780,
+      "fresh": 2095,
+      "cache_read": 455541,
+      "cache_create": 21144,
+      "output": 4244,
+      "input_total": 478780,
+      "cost": 0.4771,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 39.3,
+      "billed": 206782,
+      "fresh": 1825,
+      "cache_read": 191648,
+      "cache_create": 13309,
+      "output": 1234,
+      "input_total": 206782,
+      "cost": 0.2196,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "ssrf-allowlist-port-confusion": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 29.8,
+      "billed": 207075,
+      "fresh": 1825,
+      "cache_read": 192091,
+      "cache_create": 13159,
+      "output": 1880,
+      "input_total": 207075,
+      "cost": 0.235,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "timing-attack-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 24,
+      "wall": 95.5,
+      "billed": 751055,
+      "fresh": 2111,
+      "cache_read": 731076,
+      "cache_create": 17868,
+      "output": 4794,
+      "input_total": 751055,
+      "cost": 0.6082,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "missing"
      }
     }
    }

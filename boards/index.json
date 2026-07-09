@@ -1483,14 +1483,25 @@
         "masked": 16,
         "source_arm": "cpu"
        }
+      },
+      "claude-sonnet-5": {
+       "native": {
+        "solved": 34,
+        "total": 37,
+        "cost_usd": 16.9955,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 9
+       }
       }
      },
      "trust": {
-      "solve_valid_cells": 149,
-      "cost_valid_cells": 149,
+      "solve_valid_cells": 186,
+      "cost_valid_cells": 186,
       "cost_invalid_cells": 0,
       "invalid_cells": 0,
-      "teardown_masked_cells": 36
+      "teardown_masked_cells": 45
      }
     }
    ],
