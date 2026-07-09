@@ -62,6 +62,18 @@ REASON_ZERO_TOKEN_OUTPUT = "zero_token_accounting:no_output"  # completed run, n
 # (deepseek/grok/devstral native): the only surviving number is an
 # unverifiable folded input_tokens, so the cell is untrustworthy for cost.
 REASON_ZERO_BILLED = "zero_token_accounting:zero_billed"
+# Completed / "pass" cell that recorded ZERO turns AND ZERO tokens on BOTH
+# sides — a zero-ACCOUNTING pass. Either the arm did real work whose telemetry
+# was lost (the native error-result writer stamps error_max_turns runs as a
+# 0-turn/0-token "pass": nginx-upstream-port-mismatch's launcher.log shows
+# num_turns:41 and $1.40 of spend, all discarded to 0) or it is a genuine
+# passive-verify $0 cell — the two are INDISTINGUISHABLE at the score-payload
+# level, so we fail closed on the COST axis. Previously an explicit
+# passive_verify exemption blessed these as fully VALID, silently deflating
+# cost aggregates with unverifiable $0 rows. COST-axis: the solve verdict is
+# preserved (native resolution is exit-code-gated); cost is unavailable and
+# never priced.
+REASON_ZERO_ACCOUNTING_PASS = "zero_token_accounting:passive_pass"
 # Dedup reasons — assigned by the consolidator (needs whole-tree context, see
 # consolidate_scores.duplicate_column_reason), defined here so the reason
 # vocabulary lives in one place.
@@ -82,6 +94,7 @@ SOLVE_AXIS_REASONS = frozenset({
 })
 COST_AXIS_REASONS = frozenset({
     REASON_ZERO_TOKEN_INPUT, REASON_ZERO_TOKEN_OUTPUT, REASON_ZERO_BILLED,
+    REASON_ZERO_ACCOUNTING_PASS,
 })
 
 
@@ -226,13 +239,20 @@ def classify_cell(entry: object, requested_arm: str | None = None) -> Classifica
                          Payloads WITHOUT a billed_tokens key (pre-→2062
                          legacy writers) are exempt: their input_tokens IS the
                          billing-era record.
-      passive-verify exception — stop_reason == 'pass' with 0 turns and 0
-                         tokens is a legitimate zero-cost cell (a handful of
-                         benches resolve via passive verification with no
-                         agent turns) and stays VALID.
+      zero_token_accounting:passive_pass —
+                         stop_reason == 'pass' with 0 turns AND 0 tokens on
+                         both sides is a zero-ACCOUNTING pass. A genuine
+                         passive-verify $0 cell is INDISTINGUISHABLE from a run
+                         whose real spend was lost (the native error-result
+                         writer stamps error_max_turns runs as a 0-turn/
+                         0-token 'pass' — see REASON_ZERO_ACCOUNTING_PASS), so
+                         it fails closed on COST: COST_INVALID, solve verdict
+                         preserved, cost axis unavailable and never priced.
+                         (Formerly a passive_verify exemption kept these fully
+                         VALID — the P0 cost-accounting defect this replaces.)
 
     AXIS SPLIT: malformed / no_arm_receipt / arm_mismatch / deadline /
-    zero_work are SOLVE-axis reasons → the cell is fully INVALID. The three
+    zero_work are SOLVE-axis reasons → the cell is fully INVALID. The four
     zero_token_accounting reasons are COST-axis reasons → the cell is
     COST_INVALID: its oracle verdict and arm receipt stand (it enters solve
     aggregates) while its cost axis is UNAVAILABLE (excluded from cost/token
@@ -264,10 +284,19 @@ def classify_cell(entry: object, requested_arm: str | None = None) -> Classifica
         reasons.append(REASON_STALL)
     elif turns == 0 and input_side + output == 0 and stop != "pass":
         reasons.append(REASON_ZERO_WORK)
+    elif turns == 0 and input_side + output == 0:
+        # stop == "pass" here (the zero_work branch above consumed the
+        # stop != "pass" case). A "pass" that recorded ZERO turns and ZERO
+        # tokens is a zero-ACCOUNTING pass — COST-axis UNAVAILABLE, not a free
+        # VALID cell. The solve verdict stands (native resolution is
+        # exit-code-gated), but the cost axis is excluded from aggregates and
+        # never priced. See REASON_ZERO_ACCOUNTING_PASS. This REPLACES the
+        # former passive_verify exemption, which blessed lost-telemetry $0
+        # rows (e.g. native error_max_turns results) as fully VALID.
+        reasons.append(REASON_ZERO_ACCOUNTING_PASS)
     else:
         completed = bool(entry.get("resolved")) or turns > 0 or tool_uses > 0
-        passive_verify = stop == "pass" and turns == 0 and input_side == 0 and output == 0
-        if completed and not passive_verify:
+        if completed:
             bucket_sum = ((entry.get("fresh_input_tokens") or 0)
                           + (entry.get("cache_read_tokens") or 0)
                           + (entry.get("cache_create_tokens") or 0))

@@ -158,9 +158,110 @@ def parse_vibe_meta(text: str) -> dict | None:
     }
 
 
+def parse_claude_result_json(text: str) -> dict | None:
+    """Recover num_turns + token/cost usage from a Claude Code CLI *result*
+    envelope, INCLUDING error results (is_error:true / subtype:
+    error_max_turns and the other error subtypes).
+
+    WHY: the native error-result writer discards an error-terminated run to a
+    0-turn / 0-token "pass" (nginx-upstream-port-mismatch: num_turns:41,
+    $1.40 spent, all zeroed). But the raw envelope survives — as a JSONL line
+    in native.stdout AND as a `harness error: {...}` line in launcher.log —
+    so we parse it wherever it lands, on ANY line whose first `{` decodes to a
+    {"type":"result", ...} object. is_error is deliberately IGNORED: an
+    error-terminated run still billed real tokens and took real turns."""
+    for line in text.splitlines():
+        brace = line.find("{")
+        if brace < 0 or '"type"' not in line or '"result"' not in line:
+            continue
+        try:
+            obj, _ = json.JSONDecoder().raw_decode(line[brace:])
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(obj, dict) or obj.get("type") != "result":
+            continue
+        usage = obj.get("usage") or {}
+        fresh = int(usage.get("input_tokens") or 0)
+        cache_read = int(usage.get("cache_read_input_tokens") or 0)
+        cache_create = int(usage.get("cache_creation_input_tokens") or 0)
+        out = int(usage.get("output_tokens") or 0)
+        nt = obj.get("num_turns")
+        num_turns = int(nt) if isinstance(nt, (int, float)) else None
+        cost = obj.get("total_cost_usd")
+        if fresh + cache_read + cache_create + out == 0 and not num_turns:
+            continue  # a result envelope with no usable telemetry — keep looking
+        return {
+            "source": "claude_result_json",
+            "api_calls": num_turns or 0,
+            "num_turns": num_turns,
+            "fresh_input_tokens": fresh,
+            "cache_read_tokens": cache_read,
+            "cache_create_tokens": cache_create,
+            "output_tokens": out,
+            "reasoning_tokens": 0,
+            "billed_tokens": fresh + cache_read + cache_create,
+            "cost_usd": round(float(cost), 6) if cost else None,
+        }
+    return None
+
+
+def parse_gemini_stats(text: str) -> dict | None:
+    """Recover usage from the Gemini CLI end-of-run stats JSON (native.stdout).
+
+    The block is a pretty-printed object keyed on `session_id` with a
+    `stats.models.<model>.tokens` bag — prompt (total input incl. cache),
+    input (fresh / non-cached), cached (cache read), candidates (output),
+    thoughts (reasoning) — and `api.totalRequests` (the turn proxy). Gemini
+    reports no per-run USD, so cost_usd stays None and the consolidator prices
+    the buckets. Gemini also has no cache-CREATE split, so that bucket is 0."""
+    idx = text.rfind('"session_id"')
+    if idx < 0:
+        return None
+    start = text.rfind("{", 0, idx)
+    if start < 0:
+        return None
+    try:
+        obj, _ = json.JSONDecoder().raw_decode(text[start:])
+    except json.JSONDecodeError:
+        return None
+    models = ((obj.get("stats") or {}).get("models")) or {}
+    if not models:
+        return None
+    fresh = cache_read = out = reasoning = calls = 0
+    for m in models.values():
+        tok = (m or {}).get("tokens") or {}
+        api = (m or {}).get("api") or {}
+        prompt = int(tok.get("prompt") or 0)
+        cached = int(tok.get("cached") or 0)
+        inp = int(tok.get("input") or 0)
+        # fresh = non-cached input. prompt-minus-cached is authoritative
+        # (prompt is the whole input side incl. cache read); fall back to the
+        # reported 'input' field when prompt is absent/inconsistent.
+        fresh += (prompt - cached) if prompt >= cached and prompt > 0 else inp
+        cache_read += cached
+        out += int(tok.get("candidates") or 0) + int(tok.get("thoughts") or 0)
+        reasoning += int(tok.get("thoughts") or 0)
+        calls += int(api.get("totalRequests") or 0)
+    if fresh + cache_read + out == 0:
+        return None
+    return {
+        "source": "gemini_stats",
+        "api_calls": calls,
+        "num_turns": calls or None,
+        "fresh_input_tokens": fresh,
+        "cache_read_tokens": cache_read,
+        "cache_create_tokens": 0,  # Gemini stats carry no cache-create split
+        "output_tokens": out,
+        "reasoning_tokens": reasoning,
+        "billed_tokens": fresh + cache_read,
+        "cost_usd": None,
+    }
+
+
 def recover_usage(raw_dir: Path) -> dict | None:
     """Recover usage from a cell's .raw/ artifacts, trying each CLI shape.
-    Precedence: opencode JSONL (strict), kimi event stream, vibe meta."""
+    Precedence: opencode JSONL (strict), kimi event stream, Claude Code result
+    envelope (incl. error results), Gemini stats, vibe meta."""
     stdout_fp = raw_dir / "native.stdout"
     text = None
     if stdout_fp.is_file():
@@ -173,6 +274,12 @@ def recover_usage(raw_dir: Path) -> dict | None:
         if usage:
             return usage
         usage = parse_kimi_stdout(text)
+        if usage:
+            return usage
+        usage = parse_claude_result_json(text)
+        if usage:
+            return usage
+        usage = parse_gemini_stats(text)
         if usage:
             return usage
     meta_fp = raw_dir / "vibe-meta.json"
@@ -247,7 +354,7 @@ def enrich_score_file(score_path: Path, raw_dir: Path | None = None,
 
     prev = {k: payload.get(k) for k in
             ("input_tokens", "output_tokens", "billed_tokens",
-             "estimated_cost_usd")}
+             "estimated_cost_usd", "turns_to_fix")}
     if apply:
         payload["fresh_input_tokens"] = usage["fresh_input_tokens"]
         payload["cache_read_tokens"] = usage["cache_read_tokens"]
@@ -262,6 +369,11 @@ def enrich_score_file(score_path: Path, raw_dir: Path | None = None,
         payload["token_cost"] = usage["fresh_input_tokens"] + usage["output_tokens"]
         if usage["cost_usd"] and not (payload.get("estimated_cost_usd") or 0) > 0:
             payload["estimated_cost_usd"] = usage["cost_usd"]
+        # Recover the real turn count too: the native error-result writer zeros
+        # turns_to_fix alongside tokens, so a recovered num_turns replaces a
+        # 0 (never overwrites a genuine, already-nonzero count).
+        if usage.get("num_turns") and not (payload.get("turns_to_fix") or 0):
+            payload["turns_to_fix"] = usage["num_turns"]
         payload.pop("cost_basis", None)  # recovered — no longer unavailable
         payload["native_usage_source"] = usage["source"]
         payload["native_usage"] = usage
@@ -271,6 +383,7 @@ def enrich_score_file(score_path: Path, raw_dir: Path | None = None,
             f"(fresh={usage['fresh_input_tokens']} cr={usage['cache_read_tokens']} "
             f"cc={usage['cache_create_tokens']}) out={usage['output_tokens']} "
             f"calls={usage['api_calls']}"
+            + (f" turns={usage['num_turns']}" if usage.get("num_turns") else "")
             + (f" cost=${usage['cost_usd']}" if usage["cost_usd"] else ""))
     return True, note
 

@@ -185,8 +185,13 @@ class TestSolveAxis(unittest.TestCase):
         self.assertEqual(cls.status, cv.INVALID)
         self.assertIn(cv.REASON_ZERO_WORK, cls.solve_reasons)
 
-    def test_passive_verify_zero_tokens_is_valid(self):
-        # stop_reason='pass' with 0 turns / 0 tokens: passive verification.
+    def test_passive_verify_zero_tokens_is_cost_invalid(self):
+        # stop_reason='pass' with 0 turns / 0 tokens is a zero-ACCOUNTING pass.
+        # A genuine passive-verify $0 cell is indistinguishable from a run whose
+        # real spend was lost (native error_max_turns results are stamped as a
+        # 0-turn/0-token pass), so it fails closed on COST: COST_INVALID with
+        # the solve verdict preserved. (Previously this exemption returned VALID
+        # — the P0 cost-accounting defect.)
         cell = kernel_cell(agent="qwen3-coder-plus-native", arm="native",
                            resolved=True, stop_reason="pass",
                            turns_to_fix=0, tool_uses=0,
@@ -194,7 +199,10 @@ class TestSolveAxis(unittest.TestCase):
                            cache_create_tokens=0, billed_tokens=0,
                            input_tokens=0, output_tokens=0)
         cls = cv.classify_cell(cell, requested_arm="native")
-        self.assertEqual(cls.status, cv.VALID, cls.reasons)
+        self.assertEqual(cls.status, cv.COST_INVALID, cls.reasons)
+        self.assertIn(cv.REASON_ZERO_ACCOUNTING_PASS, cls.cost_reasons)
+        self.assertTrue(cls.solve_valid)   # solve verdict preserved
+        self.assertFalse(cls.cost_valid)
 
     def test_july_schema_without_stop_reason_is_valid(self):
         # run_arms.py July schema has no stop_reason at all.
