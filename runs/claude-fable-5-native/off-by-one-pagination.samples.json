@@ -1,0 +1,28 @@
+[
+  {
+    "benchmark": "off-by-one-pagination",
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "timestamp": "2026-07-09T01:37:17Z",
+    "difficulty_tier": "easy",
+    "resolved": true,
+    "turns_to_fix": 7,
+    "token_cost": 158070,
+    "input_tokens": 1827,
+    "output_tokens": 997,
+    "estimated_cost_usd": 0.3146070000000001,
+    "fresh_input_tokens": 1827,
+    "cache_read_tokens": 147364,
+    "cache_create_tokens": 7882,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 157073,
+    "wall_clock": 46.661,
+    "tool_uses": 6,
+    "stop_reason": "pass",
+    "summary": "Found and fixed the needle. In `app/app.py:28`, the pagination offset was computed as `(page - 1) * per_page - (1 if page > 1 else 0)` \u2014 the extra `- 1` for pages after the first shifted every subsequent page back by one item, so page 2 started with the last item of page 1 (a duplicate at every page boundary). I removed the subtraction so the offset is the standard `(page - 1) * per_page`.\n\n`test.sh` now passes: `PASS: Pagination is correct across page boundaries`.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T01:37:28+00:00"
+  }
+]

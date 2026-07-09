@@ -1,0 +1,28 @@
+[
+  {
+    "benchmark": "wrong-operator-discount",
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "timestamp": "2026-07-09T01:38:47Z",
+    "difficulty_tier": "easy",
+    "resolved": true,
+    "turns_to_fix": 5,
+    "token_cost": 111931,
+    "input_tokens": 1823,
+    "output_tokens": 700,
+    "estimated_cost_usd": 0.24503550000000002,
+    "fresh_input_tokens": 1823,
+    "cache_read_tokens": 102295,
+    "cache_create_tokens": 7113,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 111231,
+    "wall_clock": 30.47,
+    "tool_uses": 4,
+    "stop_reason": "pass",
+    "summary": "Found and fixed it. The needle was in `pricing.py:11` \u2014 `calculate_discount_amount` used addition instead of multiplication:\n\n```python\ndiscount = subtotal + discount_percent / 100   # before: $1098.94 + 0.20\ndiscount = subtotal * discount_percent / 100   # after: 20% of $1098.94\n```\n\nDue to operator precedence, the buggy version added a fraction of a dollar to the subtotal instead of taking a percentage of it, so a \"20% discount\" on $1,098.94 came out as $1,099.14 \u2014 more than the whole cart. `test.sh` now passes all four cases: `PASS: Discount calculations are correct`.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T01:38:59+00:00"
+  }
+]

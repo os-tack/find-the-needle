@@ -1,0 +1,28 @@
+[
+  {
+    "benchmark": "encoding-mojibake",
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "timestamp": "2026-07-09T01:34:37Z",
+    "difficulty_tier": "easy",
+    "resolved": true,
+    "turns_to_fix": 10,
+    "token_cost": 189371,
+    "input_tokens": 1829,
+    "output_tokens": 1338,
+    "estimated_cost_usd": 0.3899705,
+    "fresh_input_tokens": 1829,
+    "cache_read_tokens": 175945,
+    "cache_create_tokens": 10259,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 188033,
+    "wall_clock": 57.594,
+    "tool_uses": 9,
+    "stop_reason": "pass",
+    "summary": "The needle was a charset mismatch in `CsvReader.java:18`: the constructor decoded the CSV as ISO-8859-1 (\"for broad compatibility with legacy systems\"), but `customers.csv` is UTF-8. Each multi-byte character (e.g. `\u00e9` = `0xC3 0xA9`) was decoded as two Latin-1 characters, so names like \"Ren\u00e9e Dub\u00f6is\" came out as mojibake in the report \u2014 the UTF-8 writer in `ReportGenerator` then faithfully preserved the garbage.\n\nFix: one line \u2014 read the file with `StandardCharsets.UTF_8` instead. `test.sh` now passes: all 12 name checks OK, including every accented name and city.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T01:34:47+00:00"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "benchmark": "encoding-mojibake",
+    "agent": "claude-fable-5-kernel-cpu",
+    "arm": "kernel",
+    "control_type": "kernel",
+    "timestamp": "2026-07-09T01:35:26Z",
+    "difficulty_tier": "easy",
+    "resolved": false,
+    "turns_to_fix": 4,
+    "token_cost": 27533,
+    "input_tokens": 824,
+    "output_tokens": 317,
+    "estimated_cost_usd": 0.1319825,
+    "fresh_input_tokens": 824,
+    "cache_read_tokens": 19305,
+    "cache_create_tokens": 7087,
+    "cache_create_5m_tokens": 7087,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 27216,
+    "wall_clock": 38.382,
+    "tool_uses": 3,
+    "stop_reason": "exit_code: 1",
+    "summary": "agent.completed: 4turns, 824+317 tokens, $0.1320",
+    "teardown_masked": true,
+    "teardown_masked_by": "stall_watch",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T01:35:39+00:00"
+  }
+]

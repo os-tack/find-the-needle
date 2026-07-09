@@ -1,0 +1,28 @@
+[
+  {
+    "benchmark": "sql-injection-search",
+    "agent": "gemini-3.5-flash-kernel-cpu",
+    "arm": "kernel",
+    "control_type": "kernel",
+    "timestamp": "2026-07-09T01:44:03Z",
+    "difficulty_tier": "medium",
+    "resolved": true,
+    "turns_to_fix": 31,
+    "token_cost": 566434,
+    "input_tokens": 372754,
+    "output_tokens": 7732,
+    "estimated_cost_usd": 0.6566112000000001,
+    "fresh_input_tokens": 372754,
+    "cache_read_tokens": 185948,
+    "cache_create_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 558702,
+    "wall_clock": 168.328,
+    "tool_uses": 30,
+    "stop_reason": "end_turn",
+    "summary": "complete: 31turns, 372754+7732 tokens, $0.6566",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T01:44:13+00:00"
+  }
+]

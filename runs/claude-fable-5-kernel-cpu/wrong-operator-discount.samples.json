@@ -1,0 +1,30 @@
+[
+  {
+    "benchmark": "wrong-operator-discount",
+    "agent": "claude-fable-5-kernel-cpu",
+    "arm": "kernel",
+    "control_type": "kernel",
+    "timestamp": "2026-07-09T01:39:27Z",
+    "difficulty_tier": "easy",
+    "resolved": false,
+    "turns_to_fix": 3,
+    "token_cost": 20176,
+    "input_tokens": 647,
+    "output_tokens": 224,
+    "estimated_cost_usd": 0.036975,
+    "fresh_input_tokens": 647,
+    "cache_read_tokens": 19305,
+    "cache_create_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 19952,
+    "wall_clock": 28.064,
+    "tool_uses": 2,
+    "stop_reason": "exit_code: 1",
+    "summary": "agent.completed: 3turns, 647+224 tokens, $0.0370",
+    "teardown_masked": true,
+    "teardown_masked_by": "stall_watch",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T01:39:38+00:00"
+  }
+]
