@@ -23,10 +23,27 @@ Append-only: a versioned board file that already exists with different content
 is NEVER silently overwritten — the script fails loudly (--force to replace
 deliberately, e.g. after a doctrine change; document why in the commit).
 
+FROZEN ERAS (era-source-archival): a snapshot whose ostk-version is not the
+current OSTK_VERSION is frozen. Once its versioned board file is on disk, its
+runs/ sources are no longer authoritative for it — they may be fully or
+partially moved to runs-archive/ as routine hygiene (a live rerun of one
+model must not force a stale re-judgment of every other model's frozen
+history). Such a frozen+already-published era is treated as
+immutable-and-satisfied: publish_boards skips rebuilding it (an informative
+line is printed, not a refusal) rather than comparing it against whatever
+fraction of its sources still happen to be in runs/. --force keeps its
+original global meaning (rebuild + force-overwrite every era, frozen or not).
+--force-era ERA rebuilds and, if content differs, force-overwrites exactly
+one named era (see consolidate_scores.SNAPSHOTS for valid names) — for a
+deliberate, documented replacement without reopening every other era's
+append-only guard. The CURRENT era (ostk-version == OSTK_VERSION) is never
+considered frozen and always goes through the normal build+compare+refuse
+path, since its data is still expected to move.
+
 No cross-version aggregate exists anywhere: boards/index.json carries
 cross_version.comparable=false and no code path sums across versions.
 
-Usage:  python3 publish_boards.py [--dry-run] [--force]
+Usage:  python3 publish_boards.py [--dry-run] [--force] [--force-era ERA ...]
 """
 
 from __future__ import annotations
@@ -88,6 +105,13 @@ def write_versioned(path: Path, payload: dict, force: bool = False,
             print(f"[boards] {msg}", file=sys.stderr)
             refusals.append(str(path.relative_to(ROOT)))
             return False
+        old_n = old.get("trust", {}).get("solve_valid_cells")
+        new_n = payload.get("trust", {}).get("solve_valid_cells")
+        if isinstance(old_n, int) and isinstance(new_n, int) and new_n < old_n:
+            print(f"[boards] WARNING: forced overwrite of {path.relative_to(ROOT)} "
+                  f"SHRINKS solve_valid_cells {old_n} -> {new_n} — confirm this era's "
+                  f"sources weren't just partially archived before trusting the new file",
+                  file=sys.stderr)
         print(f"[boards] FORCED overwrite of {path.relative_to(ROOT)}", file=sys.stderr)
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w") as f:
@@ -505,8 +529,19 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="Versioned board publishing (append-only).")
     ap.add_argument("--dry-run", action="store_true", help="Build everything, write nothing")
     ap.add_argument("--force", action="store_true",
-                    help="Deliberately replace an existing versioned board (document why)")
+                    help="Deliberately replace an existing versioned board (document why); "
+                         "applies to every era, frozen or current")
+    ap.add_argument("--force-era", action="append", metavar="ERA", default=[],
+                    help="Deliberately rebuild + (if content differs) replace one named "
+                         "frozen era (repeatable). Valid names: " + ", ".join(cs.SNAPSHOTS) +
+                         ". Narrower than --force: only the named era(s) reopen their "
+                         "append-only guard.")
     args = ap.parse_args()
+
+    unknown_eras = sorted(set(args.force_era) - set(cs.SNAPSHOTS))
+    if unknown_eras:
+        sys.exit(f"REFUSED: --force-era named unknown era(s) {unknown_eras} — "
+                 f"valid eras: {list(cs.SNAPSHOTS)}")
 
     if not (BOARDS_DIR / "FAULTS.json").exists() and not args.dry_run:
         sys.exit("REFUSED: boards/FAULTS.json missing — fault annotations are "
@@ -561,12 +596,34 @@ def main() -> None:
     # are collected so a drifted historical board (e.g. an INVALID phantom
     # that the matrix legitimately deleted and re-ran) cannot block a new
     # snapshot from landing — but they still fail the run at the end.
+    #
+    # FROZEN ERA SKIP: a snapshot whose version isn't the current OSTK_VERSION
+    # is frozen. Once its board file exists on disk it is immutable-and-
+    # satisfied — its runs/ sources may be fully or partially archived away
+    # (era-source-archival hygiene) and that is NOT drift worth refusing on;
+    # skip cleanly instead. --force / --force-era reopen the guard explicitly.
     refusals: list[str] = []
-    for snap, out in snapshot_outs.items():
+    force_eras = set(args.force_era)
+    for snap in cs.SNAPSHOTS:
         run_date = cs.SNAPSHOT_RUN_DATE[snap]
         version = cs.SNAPSHOT_OSTK_VERSION.get(snap, cs.OSTK_VERSION)
         path = BOARDS_DIR / version / f"{run_date}-experiment-scores.json"
-        write_versioned(path, out, force=args.force, refusals=refusals)
+        frozen = version != cs.OSTK_VERSION
+        forced_this_era = args.force or snap in force_eras
+
+        if frozen and path.exists() and not forced_this_era:
+            print(f"[boards] {path.relative_to(ROOT)}: frozen era ({snap}, {version}) "
+                  f"already published — skipping rebuild (source runs may be archived; "
+                  f"pass --force-era {snap} to rewrite deliberately)")
+            continue
+
+        if snap not in snapshot_outs:
+            print(f"[boards] {path.relative_to(ROOT)}: no source cells for snapshot "
+                  f"{snap!r} in runs/ — nothing to build; on-disk file (if any) left "
+                  f"untouched.")
+            continue
+
+        write_versioned(path, snapshot_outs[snap], force=forced_this_era, refusals=refusals)
 
     # boards/index.json (rebuilt from what is on disk — includes backfills)
     index = build_index()
