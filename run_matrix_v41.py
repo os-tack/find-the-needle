@@ -549,6 +549,12 @@ def classify_failure(output: str, returncode: int) -> str:
     retried via TRANSIENT_MARKERS below.
     """
     lo = output.lower()
+    # Exit 3 = model refusal (API safety classifier) with no valid score
+    # landed. Deterministic and terminal — retrying at the same key/prompt
+    # hits the same wall — so it is never transient, and it gets its own
+    # status so a refusal-without-score is legible in the punch list.
+    if returncode == 3:
+        return "refused"
     if "poll deadline exceeded" in lo or "deadline_exceeded" in lo:
         return "failed"
     if "stop=api_error" in lo:
@@ -655,9 +661,18 @@ def run_cell(model: str, bench: str, arm: str, dry_run: bool) -> tuple[str, str]
     # teardown and took the completed_kill path instead of clean exit 1.)
     completed = result.status in ("completed_kill", "exit")
     masked_note = " [teardown_masked]" if result.teardown_masked else ""
+    # Exit 3 = the model's safety classifier refused (stop_reason=refusal,
+    # ostk bench >= 7.7.3). A refusal still lands a VALID score
+    # (resolved=false, real accounting), so the cell stays a comparable
+    # outcome ('success'); the marker just makes the state row and run log
+    # distinguish it from a plain capability loss. The score fallback covers
+    # the completed_kill path, where returncode is the kill signal.
+    refused = result.returncode == 3 or (
+        (read_score(model, bench, arm) or {}).get("stop_reason", "") == "refusal")
+    refusal_note = " [refusal]" if refused else ""
     if completed and score_exists(model, bench, arm):
         if score_valid(model, bench, arm):
-            return "success", f"({elapsed:.0f}s){masked_note}"
+            return "success", f"({elapsed:.0f}s){masked_note}{refusal_note}"
         sc = read_score(model, bench, arm) or {}
         reason = (sc.get("stop_reason", "") or "").lower() or "invalid"
         return "infra_fail", f"invalid score (stop={reason}) ({elapsed:.0f}s){masked_note}"
@@ -727,6 +742,12 @@ def cell_action(model: str, bench: str, arm: str, state: dict, retry_failed: boo
         if retry_failed:
             return "retry"
         return "skip"
+    if status == "refused":
+        # A refusal is deterministic at the same key/prompt — sticky like a
+        # hard fail; --retry-failed reopens it deliberately.
+        if retry_failed:
+            return "retry"
+        return "skip"
     return "run"
 
 def now_iso() -> str:
@@ -793,6 +814,7 @@ def main() -> int:
     per_model_quarantined: dict[str, int] = {m.name: 0 for m in models}
 
     total = pending = skipped = succeeded = failed_hard = failed_trans = quarantined = 0
+    refused_total = 0
     plan_quarantine = 0
     for m in models:
         arms = [a for a in m.arms if not args.arm or a in args.arm]
@@ -885,8 +907,9 @@ def main() -> int:
                             cell_succeeded = True
                             print(f"    OK {tail}")
                             break
-                        if status == "failed":
-                            print(f"    HARD FAIL: {tail[:200]}")
+                        if status in ("failed", "refused"):
+                            label = "REFUSED" if status == "refused" else "HARD FAIL"
+                            print(f"    {label}: {tail[:200]}")
                             break
                         if status == "infra_fail":
                             # Phantom/invalid score. run_cell already left no
@@ -955,6 +978,10 @@ def main() -> int:
                     per_model_ok[m.name] = per_model_ok.get(m.name, 0) + 1
                 elif final_status == "failed":
                     failed_hard += 1
+                elif final_status == "refused":
+                    # Model verdict, not infra failure: counted in its own
+                    # bucket and kept OUT of the nonzero-exit condition.
+                    refused_total += 1
                 elif final_status == "transient_fail":
                     failed_trans += 1
                 elif final_status == "infra_fail":
@@ -966,6 +993,7 @@ def main() -> int:
     print(f"\n========== summary @ {now_iso()} ==========")
     print(f"  succeeded:   {succeeded}")
     print(f"  hard fail:   {failed_hard}")
+    print(f"  refused:     {refused_total}")
     print(f"  gave up:     {failed_trans}")
     print(f"  quarantined: {quarantined}")
     print(f"  skipped:     {skipped}")
