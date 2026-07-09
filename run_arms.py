@@ -19,6 +19,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -27,9 +28,33 @@ from runner import (
     docker_exec, resolve_tools, call_model, detect_provider, do_edit,
     PostRecorder, MetricsRecorder, parse_agentfile,
     _canonical_agent_name, _load_difficulty_json, _model_cost_usd,
+    extract_usage, billed_equivalent_input_tokens,
     ALL_TOOLS, DEFAULT_TOOLS, BENCH_SYSTEM_PROMPT, BENCH_USER_PROMPT,
     list_benchmarks, solution_files,
 )
+
+
+# A cell is "resolved" ONLY when a harness-executed `bash test.sh` exits 0.
+# The model *inspecting* test.sh (cat/ls/grep/head) must never be mistaken for
+# *running* it — that substring confusion produced false positives. Match a
+# genuine invocation: via an interpreter (`bash`/`sh test.sh`) or as a script
+# (`./test.sh`, `/abs/path/test.sh`). Over-matching here is harmless: the
+# authoritative exit code always comes from our own canonical run, so an extra
+# `bash test.sh` on a false match just re-confirms an unresolved cell.
+_TEST_EXEC_RE = re.compile(
+    r"(?:^|[\s;&|(])"
+    r"(?:"
+    r"(?:bash|sh)\s+(?:\S*/)?test\.sh"   # bash test.sh / sh path/test.sh
+    r"|\.?/(?:\S*/)?test\.sh"            # ./test.sh / /abs/test.sh
+    r")"
+    r"(?:\s|$|[;&|)])"
+)
+
+
+def _is_test_execution(cmd: str) -> bool:
+    """True iff the model's bash command actually *runs* test.sh, as opposed to
+    inspecting it (cat/ls/grep/head test.sh)."""
+    return bool(_TEST_EXEC_RE.search(cmd))
 
 # ── Arm definitions (SPEC-bench-v2 §1) ──────────────────────────────────
 #
@@ -188,6 +213,10 @@ def _run_arm_inner(model, bench_name, bench_dir, provider, arm_name):
     start_time = time.time()
     total_tokens_in = 0
     total_tokens_out = 0
+    total_cache_read = 0
+    total_cache_creation = 0
+    total_cc_5m = 0
+    total_cc_1h = 0
     total_cost_usd = 0.0
     turn_events = []
     total_tool_calls = 0
@@ -220,14 +249,24 @@ def _run_arm_inner(model, bench_name, bench_dir, provider, arm_name):
 
             resp = call_model(api_model, messages, provider,
                               system_prompt=system_prompt, tools=tools)
-            tokens_in = resp.get("usage", {}).get("input_tokens", 0)
-            tokens_out = resp.get("usage", {}).get("output_tokens", 0)
+            usage = extract_usage(resp)
+            tokens_in = usage["input_tokens"]
+            tokens_out = usage["output_tokens"]
+            cache_read = usage["cache_read_input_tokens"]
+            cache_creation = usage["cache_creation_input_tokens"]
+            cc_5m = usage["cache_creation_5m_tokens"]
+            cc_1h = usage["cache_creation_1h_tokens"]
             turn_cost_usd = resp.get("usage", {}).get("cost_usd", 0)
             total_tokens_in += tokens_in
             total_tokens_out += tokens_out
+            total_cache_read += cache_read
+            total_cache_creation += cache_creation
+            total_cc_5m += cc_5m
+            total_cc_1h += cc_1h
             total_cost_usd += turn_cost_usd
 
-            metrics.record_turn(turn, tokens_in, tokens_out)
+            metrics.record_turn(turn, tokens_in, tokens_out, cache_read, cache_creation,
+                                cc_5m, cc_1h)
 
             content_blocks = resp.get("content", [])
             stop_reason = resp.get("stop_reason", "end_turn")
@@ -268,10 +307,17 @@ def _run_arm_inner(model, bench_name, bench_dir, provider, arm_name):
                     })
                     post.bash(cmd, output, turn)
 
-                    # For bare/bare arms: detect if the model ran test.sh via bash
-                    if "test.sh" in cmd:
-                        test_exit = rc
-                        final_test_output = output
+                    # Resolution may ONLY come from a harness-run `bash test.sh`,
+                    # never from the model command's own exit code. If the model
+                    # appears to run the test, execute it canonically ourselves
+                    # and trust ITS exit code + output (mirrors the post-edit check).
+                    if _is_test_execution(cmd):
+                        trc, tstdout, tstderr = docker_exec(container, "bash test.sh")
+                        test_exit = trc
+                        test_output = tstdout
+                        if tstderr:
+                            test_output += ("\n" if test_output else "") + tstderr
+                        final_test_output = test_output
 
                 elif name == "read":
                     total_read_calls += 1
@@ -314,6 +360,8 @@ def _run_arm_inner(model, bench_name, bench_dir, provider, arm_name):
                 "event": "turn", "turn": turn,
                 "files_edited": files_edited, "files_read": files_read,
                 "tokens_in": tokens_in, "tokens_out": tokens_out,
+                "cache_read_input_tokens": cache_read,
+                "cache_creation_input_tokens": cache_creation,
                 "test_exit": test_exit,
             }
             emit(turn_event)
@@ -464,6 +512,19 @@ def _run_arm_inner(model, bench_name, bench_dir, provider, arm_name):
     # estimated_cost_usd — prefer real OpenRouter cost, fall back to MODEL_PRICING
     estimated_cost_usd = total_cost_usd if total_cost_usd > 0 else cost
 
+    # task #11: per-arm cache-split aggregates. Field names mirror the canonical
+    # bucket schema consumed downstream by consolidate_harden.py / emit_cells.py
+    # (→2062 SCHEMA PARITY). All additive — existing fields are untouched.
+    billed_tokens = total_tokens_in + total_cache_read + total_cache_creation
+    cache_read_to_create_ratio = (
+        round(total_cache_read / total_cache_creation, 4)
+        if total_cache_creation else None
+    )
+    total_billed_equivalent_tokens = round(
+        billed_equivalent_input_tokens(
+            total_tokens_in, total_cache_read, total_cache_creation,
+            total_cc_5m, total_cc_1h) + total_tokens_out, 2)
+
     # dollars_per_correct_line
     dollars_per_correct_line = round(estimated_cost_usd / correct_lines, 6) if correct_lines > 0 else None
 
@@ -497,6 +558,16 @@ def _run_arm_inner(model, bench_name, bench_dir, provider, arm_name):
         "signal_to_noise": round(signal_to_noise, 3),
         "false_positives": false_pos,
         "token_cost": token_cost,
+        "input_tokens": total_tokens_in,
+        "output_tokens": total_tokens_out,
+        "fresh_input_tokens": total_tokens_in,
+        "cache_read_tokens": total_cache_read,
+        "cache_create_tokens": total_cache_creation,
+        "cache_create_5m_tokens": total_cc_5m,
+        "cache_create_1h_tokens": total_cc_1h,
+        "billed_tokens": billed_tokens,
+        "cache_read_to_create_ratio": cache_read_to_create_ratio,
+        "total_billed_equivalent_tokens": total_billed_equivalent_tokens,
         "estimated_cost_usd": estimated_cost_usd,
         "dollars_per_correct_line": dollars_per_correct_line,
         "tokens_per_correct_line": tpcl,

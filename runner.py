@@ -149,6 +149,56 @@ def _model_cost_usd(model: str, input_tokens: int, output_tokens: int) -> float:
     return round(cost_in + cost_out, 6)
 
 
+# ── Token / cache-split accounting (task #11) ────────────────────────────
+# Cache billing multipliers relative to the base input rate, matching the
+# downstream RATE CARD in consolidate_harden.py / emit_cells.py (→2062 SCHEMA
+# PARITY): cache reads bill at 0.1x, 5-minute cache writes at 1.25x, 1-hour
+# cache writes at 2.0x. Unsplit cache-creation is priced as 5m (the Anthropic
+# default TTL). Providers without a cache-creation concept report 0 for those
+# buckets, so their billed-equivalent reduces to fresh input.
+CACHE_READ_MULTIPLIER = 0.10
+CACHE_CREATE_5M_MULTIPLIER = 1.25
+CACHE_CREATE_1H_MULTIPLIER = 2.00
+
+
+def extract_usage(resp: dict) -> dict:
+    """Normalize per-turn token usage across providers.
+
+    Returns the four canonical Anthropic usage fields plus the 5m/1h
+    cache-creation breakdown, defaulting every field to 0 so that older
+    responses or providers that omit cache accounting never raise. Anthropic
+    populates all of these directly (the 5m/1h split lives under the nested
+    ``cache_creation`` object); Google/OpenRouter surface the cache-read field
+    when available (see call_google / call_openrouter).
+    """
+    u = (resp or {}).get("usage", {}) or {}
+    creation = u.get("cache_creation") or {}
+    return {
+        "input_tokens": u.get("input_tokens", 0) or 0,
+        "output_tokens": u.get("output_tokens", 0) or 0,
+        "cache_read_input_tokens": u.get("cache_read_input_tokens", 0) or 0,
+        "cache_creation_input_tokens": u.get("cache_creation_input_tokens", 0) or 0,
+        "cache_creation_5m_tokens": creation.get("ephemeral_5m_input_tokens", 0) or 0,
+        "cache_creation_1h_tokens": creation.get("ephemeral_1h_input_tokens", 0) or 0,
+    }
+
+
+def billed_equivalent_input_tokens(fresh: int, cache_read: int,
+                                   cache_create_total: int,
+                                   cc_5m: int = 0, cc_1h: int = 0) -> float:
+    """Input-token count weighted by the cache billing multipliers.
+
+    Mirrors consolidate_harden.bucket_cost's input side: unsplit cache-create
+    (total minus the known 5m/1h buckets) is priced at the 5m rate.
+    """
+    cc_unsplit = max(0, cache_create_total - cc_5m - cc_1h)
+    return (fresh
+            + cache_read * CACHE_READ_MULTIPLIER
+            + cc_5m * CACHE_CREATE_5M_MULTIPLIER
+            + cc_1h * CACHE_CREATE_1H_MULTIPLIER
+            + cc_unsplit * CACHE_CREATE_5M_MULTIPLIER)
+
+
 class PostRecorder:
     """Writes structured POST (power-on self-test) records per benchmark run.
 
@@ -234,34 +284,77 @@ class MetricsRecorder:
         self._model = model
         self._cum_in = 0
         self._cum_out = 0
+        self._cum_cache_read = 0
+        self._cum_cache_creation = 0
+        self._cum_cc_5m = 0
+        self._cum_cc_1h = 0
 
     def _emit(self, record: dict):
         self._f.write(json.dumps(record) + "\n")
         self._f.flush()
 
-    def record_turn(self, turn: int, input_tokens: int, output_tokens: int):
+    def record_turn(self, turn: int, input_tokens: int, output_tokens: int,
+                    cache_read_input_tokens: int = 0,
+                    cache_creation_input_tokens: int = 0,
+                    cache_creation_5m_tokens: int = 0,
+                    cache_creation_1h_tokens: int = 0):
         self._cum_in += input_tokens
         self._cum_out += output_tokens
+        self._cum_cache_read += cache_read_input_tokens
+        self._cum_cache_creation += cache_creation_input_tokens
+        self._cum_cc_5m += cache_creation_5m_tokens
+        self._cum_cc_1h += cache_creation_1h_tokens
         self._emit({
             "event": "token.usage",
             "turn": turn,
             "input_tokens": input_tokens,
             "output_tokens": output_tokens,
+            "cache_read_input_tokens": cache_read_input_tokens,
+            "cache_creation_input_tokens": cache_creation_input_tokens,
+            "cache_creation_5m_tokens": cache_creation_5m_tokens,
+            "cache_creation_1h_tokens": cache_creation_1h_tokens,
             "cumulative_input": self._cum_in,
             "cumulative_output": self._cum_out,
+            "cumulative_cache_read": self._cum_cache_read,
+            "cumulative_cache_creation": self._cum_cache_creation,
         })
 
     def complete(self):
         total = self._cum_in + self._cum_out
         cost = _model_cost_usd(self._model, self._cum_in, self._cum_out)
+        ratio = (round(self._cum_cache_read / self._cum_cache_creation, 4)
+                 if self._cum_cache_creation else None)
+        billed = billed_equivalent_input_tokens(
+            self._cum_in, self._cum_cache_read, self._cum_cache_creation,
+            self._cum_cc_5m, self._cum_cc_1h)
         self._emit({
             "event": "run.complete",
             "total_input_tokens": self._cum_in,
             "total_output_tokens": self._cum_out,
+            "total_cache_read_input_tokens": self._cum_cache_read,
+            "total_cache_creation_input_tokens": self._cum_cache_creation,
+            "cache_read_to_create_ratio": ratio,
+            "total_billed_equivalent_input_tokens": round(billed, 2),
             "total_tokens": total,
             "estimated_cost_usd": cost,
         })
         return self._cum_in, self._cum_out, total, cost
+
+    @property
+    def cum_cache_read(self) -> int:
+        return self._cum_cache_read
+
+    @property
+    def cum_cache_creation(self) -> int:
+        return self._cum_cache_creation
+
+    @property
+    def cum_cache_creation_5m(self) -> int:
+        return self._cum_cc_5m
+
+    @property
+    def cum_cache_creation_1h(self) -> int:
+        return self._cum_cc_1h
 
     def close(self):
         self._f.close()
@@ -469,6 +562,9 @@ def call_google(model, messages, api_key, system_prompt=None, tools=None):
     usage = data.get("usageMetadata", {})
     result["usage"]["input_tokens"] = usage.get("promptTokenCount", 0)
     result["usage"]["output_tokens"] = usage.get("candidatesTokenCount", 0)
+    # Gemini context-cache reads (no cache-creation concept on this API).
+    result["usage"]["cache_read_input_tokens"] = usage.get("cachedContentTokenCount", 0) or 0
+    result["usage"]["cache_creation_input_tokens"] = 0
     for candidate in data.get("candidates", []):
         for part in candidate.get("content", {}).get("parts", []):
             if "text" in part:
@@ -609,12 +705,18 @@ def call_openrouter(model, messages, api_key, system_prompt=None, tools=None):
 
     stop_reason = "tool_use" if msg.get("tool_calls") else "end_turn"
 
+    # OpenAI/OpenRouter report cache reads under prompt_tokens_details.cached_tokens.
+    # There is no separate cache-creation count in this shape, so it stays 0.
+    _cached = (usage.get("prompt_tokens_details") or {}).get("cached_tokens", 0) or 0
+
     return {
         "content": content_blocks,
         "stop_reason": stop_reason,
         "usage": {
             "input_tokens": usage.get("prompt_tokens", 0),
             "output_tokens": usage.get("completion_tokens", 0),
+            "cache_read_input_tokens": _cached,
+            "cache_creation_input_tokens": 0,
             "cost_usd": usage.get("cost", 0),  # real cost from OpenRouter
         },
     }
@@ -730,6 +832,10 @@ def run_benchmark(model, bench_name, bench_dir, provider):
     start_time = time.time()
     total_tokens_in = 0
     total_tokens_out = 0
+    total_cache_read = 0
+    total_cache_creation = 0
+    total_cc_5m = 0
+    total_cc_1h = 0
     total_cost_usd = 0.0
     turn_events = []
     # v2.0 metrics: accumulate tool-call counters for read_tool_ratio / tool_calls_per_turn
@@ -769,15 +875,25 @@ def run_benchmark(model, bench_name, bench_dir, provider):
                 break
 
             resp = call_model(api_model, messages, provider, system_prompt=system_prompt, tools=tools)
-            tokens_in = resp.get("usage", {}).get("input_tokens", 0)
-            tokens_out = resp.get("usage", {}).get("output_tokens", 0)
+            usage = extract_usage(resp)
+            tokens_in = usage["input_tokens"]
+            tokens_out = usage["output_tokens"]
+            cache_read = usage["cache_read_input_tokens"]
+            cache_creation = usage["cache_creation_input_tokens"]
+            cc_5m = usage["cache_creation_5m_tokens"]
+            cc_1h = usage["cache_creation_1h_tokens"]
             turn_cost_usd = resp.get("usage", {}).get("cost_usd", 0)
             total_tokens_in += tokens_in
             total_tokens_out += tokens_out
+            total_cache_read += cache_read
+            total_cache_creation += cache_creation
+            total_cc_5m += cc_5m
+            total_cc_1h += cc_1h
             total_cost_usd += turn_cost_usd
 
-            # AC2: record per-turn token usage
-            metrics.record_turn(turn, tokens_in, tokens_out)
+            # AC2: record per-turn token usage (incl. cache split, task #11)
+            metrics.record_turn(turn, tokens_in, tokens_out, cache_read, cache_creation,
+                                cc_5m, cc_1h)
 
             content_blocks = resp.get("content", [])
             stop_reason = resp.get("stop_reason", "end_turn")
@@ -859,6 +975,8 @@ def run_benchmark(model, bench_name, bench_dir, provider):
 
             turn_event = {"event": "turn", "turn": turn, "files_edited": files_edited,
                           "files_read": files_read, "tokens_in": tokens_in, "tokens_out": tokens_out,
+                          "cache_read_input_tokens": cache_read,
+                          "cache_creation_input_tokens": cache_creation,
                           "test_exit": test_exit}
             emit(turn_event)
             turn_events.append(turn_event)
@@ -989,6 +1107,20 @@ def run_benchmark(model, bench_name, bench_dir, provider):
     # v2.0: estimated_cost_usd — prefer real OpenRouter cost, fall back to MODEL_PRICING estimate
     estimated_cost_usd = total_cost_usd if total_cost_usd > 0 else cost
 
+    # task #11: per-arm cache-split aggregates. Field names mirror the canonical
+    # bucket schema consumed downstream by consolidate_harden.py / emit_cells.py
+    # (→2062 SCHEMA PARITY): fresh + cache_read + cache_create buckets, priced
+    # via the shared multipliers. All additive — existing fields are untouched.
+    billed_tokens = total_tokens_in + total_cache_read + total_cache_creation
+    cache_read_to_create_ratio = (
+        round(total_cache_read / total_cache_creation, 4)
+        if total_cache_creation else None
+    )
+    total_billed_equivalent_tokens = round(
+        billed_equivalent_input_tokens(
+            total_tokens_in, total_cache_read, total_cache_creation,
+            total_cc_5m, total_cc_1h) + total_tokens_out, 2)
+
     # v2.0: dollars_per_correct_line
     if correct_lines > 0:
         dollars_per_correct_line = round(estimated_cost_usd / correct_lines, 6)
@@ -1039,6 +1171,16 @@ def run_benchmark(model, bench_name, bench_dir, provider):
         "resolved": resolved, "turns_to_discovery": turns_to_discovery,
         "turns_to_fix": turns_to_fix, "signal_to_noise": round(signal_to_noise, 3),
         "false_positives": false_pos, "token_cost": token_cost,
+        "input_tokens": total_tokens_in,
+        "output_tokens": total_tokens_out,
+        "fresh_input_tokens": total_tokens_in,
+        "cache_read_tokens": total_cache_read,
+        "cache_create_tokens": total_cache_creation,
+        "cache_create_5m_tokens": total_cc_5m,
+        "cache_create_1h_tokens": total_cc_1h,
+        "billed_tokens": billed_tokens,
+        "cache_read_to_create_ratio": cache_read_to_create_ratio,
+        "total_billed_equivalent_tokens": total_billed_equivalent_tokens,
         "estimated_cost_usd": estimated_cost_usd,
         "dollars_per_correct_line": dollars_per_correct_line,
         "tokens_per_correct_line": tpcl,
