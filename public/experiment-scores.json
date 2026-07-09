@@ -1,8 +1,8 @@
 {
-  "generated": "2026-07-09T12:22:55Z",
-  "ostk_version": "v7.7.1",
+  "generated": "2026-07-09T14:19:09Z",
+  "ostk_version": "v7.7.2",
   "snapshot": "latest",
-  "snapshot_policy": "latest = single snapshot per (model, arm) column \u2014 a column never mixes run dates; earlier snapshots are published under boards/v7.7.1/",
+  "snapshot_policy": "latest = single snapshot per (model, arm) column \u2014 a column never mixes run dates; earlier snapshots are published under boards/v7.7.2/",
   "column_snapshots": {
     "claude-fable-5/cpu": "july09",
     "claude-fable-5/native": "july09",
@@ -10,6 +10,7 @@
     "claude-opus-4-8/native": "july09",
     "claude-sonnet-4-6/cpu": "june16",
     "claude-sonnet-4-6/native": "june16",
+    "claude-sonnet-5/cpu": "july09v2",
     "claude-sonnet-5/native": "july09",
     "deepseek-v4-pro/kernel": "june16",
     "deepseek-v4-pro/native": "june16",
@@ -38,22 +39,38 @@
     {
       "id": "july09-fable-kernel-refusal",
       "note": "July-9 smoke (v7.7.1): every claude-fable-5 kernel-cpu cell ends in an empty-content stop_reason=refusal after 2-3 real tool turns (native arm unaffected). Cells are VALID resolved=false with real accounting, but the unsolved verdict reflects a provider refusal on the kernel-arm prompt shape \u2014 treat fable-5 kernel-cpu solve rates as a floor."
+    },
+    {
+      "id": "july09-opus48-unknown-tool-loop-exit",
+      "note": "July-9 (v7.7.1): 2 claude-opus-4-8 kernel-cpu cells lost to an agent-loop hard-exit on an undeclared tool request (harness defect, not a capability gap) \u2014 treat opus-4-8 kernel-cpu solve rate as a floor."
+    },
+    {
+      "id": "july09-f7-earlystop-truncated-votes",
+      "note": "F7 resampling stopped on any mid-stream solve, locking [F,T] cells at 1/2 = miss without their deciding third sample. Affected v7.7.1 cells publish as-were (solve rates are floors); harness fixed 2026-07-09 before the v7.7.2 board."
+    },
+    {
+      "id": "july09-f7-earlystop-truncated-votes",
+      "note": "F7 resampling stopped on any mid-stream solve, locking [F,T] cells at 1/2 = miss without their deciding third sample. Affected v7.7.1 cells publish as-were (solve rates are floors); harness fixed 2026-07-09 before the v7.7.2 board."
+    },
+    {
+      "id": "july09-runcell-exit1-hardfail",
+      "note": "v7.7.2 capture: run_cell hard-failed clean completed-but-unsolved exits (unmasked by the teardown fix); one sonnet-5 kernel cell was remediated by cold re-run before publish \u2014 no published board carries a mis-scored cell. Harness fixed 2026-07-09."
     }
   ],
   "faults_ref": "boards/FAULTS.json",
   "trust": {
     "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle verdict + arm receipt + not stalled): malformed / no-arm-receipt / arm-mismatch / deadline / zero-work / duplicate-column cells are fully INVALID \u2014 excluded from everything, counted visibly. COST axis (real token/cost accounting): zero token accounting on a completed run keeps the solve verdict and marks cost UNAVAILABLE \u2014 included in solve columns, excluded from cost/token columns, counted visibly, never priced. absent = never run (not invalid).",
-    "solve_valid_cells": 731,
-    "cost_valid_cells": 731,
+    "solve_valid_cells": 768,
+    "cost_valid_cells": 768,
     "cost_invalid_cells": 0,
     "invalid_cells": 10,
-    "policy_excluded_cells": 22,
+    "policy_excluded_cells": 23,
     "invalid_by_reason": {
       "deadline_exceeded": 6,
       "zero_work": 4
     },
     "cost_invalid_by_reason": {},
-    "teardown_masked_cells": 116,
+    "teardown_masked_cells": 117,
     "by_ostk_version": {
       "v7.6.0": {
         "solve_valid_cells": 545,
@@ -64,6 +81,12 @@
       "v7.7.1": {
         "solve_valid_cells": 186,
         "cost_valid_cells": 186,
+        "cost_invalid_cells": 0,
+        "invalid_cells": 0
+      },
+      "v7.7.2": {
+        "solve_valid_cells": 37,
+        "cost_valid_cells": 37,
         "cost_invalid_cells": 0,
         "invalid_cells": 0
       }
@@ -362,6 +385,85 @@
         "arm_type": "native_driver"
       },
       "native_cli": "gemini-cli"
+    },
+    {
+      "model": "claude-sonnet-5",
+      "model_normalized": "claude-sonnet-5",
+      "benchmarks": 37,
+      "native": {
+        "solved": 34,
+        "total": 37,
+        "cost": 16.995506000000002,
+        "tokens": 18069573,
+        "tokens_fresh": 219970,
+        "cost_cells": 37,
+        "tools": 474,
+        "turns": 510,
+        "wall": 2982.4489999999996,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 9,
+        "cost_bases": {
+          "self-reported": 36,
+          "unpriced": 1
+        }
+      },
+      "kernel": {
+        "solved": 0,
+        "total": 0,
+        "cost": 0,
+        "tokens": 0,
+        "tokens_fresh": 0,
+        "cost_cells": 0,
+        "tools": 0,
+        "turns": 0,
+        "wall": 0,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "cost_bases": {},
+        "status": "not_applicable \u2014 ostk treatment sourced from 'cpu' (kernel_arm_type=generic_kernel; see 'ostk')"
+      },
+      "cpu": {
+        "solved": 36,
+        "total": 37,
+        "cost": 3.0400729999999996,
+        "tokens": 4767433,
+        "tokens_fresh": 356650,
+        "cost_cells": 37,
+        "tools": 460,
+        "turns": 420,
+        "wall": 2861.8849999999993,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 1,
+        "cost_bases": {
+          "self-reported": 37
+        }
+      },
+      "cpu_driver_status": "no_driver",
+      "kernel_arm_type": "generic_kernel",
+      "ostk": {
+        "solved": 36,
+        "total": 37,
+        "cost": 3.0400729999999996,
+        "tokens": 4767433,
+        "tokens_fresh": 356650,
+        "cost_cells": 37,
+        "tools": 460,
+        "turns": 420,
+        "wall": 2861.8849999999993,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 1,
+        "cost_bases": {
+          "self-reported": 37
+        },
+        "source_arm": "cpu",
+        "arm_type": "generic_kernel",
+        "note": "requested-vs-executed arm mismatch: no native driver; executed via generic fallback \u2014 single execution sourced from the kernel-cpu directory"
+      },
+      "native_cli": "opencode"
     },
     {
       "model": "gemini-3.1-pro-preview",
@@ -996,80 +1098,6 @@
         "arm_type": "native_driver"
       },
       "native_cli": "claude-code"
-    },
-    {
-      "model": "claude-sonnet-5",
-      "model_normalized": "claude-sonnet-5",
-      "benchmarks": 37,
-      "native": {
-        "solved": 34,
-        "total": 37,
-        "cost": 16.995506000000002,
-        "tokens": 18069573,
-        "tokens_fresh": 219970,
-        "cost_cells": 37,
-        "tools": 474,
-        "turns": 510,
-        "wall": 2982.4489999999996,
-        "invalid": 0,
-        "cost_invalid": 0,
-        "masked": 9,
-        "cost_bases": {
-          "self-reported": 36,
-          "unpriced": 1
-        }
-      },
-      "kernel": {
-        "solved": 0,
-        "total": 0,
-        "cost": 0,
-        "tokens": 0,
-        "tokens_fresh": 0,
-        "cost_cells": 0,
-        "tools": 0,
-        "turns": 0,
-        "wall": 0,
-        "invalid": 0,
-        "cost_invalid": 0,
-        "masked": 0,
-        "cost_bases": {}
-      },
-      "cpu": {
-        "solved": 0,
-        "total": 0,
-        "cost": 0,
-        "tokens": 0,
-        "tokens_fresh": 0,
-        "cost_cells": 0,
-        "tools": 0,
-        "turns": 0,
-        "wall": 0,
-        "invalid": 0,
-        "cost_invalid": 0,
-        "masked": 0,
-        "cost_bases": {},
-        "status": "not_applicable \u2014 ostk treatment sourced from 'kernel' (kernel_arm_type=generic_kernel; see 'ostk')"
-      },
-      "cpu_driver_status": "no_driver",
-      "kernel_arm_type": "generic_kernel",
-      "ostk": {
-        "solved": 0,
-        "total": 0,
-        "cost": 0,
-        "tokens": 0,
-        "tokens_fresh": 0,
-        "cost_cells": 0,
-        "tools": 0,
-        "turns": 0,
-        "wall": 0,
-        "invalid": 0,
-        "cost_invalid": 0,
-        "masked": 0,
-        "cost_bases": {},
-        "source_arm": "kernel",
-        "arm_type": "generic_kernel"
-      },
-      "native_cli": "opencode"
     }
   ],
   "benchmarks": [
@@ -5297,7 +5325,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 11,
+        "input_tokens": 6424,
+        "output_tokens": 2173,
+        "billed_input_tokens": 111827,
+        "token_cost": 114000,
+        "cost_usd": 0.088436,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 10,
+        "wall_clock": 70.924,
+        "summary": "agent.completed: 11turns, 6424+2173 tokens, $0.0884",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5320,7 +5363,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 9,
+        "input_tokens": 7705,
+        "output_tokens": 1700,
+        "billed_input_tokens": 100099,
+        "token_cost": 101799,
+        "cost_usd": 0.07045,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 11,
+        "wall_clock": 49.986,
+        "summary": "agent.completed: 9turns, 7705+1700 tokens, $0.0705",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5343,7 +5401,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 12,
+        "input_tokens": 10016,
+        "output_tokens": 3301,
+        "billed_input_tokens": 159108,
+        "token_cost": 162409,
+        "cost_usd": 0.110642,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 11,
+        "wall_clock": 76.239,
+        "summary": "agent.completed: 12turns, 10016+3301 tokens, $0.1106",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5366,7 +5439,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 8,
+        "input_tokens": 8664,
+        "output_tokens": 1450,
+        "billed_input_tokens": 92092,
+        "token_cost": 93542,
+        "cost_usd": 0.070168,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 12,
+        "wall_clock": 53.545,
+        "summary": "agent.completed: 8turns, 8664+1450 tokens, $0.0702",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5389,7 +5477,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 10,
+        "input_tokens": 5450,
+        "output_tokens": 1474,
+        "billed_input_tokens": 90506,
+        "token_cost": 91980,
+        "cost_usd": 0.055051,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 14,
+        "wall_clock": 59.13,
+        "summary": "agent.completed: 10turns, 5450+1474 tokens, $0.0551",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5412,7 +5515,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 10,
+        "input_tokens": 4094,
+        "output_tokens": 1812,
+        "billed_input_tokens": 87705,
+        "token_cost": 89517,
+        "cost_usd": 0.054167,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 9,
+        "wall_clock": 58.041,
+        "summary": "agent.completed: 10turns, 4094+1812 tokens, $0.0542",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5435,7 +5553,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 9,
+        "input_tokens": 3618,
+        "output_tokens": 2160,
+        "billed_input_tokens": 77446,
+        "token_cost": 79606,
+        "cost_usd": 0.054706,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 9,
+        "wall_clock": 57.896,
+        "summary": "agent.completed: 9turns, 3618+2160 tokens, $0.0547",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5458,7 +5591,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 12,
+        "input_tokens": 5737,
+        "output_tokens": 1770,
+        "billed_input_tokens": 116400,
+        "token_cost": 118170,
+        "cost_usd": 0.064745,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 14,
+        "wall_clock": 71.361,
+        "summary": "agent.completed: 12turns, 5737+1770 tokens, $0.0647",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5481,7 +5629,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 12,
+        "input_tokens": 6421,
+        "output_tokens": 3054,
+        "billed_input_tokens": 138881,
+        "token_cost": 141935,
+        "cost_usd": 0.089387,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 16,
+        "wall_clock": 101.742,
+        "summary": "agent.completed: 12turns, 6421+3054 tokens, $0.0894",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5504,7 +5667,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 13,
+        "input_tokens": 10487,
+        "output_tokens": 4685,
+        "billed_input_tokens": 169465,
+        "token_cost": 174150,
+        "cost_usd": 0.131504,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 18,
+        "wall_clock": 88.414,
+        "summary": "agent.completed: 13turns, 10487+4685 tokens, $0.1315",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5527,7 +5705,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 12,
+        "input_tokens": 5578,
+        "output_tokens": 2489,
+        "billed_input_tokens": 113991,
+        "token_cost": 116480,
+        "cost_usd": 0.072391,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 15,
+        "wall_clock": 63.408,
+        "summary": "agent.completed: 12turns, 5578+2489 tokens, $0.0724",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5550,7 +5743,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 9,
+        "input_tokens": 3353,
+        "output_tokens": 1671,
+        "billed_input_tokens": 80230,
+        "token_cost": 81901,
+        "cost_usd": 0.048688,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 9,
+        "wall_clock": 57.151,
+        "summary": "agent.completed: 9turns, 3353+1671 tokens, $0.0487",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5573,7 +5781,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 10,
+        "input_tokens": 2726,
+        "output_tokens": 1824,
+        "billed_input_tokens": 79894,
+        "token_cost": 81718,
+        "cost_usd": 0.046973,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 9,
+        "wall_clock": 77.895,
+        "summary": "agent.completed: 10turns, 2726+1824 tokens, $0.0470",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5596,7 +5819,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 19,
+        "input_tokens": 11859,
+        "output_tokens": 10776,
+        "billed_input_tokens": 275928,
+        "token_cost": 286704,
+        "cost_usd": 0.218157,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 20,
+        "wall_clock": 167.827,
+        "summary": "agent.completed: 19turns, 11859+10776 tokens, $0.2182",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5619,7 +5857,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 19,
+        "input_tokens": 20699,
+        "output_tokens": 5828,
+        "billed_input_tokens": 347414,
+        "token_cost": 353242,
+        "cost_usd": 0.21489,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 21,
+        "wall_clock": 154.291,
+        "summary": "agent.completed: 19turns, 20699+5828 tokens, $0.2149",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5642,7 +5895,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 14,
+        "input_tokens": 5899,
+        "output_tokens": 2110,
+        "billed_input_tokens": 144466,
+        "token_cost": 146576,
+        "cost_usd": 0.077151,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 13,
+        "wall_clock": 79.786,
+        "summary": "agent.completed: 14turns, 5899+2110 tokens, $0.0772",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5665,7 +5933,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 11,
+        "input_tokens": 5985,
+        "output_tokens": 1349,
+        "billed_input_tokens": 113730,
+        "token_cost": 115079,
+        "cost_usd": 0.06232,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 10,
+        "wall_clock": 86.657,
+        "summary": "agent.completed: 11turns, 5985+1349 tokens, $0.0623",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5688,7 +5971,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 10,
+        "input_tokens": 5168,
+        "output_tokens": 1431,
+        "billed_input_tokens": 97992,
+        "token_cost": 99423,
+        "cost_usd": 0.056732,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 12,
+        "wall_clock": 84.216,
+        "summary": "agent.completed: 10turns, 5168+1431 tokens, $0.0567",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5711,7 +6009,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 10,
+        "input_tokens": 6685,
+        "output_tokens": 2353,
+        "billed_input_tokens": 109591,
+        "token_cost": 111944,
+        "cost_usd": 0.075276,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 14,
+        "wall_clock": 73.101,
+        "summary": "agent.completed: 10turns, 6685+2353 tokens, $0.0753",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5734,7 +6047,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 6,
+        "input_tokens": 3540,
+        "output_tokens": 705,
+        "billed_input_tokens": 51543,
+        "token_cost": 52248,
+        "cost_usd": 0.03265,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 7,
+        "wall_clock": 91.695,
+        "summary": "agent.completed: 6turns, 3540+705 tokens, $0.0326",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5757,7 +6085,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 8,
+        "input_tokens": 5521,
+        "output_tokens": 1057,
+        "billed_input_tokens": 80821,
+        "token_cost": 81878,
+        "cost_usd": 0.05038,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 10,
+        "wall_clock": 97.495,
+        "summary": "agent.completed: 8turns, 5521+1057 tokens, $0.0504",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5780,7 +6123,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 11,
+        "input_tokens": 3213,
+        "output_tokens": 1219,
+        "billed_input_tokens": 95721,
+        "token_cost": 96940,
+        "cost_usd": 0.045582,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 10,
+        "wall_clock": 96.896,
+        "summary": "agent.completed: 11turns, 3213+1219 tokens, $0.0456",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5803,7 +6161,22 @@
         "stop_reason": "fail"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": false,
+        "turns": 19,
+        "input_tokens": 9631,
+        "output_tokens": 2826,
+        "billed_input_tokens": 250794,
+        "token_cost": 12457,
+        "cost_usd": 0.120335,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": true,
+        "tool_uses": 18,
+        "wall_clock": 122.2,
+        "summary": "end_turn: 19turns, 9631+2826 tokens, $0.1203 (scored by stall_watch from journal)",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5826,7 +6199,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 8,
+        "input_tokens": 3318,
+        "output_tokens": 1168,
+        "billed_input_tokens": 68827,
+        "token_cost": 69995,
+        "cost_usd": 0.040691,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 7,
+        "wall_clock": 51.797,
+        "summary": "agent.completed: 8turns, 3318+1168 tokens, $0.0407",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5849,7 +6237,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 10,
+        "input_tokens": 12752,
+        "output_tokens": 3043,
+        "billed_input_tokens": 122947,
+        "token_cost": 125990,
+        "cost_usd": 0.108485,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 9,
+        "wall_clock": 75.188,
+        "summary": "agent.completed: 10turns, 12752+3043 tokens, $0.1085",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5872,7 +6275,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 9,
+        "input_tokens": 5683,
+        "output_tokens": 1777,
+        "billed_input_tokens": 85583,
+        "token_cost": 87360,
+        "cost_usd": 0.05991,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 13,
+        "wall_clock": 69.2,
+        "summary": "agent.completed: 9turns, 5683+1777 tokens, $0.0599",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5895,7 +6313,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 12,
+        "input_tokens": 7624,
+        "output_tokens": 4696,
+        "billed_input_tokens": 150634,
+        "token_cost": 155330,
+        "cost_usd": 0.114891,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 11,
+        "wall_clock": 83.303,
+        "summary": "agent.completed: 12turns, 7624+4696 tokens, $0.1149",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5918,7 +6351,22 @@
         "stop_reason": "fail"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 14,
+        "input_tokens": 3789,
+        "output_tokens": 1802,
+        "billed_input_tokens": 127022,
+        "token_cost": 128824,
+        "cost_usd": 0.06145,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 13,
+        "wall_clock": 63.704,
+        "summary": "agent.completed: 14turns, 3789+1802 tokens, $0.0615",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5941,7 +6389,22 @@
         "stop_reason": "fail"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 16,
+        "input_tokens": 17226,
+        "output_tokens": 3778,
+        "billed_input_tokens": 191203,
+        "token_cost": 194981,
+        "cost_usd": 0.130683,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 20,
+        "wall_clock": 92.711,
+        "summary": "agent.completed: 16turns, 17226+3778 tokens, $0.1307",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5964,7 +6427,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 11,
+        "input_tokens": 6035,
+        "output_tokens": 1418,
+        "billed_input_tokens": 101195,
+        "token_cost": 102613,
+        "cost_usd": 0.060563,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 10,
+        "wall_clock": 50.357,
+        "summary": "agent.completed: 11turns, 6035+1418 tokens, $0.0606",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -5987,7 +6465,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 11,
+        "input_tokens": 5507,
+        "output_tokens": 2552,
+        "billed_input_tokens": 112510,
+        "token_cost": 115062,
+        "cost_usd": 0.073945,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 13,
+        "wall_clock": 56.156,
+        "summary": "agent.completed: 11turns, 5507+2552 tokens, $0.0739",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -6010,7 +6503,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 11,
+        "input_tokens": 4931,
+        "output_tokens": 3108,
+        "billed_input_tokens": 101026,
+        "token_cost": 104134,
+        "cost_usd": 0.07245,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 10,
+        "wall_clock": 67.257,
+        "summary": "agent.completed: 11turns, 4931+3108 tokens, $0.0724",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -6033,7 +6541,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 10,
+        "input_tokens": 5446,
+        "output_tokens": 1231,
+        "billed_input_tokens": 90975,
+        "token_cost": 92206,
+        "cost_usd": 0.054076,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 9,
+        "wall_clock": 43.698,
+        "summary": "agent.completed: 10turns, 5446+1231 tokens, $0.0541",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -6056,7 +6579,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 14,
+        "input_tokens": 10775,
+        "output_tokens": 2851,
+        "billed_input_tokens": 173862,
+        "token_cost": 176713,
+        "cost_usd": 0.109348,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 13,
+        "wall_clock": 75.655,
+        "summary": "agent.completed: 14turns, 10775+2851 tokens, $0.1093",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -6079,7 +6617,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 9,
+        "input_tokens": 4618,
+        "output_tokens": 1816,
+        "billed_input_tokens": 83471,
+        "token_cost": 85287,
+        "cost_usd": 0.055895,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 14,
+        "wall_clock": 52.821,
+        "summary": "agent.completed: 9turns, 4618+1816 tokens, $0.0559",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -6102,7 +6655,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 14,
+        "input_tokens": 12979,
+        "output_tokens": 5337,
+        "billed_input_tokens": 220458,
+        "token_cost": 225795,
+        "cost_usd": 0.15494,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 18,
+        "wall_clock": 105.08,
+        "summary": "agent.completed: 14turns, 12979+5337 tokens, $0.1549",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "claude-sonnet-5",
@@ -6125,7 +6693,22 @@
         "stop_reason": "pass"
       },
       "kernel": null,
-      "cpu": null
+      "cpu": {
+        "resolved": true,
+        "turns": 7,
+        "input_tokens": 2951,
+        "output_tokens": 749,
+        "billed_input_tokens": 57533,
+        "token_cost": 58282,
+        "cost_usd": 0.031965,
+        "cost_basis": "self-reported",
+        "cost_valid": true,
+        "teardown_masked": false,
+        "tool_uses": 8,
+        "wall_clock": 35.062,
+        "summary": "agent.completed: 7turns, 2951+749 tokens, $0.0320",
+        "stop_reason": "end_turn"
+      }
     },
     {
       "model": "deepseek-v4-pro",
@@ -15298,7 +15881,8 @@
   "ostk_versions": {
     "june16": "v7.6.0",
     "july02": "v7.6.0",
-    "july09": "v7.7.1"
+    "july09": "v7.7.1",
+    "july09v2": "v7.7.2"
   },
   "ostk_version_note": "ostk_version is the CURRENT binary; columns in this rolling view executed under the version of their snapshot \u2014 see ostk_versions + column_snapshots for per-column attribution.",
   "column_supersessions": {

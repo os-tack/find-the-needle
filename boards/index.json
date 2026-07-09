@@ -1427,7 +1427,9 @@
      "judged": "axis-v2 (solve/cost split, fail-closed)",
      "snapshot": "july09",
      "faults": [
-      "july09-fable-kernel-refusal"
+      "july09-fable-kernel-refusal",
+      "july09-opus48-unknown-tool-loop-exit",
+      "july09-f7-earlystop-truncated-votes"
      ],
      "models": {
       "gemini-3.5-flash": {
@@ -1502,6 +1504,45 @@
       "cost_invalid_cells": 0,
       "invalid_cells": 0,
       "teardown_masked_cells": 45
+     }
+    }
+   ],
+   "schema_era": "axis-v2",
+   "judged": "axis-v2 (solve/cost split, fail-closed)",
+   "comparable_with_other_versions": false
+  },
+  {
+   "version": "v7.7.2",
+   "runs": [
+    {
+     "date": "2026-07-09",
+     "file": "v7.7.2/2026-07-09-experiment-scores.json",
+     "judged": "axis-v2 (solve/cost split, fail-closed)",
+     "snapshot": "july09v2",
+     "faults": [
+      "july09-f7-earlystop-truncated-votes",
+      "july09-runcell-exit1-hardfail"
+     ],
+     "models": {
+      "claude-sonnet-5": {
+       "ostk": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 3.0401,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 1,
+        "source_arm": "cpu"
+       }
+      }
+     },
+     "trust": {
+      "solve_valid_cells": 37,
+      "cost_valid_cells": 37,
+      "cost_invalid_cells": 0,
+      "invalid_cells": 0,
+      "teardown_masked_cells": 1
      }
     }
    ],

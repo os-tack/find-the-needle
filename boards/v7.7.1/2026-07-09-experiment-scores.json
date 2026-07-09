@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-09T12:22:55Z",
+ "generated": "2026-07-09T14:19:09Z",
  "ostk_version": "v7.7.1",
  "snapshot": "july09",
  "snapshot_policy": "latest = single snapshot per (model, arm) column \u2014 a column never mixes run dates; earlier snapshots are published under boards/v7.7.1/",
@@ -15,6 +15,14 @@
   {
    "id": "july09-fable-kernel-refusal",
    "note": "July-9 smoke (v7.7.1): every claude-fable-5 kernel-cpu cell ends in an empty-content stop_reason=refusal after 2-3 real tool turns (native arm unaffected). Cells are VALID resolved=false with real accounting, but the unsolved verdict reflects a provider refusal on the kernel-arm prompt shape \u2014 treat fable-5 kernel-cpu solve rates as a floor."
+  },
+  {
+   "id": "july09-opus48-unknown-tool-loop-exit",
+   "note": "July-9 (v7.7.1): 2 claude-opus-4-8 kernel-cpu cells lost to an agent-loop hard-exit on an undeclared tool request (harness defect, not a capability gap) \u2014 treat opus-4-8 kernel-cpu solve rate as a floor."
+  },
+  {
+   "id": "july09-f7-earlystop-truncated-votes",
+   "note": "F7 resampling stopped on any mid-stream solve, locking [F,T] cells at 1/2 = miss without their deciding third sample. Affected v7.7.1 cells publish as-were (solve rates are floors); harness fixed 2026-07-09 before the v7.7.2 board."
   }
  ],
  "faults_ref": "boards/FAULTS.json",

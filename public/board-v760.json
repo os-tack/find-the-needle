@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-09",
- "run": "v7.7.1",
+ "run": "v7.7.2",
  "snapshot": "latest",
  "pipeline": "publish_boards.py \u2190 consolidate_scores.py (axis-split validity)",
  "published_tasks": 37,
@@ -16,22 +16,38 @@
   {
    "id": "july09-fable-kernel-refusal",
    "note": "July-9 smoke (v7.7.1): every claude-fable-5 kernel-cpu cell ends in an empty-content stop_reason=refusal after 2-3 real tool turns (native arm unaffected). Cells are VALID resolved=false with real accounting, but the unsolved verdict reflects a provider refusal on the kernel-arm prompt shape \u2014 treat fable-5 kernel-cpu solve rates as a floor."
+  },
+  {
+   "id": "july09-opus48-unknown-tool-loop-exit",
+   "note": "July-9 (v7.7.1): 2 claude-opus-4-8 kernel-cpu cells lost to an agent-loop hard-exit on an undeclared tool request (harness defect, not a capability gap) \u2014 treat opus-4-8 kernel-cpu solve rate as a floor."
+  },
+  {
+   "id": "july09-f7-earlystop-truncated-votes",
+   "note": "F7 resampling stopped on any mid-stream solve, locking [F,T] cells at 1/2 = miss without their deciding third sample. Affected v7.7.1 cells publish as-were (solve rates are floors); harness fixed 2026-07-09 before the v7.7.2 board."
+  },
+  {
+   "id": "july09-f7-earlystop-truncated-votes",
+   "note": "F7 resampling stopped on any mid-stream solve, locking [F,T] cells at 1/2 = miss without their deciding third sample. Affected v7.7.1 cells publish as-were (solve rates are floors); harness fixed 2026-07-09 before the v7.7.2 board."
+  },
+  {
+   "id": "july09-runcell-exit1-hardfail",
+   "note": "v7.7.2 capture: run_cell hard-failed clean completed-but-unsolved exits (unmasked by the teardown fix); one sonnet-5 kernel cell was remediated by cold re-run before publish \u2014 no published board carries a mis-scored cell. Harness fixed 2026-07-09."
   }
  ],
  "faults_ref": "boards/FAULTS.json",
  "trust": {
   "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle verdict + arm receipt + not stalled): malformed / no-arm-receipt / arm-mismatch / deadline / zero-work / duplicate-column cells are fully INVALID \u2014 excluded from everything, counted visibly. COST axis (real token/cost accounting): zero token accounting on a completed run keeps the solve verdict and marks cost UNAVAILABLE \u2014 included in solve columns, excluded from cost/token columns, counted visibly, never priced. absent = never run (not invalid).",
-  "solve_valid_cells": 731,
-  "cost_valid_cells": 731,
+  "solve_valid_cells": 768,
+  "cost_valid_cells": 768,
   "cost_invalid_cells": 0,
   "invalid_cells": 10,
-  "policy_excluded_cells": 22,
+  "policy_excluded_cells": 23,
   "invalid_by_reason": {
    "deadline_exceeded": 6,
    "zero_work": 4
   },
   "cost_invalid_by_reason": {},
-  "teardown_masked_cells": 116,
+  "teardown_masked_cells": 117,
   "by_ostk_version": {
    "v7.6.0": {
     "solve_valid_cells": 545,
@@ -42,6 +58,12 @@
    "v7.7.1": {
     "solve_valid_cells": 186,
     "cost_valid_cells": 186,
+    "cost_invalid_cells": 0,
+    "invalid_cells": 0
+   },
+   "v7.7.2": {
+    "solve_valid_cells": 37,
+    "cost_valid_cells": 37,
     "cost_invalid_cells": 0,
     "invalid_cells": 0
    }
@@ -180,6 +202,73 @@
     "billed": 558702,
     "output": 7732,
     "input_total": 558702
+   }
+  },
+  {
+   "model": "claude-sonnet-5",
+   "type": "B*",
+   "native_cli": "opencode",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 34,
+   "native_total": 37,
+   "kernel_solved": 36,
+   "kernel_total": 37,
+   "both_n": 34,
+   "both_cost_n": 34,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 9,
+    "ostk": 1
+   },
+   "native_cost_basis": "self-reported",
+   "native_cost_bases": {
+    "self-reported": 36,
+    "unpriced": 1
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "july09",
+    "ostk": "july09v2"
+   },
+   "cross_snapshot_delta": true,
+   "cross_version_pair": true,
+   "delta_note": "SUPPRESSED: native (july09, v7.7.1) and ostk (july09v2, v7.7.2) columns executed under different binary versions \u2014 no cross-version delta is published anywhere (boards/index.json doctrine); compare within one version's board instead",
+   "native": {
+    "cost": 15.108,
+    "fresh": 67170,
+    "cache_read": 15077781,
+    "cache_create": 632589,
+    "billed": 15777540,
+    "output": 130386,
+    "input_total": 15777540
+   },
+   "kernel": {
+    "cost": 2.728,
+    "fresh": 231461,
+    "cache_read": 3599005,
+    "cache_create": 273405,
+    "billed": 4103871,
+    "output": 86137,
+    "input_total": 4103871
+   },
+   "cost_delta": null,
+   "tok_delta": null,
+   "kernel_abs": {
+    "cost": 2.92,
+    "fresh": 252476,
+    "cache_read": 3881058,
+    "cache_create": 288562,
+    "billed": 4422096,
+    "output": 91717,
+    "input_total": 4422096
    }
   },
   {
@@ -710,49 +799,6 @@
     "output": 75709,
     "input_total": 3626935
    }
-  },
-  {
-   "model": "claude-sonnet-5",
-   "type": "B*",
-   "native_cli": "opencode",
-   "native_present": true,
-   "published": 37,
-   "native_solved": 34,
-   "native_total": 37,
-   "kernel_solved": 0,
-   "kernel_total": 0,
-   "both_n": 0,
-   "both_cost_n": 0,
-   "invalid": {
-    "native": 0,
-    "ostk": 0
-   },
-   "cost_invalid": {
-    "native": 0,
-    "ostk": 0
-   },
-   "masked": {
-    "native": 9,
-    "ostk": 0
-   },
-   "native_cost_basis": "self-reported",
-   "native_cost_bases": {
-    "self-reported": 36,
-    "unpriced": 1
-   },
-   "source_arm": "kernel",
-   "snapshots": {
-    "native": "july09",
-    "ostk": null
-   },
-   "cross_snapshot_delta": false,
-   "cross_version_pair": false,
-   "delta_note": null,
-   "native": null,
-   "kernel": null,
-   "cost_delta": null,
-   "tok_delta": null,
-   "kernel_abs": null
   }
  ]
 }
