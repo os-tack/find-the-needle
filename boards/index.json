@@ -1081,18 +1081,6 @@
         "source_arm": "cpu"
        }
       },
-      "claude-opus-4-8": {
-       "ostk": {
-        "solved": 36,
-        "total": 37,
-        "cost_usd": 7.0118,
-        "cost_cells": 37,
-        "invalid": 0,
-        "cost_invalid": 0,
-        "masked": 36,
-        "source_arm": "cpu"
-       }
-      },
       "gpt-5.5": {
        "native": {
         "solved": 36,
@@ -1200,11 +1188,11 @@
       }
      },
      "trust": {
-      "solve_valid_cells": 618,
-      "cost_valid_cells": 618,
+      "solve_valid_cells": 581,
+      "cost_valid_cells": 581,
       "cost_invalid_cells": 0,
       "invalid_cells": 11,
-      "teardown_masked_cells": 179
+      "teardown_masked_cells": 143
      }
     },
     {
@@ -1404,27 +1392,6 @@
       "july02-cache-read-zero"
      ],
      "models": {
-      "claude-opus-4-8": {
-       "native": {
-        "solved": 36,
-        "total": 37,
-        "cost_usd": 12.214,
-        "cost_cells": 37,
-        "invalid": 0,
-        "cost_invalid": 0,
-        "masked": 0
-       },
-       "ostk": {
-        "solved": 37,
-        "total": 37,
-        "cost_usd": 12.0148,
-        "cost_cells": 37,
-        "invalid": 0,
-        "cost_invalid": 0,
-        "masked": 0,
-        "source_arm": "cpu"
-       }
-      },
       "gemini-3.1-pro-preview": {
        "ostk": {
         "solved": 35,
@@ -1439,8 +1406,8 @@
       }
      },
      "trust": {
-      "solve_valid_cells": 111,
-      "cost_valid_cells": 111,
+      "solve_valid_cells": 37,
+      "cost_valid_cells": 37,
       "cost_invalid_cells": 0,
       "invalid_cells": 0,
       "teardown_masked_cells": 0
@@ -1495,14 +1462,35 @@
         "masked": 6,
         "source_arm": "cpu"
        }
+      },
+      "claude-opus-4-8": {
+       "native": {
+        "solved": 34,
+        "total": 37,
+        "cost_usd": 13.0266,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 5
+       },
+       "ostk": {
+        "solved": 33,
+        "total": 37,
+        "cost_usd": 6.6739,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 16,
+        "source_arm": "cpu"
+       }
       }
      },
      "trust": {
-      "solve_valid_cells": 75,
-      "cost_valid_cells": 75,
+      "solve_valid_cells": 149,
+      "cost_valid_cells": 149,
       "cost_invalid_cells": 0,
       "invalid_cells": 0,
-      "teardown_masked_cells": 15
+      "teardown_masked_cells": 36
      }
     }
    ],

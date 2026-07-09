@@ -22,8 +22,8 @@
   {
    "name": "postgres-migration-schema-drift",
    "tier": "ceiling",
-   "solve_pct": 32,
-   "solved": 6,
+   "solve_pct": 21,
+   "solved": 4,
    "total": 19
   },
   {
@@ -36,8 +36,15 @@
   {
    "name": "split-brain-leader-election",
    "tier": "discriminating",
-   "solve_pct": 74,
-   "solved": 14,
+   "solve_pct": 68,
+   "solved": 13,
+   "total": 19
+  },
+  {
+   "name": "encoding-mojibake",
+   "tier": "discriminating",
+   "solve_pct": 84,
+   "solved": 16,
    "total": 19
   },
   {
@@ -55,6 +62,13 @@
    "total": 19
   },
   {
+   "name": "tls-chain-ordering-strict",
+   "tier": "discriminating",
+   "solve_pct": 84,
+   "solved": 16,
+   "total": 19
+  },
+  {
    "name": "wal-fsync-ghost-ack",
    "tier": "discriminating",
    "solve_pct": 89,
@@ -63,13 +77,6 @@
   },
   {
    "name": "deadlock-transfer",
-   "tier": "discriminating",
-   "solve_pct": 89,
-   "solved": 17,
-   "total": 19
-  },
-  {
-   "name": "encoding-mojibake",
    "tier": "discriminating",
    "solve_pct": 89,
    "solved": 17,
@@ -125,7 +132,7 @@
    "total": 19
   },
   {
-   "name": "tls-chain-ordering-strict",
+   "name": "relaxed-ordering-ringbuf",
    "tier": "discriminating",
    "solve_pct": 89,
    "solved": 17,
@@ -237,13 +244,6 @@
    "total": 19
   },
   {
-   "name": "relaxed-ordering-ringbuf",
-   "tier": "floor",
-   "solve_pct": 95,
-   "solved": 18,
-   "total": 19
-  },
-  {
    "name": "cache-stale-invalidation",
    "tier": "floor",
    "solve_pct": 100,
@@ -280,1199 +280,6 @@
   }
  ],
  "models": [
-  {
-   "model": "claude-opus-4-8",
-   "type": "B",
-   "native_cli": "claude-code",
-   "native_solved": 36,
-   "kernel_solved": 37,
-   "cells": {
-    "postgres-migration-schema-drift": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 82.8,
-      "billed": 43246,
-      "fresh": 43246,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1234,
-      "input_total": 43246,
-      "cost": 0.2471,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 98.1,
-      "billed": 66502,
-      "fresh": 66502,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2035,
-      "input_total": 66502,
-      "cost": 0.3834,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "silent-data-corruption": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 40,
-      "wall": 142.1,
-      "billed": 198839,
-      "fresh": 198839,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 6006,
-      "input_total": 198839,
-      "cost": 1.1443,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 21,
-      "wall": 152.8,
-      "billed": 141312,
-      "fresh": 141312,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3975,
-      "input_total": 141312,
-      "cost": 0.8059,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "split-brain-leader-election": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 38.2,
-      "billed": 43766,
-      "fresh": 43766,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1252,
-      "input_total": 43766,
-      "cost": 0.2501,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 35.1,
-      "billed": 49922,
-      "fresh": 49922,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1240,
-      "input_total": 49922,
-      "cost": 0.2806,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "linearizability-stale-read": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 16,
-      "wall": 71.0,
-      "billed": 135956,
-      "fresh": 135956,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3191,
-      "input_total": 135956,
-      "cost": 0.7596,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 17,
-      "wall": 94.6,
-      "billed": 180670,
-      "fresh": 180670,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3351,
-      "input_total": 180670,
-      "cost": 0.9871,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "timezone-scheduling": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 35.4,
-      "billed": 31950,
-      "fresh": 31950,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2237,
-      "input_total": 31950,
-      "cost": 0.2157,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 24.4,
-      "billed": 23914,
-      "fresh": 23914,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1405,
-      "input_total": 23914,
-      "cost": 0.1547,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "wal-fsync-ghost-ack": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 84.7,
-      "billed": 107807,
-      "fresh": 107807,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3351,
-      "input_total": 107807,
-      "cost": 0.6228,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 14,
-      "wall": 80.9,
-      "billed": 119927,
-      "fresh": 119927,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 4036,
-      "input_total": 119927,
-      "cost": 0.7005,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "deadlock-transfer": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 21.4,
-      "billed": 12731,
-      "fresh": 12731,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1282,
-      "input_total": 12731,
-      "cost": 0.0957,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 23.4,
-      "billed": 17362,
-      "fresh": 17362,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1411,
-      "input_total": 17362,
-      "cost": 0.1221,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 35.5,
-      "billed": 31790,
-      "fresh": 31790,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1401,
-      "input_total": 31790,
-      "cost": 0.194,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 26.1,
-      "billed": 29999,
-      "fresh": 29999,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1120,
-      "input_total": 29999,
-      "cost": 0.178,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "goroutine-leak-handler": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 67.4,
-      "billed": 49287,
-      "fresh": 49287,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3885,
-      "input_total": 49287,
-      "cost": 0.3436,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 47.9,
-      "billed": 19143,
-      "fresh": 19143,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2591,
-      "input_total": 19143,
-      "cost": 0.1605,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "import-cycle-startup": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 26.3,
-      "billed": 24175,
-      "fresh": 24175,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1274,
-      "input_total": 24175,
-      "cost": 0.1527,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 24.8,
-      "billed": 18707,
-      "fresh": 18707,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1152,
-      "input_total": 18707,
-      "cost": 0.1223,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "memory-leak-event-listener": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 28.2,
-      "billed": 14829,
-      "fresh": 14829,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1348,
-      "input_total": 14829,
-      "cost": 0.1078,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 29.6,
-      "billed": 15038,
-      "fresh": 15038,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1261,
-      "input_total": 15038,
-      "cost": 0.1067,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "null-pointer-config": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 21.2,
-      "billed": 11966,
-      "fresh": 11966,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 910,
-      "input_total": 11966,
-      "cost": 0.0826,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 4,
-      "wall": 20.4,
-      "billed": 10039,
-      "fresh": 10039,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 945,
-      "input_total": 10039,
-      "cost": 0.0738,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "off-by-one-array-slice": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 4,
-      "wall": 12.1,
-      "billed": 7050,
-      "fresh": 7050,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 464,
-      "input_total": 7050,
-      "cost": 0.0469,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 4,
-      "wall": 9.8,
-      "billed": 6996,
-      "fresh": 6996,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 410,
-      "input_total": 6996,
-      "cost": 0.0452,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "off-by-one-pagination": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 22.5,
-      "billed": 13404,
-      "fresh": 13404,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 603,
-      "input_total": 13404,
-      "cost": 0.0821,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 24.3,
-      "billed": 12370,
-      "fresh": 12370,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 566,
-      "input_total": 12370,
-      "cost": 0.076,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "raft-snapshot-commit-gap": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 12,
-      "wall": 44.8,
-      "billed": 90611,
-      "fresh": 90611,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2340,
-      "input_total": 90611,
-      "cost": 0.5116,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 42.7,
-      "billed": 113933,
-      "fresh": 113933,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2082,
-      "input_total": 113933,
-      "cost": 0.6217,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "tls-chain-ordering-strict": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 36.1,
-      "billed": 39577,
-      "fresh": 39577,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2134,
-      "input_total": 39577,
-      "cost": 0.2512,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 73.3,
-      "billed": 55857,
-      "fresh": 55857,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 5126,
-      "input_total": 55857,
-      "cost": 0.4074,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "wrong-operator-discount": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 4,
-      "wall": 9.6,
-      "billed": 7743,
-      "fresh": 7743,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 388,
-      "input_total": 7743,
-      "cost": 0.0484,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 4,
-      "wall": 10.9,
-      "billed": 9338,
-      "fresh": 9338,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 386,
-      "input_total": 9338,
-      "cost": 0.0563,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "sql-injection-search": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 16,
-      "wall": 106.8,
-      "billed": 116016,
-      "fresh": 116016,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2821,
-      "input_total": 116016,
-      "cost": 0.6506,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 20,
-      "wall": 105.5,
-      "billed": 155964,
-      "fresh": 155964,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3853,
-      "input_total": 155964,
-      "cost": 0.8761,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "k8s-assume-cache-silent-drop": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 13.7,
-      "billed": 10119,
-      "fresh": 10119,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 635,
-      "input_total": 10119,
-      "cost": 0.0665,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 21.8,
-      "billed": 11244,
-      "fresh": 11244,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 858,
-      "input_total": 11244,
-      "cost": 0.0777,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "k8s-scheduler-shutdown-deadlock": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 22.6,
-      "billed": 10127,
-      "fresh": 10127,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1124,
-      "input_total": 10127,
-      "cost": 0.0787,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 4,
-      "wall": 18.0,
-      "billed": 6643,
-      "fresh": 6643,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 931,
-      "input_total": 6643,
-      "cost": 0.0565,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "performance-cliff-hash": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 25.6,
-      "billed": 20065,
-      "fresh": 20065,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 937,
-      "input_total": 20065,
-      "cost": 0.1237,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 28.8,
-      "billed": 32508,
-      "fresh": 32508,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1330,
-      "input_total": 32508,
-      "cost": 0.1958,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "type-coercion-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 20.9,
-      "billed": 12795,
-      "fresh": 12795,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 956,
-      "input_total": 12795,
-      "cost": 0.0879,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 4,
-      "wall": 17.0,
-      "billed": 8857,
-      "fresh": 8857,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 681,
-      "input_total": 8857,
-      "cost": 0.0613,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "api-version-field-drop": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 27.7,
-      "billed": 23862,
-      "fresh": 23862,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1202,
-      "input_total": 23862,
-      "cost": 0.1494,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 33.3,
-      "billed": 39112,
-      "fresh": 39112,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1409,
-      "input_total": 39112,
-      "cost": 0.2308,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 18.7,
-      "billed": 19191,
-      "fresh": 19191,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1070,
-      "input_total": 19191,
-      "cost": 0.1227,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 23.3,
-      "billed": 27388,
-      "fresh": 27388,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1202,
-      "input_total": 27388,
-      "cost": 0.167,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "bidi-override-injection": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 49.4,
-      "billed": 52357,
-      "fresh": 52357,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1911,
-      "input_total": 52357,
-      "cost": 0.3096,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 40.5,
-      "billed": 43108,
-      "fresh": 43108,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2018,
-      "input_total": 43108,
-      "cost": 0.266,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "compiler-macro-expansion": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 30,
-      "wall": 179.3,
-      "billed": 272652,
-      "fresh": 272652,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 4580,
-      "input_total": 272652,
-      "cost": 1.4778,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 31,
-      "wall": 151.9,
-      "billed": 291149,
-      "fresh": 291149,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 4586,
-      "input_total": 291149,
-      "cost": 1.5704,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "data-corruption-concurrent-write": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 30,
-      "wall": 186.2,
-      "billed": 302572,
-      "fresh": 302572,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 4838,
-      "input_total": 302572,
-      "cost": 1.6338,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 19,
-      "wall": 109.0,
-      "billed": 141225,
-      "fresh": 141225,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2952,
-      "input_total": 141225,
-      "cost": 0.7799,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 79.1,
-      "billed": 102952,
-      "fresh": 102952,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3323,
-      "input_total": 102952,
-      "cost": 0.5978,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 17,
-      "wall": 105.2,
-      "billed": 149102,
-      "fresh": 149102,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3783,
-      "input_total": 149102,
-      "cost": 0.8401,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "missing-input-validation": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 27.6,
-      "billed": 21877,
-      "fresh": 21877,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1267,
-      "input_total": 21877,
-      "cost": 0.1411,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 26.8,
-      "billed": 22134,
-      "fresh": 22134,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1365,
-      "input_total": 22134,
-      "cost": 0.1448,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 21.0,
-      "billed": 12247,
-      "fresh": 12247,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 779,
-      "input_total": 12247,
-      "cost": 0.0807,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 20.7,
-      "billed": 15876,
-      "fresh": 15876,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 765,
-      "input_total": 15876,
-      "cost": 0.0985,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "race-condition-counter": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 19.6,
-      "billed": 11932,
-      "fresh": 11932,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 920,
-      "input_total": 11932,
-      "cost": 0.0827,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 18.4,
-      "billed": 11896,
-      "fresh": 11896,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 891,
-      "input_total": 11896,
-      "cost": 0.0818,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 11,
-      "wall": 47.4,
-      "billed": 69373,
-      "fresh": 69373,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2992,
-      "input_total": 69373,
-      "cost": 0.4217,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 38.2,
-      "billed": 46864,
-      "fresh": 46864,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2238,
-      "input_total": 46864,
-      "cost": 0.2903,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "cache-stale-invalidation": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 22.9,
-      "billed": 21414,
-      "fresh": 21414,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1102,
-      "input_total": 21414,
-      "cost": 0.1346,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 18.7,
-      "billed": 14094,
-      "fresh": 14094,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 880,
-      "input_total": 14094,
-      "cost": 0.0925,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "graphql-dataloader-per-request": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 54.5,
-      "billed": 65073,
-      "fresh": 65073,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3291,
-      "input_total": 65073,
-      "cost": 0.4076,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 45.1,
-      "billed": 53802,
-      "fresh": 53802,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3083,
-      "input_total": 53802,
-      "cost": 0.3461,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 49.2,
-      "billed": 28419,
-      "fresh": 28419,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1934,
-      "input_total": 28419,
-      "cost": 0.1904,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 41.7,
-      "billed": 27082,
-      "fresh": 27082,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1834,
-      "input_total": 27082,
-      "cost": 0.1813,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "ssrf-allowlist-port-confusion": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 30.4,
-      "billed": 15294,
-      "fresh": 15294,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1263,
-      "input_total": 15294,
-      "cost": 0.108,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 33.4,
-      "billed": 15339,
-      "fresh": 15339,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1313,
-      "input_total": 15339,
-      "cost": 0.1095,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "timing-attack-comparison": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 25.7,
-      "billed": 33683,
-      "fresh": 33683,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 965,
-      "input_total": 33683,
-      "cost": 0.1925,
-      "cost_valid": true,
-      "snapshot": "july02"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 32.2,
-      "billed": 46661,
-      "fresh": 46661,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1311,
-      "input_total": 46661,
-      "cost": 0.2661,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    }
-   }
-  },
   {
    "model": "deepseek-v4-pro",
    "type": "B*",
@@ -1576,6 +383,38 @@
       "snapshot": "june16"
      }
     },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 26.3,
+      "billed": 78293,
+      "fresh": 4437,
+      "cache_read": 73856,
+      "cache_create": 0,
+      "output": 1398,
+      "input_total": 78293,
+      "cost": 0.0254,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 69.0,
+      "billed": 94285,
+      "fresh": 94285,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2092,
+      "input_total": 94285,
+      "cost": 0.1713,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "linearizability-stale-read": {
      "native": {
       "status": "pass",
@@ -1640,6 +479,38 @@
       "snapshot": "june16"
      }
     },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 46.0,
+      "billed": 124745,
+      "fresh": 4937,
+      "cache_read": 119808,
+      "cache_create": 0,
+      "output": 2739,
+      "input_total": 124745,
+      "cost": 0.039,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 109.1,
+      "billed": 117082,
+      "fresh": 117082,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 3596,
+      "input_total": 117082,
+      "cost": 0.2162,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -1700,38 +571,6 @@
       "output": 2397,
       "input_total": 107505,
       "cost": 0.1954,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 26.3,
-      "billed": 78293,
-      "fresh": 4437,
-      "cache_read": 73856,
-      "cache_create": 0,
-      "output": 1398,
-      "input_total": 78293,
-      "cost": 0.0254,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 15,
-      "wall": 69.0,
-      "billed": 94285,
-      "fresh": 94285,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2092,
-      "input_total": 94285,
-      "cost": 0.1713,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -1960,34 +799,34 @@
       "snapshot": "june16"
      }
     },
-    "tls-chain-ordering-strict": {
+    "relaxed-ordering-ringbuf": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 11,
-      "wall": 46.0,
-      "billed": 124745,
-      "fresh": 4937,
-      "cache_read": 119808,
+      "turns": 9,
+      "wall": 45.8,
+      "billed": 124277,
+      "fresh": 7285,
+      "cache_read": 116992,
       "cache_create": 0,
-      "output": 2739,
-      "input_total": 124745,
-      "cost": 0.039,
+      "output": 2769,
+      "input_total": 124277,
+      "cost": 0.0427,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 14,
-      "wall": 109.1,
-      "billed": 117082,
-      "fresh": 117082,
+      "turns": 17,
+      "wall": 220.0,
+      "billed": 151060,
+      "fresh": 151060,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 3596,
-      "input_total": 117082,
-      "cost": 0.2162,
+      "output": 7154,
+      "input_total": 151060,
+      "cost": 0.2877,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -2472,38 +1311,6 @@
       "snapshot": "june16"
      }
     },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 45.8,
-      "billed": 124277,
-      "fresh": 7285,
-      "cache_read": 116992,
-      "cache_create": 0,
-      "output": 2769,
-      "input_total": 124277,
-      "cost": 0.0427,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 17,
-      "wall": 220.0,
-      "billed": 151060,
-      "fresh": 151060,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 7154,
-      "input_total": 151060,
-      "cost": 0.2877,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "cache-stale-invalidation": {
      "native": {
       "status": "pass",
@@ -2733,6 +1540,26 @@
       "status": "missing"
      }
     },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 38.0,
+      "billed": 142590,
+      "fresh": 110187,
+      "cache_read": 32403,
+      "cache_create": 0,
+      "output": 4485,
+      "input_total": 142590,
+      "cost": 0.2105,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
     "linearizability-stale-read": {
      "native": {
       "status": "pass",
@@ -2773,6 +1600,26 @@
       "status": "missing"
      }
     },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 0,
+      "wall": 82.0,
+      "billed": 0,
+      "fresh": 0,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 0,
+      "input_total": 0,
+      "cost": 0.0,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -2806,26 +1653,6 @@
       "output": 6865,
       "input_total": 158796,
       "cost": 0.2124,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 38.0,
-      "billed": 142590,
-      "fresh": 110187,
-      "cache_read": 32403,
-      "cache_create": 0,
-      "output": 4485,
-      "input_total": 142590,
-      "cost": 0.2105,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -2973,19 +1800,19 @@
       "status": "missing"
      }
     },
-    "tls-chain-ordering-strict": {
+    "relaxed-ordering-ringbuf": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 0,
-      "wall": 82.0,
-      "billed": 0,
-      "fresh": 0,
-      "cache_read": 0,
+      "turns": 10,
+      "wall": 60.9,
+      "billed": 195154,
+      "fresh": 73221,
+      "cache_read": 121933,
       "cache_create": 0,
-      "output": 0,
-      "input_total": 0,
-      "cost": 0.0,
+      "output": 8708,
+      "input_total": 195154,
+      "cost": 0.2065,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -3305,26 +2132,6 @@
       "status": "missing"
      }
     },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 60.9,
-      "billed": 195154,
-      "fresh": 73221,
-      "cache_read": 121933,
-      "cache_create": 0,
-      "output": 8708,
-      "input_total": 195154,
-      "cost": 0.2065,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
     "cache-stale-invalidation": {
      "native": {
       "status": "pass",
@@ -3530,6 +2337,38 @@
       "snapshot": "july02"
      }
     },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 27.3,
+      "billed": 100279,
+      "fresh": 23918,
+      "cache_read": 76361,
+      "cache_create": 0,
+      "output": 1173,
+      "input_total": 100279,
+      "cost": 0.0772,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 54.6,
+      "billed": 48553,
+      "fresh": 48553,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 583,
+      "input_total": 48553,
+      "cost": 0.1041,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
     "linearizability-stale-read": {
      "native": {
       "status": "pass",
@@ -3594,6 +2433,38 @@
       "snapshot": "july02"
      }
     },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 42.5,
+      "billed": 71269,
+      "fresh": 10732,
+      "cache_read": 60537,
+      "cache_create": 0,
+      "output": 3853,
+      "input_total": 71269,
+      "cost": 0.0798,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 100.9,
+      "billed": 176147,
+      "fresh": 124926,
+      "cache_read": 51221,
+      "cache_create": 0,
+      "output": 2334,
+      "input_total": 176147,
+      "cost": 0.2881,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -3654,38 +2525,6 @@
       "output": 909,
       "input_total": 40206,
       "cost": 0.0913,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 27.3,
-      "billed": 100279,
-      "fresh": 23918,
-      "cache_read": 76361,
-      "cache_create": 0,
-      "output": 1173,
-      "input_total": 100279,
-      "cost": 0.0772,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 54.6,
-      "billed": 48553,
-      "fresh": 48553,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 583,
-      "input_total": 48553,
-      "cost": 0.1041,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -3914,34 +2753,34 @@
       "snapshot": "july02"
      }
     },
-    "tls-chain-ordering-strict": {
+    "relaxed-ordering-ringbuf": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 5,
-      "wall": 42.5,
-      "billed": 71269,
-      "fresh": 10732,
-      "cache_read": 60537,
+      "turns": 0,
+      "wall": 55.7,
+      "billed": 0,
+      "fresh": 0,
+      "cache_read": 0,
       "cache_create": 0,
-      "output": 3853,
-      "input_total": 71269,
-      "cost": 0.0798,
+      "output": 0,
+      "input_total": 0,
+      "cost": 0.0,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 15,
-      "wall": 100.9,
-      "billed": 176147,
-      "fresh": 124926,
-      "cache_read": 51221,
+      "turns": 7,
+      "wall": 72.9,
+      "billed": 67760,
+      "fresh": 51983,
+      "cache_read": 15777,
       "cache_create": 0,
-      "output": 2334,
-      "input_total": 176147,
-      "cost": 0.2881,
+      "output": 1770,
+      "input_total": 67760,
+      "cost": 0.1284,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -4426,38 +3265,6 @@
       "snapshot": "july02"
      }
     },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 0,
-      "wall": 55.7,
-      "billed": 0,
-      "fresh": 0,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 0,
-      "input_total": 0,
-      "cost": 0.0,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 72.9,
-      "billed": 67760,
-      "fresh": 51983,
-      "cache_read": 15777,
-      "cache_create": 0,
-      "output": 1770,
-      "input_total": 67760,
-      "cost": 0.1284,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
     "cache-stale-invalidation": {
      "native": {
       "status": "pass",
@@ -4723,6 +3530,38 @@
       "snapshot": "june16"
      }
     },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 19.8,
+      "billed": 69410,
+      "fresh": 6562,
+      "cache_read": 62848,
+      "cache_create": 0,
+      "output": 846,
+      "input_total": 69410,
+      "cost": 0.0896,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 47.8,
+      "billed": 110415,
+      "fresh": 61263,
+      "cache_read": 49152,
+      "cache_create": 0,
+      "output": 669,
+      "input_total": 110415,
+      "cost": 0.351,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "linearizability-stale-read": {
      "native": {
       "status": "pass",
@@ -4787,6 +3626,38 @@
       "snapshot": "june16"
      }
     },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 76.4,
+      "billed": 146626,
+      "fresh": 17218,
+      "cache_read": 129408,
+      "cache_create": 0,
+      "output": 2488,
+      "input_total": 146626,
+      "cost": 0.2254,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 59.6,
+      "billed": 123731,
+      "fresh": 74067,
+      "cache_read": 49664,
+      "cache_create": 0,
+      "output": 1385,
+      "input_total": 123731,
+      "cost": 0.4367,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -4847,38 +3718,6 @@
       "output": 2263,
       "input_total": 95800,
       "cost": 0.3741,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 19.8,
-      "billed": 69410,
-      "fresh": 6562,
-      "cache_read": 62848,
-      "cache_create": 0,
-      "output": 846,
-      "input_total": 69410,
-      "cost": 0.0896,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 47.8,
-      "billed": 110415,
-      "fresh": 61263,
-      "cache_read": 49152,
-      "cache_create": 0,
-      "output": 669,
-      "input_total": 110415,
-      "cost": 0.351,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -5107,34 +3946,34 @@
       "snapshot": "june16"
      }
     },
-    "tls-chain-ordering-strict": {
+    "relaxed-ordering-ringbuf": {
      "native": {
       "status": "pass",
       "resolved": true,
       "turns": 1,
-      "wall": 76.4,
-      "billed": 146626,
-      "fresh": 17218,
-      "cache_read": 129408,
+      "wall": 40.3,
+      "billed": 156963,
+      "fresh": 11171,
+      "cache_read": 145792,
       "cache_create": 0,
-      "output": 2488,
-      "input_total": 146626,
-      "cost": 0.2254,
+      "output": 2275,
+      "input_total": 156963,
+      "cost": 0.197,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 9,
-      "wall": 59.6,
-      "billed": 123731,
-      "fresh": 74067,
-      "cache_read": 49664,
+      "turns": 19,
+      "wall": 86.3,
+      "billed": 361154,
+      "fresh": 190146,
+      "cache_read": 171008,
       "cache_create": 0,
-      "output": 1385,
-      "input_total": 123731,
-      "cost": 0.4367,
+      "output": 2714,
+      "input_total": 361154,
+      "cost": 1.1177,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -5619,38 +4458,6 @@
       "snapshot": "june16"
      }
     },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 40.3,
-      "billed": 156963,
-      "fresh": 11171,
-      "cache_read": 145792,
-      "cache_create": 0,
-      "output": 2275,
-      "input_total": 156963,
-      "cost": 0.197,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 19,
-      "wall": 86.3,
-      "billed": 361154,
-      "fresh": 190146,
-      "cache_read": 171008,
-      "cache_create": 0,
-      "output": 2714,
-      "input_total": 361154,
-      "cost": 1.1177,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "cache-stale-invalidation": {
      "native": {
       "status": "pass",
@@ -5916,6 +4723,38 @@
       "snapshot": "june16"
      }
     },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 25.2,
+      "billed": 101724,
+      "fresh": 13660,
+      "cache_read": 88064,
+      "cache_create": 0,
+      "output": 472,
+      "input_total": 101724,
+      "cost": 0.0099,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 102.6,
+      "billed": 68654,
+      "fresh": 68654,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2079,
+      "input_total": 68654,
+      "cost": 0.0316,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "linearizability-stale-read": {
      "native": {
       "status": "pass",
@@ -5980,6 +4819,38 @@
       "snapshot": "june16"
      }
     },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 48.4,
+      "billed": 116609,
+      "fresh": 16257,
+      "cache_read": 100352,
+      "cache_create": 0,
+      "output": 1139,
+      "input_total": 116609,
+      "cost": 0.0128,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 181.6,
+      "billed": 80066,
+      "fresh": 80066,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 5137,
+      "input_total": 80066,
+      "cost": 0.0422,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -6040,38 +4911,6 @@
       "output": 1406,
       "input_total": 48543,
       "cost": 0.0222,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 25.2,
-      "billed": 101724,
-      "fresh": 13660,
-      "cache_read": 88064,
-      "cache_create": 0,
-      "output": 472,
-      "input_total": 101724,
-      "cost": 0.0099,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 14,
-      "wall": 102.6,
-      "billed": 68654,
-      "fresh": 68654,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2079,
-      "input_total": 68654,
-      "cost": 0.0316,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -6300,19 +5139,19 @@
       "snapshot": "june16"
      }
     },
-    "tls-chain-ordering-strict": {
+    "relaxed-ordering-ringbuf": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 8,
-      "wall": 48.4,
-      "billed": 116609,
-      "fresh": 16257,
-      "cache_read": 100352,
+      "turns": 4,
+      "wall": 38.7,
+      "billed": 55683,
+      "fresh": 8579,
+      "cache_read": 47104,
       "cache_create": 0,
-      "output": 1139,
-      "input_total": 116609,
-      "cost": 0.0128,
+      "output": 970,
+      "input_total": 55683,
+      "cost": 0.0072,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -6320,14 +5159,14 @@
       "status": "pass",
       "resolved": true,
       "turns": 15,
-      "wall": 181.6,
-      "billed": 80066,
-      "fresh": 80066,
+      "wall": 166.6,
+      "billed": 80595,
+      "fresh": 80595,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 5137,
-      "input_total": 80066,
-      "cost": 0.0422,
+      "output": 7126,
+      "input_total": 80595,
+      "cost": 0.0464,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -6812,38 +5651,6 @@
       "snapshot": "june16"
      }
     },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 4,
-      "wall": 38.7,
-      "billed": 55683,
-      "fresh": 8579,
-      "cache_read": 47104,
-      "cache_create": 0,
-      "output": 970,
-      "input_total": 55683,
-      "cost": 0.0072,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 15,
-      "wall": 166.6,
-      "billed": 80595,
-      "fresh": 80595,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 7126,
-      "input_total": 80595,
-      "cost": 0.0464,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "cache-stale-invalidation": {
      "native": {
       "status": "pass",
@@ -7109,6 +5916,38 @@
       "snapshot": "june16"
      }
     },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 26.0,
+      "billed": 180202,
+      "fresh": 9,
+      "cache_read": 169383,
+      "cache_create": 10810,
+      "output": 1132,
+      "input_total": 180202,
+      "cost": 0.1084,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 48.8,
+      "billed": 59775,
+      "fresh": 4329,
+      "cache_read": 51416,
+      "cache_create": 4030,
+      "output": 1092,
+      "input_total": 59775,
+      "cost": 0.0599,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "linearizability-stale-read": {
      "native": {
       "status": "pass",
@@ -7173,6 +6012,38 @@
       "snapshot": "june16"
      }
     },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 49,
+      "wall": 386.4,
+      "billed": 2007079,
+      "fresh": 49,
+      "cache_read": 1967071,
+      "cache_create": 39959,
+      "output": 19362,
+      "input_total": 2007079,
+      "cost": 1.0305,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 70.0,
+      "billed": 106976,
+      "fresh": 5134,
+      "cache_read": 95479,
+      "cache_create": 6363,
+      "output": 1688,
+      "input_total": 106976,
+      "cost": 0.0932,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -7233,38 +6104,6 @@
       "output": 1755,
       "input_total": 87847,
       "cost": 0.0813,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 26.0,
-      "billed": 180202,
-      "fresh": 9,
-      "cache_read": 169383,
-      "cache_create": 10810,
-      "output": 1132,
-      "input_total": 180202,
-      "cost": 0.1084,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 48.8,
-      "billed": 59775,
-      "fresh": 4329,
-      "cache_read": 51416,
-      "cache_create": 4030,
-      "output": 1092,
-      "input_total": 59775,
-      "cost": 0.0599,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -7493,34 +6332,34 @@
       "snapshot": "june16"
      }
     },
-    "tls-chain-ordering-strict": {
+    "relaxed-ordering-ringbuf": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 49,
-      "wall": 386.4,
-      "billed": 2007079,
-      "fresh": 49,
-      "cache_read": 1967071,
-      "cache_create": 39959,
-      "output": 19362,
-      "input_total": 2007079,
-      "cost": 1.0305,
+      "turns": 10,
+      "wall": 95.0,
+      "billed": 216416,
+      "fresh": 9,
+      "cache_read": 197829,
+      "cache_create": 18578,
+      "output": 5178,
+      "input_total": 216416,
+      "cost": 0.2067,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 12,
-      "wall": 70.0,
-      "billed": 106976,
-      "fresh": 5134,
-      "cache_read": 95479,
-      "cache_create": 6363,
-      "output": 1688,
-      "input_total": 106976,
-      "cost": 0.0932,
+      "turns": 13,
+      "wall": 95.7,
+      "billed": 160147,
+      "fresh": 10268,
+      "cache_read": 137938,
+      "cache_create": 11941,
+      "output": 2716,
+      "input_total": 160147,
+      "cost": 0.1577,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8005,38 +6844,6 @@
       "snapshot": "june16"
      }
     },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 95.0,
-      "billed": 216416,
-      "fresh": 9,
-      "cache_read": 197829,
-      "cache_create": 18578,
-      "output": 5178,
-      "input_total": 216416,
-      "cost": 0.2067,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 95.7,
-      "billed": 160147,
-      "fresh": 10268,
-      "cache_read": 137938,
-      "cache_create": 11941,
-      "output": 2716,
-      "input_total": 160147,
-      "cost": 0.1577,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "cache-stale-invalidation": {
      "native": {
       "status": "pass",
@@ -8302,6 +7109,38 @@
       "snapshot": "june16"
      }
     },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 17.5,
+      "billed": 83990,
+      "fresh": 43350,
+      "cache_read": 40640,
+      "cache_create": 0,
+      "output": 625,
+      "input_total": 83990,
+      "cost": 0.0608,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 35.5,
+      "billed": 67681,
+      "fresh": 67681,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1053,
+      "input_total": 67681,
+      "cost": 0.0872,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "linearizability-stale-read": {
      "native": {
       "status": "pass",
@@ -8366,6 +7205,38 @@
       "snapshot": "june16"
      }
     },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 37.2,
+      "billed": 157574,
+      "fresh": 22342,
+      "cache_read": 135232,
+      "cache_create": 0,
+      "output": 1607,
+      "input_total": 157574,
+      "cost": 0.0488,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 23,
+      "wall": 67.7,
+      "billed": 192046,
+      "fresh": 192046,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1933,
+      "input_total": 192046,
+      "cost": 0.2449,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -8426,38 +7297,6 @@
       "output": 870,
       "input_total": 43683,
       "cost": 0.0568,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 17.5,
-      "billed": 83990,
-      "fresh": 43350,
-      "cache_read": 40640,
-      "cache_create": 0,
-      "output": 625,
-      "input_total": 83990,
-      "cost": 0.0608,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 35.5,
-      "billed": 67681,
-      "fresh": 67681,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1053,
-      "input_total": 67681,
-      "cost": 0.0872,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8686,34 +7525,34 @@
       "snapshot": "june16"
      }
     },
-    "tls-chain-ordering-strict": {
+    "relaxed-ordering-ringbuf": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 15,
-      "wall": 37.2,
-      "billed": 157574,
-      "fresh": 22342,
-      "cache_read": 135232,
+      "turns": 7,
+      "wall": 21.5,
+      "billed": 75175,
+      "fresh": 10983,
+      "cache_read": 64192,
       "cache_create": 0,
-      "output": 1607,
-      "input_total": 157574,
-      "cost": 0.0488,
+      "output": 1460,
+      "input_total": 75175,
+      "cost": 0.0254,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 23,
-      "wall": 67.7,
-      "billed": 192046,
-      "fresh": 192046,
+      "turns": 13,
+      "wall": 38.9,
+      "billed": 68043,
+      "fresh": 68043,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 1933,
-      "input_total": 192046,
-      "cost": 0.2449,
+      "output": 1256,
+      "input_total": 68043,
+      "cost": 0.0882,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9198,38 +8037,6 @@
       "snapshot": "june16"
      }
     },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 21.5,
-      "billed": 75175,
-      "fresh": 10983,
-      "cache_read": 64192,
-      "cache_create": 0,
-      "output": 1460,
-      "input_total": 75175,
-      "cost": 0.0254,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 38.9,
-      "billed": 68043,
-      "fresh": 68043,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1256,
-      "input_total": 68043,
-      "cost": 0.0882,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "cache-stale-invalidation": {
      "native": {
       "status": "pass",
@@ -9495,6 +8302,38 @@
       "snapshot": "june16"
      }
     },
+    "encoding-mojibake": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 0,
+      "wall": 59.1,
+      "billed": 224630,
+      "fresh": 224630,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1722,
+      "input_total": 224630,
+      "cost": 0.0933,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 17,
+      "wall": 38.2,
+      "billed": 117772,
+      "fresh": 117772,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 780,
+      "input_total": 117772,
+      "cost": 0.0487,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "linearizability-stale-read": {
      "native": {
       "status": "fail",
@@ -9559,6 +8398,38 @@
       "snapshot": "june16"
      }
     },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 0,
+      "wall": 160.5,
+      "billed": 1925883,
+      "fresh": 1925883,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 10627,
+      "input_total": 1925883,
+      "cost": 0.7916,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 26,
+      "wall": 67.1,
+      "billed": 210407,
+      "fresh": 210407,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1124,
+      "input_total": 210407,
+      "cost": 0.0864,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "fail",
@@ -9619,38 +8490,6 @@
       "output": 3645,
       "input_total": 284867,
       "cost": 0.1212,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 0,
-      "wall": 59.1,
-      "billed": 224630,
-      "fresh": 224630,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1722,
-      "input_total": 224630,
-      "cost": 0.0933,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 17,
-      "wall": 38.2,
-      "billed": 117772,
-      "fresh": 117772,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 780,
-      "input_total": 117772,
-      "cost": 0.0487,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9879,34 +8718,34 @@
       "snapshot": "june16"
      }
     },
-    "tls-chain-ordering-strict": {
+    "relaxed-ordering-ringbuf": {
      "native": {
       "status": "fail",
       "resolved": false,
-      "turns": 0,
-      "wall": 160.5,
-      "billed": 1925883,
-      "fresh": 1925883,
+      "turns": 13,
+      "wall": 81.1,
+      "billed": 182678,
+      "fresh": 182678,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 10627,
-      "input_total": 1925883,
-      "cost": 0.7916,
+      "output": 3505,
+      "input_total": 182678,
+      "cost": 0.0801,
       "cost_valid": true,
       "snapshot": "june16"
      },
      "kernel": {
       "status": "pass",
       "resolved": true,
-      "turns": 26,
-      "wall": 67.1,
-      "billed": 210407,
-      "fresh": 210407,
+      "turns": 16,
+      "wall": 61.6,
+      "billed": 133800,
+      "fresh": 133800,
       "cache_read": 0,
       "cache_create": 0,
-      "output": 1124,
-      "input_total": 210407,
-      "cost": 0.0864,
+      "output": 1658,
+      "input_total": 133800,
+      "cost": 0.0568,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -10391,38 +9230,6 @@
       "snapshot": "june16"
      }
     },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 13,
-      "wall": 81.1,
-      "billed": 182678,
-      "fresh": 182678,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3505,
-      "input_total": 182678,
-      "cost": 0.0801,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 16,
-      "wall": 61.6,
-      "billed": 133800,
-      "fresh": 133800,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1658,
-      "input_total": 133800,
-      "cost": 0.0568,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "cache-stale-invalidation": {
      "native": {
       "status": "infra",
@@ -10688,6 +9495,38 @@
       "snapshot": "july09"
      }
     },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 57.6,
+      "billed": 188033,
+      "fresh": 1829,
+      "cache_read": 175945,
+      "cache_create": 10259,
+      "output": 1338,
+      "input_total": 188033,
+      "cost": 0.3894,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 4,
+      "wall": 34.9,
+      "billed": 27416,
+      "fresh": 1027,
+      "cache_read": 25683,
+      "cache_create": 706,
+      "output": 224,
+      "input_total": 27416,
+      "cost": 0.056,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
     "linearizability-stale-read": {
      "native": {
       "status": "pass",
@@ -10752,6 +9591,38 @@
       "snapshot": "july09"
      }
     },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 23,
+      "wall": 215.7,
+      "billed": 638356,
+      "fresh": 2113,
+      "cache_read": 612715,
+      "cache_create": 23528,
+      "output": 10646,
+      "input_total": 638356,
+      "cost": 1.4602,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 3,
+      "wall": 29.3,
+      "billed": 19952,
+      "fresh": 647,
+      "cache_read": 19014,
+      "cache_create": 291,
+      "output": 174,
+      "input_total": 19952,
+      "cost": 0.0378,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
     "wal-fsync-ghost-ack": {
      "native": {
       "status": "pass",
@@ -10812,38 +9683,6 @@
       "output": 2306,
       "input_total": 76657,
       "cost": 0.2952,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
-    "encoding-mojibake": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 57.6,
-      "billed": 188033,
-      "fresh": 1829,
-      "cache_read": 175945,
-      "cache_create": 10259,
-      "output": 1338,
-      "input_total": 188033,
-      "cost": 0.3894,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 4,
-      "wall": 34.9,
-      "billed": 27416,
-      "fresh": 1027,
-      "cache_read": 25683,
-      "cache_create": 706,
-      "output": 224,
-      "input_total": 27416,
-      "cost": 0.056,
       "cost_valid": true,
       "snapshot": "july09"
      }
@@ -11072,34 +9911,34 @@
       "snapshot": "july09"
      }
     },
-    "tls-chain-ordering-strict": {
+    "relaxed-ordering-ringbuf": {
      "native": {
       "status": "pass",
       "resolved": true,
-      "turns": 23,
-      "wall": 215.7,
-      "billed": 638356,
-      "fresh": 2113,
-      "cache_read": 612715,
-      "cache_create": 23528,
-      "output": 10646,
-      "input_total": 638356,
-      "cost": 1.4602,
+      "turns": 7,
+      "wall": 50.7,
+      "billed": 130367,
+      "fresh": 1823,
+      "cache_read": 114474,
+      "cache_create": 14070,
+      "output": 2853,
+      "input_total": 130367,
+      "cost": 0.4512,
       "cost_valid": true,
       "snapshot": "july09"
      },
      "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 3,
-      "wall": 29.3,
-      "billed": 19952,
-      "fresh": 647,
-      "cache_read": 19014,
-      "cache_create": 291,
-      "output": 174,
-      "input_total": 19952,
-      "cost": 0.0378,
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 90.2,
+      "billed": 104399,
+      "fresh": 7270,
+      "cache_read": 88538,
+      "cache_create": 8591,
+      "output": 2924,
+      "input_total": 104399,
+      "cost": 0.4148,
       "cost_valid": true,
       "snapshot": "july09"
      }
@@ -11584,38 +10423,6 @@
       "snapshot": "july09"
      }
     },
-    "relaxed-ordering-ringbuf": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 50.7,
-      "billed": 130367,
-      "fresh": 1823,
-      "cache_read": 114474,
-      "cache_create": 14070,
-      "output": 2853,
-      "input_total": 130367,
-      "cost": 0.4512,
-      "cost_valid": true,
-      "snapshot": "july09"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 90.2,
-      "billed": 104399,
-      "fresh": 7270,
-      "cache_read": 88538,
-      "cache_create": 8591,
-      "output": 2924,
-      "input_total": 104399,
-      "cost": 0.4148,
-      "cost_valid": true,
-      "snapshot": "july09"
-     }
-    },
     "cache-stale-invalidation": {
      "native": {
       "status": "pass",
@@ -11772,6 +10579,1199 @@
       "output": 223,
       "input_total": 27471,
       "cost": 0.0565,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    }
+   }
+  },
+  {
+   "model": "claude-opus-4-8",
+   "type": "B",
+   "native_cli": "claude-code",
+   "native_solved": 34,
+   "kernel_solved": 33,
+   "cells": {
+    "postgres-migration-schema-drift": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 19,
+      "wall": 97.1,
+      "billed": 501248,
+      "fresh": 2109,
+      "cache_read": 484336,
+      "cache_create": 14803,
+      "output": 4876,
+      "input_total": 501248,
+      "cost": 0.4671,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 11,
+      "wall": 112.3,
+      "billed": 131741,
+      "fresh": 8226,
+      "cache_read": 114302,
+      "cache_create": 9213,
+      "output": 2354,
+      "input_total": 131741,
+      "cost": 0.2147,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "silent-data-corruption": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 16,
+      "wall": 130.6,
+      "billed": 365889,
+      "fresh": 2101,
+      "cache_read": 352170,
+      "cache_create": 11618,
+      "output": 3817,
+      "input_total": 365889,
+      "cost": 0.3546,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 48.7,
+      "billed": 62590,
+      "fresh": 3542,
+      "cache_read": 54564,
+      "cache_create": 4484,
+      "output": 1529,
+      "input_total": 62590,
+      "cost": 0.1112,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "split-brain-leader-election": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 10,
+      "wall": 63.4,
+      "billed": 263365,
+      "fresh": 1962,
+      "cache_read": 239031,
+      "cache_create": 22372,
+      "output": 2543,
+      "input_total": 263365,
+      "cost": 0.3327,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 76.6,
+      "billed": 145644,
+      "fresh": 6595,
+      "cache_read": 130734,
+      "cache_create": 8315,
+      "output": 2327,
+      "input_total": 145644,
+      "cost": 0.2085,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "encoding-mojibake": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 40.2,
+      "billed": 230251,
+      "fresh": 1962,
+      "cache_read": 219096,
+      "cache_create": 9193,
+      "output": 1828,
+      "input_total": 230251,
+      "cost": 0.2225,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 13,
+      "wall": 76.1,
+      "billed": 127118,
+      "fresh": 5467,
+      "cache_read": 115390,
+      "cache_create": 6261,
+      "output": 2136,
+      "input_total": 127118,
+      "cost": 0.1776,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "linearizability-stale-read": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 45,
+      "wall": 848.7,
+      "billed": 2717793,
+      "fresh": 14711,
+      "cache_read": 2622093,
+      "cache_create": 80989,
+      "output": 38480,
+      "input_total": 2717793,
+      "cost": 2.8528,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 18,
+      "wall": 146.8,
+      "billed": 261865,
+      "fresh": 14842,
+      "cache_read": 222735,
+      "cache_create": 24288,
+      "output": 3856,
+      "input_total": 261865,
+      "cost": 0.4338,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "timezone-scheduling": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 36.1,
+      "billed": 137800,
+      "fresh": 1825,
+      "cache_read": 126172,
+      "cache_create": 9803,
+      "output": 1791,
+      "input_total": 137800,
+      "cost": 0.1783,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 20,
+      "wall": 92.7,
+      "billed": 244466,
+      "fresh": 7579,
+      "cache_read": 226723,
+      "cache_create": 10164,
+      "output": 3558,
+      "input_total": 244466,
+      "cost": 0.3037,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "tls-chain-ordering-strict": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 19,
+      "wall": 122.1,
+      "billed": 553865,
+      "fresh": 2109,
+      "cache_read": 532297,
+      "cache_create": 19459,
+      "output": 7844,
+      "input_total": 553865,
+      "cost": 0.5944,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 3,
+      "wall": 30.2,
+      "billed": 22724,
+      "fresh": 3315,
+      "cache_read": 19044,
+      "cache_create": 365,
+      "output": 432,
+      "input_total": 22724,
+      "cost": 0.0392,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "wal-fsync-ghost-ack": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 153.0,
+      "billed": 239843,
+      "fresh": 1958,
+      "cache_read": 215364,
+      "cache_create": 22521,
+      "output": 9591,
+      "input_total": 239843,
+      "cost": 0.498,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 85.7,
+      "billed": 159629,
+      "fresh": 10138,
+      "cache_read": 136616,
+      "cache_create": 12875,
+      "output": 3421,
+      "input_total": 159629,
+      "cost": 0.285,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "deadlock-transfer": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 36.3,
+      "billed": 166475,
+      "fresh": 1827,
+      "cache_read": 153986,
+      "cache_create": 10662,
+      "output": 2179,
+      "input_total": 166475,
+      "cost": 0.2072,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 57.3,
+      "billed": 62778,
+      "fresh": 4034,
+      "cache_read": 53371,
+      "cache_create": 5373,
+      "output": 2263,
+      "input_total": 62778,
+      "cost": 0.137,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "goroutine-leak-handler": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 78.0,
+      "billed": 194090,
+      "fresh": 1829,
+      "cache_read": 180858,
+      "cache_create": 11403,
+      "output": 3866,
+      "input_total": 194090,
+      "cost": 0.2675,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 78.7,
+      "billed": 98071,
+      "fresh": 4088,
+      "cache_read": 87990,
+      "cache_create": 5993,
+      "output": 2487,
+      "input_total": 98071,
+      "cost": 0.1641,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "import-cycle-startup": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 26.5,
+      "billed": 134299,
+      "fresh": 1825,
+      "cache_read": 123074,
+      "cache_create": 9400,
+      "output": 1517,
+      "input_total": 134299,
+      "cost": 0.1673,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 58.1,
+      "billed": 99984,
+      "fresh": 5527,
+      "cache_read": 87773,
+      "cache_create": 6684,
+      "output": 2157,
+      "input_total": 99984,
+      "cost": 0.1672,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "memory-leak-event-listener": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 47.2,
+      "billed": 195782,
+      "fresh": 1829,
+      "cache_read": 182615,
+      "cache_create": 11338,
+      "output": 2575,
+      "input_total": 195782,
+      "cost": 0.2357,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 67.4,
+      "billed": 89130,
+      "fresh": 3935,
+      "cache_read": 79871,
+      "cache_create": 5324,
+      "output": 1800,
+      "input_total": 89130,
+      "cost": 0.1379,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "null-pointer-config": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 39.6,
+      "billed": 109040,
+      "fresh": 1823,
+      "cache_read": 99547,
+      "cache_create": 7670,
+      "output": 1482,
+      "input_total": 109040,
+      "cost": 0.1439,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 58.4,
+      "billed": 87757,
+      "fresh": 3335,
+      "cache_read": 79647,
+      "cache_create": 4775,
+      "output": 1954,
+      "input_total": 87757,
+      "cost": 0.1352,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "off-by-one-array-slice": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 19.4,
+      "billed": 103045,
+      "fresh": 1823,
+      "cache_read": 95794,
+      "cache_create": 5428,
+      "output": 629,
+      "input_total": 103045,
+      "cost": 0.1067,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 40.6,
+      "billed": 65298,
+      "fresh": 2794,
+      "cache_read": 58947,
+      "cache_create": 3557,
+      "output": 1093,
+      "input_total": 65298,
+      "cost": 0.093,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "off-by-one-pagination": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 26.3,
+      "billed": 150701,
+      "fresh": 1827,
+      "cache_read": 142041,
+      "cache_create": 6833,
+      "output": 1030,
+      "input_total": 150701,
+      "cost": 0.1486,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 37.8,
+      "billed": 48165,
+      "fresh": 2355,
+      "cache_read": 43070,
+      "cache_create": 2740,
+      "output": 803,
+      "input_total": 48165,
+      "cost": 0.0705,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "raft-snapshot-commit-gap": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 123.7,
+      "billed": 401168,
+      "fresh": 1966,
+      "cache_read": 373189,
+      "cache_create": 26013,
+      "output": 8391,
+      "input_total": 401168,
+      "cost": 0.5688,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 72.1,
+      "billed": 141157,
+      "fresh": 11487,
+      "cache_read": 115273,
+      "cache_create": 14397,
+      "output": 3573,
+      "input_total": 141157,
+      "cost": 0.2944,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "relaxed-ordering-ringbuf": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 55.3,
+      "billed": 183289,
+      "fresh": 1956,
+      "cache_read": 167455,
+      "cache_create": 13878,
+      "output": 3624,
+      "input_total": 183289,
+      "cost": 0.2708,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 4,
+      "wall": 32.0,
+      "billed": 30340,
+      "fresh": 3462,
+      "cache_read": 25670,
+      "cache_create": 1208,
+      "output": 472,
+      "input_total": 30340,
+      "cost": 0.0495,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "wrong-operator-discount": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 15.8,
+      "billed": 105821,
+      "fresh": 1823,
+      "cache_read": 97907,
+      "cache_create": 6091,
+      "output": 624,
+      "input_total": 105821,
+      "cost": 0.1117,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 42.9,
+      "billed": 59850,
+      "fresh": 3521,
+      "cache_read": 52091,
+      "cache_create": 4238,
+      "output": 1063,
+      "input_total": 59850,
+      "cost": 0.0967,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "sql-injection-search": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 28.3,
+      "billed": 137640,
+      "fresh": 1825,
+      "cache_read": 126245,
+      "cache_create": 9570,
+      "output": 1369,
+      "input_total": 137640,
+      "cost": 0.1663,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 61.5,
+      "billed": 117504,
+      "fresh": 6799,
+      "cache_read": 102393,
+      "cache_create": 8312,
+      "output": 1954,
+      "input_total": 117504,
+      "cost": 0.186,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "k8s-assume-cache-silent-drop": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 32.5,
+      "billed": 128662,
+      "fresh": 1825,
+      "cache_read": 119840,
+      "cache_create": 6997,
+      "output": 1287,
+      "input_total": 128662,
+      "cost": 0.145,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 58.2,
+      "billed": 86241,
+      "fresh": 2997,
+      "cache_read": 78776,
+      "cache_create": 4468,
+      "output": 1928,
+      "input_total": 86241,
+      "cost": 0.1305,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 35.9,
+      "billed": 105669,
+      "fresh": 1823,
+      "cache_read": 97215,
+      "cache_create": 6631,
+      "output": 1405,
+      "input_total": 105669,
+      "cost": 0.1343,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 56.0,
+      "billed": 57448,
+      "fresh": 2470,
+      "cache_read": 51453,
+      "cache_create": 3525,
+      "output": 1544,
+      "input_total": 57448,
+      "cost": 0.0987,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "performance-cliff-hash": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 36.0,
+      "billed": 180334,
+      "fresh": 1829,
+      "cache_read": 169430,
+      "cache_create": 9075,
+      "output": 1418,
+      "input_total": 180334,
+      "cost": 0.186,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 47.8,
+      "billed": 88849,
+      "fresh": 6280,
+      "cache_read": 75544,
+      "cache_create": 7025,
+      "output": 1579,
+      "input_total": 88849,
+      "cost": 0.1526,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "type-coercion-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 26.1,
+      "billed": 109055,
+      "fresh": 1823,
+      "cache_read": 99847,
+      "cache_create": 7385,
+      "output": 1174,
+      "input_total": 109055,
+      "cost": 0.1345,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 55.0,
+      "billed": 79726,
+      "fresh": 4044,
+      "cache_read": 70423,
+      "cache_create": 5259,
+      "output": 1683,
+      "input_total": 79726,
+      "cost": 0.1304,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "api-version-field-drop": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 39.5,
+      "billed": 199511,
+      "fresh": 1829,
+      "cache_read": 186281,
+      "cache_create": 11401,
+      "output": 1627,
+      "input_total": 199511,
+      "cost": 0.2142,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 66.2,
+      "billed": 110050,
+      "fresh": 6824,
+      "cache_read": 88426,
+      "cache_create": 14800,
+      "output": 2273,
+      "input_total": 110050,
+      "cost": 0.2277,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 43.2,
+      "billed": 172127,
+      "fresh": 1827,
+      "cache_read": 158685,
+      "cache_create": 11615,
+      "output": 2464,
+      "input_total": 172127,
+      "cost": 0.2227,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 52.9,
+      "billed": 88979,
+      "fresh": 5957,
+      "cache_read": 75822,
+      "cache_create": 7200,
+      "output": 1808,
+      "input_total": 88979,
+      "cost": 0.1579,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "bidi-override-injection": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 86.8,
+      "billed": 366292,
+      "fresh": 2097,
+      "cache_read": 347288,
+      "cache_create": 16907,
+      "output": 4572,
+      "input_total": 366292,
+      "cost": 0.4041,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 75.8,
+      "billed": 129176,
+      "fresh": 8337,
+      "cache_read": 109538,
+      "cache_create": 11301,
+      "output": 3518,
+      "input_total": 129176,
+      "cost": 0.255,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "compiler-macro-expansion": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 18,
+      "wall": 141.8,
+      "billed": 429901,
+      "fresh": 3303,
+      "cache_read": 412641,
+      "cache_create": 13957,
+      "output": 5006,
+      "input_total": 429901,
+      "cost": 0.4352,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 53.1,
+      "billed": 102393,
+      "fresh": 9179,
+      "cache_read": 83962,
+      "cache_create": 9252,
+      "output": 1715,
+      "input_total": 102393,
+      "cost": 0.1886,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "data-corruption-concurrent-write": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 89.9,
+      "billed": 307285,
+      "fresh": 1966,
+      "cache_read": 291044,
+      "cache_create": 14275,
+      "output": 4861,
+      "input_total": 307285,
+      "cost": 0.3661,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 45.8,
+      "billed": 93569,
+      "fresh": 6473,
+      "cache_read": 79866,
+      "cache_create": 7230,
+      "output": 1317,
+      "input_total": 93569,
+      "cost": 0.1504,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 106.8,
+      "billed": 376063,
+      "fresh": 1968,
+      "cache_read": 355042,
+      "cache_create": 19053,
+      "output": 7057,
+      "input_total": 376063,
+      "cost": 0.4829,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 17,
+      "wall": 123.6,
+      "billed": 276763,
+      "fresh": 12081,
+      "cache_read": 246857,
+      "cache_create": 17825,
+      "output": 6597,
+      "input_total": 276763,
+      "cost": 0.4602,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "missing-input-validation": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 28.5,
+      "billed": 114075,
+      "fresh": 1823,
+      "cache_read": 103458,
+      "cache_create": 8794,
+      "output": 1104,
+      "input_total": 114075,
+      "cost": 0.1434,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 57.7,
+      "billed": 109270,
+      "fresh": 5733,
+      "cache_read": 96231,
+      "cache_create": 7306,
+      "output": 2030,
+      "input_total": 109270,
+      "cost": 0.1732,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 18,
+      "wall": 280.0,
+      "billed": 490509,
+      "fresh": 2107,
+      "cache_read": 465536,
+      "cache_create": 22866,
+      "output": 15066,
+      "input_total": 490509,
+      "cost": 0.7629,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 47.4,
+      "billed": 91739,
+      "fresh": 4474,
+      "cache_read": 75878,
+      "cache_create": 11387,
+      "output": 1581,
+      "input_total": 91739,
+      "cost": 0.171,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "race-condition-counter": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 32.4,
+      "billed": 127659,
+      "fresh": 1825,
+      "cache_read": 118998,
+      "cache_create": 6836,
+      "output": 1287,
+      "input_total": 127659,
+      "cost": 0.1435,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 54.1,
+      "billed": 71932,
+      "fresh": 4091,
+      "cache_read": 62448,
+      "cache_create": 5393,
+      "output": 1801,
+      "input_total": 71932,
+      "cost": 0.1304,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "cache-stale-invalidation": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 29.6,
+      "billed": 138535,
+      "fresh": 1954,
+      "cache_read": 126290,
+      "cache_create": 10291,
+      "output": 1440,
+      "input_total": 138535,
+      "cost": 0.1732,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 71.1,
+      "billed": 64604,
+      "fresh": 5250,
+      "cache_read": 53134,
+      "cache_create": 6220,
+      "output": 1598,
+      "input_total": 64604,
+      "cost": 0.1316,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "graphql-dataloader-per-request": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 80.6,
+      "billed": 416645,
+      "fresh": 1968,
+      "cache_read": 392500,
+      "cache_create": 22177,
+      "output": 4991,
+      "input_total": 416645,
+      "cost": 0.4695,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 99.6,
+      "billed": 209853,
+      "fresh": 10363,
+      "cache_read": 185288,
+      "cache_create": 14202,
+      "output": 5013,
+      "input_total": 209853,
+      "cost": 0.3585,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 60.3,
+      "billed": 189537,
+      "fresh": 1829,
+      "cache_read": 176863,
+      "cache_create": 10845,
+      "output": 2282,
+      "input_total": 189537,
+      "cost": 0.2224,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 67.0,
+      "billed": 76564,
+      "fresh": 5610,
+      "cache_read": 63989,
+      "cache_create": 6965,
+      "output": 2110,
+      "input_total": 76564,
+      "cost": 0.1563,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "ssrf-allowlist-port-confusion": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 47.4,
+      "billed": 185944,
+      "fresh": 1829,
+      "cache_read": 174432,
+      "cache_create": 9683,
+      "output": 2195,
+      "input_total": 185944,
+      "cost": 0.2118,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 58.3,
+      "billed": 78603,
+      "fresh": 5660,
+      "cache_read": 66161,
+      "cache_create": 6782,
+      "output": 2399,
+      "input_total": 78603,
+      "cost": 0.1637,
+      "cost_valid": true,
+      "snapshot": "july09"
+     }
+    },
+    "timing-attack-comparison": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 11,
+      "wall": 48.4,
+      "billed": 277071,
+      "fresh": 1964,
+      "cache_read": 262882,
+      "cache_create": 12225,
+      "output": 2490,
+      "input_total": 277071,
+      "cost": 0.2799,
+      "cost_valid": true,
+      "snapshot": "july09"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 52.0,
+      "billed": 67288,
+      "fresh": 5889,
+      "cache_read": 54878,
+      "cache_create": 6521,
+      "output": 1377,
+      "input_total": 67288,
+      "cost": 0.1321,
       "cost_valid": true,
       "snapshot": "july09"
      }
