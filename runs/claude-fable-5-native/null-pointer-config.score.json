@@ -1,0 +1,33 @@
+{
+  "benchmark": "null-pointer-config",
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T03:51:44Z",
+  "difficulty_tier": "medium",
+  "resolved": true,
+  "turns_to_fix": 8,
+  "token_cost": 117313,
+  "input_tokens": 1823,
+  "output_tokens": 1153,
+  "estimated_cost_usd": 0.293648,
+  "fresh_input_tokens": 1823,
+  "cache_read_tokens": 105395,
+  "cache_create_tokens": 8942,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 116160,
+  "wall_clock": 38.105,
+  "tool_uses": 7,
+  "stop_reason": "pass",
+  "summary": "The needle was a nil-pointer dereference: `config.json` enables metrics (`enable_metrics: true`) but omits the `metrics` config block, so `cfg.Metrics` stayed `nil`. When `/status` was hit, `makeStatusHandler` dereferenced `cfg.Metrics.Endpoint` (main.go:47) and panicked, crashing the request.\n\nThe fix, in `LoadConfig` (config.go), applies sensible defaults (`endpoint: \"/metrics\"`, `interval_sec: 60`) whenever metrics are enabled but no metrics block is provided \u2014 consistent with the existing port/version defaulting there.\n\n`test.sh` passes: `PASS: Server starts and responds correctly with metrics enabled`.",
+  "teardown_masked": true,
+  "teardown_masked_by": "stall_watch"
+}

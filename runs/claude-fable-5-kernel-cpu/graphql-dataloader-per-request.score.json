@@ -1,0 +1,33 @@
+{
+  "benchmark": "graphql-dataloader-per-request",
+  "agent": "claude-fable-5-kernel-cpu",
+  "arm": "kernel",
+  "control_type": "kernel",
+  "requested_arm": "kernel",
+  "executed_arm": "kernel-cpu",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T03:26:06Z",
+  "difficulty_tier": "extreme",
+  "resolved": true,
+  "turns_to_fix": 4,
+  "token_cost": 27662,
+  "input_tokens": 1096,
+  "output_tokens": 204,
+  "estimated_cost_usd": 0.0553305,
+  "fresh_input_tokens": 1096,
+  "cache_read_tokens": 25683,
+  "cache_create_tokens": 679,
+  "cache_create_5m_tokens": 679,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 27458,
+  "wall_clock": 34.127,
+  "tool_uses": 3,
+  "stop_reason": "exit_code: 1",
+  "summary": "agent.completed: 4turns, 1096+204 tokens, $0.0553",
+  "teardown_masked": true,
+  "teardown_masked_by": "stall_watch"
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "benchmark": "rate-limit-bypass-header",
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "requested_arm": "native",
+    "executed_arm": "native",
+    "bench_binary": {
+      "version": "7.7.1",
+      "build_sha": "c8e13be9deaa-dirty",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+    },
+    "timestamp": "2026-07-09T04:12:01Z",
+    "difficulty_tier": "medium",
+    "resolved": true,
+    "turns_to_fix": 9,
+    "token_cost": 148442,
+    "input_tokens": 1954,
+    "output_tokens": 1671,
+    "estimated_cost_usd": 0.2317215,
+    "fresh_input_tokens": 1954,
+    "cache_read_tokens": 133086,
+    "cache_create_tokens": 11731,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 146771,
+    "wall_clock": 60.297,
+    "tool_uses": 8,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified. All tests pass.\n\n**The needle:** `getClientIp` in `/app/app/ratelimiter.ts` derived the rate-limit key from the client-controlled `X-Forwarded-For` header. An attacker could send a different value on each request (`10.0.0.1`, `10.0.0.2`, \u2026) to land in a fresh rate-limit bucket every time, bypassing the limiter entirely.\n\n**The fix:** rate-limit by the actual TCP peer address (`req.socket.remoteAddress`) and stop trusting the spoofable header. Since this server sits behind no trusted proxy, there's no legitimate case where the header should override the real connection source.\n\nTest results: excess requests are now blocked normally (10 passed / 5 blocked), and header rotation no longer helps \u2014 only 10 of 30 spoofed requests get through.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T04:12:11+00:00"
+  }
+]

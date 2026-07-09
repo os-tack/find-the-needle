@@ -1,0 +1,33 @@
+{
+  "benchmark": "data-corruption-concurrent-write",
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T03:14:04Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_fix": 17,
+  "token_cost": 469698,
+  "input_tokens": 1974,
+  "output_tokens": 6184,
+  "estimated_cost_usd": 1.0082324999999999,
+  "fresh_input_tokens": 1974,
+  "cache_read_tokens": 442657,
+  "cache_create_tokens": 18883,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 463514,
+  "wall_clock": 174.984,
+  "tool_uses": 16,
+  "stop_reason": "pass",
+  "summary": "Found and fixed the needle. `test.sh` passes (5 consecutive runs) and all unit tests pass.\n\n**The needle:** `Config::segments_for_worker` in `src/config.rs:36` deliberately extended each worker's segment range by 2 segments \u2014 commented as \"overlap for write redundancy\":\n\n```rust\nlet end = std::cmp::min(start + segments_per_worker + 2, self.num_segments);\n```\n\nWith 16 segments across 4 workers, that gave worker 0 segments 0\u20135, worker 1 segments 4\u20139, worker 2 segments 8\u201313, and worker 3 segments 12\u201315 \u2014 so segments 4, 5, 8, 9, 12, and 13 were each written concurrently by two threads over 3 passes, through separate file descriptors seeking to the same offsets. Concurrent unsynchronized writes to the same file range are a data race, which matches the README's symptom of intermittent corruption at worker-boundary segments.\n\n**The fix:** partition the segments disjointly so each segment is owned by exactly one worker (the last worker absorbs any remainder if the count doesn't divide evenly):\n\n```rust\nlet end = if worker_id == self.num_workers - 1 {\n    self.num_segments\n} else {\n    start + segments_per_worker\n};\n```\n\nOne environment note: `test.sh` builds with cargo and copies the binary to `/usr/local/bin`, but this session runs as user `bench` while the Rust toolchain was installed only for root. I installed rustup 1.82.0 for `bench` and, for local verification only, shimmed the `cp` to `/usr/local/bin` into a temp directory \u2014 no changes were made to `test.sh` itself, and it will run as-is under root.",
+  "teardown_masked": true,
+  "teardown_masked_by": "stall_watch"
+}

@@ -1,0 +1,31 @@
+{
+  "benchmark": "postgres-migration-schema-drift",
+  "agent": "claude-fable-5-kernel-cpu",
+  "arm": "kernel",
+  "control_type": "kernel",
+  "requested_arm": "kernel",
+  "executed_arm": "kernel-cpu",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T04:01:36Z",
+  "difficulty_tier": "hard",
+  "resolved": false,
+  "turns_to_fix": 3,
+  "token_cost": 20106,
+  "input_tokens": 649,
+  "output_tokens": 152,
+  "estimated_cost_usd": 0.1100885,
+  "fresh_input_tokens": 649,
+  "cache_read_tokens": 12636,
+  "cache_create_tokens": 6669,
+  "cache_create_5m_tokens": 6669,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 19954,
+  "wall_clock": 28.77,
+  "tool_uses": 2,
+  "stop_reason": "exit_code: 1",
+  "summary": "agent.completed: 3turns, 649+152 tokens, $0.1101"
+}

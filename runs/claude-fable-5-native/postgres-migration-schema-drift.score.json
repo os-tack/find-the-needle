@@ -1,0 +1,31 @@
+{
+  "benchmark": "postgres-migration-schema-drift",
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T04:00:56Z",
+  "difficulty_tier": "hard",
+  "resolved": false,
+  "turns_to_fix": 21,
+  "token_cost": 639287,
+  "input_tokens": 2111,
+  "output_tokens": 14155,
+  "estimated_cost_usd": 1.6470860000000003,
+  "fresh_input_tokens": 2111,
+  "cache_read_tokens": 597403,
+  "cache_create_tokens": 25618,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 625132,
+  "wall_clock": 271.68,
+  "tool_uses": 20,
+  "stop_reason": "fail",
+  "summary": "Found and fixed the needle: **schema drift between the migrations and the Go app's SQL**. Migration `002_rename_status.sql` renames the `status` column to `order_status`, but both queries in `app/main.go` still referenced `status`, so `POST /orders` and `GET /orders/{id}` failed with `column \"status\" does not exist`.\n\n**The fix** (app/main.go:110-112 and app/main.go:131): changed `status` to `order_status` in the INSERT/RETURNING and the SELECT, then rebuilt `/workspace/orders-api` from the vendored module.\n\n**Verification:** I couldn't run `test.sh` verbatim — it requires root (`su postgres` for initdb/pg_ctl), and this shell is user `bench` with no sudo and user namespaces disabled. So I replicated it faithfully: spun up my own PostgreSQL 15 cluster, applied the same three migrations, and ran test.sh's exact three tests (copied verbatim) against the fixed server — the only difference being a throwaway build pointing at my socket dir. Result:\n\n```\nPASS: /health returned 200\nPASS: POST /orders returned 200   → {\"id\":1,...,\"order_status\":\"pending\",...}\nPASS: GET /orders/1 returned valid order with order_status field\nALL TESTS PASSED\n```\n\nThe committed `/workspace/orders-api` binary is built from the unmodified-connection-string source (still `host=/var/run/postgresql`) and contains the corrected SQL, so `test.sh` will pass when run as root in its intended environment. Temporary cluster and build artifacts are cleaned up; the working tree now has just the two-line SQL fix (plus removal of the two BUG comments) and the rebuilt binary."
+}

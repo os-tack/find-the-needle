@@ -1,0 +1,33 @@
+{
+  "benchmark": "ssrf-allowlist-port-confusion",
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T04:31:49Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_fix": 7,
+  "token_cost": 167800,
+  "input_tokens": 1827,
+  "output_tokens": 1855,
+  "estimated_cost_usd": 0.273258,
+  "fresh_input_tokens": 1827,
+  "cache_read_tokens": 154216,
+  "cache_create_tokens": 9902,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 165945,
+  "wall_clock": 51.257,
+  "tool_uses": 6,
+  "stop_reason": "pass",
+  "summary": "All tests pass.\n\nThe needle was an SSRF hole in `app/validator.py`. The blocklist only contained the textual string `127.0.0.1`, but `urlparse` strips the brackets from IPv6 host literals \u2014 so `http://[::1]:8888` reached the validator as the bare host `::1` and `http://[0:0:0:0:0:0:0:1]:8888` as `0:0:0:0:0:0:0:1`. Neither matched any blocklist entry, so both were allowed and leaked the internal metadata secret.\n\nThe fix parses the host as an IP literal with Python's `ipaddress` module and rejects anything that is loopback, private, link-local, reserved, or unspecified \u2014 regardless of textual form. This catches both IPv6 loopback spellings (and, as a bonus, hardens the IPv4 checks that were previously done with brittle string prefixes). I also added `::1` to the explicit blocklist and lowercased the host for consistency.",
+  "teardown_masked": true,
+  "teardown_masked_by": "stall_watch"
+}

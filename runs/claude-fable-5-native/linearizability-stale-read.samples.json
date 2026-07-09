@@ -1,0 +1,35 @@
+[
+  {
+    "benchmark": "linearizability-stale-read",
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "requested_arm": "native",
+    "executed_arm": "native",
+    "bench_binary": {
+      "version": "7.7.1",
+      "build_sha": "c8e13be9deaa-dirty",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+    },
+    "timestamp": "2026-07-09T03:37:43Z",
+    "difficulty_tier": "extreme",
+    "resolved": true,
+    "turns_to_fix": 19,
+    "token_cost": 572009,
+    "input_tokens": 2101,
+    "output_tokens": 11169,
+    "estimated_cost_usd": 1.5366049999999998,
+    "fresh_input_tokens": 2101,
+    "cache_read_tokens": 524147,
+    "cache_create_tokens": 34592,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 560840,
+    "wall_clock": 218.21,
+    "tool_uses": 18,
+    "stop_reason": "pass",
+    "summary": "Found it and fixed it \u2014 `test.sh` now passes all 3 rounds.\n\n## The needle (two compounding bugs)\n\nThe stale read after partition heal came from two gaps that mask each other, and fixing either one alone isn't enough:\n\n1. **`app/handler.go:88` \u2014 reads bypassed the linearizability protocol.** The HTTP read handler called `node.Read()`, which returns whatever happens to be in the local KV map. A correct `ReadLinearizable()` (read-index protocol: ask the leader for its commit index, wait for the local applied index to catch up) already existed but was never called. Fix: `handleRead` now calls `ReadLinearizable(key)`.\n\n2. **`app/raft/node.go` `handleHeartbeat` \u2014 the catch-up path never advanced the commit index.** After the partition heals, the isolated follower catches up via entries piggybacked on heartbeats. `handleHeartbeat` appended those entries to the log but ignored the leader's commit index carried in `msg.Index`, so the entries were never sent to the apply loop and never reached the KV state machine \u2014 the committed write stayed invisible forever. (`handleAppendEntries` had the correct advancement, which hid the bug during normal operation.) Fix: `handleHeartbeat` now advances the commit index to `min(leaderCommit, lastLogIndex)`, same as the AppendEntries path.\n\nI did not touch the heartbeat-interval/election-timeout configuration \u2014 it looks misconfigured (200ms heartbeat vs 150ms timeout base) but is a red herring: jitter makes the effective election timeout 300\u2013600ms, safely above the heartbeat interval.\n\n## Verification note\n\n`test.sh` hard-codes `go build -o /usr/local/bin/kv-cluster`, which is root-owned and this session runs as uid 1001 with no sudo. Rather than edit the test, I ran it unmodified with a tiny `go` wrapper on `PATH` that redirects only that output path to a writable directory (which also shadows `/usr/local/bin` in `PATH`), so the freshly built binary is what `kv-cluster check` executes. All 3 rounds pass: the formerly isolated follower reports applied index 1 and returns `K=1`.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T03:37:55+00:00"
+  }
+]

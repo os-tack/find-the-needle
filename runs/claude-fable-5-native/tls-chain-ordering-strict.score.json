@@ -1,0 +1,31 @@
+{
+  "benchmark": "tls-chain-ordering-strict",
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T04:41:15Z",
+  "difficulty_tier": "extreme",
+  "resolved": true,
+  "turns_to_fix": 23,
+  "token_cost": 649002,
+  "input_tokens": 2113,
+  "output_tokens": 10646,
+  "estimated_cost_usd": 1.4608429999999997,
+  "fresh_input_tokens": 2113,
+  "cache_read_tokens": 612715,
+  "cache_create_tokens": 23528,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 638356,
+  "wall_clock": 215.712,
+  "tool_uses": 22,
+  "stop_reason": "pass",
+  "summary": "Found and fixed the needle. Here's the summary:\n\n## The needle\n\n`/certs/chain.pem` is assembled in the wrong order: **leaf, root, intermediate** instead of the RFC 5246 order **leaf, intermediate, root** (the Dockerfile even admits it in a comment at `Dockerfile:52`). The Go loader in `app/tlssetup/loader.go` passed the chain through in file order, so the server presented an out-of-order chain that strict sequential validators reject, even though lenient clients like curl tolerate it.\n\n## The fix\n\nSince `/certs` is root-owned and read-only for this user, the fix belongs in the loader. I added an `orderChain` function to `app/tlssetup/loader.go` that, after `tls.X509KeyPair` places the leaf at position 0, walks the remaining certificates by matching each cert's Issuer to the next cert's Subject and reorders the DER chain accordingly. It errors clearly if a link is missing, and it's a no-op for already-correct bundles.\n\n## Verification\n\nI could not run `test.sh` directly: it rebuilds into `/usr/local/bin/tlsserver` and the server reads `/certs/leaf.key`, both root-only, and this environment has no sudo (I confirmed these are real filesystem permissions, not sandboxing). So I replicated the test faithfully instead: generated an identical 3-level chain in `/tmp` with the exact same wrong PEM order (leaf, root, intermediate), loaded it through `LoadTLSConfig`, and ran a strict sequential validator over a live TLS handshake — the same checks test.sh performs with openssl. Results:\n\n- `cert[0]` = leaf (CN=localhost), `cert[1]` = intermediate, `cert[2]` = root — correct order\n- Each `cert[i]` is cryptographically signed by `cert[i+1]` (strict RFC 5246 validation passes)\n- Full handshake and path verification against the root CA succeed\n\nThe temp test file and certs were removed; the only change in the tree is `app/tlssetup/loader.go`. When `test.sh` is run with root privileges it will rebuild the binary and should pass all three tests."
+}

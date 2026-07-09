@@ -1,0 +1,35 @@
+[
+  {
+    "benchmark": "relaxed-ordering-ringbuf",
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "requested_arm": "native",
+    "executed_arm": "native",
+    "bench_binary": {
+      "version": "7.7.1",
+      "build_sha": "c8e13be9deaa-dirty",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+    },
+    "timestamp": "2026-07-09T04:13:54Z",
+    "difficulty_tier": "extreme",
+    "resolved": true,
+    "turns_to_fix": 7,
+    "token_cost": 133220,
+    "input_tokens": 1823,
+    "output_tokens": 2853,
+    "estimated_cost_usd": 0.451827,
+    "fresh_input_tokens": 1823,
+    "cache_read_tokens": 114474,
+    "cache_create_tokens": 14070,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 130367,
+    "wall_clock": 50.661,
+    "tool_uses": 6,
+    "stop_reason": "pass",
+    "summary": "The test passes. \n\n**The needle:** `ring_buffer.c` used `memory_order_relaxed` for every atomic operation in the SPSC hot path, justified by comments claiming x86 TSO makes it safe. That reasoning is wrong on two counts: the C memory model lets the *compiler* reorder the plain `slots[]` write past a relaxed index store even on x86, and the deployment here is ARM64 (weak memory model), where the hardware reorders too. The consumer could observe the new `write_idx` before the slot data landed (reading garbage), and the producer could overwrite a slot before the consumer finished reading it.\n\n**The fix** in `ringbuf_push`/`ringbuf_pop` (ring_buffer.c:76-135) is the standard acquire/release pairing:\n- Producer: `release` store to `write_idx` publishes the slot data; `acquire` load of `read_idx` ensures the consumer is done with a slot before reuse.\n- Consumer: `acquire` load of `write_idx` makes the slot data visible; `release` store to `read_idx` orders its read before signaling the slot free.\n- Loads of each thread's own index remain relaxed \u2014 no synchronization needed there.\n\nTSan couldn't run in this container (ASLR restriction), so the test fell back to the multi-run functional check: all 5 runs of the 1M-item producer/consumer stress test passed with no data corruption.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T04:14:06+00:00"
+  }
+]

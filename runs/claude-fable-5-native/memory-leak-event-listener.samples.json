@@ -1,0 +1,35 @@
+[
+  {
+    "benchmark": "memory-leak-event-listener",
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "control_type": "native",
+    "requested_arm": "native",
+    "executed_arm": "native",
+    "bench_binary": {
+      "version": "7.7.1",
+      "build_sha": "c8e13be9deaa-dirty",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+    },
+    "timestamp": "2026-07-09T03:42:42Z",
+    "difficulty_tier": "medium",
+    "resolved": true,
+    "turns_to_fix": 8,
+    "token_cost": 166905,
+    "input_tokens": 2871,
+    "output_tokens": 1870,
+    "estimated_cost_usd": 0.3976605,
+    "fresh_input_tokens": 2871,
+    "cache_read_tokens": 152365,
+    "cache_create_tokens": 9799,
+    "cache_create_5m_tokens": 0,
+    "cache_create_1h_tokens": 0,
+    "billed_tokens": 165035,
+    "wall_clock": 60.945,
+    "tool_uses": 7,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified \u2014 `test.sh` passes.\n\n**The needle:** `DataProcessor.process()` in `app/processor.js` called `eventBus.on('data:validated', ...)` and `eventBus.on('data:error', ...)` on every request without ever removing them. Each listener closure also captured the request's `data`, so both listeners and their retained payloads accumulated unboundedly (the leak was masked by `setMaxListeners(0)` in `server.js`, which suppressed Node's warning).\n\n**The fix:** listener registration moved to the constructor so it happens once per processor lifetime. The per-request data is passed to the handler via a `this.currentData` field (cleared after emit, since the emit is synchronous) instead of a per-call closure.\n\nTest output confirms it: listener count on `data:validated` stayed at 2 after 500 requests (previously it would have grown to ~500+), and heap grew only 4.43MB \u2192 5.15MB.",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T03:42:53+00:00"
+  }
+]

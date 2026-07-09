@@ -1,0 +1,33 @@
+{
+  "benchmark": "off-by-one-array-slice",
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T03:53:05Z",
+  "difficulty_tier": "easy",
+  "resolved": true,
+  "turns_to_fix": 5,
+  "token_cost": 111282,
+  "input_tokens": 1823,
+  "output_tokens": 640,
+  "estimated_cost_usd": 0.2400205,
+  "fresh_input_tokens": 1823,
+  "cache_read_tokens": 101830,
+  "cache_create_tokens": 6989,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 110642,
+  "wall_clock": 27.991,
+  "tool_uses": 4,
+  "stop_reason": "pass",
+  "summary": "Fixed and verified. The needle was an off-by-one in `process_batch` at `processor.py:17`: it computed the slice end as `start + batch_size - 1`, so since Python slices exclude the endpoint, every batch silently dropped its last record (e.g. a batch of 10 only yielded 9). Changing it to `start + batch_size` fixes it \u2014 `test.sh` now prints `PASS: All records processed correctly across batch boundaries`.",
+  "teardown_masked": true,
+  "teardown_masked_by": "stall_watch"
+}

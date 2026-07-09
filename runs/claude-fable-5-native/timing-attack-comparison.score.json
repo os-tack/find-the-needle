@@ -1,0 +1,31 @@
+{
+  "benchmark": "timing-attack-comparison",
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "control_type": "native",
+  "requested_arm": "native",
+  "executed_arm": "native",
+  "bench_binary": {
+    "version": "7.7.1",
+    "build_sha": "c8e13be9deaa-dirty",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-ceb69933e68652a0785be9becafdf4a9f0fa8e8c6be0214a8b8065e03b6f57fa"
+  },
+  "timestamp": "2026-07-09T04:36:45Z",
+  "difficulty_tier": "hard",
+  "resolved": true,
+  "turns_to_fix": 16,
+  "token_cost": 404692,
+  "input_tokens": 1974,
+  "output_tokens": 4394,
+  "estimated_cost_usd": 0.7907715000000001,
+  "fresh_input_tokens": 1974,
+  "cache_read_tokens": 385071,
+  "cache_create_tokens": 13253,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 400298,
+  "wall_clock": 125.489,
+  "tool_uses": 15,
+  "stop_reason": "pass",
+  "summary": "Found the needle and fixed it — `test.sh` now passes all checks.\n\n**The bug:** `compareHashes` in `app/auth/compare.go:8` compared password hashes with Go's `==` string operator, which short-circuits on the first differing byte. Inputs whose hash shares a longer prefix with the stored hash take longer to reject, letting an attacker recover the hash byte-by-byte through timing measurements.\n\n**The fix:** replaced it with `crypto/subtle.ConstantTimeCompare([]byte(stored), []byte(input)) == 1`, which examines every byte regardless of where a mismatch occurs.\n\n**Verification:** `test.sh` reports all green — correct password accepted, wrong password rejected, static analysis confirms constant-time comparison, and the measured timing ratio between full-match and no-match rejections is 0.948 (well within the safety threshold).\n\nOne environmental note: `test.sh` builds directly to `/usr/local/bin/authserver`, which is root-owned in this container, and there's no sudo or user-namespace support. I ran the script unmodified but with a small `go` shim on PATH that redirects only the build output path to a writable directory — all test logic executed unchanged against the freshly built binary. If you run `test.sh` as root, it will work as-is."
+}
