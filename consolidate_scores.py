@@ -961,8 +961,14 @@ def build_experiment_output(cells: list[dict], policy_excluded,
     # Fault annotations for this board (machine-readable ids → boards/FAULTS.json)
     snaps_present = sorted({c["snapshot"] for c in use}, key=SNAPSHOTS.index)
     faults = []
+    seen_fids: set[str] = set()
     for s in snaps_present:
         for fid in SNAPSHOT_FAULTS.get(s, []):
+            # A fault can attach to several snapshots (e.g. a harness bug
+            # spanning a re-pin); the board's fault list carries it once.
+            if fid in seen_fids:
+                continue
+            seen_fids.add(fid)
             faults.append({"id": fid, "note": FAULT_NOTES.get(fid, "")})
 
     import datetime as _dt

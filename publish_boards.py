@@ -52,6 +52,7 @@ import argparse
 import copy
 import datetime as dt
 import json
+import shutil
 import sys
 from pathlib import Path
 
@@ -62,6 +63,12 @@ ROOT = Path(__file__).parent
 BOARDS_DIR = ROOT / "boards"
 BOARD_OUTPUT = ROOT / "public" / "board-v760.json"
 CELLS_OUTPUT = ROOT / "public" / "cells-v760.json"
+# Reader-facing copies of the canonical annotation sources (index.astro fetches
+# these at runtime): the full fault log + the era index. Byte-for-byte copies —
+# the board payload only carries fault id + short note, and no page reads
+# boards/ directly. Kept in sync on every publish.
+FAULTS_OUTPUT = ROOT / "public" / "faults.json"
+BOARDS_INDEX_OUTPUT = ROOT / "public" / "boards-index.json"
 
 TODAY = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
 
@@ -590,6 +597,13 @@ def main() -> None:
     print(f"[public] wrote {CELLS_OUTPUT.relative_to(ROOT)} "
           f"({len(cells_json['models'])} models x {len(cells_json['benchmarks'])} benches)")
 
+    # public/faults.json — the full fault log the reader-facing "Corrections &
+    # known faults" section renders, and the source of the per-row FLOOR badges
+    # (each fault's optional `models` + `axis` fields). A byte copy of the
+    # canonical boards/FAULTS.json; the board payload only carries id + note.
+    shutil.copyfile(BOARDS_DIR / "FAULTS.json", FAULTS_OUTPUT)
+    print(f"[public] wrote {FAULTS_OUTPUT.relative_to(ROOT)} (fault annotations)")
+
     # boards/<version>/<run-date>-experiment-scores.json (append-only). Each
     # snapshot lands under the binary version it actually ran on — never the
     # current binary's dir (a v7.6.0 run must not move under v7.7.1). Refusals
@@ -633,6 +647,12 @@ def main() -> None:
     print(f"[boards] wrote boards/index.json "
           f"({sum(len(v['runs']) for v in index['versions'])} runs across "
           f"{len(index['versions'])} versions)")
+
+    # public/boards-index.json — era-navigation source for index.astro's footer
+    # (versioned boards + run dates + fault ids). Copy of the boards/index.json
+    # just written; no page reads boards/ directly.
+    shutil.copyfile(BOARDS_DIR / "index.json", BOARDS_INDEX_OUTPUT)
+    print(f"[public] wrote {BOARDS_INDEX_OUTPUT.relative_to(ROOT)} (era index)")
 
     if refusals:
         sys.exit(f"FAIL CLOSED: {len(refusals)} versioned board(s) drifted from "

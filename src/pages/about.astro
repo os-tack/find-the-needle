@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="About — needle-bench" description="How needle-bench works: real bugs in Docker snapshots, deterministic scoring, three-arm experiment design. 31 models, 40 benchmarks, 3,641 runs.">
+<Base title="About — needle-bench" description="How needle-bench works: real bugs in Docker snapshots, deterministic scoring, arm-vs-arm experiment design. Live counts are on the board.">
 
   <main>
     <section class="section">
@@ -31,7 +31,7 @@ LIMIT turns 20
 LIMIT tokens 100000
 LIMIT wall_clock 300</code></pre>
       </div>
-      <p>40 benchmarks span easy, medium, and hard tiers across logic errors, concurrency bugs, data integrity issues, and more.</p>
+      <p>Benchmarks span easy, medium, and hard tiers across logic errors, concurrency bugs, data integrity issues, and more — the live count is on the board.</p>
     </section>
 
     <section class="section" id="experiment">
@@ -42,7 +42,7 @@ LIMIT wall_clock 300</code></pre>
         <li><strong>Kernel</strong>: the ostk agent loop via OpenRouter &mdash; the controlled comparison, same harness for every model.</li>
         <li><strong>CPU</strong>: the ostk agent loop via a native API driver (Anthropic, Google, OpenAI, Mistral). Models without a driver surface as &ldquo;no driver&rdquo; on the leaderboard.</li>
       </ul>
-      <p>31 models &times; 40 benchmarks &times; 3 arms = 3,641 runs, 1,945 solved. Identical system prompt, identical user message, identical benchmark set across all arms.</p>
+      <p>Every model runs the same matrix: identical system prompt, identical user message, identical benchmark set across all arms. Current model, benchmark, and run counts are generated live on the board — this page never restates them.</p>
     </section>
 
     <section class="section" id="scoring">

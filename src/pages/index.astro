@@ -24,13 +24,14 @@ const datasetSchema = {
 
 <Base
   title="needle-bench — AI coding agent leaderboard on real Docker bugs"
-  description="Open benchmark for AI coding agents. v7.6.0: 8 frontier models × 38 real-bug Docker benchmarks, native vendor CLI vs ostk kernel. Resolved-gated, per-bucket cost. Deterministic scoring."
+  description="Open benchmark for AI coding agents on real-bug Docker snapshots. Native vendor CLI vs ostk kernel, per-axis validity, per-cell cost and token accounting."
   jsonLd={datasetSchema}
 >
   <main>
     <h1 class="visually-hidden">needle-bench AI Coding Agent Leaderboard</h1>
     <div class="experiment-info">
-      <p><strong>v7.6.0 &mdash; native vendor CLI vs ostk kernel.</strong> 8 frontier models &times; 38 benchmarks, single-shot (samples=1), captured 2026-06-15. Cost/token &Delta; are resolved-gated (cells both arms solved) and per-bucket priced. Anthropic carries a full cache split; other harnesses report a usable total (basis noted per model) &mdash; see the per-cell matrix below.</p>
+      <p id="board-stats" class="board-stats muted">Loading board&hellip;</p>
+      <p>Native vendor CLI vs the ostk kernel on real-bug Docker snapshots, single-shot. Cost/token &Delta; are resolved-gated (cells both arms solved) and per-bucket priced. Every figure is shown as recorded &mdash; trust badges flag masked, invalid, floor-suppressed and mixed-basis cells, and the <a href="#corrections">corrections log &darr;</a> carries the full fault context.</p>
       <p class="muted">Cost &Delta; / Token &Delta; = kernel vs native (<span style="color:#3fb950">negative = kernel cheaper/lighter</span>). Click headers to sort, or jump to the <a href="#matrix-wrap">per-cell matrix &darr;</a></p>
     </div>
 
@@ -48,14 +49,14 @@ const datasetSchema = {
           <tr id="lb-head">
             <th class="col-model" data-key="model">Model</th>
             <th data-key="type" title="B = true kernel (native CpuDriver); B* = generic OpenRouter kernel">Type</th>
-            <th class="col-solve arm-native" data-key="native_solved" title="resolved of 38 published benchmarks">Solve</th>
-            <th class="col-solve arm-cpu" data-key="kernel_solved" title="resolved of 38 published benchmarks">Solve</th>
+            <th class="col-solve arm-native" data-key="native_solved" title="resolved of published benchmarks">Solve</th>
+            <th class="col-solve arm-cpu" data-key="kernel_solved" title="resolved of published benchmarks">Solve</th>
             <th class="col-metric arm-native" data-key="native_cost">Cost</th>
             <th class="col-metric arm-native" data-key="native_tok" title="billed tokens; fresh / cache-read / cache-create breakdown below">Tokens</th>
             <th class="col-metric arm-cpu" data-key="kernel_cost">Cost</th>
             <th class="col-metric arm-cpu" data-key="kernel_tok" title="billed tokens; fresh / cache-read / cache-create breakdown below">Tokens</th>
-            <th class="col-metric" data-key="cost_delta" title="kernel vs native cost over both-solved cells (Anthropic only)">Cost &Delta;</th>
-            <th class="col-metric" data-key="tok_delta" title="kernel vs native billed tokens over both-solved cells (Anthropic only)">Tok &Delta;</th>
+            <th class="col-metric" data-key="cost_delta" title="kernel vs native cost over both-solved cells">Cost &Delta;</th>
+            <th class="col-metric" data-key="tok_delta" title="kernel vs native billed tokens over both-solved cells">Tok &Delta;</th>
           </tr>
         </thead>
         <tbody id="lb-body">
@@ -77,6 +78,7 @@ const datasetSchema = {
           <span><i class="sw fail"></i>failed</span>
           <span><i class="sw deadline"></i>timeout</span>
           <span><i class="sw infra"></i>harness</span>
+          <span><i class="sw invalid"></i>invalid (excluded)</span>
           <span><i class="sw missing"></i>n/a</span>
         </div>
       </div>
@@ -85,28 +87,21 @@ const datasetSchema = {
       <div class="cell-detail" id="cell-detail" hidden></div>
     </section>
 
-    <section class="results-summary">
-      <h2>Results</h2>
+    <section class="corrections" id="corrections">
+      <details>
+        <summary>Corrections &amp; known faults <span class="muted">&mdash; read before comparing any two numbers</span></summary>
+        <div class="corrections-inner">
+          <p class="muted">Every published cell is shown as recorded (as-was); numbers are never silently restated. The trust totals and faults below are the honest context &mdash; validity caveats, harness defects, and cost-basis issues &mdash; for the data above. Reverse-chronological.</p>
+          <div id="trust-summary"></div>
+          <div id="corrections-body"><p class="muted">Loading corrections&hellip;</p></div>
+        </div>
+      </details>
+    </section>
 
-      <h3>Key findings (v7.6.0)</h3>
-      <ul>
-        <li><strong>The kernel's cache win is Anthropic-specific.</strong> With the cache-sliver active, opus ties native on solve at &minus;2.5% cost / &minus;31% tokens; sonnet is &minus;42% cost / &minus;66% tokens. Explicit <code>cache_control</code> is Anthropic-only &mdash; that's the lever.</li>
-        <li><strong>Outside Anthropic, the kernel costs more</strong> &mdash; it routes through clients that forfeit the provider's automatic prompt caching the native CLI gets for free. Per both-solved cell: gemini +116%, gpt-5.5 +276%. Honest inverse of the opus story.</li>
-        <li><strong>Harness ceilings, not just models.</strong> devstral's native (Mistral Vibe) caps at 20 turns and solved 6/38; through the kernel it reached 32/38. Real, but it's the native harness's limit being removed, not raw capability.</li>
-        <li><strong>Solve parity holds for the strong models</strong> (opus, gpt, gemini, deepseek within 1&ndash;3 cells across arms); the kernel's value is provider- and harness-specific, not universal.</li>
-        <li><strong>A genuine difficulty ceiling.</strong> Only 1 of 37 benches (<code>postgres-migration-schema-drift</code>, 12%) is a true wall and 9 discriminate; 27 are floor. The matrix above shows it &mdash; benches ordered hardest&rarr;easiest.</li>
-      </ul>
-
-      <h3>Methodology</h3>
-      <ul>
-        <li>38 Docker benchmarks with real bugs (<code>test.sh</code> exits 0 = fixed). 2 legacy pre-kernel tests retired.</li>
-        <li><strong>Native</strong>: vendor CLI with its own key. <strong>Kernel (B)</strong>: ostk with native CpuDriver. <strong>B*</strong>: ostk via generic OpenRouter (no native driver for that provider).</li>
-        <li>Cost summed per token bucket (fresh 1&times;, cache-read 0.1&times;, cache-create 1.25&times;/2&times;) on a rate card validated to &lt;0.5% of real Anthropic billing.</li>
-        <li>Efficiency &Delta; computed only over cells <em>both</em> arms solved; split-resolve, both-fail, and zero-work infra cells excluded.</li>
-        <li>Cost/token &Delta; shown only for Anthropic &mdash; gemini-cli / codex / opencode native arms don't report cost (solve-rate only).</li>
-        <li>ostk under-reports its own cost ~13%; figures here use the corrected per-bucket recompute, not ostk's self-estimate.</li>
-      </ul>
-      <p style="margin-top:0.8rem;"><a href="/v760.html">&rarr; Full verified results, per-cell tables, and caveats (v7.6.0)</a></p>
+    <section class="era-nav">
+      <h2>Other eras</h2>
+      <p class="muted">Versioned boards under <code>boards/</code>. Each ostk version is a different experimental condition (kernel, drivers, oracles, schema era) &mdash; <strong>not cross-comparable</strong>, and no cross-version delta is published anywhere. Newest first.</p>
+      <ul id="era-nav-body"><li class="muted">Loading eras&hellip;</li></ul>
     </section>
   </main>
 </Base>
@@ -120,8 +115,9 @@ const datasetSchema = {
     clip: rect(0,0,0,0); white-space: nowrap; border: 0;
   }
 
-  .experiment-info { font-size: 0.85rem; max-width: 800px; margin-bottom: 0.75rem; line-height: 1.5; }
+  .experiment-info { font-size: 0.85rem; max-width: 820px; margin-bottom: 0.75rem; line-height: 1.5; }
   .experiment-info p { margin: 0 0 0.25rem; }
+  .board-stats { font-family: var(--mono); font-size: 0.72rem; color: var(--text-muted); }
 
   .lb-container {
     overflow-x: auto; border: 1px solid var(--border); border-radius: 6px;
@@ -199,28 +195,26 @@ const datasetSchema = {
 
   .dim { color: #484f58; }
 
+  /* ---- trust badges + markers (leaderboard rows) ---- */
+  .tb { display: inline-block; font-size: 0.53rem; line-height: 1; padding: 1px 3px;
+        border-radius: 3px; margin-left: 2px; vertical-align: middle;
+        font-family: var(--mono); font-weight: 600; cursor: help; }
+  .tb-mask { background: rgba(110,118,129,0.22); color: #8b949e; }
+  .tb-inv  { background: rgba(163,113,247,0.20); color: #a371f7; }
+  .tb-cost { background: rgba(210,153,34,0.20); color: #d29922; }
+  .tb-attr { background: rgba(219,109,40,0.20); color: #db6d28; }
+  .floor { color: #d29922; font-weight: 700; cursor: help; }
+  .cb { font-size: 0.52rem; color: #6e7681; margin-left: 2px; cursor: help;
+        font-family: var(--mono); font-weight: 600; }
+  .cb-weak { color: #d29922; }
+  .cbfault { color: #f85149; font-weight: 800; margin-left: 1px; cursor: help; }
+  /* suppressed / cross-version delta dash — distinct from an ordinary null */
+  .delta-note { border-bottom: 1px dotted currentColor; cursor: help; }
+  .delta-note.xver { color: #d29922; }
+
   .totals { font-size: 0.78rem; margin: 0.5rem 0; color: var(--text-muted); font-family: var(--mono); }
 
-  .arm-comparison {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem;
-    margin: 1rem 0; font-family: var(--mono); font-size: 0.8rem;
-  }
-  .arm-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
-    padding: 0.6rem 0.8rem;
-  }
-  .arm-card h4 { margin: 0 0 0.4rem; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
-  .arm-card .big { font-size: 1.4rem; font-weight: 700; }
-  .arm-card .detail { font-size: 0.68rem; color: var(--text-muted); line-height: 1.5; }
-
-  .results-summary { max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; font-size: 0.88rem; line-height: 1.6; }
-  .results-summary h2 { margin-top: 0; }
-  .results-summary h3 { margin: 1rem 0 0.4rem; font-size: 0.95rem; }
-  .results-summary ul { padding-left: 1.5rem; margin: 0.4rem 0; }
-  .results-summary li { margin-bottom: 0.3rem; }
-
   @media (max-width: 768px) {
-    .arm-comparison { grid-template-columns: 1fr; }
     main { padding: 0.5rem; }
     .col-model { width: 100px; min-width: 100px; }
   }
@@ -237,6 +231,7 @@ const datasetSchema = {
   .sw.fail { background: rgba(248,81,73,0.6); }
   .sw.deadline { background: rgba(210,153,34,0.55); }
   .sw.infra { background: rgba(110,118,129,0.5); }
+  .sw.invalid { background: repeating-linear-gradient(45deg, rgba(163,113,247,0.55) 0, rgba(163,113,247,0.55) 2px, transparent 2px, transparent 4px); border: 1px solid rgba(163,113,247,0.5); }
   .sw.missing { background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(139,148,158,0.4) 2px, rgba(139,148,158,0.4) 3px); border: 1px solid var(--border); }
 
   /* ---- desktop matrix ---- */
@@ -265,6 +260,7 @@ const datasetSchema = {
   .st-fail { background: rgba(248,81,73,0.6); }
   .st-deadline { background: rgba(210,153,34,0.55); }
   .st-infra { background: rgba(110,118,129,0.5); }
+  .st-invalid { background: repeating-linear-gradient(45deg, rgba(163,113,247,0.6) 0, rgba(163,113,247,0.6) 2px, rgba(40,26,66,0.55) 2px, rgba(40,26,66,0.55) 4px); }
   .st-missing { background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(139,148,158,0.35) 2px, rgba(139,148,158,0.35) 3px); }
 
   /* ---- mobile accordion ---- */
@@ -301,6 +297,34 @@ const datasetSchema = {
   .cd-delta { margin-top: 0.5rem; font-size: 0.66rem; font-family: var(--mono); color: var(--text-muted); }
   .cd-delta b.neg { color: #3fb950; } .cd-delta b.pos { color: #f85149; }
 
+  /* ============ CORRECTIONS + ERA NAV ============ */
+  .corrections { max-width: 900px; margin: 2.2rem auto 0; }
+  .corrections > details { border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+  .corrections summary { cursor: pointer; padding: 0.7rem 0.9rem; font-weight: 600; font-size: 0.92rem; }
+  .corrections summary::marker { color: var(--text-muted); }
+  .corrections-inner { padding: 0 0.9rem 0.9rem; font-size: 0.82rem; line-height: 1.55; }
+  .corrections-inner > .muted { font-size: 0.76rem; }
+  .trust-line { display: flex; flex-wrap: wrap; gap: 0.8rem; font-family: var(--mono); font-size: 0.72rem; margin: 0.5rem 0 0.2rem; }
+  .trust-line span { cursor: help; }
+  .trust-line b { font-weight: 700; }
+  .doctrine { font-size: 0.66rem; line-height: 1.5; color: var(--text-muted); margin: 0.15rem 0 0.4rem; }
+  .fault { border-top: 1px solid var(--border); padding: 0.6rem 0; }
+  .fault h4 { margin: 0 0 0.1rem; font-size: 0.84rem; }
+  .fault-win { font-weight: 400; font-size: 0.66rem; color: var(--text-muted); margin-left: 0.3rem; }
+  .fault-id { font-family: var(--mono); font-size: 0.62rem; color: #6e7681; margin-bottom: 0.3rem; }
+  .fault-k { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-top: 0.35rem; }
+  .fault-affects { margin: 0.1rem 0 0; padding-left: 1.1rem; font-size: 0.72rem; color: var(--text-muted); }
+  .fault p { margin: 0.1rem 0; font-size: 0.78rem; }
+
+  .era-nav { max-width: 900px; margin: 1.6rem auto 0; font-size: 0.82rem; }
+  .era-nav h2 { font-size: 1rem; margin: 0 0 0.3rem; }
+  .era-nav > .muted { font-size: 0.74rem; line-height: 1.5; max-width: 760px; }
+  .era-nav ul { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+  .era-nav li { padding: 0.4rem 0; border-top: 1px solid var(--border); line-height: 1.55; }
+  .era-v { font-family: var(--mono); font-weight: 700; }
+  .era-faults { font-size: 0.66rem; color: #6e7681; font-family: var(--mono); }
+  .era-dates { font-family: var(--mono); font-size: 0.72rem; }
+
   @media (max-width: 760px) {
     .matrix-wrap { display: none; }
     .matrix-mobile { display: block; }
@@ -309,62 +333,114 @@ const datasetSchema = {
 </style>
 
 <script>
-  interface ArmAgg { solved: number; total: number; cost: number; tokens: number; tools: number; turns: number; wall: number; }
-  interface ModelData {
-    model: string; model_normalized: string; benchmarks: number;
-    native: ArmAgg; kernel: ArmAgg; cpu: ArmAgg;
-    price_per_m_input?: number; price_per_m_output?: number;
-    native_cli?: string; cpu_driver_status?: string;
-    // B vs B* labeling (frontier-2026): "native_driver" → true B (kernel-cpu),
-    // "generic_kernel" → B* (kernel via OpenRouter, no native driver).
-    kernel_arm_type?: string;
-  }
-
+  // ============ LEADERBOARD (data-driven from board-v760.json) ============
   function fmtN(n: number): string { return n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n); }
-  function fmtT(s: number): string { return s >= 3600 ? (s/3600).toFixed(1)+'h' : s >= 60 ? (s/60).toFixed(0)+'m' : Math.round(s)+'s'; }
-  function fmtUsd(n: number): string { return n >= 10 ? '$'+n.toFixed(0) : n >= 1 ? '$'+n.toFixed(2) : n > 0 ? '$'+n.toFixed(3) : ''; }
   function pctClass(pct: number): string { return pct >= 100 ? 'pct-100' : pct >= 90 ? 'pct-90' : pct >= 70 ? 'pct-70' : pct >= 50 ? 'pct-50' : pct > 0 ? 'pct-30' : 'pct-0'; }
 
-  function armPct(a: ArmAgg): number { return a.total > 0 ? a.solved / a.total * 100 : -1; }
-
-  function solveCell(a: ArmAgg, cls: string, label?: string, bStar?: boolean): string {
-    if (a.total === 0) {
-      if (label === 'no_driver') return `<td class="${cls} col-solve"><span class="pct-na" title="No native CPU driver for this provider">no driver</span></td>`;
-      return `<td class="${cls} col-solve"><span class="pct-na">-</span></td>`;
-    }
-    const pct = armPct(a);
-    // B* marker: generic OpenRouter kernel (no native driver) — distinguish
-    // from true B (kernel-cpu). See footnote below the table.
-    const star = bStar ? `<sup class="bstar" title="B*: generic OpenRouter kernel, no native driver">*</sup>` : '';
-    return `<td class="${cls} col-solve"><span class="solve-pct ${pctClass(pct)}">${a.solved}/${a.total}</span>${star}</td>`;
-  }
-
-  function metricCells(a: ArmAgg, cls: string): string {
-    if (a.total === 0) return `<td class="${cls}"><span class="dim">-</span></td><td class="${cls}"><span class="dim">-</span></td><td class="${cls} last"><span class="dim">-</span></td>`;
-    const cost = fmtUsd(a.cost);
-    const tok = a.tokens > 0 ? fmtN(a.tokens) : '-';
-    const turns = a.turns > 0 ? String(a.turns) : '-';
-    return `<td class="${cls}">${cost || '<span class="dim">-</span>'}</td><td class="${cls}">${tok}</td><td class="${cls} last">${turns}</td>`;
-  }
+  // short label for a native cost basis; full name kept in the tooltip.
+  const BASIS_LABEL: Record<string, string> = {
+    'bucket-split': 'kc', 'self-reported': 'sr', 'self-reported-legacy': 'srl',
+    'total-as-fresh': 'tf', 'folded-as-fresh': 'ff', 'output-only': 'oo', 'unpriced': '',
+  };
 
   async function init() {
-    const resp = await fetch('/board-v760.json');
-    const data = await resp.json();
+    const [boardResp, faultsResp] = await Promise.all([
+      fetch('/board-v760.json'),
+      fetch('/faults.json').catch(() => null),
+    ]);
+    const data = await boardResp.json();
     const rows: any[] = data.models;
 
-    const N = data.published_tasks || 38;
+    // Full fault annotations (public/faults.json) drive the per-row FLOOR /
+    // cost / attribution badges via each fault's optional `models` + `axis`.
+    // Degrades silently: no faults.json → no badges (board payload lacks the
+    // model→arm mapping), the rest of the row still renders.
+    let faultsData: any = null;
+    if (faultsResp && (faultsResp as Response).ok) {
+      try { faultsData = await (faultsResp as Response).json(); } catch { faultsData = null; }
+    }
+    const floorMap: Record<string, any[]> = {};
+    if (faultsData && Array.isArray(faultsData.faults)) {
+      for (const f of faultsData.faults) {
+        if (!Array.isArray(f.models)) continue;
+        for (const ma of f.models) {
+          (floorMap[ma] = floorMap[ma] || []).push({ id: f.id, title: f.title, axis: f.axis || 'solve' });
+        }
+      }
+    }
+    const esc = (s: any) => String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    function faultsFor(model: string, arm: string, axis?: string): any[] {
+      const keys = arm === 'kernel'
+        ? [`${model}/kernel-cpu`, `${model}/kernel`, `${model}/cpu`]
+        : [`${model}/native`];
+      const seen: Record<string, boolean> = {}; const out: any[] = [];
+      for (const k of keys) for (const f of (floorMap[k] || [])) {
+        if (axis && f.axis !== axis) continue;
+        if (seen[f.id]) continue; seen[f.id] = true; out.push(f);
+      }
+      return out;
+    }
+
+    const N = data.published_tasks || 37;
     function fmtTok(n: number): string { return n >= 1e6 ? (n/1e6).toFixed(2)+'M' : n >= 1e3 ? (n/1e3).toFixed(0)+'k' : String(n); }
     function usd(n: number): string { return n >= 10 ? '$'+n.toFixed(0) : n >= 1 ? '$'+n.toFixed(2) : '$'+n.toFixed(3); }
-    function delta(d: number | null): string {
-      if (d == null) return '<span class="dim">—</span>';
+    function delta(d: number | null, r: any): string {
+      if (d == null) {
+        if (r && r.delta_note) {
+          const cls = r.cross_version_pair ? 'delta-note xver' : 'delta-note';
+          return `<span class="dim ${cls}" title="${esc(r.delta_note)}">&mdash;</span>`;
+        }
+        return '<span class="dim">&mdash;</span>';
+      }
       if (d < 0) return `<span style="color:#3fb950;font-weight:700">${d}%</span>`;
       if (d > 0) return `<span style="color:#f85149;font-weight:700">+${d}%</span>`;
       return '<span class="dim">0%</span>';
     }
-    function solveCell(solved: number | null, present: boolean, star: string): string {
-      if (!present || solved == null) return '<span class="dim" title="no provider API key — native not run for this model">no native key</span>';
-      return `<span class="solve-pct ${pctClass(solved / N * 100)}">${solved}/${N}</span>${star}`;
+
+    // per-arm trust badges from fields already shipped on each row.
+    function trustBadges(r: any, arm: string): string {
+      const inv = (r.invalid && r.invalid[arm]) || 0;
+      const ci = (r.cost_invalid && r.cost_invalid[arm]) || 0;
+      const mk = (r.masked && r.masked[arm]) || 0;
+      let out = '';
+      if (inv) out += `<span class="tb tb-inv" title="${inv} cell(s) INVALID on the solve axis (arm receipt / deadline / stall / duplicate column) — excluded from solve counts, counted here">${inv} inv</span>`;
+      if (ci) out += `<span class="tb tb-cost" title="${ci} cell(s) cost-invalid (real run, no usable token accounting) — excluded from cost/token columns, never priced">${ci} c$</span>`;
+      if (mk) out += `<span class="tb tb-mask" title="${mk} teardown-masked cell(s): oracle verdict trusted (test.sh ran to completion); wall-clock and stop_reason are watchdog artifacts">${mk} msk</span>`;
+      return out;
     }
+
+    function solveCell(solved: number | null, present: boolean, star: string, r: any, arm: string): string {
+      if (!present || solved == null) return `<span class="dim" title="no provider API key — native not run for this model">no native key</span>${trustBadges(r, arm)}`;
+      const floor = arm === 'ostk' ? faultsFor(r.model, 'kernel', 'solve') : [];
+      const ge = floor.length
+        ? `<span class="floor" title="known-suppressed floor — actual capability is at or above this: ${esc(floor.map((f:any)=>f.title).join(' | '))}">&ge;</span>`
+        : '';
+      return `${ge}<span class="solve-pct ${pctClass(solved / N * 100)}">${solved}/${N}</span>${star}${trustBadges(r, arm)}`;
+    }
+
+    function nativeCostCell(r: any): string {
+      const b = r.native;
+      if (!b) return '<span class="dim" title="native CLI does not report cost">n/r</span>';
+      const basis = r.native_cost_basis;
+      const bases = r.native_cost_bases || {};
+      const hist = Object.keys(bases).map(k => `${k}×${bases[k]}`).join(', ');
+      let mark = '';
+      if (basis) {
+        const short = BASIS_LABEL[basis] != null ? (BASIS_LABEL[basis] || basis) : basis;
+        const weak = basis !== 'bucket-split';
+        const full = weak
+          ? `cost basis: ${hist} — vendor CLI self-reported, NOT the kernel per-bucket recompute`
+          : `cost basis: ${hist} — kernel per-bucket recompute over reported token buckets`;
+        mark = `<sup class="cb${weak ? ' cb-weak' : ''}" title="${esc(full)}">${esc(short)}</sup>`;
+      }
+      const cf = faultsFor(r.model, 'native', 'cost');
+      const cfMark = cf.length
+        ? `<sup class="cbfault" title="cost fault — figure shown as recorded; honest restatement in the corrections log: ${esc(cf.map((f:any)=>f.title).join(' | '))}">!</sup>`
+        : '';
+      return usd(b.cost) + mark + cfMark;
+    }
+
     function costCell(b: any): string { return b ? usd(b.cost) : '<span class="dim" title="native CLI does not report cost">n/r</span>'; }
     function tokCell(b: any): string {
       if (!b || !b.billed) return '<span class="dim" title="native CLI does not report token usage">n/r</span>';
@@ -374,6 +450,12 @@ const datasetSchema = {
         ? `<div style="font-size:0.58rem;color:var(--text-muted);margin-top:1px">fresh ${fmtTok(b.fresh)} · read ${fmtTok(b.cache_read)} · create ${fmtTok(b.cache_create)}</div>`
         : `<div style="font-size:0.58rem;color:var(--text-muted);margin-top:1px" title="native CLI reports a token total but no fresh/cache breakdown">total only · no cache split</div>`;
       return head + sub;
+    }
+    // row-level attribution badge (native + kernel), rendered by the model name.
+    function attrBadge(r: any): string {
+      const a = faultsFor(r.model, 'native', 'attribution').concat(faultsFor(r.model, 'kernel', 'attribution'));
+      if (!a.length) return '';
+      return `<span class="tb tb-attr" title="attribution caveat — see corrections: ${esc(a.map((f:any)=>f.title).join(' | '))}">attr</span>`;
     }
 
     let sortKey = 'kernel_solved';
@@ -406,16 +488,16 @@ const datasetSchema = {
         const K = r.kernel ?? r.kernel_abs;
         const natB = r.native ?? null;
         return `<tr>
-          <td><span class="model-name">${r.model}</span> <span class="dim" style="font-size:0.6rem">${r.native_cli}</span></td>
+          <td><span class="model-name">${r.model}</span> <span class="dim" style="font-size:0.6rem">${r.native_cli}</span>${attrBadge(r)}</td>
           <td>${r.type}</td>
-          <td class="arm-native col-solve">${solveCell(r.native_solved, r.native_present, '')}</td>
-          <td class="arm-cpu col-solve">${solveCell(r.kernel_solved, true, star)}</td>
-          <td class="arm-native">${costCell(natB)}</td>
+          <td class="arm-native col-solve">${solveCell(r.native_solved, r.native_present, '', r, 'native')}</td>
+          <td class="arm-cpu col-solve">${solveCell(r.kernel_solved, true, star, r, 'ostk')}</td>
+          <td class="arm-native">${nativeCostCell(r)}</td>
           <td class="arm-native">${tokCell(natB)}</td>
           <td class="arm-cpu">${costCell(K)}</td>
           <td class="arm-cpu">${tokCell(K)}</td>
-          <td>${delta(r.cost_delta)}</td>
-          <td>${delta(r.tok_delta)}</td>
+          <td>${delta(r.cost_delta, r)}</td>
+          <td>${delta(r.tok_delta, r)}</td>
         </tr>`;
       }).join('');
       document.querySelectorAll('#lb-head th').forEach(th => {
@@ -434,8 +516,18 @@ const datasetSchema = {
     });
     render();
 
+    // Header + totals: every number generated from the fetched board JSON.
+    const versions = (data.trust && data.trust.by_ostk_version)
+      ? Object.keys(data.trust.by_ostk_version) : [];
+    const eraStr = versions.length > 1
+      ? `rolling latest — columns span ostk ${versions.join(' / ')}`
+      : `snapshot ${data.snapshot}`;
+    const statsEl = document.getElementById('board-stats');
+    if (statsEl) statsEl.textContent =
+      `${rows.length} models · ${N} benchmarks · ${eraStr} · current binary ostk ${data.run} · generated ${data.generated}`;
     const tEl = document.getElementById('totals');
-    if (tEl) tEl.textContent = `${rows.length} models · ${N} benchmarks · single-shot · per-arm token buckets (fresh / cache-read / cache-create / billed) · v7.6.0`;
+    if (tEl) tEl.textContent =
+      `${rows.length} models · ${N} benchmarks · single-shot · per-arm token buckets (fresh / cache-read / cache-create / billed) · ostk ${data.run}`;
   }
 
   init();
@@ -456,7 +548,7 @@ const datasetSchema = {
     const ftok = (n: number) => n >= 1e6 ? (n / 1e6).toFixed(2) + 'M' : n >= 1e3 ? (n / 1e3).toFixed(0) + 'k' : String(n);
     const usd = (n: number | null) => n == null ? '—' : n >= 10 ? '$' + n.toFixed(0) : n >= 1 ? '$' + n.toFixed(2) : '$' + n.toFixed(3);
     const stCls = (s: string) => 'st-' + s;
-    const stLabel: Record<string, string> = { pass: 'solved', fail: 'failed', deadline: 'timed out', infra: 'harness limit', missing: 'not run' };
+    const stLabel: Record<string, string> = { pass: 'solved', fail: 'failed', deadline: 'timed out', infra: 'harness limit', invalid: 'invalid (excluded)', missing: 'not run' };
 
     // ---- desktop matrix ----
     function renderMatrix() {
@@ -559,5 +651,94 @@ const datasetSchema = {
     }
     wireClicks(document.getElementById('matrix-wrap')!);
     wireClicks(document.getElementById('matrix-mobile')!);
+  })();
+</script>
+
+<script>
+  // ============ CORRECTIONS + ERA NAVIGATION ============
+  (async function () {
+    const esc = (s: any) => String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    let board: any = null;
+    try { const r = await fetch('/board-v760.json'); if (r.ok) board = await r.json(); } catch { board = null; }
+
+    // ---- trust totals (board.trust — grand counts + doctrine) ----
+    const tsEl = document.getElementById('trust-summary');
+    if (tsEl && board && board.trust) {
+      const t = board.trust;
+      tsEl.innerHTML = `<div class="trust-line">`
+        + `<span title="cells passing the solve axis (oracle verdict + arm receipt + not stalled)">solve-valid <b>${t.solve_valid_cells}</b></span>`
+        + `<span title="cells with usable token/cost accounting (priced)">cost-valid <b>${t.cost_valid_cells}</b></span>`
+        + `<span title="excluded from every count (deadline / stall / arm receipt / duplicate column), counted here">invalid <b>${t.invalid_cells}</b></span>`
+        + `<span title="teardown-masked: oracle verdict trusted; wall-clock & stop_reason are watchdog artifacts">masked <b>${t.teardown_masked_cells}</b></span>`
+        + `</div>`
+        + (t.doctrine ? `<p class="doctrine">${esc(t.doctrine)}</p>` : '');
+    }
+
+    // ---- full fault log (public/faults.json), degrade to board.faults ----
+    function windowStr(w: any): string {
+      if (!w) return '';
+      if (w.from && w.until) return w.from === w.until ? w.from : `${w.from} → ${w.until}`;
+      if (w.until) return `until ${w.until}`;
+      if (w.from) return `from ${w.from}`;
+      return '';
+    }
+    const keyOf = (f: any) => { const w = f.window || {}; return w.from || w.until || ''; };
+
+    let full: any = null;
+    try { const r = await fetch('/faults.json'); if (r.ok) { const j = await r.json(); if (Array.isArray(j.faults)) full = j.faults; } } catch { full = null; }
+
+    const body = document.getElementById('corrections-body');
+    if (body) {
+      if (full && full.length) {
+        const sorted = full.slice().sort((a: any, b: any) => keyOf(b).localeCompare(keyOf(a)));
+        body.innerHTML = sorted.map((f: any) => {
+          const affects = Array.isArray(f.affects) ? f.affects.map((a: any) => `<li>${esc(a)}</li>`).join('') : '';
+          return `<article class="fault">`
+            + `<h4>${esc(f.title || f.id)}<span class="fault-win">${esc(windowStr(f.window))}</span></h4>`
+            + `<div class="fault-id">${esc(f.id)}${f.axis ? ` · ${esc(f.axis)} axis` : ''}</div>`
+            + (affects ? `<div class="fault-k">Affected</div><ul class="fault-affects">${affects}</ul>` : '')
+            + `<div class="fault-k">Effect</div><p>${esc(f.effect)}</p>`
+            + (f.mitigation ? `<div class="fault-k">Mitigation</div><p>${esc(f.mitigation)}</p>` : '')
+            + `</article>`;
+        }).join('');
+      } else if (board && Array.isArray(board.faults) && board.faults.length) {
+        const seen: Record<string, boolean> = {}; const uniq: any[] = [];
+        for (const f of board.faults) { if (seen[f.id]) continue; seen[f.id] = true; uniq.push(f); }
+        body.innerHTML = `<p class="muted">Showing short notes from the board payload (full fault log <code>public/faults.json</code> not found).</p>`
+          + uniq.map((f: any) => `<article class="fault"><h4>${esc(f.id)}</h4><p>${esc(f.note)}</p></article>`).join('');
+      } else {
+        body.innerHTML = '<p class="muted">No fault annotations.</p>';
+      }
+    }
+
+    // ---- era navigation (public/boards-index.json) ----
+    const nav = document.getElementById('era-nav-body');
+    if (nav) {
+      try {
+        const r = await fetch('/boards-index.json');
+        if (r.ok) {
+          const idx = await r.json();
+          if (Array.isArray(idx.versions)) {
+            const vers = idx.versions.slice().reverse(); // newest era first
+            nav.innerHTML = vers.map((v: any) => {
+              const runs = v.runs || [];
+              const dates = Array.from(new Set(runs.map((x: any) => x.date))).join(', ');
+              const fset: Record<string, boolean> = {};
+              for (const x of runs) for (const fid of (x.faults || [])) fset[fid] = true;
+              const fids = Object.keys(fset);
+              const faultStr = fids.length ? ` · <span class="era-faults">faults: ${fids.map(esc).join(', ')}</span>` : '';
+              const frozen = v.version === 'v7.6.0'
+                ? ` · <a href="/v760.html">frozen snapshot (2026-06-17) ↗</a> <span class="muted">— hand-authored, predates the axis-split validity framework</span>`
+                : '';
+              return `<li><span class="era-v">${esc(v.version)}</span> <span class="muted">${esc(v.schema_era || '')}</span> · <span class="era-dates">${esc(dates)}</span>${faultStr}${frozen}</li>`;
+            }).join('');
+          }
+        } else {
+          nav.innerHTML = '<li class="muted">Era index not available.</li>';
+        }
+      } catch { nav.innerHTML = '<li class="muted">Era index not available.</li>'; }
+    }
   })();
 </script>

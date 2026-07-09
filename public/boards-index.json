@@ -1,0 +1,1554 @@
+{
+ "generated": "2026-07-09",
+ "cross_version": {
+  "comparable": false,
+  "note": "ostk versions are different experimental conditions (different kernel, drivers, benchmark oracles, schema eras). NO cross-version delta is published anywhere, and versioned boards never aggregate across versions. The rolling latest view (public/experiment-scores.json) may span versions across its single-snapshot columns for operational continuity; it carries per-column version attribution (ostk_versions + column_snapshots) and a per-version trust breakdown, and its cross-version totals are bookkeeping, not comparison. Compare runs only within one version, and mind each run's faults list even then."
+ },
+ "faults_ref": "FAULTS.json",
+ "latest": {
+  "file": "../public/experiment-scores.json",
+  "note": "public/experiment-scores.json is the LATEST board: single snapshot per (model, arm) column; columns may span binary versions (per-version attribution + trust breakdown inside; cross-version deltas suppressed)."
+ },
+ "versions": [
+  {
+   "version": "pre-v2",
+   "runs": [
+    {
+     "date": "2026-03-30",
+     "file": "pre-v2/2026-03-30-experiment-scores.json",
+     "judged": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+     "source_commit": "69a8eea4",
+     "faults": [
+      "pre-validity-era",
+      "pre-073d9154-cache-misreporting"
+     ],
+     "models": {
+      "claude-haiku-4-5": {
+       "bare": {
+        "solved": 13,
+        "total": 32,
+        "cost_usd": 0.2432
+       },
+       "silent": {
+        "solved": 29,
+        "total": 32,
+        "cost_usd": 0.266
+       }
+      },
+      "claude-opus-4-6": {
+       "bare": {
+        "solved": 29,
+        "total": 32,
+        "cost_usd": 2.694
+       },
+       "silent": {
+        "solved": 32,
+        "total": 32,
+        "cost_usd": 0.6169
+       }
+      },
+      "claude-sonnet-4-5": {
+       "bare": {
+        "solved": 25,
+        "total": 32,
+        "cost_usd": 2.0922
+       },
+       "silent": {
+        "solved": 32,
+        "total": 32,
+        "cost_usd": 0.4706
+       }
+      },
+      "claude-sonnet-4-6": {
+       "bare": {
+        "solved": 6,
+        "total": 32,
+        "cost_usd": 0.7447
+       },
+       "silent": {
+        "solved": 30,
+        "total": 32,
+        "cost_usd": 0.8478
+       }
+      },
+      "codestral-2508": {
+       "bare": {
+        "solved": 1,
+        "total": 32,
+        "cost_usd": 0.0019
+       },
+       "silent": {
+        "solved": 3,
+        "total": 32,
+        "cost_usd": 0.0124
+       }
+      },
+      "deepseek-chat": {
+       "bare": {
+        "solved": 0,
+        "total": 32,
+        "cost_usd": 0.0181
+       },
+       "silent": {
+        "solved": 8,
+        "total": 32,
+        "cost_usd": 0.0486
+       }
+      },
+      "deepseek-r1": {
+       "bare": {
+        "solved": 31,
+        "total": 32,
+        "cost_usd": 0.7448
+       },
+       "silent": {
+        "solved": 31,
+        "total": 32,
+        "cost_usd": 0.5686
+       }
+      },
+      "deepseek-v3-2": {
+       "bare": {
+        "solved": 30,
+        "total": 32,
+        "cost_usd": 0.1215
+       },
+       "silent": {
+        "solved": 32,
+        "total": 32,
+        "cost_usd": 0.0292
+       }
+      },
+      "devstral-medium": {
+       "bare": {
+        "solved": 1,
+        "total": 32,
+        "cost_usd": 0.108
+       },
+       "silent": {
+        "solved": 24,
+        "total": 32,
+        "cost_usd": 0.2453
+       }
+      },
+      "gemini-2-0-flash-001": {
+       "bare": {
+        "solved": 0,
+        "total": 32,
+        "cost_usd": 0.0006
+       },
+       "silent": {
+        "solved": 15,
+        "total": 32,
+        "cost_usd": 0.172
+       }
+      },
+      "gemini-2-5-flash": {
+       "bare": {
+        "solved": 0,
+        "total": 32,
+        "cost_usd": 0.006
+       },
+       "silent": {
+        "solved": 21,
+        "total": 32,
+        "cost_usd": 0.3351
+       }
+      },
+      "gemini-2-5-pro": {
+       "bare": {
+        "solved": 9,
+        "total": 32,
+        "cost_usd": 0.3223
+       },
+       "silent": {
+        "solved": 21,
+        "total": 32,
+        "cost_usd": 0.7005
+       }
+      },
+      "gemini-3-1-pro-preview": {
+       "bare": {
+        "solved": 28,
+        "total": 32,
+        "cost_usd": 1.1771
+       },
+       "silent": {
+        "solved": 32,
+        "total": 32,
+        "cost_usd": 0.6317
+       }
+      },
+      "gemini-3-flash-preview": {
+       "bare": {
+        "solved": 11,
+        "total": 32,
+        "cost_usd": 0.8346
+       },
+       "silent": {
+        "solved": 30,
+        "total": 32,
+        "cost_usd": 0.1436
+       }
+      },
+      "gpt-4-1": {
+       "bare": {
+        "solved": 16,
+        "total": 32,
+        "cost_usd": 2.032
+       },
+       "silent": {
+        "solved": 28,
+        "total": 32,
+        "cost_usd": 1.1781
+       }
+      },
+      "gpt-4o": {
+       "bare": {
+        "solved": 5,
+        "total": 32,
+        "cost_usd": 3.0055
+       },
+       "silent": {
+        "solved": 26,
+        "total": 32,
+        "cost_usd": 2.9491
+       }
+      },
+      "grok-4-1-fast": {
+       "bare": {
+        "solved": 31,
+        "total": 32,
+        "cost_usd": 0.0276
+       },
+       "silent": {
+        "solved": 32,
+        "total": 32,
+        "cost_usd": 0.0165
+       }
+      },
+      "grok-4-fast": {
+       "bare": {
+        "solved": 15,
+        "total": 32,
+        "cost_usd": 0.0292
+       },
+       "silent": {
+        "solved": 23,
+        "total": 32,
+        "cost_usd": 0.0638
+       }
+      },
+      "llama-3-3-70b-instruct": {
+       "bare": {
+        "solved": 1,
+        "total": 32,
+        "cost_usd": 0.0032
+       },
+       "silent": {
+        "solved": 1,
+        "total": 32,
+        "cost_usd": 0.0057
+       }
+      },
+      "llama-4-maverick": {
+       "bare": {
+        "solved": 5,
+        "total": 32,
+        "cost_usd": 0.0399
+       },
+       "silent": {
+        "solved": 14,
+        "total": 32,
+        "cost_usd": 0.1418
+       }
+      },
+      "mistral-large": {
+       "bare": {
+        "solved": 3,
+        "total": 32,
+        "cost_usd": 0.5813
+       },
+       "silent": {
+        "solved": 25,
+        "total": 32,
+        "cost_usd": 1.484
+       }
+      },
+      "qwen-plus": {
+       "bare": {
+        "solved": 1,
+        "total": 32,
+        "cost_usd": 0.0035
+       },
+       "silent": {
+        "solved": 22,
+        "total": 32,
+        "cost_usd": 0.1896
+       }
+      },
+      "qwen3-5-flash-02-23": {
+       "bare": {
+        "solved": 10,
+        "total": 32,
+        "cost_usd": 0.0166
+       },
+       "silent": {
+        "solved": 13,
+        "total": 32,
+        "cost_usd": 0.0168
+       }
+      },
+      "qwen3-5-plus-02-15": {
+       "bare": {
+        "solved": 21,
+        "total": 32,
+        "cost_usd": 0.176
+       },
+       "silent": {
+        "solved": 11,
+        "total": 32,
+        "cost_usd": 0.062
+       }
+      },
+      "qwen3-coder-flash": {
+       "bare": {
+        "solved": 3,
+        "total": 32,
+        "cost_usd": 0.013
+       },
+       "silent": {
+        "solved": 26,
+        "total": 32,
+        "cost_usd": 0.1502
+       }
+      },
+      "qwen3-coder-plus": {
+       "bare": {
+        "solved": 0,
+        "total": 32,
+        "cost_usd": 0.0171
+       },
+       "silent": {
+        "solved": 19,
+        "total": 32,
+        "cost_usd": 0.3034
+       }
+      }
+     },
+     "note": "First published board: 26 models on the bare/silent two-arm design (pre-kernel-arm naming), flat per-cell list, 1664 runs. Commit 69a8eea4 'bench: final results \u2014 26 models, 1664 runs, +33.6pp mean'."
+    }
+   ],
+   "schema_era": "v1-bare-silent-flat",
+   "judged": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+   "comparable_with_other_versions": false
+  },
+  {
+   "version": "bench-v2",
+   "runs": [
+    {
+     "date": "2026-04-03",
+     "file": "bench-v2/2026-04-03-experiment-scores.json",
+     "judged": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+     "source_commit": "67c8e588",
+     "faults": [
+      "pre-validity-era",
+      "pre-073d9154-cache-misreporting",
+      "arm-none-era"
+     ],
+     "models": {
+      "claude-haiku-4-5": {
+       "native": {
+        "solved": 26,
+        "total": 39,
+        "cost_usd": 3.2311
+       },
+       "kernel": {
+        "solved": 37,
+        "total": 39,
+        "cost_usd": 3.6086
+       },
+       "cpu": {
+        "solved": 39,
+        "total": 39,
+        "cost_usd": 0.8446
+       }
+      },
+      "claude-opus-4-6": {
+       "native": {
+        "solved": 22,
+        "total": 38,
+        "cost_usd": 8.1898
+       },
+       "kernel": {
+        "solved": 38,
+        "total": 38,
+        "cost_usd": 14.7094
+       },
+       "cpu": {
+        "solved": 38,
+        "total": 38,
+        "cost_usd": 3.2708
+       }
+      },
+      "claude-sonnet-4-6": {
+       "native": {
+        "solved": 24,
+        "total": 38,
+        "cost_usd": 6.5157
+       },
+       "kernel": {
+        "solved": 38,
+        "total": 38,
+        "cost_usd": 5.5745
+       },
+       "cpu": {
+        "solved": 38,
+        "total": 38,
+        "cost_usd": 1.3424
+       }
+      },
+      "gpt-5-codex": {
+       "native": {
+        "solved": 38,
+        "total": 40,
+        "cost_usd": 13.9218
+       },
+       "kernel": {
+        "solved": 37,
+        "total": 40,
+        "cost_usd": 3.2967
+       },
+       "cpu": {
+        "solved": 40,
+        "total": 40,
+        "cost_usd": 3.5268
+       }
+      },
+      "gemini-3-flash-preview": {
+       "native": {
+        "solved": 37,
+        "total": 38,
+        "cost_usd": 1.6093
+       },
+       "kernel": {
+        "solved": 36,
+        "total": 38,
+        "cost_usd": 1.8246
+       },
+       "cpu": {
+        "solved": 34,
+        "total": 38,
+        "cost_usd": 4.6559
+       }
+      },
+      "gemini-3.1-pro-preview": {
+       "native": {
+        "solved": 38,
+        "total": 40,
+        "cost_usd": 2.7788
+       },
+       "kernel": {
+        "solved": 33,
+        "total": 40,
+        "cost_usd": 10.0257
+       },
+       "cpu": {
+        "solved": 37,
+        "total": 40,
+        "cost_usd": 4.3334
+       }
+      },
+      "kimi-k2.5": {
+       "native": {
+        "solved": 38,
+        "total": 40,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 38,
+        "total": 40,
+        "cost_usd": 0.7102
+       },
+       "cpu": {
+        "solved": 0,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "o3": {
+       "native": {
+        "solved": 31,
+        "total": 40,
+        "cost_usd": 56.091
+       },
+       "kernel": {
+        "solved": 38,
+        "total": 40,
+        "cost_usd": 4.0902
+       },
+       "cpu": {
+        "solved": 36,
+        "total": 40,
+        "cost_usd": 5.8486
+       }
+      },
+      "devstral-2512": {
+       "native": {
+        "solved": 36,
+        "total": 40,
+        "cost_usd": 1.8349
+       },
+       "kernel": {
+        "solved": 34,
+        "total": 38,
+        "cost_usd": 0.9007
+       },
+       "cpu": {
+        "solved": 36,
+        "total": 38,
+        "cost_usd": 1.449
+       }
+      },
+      "devstral-small-latest": {
+       "native": {
+        "solved": 33,
+        "total": 40,
+        "cost_usd": 0.3484
+       },
+       "kernel": {
+        "solved": 14,
+        "total": 40,
+        "cost_usd": 0.2097
+       },
+       "cpu": {
+        "solved": 37,
+        "total": 40,
+        "cost_usd": 0.3457
+       }
+      },
+      "gemini-2.5-pro": {
+       "native": {
+        "solved": 36,
+        "total": 40,
+        "cost_usd": 4.4238
+       },
+       "kernel": {
+        "solved": 37,
+        "total": 40,
+        "cost_usd": 4.4885
+       },
+       "cpu": {
+        "solved": 36,
+        "total": 39,
+        "cost_usd": 7.9718
+       }
+      },
+      "grok-4-fast": {
+       "native": {
+        "solved": 37,
+        "total": 40,
+        "cost_usd": 0.5499
+       },
+       "kernel": {
+        "solved": 34,
+        "total": 40,
+        "cost_usd": 0.4171
+       },
+       "cpu": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "grok-4.1-fast": {
+       "native": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 37,
+        "total": 40,
+        "cost_usd": 0.5751
+       },
+       "cpu": {
+        "solved": 0,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "gemini-2.5-flash": {
+       "native": {
+        "solved": 35,
+        "total": 38,
+        "cost_usd": 1.7041
+       },
+       "kernel": {
+        "solved": 35,
+        "total": 38,
+        "cost_usd": 0.8452
+       },
+       "cpu": {
+        "solved": 35,
+        "total": 38,
+        "cost_usd": 1.3789
+       }
+      },
+      "devstral-medium": {
+       "native": {
+        "solved": 17,
+        "total": 40,
+        "cost_usd": 1.4637
+       },
+       "kernel": {
+        "solved": 36,
+        "total": 40,
+        "cost_usd": 0.9784
+       },
+       "cpu": {
+        "solved": 15,
+        "total": 40,
+        "cost_usd": 0.7529
+       }
+      },
+      "grok-4.20": {
+       "native": {
+        "solved": 0,
+        "total": 39,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 36,
+        "total": 40,
+        "cost_usd": 2.9137
+       },
+       "cpu": {
+        "solved": 0,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "o4-mini": {
+       "native": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 2.5063
+       },
+       "kernel": {
+        "solved": 36,
+        "total": 40,
+        "cost_usd": 4.8619
+       },
+       "cpu": {
+        "solved": 0,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "qwen3-coder-plus": {
+       "native": {
+        "solved": 1,
+        "total": 39,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 36,
+        "total": 40,
+        "cost_usd": 1.7423
+       },
+       "cpu": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "grok-code-fast-1": {
+       "native": {
+        "solved": 35,
+        "total": 40,
+        "cost_usd": 0.484
+       },
+       "kernel": {
+        "solved": 30,
+        "total": 40,
+        "cost_usd": 0.8504
+       },
+       "cpu": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "deepseek-r1": {
+       "native": {
+        "solved": 0,
+        "total": 39,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 32,
+        "total": 40,
+        "cost_usd": 6.2393
+       },
+       "cpu": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "grok-3": {
+       "native": {
+        "solved": 19,
+        "total": 40,
+        "cost_usd": 3.3164
+       },
+       "kernel": {
+        "solved": 31,
+        "total": 40,
+        "cost_usd": 2.4267
+       },
+       "cpu": {
+        "solved": 0,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "deepseek-v3.2": {
+       "native": {
+        "solved": 1,
+        "total": 39,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 29,
+        "total": 40,
+        "cost_usd": 1.8593
+       },
+       "cpu": {
+        "solved": 0,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "qwen3-coder-flash": {
+       "native": {
+        "solved": 0,
+        "total": 39,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 26,
+        "total": 40,
+        "cost_usd": 0.4078
+       },
+       "cpu": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "grok-3-fast": {
+       "native": {
+        "solved": 25,
+        "total": 39,
+        "cost_usd": 8.2774
+       },
+       "kernel": {
+        "solved": 0,
+        "total": 40,
+        "cost_usd": 0
+       },
+       "cpu": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "grok-3-mini": {
+       "native": {
+        "solved": 10,
+        "total": 40,
+        "cost_usd": 0.3439
+       },
+       "kernel": {
+        "solved": 24,
+        "total": 40,
+        "cost_usd": 0.632
+       },
+       "cpu": {
+        "solved": 0,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "grok-4": {
+       "native": {
+        "solved": 24,
+        "total": 40,
+        "cost_usd": 14.8935
+       },
+       "kernel": {
+        "solved": 8,
+        "total": 40,
+        "cost_usd": 1.308
+       },
+       "cpu": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "qwen3-coder": {
+       "native": {
+        "solved": 1,
+        "total": 39,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 22,
+        "total": 40,
+        "cost_usd": 0.7033
+       },
+       "cpu": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "llama-4-maverick": {
+       "native": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 21,
+        "total": 40,
+        "cost_usd": 0.6907
+       },
+       "cpu": {
+        "solved": 0,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "gpt-4.1": {
+       "native": {
+        "solved": 10,
+        "total": 40,
+        "cost_usd": 12.2079
+       },
+       "kernel": {
+        "solved": 20,
+        "total": 40,
+        "cost_usd": 1.2475
+       },
+       "cpu": {
+        "solved": 18,
+        "total": 40,
+        "cost_usd": 1.1477
+       }
+      },
+      "deepseek-r1-0528": {
+       "native": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       },
+       "kernel": {
+        "solved": 19,
+        "total": 40,
+        "cost_usd": 0.6353
+       },
+       "cpu": {
+        "solved": 1,
+        "total": 40,
+        "cost_usd": 0
+       }
+      },
+      "codestral-2508": {
+       "kernel": {
+        "solved": 14,
+        "total": 40,
+        "cost_usd": 0.7501
+       },
+       "cpu": {
+        "solved": 13,
+        "total": 40,
+        "cost_usd": 0.6149
+       }
+      }
+     },
+     "note": "bench-v2 final: 31 models, native/kernel/cpu three-arm aggregates, 3,641 scores. Commit 67c8e588 'bench-v2 final: 3,641 scores, fixes, native backfill'."
+    }
+   ],
+   "schema_era": "bench-v2-three-arm",
+   "judged": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+   "comparable_with_other_versions": false
+  },
+  {
+   "version": "v4.6.1",
+   "runs": [
+    {
+     "date": "2026-04-30",
+     "file": "v4.6.1/2026-04-30-experiment-scores.json",
+     "judged": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+     "source_commit": "c7fee7c1",
+     "faults": [
+      "pre-validity-era",
+      "pre-073d9154-cache-misreporting"
+     ],
+     "models": {
+      "gpt-5.2": {
+       "native": {
+        "solved": 31,
+        "total": 31,
+        "cost_usd": 12.4404
+       },
+       "kernel": {
+        "solved": 31,
+        "total": 32,
+        "cost_usd": 3.458
+       },
+       "cpu": {
+        "solved": 30,
+        "total": 31,
+        "cost_usd": 2.9728
+       }
+      },
+      "gpt-5.5": {
+       "native": {
+        "solved": 5,
+        "total": 5,
+        "cost_usd": 1.1455
+       },
+       "kernel": {
+        "solved": 5,
+        "total": 5,
+        "cost_usd": 1.0395
+       },
+       "cpu": {
+        "solved": 5,
+        "total": 5,
+        "cost_usd": 0.7201
+       }
+      },
+      "qwen3-coder-plus": {
+       "kernel": {
+        "solved": 2,
+        "total": 2,
+        "cost_usd": 0.0823
+       }
+      },
+      "gpt-5.4": {
+       "native": {
+        "solved": 37,
+        "total": 38,
+        "cost_usd": 11.3281
+       },
+       "kernel": {
+        "solved": 36,
+        "total": 38,
+        "cost_usd": 5.6356
+       },
+       "cpu": {
+        "solved": 37,
+        "total": 39,
+        "cost_usd": 2.3506
+       }
+      },
+      "deepseek-v3.2": {
+       "kernel": {
+        "solved": 10,
+        "total": 11,
+        "cost_usd": 0.4166
+       }
+      },
+      "gemini-3.1-flash-lite-preview": {
+       "kernel": {
+        "solved": 12,
+        "total": 18,
+        "cost_usd": 0.1983
+       },
+       "cpu": {
+        "solved": 12,
+        "total": 18,
+        "cost_usd": 0.2218
+       }
+      },
+      "grok-code-fast-1": {
+       "kernel": {
+        "solved": 12,
+        "total": 20,
+        "cost_usd": 0.5393
+       }
+      },
+      "deepseek-r1": {
+       "kernel": {
+        "solved": 3,
+        "total": 8,
+        "cost_usd": 0.0863
+       }
+      },
+      "deepseek-r1-0528": {
+       "kernel": {
+        "solved": 3,
+        "total": 12,
+        "cost_usd": 0.2658
+       }
+      }
+     },
+     "note": "v4.6.1 sweep: 9 models, 313 cells, scoped to a single-version run. Commit c7fee7c1 'scores: publish v4.6.1 sweep'."
+    }
+   ],
+   "schema_era": "bench-v2-three-arm",
+   "judged": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+   "comparable_with_other_versions": false
+  },
+  {
+   "version": "v7.6.0",
+   "runs": [
+    {
+     "date": "2026-06-16",
+     "file": "v7.6.0/2026-06-16-experiment-scores.json",
+     "judged": "axis-v2 (solve/cost split, fail-closed)",
+     "snapshot": "june16",
+     "faults": [
+      "june16-teardown-masked"
+     ],
+     "models": {
+      "deepseek-v4-pro": {
+       "native": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 1.201,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 35,
+        "total": 36,
+        "cost_usd": 8.3787,
+        "cost_cells": 36,
+        "invalid": 1,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "kernel"
+       }
+      },
+      "gemini-3.1-pro-preview": {
+       "native": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 3.9169,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 8.0399,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 36,
+        "source_arm": "cpu"
+       }
+      },
+      "gemini-3.5-flash": {
+       "native": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 8.9937,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 36,
+        "total": 36,
+        "cost_usd": 11.3719,
+        "cost_cells": 36,
+        "invalid": 1,
+        "cost_invalid": 0,
+        "masked": 36,
+        "source_arm": "cpu"
+       }
+      },
+      "gpt-5.5": {
+       "native": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 6.8192,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 19.5732,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 36,
+        "source_arm": "cpu"
+       }
+      },
+      "kimi-k2.6": {
+       "native": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 0.3521,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 35,
+        "total": 37,
+        "cost_usd": 1.5076,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "kernel"
+       }
+      },
+      "claude-sonnet-4-6": {
+       "native": {
+        "solved": 35,
+        "total": 37,
+        "cost_usd": 8.4541,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 35,
+        "total": 36,
+        "cost_usd": 3.6897,
+        "cost_cells": 36,
+        "invalid": 1,
+        "cost_invalid": 0,
+        "masked": 35,
+        "source_arm": "cpu"
+       }
+      },
+      "grok-4.3": {
+       "native": {
+        "solved": 35,
+        "total": 37,
+        "cost_usd": 1.2206,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 30,
+        "total": 36,
+        "cost_usd": 5.2015,
+        "cost_cells": 36,
+        "invalid": 1,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "kernel"
+       }
+      },
+      "devstral-2512": {
+       "native": {
+        "solved": 6,
+        "total": 33,
+        "cost_usd": 7.4,
+        "cost_cells": 33,
+        "invalid": 4,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 32,
+        "total": 34,
+        "cost_usd": 2.0653,
+        "cost_cells": 34,
+        "invalid": 3,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "cpu"
+       }
+      }
+     },
+     "trust": {
+      "solve_valid_cells": 581,
+      "cost_valid_cells": 581,
+      "cost_invalid_cells": 0,
+      "invalid_cells": 11,
+      "teardown_masked_cells": 143
+     }
+    },
+    {
+     "date": "2026-06-17",
+     "file": "v7.6.0/2026-06-17-board-v760.json",
+     "judged": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+     "source_commit": "27228dfe",
+     "faults": [
+      "pre-validity-era",
+      "june16-teardown-masked",
+      "arm-none-era"
+     ],
+     "models": {
+      "claude-opus-4-8": {
+       "native": {
+        "solved": 34,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 34,
+        "total": 38
+       }
+      },
+      "claude-sonnet-4-6": {
+       "native": {
+        "solved": 35,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 34,
+        "total": 38
+       }
+      },
+      "gemini-3.1-pro-preview": {
+       "native": {
+        "solved": 36,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 33,
+        "total": 38
+       }
+      },
+      "devstral-2512": {
+       "native": {
+        "solved": 6,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 32,
+        "total": 38
+       }
+      },
+      "gpt-5.5": {
+       "native": {
+        "solved": 36,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 35,
+        "total": 38
+       }
+      },
+      "grok-4.3": {
+       "native": {
+        "solved": 35,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 30,
+        "total": 38
+       }
+      },
+      "deepseek-v4-pro": {
+       "native": {
+        "solved": 37,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 35,
+        "total": 38
+       }
+      },
+      "kimi-k2.6": {
+       "native": {
+        "solved": 36,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 35,
+        "total": 38
+       }
+      }
+     },
+     "note": "June-17 leaderboard as served (consolidate_harden.py emitter, retired). Run published at bb4aa6d5 (2026-06-15), board refreshed at 27228dfe 'gpt-5.5 cache fix (0%\u219243%) + gemini-3.5-flash'."
+    },
+    {
+     "date": "2026-06-17",
+     "file": "v7.6.0/2026-06-17-cells-v760.json",
+     "judged": "pre-validity-era \u2014 published as-were; NOT re-judged by axis-split validity rules",
+     "source_commit": "27228dfe",
+     "faults": [
+      "pre-validity-era",
+      "june16-teardown-masked",
+      "arm-none-era"
+     ],
+     "models": {
+      "claude-opus-4-8": {
+       "native": {
+        "solved": 34,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 34,
+        "total": 38
+       }
+      },
+      "claude-sonnet-4-6": {
+       "native": {
+        "solved": 35,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 34,
+        "total": 38
+       }
+      },
+      "gemini-3.1-pro-preview": {
+       "native": {
+        "solved": 36,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 33,
+        "total": 38
+       }
+      },
+      "gpt-5.5": {
+       "native": {
+        "solved": 36,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 35,
+        "total": 38
+       }
+      },
+      "devstral-2512": {
+       "native": {
+        "solved": 6,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 32,
+        "total": 38
+       }
+      },
+      "grok-4.3": {
+       "native": {
+        "solved": 35,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 30,
+        "total": 38
+       }
+      },
+      "deepseek-v4-pro": {
+       "native": {
+        "solved": 37,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 35,
+        "total": 38
+       }
+      },
+      "kimi-k2.6": {
+       "native": {
+        "solved": 36,
+        "total": 38
+       },
+       "kernel": {
+        "solved": 35,
+        "total": 38
+       }
+      }
+     },
+     "note": "June-17 per-cell heatmap as served (emit_cells.py emitter, retired)."
+    },
+    {
+     "date": "2026-07-02",
+     "file": "v7.6.0/2026-07-02-experiment-scores.json",
+     "judged": "axis-v2 (solve/cost split, fail-closed)",
+     "snapshot": "july02",
+     "faults": [
+      "july02-cache-read-zero"
+     ],
+     "models": {
+      "gemini-3.1-pro-preview": {
+       "ostk": {
+        "solved": 35,
+        "total": 37,
+        "cost_usd": 6.0882,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "cpu"
+       }
+      }
+     },
+     "trust": {
+      "solve_valid_cells": 37,
+      "cost_valid_cells": 37,
+      "cost_invalid_cells": 0,
+      "invalid_cells": 0,
+      "teardown_masked_cells": 0
+     }
+    }
+   ],
+   "schema_era": "axis-v2",
+   "judged": "axis-v2 (solve/cost split, fail-closed)",
+   "comparable_with_other_versions": false
+  },
+  {
+   "version": "v7.7.1",
+   "runs": [
+    {
+     "date": "2026-07-09",
+     "file": "v7.7.1/2026-07-09-experiment-scores.json",
+     "judged": "axis-v2 (solve/cost split, fail-closed)",
+     "snapshot": "july09",
+     "faults": [
+      "july09-fable-kernel-refusal",
+      "july09-opus48-unknown-tool-loop-exit",
+      "july09-f7-earlystop-truncated-votes"
+     ],
+     "models": {
+      "gemini-3.5-flash": {
+       "ostk": {
+        "solved": 1,
+        "total": 1,
+        "cost_usd": 0.6566,
+        "cost_cells": 1,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "cpu"
+       }
+      },
+      "claude-fable-5": {
+       "native": {
+        "solved": 34,
+        "total": 37,
+        "cost_usd": 23.3388,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 9
+       },
+       "ostk": {
+        "solved": 18,
+        "total": 37,
+        "cost_usd": 4.2396,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 6,
+        "source_arm": "cpu"
+       }
+      },
+      "claude-opus-4-8": {
+       "native": {
+        "solved": 34,
+        "total": 37,
+        "cost_usd": 13.0266,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 5
+       },
+       "ostk": {
+        "solved": 33,
+        "total": 37,
+        "cost_usd": 6.6739,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 16,
+        "source_arm": "cpu"
+       }
+      },
+      "claude-sonnet-5": {
+       "native": {
+        "solved": 34,
+        "total": 37,
+        "cost_usd": 16.9955,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 9
+       }
+      }
+     },
+     "trust": {
+      "solve_valid_cells": 186,
+      "cost_valid_cells": 186,
+      "cost_invalid_cells": 0,
+      "invalid_cells": 0,
+      "teardown_masked_cells": 45
+     }
+    }
+   ],
+   "schema_era": "axis-v2",
+   "judged": "axis-v2 (solve/cost split, fail-closed)",
+   "comparable_with_other_versions": false
+  },
+  {
+   "version": "v7.7.2",
+   "runs": [
+    {
+     "date": "2026-07-09",
+     "file": "v7.7.2/2026-07-09-experiment-scores.json",
+     "judged": "axis-v2 (solve/cost split, fail-closed)",
+     "snapshot": "july09v2",
+     "faults": [
+      "july09-f7-earlystop-truncated-votes",
+      "july09-runcell-exit1-hardfail"
+     ],
+     "models": {
+      "claude-sonnet-5": {
+       "ostk": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 3.0401,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 1,
+        "source_arm": "cpu"
+       }
+      }
+     },
+     "trust": {
+      "solve_valid_cells": 37,
+      "cost_valid_cells": 37,
+      "cost_invalid_cells": 0,
+      "invalid_cells": 0,
+      "teardown_masked_cells": 1
+     }
+    }
+   ],
+   "schema_era": "axis-v2",
+   "judged": "axis-v2 (solve/cost split, fail-closed)",
+   "comparable_with_other_versions": false
+  }
+ ]
+}
