@@ -189,17 +189,31 @@ def native_cost_basis(model, harness):
     return None
 
 def load(model, arm):
+    """One record per benchmark. Bench key from the payload's own `benchmark`
+    field — NEVER the raw basename: recovery twins like
+    `<bench>.recovered-june16.score.json` would otherwise mint phantom bench
+    keys. Several files per bench collapse via keep-best (resolved > not,
+    then fewer turns) — same rule as consolidate_scores.py."""
     out = {}
-    for f in glob.glob(f"{RUNS}/{model}-{arm}/*.score.json"):
+    for f in sorted(glob.glob(f"{RUNS}/{model}-{arm}/*.score.json")):
         if os.path.getmtime(f) < JUNE:
             continue
-        b = os.path.basename(f).replace(".score.json", "")
+        try:
+            rec = json.load(open(f))
+        except Exception:
+            continue
+        if not isinstance(rec, dict):
+            continue
+        b = rec.get("benchmark") or os.path.basename(f).removesuffix(
+            ".score.json").split(".", 1)[0]
         if b in INVALID:
             continue
-        try:
-            out[b] = json.load(open(f))
-        except Exception:
-            pass
+        cur = out.get(b)
+        if (cur is None
+                or (bool(rec.get("resolved")) and not bool(cur.get("resolved")))
+                or (bool(rec.get("resolved")) == bool(cur.get("resolved"))
+                    and (rec.get("turns_to_fix") or 0) < (cur.get("turns_to_fix") or 0))):
+            out[b] = rec
     return out
 
 def has_spend(rec):

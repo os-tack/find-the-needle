@@ -1,5 +1,9 @@
+# Roster documentation only — the EXECUTED roster is run_matrix_v41.py
+# (EXISTING_*/NEW_* lists + FRONTIER_2026). See RUNBOOK.md "Add a model".
+anthropic/claude-fable-5
 anthropic/claude-opus-4-6
 anthropic/claude-opus-4-7
+anthropic/claude-opus-4-8
 anthropic/claude-sonnet-4-6
 anthropic/claude-haiku-4-5
 google/gemini-2.5-flash
@@ -30,6 +34,7 @@ mistralai/devstral-small
 deepseek/deepseek-r1
 deepseek/deepseek-r1-0528
 deepseek/deepseek-v3.2
+deepseek/deepseek-v4-pro
 qwen/qwen3-coder
 qwen/qwen3-coder-flash
 qwen/qwen3-coder-plus
@@ -38,3 +43,35 @@ moonshotai/kimi-k2.5
 moonshotai/kimi-k2.6
 meta-llama/llama-4-maverick
 mlx/ternary-bonsai-8b
+
+# ---------------------------------------------------------------------------
+# PENDING — ids not live yet. When each id lands, uncomment its line here and
+# apply the one-line edits listed below it (prices TBD until announced).
+# ---------------------------------------------------------------------------
+# openai/gpt-5.6
+#   run_matrix_v41.py FRONTIER_2026:   "gpt-5.6": ["native", "kernel-cpu"],
+#   consolidate_scores.py RATE_CARD:   add ONLY when the price is announced:
+#                                      "gpt-5.6": (<$/M in>, <$/M out>),
+#     DO NOT paste a placeholder — a literal `(TBD, TBD)` is a NameError at
+#     import of consolidate_scores.py, which nothing exercised until
+#     POSTFLIGHT (i.e. AFTER the paid run); preflight now import-checks the
+#     consolidator and refuses to launch on it. Until the price lands, simply
+#     OMIT the RATE_CARD entry: compute_cost_ex falls back to the harness's
+#     self-reported cost, else 'unpriced' — never a silent $0.
+#   NOTE: like gpt-5.5, do NOT add to CPU_DRIVER_MODELS — ostk has no native
+#   OpenAI Responses driver, so the kernel-cpu execution is generic_kernel
+#   (B*) via OpenRouter/api.openai.com and must be labeled as such.
+# google/gemini-3.5-pro
+#   run_matrix_v41.py FRONTIER_2026:   "gemini-3.5-pro": ["native", "kernel-cpu"],
+#   consolidate_scores.py RATE_CARD:   add ONLY when the price is announced
+#                                      (same rule as gpt-5.6 above — never
+#                                      paste TBD; omit until priced):
+#                                      "gemini-3.5-pro": (<$/M in>, <$/M out>),
+#   consolidate_scores.py CPU_DRIVER_MODELS: "gemini-3-5-pro",   # normalized: dots -> dashes
+#   CAUTION: gemini-3.5-flash was DEFERRED 2026-06-14 for a kernel-arm stall
+#   in the gemini-3.x thinking path (run_matrix_v41.py:90-97); 3.5-pro sits in
+#   the same is_gemini_3 family gate — verify with ONE cheap bench before a
+#   paid matrix run. bench.sh has no --bench flag; the mandated probe is the
+#   direct runner (one cell, one sample):
+#     python3 run_matrix_v41.py --frontier --model gemini-3.5-pro \
+#       --arm kernel-cpu --bench off-by-one-pagination --samples 1

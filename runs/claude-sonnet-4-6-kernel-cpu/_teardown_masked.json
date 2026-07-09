@@ -1,0 +1,230 @@
+{
+  "generated": "2026-07-08T23:35:20+00:00",
+  "marker": "teardown blocks on an orphaned pipe holder",
+  "source_log_dir": "rerun-opus-sonnet-kernel-logs",
+  "window_hours": 72.0,
+  "note": "benchmarks = cells whose score timestamp matches a watchdog log within window_hours; skipped_time_mismatch = watchdog evidence exists but for a DIFFERENT (deleted/rerun) execution of this cell \u2014 not stamped.",
+  "benchmarks": {
+    "api-version-field-drop": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-api-version-field-drop.log",
+      "log_mtime": "2026-06-16T16:34:26+00:00",
+      "score_timestamp": "2026-06-16T16:34:16Z",
+      "delta_hours": 0.0
+    },
+    "auth-bypass-path-traversal": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-auth-bypass-path-traversal.log",
+      "log_mtime": "2026-06-16T16:34:23+00:00",
+      "score_timestamp": "2026-06-16T16:34:12Z",
+      "delta_hours": 0.0
+    },
+    "bidi-override-injection": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-bidi-override-injection.log",
+      "log_mtime": "2026-06-16T16:35:13+00:00",
+      "score_timestamp": "2026-06-16T16:35:03Z",
+      "delta_hours": 0.0
+    },
+    "cache-stale-invalidation": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-cache-stale-invalidation.log",
+      "log_mtime": "2026-06-16T16:34:54+00:00",
+      "score_timestamp": "2026-06-16T16:34:41Z",
+      "delta_hours": 0.0
+    },
+    "compiler-macro-expansion": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-compiler-macro-expansion.log",
+      "log_mtime": "2026-06-16T16:35:02+00:00",
+      "score_timestamp": "2026-06-16T16:34:47Z",
+      "delta_hours": 0.0
+    },
+    "data-corruption-concurrent-write": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-data-corruption-concurrent-write.log",
+      "log_mtime": "2026-06-16T16:35:11+00:00",
+      "score_timestamp": "2026-06-16T16:35:00Z",
+      "delta_hours": 0.0
+    },
+    "deadlock-transfer": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-deadlock-transfer.log",
+      "log_mtime": "2026-06-16T16:35:31+00:00",
+      "score_timestamp": "2026-06-16T16:35:21Z",
+      "delta_hours": 0.0
+    },
+    "encoding-mojibake": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-encoding-mojibake.log",
+      "log_mtime": "2026-06-16T16:35:24+00:00",
+      "score_timestamp": "2026-06-16T16:35:13Z",
+      "delta_hours": 0.0
+    },
+    "goroutine-leak-handler": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-goroutine-leak-handler.log",
+      "log_mtime": "2026-06-16T16:36:33+00:00",
+      "score_timestamp": "2026-06-16T16:36:23Z",
+      "delta_hours": 0.0
+    },
+    "graphql-dataloader-per-request": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-graphql-dataloader-per-request.log",
+      "log_mtime": "2026-06-16T16:36:23+00:00",
+      "score_timestamp": "2026-06-16T16:36:13Z",
+      "delta_hours": 0.0
+    },
+    "import-cycle-startup": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-import-cycle-startup.log",
+      "log_mtime": "2026-06-16T16:36:17+00:00",
+      "score_timestamp": "2026-06-16T16:36:07Z",
+      "delta_hours": 0.0
+    },
+    "k8s-assume-cache-silent-drop": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-k8s-assume-cache-silent-drop.log",
+      "log_mtime": "2026-06-16T16:36:18+00:00",
+      "score_timestamp": "2026-06-16T16:36:07Z",
+      "delta_hours": 0.0
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-k8s-scheduler-shutdown-deadlock.log",
+      "log_mtime": "2026-06-16T16:36:25+00:00",
+      "score_timestamp": "2026-06-16T16:36:15Z",
+      "delta_hours": 0.0
+    },
+    "kernel-panic-ioctl": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-kernel-panic-ioctl.log",
+      "log_mtime": "2026-06-16T16:37:03+00:00",
+      "score_timestamp": "2026-06-16T16:36:49Z",
+      "delta_hours": 0.0
+    },
+    "linearizability-stale-read": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-linearizability-stale-read.log",
+      "log_mtime": "2026-06-16T16:37:27+00:00",
+      "score_timestamp": "2026-06-16T16:37:12Z",
+      "delta_hours": 0.0
+    },
+    "memory-leak-event-listener": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-memory-leak-event-listener.log",
+      "log_mtime": "2026-06-16T16:37:34+00:00",
+      "score_timestamp": "2026-06-16T16:37:24Z",
+      "delta_hours": 0.0
+    },
+    "missing-input-validation": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-missing-input-validation.log",
+      "log_mtime": "2026-06-16T16:37:41+00:00",
+      "score_timestamp": "2026-06-16T16:37:31Z",
+      "delta_hours": 0.0
+    },
+    "nginx-upstream-port-mismatch": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-nginx-upstream-port-mismatch.log",
+      "log_mtime": "2026-06-16T16:37:27+00:00",
+      "score_timestamp": "2026-06-16T16:37:13Z",
+      "delta_hours": 0.0
+    },
+    "null-pointer-config": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-null-pointer-config.log",
+      "log_mtime": "2026-06-16T16:37:34+00:00",
+      "score_timestamp": "2026-06-16T16:37:23Z",
+      "delta_hours": 0.0
+    },
+    "off-by-one-array-slice": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-off-by-one-array-slice.log",
+      "log_mtime": "2026-06-16T16:37:33+00:00",
+      "score_timestamp": "2026-06-16T16:37:22Z",
+      "delta_hours": 0.0
+    },
+    "off-by-one-pagination": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-off-by-one-pagination.log",
+      "log_mtime": "2026-06-16T16:37:40+00:00",
+      "score_timestamp": "2026-06-16T16:37:30Z",
+      "delta_hours": 0.0
+    },
+    "performance-cliff-hash": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-performance-cliff-hash.log",
+      "log_mtime": "2026-06-16T16:38:43+00:00",
+      "score_timestamp": "2026-06-16T16:38:33Z",
+      "delta_hours": 0.0
+    },
+    "postgres-migration-schema-drift": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-postgres-migration-schema-drift.log",
+      "log_mtime": "2026-06-16T16:40:22+00:00",
+      "score_timestamp": "2026-06-16T16:40:11Z",
+      "delta_hours": 0.0
+    },
+    "race-condition-counter": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-race-condition-counter.log",
+      "log_mtime": "2026-06-16T16:38:53+00:00",
+      "score_timestamp": "2026-06-16T16:38:42Z",
+      "delta_hours": 0.0
+    },
+    "rate-limit-bypass-header": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-rate-limit-bypass-header.log",
+      "log_mtime": "2026-06-16T16:38:55+00:00",
+      "score_timestamp": "2026-06-16T16:38:45Z",
+      "delta_hours": 0.0
+    },
+    "relaxed-ordering-ringbuf": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-relaxed-ordering-ringbuf.log",
+      "log_mtime": "2026-06-16T16:39:24+00:00",
+      "score_timestamp": "2026-06-16T16:39:10Z",
+      "delta_hours": 0.0
+    },
+    "retry-storm-duplicate-transfer": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-retry-storm-duplicate-transfer.log",
+      "log_mtime": "2026-06-16T16:39:39+00:00",
+      "score_timestamp": "2026-06-16T16:39:28Z",
+      "delta_hours": 0.0
+    },
+    "silent-data-corruption": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-silent-data-corruption.log",
+      "log_mtime": "2026-06-16T16:39:03+00:00",
+      "score_timestamp": "2026-06-16T16:38:53Z",
+      "delta_hours": 0.0
+    },
+    "split-brain-leader-election": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-split-brain-leader-election.log",
+      "log_mtime": "2026-06-16T16:39:19+00:00",
+      "score_timestamp": "2026-06-16T16:39:04Z",
+      "delta_hours": 0.0
+    },
+    "ssrf-allowlist-port-confusion": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-ssrf-allowlist-port-confusion.log",
+      "log_mtime": "2026-06-16T16:39:50+00:00",
+      "score_timestamp": "2026-06-16T16:39:40Z",
+      "delta_hours": 0.0
+    },
+    "timezone-scheduling": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-timezone-scheduling.log",
+      "log_mtime": "2026-06-16T16:40:16+00:00",
+      "score_timestamp": "2026-06-16T16:40:05Z",
+      "delta_hours": 0.0
+    },
+    "timing-attack-comparison": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-timing-attack-comparison.log",
+      "log_mtime": "2026-06-16T16:39:51+00:00",
+      "score_timestamp": "2026-06-16T16:39:41Z",
+      "delta_hours": 0.0
+    },
+    "tls-chain-ordering-strict": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-tls-chain-ordering-strict.log",
+      "log_mtime": "2026-06-16T16:40:23+00:00",
+      "score_timestamp": "2026-06-16T16:40:13Z",
+      "delta_hours": 0.0
+    },
+    "type-coercion-comparison": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-type-coercion-comparison.log",
+      "log_mtime": "2026-06-16T16:40:34+00:00",
+      "score_timestamp": "2026-06-16T16:40:24Z",
+      "delta_hours": 0.0
+    },
+    "wal-fsync-ghost-ack": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-wal-fsync-ghost-ack.log",
+      "log_mtime": "2026-06-16T16:41:38+00:00",
+      "score_timestamp": "2026-06-16T16:41:27Z",
+      "delta_hours": 0.0
+    },
+    "wrong-operator-discount": {
+      "log": "rerun-opus-sonnet-kernel-logs/claude-sonnet-4-6-wrong-operator-discount.log",
+      "log_mtime": "2026-06-16T16:40:47+00:00",
+      "score_timestamp": "2026-06-16T16:40:37Z",
+      "delta_hours": 0.0
+    }
+  },
+  "skipped_time_mismatch": {},
+  "marker_without_score": [
+    "haystack-boot",
+    "haystack-mint"
+  ]
+}

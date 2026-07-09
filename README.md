@@ -28,6 +28,13 @@ A benchmark suite of 29 scenarios for AI coding agents, built from real bugs in 
 > and cost figures support kernel-vs-kernel-cpu comparison; cross-arm
 > cost claims are not yet supported.
 
+## Operator runbook
+
+Running the bench (not writing benchmarks)? See [RUNBOOK.md](RUNBOOK.md):
+one-command runs via `./bench.sh <model-id> [--dry-run]` (preflight →
+resumable matrix → fail-closed validation → board regen), adding a model in
+3 steps, reading the board's trust block, and known measurement caveats.
+
 ## How it works
 
 Each benchmark is a Docker container with a real bug. The agent gets tools (`shell`, `file:read`, `file:edit`), a time limit, and a test that fails. The agent explores, diagnoses, and patches. The test either passes or it doesn't.

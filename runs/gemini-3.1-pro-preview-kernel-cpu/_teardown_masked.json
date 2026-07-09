@@ -1,0 +1,236 @@
+{
+  "generated": "2026-07-08T23:35:20+00:00",
+  "marker": "teardown blocks on an orphaned pipe holder",
+  "source_log_dir": "rerun-gemini-kernel-logs",
+  "window_hours": 72.0,
+  "note": "benchmarks = cells whose score timestamp matches a watchdog log within window_hours; skipped_time_mismatch = watchdog evidence exists but for a DIFFERENT (deleted/rerun) execution of this cell \u2014 not stamped.",
+  "benchmarks": {},
+  "skipped_time_mismatch": {
+    "api-version-field-drop": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-api-version-field-drop.log",
+      "log_mtime": "2026-06-16T21:56:34+00:00",
+      "score_timestamp": "2026-07-02T17:56:43Z",
+      "delta_hours": 380.0
+    },
+    "auth-bypass-path-traversal": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-auth-bypass-path-traversal.log",
+      "log_mtime": "2026-06-16T21:56:50+00:00",
+      "score_timestamp": "2026-07-02T17:57:54Z",
+      "delta_hours": 380.0
+    },
+    "cache-stale-invalidation": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-cache-stale-invalidation.log",
+      "log_mtime": "2026-06-16T21:56:45+00:00",
+      "score_timestamp": "2026-07-02T18:01:33Z",
+      "delta_hours": 380.1
+    },
+    "compiler-macro-expansion": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-compiler-macro-expansion.log",
+      "log_mtime": "2026-06-16T21:56:27+00:00",
+      "score_timestamp": "2026-07-02T18:02:43Z",
+      "delta_hours": 380.1
+    },
+    "data-corruption-concurrent-write": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-data-corruption-concurrent-write.log",
+      "log_mtime": "2026-06-16T21:56:25+00:00",
+      "score_timestamp": "2026-07-02T18:03:59Z",
+      "delta_hours": 380.1
+    },
+    "deadlock-transfer": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-deadlock-transfer.log",
+      "log_mtime": "2026-06-16T21:57:17+00:00",
+      "score_timestamp": "2026-07-02T18:05:38Z",
+      "delta_hours": 380.1
+    },
+    "encoding-mojibake": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-encoding-mojibake.log",
+      "log_mtime": "2026-06-16T21:56:30+00:00",
+      "score_timestamp": "2026-07-02T18:06:44Z",
+      "delta_hours": 380.2
+    },
+    "goroutine-leak-handler": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-goroutine-leak-handler.log",
+      "log_mtime": "2026-06-16T21:57:16+00:00",
+      "score_timestamp": "2026-07-02T18:08:37Z",
+      "delta_hours": 380.2
+    },
+    "graphql-dataloader-per-request": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-graphql-dataloader-per-request.log",
+      "log_mtime": "2026-06-16T21:57:07+00:00",
+      "score_timestamp": "2026-07-02T18:10:31Z",
+      "delta_hours": 380.2
+    },
+    "import-cycle-startup": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-import-cycle-startup.log",
+      "log_mtime": "2026-06-16T21:58:01+00:00",
+      "score_timestamp": "2026-07-02T18:11:54Z",
+      "delta_hours": 380.2
+    },
+    "k8s-assume-cache-silent-drop": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-k8s-assume-cache-silent-drop.log",
+      "log_mtime": "2026-06-16T21:57:24+00:00",
+      "score_timestamp": "2026-07-02T18:12:52Z",
+      "delta_hours": 380.3
+    },
+    "k8s-scheduler-shutdown-deadlock": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-k8s-scheduler-shutdown-deadlock.log",
+      "log_mtime": "2026-06-16T21:57:35+00:00",
+      "score_timestamp": "2026-07-02T18:14:37Z",
+      "delta_hours": 380.3
+    },
+    "kernel-panic-ioctl": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-kernel-panic-ioctl.log",
+      "log_mtime": "2026-06-16T21:58:39+00:00",
+      "score_timestamp": "2026-07-02T18:16:29Z",
+      "delta_hours": 380.3
+    },
+    "linearizability-stale-read": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-linearizability-stale-read.log",
+      "log_mtime": "2026-06-16T22:00:26+00:00",
+      "score_timestamp": "2026-07-02T18:19:08Z",
+      "delta_hours": 380.3
+    },
+    "memory-leak-event-listener": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-memory-leak-event-listener.log",
+      "log_mtime": "2026-06-16T21:58:25+00:00",
+      "score_timestamp": "2026-07-02T18:20:40Z",
+      "delta_hours": 380.4
+    },
+    "missing-input-validation": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-missing-input-validation.log",
+      "log_mtime": "2026-06-16T21:58:41+00:00",
+      "score_timestamp": "2026-07-02T18:21:31Z",
+      "delta_hours": 380.4
+    },
+    "nginx-upstream-port-mismatch": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-nginx-upstream-port-mismatch.log",
+      "log_mtime": "2026-06-16T21:58:25+00:00",
+      "score_timestamp": "2026-07-02T18:22:32Z",
+      "delta_hours": 380.4
+    },
+    "null-pointer-config": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-null-pointer-config.log",
+      "log_mtime": "2026-06-16T21:58:27+00:00",
+      "score_timestamp": "2026-07-02T21:48:20Z",
+      "delta_hours": 383.8
+    },
+    "off-by-one-array-slice": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-off-by-one-array-slice.log",
+      "log_mtime": "2026-06-16T21:58:23+00:00",
+      "score_timestamp": "2026-07-02T18:25:08Z",
+      "delta_hours": 380.4
+    },
+    "off-by-one-pagination": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-off-by-one-pagination.log",
+      "log_mtime": "2026-06-16T21:58:51+00:00",
+      "score_timestamp": "2026-07-02T18:26:13Z",
+      "delta_hours": 380.5
+    },
+    "performance-cliff-hash": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-performance-cliff-hash.log",
+      "log_mtime": "2026-06-16T21:59:57+00:00",
+      "score_timestamp": "2026-07-02T18:27:36Z",
+      "delta_hours": 380.5
+    },
+    "postgres-migration-schema-drift": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-postgres-migration-schema-drift.log",
+      "log_mtime": "2026-06-16T22:00:44+00:00",
+      "score_timestamp": "2026-07-02T18:29:35Z",
+      "delta_hours": 380.5
+    },
+    "race-condition-counter": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-race-condition-counter.log",
+      "log_mtime": "2026-06-16T21:59:35+00:00",
+      "score_timestamp": "2026-07-02T18:30:59Z",
+      "delta_hours": 380.5
+    },
+    "raft-snapshot-commit-gap": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-raft-snapshot-commit-gap.log",
+      "log_mtime": "2026-06-16T21:59:51+00:00",
+      "score_timestamp": "2026-07-02T18:32:56Z",
+      "delta_hours": 380.6
+    },
+    "rate-limit-bypass-header": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-rate-limit-bypass-header.log",
+      "log_mtime": "2026-06-16T21:59:58+00:00",
+      "score_timestamp": "2026-07-02T18:34:24Z",
+      "delta_hours": 380.6
+    },
+    "relaxed-ordering-ringbuf": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-relaxed-ordering-ringbuf.log",
+      "log_mtime": "2026-06-16T22:00:10+00:00",
+      "score_timestamp": "2026-07-02T18:35:50Z",
+      "delta_hours": 380.6
+    },
+    "retry-storm-duplicate-transfer": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-retry-storm-duplicate-transfer.log",
+      "log_mtime": "2026-06-16T22:01:22+00:00",
+      "score_timestamp": "2026-07-02T18:39:25Z",
+      "delta_hours": 380.6
+    },
+    "silent-data-corruption": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-silent-data-corruption.log",
+      "log_mtime": "2026-06-16T22:00:00+00:00",
+      "score_timestamp": "2026-07-02T18:40:44Z",
+      "delta_hours": 380.7
+    },
+    "split-brain-leader-election": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-split-brain-leader-election.log",
+      "log_mtime": "2026-06-16T22:00:33+00:00",
+      "score_timestamp": "2026-07-02T18:42:29Z",
+      "delta_hours": 380.7
+    },
+    "sql-injection-search": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-sql-injection-search.log",
+      "log_mtime": "2026-06-16T22:01:03+00:00",
+      "score_timestamp": "2026-07-02T18:44:04Z",
+      "delta_hours": 380.7
+    },
+    "ssrf-allowlist-port-confusion": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-ssrf-allowlist-port-confusion.log",
+      "log_mtime": "2026-06-16T22:01:21+00:00",
+      "score_timestamp": "2026-07-02T18:45:24Z",
+      "delta_hours": 380.7
+    },
+    "timezone-scheduling": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-timezone-scheduling.log",
+      "log_mtime": "2026-06-16T22:01:46+00:00",
+      "score_timestamp": "2026-07-02T18:47:05Z",
+      "delta_hours": 380.8
+    },
+    "timing-attack-comparison": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-timing-attack-comparison.log",
+      "log_mtime": "2026-06-16T22:01:09+00:00",
+      "score_timestamp": "2026-07-02T18:48:18Z",
+      "delta_hours": 380.8
+    },
+    "tls-chain-ordering-strict": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-tls-chain-ordering-strict.log",
+      "log_mtime": "2026-06-16T22:02:15+00:00",
+      "score_timestamp": "2026-07-02T18:50:11Z",
+      "delta_hours": 380.8
+    },
+    "type-coercion-comparison": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-type-coercion-comparison.log",
+      "log_mtime": "2026-06-16T22:01:29+00:00",
+      "score_timestamp": "2026-07-02T18:51:18Z",
+      "delta_hours": 380.8
+    },
+    "wal-fsync-ghost-ack": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-wal-fsync-ghost-ack.log",
+      "log_mtime": "2026-06-16T22:01:44+00:00",
+      "score_timestamp": "2026-07-02T18:53:29Z",
+      "delta_hours": 380.9
+    },
+    "wrong-operator-discount": {
+      "log": "rerun-gemini-kernel-logs/gemini-3.1-pro-preview-wrong-operator-discount.log",
+      "log_mtime": "2026-06-16T22:01:22+00:00",
+      "score_timestamp": "2026-07-02T18:54:32Z",
+      "delta_hours": 380.9
+    }
+  },
+  "marker_without_score": [
+    "haystack-boot",
+    "haystack-mint"
+  ]
+}

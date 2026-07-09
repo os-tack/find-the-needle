@@ -84,6 +84,12 @@ NEW_MLX_KERNEL = [
 #   Tier-2 (no native driver → Control + B* generic): ["native", "kernel"]
 FRONTIER_2026 = {  # model -> arms (exact, no gating)
     # Tier-1: true native driver, true B = kernel-cpu
+    # claude-fable-5: Anthropic frontier (added 2026-07-09). Routes native ->
+    # claude-code CLI (prefix claude-, bench.rs detect_native_harness) and
+    # kernel-cpu -> native AnthropicClient CpuDriver (providers.rs claude* ->
+    # Anthropic), so Tier-1 like the other claude models: one ostk execution
+    # under kernel-cpu, never a redundant plain-kernel twin.
+    "claude-fable-5":    ["native", "kernel-cpu"],
     "claude-opus-4-8":   ["native", "kernel-cpu"],
     "claude-sonnet-4-6": ["native", "kernel-cpu"],
     "gemini-3.1-pro-preview": ["native", "kernel-cpu"],

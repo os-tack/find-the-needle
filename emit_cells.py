@@ -90,15 +90,30 @@ def is_zero_work(rec):
 
 
 def load(model, arm):
+    """One record per benchmark. The bench key comes from the payload's own
+    `benchmark` field — NEVER the raw basename: recovery twins like
+    `<bench>.recovered-june16.score.json` would otherwise mint phantom bench
+    keys (38 per recovered model) that enter all_benches and the solved sums.
+    When several files map to one bench, keep-best (resolved > not, then
+    fewer turns) — the same rule consolidate_scores.py uses."""
     out = {}
-    for f in glob.glob(f"{RUNS}/{model}-{arm}/*.score.json"):
-        b = os.path.basename(f).replace(".score.json", "")
+    for f in sorted(glob.glob(f"{RUNS}/{model}-{arm}/*.score.json")):
+        try:
+            rec = json.load(open(f))
+        except Exception:
+            continue
+        if not isinstance(rec, dict):
+            continue
+        b = rec.get("benchmark") or os.path.basename(f).removesuffix(
+            ".score.json").split(".", 1)[0]
         if b in INVALID or b in PUBLISHED_EXCLUDE:
             continue
-        try:
-            out[b] = json.load(open(f))
-        except Exception:
-            pass
+        cur = out.get(b)
+        if (cur is None
+                or (bool(rec.get("resolved")) and not bool(cur.get("resolved")))
+                or (bool(rec.get("resolved")) == bool(cur.get("resolved"))
+                    and g(rec, "turns_to_fix") < g(cur, "turns_to_fix"))):
+            out[b] = rec
     return out
 
 
