@@ -188,7 +188,8 @@ def parse_journal_metrics(journal_text: str) -> dict:
 
 def score_from_journal(journal_text: str, *, model: str, bench: str, arm: str,
                        resolved: bool | None, wall_clock_s: float,
-                       difficulty_tier: str = "medium") -> dict:
+                       difficulty_tier: str = "medium",
+                       bench_binary: dict | None = None) -> dict:
     """Synthesize a score payload from a salvaged kernel journal — used when
     `ostk bench` journaled terminal completion but hung before writing
     score.json. resolved=None means the oracle re-run was impossible; we fall
@@ -229,12 +230,17 @@ def score_from_journal(journal_text: str, *, model: str, bench: str, arm: str,
         "wall_clock": round(wall_clock_s, 1),
         "teardown_masked": True,
         "scored_by": "stall_watch:journal",
+        # Binary-identity receipt: ostk bench stamps its own bench_binary on
+        # clean exits; a synthesized score must carry the same receipt or the
+        # cell is unattributable in a multi-binary date window (snapshot_of).
+        **({"bench_binary": bench_binary} if bench_binary else {}),
     }
 
 
 def stall_score(*, model: str, bench: str, arm: str, wall_clock_s: float,
                 detail: str, timeline: list[dict],
-                difficulty_tier: str = "medium") -> dict:
+                difficulty_tier: str = "medium",
+                bench_binary: dict | None = None) -> dict:
     """The INVALID cell record for a stall kill: stop_reason 'stall' (a
     first-class cell_validity reason), zero work claimed, full escalation
     timeline embedded for forensics. Fails closed by construction — the cell
@@ -258,6 +264,7 @@ def stall_score(*, model: str, bench: str, arm: str, wall_clock_s: float,
         "wall_clock": round(wall_clock_s, 1),
         "stall": {"detail": detail, "timeline": timeline},
         "scored_by": "stall_watch:stall_kill",
+        **({"bench_binary": bench_binary} if bench_binary else {}),
     }
 
 
@@ -484,7 +491,8 @@ def watch_cell(cmd: list[str], *, model: str, bench: str, arm: str,
                thresholds: Thresholds | None = None,
                probe: object | None = None,
                difficulty_tier: str = "medium",
-               spool_path: Path | None = None) -> WatchResult:
+               spool_path: Path | None = None,
+               bench_binary: dict | None = None) -> WatchResult:
     """Run `cmd` (one ostk bench cell) under the three detectors.
 
     Wired into run_matrix_v41.run_cell for EVERY arm. `probe` defaults to a
@@ -641,7 +649,8 @@ def watch_cell(cmd: list[str], *, model: str, bench: str, arm: str,
                     payload = score_from_journal(
                         jtext, model=model, bench=bench, arm=arm,
                         resolved=resolved, wall_clock_s=elapsed(),
-                        difficulty_tier=difficulty_tier)
+                        difficulty_tier=difficulty_tier,
+                        bench_binary=bench_binary)
                     score_path.parent.mkdir(parents=True, exist_ok=True)
                     score_path.write_text(json.dumps(payload, indent=2))
                     detail_bits.append(
@@ -673,7 +682,8 @@ def watch_cell(cmd: list[str], *, model: str, bench: str, arm: str,
                         model=model, bench=bench, arm=arm,
                         wall_clock_s=elapsed(), detail=detail,
                         timeline=ledger.timeline,
-                        difficulty_tier=difficulty_tier)
+                        difficulty_tier=difficulty_tier,
+                        bench_binary=bench_binary)
                     score_path.parent.mkdir(parents=True, exist_ok=True)
                     score_path.write_text(json.dumps(payload, indent=2))
                 return finish("stall_kill", detail, False, None)
@@ -705,7 +715,8 @@ def watch_cell(cmd: list[str], *, model: str, bench: str, arm: str,
                 payload = stall_score(
                     model=model, bench=bench, arm=arm, wall_clock_s=elapsed(),
                     detail=detail, timeline=ledger.timeline,
-                    difficulty_tier=difficulty_tier)
+                    difficulty_tier=difficulty_tier,
+                    bench_binary=bench_binary)
                 score_path.parent.mkdir(parents=True, exist_ok=True)
                 score_path.write_text(json.dumps(payload, indent=2))
             return finish("deadline_kill", detail, False, None)

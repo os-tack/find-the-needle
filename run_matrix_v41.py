@@ -557,6 +557,28 @@ def classify_failure(output: str, returncode: int) -> str:
         return "transient_fail"
     return "failed"
 
+_HOST_BENCH_BINARY: dict | None = None
+
+
+def host_bench_binary() -> dict:
+    """Binary-identity receipt for stall_watch-synthesized scores, matching
+    the shape ostk bench stamps on clean exits. Without it a watchdog-scored
+    cell publishes receipt-less and cannot be attributed in a multi-binary
+    date window (see consolidate_scores.snapshot_of)."""
+    global _HOST_BENCH_BINARY
+    if _HOST_BENCH_BINARY is None:
+        path, _sha = resolve_host_ostk()
+        try:
+            out = subprocess.run([str(path), "--version"], capture_output=True,
+                                 text=True, timeout=30).stdout.strip()
+            ver = out.split()[-1] if out else "unknown"
+        except (subprocess.TimeoutExpired, OSError):
+            ver = "unknown"
+        _HOST_BENCH_BINARY = {"version": ver, "build_sha": "unknown",
+                              "path": str(path)}
+    return _HOST_BENCH_BINARY
+
+
 def run_cell(model: str, bench: str, arm: str, dry_run: bool) -> tuple[str, str]:
     """Invoke ostk bench under stall_watch (merciless stall detection for
     EVERY arm — journal-completion detector on kernel arms, no-progress
@@ -603,6 +625,7 @@ def run_cell(model: str, bench: str, arm: str, dry_run: bool) -> tuple[str, str]
             deadline_s=cell_deadline_s(bench),
             cwd=ROOT, env=child_env,
             difficulty_tier=bench_difficulty_tier(bench),
+            bench_binary=host_bench_binary(),
         )
     except Exception as e:
         return "failed", f"exception: {e}"
@@ -623,8 +646,14 @@ def run_cell(model: str, bench: str, arm: str, dry_run: bool) -> tuple[str, str]
         # Cell already written as INVALID reason 'stall'; matrix continues.
         return "infra_fail", f"stall_watch: {result.detail} ({elapsed:.0f}s)"
 
-    completed = (result.status == "completed_kill"
-                 or (result.status == "exit" and result.returncode == 0))
+    # A self-exit is 'completed' regardless of returncode: ostk bench exits
+    # nonzero for a completed-but-unsolved scenario ("error: N scenario(s)
+    # failed"), and the validity gate below is what decides success. Crash
+    # exits that left no fresh valid score still fall through to
+    # classify_failure; invalid scores route to infra_fail as before.
+    # (Pre-v7.7.2 this was masked: unsolved kernel cells always hung at
+    # teardown and took the completed_kill path instead of clean exit 1.)
+    completed = result.status in ("completed_kill", "exit")
     masked_note = " [teardown_masked]" if result.teardown_masked else ""
     if completed and score_exists(model, bench, arm):
         if score_valid(model, bench, arm):
@@ -889,16 +918,23 @@ def main() -> int:
                     if cell_succeeded and not args.dry_run:
                         append_sample(m.name, bench, arm, sample_idx)
                         resolved = read_score_resolved(m.name, bench, arm)
-                        if resolved:
-                            print(f"    [F7] sample {sample_idx} resolved=true; canonical score preserved")
+                        # A sample-1 solve is trusted at n=1 (uniform across
+                        # all eras). But once resampling has begun, the cell
+                        # is scored by strict majority over ALL samples taken
+                        # (consolidate_scores folds the sidecar), so a mid-
+                        # stream solve must NOT stop early: [F,T] would lock
+                        # in 1/2 = miss without ever running the deciding
+                        # third sample. Run the full budget.
+                        if resolved and sample_idx == 1:
+                            print(f"    [F7] sample 1 resolved=true; canonical score preserved")
                             break
                         if sample_idx < samples_max:
-                            print(f"    [F7] sample {sample_idx} resolved=false; resampling ({sample_idx+1}/{samples_max})")
+                            print(f"    [F7] sample {sample_idx} resolved={str(bool(resolved)).lower()}; resampling ({sample_idx+1}/{samples_max})")
                             attempt_num = 1  # reset transient-retry budget for the next sample
                             time.sleep(5)
                             continue
                         else:
-                            print(f"    [F7] all {samples_max} samples resolved=false")
+                            print(f"    [F7] {samples_max} samples taken; strict majority decides")
                             break
                     else:
                         # Hard/transient/infra failure — don't burn extra samples
