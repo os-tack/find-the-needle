@@ -205,6 +205,79 @@ def parse_claude_result_json(text: str) -> dict | None:
     return None
 
 
+_MODEL_DATE_SUFFIX_RE = re.compile(r"-\d{8}$")
+_HAIKU_SIDECAR = "claude-haiku-4-5"
+
+
+def _canon_model_key(key: str) -> str:
+    """Strip a trailing -YYYYMMDD date suffix for sidecar-model comparison
+    ONLY. The raw (possibly date-suffixed) key is still what ends up in
+    observed_models — cell_validity.normalize_model_id does its own
+    normalization at compare time."""
+    return _MODEL_DATE_SUFFIX_RE.sub("", key)
+
+
+def observed_models_from_result_json(text: str) -> list[str] | None:
+    """Pull the real, billable model id(s) that served THIS session from a
+    Claude Code CLI result envelope's `modelUsage` map (the same envelope
+    parse_claude_result_json reads, INCLUDING error results).
+
+    WHY: a Claude Code session can silently continue on a different model
+    mid-session — e.g. Fable 5's cyber-safety classifier trips on a
+    security-flavored bench and the vendor CLI falls back to Opus 4.8
+    without surfacing it anywhere else in the score payload (see
+    boards/FAULTS.json july09-fable5-native-opus-fallback: 4 cells, verified
+    via modelUsage showing both fable AND opus token buckets in one session).
+    modelUsage is keyed by every model id that billed tokens in the session,
+    so >1 non-sidecar id here means the session was not pure single-model.
+
+    The claude-haiku-4-5 sidecar (which the CLI runs internally for titles /
+    quick classification on EVERY session — not a fallback) and any
+    zero-usage entries are excluded: they are not part of the cell's model
+    identity claim. Returns None when no result envelope with a usable
+    modelUsage map is found (mirrors parse_claude_result_json's None
+    contract)."""
+    for line in text.splitlines():
+        brace = line.find("{")
+        if brace < 0 or '"type"' not in line or '"result"' not in line:
+            continue
+        try:
+            obj, _ = json.JSONDecoder().raw_decode(line[brace:])
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(obj, dict) or obj.get("type") != "result":
+            continue
+        mu = obj.get("modelUsage")
+        if not isinstance(mu, dict) or not mu:
+            continue
+        models = []
+        for key, d in mu.items():
+            if _canon_model_key(key) == _HAIKU_SIDECAR:
+                continue
+            d = d or {}
+            used = (int(d.get("inputTokens") or 0) + int(d.get("outputTokens") or 0)
+                    + int(d.get("cacheReadInputTokens") or 0)
+                    + int(d.get("cacheCreationInputTokens") or 0))
+            if used == 0:
+                continue
+            models.append(key)
+        return models or None
+    return None
+
+
+def observed_models_from_raw(raw_dir: Path) -> list[str] | None:
+    """observed_models_from_result_json, sourced from a cell's
+    .raw/native.stdout (or None if the file is absent/unreadable/foreign)."""
+    fp = raw_dir / "native.stdout"
+    if not fp.is_file():
+        return None
+    try:
+        text = fp.read_text(errors="replace")
+    except OSError:
+        return None
+    return observed_models_from_result_json(text)
+
+
 def parse_gemini_stats(text: str) -> dict | None:
     """Recover usage from the Gemini CLI end-of-run stats JSON (native.stdout).
 
@@ -310,23 +383,58 @@ def _accounted(payload: dict) -> bool:
 
 def enrich_score_file(score_path: Path, raw_dir: Path | None = None,
                       apply: bool = True, force: bool = False) -> tuple[bool, str]:
-    """Patch one native-arm score payload with recovered CLI usage.
+    """Patch one native-arm score payload with recovered CLI usage AND (independently)
+    an observed-model-identity receipt.
 
-    Returns (changed, note). Never touches a payload that already carries
-    real accounting (unless force). When nothing is recoverable, stamps
-    cost_basis='unavailable' explicitly (solve axis untouched)."""
+    Returns (changed, note). Two independent enrichments happen here:
+
+      1. MODEL-IDENTITY RECEIPT (→GPT-review F5c): extract observed_models
+         from the raw Claude CLI result envelope's modelUsage map whenever
+         one is recoverable. This runs regardless of whether the payload
+         already carries real cost accounting — the fable-5/opus-4-8
+         mid-session fallback happens on cells the writer already billed
+         correctly, so gating this behind the cost check would mean it never
+         fires for exactly the cells it exists to catch. Idempotent: never
+         overwrites an existing observed_models receipt (unless force).
+
+      2. COST-TELEMETRY RECOVERY (the original purpose of this module): never
+         touches a payload that already carries real billed accounting
+         (unless force). When nothing is recoverable, stamps
+         cost_basis='unavailable' explicitly (solve axis untouched).
+    """
     try:
         payload = json.loads(score_path.read_text())
     except (OSError, json.JSONDecodeError) as e:
         return False, f"unreadable payload ({e})"
     if not isinstance(payload, dict):
         return False, "malformed payload"
-    if _accounted(payload) and not force:
-        return False, "already accounted"
 
     bench = payload.get("benchmark") or score_path.name.removesuffix(".score.json")
     if raw_dir is None:
         raw_dir = score_path.parent / f"{bench}.raw"
+
+    model_note: str | None = None
+    if "observed_models" not in payload or force:
+        observed = observed_models_from_raw(raw_dir) if raw_dir.is_dir() else None
+        if observed:
+            if apply:
+                payload["observed_models"] = observed
+            model_note = f"observed_models={observed}"
+
+    def _finish(changed: bool, note: str) -> tuple[bool, str]:
+        """Fold the (independent) model-identity note into the return value,
+        writing the payload if the model receipt alone is what changed."""
+        if not changed and model_note:
+            if apply:
+                score_path.write_text(json.dumps(payload, indent=2))
+            return True, model_note
+        if changed and model_note:
+            return True, f"{note}; {model_note}"
+        return changed, note
+
+    if _accounted(payload) and not force:
+        return _finish(False, "already accounted")
+
     usage = recover_usage(raw_dir) if raw_dir.is_dir() else None
 
     if usage is None:
@@ -342,15 +450,15 @@ def enrich_score_file(score_path: Path, raw_dir: Path | None = None,
         completed = bool(payload.get("resolved")) or turns > 0 or tool_uses > 0
         passive_verify = stop == "pass" and turns == 0
         if not completed or passive_verify:
-            return False, "no telemetry, but not a completed-work cell — untouched"
+            return _finish(False, "no telemetry, but not a completed-work cell — untouched")
         note = "no telemetry recoverable -> cost_basis=unavailable"
         if payload.get("cost_basis") == "unavailable":
-            return False, "already marked unavailable"
+            return _finish(False, "already marked unavailable")
         if apply:
             payload["cost_basis"] = "unavailable"
             payload["native_usage_source"] = "none"
             score_path.write_text(json.dumps(payload, indent=2))
-        return True, note
+        return _finish(True, note)
 
     prev = {k: payload.get(k) for k in
             ("input_tokens", "output_tokens", "billed_tokens",
@@ -385,7 +493,7 @@ def enrich_score_file(score_path: Path, raw_dir: Path | None = None,
             f"calls={usage['api_calls']}"
             + (f" turns={usage['num_turns']}" if usage.get("num_turns") else "")
             + (f" cost=${usage['cost_usd']}" if usage["cost_usd"] else ""))
-    return True, note
+    return _finish(True, note)
 
 
 # ---------------------------------------------------------------------------

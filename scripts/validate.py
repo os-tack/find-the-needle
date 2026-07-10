@@ -125,10 +125,10 @@ def main() -> int:
         if arm is None:
             # Orphan dir: no arm suffix — the arm=None signature. Fail closed.
             reasons = [REASON_UNRECOGNIZED_DIR]
-            cls = cell_validity.classify_cell(entry)
+            cls = cell_validity.classify_cell(entry, model=model)
             reasons += cls.reasons
         else:
-            cls = cell_validity.classify_cell(entry, requested_arm=arm)
+            cls = cell_validity.classify_cell(entry, requested_arm=arm, model=model)
             reasons = list(cls.reasons)
             if dup_reason:
                 reasons.append(dup_reason)

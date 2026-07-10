@@ -39,6 +39,7 @@ Importable by consolidate_scores.py (and any future consolidator); stdlib only.
 
 from __future__ import annotations
 
+import re
 from typing import NamedTuple
 
 VALID = "valid"
@@ -81,6 +82,50 @@ REASON_NATIVE_DRIVER_DUP = "native_driver_duplicate_column"
 REASON_GENERIC_KERNEL_DUP = "generic_kernel_duplicate_column"
 
 # ---------------------------------------------------------------------------
+# ARM-RECEIPT RECONCILIATION (→GPT-review F5). REASON_NO_ARM_RECEIPT /
+# REASON_ARM_MISMATCH (above) reconcile the payload's OWN receipts against
+# each other (agent suffix vs arm field) for requested-vs-executed
+# self-consistency. The three reasons below reconcile the receipt against the
+# cell's PUBLIC claims instead — the column it publishes under, the provider
+# it claims to have run through, and the model identity it claims — each
+# fail-open on an absent field so a frozen era can never be flipped by a
+# check introduced after it was captured.
+# ---------------------------------------------------------------------------
+# (a) COLUMN <-> RECEIPT. The published column comes from the runs/
+# DIRECTORY name; the payload's own literal `executed_arm` field (written
+# directly by the rust host's bench_binary receipt) is a SEPARATE signal from
+# the agent-suffix/arm-field derivation REASON_ARM_MISMATCH already checks —
+# it can name a generic fallback execution (e.g. 'kernel') even when the
+# agent suffix still says '<model>-kernel-cpu', because the agent label is
+# assigned by the invoker before the host resolves which internal path
+# actually ran. A cell in a -kernel-cpu dir whose executed_arm receipt says
+# 'kernel' published under an arm it did not run, invisibly, until this
+# check. Absent literal field -> no-op (older writers never set it).
+REASON_COLUMN_ARM_MISMATCH = "column_arm_mismatch"
+# (b) PROVIDER <-> EXPECTATION. haystack stamps `executed_provider` (the
+# actual API vendor: "openai"/"anthropic"/"gemini"/"openrouter"/...) into
+# kernel/kernel-cpu score payloads. A model with a known native provider
+# (claude-*, gpt-*/o1/o3/o4, gemini-*, mistral/codestral/devstral) that
+# instead executed through "openrouter" is a B* generic-OpenRouter execution
+# masquerading as a Tier-1 native-driver column (see
+# consolidate_scores.kernel_arm_type_for). Conditional both ways: absent
+# executed_provider field, OR a model with no derivable expectation -> no-op.
+# Never checked on the native arm (the native CLI identity, e.g. 'claude' /
+# 'codex', is not a provider name).
+REASON_PROVIDER_MISMATCH = "provider_mismatch"
+# (c) MODEL IDENTITY <-> OBSERVED. The vendor CLI can silently continue a
+# session on a different model mid-run (the 2026-07-09 fable-5 incident: a
+# cyber-safety classifier trip fell back to claude-opus-4-8; see
+# boards/FAULTS.json july09-fable5-native-opus-fallback). scripts/
+# native_usage.py extracts the real, billable model id(s) that served the
+# session (the Claude CLI result envelope's `modelUsage` map, sidecar/
+# zero-usage entries excluded) into `observed_models` when available. An
+# observed id that is not the claimed model (prefix-after-normalization; CLI
+# ids may carry a -YYYYMMDD date suffix) means the solve was not pure —
+# INVALID. Absent observed_models -> no-op (no cell carries it yet).
+REASON_MODEL_MISMATCH = "model_mismatch"
+
+# ---------------------------------------------------------------------------
 # Axis assignment. SOLVE-axis reasons poison BOTH axes (no trustworthy verdict
 # means no attributable spend either); COST-axis reasons leave the solve
 # verdict standing and mark the cost axis unavailable. The dedup reasons are
@@ -91,6 +136,7 @@ SOLVE_AXIS_REASONS = frozenset({
     REASON_MALFORMED, REASON_NO_ARM_RECEIPT, REASON_ARM_MISMATCH,
     REASON_DEADLINE, REASON_STALL, REASON_ZERO_WORK,
     REASON_NATIVE_DRIVER_DUP, REASON_GENERIC_KERNEL_DUP,
+    REASON_COLUMN_ARM_MISMATCH, REASON_PROVIDER_MISMATCH, REASON_MODEL_MISMATCH,
 })
 COST_AXIS_REASONS = frozenset({
     REASON_ZERO_TOKEN_INPUT, REASON_ZERO_TOKEN_OUTPUT, REASON_ZERO_BILLED,
@@ -141,6 +187,51 @@ def split_agent_arm(agent: str | None) -> tuple[str, str] | None:
         if agent.endswith(tail) and len(agent) > len(tail):
             return agent[: -len(tail)], suffix
     return None
+
+
+_MODEL_ID_DATE_SUFFIX_RE = re.compile(r"-\d{8}$")
+
+
+def normalize_model_id(model_id: str | None) -> str | None:
+    """Canonicalize a model id/name for identity comparisons: lowercase,
+    dots/underscores -> dashes (mirrors consolidate_scores.normalize_model),
+    and a trailing -YYYYMMDD date suffix stripped (vendor CLI model ids can
+    carry one, e.g. 'claude-fable-5-20260709'). None in, None out."""
+    if model_id is None:
+        return None
+    m = re.sub(r"[_.]", "-", str(model_id).strip().lower())
+    return _MODEL_ID_DATE_SUFFIX_RE.sub("", m)
+
+
+def expected_provider(model: str | None) -> str | None:
+    """The provider a model is EXPECTED to execute through, from a coarse
+    model-name-prefix heuristic. None means NO expectation — e.g. deepseek/
+    grok/kimi/qwen native cells route through vendor CLIs / OpenRouter with
+    no single 'native provider' to reconcile against, so an unmapped model
+    never poisons a cell by itself (see REASON_PROVIDER_MISMATCH)."""
+    if not model:
+        return None
+    m = str(model).strip().lower()
+    if m.startswith("claude"):
+        return "anthropic"
+    if m.startswith("gpt") or m.startswith(("o1", "o3", "o4")):
+        return "openai"
+    if m.startswith("gemini"):
+        return "gemini"
+    if "mistral" in m or "codestral" in m or "devstral" in m:
+        return "mistral"
+    return None
+
+
+def _claimed_model(entry: dict, model: str | None) -> str | None:
+    """The model this cell claims to be: the threaded directory identity
+    (ground truth for the column) when the caller supplies one, else a
+    best-effort fallback to the agent-suffix parse (same receipt
+    executed_arm() trusts as its strongest signal)."""
+    if model:
+        return model
+    parsed = split_agent_arm(entry.get("agent"))
+    return parsed[0] if parsed else None
 
 
 def executed_arm(entry: dict) -> str | None:
@@ -201,12 +292,17 @@ def classify_reasons(reasons: list[str]) -> Classification:
                           solve_reasons, cost_reasons)
 
 
-def classify_cell(entry: object, requested_arm: str | None = None) -> Classification:
+def classify_cell(entry: object, requested_arm: str | None = None,
+                  model: str | None = None) -> Classification:
     """Fail-closed, per-axis classification of a single loaded score payload.
 
     `requested_arm` is the arm implied by the runs/ directory the file was
     found in ('native' | 'kernel' | 'kernel-cpu'); pass None to skip the
-    receipt check (unit pricing tests etc.).
+    receipt check (unit pricing tests etc.). `model` is the on-disk model
+    identity implied by that same directory (threaded through from
+    consolidate_scores.collect_cells); pass None to fall back to a
+    best-effort agent-suffix parse, or to skip the model/provider-identity
+    checks entirely when neither is available.
 
     Rules (all reasons that apply are collected, not just the first):
       malformed        — not a dict, or missing the `benchmark` key.
@@ -214,6 +310,20 @@ def classify_cell(entry: object, requested_arm: str | None = None) -> Classifica
                          parseable agent suffix nor a recognized arm field.
       arm_mismatch     — the executed-arm receipt names a different arm than
                          requested (e.g. a '-native' agent inside a -kernel dir).
+      column_arm_mismatch — the payload's own literal `executed_arm` receipt
+                         field names a different arm than the directory it
+                         publishes under (→GPT-review F5a). Absent field: no-op.
+      provider_mismatch — `executed_provider` is stamped, the model has a
+                         known native-provider expectation, and the two
+                         disagree on a kernel/kernel-cpu cell — a generic
+                         OpenRouter (B*) execution masquerading as a Tier-1
+                         native-driver column (→GPT-review F5b). Absent
+                         field, no expectation, or native arm: no-op.
+      model_mismatch   — `observed_models` (vendor-CLI telemetry) is present
+                         and names a model id that isn't the cell's claimed
+                         model — a mid-session vendor-CLI model fallback
+                         (→GPT-review F5c, the fable-5/opus-4-8 incident).
+                         Absent field: no-op.
       deadline_exceeded— stop_reason contains 'deadline': an infra timeout is
                          not a model verdict. Previously silently dropped;
                          now visibly INVALID.
@@ -251,12 +361,13 @@ def classify_cell(entry: object, requested_arm: str | None = None) -> Classifica
                          (Formerly a passive_verify exemption kept these fully
                          VALID — the P0 cost-accounting defect this replaces.)
 
-    AXIS SPLIT: malformed / no_arm_receipt / arm_mismatch / deadline /
-    zero_work are SOLVE-axis reasons → the cell is fully INVALID. The four
-    zero_token_accounting reasons are COST-axis reasons → the cell is
-    COST_INVALID: its oracle verdict and arm receipt stand (it enters solve
-    aggregates) while its cost axis is UNAVAILABLE (excluded from cost/token
-    aggregates, never priced). See module docstring.
+    AXIS SPLIT: malformed / no_arm_receipt / arm_mismatch / column_arm_mismatch
+    / provider_mismatch / model_mismatch / deadline / zero_work are SOLVE-axis
+    reasons → the cell is fully INVALID. The four zero_token_accounting
+    reasons are COST-axis reasons → the cell is COST_INVALID: its oracle
+    verdict and arm receipt stand (it enters solve aggregates) while its cost
+    axis is UNAVAILABLE (excluded from cost/token aggregates, never priced).
+    See module docstring.
     """
     if not isinstance(entry, dict) or "benchmark" not in entry:
         return classify_reasons([REASON_MALFORMED])
@@ -270,6 +381,37 @@ def classify_cell(entry: object, requested_arm: str | None = None) -> Classifica
             reasons.append(REASON_NO_ARM_RECEIPT)
         elif executed != req:
             reasons.append(f"{REASON_ARM_MISMATCH}:requested={req},executed={executed}")
+
+        # (a) COLUMN <-> RECEIPT — see REASON_COLUMN_ARM_MISMATCH above.
+        lit_executed = entry.get("executed_arm")
+        if lit_executed:
+            lit_executed_norm = normalize_arm(lit_executed)
+            if lit_executed_norm != req:
+                reasons.append(f"{REASON_COLUMN_ARM_MISMATCH}:"
+                              f"dir={req}:executed={lit_executed_norm}")
+
+        # (b) PROVIDER <-> EXPECTATION — see REASON_PROVIDER_MISMATCH above.
+        # Only meaningful on kernel/kernel-cpu: the native arm's CLI identity
+        # (e.g. 'claude', 'codex') is not a provider name.
+        if req in ("kernel", "kernel-cpu"):
+            obs_provider = entry.get("executed_provider")
+            exp_provider = expected_provider(_claimed_model(entry, model))
+            if obs_provider and exp_provider is not None:
+                obs_provider_norm = str(obs_provider).strip().lower()
+                if obs_provider_norm != exp_provider:
+                    reasons.append(f"{REASON_PROVIDER_MISMATCH}:"
+                                  f"expected={exp_provider}:executed={obs_provider_norm}")
+
+    # (c) MODEL IDENTITY <-> OBSERVED — see REASON_MODEL_MISMATCH above.
+    # Independent of arm: the fable-5/opus-4-8 incident is a NATIVE-arm fault.
+    observed = entry.get("observed_models")
+    if observed:
+        claimed_norm = normalize_model_id(_claimed_model(entry, model))
+        if claimed_norm:
+            mismatched = [o for o in observed
+                         if not (normalize_model_id(o) or "").startswith(claimed_norm)]
+            if mismatched:
+                reasons.append(f"{REASON_MODEL_MISMATCH}:observed={','.join(observed)}")
 
     stop = (entry.get("stop_reason") or "").lower()
     turns = entry.get("turns_to_fix") or 0

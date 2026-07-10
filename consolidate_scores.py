@@ -713,7 +713,8 @@ def collect_cells() -> tuple[list[dict], dict, dict]:
                     entry.get("teardown_masked") or bench_name in masked_set
                 )
                 masked = entry["teardown_masked"]
-                reasons = list(cell_validity.classify_cell(entry, requested_arm=arm).reasons)
+                reasons = list(cell_validity.classify_cell(
+                    entry, requested_arm=arm, model=model).reasons)
                 if dup_reason:
                     reasons.append(dup_reason)
 
