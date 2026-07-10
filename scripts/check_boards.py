@@ -82,7 +82,7 @@ def check_axis_board(path: Path, data: dict) -> None:
     # Deliberately hardcoded (second opinion on consolidate_scores.SNAPSHOTS):
     # extend this tuple in the SAME change that adds a snapshot to the pipeline.
     if data.get("snapshot") not in ("latest", "june16", "july02", "july09",
-                                    "july09v2", "july09v3"):
+                                    "july09v2", "july09v3", "july10"):
         fail(f"{where}: unknown snapshot {data.get('snapshot')!r}")
     for m in data.get("models", []):
         for arm in ("native", "kernel", "cpu", "ostk"):
@@ -125,7 +125,7 @@ def check_aswas(path: Path, data: dict, fault_ids: set) -> None:
 # two-truths by design: drift between the maps surfaces as a failure here.
 SNAPSHOT_BINARY = {"june16": "v7.6.0", "july02": "v7.6.0",
                    "july09": "v7.7.1", "july09v2": "v7.7.2",
-                   "july09v3": "v7.7.3"}
+                   "july09v3": "v7.7.3", "july10": "v7.7.4"}
 # Snapshots sharing one run date (2026-07-09 hosted two pins): a receipt
 # CONTRADICTING its snapshot fails anywhere, but a receipt-less cell in a
 # multi-binary window can only be attributed by default — count it visibly.

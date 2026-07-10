@@ -54,11 +54,11 @@ EXPERIMENT_OUTPUT = Path(__file__).parent / "public" / "experiment-scores.json"
 # hosted THREE frozen-bin pins in one day — v7.7.1 ("july09"; fable-5 + flash
 # smoke), v7.7.2 ("july09v2"), and v7.7.3 ("july09v3", the current latest).
 # ---------------------------------------------------------------------------
-OSTK_VERSION = "v7.7.3"                      # current binary (latest board)
+OSTK_VERSION = "v7.7.4"                      # current binary (latest board)
 # Chronological order — MUST stay oldest→newest: downstream ranking uses
 # SNAPSHOTS.index (see published_snapshot_for / consolidate_all) to pick the
 # newest snapshot per column, so a new pin is APPENDED, never inserted.
-SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3")
+SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3", "july10")
 # F2 FIX — RECEIPT-DRIVEN SNAPSHOT IDENTITY. The cell's own bench_binary.version
 # receipt is the RELIABLE attribution signal; the hand-maintained date ladder
 # below can only split the v7.6.0 june16/july02 pair (same binary, different run
@@ -67,7 +67,8 @@ SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3")
 # its payload date. v7.6.0 is intentionally ABSENT (date-ambiguous). Newest
 # first for readability; matching is exact-or-dotted-prefix (see snapshot_of).
 SNAPSHOT_BY_VERSION = (
-    ("7.7.3", "july09v3"),   # 2026-07-09 third pin (current latest board)
+    ("7.7.4", "july10"),     # 2026-07-10 pin (native OpenAI Responses driver; current latest)
+    ("7.7.3", "july09v3"),   # 2026-07-09 third pin
     ("7.7.2", "july09v2"),   # 2026-07-09 second pin
     ("7.7.1", "july09"),     # 2026-07-09 first pin
 )
@@ -83,13 +84,13 @@ SNAPSHOT_BOUNDARIES = (
 )
 SNAPSHOT_RUN_DATE = {"june16": "2026-06-16", "july02": "2026-07-02",
                      "july09": "2026-07-09", "july09v2": "2026-07-09",
-                     "july09v3": "2026-07-09"}
+                     "july09v3": "2026-07-09", "july10": "2026-07-10"}
 # Binary identity per snapshot: versioned boards land under
 # boards/<SNAPSHOT_OSTK_VERSION[snap]>/ — a run is never re-attributed to a
 # binary it did not execute on (runs/.binary_identity.jsonl is the receipt).
 SNAPSHOT_OSTK_VERSION = {"june16": "v7.6.0", "july02": "v7.6.0",
                          "july09": "v7.7.1", "july09v2": "v7.7.2",
-                         "july09v3": "v7.7.3"}
+                         "july09v3": "v7.7.3", "july10": "v7.7.4"}
 # Fault ids (boards/FAULTS.json) attached to each snapshot's published board.
 SNAPSHOT_FAULTS = {
     "june16": ["june16-teardown-masked"],
@@ -101,10 +102,14 @@ SNAPSHOT_FAULTS = {
                "july09-fable5-native-opus-fallback"],
     "july09v2": ["july09-f7-earlystop-truncated-votes",
                  "july09-runcell-exit1-hardfail"],
-    # v7.7.3 (current latest): F7 early-stop + runcell hard-fail both fixed
-    # before this pin; retry-cost accounting is now summed across attempts
-    # (see load_score F3). No known era faults yet.
+    # v7.7.3: F7 early-stop + runcell hard-fail both fixed before this pin;
+    # retry-cost accounting summed across attempts (load_score F3).
     "july09v3": [],
+    # v7.7.4 (current latest): adds the native OpenAI Responses-API CpuDriver
+    # (gpt-* kernel-cpu becomes a true Tier-1 native-driver arm; the old
+    # generic-OpenRouter gpt kernel cells are archived, frozen boards keep
+    # their history). No known era faults yet.
+    "july10": [],
 }
 # Human-readable one-liners for the ids above; the canonical machine-readable
 # era annotations (windows, commits, affected models) live in boards/FAULTS.json.
@@ -229,6 +234,9 @@ RATE_CARD = {
     "gpt-5.2": (1.25, 10.00), "gpt-5.4": (1.25, 10.00),
     # gpt-5.5 line: April 23 2026 price hike doubled the GPT-5 line → $5/$30 input/output.
     "gpt-5.5": (5.00, 30.00), "gpt-5.5-pro": (30.00, 180.00),
+    # gpt-5.6 family (GA 2026-07-09): Sol $5/$30, Terra $2.50/$15, Luna $1/$6.
+    "gpt-5.6": (5.00, 30.00), "gpt-5.6-sol": (5.00, 30.00),
+    "gpt-5.6-terra": (2.50, 15.00), "gpt-5.6-luna": (1.00, 6.00),
     "o3": (2.00, 8.00), "o4-mini": (1.10, 4.40),
     "grok-3": (3.00, 15.00), "grok-3-fast": (0.20, 0.50), "grok-4": (3.00, 15.00),
     "grok-3-mini": (0.30, 0.50), "grok-4-fast": (0.20, 0.50),
@@ -278,10 +286,12 @@ CPU_DRIVER_MODELS = {
     "gemini-3-5-flash",  # frontier-2026 flash; native GeminiClient cpu driver
     # OpenAI — native API (OpenRouterClient pointed at api.openai.com)
     "gpt-4-1", "gpt-5-codex", "o3", "o4-mini",
-    # NOTE: gpt-5.5 / gpt-5.5-pro are NOT here. ostk v7.6.0 has no native
-    # OpenAI Responses-API driver, so their kernel-cpu cells fall back to the
-    # generic OpenRouter (openrouter.ai) path — i.e. B* (generic_kernel), not
-    # true native-driver B. Keeping them out tags kernel_arm_type correctly.
+    # gpt-5.5 / gpt-5.6: Tier-1 as of v7.7.4 — haystack ships a native OpenAI
+    # Responses-API CpuDriver (src/cpu/openai.rs, POST /v1/responses,
+    # reasoning.effort=high, encrypted_content round-trip). The pre-v7.7.4
+    # generic-OpenRouter gpt-5.5 kernel cells were archived
+    # (runs-archive/gpt-5.5-*-v760-*); frozen boards keep their B* history.
+    "gpt-5-5", "gpt-5-6",
     # Mistral — native API
     "codestral-2508", "devstral-2512", "devstral-medium", "devstral-small-latest",
 }
@@ -356,6 +366,25 @@ def load_teardown_sidecar(dir_path: Path) -> frozenset:
 #   cache_create 5m write ....... 1.25x input rate
 #   cache_create 1h write ....... 2.00x input rate
 CACHE_MULT = {"fresh": 1.0, "cache_read": 0.10, "cache_create_5m": 1.25, "cache_create_1h": 2.00}
+
+# F6-broad fix: cache economics are PER-PROVIDER — the Anthropic multipliers
+# above must not be applied to every model. OpenAI (Responses API, implicit
+# prefix caching): reads 0.10x like Anthropic, but the WRITE premium is 1.25x
+# only from the gpt-5.6 family onward (5.5 and earlier bill writes at 1.0x —
+# no explicit cache-write fee), and there is no 5m/1h TTL split at all.
+# Anthropic/other models keep CACHE_MULT unchanged (existing boards byte-stable).
+CACHE_MULT_OPENAI_PRE56 = {"fresh": 1.0, "cache_read": 0.10, "cache_create_5m": 1.00, "cache_create_1h": 1.00}
+CACHE_MULT_OPENAI_56 = {"fresh": 1.0, "cache_read": 0.10, "cache_create_5m": 1.25, "cache_create_1h": 1.25}
+
+
+def cache_mult_for(model: str) -> dict:
+    """Per-provider cache multipliers (see F6-broad note above)."""
+    m = model.lower()
+    if m.startswith("gpt-5.6") or m.startswith("gpt-5-6"):
+        return CACHE_MULT_OPENAI_56
+    if m.startswith(("gpt-", "o1", "o3", "o4")):
+        return CACHE_MULT_OPENAI_PRE56
+    return CACHE_MULT
 
 
 def compute_cost_ex(entry: dict, model: str) -> tuple[float, str]:
@@ -435,13 +464,15 @@ def compute_cost_ex(entry: dict, model: str) -> tuple[float, str]:
         return 0.0, "unpriced"
     # Full split present → price every bucket explicitly.
     # If 5m/1h aren't split out, treat all cache_create as 5m (the common case).
+    # Multipliers are per-provider (cache_mult_for — F6-broad fix).
+    mult = cache_mult_for(model)
     cc_unsplit = max(0, cc_total - cc_5m - cc_1h)
     cost_input = (
-        fresh * CACHE_MULT["fresh"]
-        + cache_read * CACHE_MULT["cache_read"]
-        + cc_5m * CACHE_MULT["cache_create_5m"]
-        + cc_1h * CACHE_MULT["cache_create_1h"]
-        + cc_unsplit * CACHE_MULT["cache_create_5m"]
+        fresh * mult["fresh"]
+        + cache_read * mult["cache_read"]
+        + cc_5m * mult["cache_create_5m"]
+        + cc_1h * mult["cache_create_1h"]
+        + cc_unsplit * mult["cache_create_5m"]
     ) * in_rate
     return (cost_input + tout * out_rate) / 1_000_000, "bucket-split"
 
@@ -604,6 +635,7 @@ NATIVE_CLI_MAP = {
     "gemini-3-flash-preview": "gemini-cli", "gemini-3-1-pro-preview": "gemini-cli",
     "gemini-3-5-flash": "gemini-cli",
     "gpt-4-1": "codex", "gpt-5-codex": "codex", "o4-mini": "codex", "gpt-5-5": "codex",
+    "gpt-5-6": "codex", "gpt-5-6-sol": "codex",
     "devstral-2512": "vibe", "devstral-medium": "vibe", "devstral-small-latest": "vibe",
     "kimi-k2-5": "kimi-cli", "kimi-k2-6": "kimi",
 }
