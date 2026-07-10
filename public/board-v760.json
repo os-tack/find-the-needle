@@ -1,6 +1,6 @@
 {
- "generated": "2026-07-09",
- "run": "v7.7.2",
+ "generated": "2026-07-10",
+ "run": "v7.7.3",
  "snapshot": "latest",
  "pipeline": "publish_boards.py \u2190 consolidate_scores.py (axis-split validity)",
  "published_tasks": 37,
@@ -32,10 +32,6 @@
   {
    "id": "july09-fable5-native-opus-fallback",
    "note": "claude-fable-5 native: 4 security cells silently continued on claude-opus-4-8 after a mid-session classifier stop \u2014 solve attribution for those cells is not pure fable-5 (see FAULTS.json for the cell list)."
-  },
-  {
-   "id": "july09-runcell-exit1-hardfail",
-   "note": "v7.7.2 capture: run_cell hard-failed clean completed-but-unsolved exits (unmasked by the teardown fix); one sonnet-5 kernel cell was remediated by cold re-run before publish \u2014 no published board carries a mis-scored cell. Harness fixed 2026-07-09."
   }
  ],
  "faults_ref": "boards/FAULTS.json",
@@ -51,7 +47,7 @@
    "zero_work": 4
   },
   "cost_invalid_by_reason": {},
-  "teardown_masked_cells": 113,
+  "teardown_masked_cells": 73,
   "by_ostk_version": {
    "v7.6.0": {
     "solve_valid_cells": 545,
@@ -60,14 +56,14 @@
     "invalid_cells": 10
    },
    "v7.7.1": {
-    "solve_valid_cells": 149,
-    "cost_valid_cells": 149,
+    "solve_valid_cells": 1,
+    "cost_valid_cells": 1,
     "cost_invalid_cells": 0,
     "invalid_cells": 0
    },
-   "v7.7.2": {
-    "solve_valid_cells": 74,
-    "cost_valid_cells": 74,
+   "v7.7.3": {
+    "solve_valid_cells": 222,
+    "cost_valid_cells": 222,
     "cost_invalid_cells": 0,
     "invalid_cells": 0
    }
@@ -75,6 +71,72 @@
   "mixed_versions_note": "the totals above aggregate columns executed under more than one binary version (per-version split in by_ostk_version) \u2014 operational bookkeeping, NOT a cross-version comparison. No cross-version delta is published anywhere; versioned boards under boards/<version>/ are single-version."
  },
  "models": [
+  {
+   "model": "claude-sonnet-5",
+   "type": "B",
+   "native_cli": "claude-code",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 34,
+   "native_total": 37,
+   "kernel_solved": 37,
+   "kernel_total": 37,
+   "both_n": 34,
+   "both_cost_n": 34,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "self-reported",
+   "native_cost_bases": {
+    "self-reported": 37
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "july09v3",
+    "ostk": "july09v3"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 16.918,
+    "fresh": 73774,
+    "cache_read": 17547929,
+    "cache_create": 638423,
+    "billed": 18260126,
+    "output": 150603,
+    "input_total": 18260126
+   },
+   "kernel": {
+    "cost": 2.84,
+    "fresh": 235803,
+    "cache_read": 3885460,
+    "cache_create": 279935,
+    "billed": 4401198,
+    "output": 89144,
+    "input_total": 4401198
+   },
+   "cost_delta": -83.2,
+   "tok_delta": -75.9,
+   "kernel_abs": {
+    "cost": 3.151,
+    "fresh": 263557,
+    "cache_read": 4463639,
+    "cache_create": 303908,
+    "billed": 5031104,
+    "output": 97167,
+    "input_total": 5031104
+   }
+  },
   {
    "model": "deepseek-v4-pro",
    "type": "B*",
@@ -167,8 +229,7 @@
    },
    "native_cost_basis": "bucket-split",
    "native_cost_bases": {
-    "bucket-split": 35,
-    "unpriced": 2
+    "bucket-split": 37
    },
    "source_arm": "cpu",
    "snapshots": {
@@ -209,8 +270,8 @@
    }
   },
   {
-   "model": "claude-sonnet-5",
-   "type": "B*",
+   "model": "claude-opus-4-8",
+   "type": "B",
    "native_cli": "claude-code",
    "native_present": true,
    "published": 37,
@@ -229,50 +290,49 @@
     "ostk": 0
    },
    "masked": {
-    "native": 9,
+    "native": 0,
     "ostk": 1
    },
-   "native_cost_basis": "self-reported",
+   "native_cost_basis": "bucket-split",
    "native_cost_bases": {
-    "self-reported": 36,
-    "unpriced": 1
+    "bucket-split": 37
    },
    "source_arm": "cpu",
    "snapshots": {
-    "native": "july09",
-    "ostk": "july09v2"
+    "native": "july09v3",
+    "ostk": "july09v3"
    },
-   "cross_snapshot_delta": true,
-   "cross_version_pair": true,
-   "delta_note": "SUPPRESSED: native (july09, v7.7.1) and ostk (july09v2, v7.7.2) columns executed under different binary versions \u2014 no cross-version delta is published anywhere (boards/index.json doctrine); compare within one version's board instead",
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
    "native": {
-    "cost": 15.108,
-    "fresh": 67170,
-    "cache_read": 15077781,
-    "cache_create": 632589,
-    "billed": 15777540,
-    "output": 130386,
-    "input_total": 15777540
+    "cost": 10.351,
+    "fresh": 67918,
+    "cache_read": 8111209,
+    "cache_create": 446115,
+    "billed": 8625242,
+    "output": 126701,
+    "input_total": 8625242
    },
    "kernel": {
-    "cost": 2.728,
-    "fresh": 231461,
-    "cache_read": 3599005,
-    "cache_create": 273405,
-    "billed": 4103871,
-    "output": 86137,
-    "input_total": 4103871
+    "cost": 6.07,
+    "fresh": 211848,
+    "cache_read": 3033899,
+    "cache_create": 264501,
+    "billed": 3327524,
+    "output": 73616,
+    "input_total": 3510248
    },
-   "cost_delta": null,
-   "tok_delta": null,
+   "cost_delta": -41.4,
+   "tok_delta": -59.3,
    "kernel_abs": {
-    "cost": 2.92,
-    "fresh": 252476,
-    "cache_read": 3881058,
-    "cache_create": 288562,
-    "billed": 4422096,
-    "output": 91717,
-    "input_total": 4422096
+    "cost": 6.415,
+    "fresh": 230191,
+    "cache_read": 3219755,
+    "cache_create": 276634,
+    "billed": 3543856,
+    "output": 77005,
+    "input_total": 3726580
    }
   },
   {
@@ -301,8 +361,7 @@
    },
    "native_cost_basis": "bucket-split",
    "native_cost_bases": {
-    "bucket-split": 34,
-    "unpriced": 3
+    "bucket-split": 37
    },
    "source_arm": "cpu",
    "snapshots": {
@@ -313,13 +372,13 @@
    "cross_version_pair": false,
    "delta_note": "native and ostk columns come from different run-date snapshots (see faults: july02 reports cache_read=0, so pair cost bases differ)",
    "native": {
-    "cost": 3.655,
-    "fresh": 937959,
-    "cache_read": 3186590,
+    "cost": 3.893,
+    "fresh": 991689,
+    "cache_read": 3360104,
     "cache_create": 0,
-    "billed": 4124549,
-    "output": 95122,
-    "input_total": 4124549
+    "billed": 4351793,
+    "output": 103167,
+    "input_total": 4351793
    },
    "kernel": {
     "cost": 5.509,
@@ -330,8 +389,8 @@
     "output": 42772,
     "input_total": 3129177
    },
-   "cost_delta": 50.7,
-   "tok_delta": -24.1,
+   "cost_delta": 41.5,
+   "tok_delta": -28.1,
    "kernel_abs": {
     "cost": 5.827,
     "fresh": 2572028,
@@ -680,10 +739,10 @@
    "published": 37,
    "native_solved": 34,
    "native_total": 37,
-   "kernel_solved": 24,
+   "kernel_solved": 17,
    "kernel_total": 37,
-   "both_n": 24,
-   "both_cost_n": 24,
+   "both_n": 16,
+   "both_cost_n": 16,
    "invalid": {
     "native": 0,
     "ostk": 0
@@ -693,8 +752,8 @@
     "ostk": 0
    },
    "masked": {
-    "native": 9,
-    "ostk": 2
+    "native": 0,
+    "ostk": 1
    },
    "native_cost_basis": "bucket-split",
    "native_cost_bases": {
@@ -702,106 +761,40 @@
    },
    "source_arm": "cpu",
    "snapshots": {
-    "native": "july09",
-    "ostk": "july09v2"
-   },
-   "cross_snapshot_delta": true,
-   "cross_version_pair": true,
-   "delta_note": "SUPPRESSED: native (july09, v7.7.1) and ostk (july09v2, v7.7.2) columns executed under different binary versions \u2014 no cross-version delta is published anywhere (boards/index.json doctrine); compare within one version's board instead",
-   "native": {
-    "cost": 14.727,
-    "fresh": 49171,
-    "cache_read": 5965447,
-    "cache_create": 332747,
-    "billed": 6347365,
-    "output": 82201,
-    "input_total": 6347365
-   },
-   "kernel": {
-    "cost": 4.481,
-    "fresh": 76472,
-    "cache_read": 1333090,
-    "cache_create": 83810,
-    "billed": 1493372,
-    "output": 26705,
-    "input_total": 1493372
-   },
-   "cost_delta": null,
-   "tok_delta": null,
-   "kernel_abs": {
-    "cost": 4.481,
-    "fresh": 76472,
-    "cache_read": 1333090,
-    "cache_create": 83810,
-    "billed": 1493372,
-    "output": 26705,
-    "input_total": 1493372
-   }
-  },
-  {
-   "model": "claude-opus-4-8",
-   "type": "B",
-   "native_cli": "claude-code",
-   "native_present": true,
-   "published": 37,
-   "native_solved": 34,
-   "native_total": 37,
-   "kernel_solved": 33,
-   "kernel_total": 37,
-   "both_n": 31,
-   "both_cost_n": 31,
-   "invalid": {
-    "native": 0,
-    "ostk": 0
-   },
-   "cost_invalid": {
-    "native": 0,
-    "ostk": 0
-   },
-   "masked": {
-    "native": 5,
-    "ostk": 16
-   },
-   "native_cost_basis": "bucket-split",
-   "native_cost_bases": {
-    "bucket-split": 37
-   },
-   "source_arm": "cpu",
-   "snapshots": {
-    "native": "july09",
-    "ostk": "july09"
+    "native": "july09v3",
+    "ostk": "july09v3"
    },
    "cross_snapshot_delta": false,
    "cross_version_pair": false,
    "delta_note": null,
    "native": {
-    "cost": 10.784,
-    "fresh": 72480,
-    "cache_read": 8597157,
-    "cache_create": 438734,
-    "billed": 9108371,
-    "output": 135250,
-    "input_total": 9108371
+    "cost": 8.523,
+    "fresh": 30318,
+    "cache_read": 3516397,
+    "cache_create": 199210,
+    "billed": 3745925,
+    "output": 44267,
+    "input_total": 3745925
    },
    "kernel": {
-    "cost": 5.873,
-    "fresh": 192146,
-    "cache_read": 2965174,
-    "cache_create": 261381,
-    "billed": 3418701,
-    "output": 71853,
-    "input_total": 3418701
+    "cost": 5.608,
+    "fresh": 92368,
+    "cache_read": 1498853,
+    "cache_create": 106792,
+    "billed": 1505001,
+    "output": 37017,
+    "input_total": 1698013
    },
-   "cost_delta": -45.5,
-   "tok_delta": -62.5,
+   "cost_delta": -34.2,
+   "tok_delta": -54.7,
    "kernel_abs": {
-    "cost": 6.193,
-    "fresh": 202283,
-    "cache_read": 3150472,
-    "cache_create": 274180,
-    "billed": 3626935,
-    "output": 75709,
-    "input_total": 3626935
+    "cost": 6.22,
+    "fresh": 101310,
+    "cache_read": 1673132,
+    "cache_create": 117277,
+    "billed": 1587493,
+    "output": 41348,
+    "input_total": 1891719
    }
   }
  ]

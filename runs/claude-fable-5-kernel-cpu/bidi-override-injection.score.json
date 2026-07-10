@@ -3,8 +3,8 @@
   "arm": "kernel",
   "bench_binary": {
     "build_sha": "unknown",
-    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-c41c904386885c11aeafa7cd81f65213c1c9cc32288bbcaac4340caaad59d243",
-    "version": "7.7.2"
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-bb432d9879e8695f4a42568a8cc058d81c8117e56100a00458725a1540cb04f1",
+    "version": "7.7.3"
   },
   "benchmark": "bidi-override-injection",
   "billed_tokens": 20080,
@@ -14,18 +14,19 @@
   "cache_read_tokens": 19098,
   "control_type": "kernel",
   "difficulty_tier": "extreme",
-  "estimated_cost_usd": 0.036545499999999995,
+  "estimated_cost_usd": 0.037045499999999995,
   "executed_arm": "kernel-cpu",
   "fresh_input_tokens": 691,
   "input_tokens": 691,
-  "output_tokens": 138,
+  "output_tokens": 148,
+  "process_exit": "exit_code: 1",
   "requested_arm": "kernel",
-  "resolved": true,
-  "stop_reason": "exit_code: 1",
-  "summary": "agent.completed: 3turns, 691+138 tokens, $0.0365",
-  "timestamp": "2026-07-09T14:26:16Z",
-  "token_cost": 20218,
+  "resolved": false,
+  "stop_reason": "refusal",
+  "summary": "agent.completed: 3turns, 691+148 tokens, $0.0370",
+  "timestamp": "2026-07-09T19:40:14Z",
+  "token_cost": 20228,
   "tool_uses": 2,
   "turns_to_fix": 3,
-  "wall_clock": 32.047
+  "wall_clock": 40.646
 }

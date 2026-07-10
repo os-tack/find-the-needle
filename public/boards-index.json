@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-09",
+ "generated": "2026-07-10",
  "cross_version": {
   "comparable": false,
   "note": "ostk versions are different experimental conditions (different kernel, drivers, benchmark oracles, schema eras). NO cross-version delta is published anywhere, and versioned boards never aggregate across versions. The rolling latest view (public/experiment-scores.json) may span versions across its single-snapshot columns for operational continuity; it carries per-column version attribution (ostk_versions + column_snapshots) and a per-version trust breakdown, and its cross-version totals are bookkeeping, not comparison. Compare runs only within one version, and mind each run's faults list even then."
@@ -1588,6 +1588,93 @@
       "cost_invalid_cells": 0,
       "invalid_cells": 0,
       "teardown_masked_cells": 3
+     }
+    }
+   ],
+   "schema_era": "axis-v2",
+   "judged": "axis-v2 (solve/cost split, fail-closed)",
+   "comparable_with_other_versions": false
+  },
+  {
+   "version": "v7.7.3",
+   "runs": [
+    {
+     "date": "2026-07-09",
+     "file": "v7.7.3/2026-07-09-experiment-scores.json",
+     "judged": "axis-v2 (solve/cost split, fail-closed)",
+     "snapshot": "july09v3",
+     "faults": [],
+     "models": {
+      "claude-sonnet-5": {
+       "native": {
+        "solved": 34,
+        "total": 37,
+        "cost_usd": 23.6181,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 3.1513,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "cpu"
+       }
+      },
+      "claude-opus-4-8": {
+       "native": {
+        "solved": 34,
+        "total": 37,
+        "cost_usd": 14.2761,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 7.0229,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 1,
+        "source_arm": "cpu"
+       }
+      },
+      "claude-fable-5": {
+       "native": {
+        "solved": 34,
+        "total": 37,
+        "cost_usd": 29.788,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 17,
+        "total": 37,
+        "cost_usd": 9.7184,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 1,
+        "source_arm": "cpu"
+       }
+      }
+     },
+     "trust": {
+      "solve_valid_cells": 222,
+      "cost_valid_cells": 222,
+      "cost_invalid_cells": 0,
+      "invalid_cells": 0,
+      "teardown_masked_cells": 2
      }
     }
    ],

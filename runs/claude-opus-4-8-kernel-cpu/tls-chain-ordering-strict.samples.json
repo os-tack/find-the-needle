@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "claude-opus-4-8-kernel-cpu",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-bb432d9879e8695f4a42568a8cc058d81c8117e56100a00458725a1540cb04f1",
+      "version": "7.7.3"
+    },
+    "benchmark": "tls-chain-ordering-strict",
+    "billed_tokens": 140536,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 11097,
+    "cache_create_tokens": 11097,
+    "cache_read_tokens": 120798,
+    "control_type": "kernel",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.25756025,
+    "executed_arm": "kernel-cpu",
+    "fresh_input_tokens": 8641,
+    "input_tokens": 8641,
+    "output_tokens": 3384,
+    "process_exit": "end_turn",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 11turns, 8641+3384 tokens, $0.2576",
+    "timestamp": "2026-07-09T21:55:50Z",
+    "token_cost": 143920,
+    "tool_uses": 12,
+    "turns_to_fix": 11,
+    "wall_clock": 84.325,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-09T21:55:51+00:00"
+  }
+]
