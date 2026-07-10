@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "deadlock-transfer",
+    "billed_tokens": 86368,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 80640,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 5728,
+    "input_tokens": 5728,
+    "output_tokens": 1595,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the deadlock in [TransferService.java](/app/app/TransferService.java:1).\n\nThe transfer code now locks accounts in deterministic account-id order, so opposing transfers like `A -> B` and `B -> A` no longer acquire locks in conflicting order. I also changed the completed/failed counters to `AtomicInteger` so concurrent increments are counted correctly.\n\nVerification: `./test.sh` passes, including the second deadlock check.",
+    "timestamp": "2026-07-10T11:11:08Z",
+    "token_cost": 87963,
+    "tool_uses": 10,
+    "turns_to_fix": 1,
+    "wall_clock": 59.467,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:11:09+00:00"
+  }
+]

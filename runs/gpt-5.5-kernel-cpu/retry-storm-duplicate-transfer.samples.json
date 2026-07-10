@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-kernel-cpu",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "retry-storm-duplicate-transfer",
+    "billed_tokens": 71103,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 49152,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.22997099999999998,
+    "executed_arm": "kernel-cpu",
+    "fresh_input_tokens": 21951,
+    "input_tokens": 21951,
+    "output_tokens": 3188,
+    "process_exit": "end_turn",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 9turns, 21951+3188 tokens, $0.2300",
+    "timestamp": "2026-07-10T11:51:43Z",
+    "token_cost": 74291,
+    "tool_uses": 8,
+    "turns_to_fix": 9,
+    "wall_clock": 104.407,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:51:46+00:00"
+  }
+]

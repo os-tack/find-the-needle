@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "rate-limit-bypass-header",
+    "billed_tokens": 124229,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 74112,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 50117,
+    "input_tokens": 50117,
+    "output_tokens": 1473,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the rate-limit bypass in [app/ratelimiter.ts](/app/app/ratelimiter.ts:24). The limiter now keys clients from `req.socket.remoteAddress` instead of trusting spoofable `X-Forwarded-For` headers. `test.sh` rebuilt the project, so the matching `dist` files were updated too.\n\nVerification passed:\n\n```text\nWith header spoofing: 10 passed, 20 blocked\nPASS: Rate limiter is not vulnerable to header spoofing\n```",
+    "timestamp": "2026-07-10T11:32:04Z",
+    "token_cost": 125702,
+    "tool_uses": 12,
+    "turns_to_fix": 1,
+    "wall_clock": 72.468,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:32:12+00:00"
+  }
+]

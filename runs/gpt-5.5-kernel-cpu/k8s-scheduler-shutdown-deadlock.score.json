@@ -1,0 +1,32 @@
+{
+  "agent": "gpt-5.5-kernel-cpu",
+  "arm": "kernel",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+    "version": "7.7.4"
+  },
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "billed_tokens": 34397,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 24576,
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.085903,
+  "executed_arm": "kernel-cpu",
+  "fresh_input_tokens": 9821,
+  "input_tokens": 9821,
+  "output_tokens": 817,
+  "process_exit": "end_turn",
+  "requested_arm": "kernel",
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "agent.completed: 10turns, 9821+817 tokens, $0.0859",
+  "timestamp": "2026-07-10T11:21:21Z",
+  "token_cost": 35214,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 72.408
+}

@@ -1,0 +1,32 @@
+{
+  "agent": "gpt-5.5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+    "version": "7.7.4"
+  },
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "billed_tokens": 83811,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 61824,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "executed_arm": "native",
+  "fresh_input_tokens": 21987,
+  "input_tokens": 21987,
+  "output_tokens": 1566,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed the silent assumed-state drop in [main.go](/workspace/main.go) by adding an `OnConflict` callback and invoking it when an informer update supersedes an assumed object.\n\nVerification passed:\n\n```text\nOK: conflict notified\nPASS\n```\n\nNote: `assume-cache` is still untracked; it was already present before the change and `test.sh` rebuilds it.",
+  "timestamp": "2026-07-10T11:14:39Z",
+  "token_cost": 85377,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 35.154
+}

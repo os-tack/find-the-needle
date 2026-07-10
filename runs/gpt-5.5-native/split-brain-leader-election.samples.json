@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "split-brain-leader-election",
+    "billed_tokens": 236897,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 192640,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 44257,
+    "input_tokens": 44257,
+    "output_tokens": 2710,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the split-brain bug in [node.go](/app/app/cluster/node.go): leader election now requires a strict majority (`finalVotes > totalNodes/2`) instead of allowing half rounded down. I also corrected the leader log argument order.\n\nAdded a regression test in [node_test.go](/app/app/cluster/node_test.go) proving a 2-node minority partition in a 5-node cluster cannot elect a leader.\n\nVerification passed:\n- `go test ./...`\n- `./test.sh`\n\nNote: `test.sh` calls `/usr/local/bin/split-brain`, so I rebuilt that binary from the fixed source before rerunning the script.",
+    "timestamp": "2026-07-10T11:36:31Z",
+    "token_cost": 239607,
+    "tool_uses": 21,
+    "turns_to_fix": 1,
+    "wall_clock": 61.731,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:36:37+00:00"
+  }
+]

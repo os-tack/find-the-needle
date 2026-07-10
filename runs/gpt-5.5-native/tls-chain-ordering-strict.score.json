@@ -1,0 +1,32 @@
+{
+  "agent": "gpt-5.5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+    "version": "7.7.4"
+  },
+  "benchmark": "tls-chain-ordering-strict",
+  "billed_tokens": 126092,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 117248,
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "executed_arm": "native",
+  "fresh_input_tokens": 8844,
+  "input_tokens": 8844,
+  "output_tokens": 1771,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed the TLS chain ordering in [loader.go](/app/app/tlssetup/loader.go). After `tls.X509KeyPair` loads the leaf, the loader now walks the remaining certs by issuer using `x509.CheckSignatureFrom` and rewrites the chain as `leaf -> intermediate -> root`.\n\nVerification: `./test.sh` passes.\n\n```text\nPASS: TLS chain is correctly ordered per RFC 5246\n```",
+  "timestamp": "2026-07-10T11:39:56Z",
+  "token_cost": 127863,
+  "tool_uses": 13,
+  "turns_to_fix": 1,
+  "wall_clock": 47.631
+}

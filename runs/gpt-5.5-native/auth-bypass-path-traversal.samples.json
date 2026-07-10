@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "auth-bypass-path-traversal",
+    "billed_tokens": 126059,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 88320,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 37739,
+    "input_tokens": 37739,
+    "output_tokens": 2033,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the auth bypass.\n\nChanged:\n- [app/main.go](/app/app/main.go): added shared `canonicalPath` helper and used it in router matching.\n- [app/middleware.go](/app/app/middleware.go): auth now checks the canonicalized path, so `//api/admin` and `/health/../api/data` are protected before routing.\n\nVerification:\n- Ran `./test.sh`\n- Result: `PASS: Auth middleware correctly protects all API routes`\n\nNote: `test.sh` rebuilds `/app/server`, so the compiled `server` binary is also modified.",
+    "timestamp": "2026-07-10T11:06:53Z",
+    "token_cost": 128092,
+    "tool_uses": 14,
+    "turns_to_fix": 1,
+    "wall_clock": 57.509,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:06:56+00:00"
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "memory-leak-event-listener",
+    "billed_tokens": 104392,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 97920,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 6472,
+    "input_tokens": 6472,
+    "output_tokens": 1361,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the listener leak in [processor.js](/app/app/processor.js). `DataProcessor` now registers its `data:validated` and `data:error` listeners once in the constructor instead of on every `process()` call, and the validated handler no longer captures the original request payload.\n\nVerification: `./test.sh` passes.\n\n```text\nBaseline: listeners=2\nAfter 500 requests: listeners=2\nPASS: No event listener leak detected\n```",
+    "timestamp": "2026-07-10T11:18:31Z",
+    "token_cost": 105753,
+    "tool_uses": 12,
+    "turns_to_fix": 1,
+    "wall_clock": 62.262,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:18:33+00:00"
+  }
+]

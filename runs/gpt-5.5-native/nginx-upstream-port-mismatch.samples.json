@@ -1,0 +1,38 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "nginx-upstream-port-mismatch",
+    "billed_tokens": 84579,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 51712,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 32867,
+    "input_tokens": 32867,
+    "output_tokens": 946,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the nginx upstream mismatch in `/etc/nginx/sites-enabled/default`: `/api/` now proxies to Flask on `127.0.0.1:5000` instead of `5001`.\n\nVerified:\n- `nginx -t` passes\n- `./test.sh` passes with `ALL TESTS PASSED`",
+    "timestamp": "2026-07-10T11:20:07Z",
+    "token_cost": 85525,
+    "tool_uses": 9,
+    "turns_to_fix": 1,
+    "wall_clock": 25.588,
+    "teardown_masked": true,
+    "teardown_masked_by": "stall_watch",
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:20:23+00:00"
+  }
+]

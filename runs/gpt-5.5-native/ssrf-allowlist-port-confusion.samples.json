@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "billed_tokens": 84062,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 66432,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 17630,
+    "input_tokens": 17630,
+    "output_tokens": 1104,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the SSRF bypass in [app/validator.py](/workspace/app/validator.py:7) by parsing IP literals with Python\u2019s `ipaddress` module and blocking non-public/internal addresses, including IPv6 loopback forms like `::1` and expanded loopback.\n\nVerification: `./test.sh` passes.",
+    "timestamp": "2026-07-10T11:37:47Z",
+    "token_cost": 85166,
+    "tool_uses": 8,
+    "turns_to_fix": 1,
+    "wall_clock": 35.413,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:37:50+00:00"
+  }
+]

@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "goroutine-leak-handler",
+    "billed_tokens": 167614,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 144768,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 22846,
+    "input_tokens": 22846,
+    "output_tokens": 3219,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the goroutine leak in [app/main.go](/app/app/main.go:56).\n\nThe compute handler now derives a timeout context from `r.Context()`, exits when the client disconnects, and passes that context into `performComputation`, which cancels during work/delay instead of running to completion in the background.\n\nVerification passed:\n\n```text\nLeaked goroutines above baseline: 0\nPASS: Goroutines properly cleaned up after client disconnect\nPASS: All goroutine lifecycle tests passed\n```\n\nNote: `test.sh` rebuilds `/app/server`, so the binary was updated as part of verification.",
+    "timestamp": "2026-07-10T11:12:56Z",
+    "token_cost": 170833,
+    "tool_uses": 15,
+    "turns_to_fix": 1,
+    "wall_clock": 107.337,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:13:01+00:00"
+  }
+]

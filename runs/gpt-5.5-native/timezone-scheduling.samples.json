@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "timezone-scheduling",
+    "billed_tokens": 110067,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 72064,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 38003,
+    "input_tokens": 38003,
+    "output_tokens": 2379,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the timezone scheduling bug in [app/scheduler.py](/app/app/scheduler.py:43). The scheduler now uses the event\u2019s local calendar date for candidate scheduled times, then converts those candidates back to UTC for the window comparison. This catches late-night local events that fire after midnight UTC.\n\nVerification passed:\n\n```text\nPASS: All scheduling tests passed\n```\n\nOnly source change: `app/scheduler.py`.",
+    "timestamp": "2026-07-10T11:38:37Z",
+    "token_cost": 112446,
+    "tool_uses": 11,
+    "turns_to_fix": 1,
+    "wall_clock": 47.287,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:38:38+00:00"
+  }
+]

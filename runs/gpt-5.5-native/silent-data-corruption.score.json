@@ -1,0 +1,32 @@
+{
+  "agent": "gpt-5.5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+    "version": "7.7.4"
+  },
+  "benchmark": "silent-data-corruption",
+  "billed_tokens": 155470,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 119808,
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "executed_arm": "native",
+  "fresh_input_tokens": 35662,
+  "input_tokens": 35662,
+  "output_tokens": 2667,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed the truncation bug in [src/main.rs](/app/src/main.rs:9). `process_file` now reads the entire input with `read_to_end` before applying the transform, instead of doing one fixed 64KB read. I also removed the obsolete buffer-size warning from `--stats`.\n\nVerification passed:\n- `cargo fmt --check`\n- `cargo test`\n- `./test.sh`\n\nI also refreshed `/usr/local/bin/fileproc` from the current source so `./test.sh` runs against the fixed binary directly.",
+  "timestamp": "2026-07-10T11:35:22Z",
+  "token_cost": 158137,
+  "tool_uses": 19,
+  "turns_to_fix": 1,
+  "wall_clock": 57.308
+}

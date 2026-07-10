@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "race-condition-counter",
+    "billed_tokens": 139649,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 127104,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 12545,
+    "input_tokens": 12545,
+    "output_tokens": 1296,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the needle in [app/counter.js](/app/app/counter.js): `incrementCounter()` now uses Redis `INCR`, which is atomic, instead of the racing `GET`/`SET` read-modify-write sequence.\n\nVerification passed:\n\n```text\nExpected: 100\nGot:      100\nPASS: Counter is correct\n```",
+    "timestamp": "2026-07-10T11:30:15Z",
+    "token_cost": 140945,
+    "tool_uses": 15,
+    "turns_to_fix": 1,
+    "wall_clock": 41.547,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:30:17+00:00"
+  }
+]

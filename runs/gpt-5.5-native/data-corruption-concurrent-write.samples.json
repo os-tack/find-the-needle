@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "data-corruption-concurrent-write",
+    "billed_tokens": 215699,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 172288,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 43411,
+    "input_tokens": 43411,
+    "output_tokens": 2611,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the needle in [src/config.rs](/app/src/config.rs:29). Worker segment assignment now partitions segments with non-overlapping integer boundaries, so every segment is assigned exactly once. I also added tests covering duplicate-free coverage, including an uneven `10 segments / 3 workers` case.\n\nVerification run:\n\n```text\n./test.sh\nPASS: All concurrent write runs produced correct output\n```\n\nI also ran `cargo test`; all 4 unit tests passed. Build/test generated target files are dirty in `target/`, but the only source change is `src/config.rs`.",
+    "timestamp": "2026-07-10T11:10:07Z",
+    "token_cost": 218310,
+    "tool_uses": 20,
+    "turns_to_fix": 1,
+    "wall_clock": 50.618,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:10:08+00:00"
+  }
+]

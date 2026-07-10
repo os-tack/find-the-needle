@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "relaxed-ordering-ringbuf",
+    "billed_tokens": 118341,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 97920,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 20421,
+    "input_tokens": 20421,
+    "output_tokens": 2321,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the memory-ordering bug in [ring_buffer.c](/app/ring_buffer.c) and updated the matching note in [ring_buffer.h](/app/ring_buffer.h).\n\nWhat changed:\n- Producer now publishes `write_idx` with `memory_order_release`.\n- Consumer now reads `write_idx` with `memory_order_acquire`.\n- Consumer releases `read_idx` after reading the slot.\n- Producer acquires `read_idx` before reusing slots.\n- Simplified the empty check to `r == w`.\n\nVerification: `./test.sh` passes. TSan cannot run in this container, so the script used its fallback correctness loop; all 5 optimized runs passed with no corruption.",
+    "timestamp": "2026-07-10T11:32:51Z",
+    "token_cost": 120662,
+    "tool_uses": 10,
+    "turns_to_fix": 1,
+    "wall_clock": 39.421,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:32:52+00:00"
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "agent": "gpt-5.5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+    "version": "7.7.4"
+  },
+  "benchmark": "missing-input-validation",
+  "billed_tokens": 209258,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 189440,
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "executed_arm": "native",
+  "fresh_input_tokens": 19818,
+  "input_tokens": 19818,
+  "output_tokens": 1593,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed the missing validation.\n\nChanged:\n- [inventory.ts](/app/inventory.ts:37): computes the new quantity before mutation and rejects negative inventory with `RangeError`.\n- [routes.ts](/app/routes.ts:57): converts that `RangeError` into a `400` JSON response.\n\nVerified with `./test.sh`:\n\n```text\nPASS: Input validation correctly prevents impossible inventory states\n```\n\n`npx tsc` inside the test also updated the compiled `dist/` files.",
+  "timestamp": "2026-07-10T11:19:40Z",
+  "token_cost": 210851,
+  "tool_uses": 14,
+  "turns_to_fix": 1,
+  "wall_clock": 66.934
+}

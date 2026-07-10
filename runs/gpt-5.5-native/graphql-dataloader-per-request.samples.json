@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 201839,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 168576,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 33263,
+    "input_tokens": 33263,
+    "output_tokens": 2900,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the DataLoader batching issue.\n\nChanged:\n- [src/context.ts](/app/src/context.ts:11): creates request-scoped loaders in GraphQL context.\n- [src/resolvers/userResolver.ts](/app/src/resolvers/userResolver.ts:16): uses shared loaders for `user` and `User.posts`.\n- [src/resolvers/postResolver.ts](/app/src/resolvers/postResolver.ts:58): uses shared `userLoader` for `Post.author`.\n\nVerification:\n- Ran `./test.sh`\n- Result: `PASS: All tests passed`\n- Query count dropped from `101` to `2`, within the `<=15` threshold.",
+    "timestamp": "2026-07-10T11:14:02Z",
+    "token_cost": 204739,
+    "tool_uses": 16,
+    "turns_to_fix": 1,
+    "wall_clock": 60.803,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:14:04+00:00"
+  }
+]

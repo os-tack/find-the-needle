@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "kernel-panic-ioctl",
+    "billed_tokens": 158225,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 114816,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 43409,
+    "input_tokens": 43409,
+    "output_tokens": 2788,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the ioctl validation bug in [src/ioctl_handler.c](/app/src/ioctl_handler.c:40). The handlers now reject NULL value buffers, zero/oversized lengths, and invalid key lengths before copying. `SET_CONFIG` also rejects claimed lengths larger than the actual bounded string length, preventing the oversized `value_len` over-read.\n\nVerification passed:\n\n```text\n./test.sh\nPASS: IOCTL handler correctly validates all inputs\n```\n\nOnly source change is `src/ioctl_handler.c`. The `src/*.o` and `src/devctl` files are regenerated build outputs from the test script.",
+    "timestamp": "2026-07-10T11:16:07Z",
+    "token_cost": 161013,
+    "tool_uses": 13,
+    "turns_to_fix": 1,
+    "wall_clock": 47.26,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:16:10+00:00"
+  }
+]

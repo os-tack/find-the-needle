@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-10",
- "run": "v7.7.3",
+ "run": "v7.7.4",
  "snapshot": "latest",
  "pipeline": "publish_boards.py \u2190 consolidate_scores.py (axis-split validity)",
  "published_tasks": 37,
@@ -47,11 +47,11 @@
    "zero_work": 4
   },
   "cost_invalid_by_reason": {},
-  "teardown_masked_cells": 73,
+  "teardown_masked_cells": 40,
   "by_ostk_version": {
    "v7.6.0": {
-    "solve_valid_cells": 545,
-    "cost_valid_cells": 545,
+    "solve_valid_cells": 471,
+    "cost_valid_cells": 471,
     "cost_invalid_cells": 0,
     "invalid_cells": 10
    },
@@ -64,6 +64,12 @@
    "v7.7.3": {
     "solve_valid_cells": 222,
     "cost_valid_cells": 222,
+    "cost_invalid_cells": 0,
+    "invalid_cells": 0
+   },
+   "v7.7.4": {
+    "solve_valid_cells": 74,
+    "cost_valid_cells": 74,
     "cost_invalid_cells": 0,
     "invalid_cells": 0
    }
@@ -403,7 +409,7 @@
   },
   {
    "model": "gpt-5.5",
-   "type": "B*",
+   "type": "B",
    "native_cli": "codex",
    "native_present": true,
    "published": 37,
@@ -411,8 +417,8 @@
    "native_total": 37,
    "kernel_solved": 36,
    "kernel_total": 37,
-   "both_n": 35,
-   "both_cost_n": 35,
+   "both_n": 36,
+   "both_cost_n": 36,
    "invalid": {
     "native": 0,
     "ostk": 0
@@ -422,8 +428,8 @@
     "ostk": 0
    },
    "masked": {
-    "native": 0,
-    "ostk": 36
+    "native": 1,
+    "ostk": 2
    },
    "native_cost_basis": "bucket-split",
    "native_cost_bases": {
@@ -431,40 +437,40 @@
    },
    "source_arm": "cpu",
    "snapshots": {
-    "native": "june16",
-    "ostk": "june16"
+    "native": "july10",
+    "ostk": "july10"
    },
    "cross_snapshot_delta": false,
    "cross_version_pair": false,
    "delta_note": null,
    "native": {
-    "cost": 6.381,
-    "fresh": 497968,
-    "cache_read": 4179840,
+    "cost": 7.725,
+    "fresh": 798895,
+    "cache_read": 3805952,
     "cache_create": 0,
-    "billed": 4677808,
-    "output": 60050,
-    "input_total": 4677808
+    "billed": 4604847,
+    "output": 60916,
+    "input_total": 4604847
    },
    "kernel": {
-    "cost": 18.507,
-    "fresh": 3119753,
-    "cache_read": 2301952,
+    "cost": 13.372,
+    "fresh": 1733611,
+    "cache_read": 4311552,
     "cache_create": 0,
-    "billed": 5421705,
-    "output": 58569,
-    "input_total": 5421705
+    "billed": 6045163,
+    "output": 84942,
+    "input_total": 6045163
    },
-   "cost_delta": 190.0,
-   "tok_delta": 15.9,
+   "cost_delta": 73.1,
+   "tok_delta": 31.3,
    "kernel_abs": {
-    "cost": 18.876,
-    "fresh": 3182522,
-    "cache_read": 2348032,
+    "cost": 13.372,
+    "fresh": 1733611,
+    "cache_read": 4311552,
     "cache_create": 0,
-    "billed": 5530554,
-    "output": 59644,
-    "input_total": 5530554
+    "billed": 6045163,
+    "output": 84942,
+    "input_total": 6045163
    }
   },
   {

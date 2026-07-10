@@ -1,0 +1,32 @@
+{
+  "agent": "gpt-5.5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+    "version": "7.7.4"
+  },
+  "benchmark": "api-version-field-drop",
+  "billed_tokens": 91418,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 60416,
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.0,
+  "executed_arm": "native",
+  "fresh_input_tokens": 31002,
+  "input_tokens": 31002,
+  "output_tokens": 1711,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed the v2 compatibility regression in [models.go](/app/app/models.go). `UserV2` now includes `avatar_url`, `bio`, and `location`, and `ToV2()` populates them from `InternalUser`.\n\nVerification: `./test.sh` passes.\n\nNote: `test.sh` rebuilds `/app/server`, so `git status` shows `server` modified as a build artifact.",
+  "timestamp": "2026-07-10T11:05:53Z",
+  "token_cost": 93129,
+  "tool_uses": 11,
+  "turns_to_fix": 1,
+  "wall_clock": 46.218
+}

@@ -1,0 +1,36 @@
+[
+  {
+    "agent": "gpt-5.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+      "version": "7.7.4"
+    },
+    "benchmark": "sql-injection-search",
+    "billed_tokens": 103445,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 73600,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "fresh_input_tokens": 29845,
+    "input_tokens": 29845,
+    "output_tokens": 1258,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the SQL injection in [search.py](/app/app/search.py:16) by replacing string-built SQL with parameterized SQLite queries for both `q` and `category`.\n\nVerification passed:\n\n```text\nPASS: UNION injection did not leak user data\nPASS: Boolean injection did not bypass search filter\nPASS: Search endpoint is not vulnerable to SQL injection\n```\n\nI also cleared the stale test server process left from the first failing run before rerunning `./test.sh`.",
+    "timestamp": "2026-07-10T11:37:08Z",
+    "token_cost": 104703,
+    "tool_uses": 11,
+    "turns_to_fix": 1,
+    "wall_clock": 30.37,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T11:37:11+00:00"
+  }
+]

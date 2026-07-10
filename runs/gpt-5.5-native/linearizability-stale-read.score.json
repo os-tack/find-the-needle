@@ -1,0 +1,32 @@
+{
+  "agent": "gpt-5.5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+    "version": "7.7.4"
+  },
+  "benchmark": "linearizability-stale-read",
+  "billed_tokens": 220996,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 203392,
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.0,
+  "executed_arm": "native",
+  "fresh_input_tokens": 17604,
+  "input_tokens": 17604,
+  "output_tokens": 1998,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed the stale-read bug.\n\nChanged:\n- [app/handler.go](/app/app/handler.go): `/read` now uses `ReadLinearizable` instead of serving directly from local KV state.\n- [app/raft/node.go](/app/app/raft/node.go): heartbeat handling now advances the follower commit index from the leader’s commit index, so healed followers apply catch-up entries before linearizable reads return.\n\nVerification:\n- Ran `./test.sh`\n- Result: `PASS: All rounds passed — reads are linearizable`",
+  "timestamp": "2026-07-10T11:17:26Z",
+  "token_cost": 222994,
+  "tool_uses": 15,
+  "turns_to_fix": 1,
+  "wall_clock": 75.614
+}

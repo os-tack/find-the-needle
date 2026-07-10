@@ -1,0 +1,32 @@
+{
+  "agent": "gpt-5.5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+    "version": "7.7.4"
+  },
+  "benchmark": "wrong-operator-discount",
+  "billed_tokens": 67488,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 63872,
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.0,
+  "executed_arm": "native",
+  "fresh_input_tokens": 3616,
+  "input_tokens": 3616,
+  "output_tokens": 732,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed the needle in [pricing.py](/app/pricing.py): `calculate_discount_amount` now computes `subtotal * discount_percent / 100` instead of adding the percentage fraction.\n\nVerification: `./test.sh` passes with `PASS: Discount calculations are correct`.",
+  "timestamp": "2026-07-10T11:42:38Z",
+  "token_cost": 68220,
+  "tool_uses": 9,
+  "turns_to_fix": 1,
+  "wall_clock": 26.722
+}

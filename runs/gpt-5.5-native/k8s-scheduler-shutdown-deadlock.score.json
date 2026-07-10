@@ -1,0 +1,32 @@
+{
+  "agent": "gpt-5.5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3cd044d730f3e1243ad0827ac4374207be15832a180beb1ddfeb932710f504c6",
+    "version": "7.7.4"
+  },
+  "benchmark": "k8s-scheduler-shutdown-deadlock",
+  "billed_tokens": 110786,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 99328,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0,
+  "executed_arm": "native",
+  "fresh_input_tokens": 11458,
+  "input_tokens": 11458,
+  "output_tokens": 1490,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed the shutdown deadlock in [main.go](/workspace/main.go): `Run()` now closes the scheduling queue immediately after context cancellation, then waits for the worker goroutine to exit.\n\nVerification passed:\n\n```text\nOK: clean shutdown\nPASS\n```",
+  "timestamp": "2026-07-10T11:15:18Z",
+  "token_cost": 112276,
+  "tool_uses": 10,
+  "turns_to_fix": 1,
+  "wall_clock": 36.146
+}
