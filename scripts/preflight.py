@@ -120,9 +120,13 @@ def required_keys(model: str, arm: str) -> tuple[list[str], str]:
     if m.startswith("claude"):
         return ["ANTHROPIC_API_KEY"], "Anthropic native CpuDriver"
     if m.startswith(("gpt", "o1", "o3")):
-        return ["OPENROUTER_API_KEY", "OPENAI_API_KEY"], (
-            "OpenRouter if OPENROUTER_API_KEY set, else api.openai.com "
-            "passthrough (generic_kernel either way — no native OpenAI driver)"
+        # v7.7.4+: resolve_provider routes gpt-*/o-series to the native
+        # OpenAI Responses driver UNCONDITIONALLY (OPENROUTER_API_KEY is
+        # not consulted). Require the native key on every kernel arm —
+        # same fail-closed stance as gemini/mistral below.
+        return ["OPENAI_API_KEY"], (
+            "native OpenAI Responses CpuDriver (api.openai.com/v1/responses; "
+            "unconditional since v7.7.4 — OpenRouter never substitutes)"
         )
     if m.startswith("gemini"):
         if arm == "kernel-cpu":
@@ -297,11 +301,14 @@ def probe_plan(model: str, arm: str) -> list[tuple[str, str]]:
         if m.startswith(MISTRAL_PREFIXES):
             return [("mistral", model)]
         if m.startswith(("gpt", "o1", "o3")):
-            # OpenRouter if key set, else api.openai.com passthrough
-            return [("openrouter", format_openrouter_model(model)),
-                    ("openai", model)]
+            # v7.7.4+: native OpenAI Responses driver, unconditional.
+            return [("openai", model)]
         return [("openrouter", format_openrouter_model(model))]
-    # plain kernel: everything routes via OpenRouter (wire_model)
+    # plain kernel: OpenRouter (wire_model) — EXCEPT gpt-*/o-series, which
+    # resolve_provider routes to the native OpenAI driver unconditionally
+    # since v7.7.4 (there is no OpenRouter-routed gpt kernel arm anymore).
+    if m.startswith(("gpt", "o1", "o3")):
+        return [("openai", model)]
     or_model = model.removeprefix("openrouter/") if m.startswith("openrouter/") \
         else format_openrouter_model(model)
     return [("openrouter", or_model)]

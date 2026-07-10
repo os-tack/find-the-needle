@@ -54,11 +54,12 @@ EXPERIMENT_OUTPUT = Path(__file__).parent / "public" / "experiment-scores.json"
 # hosted THREE frozen-bin pins in one day — v7.7.1 ("july09"; fable-5 + flash
 # smoke), v7.7.2 ("july09v2"), and v7.7.3 ("july09v3", the current latest).
 # ---------------------------------------------------------------------------
-OSTK_VERSION = "v7.7.4"                      # current binary (latest board)
+OSTK_VERSION = "v7.7.5"                      # current binary (latest board)
 # Chronological order — MUST stay oldest→newest: downstream ranking uses
 # SNAPSHOTS.index (see published_snapshot_for / consolidate_all) to pick the
 # newest snapshot per column, so a new pin is APPENDED, never inserted.
-SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3", "july10")
+SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3", "july10",
+             "july10v2")
 # F2 FIX — RECEIPT-DRIVEN SNAPSHOT IDENTITY. The cell's own bench_binary.version
 # receipt is the RELIABLE attribution signal; the hand-maintained date ladder
 # below can only split the v7.6.0 june16/july02 pair (same binary, different run
@@ -67,7 +68,8 @@ SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3", "july10")
 # its payload date. v7.6.0 is intentionally ABSENT (date-ambiguous). Newest
 # first for readability; matching is exact-or-dotted-prefix (see snapshot_of).
 SNAPSHOT_BY_VERSION = (
-    ("7.7.4", "july10"),     # 2026-07-10 pin (native OpenAI Responses driver; current latest)
+    ("7.7.5", "july10v2"),   # 2026-07-10 second pin (envelope trim + always-boundary telemetry; current latest)
+    ("7.7.4", "july10"),     # 2026-07-10 first pin (native OpenAI Responses driver)
     ("7.7.3", "july09v3"),   # 2026-07-09 third pin
     ("7.7.2", "july09v2"),   # 2026-07-09 second pin
     ("7.7.1", "july09"),     # 2026-07-09 first pin
@@ -84,13 +86,15 @@ SNAPSHOT_BOUNDARIES = (
 )
 SNAPSHOT_RUN_DATE = {"june16": "2026-06-16", "july02": "2026-07-02",
                      "july09": "2026-07-09", "july09v2": "2026-07-09",
-                     "july09v3": "2026-07-09", "july10": "2026-07-10"}
+                     "july09v3": "2026-07-09", "july10": "2026-07-10",
+                     "july10v2": "2026-07-10"}
 # Binary identity per snapshot: versioned boards land under
 # boards/<SNAPSHOT_OSTK_VERSION[snap]>/ — a run is never re-attributed to a
 # binary it did not execute on (runs/.binary_identity.jsonl is the receipt).
 SNAPSHOT_OSTK_VERSION = {"june16": "v7.6.0", "july02": "v7.6.0",
                          "july09": "v7.7.1", "july09v2": "v7.7.2",
-                         "july09v3": "v7.7.3", "july10": "v7.7.4"}
+                         "july09v3": "v7.7.3", "july10": "v7.7.4",
+                         "july10v2": "v7.7.5"}
 # Fault ids (boards/FAULTS.json) attached to each snapshot's published board.
 SNAPSHOT_FAULTS = {
     "june16": ["june16-teardown-masked"],
@@ -107,11 +111,17 @@ SNAPSHOT_FAULTS = {
     # fable-5 native opus-fallback reproduced in this era's re-capture —
     # resolved mechanically via INVALID(model_mismatch), see FAULTS.json.
     "july09v3": ["july09v3-fable5-native-opus-fallback"],
-    # v7.7.4 (current latest): adds the native OpenAI Responses-API CpuDriver
-    # (gpt-* kernel-cpu becomes a true Tier-1 native-driver arm; the old
-    # generic-OpenRouter gpt kernel cells are archived, frozen boards keep
-    # their history). No known era faults yet.
+    # v7.7.4: adds the native OpenAI Responses-API CpuDriver (gpt-* kernel-cpu
+    # becomes a true Tier-1 native-driver arm; the old generic-OpenRouter gpt
+    # kernel cells are archived, frozen boards keep their history). No known
+    # era faults.
     "july10": [],
+    # v7.7.5 (current latest): kernel envelope trim (operator token-cost work)
+    # + always-on [ostk:telemetry] boundary on every tool response (spoof
+    # hardening; small constant per-call token cost) + executed_provider
+    # stamped into score.json (F5b provider receipts go live this era).
+    # No known era faults yet.
+    "july10v2": [],
 }
 # Human-readable one-liners for the ids above; the canonical machine-readable
 # era annotations (windows, commits, affected models) live in boards/FAULTS.json.

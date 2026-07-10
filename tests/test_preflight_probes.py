@@ -64,10 +64,14 @@ class TestProbePlan(unittest.TestCase):
         self.assertEqual(probe_plan("devstral-2512", "kernel-cpu"),
                          [("mistral", "devstral-2512")])
 
-    def test_kernel_cpu_gpt_prefers_openrouter_then_openai(self):
-        plan = probe_plan("gpt-5.5", "kernel-cpu")
-        self.assertEqual(plan, [("openrouter", "openai/gpt-5.5"),
-                                ("openai", "gpt-5.5")])
+    def test_kernel_gpt_routes_native_openai_unconditionally(self):
+        # v7.7.4+: resolve_provider sends gpt-*/o-series to the native
+        # OpenAI Responses driver on EVERY kernel arm; OpenRouter never
+        # substitutes (and OPENROUTER_API_KEY is not consulted).
+        self.assertEqual(probe_plan("gpt-5.5", "kernel-cpu"),
+                         [("openai", "gpt-5.5")])
+        self.assertEqual(probe_plan("gpt-5.5", "kernel"),
+                         [("openai", "gpt-5.5")])
 
     def test_mlx_has_no_probe(self):
         self.assertEqual(probe_plan("mlx/ternary-bonsai-8b", "kernel-mlx"), [])
