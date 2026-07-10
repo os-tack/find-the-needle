@@ -227,11 +227,13 @@ class TestConsolidateTree(unittest.TestCase):
         # teardown sidecar marks bench-a in the kernel-cpu dir
         (self.runs / "claude-sonnet-4-6-kernel-cpu" / "_teardown_masked.json").write_text(
             json.dumps({"benchmarks": {"bench-a": {"log": "x.log"}}}))
-        # gpt-5.5: generic_kernel whose only ostk data is the -kernel-cpu dir;
-        # payload-level teardown_masked passthrough
-        gpt = sonnet_kernel_cell()
-        gpt.update({"agent": "gpt-5.5-kernel-cpu", "teardown_masked": True})
-        self.write_cell("gpt-5.5-kernel-cpu", "bench-a", gpt)
+        # kimi-k2.6: generic_kernel whose only ostk data is the -kernel-cpu
+        # dir; payload-level teardown_masked passthrough. (Was gpt-5.5 until
+        # the v7.7.4 native OpenAI Responses driver promoted gpt-* to Tier-1
+        # — the exemplar must stay a genuinely driverless model.)
+        kimi = sonnet_kernel_cell()
+        kimi.update({"agent": "kimi-k2.6-kernel-cpu", "teardown_masked": True})
+        self.write_cell("kimi-k2.6-kernel-cpu", "bench-a", kimi)
         # grok-4.3: native cell is INVALID (zero-billed harness-incomplete:
         # billed_tokens=0 + empty buckets on a completed run); kernel arm
         # ABSENT (legitimately not run)
@@ -304,18 +306,18 @@ class TestConsolidateTree(unittest.TestCase):
 
         # ---- TEARDOWN: sidecar + payload passthrough, counted per model/arm ----
         self.assertEqual(sonnet["cpu"]["masked"], 1)        # via sidecar
-        gpt = self.model_row(board, "gpt-5-5")
-        self.assertEqual(gpt["cpu"]["masked"], 1)           # via payload field
+        kimi = self.model_row(board, "kimi-k2-6")
+        self.assertEqual(kimi["cpu"]["masked"], 1)          # via payload field
         self.assertEqual(board["trust"]["teardown_masked_cells"], 2)
         bench_a = [b for b in board["benchmarks"]
                    if b["model_normalized"] == "claude-sonnet-4-6" and b["benchmark"] == "bench-a"][0]
         self.assertTrue(bench_a["cpu"]["teardown_masked"])
         self.assertFalse(bench_a["native"]["teardown_masked"])
 
-        # ---- gpt-5.5: generic_kernel sourced from cpu dir, flagged ----
-        self.assertEqual(gpt["kernel_arm_type"], "generic_kernel")
-        self.assertEqual(gpt["ostk"]["source_arm"], "cpu")
-        self.assertIn("note", gpt["ostk"])
+        # ---- kimi-k2.6: generic_kernel sourced from cpu dir, flagged ----
+        self.assertEqual(kimi["kernel_arm_type"], "generic_kernel")
+        self.assertEqual(kimi["ostk"]["source_arm"], "cpu")
+        self.assertIn("note", kimi["ostk"])
 
         # ---- absent vs INVALID vs COST_INVALID (the axis split) ----
         grok = self.model_row(board, "grok-4-3")

@@ -96,10 +96,12 @@ class TestSnapshotReceiptIdentity(unittest.TestCase):
         snap = cs.snapshot_of(cell)
         self.assertEqual(snap, "july09v3")
         self.assertEqual(cs.SNAPSHOT_OSTK_VERSION[snap], "v7.7.3")
-        # v7.7.3 is the current latest board.
-        self.assertEqual(cs.OSTK_VERSION, "v7.7.3")
-        # Appended newest-last so SNAPSHOTS.index ranking still works.
-        self.assertEqual(cs.SNAPSHOTS[-1], "july09v3")
+        # Receipt identity is era-independent: july09v3 stays registered and
+        # ordered even after newer pins (v7.7.4/july10) supersede it as the
+        # current board. Do NOT pin OSTK_VERSION here — that assertion broke
+        # on the v7.7.4 bump and encoded the era, not the invariant.
+        self.assertIn("july09v3", cs.SNAPSHOTS)
+        self.assertLess(cs.SNAPSHOTS.index("july09"), cs.SNAPSHOTS.index("july09v3"))
 
     def test_ac2_no_regression_v771_v772(self):
         """AC2: version receipts still bucket 7.7.1→july09, 7.7.2→july09v2."""
@@ -245,9 +247,15 @@ class TestSonnet5Driver(unittest.TestCase):
             self.assertEqual(cs.kernel_arm_type_for(m), "native_driver")
 
     def test_ac4_generic_control_unaffected(self):
-        # gpt-5.5 has no native driver → must remain generic_kernel.
+        # A model with no native driver must remain generic_kernel. The
+        # original exemplar (gpt-5.5) was promoted to Tier-1 by the v7.7.4
+        # native OpenAI Responses driver, so the driverless control is now
+        # grok-4.3 (Tier-2, OpenRouter-only) — and gpt-5.5's promotion is
+        # asserted as the positive case.
         self.assertEqual(
-            cs.kernel_arm_type_for(cs.normalize_model("gpt-5.5")), "generic_kernel")
+            cs.kernel_arm_type_for(cs.normalize_model("grok-4.3")), "generic_kernel")
+        self.assertEqual(
+            cs.kernel_arm_type_for(cs.normalize_model("gpt-5.5")), "native_driver")
 
 
 # ---------------------------------------------------------------------------
