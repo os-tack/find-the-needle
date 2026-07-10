@@ -21,3 +21,10 @@ runs/openrouter/
 # raw harness artifacts — local re-derivation only, never published (may echo fixture text)
 runs/**/*.raw/
 runs/*.raw/
+
+# transient per-cell harness artifacts — never commit (operator rule,
+# encoded 2026-07-11 after two near-misses swept them in via `git add runs/`)
+runs/**/*.launcher.log
+runs-archive/**/*.launcher.log
+runs/**/*.pid
+*.raw
