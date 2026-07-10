@@ -28,5 +28,8 @@
   "token_cost": 165583,
   "tool_uses": 4,
   "turns_to_fix": 5,
-  "wall_clock": 15.42
+  "wall_clock": 15.42,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

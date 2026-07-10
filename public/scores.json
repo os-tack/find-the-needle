@@ -1985,6 +1985,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 60.964,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -1996,52 +1999,6 @@
     "wall_clock_mean": 60.964,
     "teardown_masked": false,
     "computed_cost_usd": 0.408241,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "snapshot": "july09v3"
-  },
-  {
-    "agent": "claude-fable-5-native",
-    "arm": "native",
-    "bench_binary": {
-      "build_sha": "unknown",
-      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-bb432d9879e8695f4a42568a8cc058d81c8117e56100a00458725a1540cb04f1",
-      "version": "7.7.3"
-    },
-    "benchmark": "auth-bypass-path-traversal",
-    "billed_tokens": 143623,
-    "cache_create_1h_tokens": 0,
-    "cache_create_5m_tokens": 0,
-    "cache_create_tokens": 10565,
-    "cache_read_tokens": 131233,
-    "control_type": "native",
-    "difficulty_tier": "medium",
-    "estimated_cost_usd": 0.25788425,
-    "executed_arm": "native",
-    "fresh_input_tokens": 1825,
-    "input_tokens": 1825,
-    "output_tokens": 1722,
-    "process_exit": null,
-    "requested_arm": "native",
-    "resolved": true,
-    "stop_reason": "pass",
-    "summary": "Fixed and verified \u2014 all tests pass.\n\n**The needle:** an authentication bypass in `middleware.go`. The auth middleware decided whether a route needed authentication by checking the **raw** `r.URL.Path` for the `/api/` prefix, while the router matched routes against the **cleaned** path (`path.Clean`, which normalizes `//` and `..`). That mismatch let an attacker reach protected handlers unauthenticated:\n\n- `//api/admin` \u2014 raw path starts with `//api/`, so the middleware's `/api/` check is skipped, but the router cleans it to `/api/admin` and serves the admin handler (leaking secrets and API keys).\n- `/health/../api/data` \u2014 same idea via traversal.\n\n**The fix:** normalize the path in the middleware with the same `path.Clean` logic the router uses, then check the prefix against that cleaned path. Now both sides agree on which path is being served, closing the bypass. All five test cases pass, including the double-slash and traversal variants.",
-    "timestamp": "2026-07-09T23:04:45Z",
-    "token_cost": 145345,
-    "tool_uses": 6,
-    "turns_to_fix": 7,
-    "wall_clock": 47.398,
-    "samples_count": 1,
-    "samples_resolved_count": 1,
-    "resolution_rate": 1.0,
-    "turns_min": 7,
-    "turns_max": 7,
-    "turns_mean": 7.0,
-    "wall_clock_min": 47.398,
-    "wall_clock_max": 47.398,
-    "wall_clock_mean": 47.398,
-    "teardown_masked": false,
-    "computed_cost_usd": 0.3676455,
     "cost_basis": "bucket-split",
     "cost_valid": true,
     "snapshot": "july09v3"
@@ -2077,6 +2034,9 @@
     "tool_uses": 11,
     "turns_to_fix": 12,
     "wall_clock": 154.047,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2123,6 +2083,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 75.566,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2169,6 +2132,9 @@
     "tool_uses": 26,
     "turns_to_fix": 27,
     "wall_clock": 433.528,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2215,6 +2181,9 @@
     "tool_uses": 16,
     "turns_to_fix": 17,
     "wall_clock": 181.145,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2261,6 +2230,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 68.792,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2307,6 +2279,9 @@
     "tool_uses": 14,
     "turns_to_fix": 15,
     "wall_clock": 111.629,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2353,6 +2328,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 79.783,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2399,6 +2377,9 @@
     "tool_uses": 11,
     "turns_to_fix": 12,
     "wall_clock": 83.275,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2445,6 +2426,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 48.416,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2491,6 +2475,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 51.903,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2537,6 +2524,9 @@
     "tool_uses": 4,
     "turns_to_fix": 5,
     "wall_clock": 47.674,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2548,52 +2538,6 @@
     "wall_clock_mean": 47.674,
     "teardown_masked": false,
     "computed_cost_usd": 0.269686,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "snapshot": "july09v3"
-  },
-  {
-    "agent": "claude-fable-5-native",
-    "arm": "native",
-    "bench_binary": {
-      "build_sha": "unknown",
-      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-bb432d9879e8695f4a42568a8cc058d81c8117e56100a00458725a1540cb04f1",
-      "version": "7.7.3"
-    },
-    "benchmark": "kernel-panic-ioctl",
-    "billed_tokens": 381848,
-    "cache_create_1h_tokens": 0,
-    "cache_create_5m_tokens": 0,
-    "cache_create_tokens": 18832,
-    "cache_read_tokens": 360921,
-    "control_type": "native",
-    "difficulty_tier": "hard",
-    "estimated_cost_usd": 0.4711835,
-    "executed_arm": "native",
-    "fresh_input_tokens": 2095,
-    "input_tokens": 2095,
-    "output_tokens": 6478,
-    "process_exit": null,
-    "requested_arm": "native",
-    "resolved": true,
-    "stop_reason": "pass",
-    "summary": "Fixed and verified \u2014 `test.sh` now reports `PASS` (exit 0). The only remaining message is the harmless `cp: Permission denied` for `/usr/local/bin/devctl`, which happens only because I'm running as `bench`; the grading harness runs as root and the `cp` succeeds there.\n\n## The needle\n\nThe core crash was in `handle_set_config` (`src/ioctl_handler.c`): it validated the `key` pointer but never checked `value` before `memcpy(entry->value, req->value, copy_len)`. Fuzz Test 3 passes a NULL `value` with `value_len = 100`, so the handler dereferenced NULL and segfaulted \u2014 a simulated kernel panic.\n\nWhile fixing that I hardened two more input-validation holes the fuzz suite also exercises:\n\n1. **NULL / zero-length output buffer in `handle_get_config`** \u2014 a NULL `value` or `value_len == 0` would either dereference NULL or, worse, hit `copy_len = req->value_len - 1` where `value_len` is a `size_t`, underflowing to `SIZE_MAX` and driving a giant `memcpy`. Now rejected up front.\n\n2. **Oversized `value_len` in `handle_set_config`** \u2014 the old code silently truncated an out-of-range length to `MAX_VALUE_LEN - 1` (255) and then `memcpy`'d 255 bytes from a 6-byte source string, an out-of-bounds *read*. Since `value_len` is the count of valid bytes in the source, a length past `MAX_VALUE_LEN` can't be valid, so it's now rejected with an error.\n\nAll three fixes are pointer/length validation added before any `memcpy`, matching the driver's stated \"untrusted userspace input\" model. Self-test still passes and all seven crafted fuzz cases now return `-1` cleanly.",
-    "timestamp": "2026-07-09T23:29:10Z",
-    "token_cost": 388326,
-    "tool_uses": 15,
-    "turns_to_fix": 16,
-    "wall_clock": 109.673,
-    "samples_count": 1,
-    "samples_resolved_count": 1,
-    "resolution_rate": 1.0,
-    "turns_min": 16,
-    "turns_max": 16,
-    "turns_mean": 16.0,
-    "wall_clock_min": 109.673,
-    "wall_clock_max": 109.673,
-    "wall_clock_mean": 109.673,
-    "teardown_masked": false,
-    "computed_cost_usd": 0.941171,
     "cost_basis": "bucket-split",
     "cost_valid": true,
     "snapshot": "july09v3"
@@ -2629,6 +2573,9 @@
     "tool_uses": 20,
     "turns_to_fix": 21,
     "wall_clock": 236.237,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2675,6 +2622,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 66.634,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2721,6 +2671,9 @@
     "tool_uses": 5,
     "turns_to_fix": 6,
     "wall_clock": 47.27,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2732,52 +2685,6 @@
     "wall_clock_mean": 47.27,
     "teardown_masked": false,
     "computed_cost_usd": 0.305028,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "snapshot": "july09v3"
-  },
-  {
-    "agent": "claude-fable-5-native",
-    "arm": "native",
-    "bench_binary": {
-      "build_sha": "unknown",
-      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-bb432d9879e8695f4a42568a8cc058d81c8117e56100a00458725a1540cb04f1",
-      "version": "7.7.3"
-    },
-    "benchmark": "nginx-upstream-port-mismatch",
-    "billed_tokens": 439028,
-    "cache_create_1h_tokens": 0,
-    "cache_create_5m_tokens": 0,
-    "cache_create_tokens": 16975,
-    "cache_read_tokens": 419948,
-    "control_type": "native",
-    "difficulty_tier": "medium",
-    "estimated_cost_usd": 1.0386095000000002,
-    "executed_arm": "native",
-    "fresh_input_tokens": 2105,
-    "input_tokens": 2105,
-    "output_tokens": 10311,
-    "process_exit": null,
-    "requested_arm": "native",
-    "resolved": true,
-    "stop_reason": "pass",
-    "summary": "## The needle\n\nAn **nginx upstream port mismatch**. `/etc/nginx/sites-available/default` reverse-proxies `/api/` requests to the Flask backend at `http://127.0.0.1:5001`:\n\n```\nlocation /api/ {\n    proxy_pass http://127.0.0.1:5001;\n```\n\n...but Flask was configured to listen on port **5000** (`app.run(host=\"127.0.0.1\", port=5000)`). So `/api/data` through nginx returned a 502 (nothing on 5001), while the static `/health` location \u2014 which nginx serves directly without touching the backend \u2014 always returned 200. That's why Test 1 passed and Test 2 failed.\n\n## The fix\n\nThe nginx config is root-owned and immutable in this environment, so the fix goes in the editable app side. I changed `/workspace/app/server.py` to listen on the port nginx actually targets:\n\n```python\napp.run(host=\"127.0.0.1\", port=5001)\n```\n\n## Verification\n\n`test.sh` is designed to run as root (its default nginx invocation writes to root-owned `/run/nginx.pid` and `/var/log/nginx/`), and the leftover root-owned processes confirm the grader runs it that way. As the unprivileged `bench` user I can't start that root config directly, so I verified end-to-end by launching nginx with the **actual** `sites-available/default` config under writable runtime paths, against the fixed Flask:\n\n- `GET /health` \u2192 **200**\n- `GET /api/data` \u2192 **200**, body `{\"status\":\"ok\",\"items\":[...3 items...]}`\n\nBoth assertions `test.sh` makes now pass, so the test will report success when run in its root grading environment.",
-    "timestamp": "2026-07-09T23:39:28Z",
-    "token_cost": 449339,
-    "tool_uses": 17,
-    "turns_to_fix": 18,
-    "wall_clock": 262.483,
-    "samples_count": 1,
-    "samples_resolved_count": 1,
-    "resolution_rate": 1.0,
-    "turns_min": 18,
-    "turns_max": 18,
-    "turns_mean": 18.0,
-    "wall_clock_min": 262.483,
-    "wall_clock_max": 262.483,
-    "wall_clock_mean": 262.483,
-    "teardown_masked": false,
-    "computed_cost_usd": 1.1687355,
     "cost_basis": "bucket-split",
     "cost_valid": true,
     "snapshot": "july09v3"
@@ -2813,6 +2720,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 47.46,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2859,6 +2769,9 @@
     "tool_uses": 4,
     "turns_to_fix": 5,
     "wall_clock": 35.393,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2905,6 +2818,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 58.433,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2951,6 +2867,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 58.028,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -2962,63 +2881,6 @@
     "wall_clock_mean": 58.028,
     "teardown_masked": false,
     "computed_cost_usd": 0.344137,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "snapshot": "july09v3"
-  },
-  {
-    "agent": "claude-fable-5-native",
-    "arm": "native",
-    "bench_binary": {
-      "build_sha": "unknown",
-      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-bb432d9879e8695f4a42568a8cc058d81c8117e56100a00458725a1540cb04f1",
-      "version": "7.7.3"
-    },
-    "benchmark": "postgres-migration-schema-drift",
-    "billed_tokens": 434713,
-    "cache_create_1h_tokens": 0,
-    "cache_create_5m_tokens": 0,
-    "cache_create_tokens": 52251,
-    "cache_read_tokens": 1275661,
-    "control_type": "native",
-    "difficulty_tier": "hard",
-    "estimated_cost_usd": 2.711614,
-    "executed_arm": "native",
-    "fresh_input_tokens": 6180,
-    "input_tokens": 6180,
-    "output_tokens": 20976,
-    "process_exit": null,
-    "requested_arm": "native",
-    "resolved": false,
-    "stop_reason": "fail",
-    "summary": "Both queries succeed against a real Postgres cluster with the migrated schema.\n\n## The needle\n\nA schema-drift bug in `/workspace/app/main.go`. Migration `002_rename_status.sql` renames the `status` column to `order_status`, but the Go API's SQL still referenced the old `status` name in two places:\n\n- `createOrder` \u2014 the `INSERT ... RETURNING` (lines 109-114)\n- `getOrder` \u2014 the `SELECT` (lines 130-134)\n\nAgainst the migrated database, every `POST /orders` and `GET /orders/{id}` would fail with `column \"status\" does not exist` (HTTP 500), so tests 2 and 3 in `test.sh` would fail.\n\n## The fix\n\nI changed both queries to use `order_status`, rebuilt the `orders-api` binary (`go build -mod=vendor`), which succeeded.\n\n## Verification\n\n`test.sh` itself requires root \u2014 it runs `su postgres`, which prompts for a password I don't have as the `bench` user, so I couldn't execute it directly. Instead I reproduced the test's setup independently: I stood up a fresh Postgres cluster I own, created `ordersdb`, applied all three migrations in order (confirming the live column is `order_status`), and ran the code's exact INSERT and SELECT statements. Both returned the expected row with the `order_status` field populated \u2014 which is precisely what tests 2 and 3 assert. The fix is correct; running the full `test.sh` under root will now pass.",
-    "timestamp": "2026-07-09T23:52:51Z",
-    "token_cost": 1355068,
-    "tool_uses": 48,
-    "turns_to_fix": 17,
-    "wall_clock": 157.704,
-    "samples_count": 3,
-    "samples_resolved_count": 0,
-    "resolution_rate": 0.0,
-    "turns_min": 16,
-    "turns_max": 18,
-    "turns_mean": 17.0,
-    "wall_clock_min": 157.704,
-    "wall_clock_max": 238.821,
-    "wall_clock_mean": 190.01500000000001,
-    "retry_attempts": 3,
-    "final_attempt_input_tokens": 2103,
-    "final_attempt_output_tokens": 5430,
-    "final_attempt_token_cost": 440143,
-    "final_attempt_estimated_cost_usd": 0.7551165,
-    "final_attempt_fresh_input_tokens": 2103,
-    "final_attempt_cache_read_tokens": 417541,
-    "final_attempt_cache_create_tokens": 15069,
-    "final_attempt_cache_create_5m_tokens": 0,
-    "final_attempt_cache_create_1h_tokens": 0,
-    "final_attempt_tool_uses": 16,
-    "teardown_masked": false,
-    "computed_cost_usd": 3.0393985,
     "cost_basis": "bucket-split",
     "cost_valid": true,
     "snapshot": "july09v3"
@@ -3054,6 +2916,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 63.846,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -3100,6 +2965,9 @@
     "tool_uses": 15,
     "turns_to_fix": 16,
     "wall_clock": 160.23,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -3111,52 +2979,6 @@
     "wall_clock_mean": 160.23,
     "teardown_masked": false,
     "computed_cost_usd": 1.0649045,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "snapshot": "july09v3"
-  },
-  {
-    "agent": "claude-fable-5-native",
-    "arm": "native",
-    "bench_binary": {
-      "build_sha": "unknown",
-      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-bb432d9879e8695f4a42568a8cc058d81c8117e56100a00458725a1540cb04f1",
-      "version": "7.7.3"
-    },
-    "benchmark": "rate-limit-bypass-header",
-    "billed_tokens": 140298,
-    "cache_create_1h_tokens": 0,
-    "cache_create_5m_tokens": 0,
-    "cache_create_tokens": 7882,
-    "cache_read_tokens": 130591,
-    "control_type": "native",
-    "difficulty_tier": "medium",
-    "estimated_cost_usd": 0.25711124999999996,
-    "executed_arm": "native",
-    "fresh_input_tokens": 1825,
-    "input_tokens": 1825,
-    "output_tokens": 1637,
-    "process_exit": null,
-    "requested_arm": "native",
-    "resolved": true,
-    "stop_reason": "pass",
-    "summary": "Fixed and verified. Both tests pass.\n\nThe needle was in `/app/app/ratelimiter.ts`: `getClientIp()` derived the rate-limit key from the client-supplied `X-Forwarded-For` header. Since that header is trivially spoofable, an attacker could send a different value on every request (`10.0.0.1`, `10.0.0.2`, \u2026) and get a fresh rate-limit window each time, bypassing the limiter entirely.\n\nThe fix keys the rate limiter on the actual TCP socket address (`req.socket.remoteAddress`), which the client can't forge. After the change, `test.sh` shows 20 of the 30 spoofed requests correctly blocked (10 passed = the real limit), while normal traffic still gets its expected 10-request window.\n\nNote: if this service is ever deployed behind a genuine trusted proxy/load balancer, the proxy's real IP should be resolved from configuration rather than by trusting request headers \u2014 I left a comment to that effect.",
-    "timestamp": "2026-07-09T23:57:44Z",
-    "token_cost": 141935,
-    "tool_uses": 6,
-    "turns_to_fix": 7,
-    "wall_clock": 65.125,
-    "samples_count": 1,
-    "samples_resolved_count": 1,
-    "resolution_rate": 1.0,
-    "turns_min": 7,
-    "turns_max": 7,
-    "turns_mean": 7.0,
-    "wall_clock_min": 65.125,
-    "wall_clock_max": 65.125,
-    "wall_clock_mean": 65.125,
-    "teardown_masked": false,
-    "computed_cost_usd": 0.329216,
     "cost_basis": "bucket-split",
     "cost_valid": true,
     "snapshot": "july09v3"
@@ -3192,6 +3014,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 80.738,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -3238,6 +3063,9 @@
     "tool_uses": 48,
     "turns_to_fix": 19,
     "wall_clock": 222.536,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 3,
     "samples_resolved_count": 0,
     "resolution_rate": 0.0,
@@ -3295,6 +3123,9 @@
     "tool_uses": 32,
     "turns_to_fix": 12,
     "wall_clock": 98.625,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 3,
     "samples_resolved_count": 0,
     "resolution_rate": 0.0,
@@ -3317,52 +3148,6 @@
     "final_attempt_tool_uses": 11,
     "teardown_masked": false,
     "computed_cost_usd": 2.0715825,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "snapshot": "july09v3"
-  },
-  {
-    "agent": "claude-fable-5-native",
-    "arm": "native",
-    "bench_binary": {
-      "build_sha": "unknown",
-      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-bb432d9879e8695f4a42568a8cc058d81c8117e56100a00458725a1540cb04f1",
-      "version": "7.7.3"
-    },
-    "benchmark": "sql-injection-search",
-    "billed_tokens": 358598,
-    "cache_create_1h_tokens": 0,
-    "cache_create_5m_tokens": 0,
-    "cache_create_tokens": 14343,
-    "cache_read_tokens": 342156,
-    "control_type": "native",
-    "difficulty_tier": "medium",
-    "estimated_cost_usd": 0.6088895,
-    "executed_arm": "native",
-    "fresh_input_tokens": 2099,
-    "input_tokens": 2099,
-    "output_tokens": 5638,
-    "process_exit": null,
-    "requested_arm": "native",
-    "resolved": true,
-    "stop_reason": "fail",
-    "summary": "## Summary\n\n**The needle:** a SQL injection vulnerability in `app/search.py:18`. The `search()` method interpolated user input directly into the SQL string via an f-string (`WHERE name LIKE '%{query}%'` and `AND category = '{category}'`), allowing UNION-based data exfiltration and boolean WHERE-clause bypass.\n\n**The fix:** rewrote `search()` to use parameterized queries \u2014 placeholders (`?`) with values passed separately to `db.execute()` instead of `db.execute_raw()`:\n\n```python\nsql = \"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?\"\nparams = [f\"%{query}%\"]\nif category:\n    sql += \" AND category = ?\"\n    params.append(category)\nsql += \" ORDER BY name\"\nreturn self.db.execute(sql, tuple(params))\n```\n\n**Verification:** All three test cases pass \u2014 normal search works (1 result for \"Mouse\"), the UNION attack leaks no user data (0 results), and the boolean `' OR '1'='1` injection no longer bypasses the filter (0 results vs. 10 total products).\n\n**One caveat about running `test.sh` directly:** a leftover **root-owned** server process (pid 37) started at container init is still listening on port 18083 (the port test.sh hardcodes), running the *old vulnerable* code. As user `bench` I can't kill it (no sudo, `kill`/`pkill` return \"Operation not permitted\"), and there's no shutdown endpoint to stop it gracefully. So `test.sh` as-is fails at \"Server failed to start\" (Address already in use) \u2014 not because of the fix, but because the port is occupied.\n\nTo prove the fix works, I ran test.sh's exact logic against a fresh server on a free port (18099) and it printed the final `PASS`. The original `test.sh` is unmodified. If a fresh environment (without that stale pid 37) runs `test.sh`, it will pass. If you have a way to kill pid 37, `test.sh` will then pass unchanged here too.",
-    "timestamp": "2026-07-10T00:21:56Z",
-    "token_cost": 364236,
-    "tool_uses": 13,
-    "turns_to_fix": 14,
-    "wall_clock": 123.442,
-    "samples_count": 1,
-    "samples_resolved_count": 1,
-    "resolution_rate": 1.0,
-    "turns_min": 14,
-    "turns_max": 14,
-    "turns_mean": 14.0,
-    "wall_clock_min": 123.442,
-    "wall_clock_max": 123.442,
-    "wall_clock_mean": 123.442,
-    "teardown_masked": false,
-    "computed_cost_usd": 0.8243335,
     "cost_basis": "bucket-split",
     "cost_valid": true,
     "snapshot": "july09v3"
@@ -3398,6 +3183,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 56.74,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -3444,6 +3232,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 61.984,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -3490,6 +3281,9 @@
     "tool_uses": 15,
     "turns_to_fix": 16,
     "wall_clock": 132.166,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -3536,6 +3330,9 @@
     "tool_uses": 24,
     "turns_to_fix": 25,
     "wall_clock": 283.405,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -3582,6 +3379,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 45.165,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -3628,6 +3428,9 @@
     "tool_uses": 24,
     "turns_to_fix": 25,
     "wall_clock": 259.927,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -3674,6 +3477,9 @@
     "tool_uses": 5,
     "turns_to_fix": 6,
     "wall_clock": 31.279,
+    "observed_models": [
+      "claude-fable-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5444,6 +5250,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 40.013,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5490,6 +5299,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 40.531,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5536,6 +5348,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 48.449,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5582,6 +5397,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 33.495,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5628,6 +5446,9 @@
     "tool_uses": 13,
     "turns_to_fix": 14,
     "wall_clock": 68.421,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5674,6 +5495,9 @@
     "tool_uses": 12,
     "turns_to_fix": 13,
     "wall_clock": 69.872,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5720,6 +5544,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 52.247,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5766,6 +5593,9 @@
     "tool_uses": 15,
     "turns_to_fix": 16,
     "wall_clock": 107.943,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5812,6 +5642,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 82.686,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5858,6 +5691,9 @@
     "tool_uses": 12,
     "turns_to_fix": 13,
     "wall_clock": 68.318,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5904,6 +5740,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 51.371,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5950,6 +5789,9 @@
     "tool_uses": 4,
     "turns_to_fix": 5,
     "wall_clock": 22.052,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -5996,6 +5838,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 36.73,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6042,6 +5887,9 @@
     "tool_uses": 16,
     "turns_to_fix": 17,
     "wall_clock": 96.884,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6088,6 +5936,9 @@
     "tool_uses": 19,
     "turns_to_fix": 20,
     "wall_clock": 144.77,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6134,6 +5985,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 56.213,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6180,6 +6034,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 31.877,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6226,6 +6083,9 @@
     "tool_uses": 29,
     "turns_to_fix": 30,
     "wall_clock": 364.3,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6272,6 +6132,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 38.334,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6318,6 +6181,9 @@
     "tool_uses": 4,
     "turns_to_fix": 5,
     "wall_clock": 19.479,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6364,6 +6230,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 32.576,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6410,6 +6279,9 @@
     "tool_uses": 5,
     "turns_to_fix": 6,
     "wall_clock": 25.257,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6456,6 +6328,9 @@
     "tool_uses": 50,
     "turns_to_fix": 18,
     "wall_clock": 128.133,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 3,
     "samples_resolved_count": 0,
     "resolution_rate": 0.0,
@@ -6513,6 +6388,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 40.851,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6559,6 +6437,9 @@
     "tool_uses": 13,
     "turns_to_fix": 14,
     "wall_clock": 88.74,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6605,6 +6486,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 53.987,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6651,6 +6535,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 46.036,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6697,6 +6584,9 @@
     "tool_uses": 54,
     "turns_to_fix": 20,
     "wall_clock": 267.897,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 3,
     "samples_resolved_count": 0,
     "resolution_rate": 0.0,
@@ -6754,6 +6644,9 @@
     "tool_uses": 31,
     "turns_to_fix": 12,
     "wall_clock": 59.41,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 3,
     "samples_resolved_count": 0,
     "resolution_rate": 0.0,
@@ -6811,6 +6704,9 @@
     "tool_uses": 13,
     "turns_to_fix": 14,
     "wall_clock": 61.8,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6857,6 +6753,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 44.257,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6903,6 +6802,9 @@
     "tool_uses": 5,
     "turns_to_fix": 6,
     "wall_clock": 40.124,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6949,6 +6851,9 @@
     "tool_uses": 13,
     "turns_to_fix": 14,
     "wall_clock": 74.544,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -6995,6 +6900,9 @@
     "tool_uses": 18,
     "turns_to_fix": 19,
     "wall_clock": 123.774,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -7041,6 +6949,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 35.038,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -7087,6 +6998,9 @@
     "tool_uses": 22,
     "turns_to_fix": 23,
     "wall_clock": 206.407,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -7133,6 +7047,9 @@
     "tool_uses": 4,
     "turns_to_fix": 5,
     "wall_clock": 16.386,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8521,6 +8438,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 33.583,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8559,6 +8479,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 27.01,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8597,6 +8520,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 75.96,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8635,6 +8561,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 27.226,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8673,6 +8602,9 @@
     "tool_uses": 38,
     "turns_to_fix": 39,
     "wall_clock": 297.93,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8711,6 +8643,9 @@
     "tool_uses": 26,
     "turns_to_fix": 27,
     "wall_clock": 156.373,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8749,6 +8684,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 22.896,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8787,6 +8725,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 25.956,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8825,6 +8766,9 @@
     "tool_uses": 10,
     "turns_to_fix": 11,
     "wall_clock": 70.263,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8863,6 +8807,9 @@
     "tool_uses": 11,
     "turns_to_fix": 12,
     "wall_clock": 76.369,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8901,6 +8848,9 @@
     "tool_uses": 11,
     "turns_to_fix": 12,
     "wall_clock": 37.692,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8939,6 +8889,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 30.988,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -8977,6 +8930,9 @@
     "tool_uses": 5,
     "turns_to_fix": 6,
     "wall_clock": 31.784,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9015,6 +8971,9 @@
     "tool_uses": 20,
     "turns_to_fix": 21,
     "wall_clock": 189.382,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9053,6 +9012,9 @@
     "tool_uses": 22,
     "turns_to_fix": 23,
     "wall_clock": 159.587,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9091,6 +9053,9 @@
     "tool_uses": 13,
     "turns_to_fix": 14,
     "wall_clock": 44.795,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9129,6 +9094,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 35.123,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9167,6 +9135,9 @@
     "tool_uses": 34,
     "turns_to_fix": 35,
     "wall_clock": 255.425,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9205,6 +9176,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 31.932,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9243,6 +9217,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 20.748,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9281,6 +9258,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 37.213,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9319,6 +9299,9 @@
     "tool_uses": 5,
     "turns_to_fix": 6,
     "wall_clock": 20.004,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9357,6 +9340,9 @@
     "tool_uses": 43,
     "turns_to_fix": 44,
     "wall_clock": 284.312,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "teardown_masked": false,
     "computed_cost_usd": 0.75682575,
     "cost_basis": "bucket-split",
@@ -9386,6 +9372,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 32.552,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9424,6 +9413,9 @@
     "tool_uses": 12,
     "turns_to_fix": 13,
     "wall_clock": 164.025,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9462,6 +9454,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 39.18,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9500,6 +9495,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 94.99,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9538,6 +9536,9 @@
     "tool_uses": 21,
     "turns_to_fix": 22,
     "wall_clock": 105.391,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "teardown_masked": false,
     "computed_cost_usd": 0.25438815000000004,
     "cost_basis": "bucket-split",
@@ -9567,6 +9568,9 @@
     "tool_uses": 15,
     "turns_to_fix": 16,
     "wall_clock": 64.431,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9605,6 +9609,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 25.078,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9643,6 +9650,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 44.115,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9681,6 +9691,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 49.631,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9719,6 +9732,9 @@
     "tool_uses": 23,
     "turns_to_fix": 24,
     "wall_clock": 95.664,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9757,6 +9773,9 @@
     "tool_uses": 48,
     "turns_to_fix": 49,
     "wall_clock": 386.372,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9795,6 +9814,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 40.61,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9833,6 +9855,9 @@
     "tool_uses": 11,
     "turns_to_fix": 12,
     "wall_clock": 87.248,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -9871,6 +9896,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 22.697,
+    "observed_models": [
+      "claude-sonnet-4-6"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -11619,6 +11647,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 29.363,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -11665,6 +11696,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 27.98,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -11711,6 +11745,9 @@
     "tool_uses": 17,
     "turns_to_fix": 18,
     "wall_clock": 82.314,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -11757,6 +11794,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 27.351,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -11803,6 +11843,9 @@
     "tool_uses": 28,
     "turns_to_fix": 29,
     "wall_clock": 204.172,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -11849,6 +11892,9 @@
     "tool_uses": 35,
     "turns_to_fix": 36,
     "wall_clock": 232.584,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -11895,6 +11941,9 @@
     "tool_uses": 6,
     "turns_to_fix": 7,
     "wall_clock": 44.072,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -11941,6 +11990,9 @@
     "tool_uses": 19,
     "turns_to_fix": 20,
     "wall_clock": 105.72,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -11987,6 +12039,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 72.752,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12033,6 +12088,9 @@
     "tool_uses": 14,
     "turns_to_fix": 15,
     "wall_clock": 62.81,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12079,6 +12137,9 @@
     "tool_uses": 10,
     "turns_to_fix": 11,
     "wall_clock": 27.054,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12125,6 +12186,9 @@
     "tool_uses": 4,
     "turns_to_fix": 5,
     "wall_clock": 15.42,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12171,6 +12235,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 31.929,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12217,6 +12284,9 @@
     "tool_uses": 29,
     "turns_to_fix": 30,
     "wall_clock": 143.331,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12263,6 +12333,9 @@
     "tool_uses": 27,
     "turns_to_fix": 28,
     "wall_clock": 157.874,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12309,6 +12382,9 @@
     "tool_uses": 12,
     "turns_to_fix": 13,
     "wall_clock": 37.368,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12355,6 +12431,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 25.991,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12401,6 +12480,9 @@
     "tool_uses": 25,
     "turns_to_fix": 26,
     "wall_clock": 189.526,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12447,6 +12529,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 26.709,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12493,6 +12578,9 @@
     "tool_uses": 4,
     "turns_to_fix": 5,
     "wall_clock": 13.834,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12539,6 +12627,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 22.288,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12585,6 +12676,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 26.44,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12631,6 +12725,9 @@
     "tool_uses": 89,
     "turns_to_fix": 34,
     "wall_clock": 211.079,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 3,
     "samples_resolved_count": 0,
     "resolution_rate": 0.0,
@@ -12688,6 +12785,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 36.944,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12734,6 +12834,9 @@
     "tool_uses": 17,
     "turns_to_fix": 18,
     "wall_clock": 152.805,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12780,6 +12883,9 @@
     "tool_uses": 8,
     "turns_to_fix": 9,
     "wall_clock": 43.6,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12826,6 +12932,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 42.329,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -12872,6 +12981,9 @@
     "tool_uses": 69,
     "turns_to_fix": 17,
     "wall_clock": 127.129,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 3,
     "samples_resolved_count": 0,
     "resolution_rate": 0.0,
@@ -12929,6 +13041,9 @@
     "tool_uses": 37,
     "turns_to_fix": 16,
     "wall_clock": 52.02,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 3,
     "samples_resolved_count": 0,
     "resolution_rate": 0.0,
@@ -12986,6 +13101,9 @@
     "tool_uses": 22,
     "turns_to_fix": 23,
     "wall_clock": 99.183,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -13032,6 +13150,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 31.409,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -13078,6 +13199,9 @@
     "tool_uses": 9,
     "turns_to_fix": 10,
     "wall_clock": 33.174,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -13124,6 +13248,9 @@
     "tool_uses": 17,
     "turns_to_fix": 18,
     "wall_clock": 91.511,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -13170,6 +13297,9 @@
     "tool_uses": 30,
     "turns_to_fix": 31,
     "wall_clock": 153.749,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -13216,6 +13346,9 @@
     "tool_uses": 7,
     "turns_to_fix": 8,
     "wall_clock": 35.922,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -13262,6 +13395,9 @@
     "tool_uses": 40,
     "turns_to_fix": 41,
     "wall_clock": 235.934,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,
@@ -13308,6 +13444,9 @@
     "tool_uses": 5,
     "turns_to_fix": 6,
     "wall_clock": 12.275,
+    "observed_models": [
+      "claude-sonnet-5"
+    ],
     "samples_count": 1,
     "samples_resolved_count": 1,
     "resolution_rate": 1.0,

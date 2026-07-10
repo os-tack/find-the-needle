@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-10T10:28:40Z",
+ "generated": "2026-07-10T13:17:25Z",
  "ostk_version": "v7.7.3",
  "snapshot": "july09v3",
  "snapshot_policy": "latest = single snapshot per (model, arm) column \u2014 a column never mixes run dates; earlier snapshots are published under boards/v7.7.3/",
@@ -11,20 +11,106 @@
   "claude-sonnet-5/cpu": "july09v3",
   "claude-sonnet-5/native": "july09v3"
  },
- "faults": [],
+ "faults": [
+  {
+   "id": "july09v3-fable5-native-opus-fallback",
+   "note": ""
+  }
+ ],
  "faults_ref": "boards/FAULTS.json",
  "trust": {
   "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle verdict + arm receipt + not stalled): malformed / no-arm-receipt / arm-mismatch / deadline / zero-work / duplicate-column cells are fully INVALID \u2014 excluded from everything, counted visibly. COST axis (real token/cost accounting): zero token accounting on a completed run keeps the solve verdict and marks cost UNAVAILABLE \u2014 included in solve columns, excluded from cost/token columns, counted visibly, never priced. absent = never run (not invalid).",
-  "solve_valid_cells": 222,
-  "cost_valid_cells": 222,
+  "solve_valid_cells": 216,
+  "cost_valid_cells": 216,
   "cost_invalid_cells": 0,
-  "invalid_cells": 0,
+  "invalid_cells": 6,
   "policy_excluded_cells": 6,
-  "invalid_by_reason": {},
+  "invalid_by_reason": {
+   "model_mismatch": 6
+  },
   "cost_invalid_by_reason": {},
   "teardown_masked_cells": 2
  },
- "invalid_cells": [],
+ "invalid_cells": [
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "arm": "native",
+   "benchmark": "auth-bypass-path-traversal",
+   "file": "runs/claude-fable-5-native/auth-bypass-path-traversal.score.json",
+   "snapshot": "july09v3",
+   "teardown_masked": false,
+   "axis": "solve",
+   "reasons": [
+    "model_mismatch:observed=claude-fable-5,claude-opus-4-8"
+   ]
+  },
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "arm": "native",
+   "benchmark": "kernel-panic-ioctl",
+   "file": "runs/claude-fable-5-native/kernel-panic-ioctl.score.json",
+   "snapshot": "july09v3",
+   "teardown_masked": false,
+   "axis": "solve",
+   "reasons": [
+    "model_mismatch:observed=claude-opus-4-8"
+   ]
+  },
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "arm": "native",
+   "benchmark": "nginx-upstream-port-mismatch",
+   "file": "runs/claude-fable-5-native/nginx-upstream-port-mismatch.score.json",
+   "snapshot": "july09v3",
+   "teardown_masked": false,
+   "axis": "solve",
+   "reasons": [
+    "model_mismatch:observed=claude-fable-5,claude-opus-4-8"
+   ]
+  },
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "arm": "native",
+   "benchmark": "postgres-migration-schema-drift",
+   "file": "runs/claude-fable-5-native/postgres-migration-schema-drift.score.json",
+   "snapshot": "july09v3",
+   "teardown_masked": false,
+   "axis": "solve",
+   "reasons": [
+    "model_mismatch:observed=claude-fable-5,claude-opus-4-8"
+   ]
+  },
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "arm": "native",
+   "benchmark": "rate-limit-bypass-header",
+   "file": "runs/claude-fable-5-native/rate-limit-bypass-header.score.json",
+   "snapshot": "july09v3",
+   "teardown_masked": false,
+   "axis": "solve",
+   "reasons": [
+    "model_mismatch:observed=claude-fable-5,claude-opus-4-8"
+   ]
+  },
+  {
+   "model": "claude-fable-5",
+   "model_normalized": "claude-fable-5",
+   "arm": "native",
+   "benchmark": "sql-injection-search",
+   "file": "runs/claude-fable-5-native/sql-injection-search.score.json",
+   "snapshot": "july09v3",
+   "teardown_masked": false,
+   "axis": "solve",
+   "reasons": [
+    "model_mismatch:observed=claude-fable-5,claude-opus-4-8"
+   ]
+  }
+ ],
  "cost_invalid_cells": [],
  "models": [
   {
@@ -188,20 +274,20 @@
    "model_normalized": "claude-fable-5",
    "benchmarks": 37,
    "native": {
-    "solved": 34,
-    "total": 37,
-    "cost": 29.787991999999996,
-    "tokens": 13211684,
-    "tokens_fresh": 258783,
-    "cost_cells": 37,
-    "tools": 482,
-    "turns": 436,
-    "wall": 4208.643,
-    "invalid": 0,
+    "solved": 29,
+    "total": 31,
+    "cost": 23.117492,
+    "tokens": 10367435,
+    "tokens_fresh": 195892,
+    "cost_cells": 31,
+    "tools": 377,
+    "turns": 357,
+    "wall": 3442.818,
+    "invalid": 6,
     "cost_invalid": 0,
     "masked": 0,
     "cost_bases": {
-     "bucket-split": 37
+     "bucket-split": 31
     }
    },
    "kernel": {
@@ -306,22 +392,7 @@
    "model": "claude-fable-5",
    "model_normalized": "claude-fable-5",
    "benchmark": "auth-bypass-path-traversal",
-   "native": {
-    "resolved": true,
-    "turns": 7,
-    "input_tokens": 1825,
-    "output_tokens": 1722,
-    "billed_input_tokens": 143623,
-    "token_cost": 145345,
-    "cost_usd": 0.367646,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "teardown_masked": false,
-    "tool_uses": 6,
-    "wall_clock": 47.398,
-    "summary": "Fixed and verified \u2014 all tests pass.\n\n**The needle:** an authentication bypass in `middleware.go`. The auth middleware decided whether a route needed authentication by checking the **raw** `r.URL.Path` for the `/api/` prefix, while the router matched routes against the **cleaned** path (`path.Clean`, which normalizes `//` and `..`). That mismatch let an attacker reach protected handlers unauthenticated:\n\n- `//api/admin` \u2014 raw path starts with `//api/`, so the middleware's `/api/` check is skipped, but the router cleans it to `/api/admin` and serves the admin handler (leaking secrets and API keys).\n- `/health/../api/data` \u2014 same idea via traversal.\n\n**The fix:** normalize the path in the middleware with the same `path.Clean` logic the router uses, then check the prefix against that cleaned path. Now both sides agree on which path is being served, closing the bypass. All five test cases pass, including the double-slash and traversal variants.",
-    "stop_reason": "pass"
-   },
+   "native": null,
    "kernel": null,
    "cpu": {
     "resolved": false,
@@ -762,22 +833,7 @@
    "model": "claude-fable-5",
    "model_normalized": "claude-fable-5",
    "benchmark": "kernel-panic-ioctl",
-   "native": {
-    "resolved": true,
-    "turns": 16,
-    "input_tokens": 2095,
-    "output_tokens": 6478,
-    "billed_input_tokens": 381848,
-    "token_cost": 388326,
-    "cost_usd": 0.941171,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "teardown_masked": false,
-    "tool_uses": 15,
-    "wall_clock": 109.673,
-    "summary": "Fixed and verified \u2014 `test.sh` now reports `PASS` (exit 0). The only remaining message is the harmless `cp: Permission denied` for `/usr/local/bin/devctl`, which happens only because I'm running as `bench`; the grading harness runs as root and the `cp` succeeds there.\n\n## The needle\n\nThe core crash was in `handle_set_config` (`src/ioctl_handler.c`): it validated the `key` pointer but never checked `value` before `memcpy(entry->value, req->value, copy_len)`. Fuzz Test 3 passes a NULL `value` with `value_len = 100`, so the handler dereferenced NULL and segfaulted \u2014 a simulated kernel panic.\n\nWhile fixing that I hardened two more input-validation holes the fuzz suite also exercises:\n\n1. **NULL / zero-length output buffer in `handle_get_config`** \u2014 a NULL `value` or `value_len == 0` would either dereference NULL or, worse, hit `copy_len = req->value_len - 1` where `value_len` is a `size_t`, underflowing to `SIZE_MAX` and driving a giant `memcpy`. Now rejected up front.\n\n2. **Oversized `value_len` in `handle_set_config`** \u2014 the old code silently truncated an out-of-range length to `MAX_VALUE_LEN - 1` (255) and then `memcpy`'d 255 bytes from a 6-byte source string, an out-of-bounds *read*. Since `value_len` is the count of valid bytes in the source, a length past `MAX_VALUE_LEN` can't be valid, so it's now rejected with an error.\n\nAll three fixes are pointer/length validation added before any `memcpy`, matching the driver's stated \"untrusted userspace input\" model. Self-test still passes and all seven crafted fuzz cases now return `-1` cleanly.",
-    "stop_reason": "pass"
-   },
+   "native": null,
    "kernel": null,
    "cpu": {
     "resolved": false,
@@ -914,22 +970,7 @@
    "model": "claude-fable-5",
    "model_normalized": "claude-fable-5",
    "benchmark": "nginx-upstream-port-mismatch",
-   "native": {
-    "resolved": true,
-    "turns": 18,
-    "input_tokens": 2105,
-    "output_tokens": 10311,
-    "billed_input_tokens": 439028,
-    "token_cost": 449339,
-    "cost_usd": 1.168735,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "teardown_masked": false,
-    "tool_uses": 17,
-    "wall_clock": 262.483,
-    "summary": "## The needle\n\nAn **nginx upstream port mismatch**. `/etc/nginx/sites-available/default` reverse-proxies `/api/` requests to the Flask backend at `http://127.0.0.1:5001`:\n\n```\nlocation /api/ {\n    proxy_pass http://127.0.0.1:5001;\n```\n\n...but Flask was configured to listen on port **5000** (`app.run(host=\"127.0.0.1\", port=5000)`). So `/api/data` through nginx returned a 502 (nothing on 5001), while the static `/health` location \u2014 which nginx serves directly without touching the backend \u2014 always returned 200. That's why Test 1 passed and Test 2 failed.\n\n## The fix\n\nThe nginx config is root-owned and immutable in this environment, so the fix goes in the editable app side. I changed `/workspace/app/server.py` to listen on the port nginx actually targets:\n\n```python\napp.run(host=\"127.0.0.1\", port=5001)\n```\n\n## Verification\n\n`test.sh` is designed to run as root (its default nginx invocation writes to root-owned `/run/nginx.pid` and `/var/log/nginx/`), and the leftover root-owned processes confirm the grader runs it that way. As the unprivileged `bench` user I can't start that root config directly, so I verified end-to-end by launching nginx with the **actual** `sites-available/default` config under writable runtime paths, against the fixed Flask:\n\n- `GET /health` \u2192 **200**\n- `GET /api/data` \u2192 **200**, body `{\"status\":\"ok\",\"items\":[...3 items...]}`\n\nBoth assertions `test.sh` makes now pass, so the test will report success when run in its root grading environment.",
-    "stop_reason": "pass"
-   },
+   "native": null,
    "kernel": null,
    "cpu": {
     "resolved": false,
@@ -1104,22 +1145,7 @@
    "model": "claude-fable-5",
    "model_normalized": "claude-fable-5",
    "benchmark": "postgres-migration-schema-drift",
-   "native": {
-    "resolved": false,
-    "turns": 17,
-    "input_tokens": 6180,
-    "output_tokens": 20976,
-    "billed_input_tokens": 1334092,
-    "token_cost": 1355068,
-    "cost_usd": 3.039398,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "teardown_masked": false,
-    "tool_uses": 48,
-    "wall_clock": 157.704,
-    "summary": "Both queries succeed against a real Postgres cluster with the migrated schema.\n\n## The needle\n\nA schema-drift bug in `/workspace/app/main.go`. Migration `002_rename_status.sql` renames the `status` column to `order_status`, but the Go API's SQL still referenced the old `status` name in two places:\n\n- `createOrder` \u2014 the `INSERT ... RETURNING` (lines 109-114)\n- `getOrder` \u2014 the `SELECT` (lines 130-134)\n\nAgainst the migrated database, every `POST /orders` and `GET /orders/{id}` would fail with `column \"status\" does not exist` (HTTP 500), so tests 2 and 3 in `test.sh` would fail.\n\n## The fix\n\nI changed both queries to use `order_status`, rebuilt the `orders-api` binary (`go build -mod=vendor`), which succeeded.\n\n## Verification\n\n`test.sh` itself requires root \u2014 it runs `su postgres`, which prompts for a password I don't have as the `bench` user, so I couldn't execute it directly. Instead I reproduced the test's setup independently: I stood up a fresh Postgres cluster I own, created `ordersdb`, applied all three migrations in order (confirming the live column is `order_status`), and ran the code's exact INSERT and SELECT statements. Both returned the expected row with the `order_status` field populated \u2014 which is precisely what tests 2 and 3 assert. The fix is correct; running the full `test.sh` under root will now pass.",
-    "stop_reason": "fail"
-   },
+   "native": null,
    "kernel": null,
    "cpu": {
     "resolved": false,
@@ -1218,22 +1244,7 @@
    "model": "claude-fable-5",
    "model_normalized": "claude-fable-5",
    "benchmark": "rate-limit-bypass-header",
-   "native": {
-    "resolved": true,
-    "turns": 7,
-    "input_tokens": 1825,
-    "output_tokens": 1637,
-    "billed_input_tokens": 140298,
-    "token_cost": 141935,
-    "cost_usd": 0.329216,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "teardown_masked": false,
-    "tool_uses": 6,
-    "wall_clock": 65.125,
-    "summary": "Fixed and verified. Both tests pass.\n\nThe needle was in `/app/app/ratelimiter.ts`: `getClientIp()` derived the rate-limit key from the client-supplied `X-Forwarded-For` header. Since that header is trivially spoofable, an attacker could send a different value on every request (`10.0.0.1`, `10.0.0.2`, \u2026) and get a fresh rate-limit window each time, bypassing the limiter entirely.\n\nThe fix keys the rate limiter on the actual TCP socket address (`req.socket.remoteAddress`), which the client can't forge. After the change, `test.sh` shows 20 of the 30 spoofed requests correctly blocked (10 passed = the real limit), while normal traffic still gets its expected 10-request window.\n\nNote: if this service is ever deployed behind a genuine trusted proxy/load balancer, the proxy's real IP should be resolved from configuration rather than by trusting request headers \u2014 I left a comment to that effect.",
-    "stop_reason": "pass"
-   },
+   "native": null,
    "kernel": null,
    "cpu": {
     "resolved": false,
@@ -1370,22 +1381,7 @@
    "model": "claude-fable-5",
    "model_normalized": "claude-fable-5",
    "benchmark": "sql-injection-search",
-   "native": {
-    "resolved": true,
-    "turns": 14,
-    "input_tokens": 2099,
-    "output_tokens": 5638,
-    "billed_input_tokens": 358598,
-    "token_cost": 364236,
-    "cost_usd": 0.824334,
-    "cost_basis": "bucket-split",
-    "cost_valid": true,
-    "teardown_masked": false,
-    "tool_uses": 13,
-    "wall_clock": 123.442,
-    "summary": "## Summary\n\n**The needle:** a SQL injection vulnerability in `app/search.py:18`. The `search()` method interpolated user input directly into the SQL string via an f-string (`WHERE name LIKE '%{query}%'` and `AND category = '{category}'`), allowing UNION-based data exfiltration and boolean WHERE-clause bypass.\n\n**The fix:** rewrote `search()` to use parameterized queries \u2014 placeholders (`?`) with values passed separately to `db.execute()` instead of `db.execute_raw()`:\n\n```python\nsql = \"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?\"\nparams = [f\"%{query}%\"]\nif category:\n    sql += \" AND category = ?\"\n    params.append(category)\nsql += \" ORDER BY name\"\nreturn self.db.execute(sql, tuple(params))\n```\n\n**Verification:** All three test cases pass \u2014 normal search works (1 result for \"Mouse\"), the UNION attack leaks no user data (0 results), and the boolean `' OR '1'='1` injection no longer bypasses the filter (0 results vs. 10 total products).\n\n**One caveat about running `test.sh` directly:** a leftover **root-owned** server process (pid 37) started at container init is still listening on port 18083 (the port test.sh hardcodes), running the *old vulnerable* code. As user `bench` I can't kill it (no sudo, `kill`/`pkill` return \"Operation not permitted\"), and there's no shutdown endpoint to stop it gracefully. So `test.sh` as-is fails at \"Server failed to start\" (Address already in use) \u2014 not because of the fix, but because the port is occupied.\n\nTo prove the fix works, I ran test.sh's exact logic against a fresh server on a free port (18099) and it printed the final `PASS`. The original `test.sh` is unmodified. If a fresh environment (without that stale pid 37) runs `test.sh`, it will pass. If you have a way to kill pid 37, `test.sh` will then pass unchanged here too.",
-    "stop_reason": "fail"
-   },
+   "native": null,
    "kernel": null,
    "cpu": {
     "resolved": false,

@@ -32,15 +32,19 @@
   {
    "id": "july09-fable5-native-opus-fallback",
    "note": "claude-fable-5 native: 4 security cells silently continued on claude-opus-4-8 after a mid-session classifier stop \u2014 solve attribution for those cells is not pure fable-5 (see FAULTS.json for the cell list)."
+  },
+  {
+   "id": "july09v3-fable5-native-opus-fallback",
+   "note": ""
   }
  ],
  "benchmarks": [
   {
    "name": "postgres-migration-schema-drift",
    "tier": "ceiling",
-   "solve_pct": 19,
+   "solve_pct": 20,
    "solved": 4,
-   "total": 21
+   "total": 20
   },
   {
    "name": "silent-data-corruption",
@@ -74,8 +78,29 @@
    "name": "sql-injection-search",
    "tier": "discriminating",
    "solve_pct": 89,
-   "solved": 17,
-   "total": 19
+   "solved": 16,
+   "total": 18
+  },
+  {
+   "name": "auth-bypass-path-traversal",
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
+  },
+  {
+   "name": "kernel-panic-ioctl",
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
+  },
+  {
+   "name": "nginx-upstream-port-mismatch",
+   "tier": "floor",
+   "solve_pct": 90,
+   "solved": 18,
+   "total": 20
   },
   {
    "name": "type-coercion-comparison",
@@ -93,13 +118,6 @@
   },
   {
    "name": "api-version-field-drop",
-   "tier": "floor",
-   "solve_pct": 90,
-   "solved": 19,
-   "total": 21
-  },
-  {
-   "name": "auth-bypass-path-traversal",
    "tier": "floor",
    "solve_pct": 90,
    "solved": 19,
@@ -134,20 +152,6 @@
    "total": 21
   },
   {
-   "name": "kernel-panic-ioctl",
-   "tier": "floor",
-   "solve_pct": 90,
-   "solved": 19,
-   "total": 21
-  },
-  {
-   "name": "nginx-upstream-port-mismatch",
-   "tier": "floor",
-   "solve_pct": 90,
-   "solved": 19,
-   "total": 21
-  },
-  {
    "name": "null-pointer-config",
    "tier": "floor",
    "solve_pct": 90,
@@ -170,6 +174,13 @@
   },
   {
    "name": "performance-cliff-hash",
+   "tier": "floor",
+   "solve_pct": 95,
+   "solved": 19,
+   "total": 20
+  },
+  {
+   "name": "rate-limit-bypass-header",
    "tier": "floor",
    "solve_pct": 95,
    "solved": 19,
@@ -226,13 +237,6 @@
   },
   {
    "name": "raft-snapshot-commit-gap",
-   "tier": "floor",
-   "solve_pct": 95,
-   "solved": 20,
-   "total": 21
-  },
-  {
-   "name": "rate-limit-bypass-header",
    "tier": "floor",
    "solve_pct": 95,
    "solved": 20,
@@ -495,6 +499,102 @@
       "snapshot": "july09v3"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 28.0,
+      "billed": 206491,
+      "fresh": 1825,
+      "cache_read": 191531,
+      "cache_create": 13135,
+      "output": 1505,
+      "input_total": 206491,
+      "cost": 0.2252,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 42.7,
+      "billed": 82107,
+      "fresh": 6545,
+      "cache_read": 68379,
+      "cache_create": 7183,
+      "output": 1519,
+      "input_total": 82107,
+      "cost": 0.0599,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 30,
+      "wall": 143.3,
+      "billed": 1106814,
+      "fresh": 2248,
+      "cache_read": 1071655,
+      "cache_create": 32911,
+      "output": 11329,
+      "input_total": 1106814,
+      "cost": 1.0366,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 20,
+      "wall": 116.4,
+      "billed": 273081,
+      "fresh": 11658,
+      "cache_read": 246896,
+      "cache_create": 14527,
+      "output": 8096,
+      "input_total": 273081,
+      "cost": 0.19,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 26,
+      "wall": 189.5,
+      "billed": 952261,
+      "fresh": 2250,
+      "cache_read": 925582,
+      "cache_create": 24429,
+      "output": 10266,
+      "input_total": 952261,
+      "cost": 0.884,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 36.7,
+      "billed": 84388,
+      "fresh": 3602,
+      "cache_read": 76791,
+      "cache_create": 3995,
+      "output": 1080,
+      "input_total": 84388,
+      "cost": 0.0433,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "pass",
@@ -587,38 +687,6 @@
       "output": 2044,
       "input_total": 105619,
       "cost": 0.0887,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 28.0,
-      "billed": 206491,
-      "fresh": 1825,
-      "cache_read": 191531,
-      "cache_create": 13135,
-      "output": 1505,
-      "input_total": 206491,
-      "cost": 0.2252,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 42.7,
-      "billed": 82107,
-      "fresh": 6545,
-      "cache_read": 68379,
-      "cache_create": 7183,
-      "output": 1519,
-      "input_total": 82107,
-      "cost": 0.0599,
       "cost_valid": true,
       "snapshot": "july09v3"
      }
@@ -751,70 +819,6 @@
       "snapshot": "july09v3"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 30,
-      "wall": 143.3,
-      "billed": 1106814,
-      "fresh": 2248,
-      "cache_read": 1071655,
-      "cache_create": 32911,
-      "output": 11329,
-      "input_total": 1106814,
-      "cost": 1.0366,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 20,
-      "wall": 116.4,
-      "billed": 273081,
-      "fresh": 11658,
-      "cache_read": 246896,
-      "cache_create": 14527,
-      "output": 8096,
-      "input_total": 273081,
-      "cost": 0.19,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 26,
-      "wall": 189.5,
-      "billed": 952261,
-      "fresh": 2250,
-      "cache_read": 925582,
-      "cache_create": 24429,
-      "output": 10266,
-      "input_total": 952261,
-      "cost": 0.884,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 36.7,
-      "billed": 84388,
-      "fresh": 3602,
-      "cache_read": 76791,
-      "cache_create": 3995,
-      "output": 1080,
-      "input_total": 84388,
-      "cost": 0.0433,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -939,6 +943,38 @@
       "output": 1254,
       "input_total": 96120,
       "cost": 0.0465,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 43.6,
+      "billed": 206963,
+      "fresh": 1825,
+      "cache_read": 191793,
+      "cache_create": 13345,
+      "output": 1272,
+      "input_total": 206963,
+      "cost": 0.2208,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 60.9,
+      "billed": 80903,
+      "fresh": 4702,
+      "cache_read": 70802,
+      "cache_create": 5399,
+      "output": 1436,
+      "input_total": 80903,
+      "cost": 0.0514,
       "cost_valid": true,
       "snapshot": "july09v3"
      }
@@ -1195,38 +1231,6 @@
       "output": 1657,
       "input_total": 114597,
       "cost": 0.1027,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 43.6,
-      "billed": 206963,
-      "fresh": 1825,
-      "cache_read": 191793,
-      "cache_create": 13345,
-      "output": 1272,
-      "input_total": 206963,
-      "cost": 0.2208,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 60.9,
-      "billed": 80903,
-      "fresh": 4702,
-      "cache_read": 70802,
-      "cache_create": 5399,
-      "output": 1436,
-      "input_total": 80903,
-      "cost": 0.0514,
       "cost_valid": true,
       "snapshot": "july09v3"
      }
@@ -1688,6 +1692,102 @@
       "snapshot": "june16"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 25.7,
+      "billed": 61544,
+      "fresh": 4712,
+      "cache_read": 56832,
+      "cache_create": 0,
+      "output": 1314,
+      "input_total": 61544,
+      "cost": 0.0227,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 16,
+      "wall": 133.3,
+      "billed": 102318,
+      "fresh": 102318,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2245,
+      "input_total": 102318,
+      "cost": 0.1858,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 26.2,
+      "billed": 76612,
+      "fresh": 7620,
+      "cache_read": 68992,
+      "cache_create": 0,
+      "output": 1786,
+      "input_total": 76612,
+      "cost": 0.0315,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 20,
+      "wall": 180.3,
+      "billed": 227708,
+      "fresh": 227708,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 7134,
+      "input_total": 227708,
+      "cost": 0.421,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 18.1,
+      "billed": 55608,
+      "fresh": 2872,
+      "cache_read": 52736,
+      "cache_create": 0,
+      "output": 978,
+      "input_total": 55608,
+      "cost": 0.0176,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 68.4,
+      "billed": 80852,
+      "fresh": 80852,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1570,
+      "input_total": 80852,
+      "cost": 0.1461,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "pass",
@@ -1780,38 +1880,6 @@
       "output": 2543,
       "input_total": 95687,
       "cost": 0.1753,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 25.7,
-      "billed": 61544,
-      "fresh": 4712,
-      "cache_read": 56832,
-      "cache_create": 0,
-      "output": 1314,
-      "input_total": 61544,
-      "cost": 0.0227,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 16,
-      "wall": 133.3,
-      "billed": 102318,
-      "fresh": 102318,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2245,
-      "input_total": 102318,
-      "cost": 0.1858,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -1944,70 +2012,6 @@
       "snapshot": "june16"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 26.2,
-      "billed": 76612,
-      "fresh": 7620,
-      "cache_read": 68992,
-      "cache_create": 0,
-      "output": 1786,
-      "input_total": 76612,
-      "cost": 0.0315,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 20,
-      "wall": 180.3,
-      "billed": 227708,
-      "fresh": 227708,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 7134,
-      "input_total": 227708,
-      "cost": 0.421,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 18.1,
-      "billed": 55608,
-      "fresh": 2872,
-      "cache_read": 52736,
-      "cache_create": 0,
-      "output": 978,
-      "input_total": 55608,
-      "cost": 0.0176,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 68.4,
-      "billed": 80852,
-      "fresh": 80852,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1570,
-      "input_total": 80852,
-      "cost": 0.1461,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -2132,6 +2136,38 @@
       "output": 4038,
       "input_total": 118849,
       "cost": 0.2208,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 85.7,
+      "billed": 51358,
+      "fresh": 3614,
+      "cache_read": 47744,
+      "cache_create": 0,
+      "output": 1411,
+      "input_total": 51358,
+      "cost": 0.0195,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 126.8,
+      "billed": 100214,
+      "fresh": 100214,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2887,
+      "input_total": 100214,
+      "cost": 0.1844,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -2388,38 +2424,6 @@
       "output": 22915,
       "input_total": 217760,
       "cost": 0.4586,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 85.7,
-      "billed": 51358,
-      "fresh": 3614,
-      "cache_read": 47744,
-      "cache_create": 0,
-      "output": 1411,
-      "input_total": 51358,
-      "cost": 0.0195,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 15,
-      "wall": 126.8,
-      "billed": 100214,
-      "fresh": 100214,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2887,
-      "input_total": 100214,
-      "cost": 0.1844,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -2821,6 +2825,66 @@
       "snapshot": "july09"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 49.3,
+      "billed": 186431,
+      "fresh": 105428,
+      "cache_read": 81003,
+      "cache_create": 0,
+      "output": 4768,
+      "input_total": 186431,
+      "cost": 0.2132,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 14,
+      "wall": 110.3,
+      "billed": 337441,
+      "fresh": 117810,
+      "cache_read": 219631,
+      "cache_create": 0,
+      "output": 17885,
+      "input_total": 337441,
+      "cost": 0.3706,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 49.0,
+      "billed": 232205,
+      "fresh": 118884,
+      "cache_read": 113321,
+      "cache_create": 0,
+      "output": 4954,
+      "input_total": 232205,
+      "cost": 0.2399,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "pass",
@@ -2874,26 +2938,6 @@
       "output": 5032,
       "input_total": 182401,
       "cost": 0.2532,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 12,
-      "wall": 49.3,
-      "billed": 186431,
-      "fresh": 105428,
-      "cache_read": 81003,
-      "cache_create": 0,
-      "output": 4768,
-      "input_total": 186431,
-      "cost": 0.2132,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -2981,46 +3025,6 @@
       "status": "missing"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 14,
-      "wall": 110.3,
-      "billed": 337441,
-      "fresh": 117810,
-      "cache_read": 219631,
-      "cache_create": 0,
-      "output": 17885,
-      "input_total": 337441,
-      "cost": 0.3706,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 15,
-      "wall": 49.0,
-      "billed": 232205,
-      "fresh": 118884,
-      "cache_read": 113321,
-      "cache_create": 0,
-      "output": 4954,
-      "input_total": 232205,
-      "cost": 0.2399,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -3094,6 +3098,26 @@
       "output": 5877,
       "input_total": 350450,
       "cost": 0.3165,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "missing"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 79.3,
+      "billed": 161175,
+      "fresh": 112506,
+      "cache_read": 48669,
+      "cache_create": 0,
+      "output": 7456,
+      "input_total": 161175,
+      "cost": 0.2432,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -3254,26 +3278,6 @@
       "output": 9673,
       "input_total": 212301,
       "cost": 0.2299,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "missing"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 79.3,
-      "billed": 161175,
-      "fresh": 112506,
-      "cache_read": 48669,
-      "cache_create": 0,
-      "output": 7456,
-      "input_total": 161175,
-      "cost": 0.2432,
       "cost_valid": true,
       "snapshot": "june16"
      },
@@ -3642,6 +3646,102 @@
       "snapshot": "july09v3"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 40.5,
+      "billed": 174617,
+      "fresh": 1827,
+      "cache_read": 160702,
+      "cache_create": 12088,
+      "output": 2633,
+      "input_total": 174617,
+      "cost": 0.2309,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 59.4,
+      "billed": 66882,
+      "fresh": 5070,
+      "cache_read": 55860,
+      "cache_create": 5952,
+      "output": 1654,
+      "input_total": 66882,
+      "cost": 0.1318,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 17,
+      "wall": 96.9,
+      "billed": 400117,
+      "fresh": 2097,
+      "cache_read": 378290,
+      "cache_create": 19730,
+      "output": 6460,
+      "input_total": 400117,
+      "cost": 0.4844,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 62.8,
+      "billed": 159643,
+      "fresh": 10195,
+      "cache_read": 137616,
+      "cache_create": 11832,
+      "output": 2373,
+      "input_total": 159643,
+      "cost": 0.2531,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 30,
+      "wall": 364.3,
+      "billed": 904949,
+      "fresh": 2524,
+      "cache_read": 874092,
+      "cache_create": 28333,
+      "output": 19886,
+      "input_total": 904949,
+      "cost": 1.1239,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 49.0,
+      "billed": 76440,
+      "fresh": 3684,
+      "cache_read": 68558,
+      "cache_create": 4198,
+      "output": 1337,
+      "input_total": 76440,
+      "cost": 0.1124,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "pass",
@@ -3734,38 +3834,6 @@
       "output": 1301,
       "input_total": 80412,
       "cost": 0.1705,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 40.5,
-      "billed": 174617,
-      "fresh": 1827,
-      "cache_read": 160702,
-      "cache_create": 12088,
-      "output": 2633,
-      "input_total": 174617,
-      "cost": 0.2309,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 59.4,
-      "billed": 66882,
-      "fresh": 5070,
-      "cache_read": 55860,
-      "cache_create": 5952,
-      "output": 1654,
-      "input_total": 66882,
-      "cost": 0.1318,
       "cost_valid": true,
       "snapshot": "july09v3"
      }
@@ -3898,70 +3966,6 @@
       "snapshot": "july09v3"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 17,
-      "wall": 96.9,
-      "billed": 400117,
-      "fresh": 2097,
-      "cache_read": 378290,
-      "cache_create": 19730,
-      "output": 6460,
-      "input_total": 400117,
-      "cost": 0.4844,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 12,
-      "wall": 62.8,
-      "billed": 159643,
-      "fresh": 10195,
-      "cache_read": 137616,
-      "cache_create": 11832,
-      "output": 2373,
-      "input_total": 159643,
-      "cost": 0.2531,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 30,
-      "wall": 364.3,
-      "billed": 904949,
-      "fresh": 2524,
-      "cache_read": 874092,
-      "cache_create": 28333,
-      "output": 19886,
-      "input_total": 904949,
-      "cost": 1.1239,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 49.0,
-      "billed": 76440,
-      "fresh": 3684,
-      "cache_read": 68558,
-      "cache_create": 4198,
-      "output": 1337,
-      "input_total": 76440,
-      "cost": 0.1124,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -4086,6 +4090,38 @@
       "output": 1335,
       "input_total": 92466,
       "cost": 0.1461,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 54.0,
+      "billed": 138656,
+      "fresh": 1825,
+      "cache_read": 126522,
+      "cache_create": 10309,
+      "output": 1701,
+      "input_total": 138656,
+      "cost": 0.1793,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 64.9,
+      "billed": 64542,
+      "fresh": 4542,
+      "cache_read": 54673,
+      "cache_create": 5327,
+      "output": 1540,
+      "input_total": 64542,
+      "cost": 0.1218,
       "cost_valid": true,
       "snapshot": "july09v3"
      }
@@ -4342,38 +4378,6 @@
       "output": 2748,
       "input_total": 196565,
       "cost": 0.317,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 54.0,
-      "billed": 138656,
-      "fresh": 1825,
-      "cache_read": 126522,
-      "cache_create": 10309,
-      "output": 1701,
-      "input_total": 138656,
-      "cost": 0.1793,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 64.9,
-      "billed": 64542,
-      "fresh": 4542,
-      "cache_read": 54673,
-      "cache_create": 5327,
-      "output": 1540,
-      "input_total": 64542,
-      "cost": 0.1218,
       "cost_valid": true,
       "snapshot": "july09v3"
      }
@@ -4835,6 +4839,102 @@
       "snapshot": "july02"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 39.1,
+      "billed": 109582,
+      "fresh": 24960,
+      "cache_read": 84622,
+      "cache_create": 0,
+      "output": 1593,
+      "input_total": 109582,
+      "cost": 0.086,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 58.2,
+      "billed": 32063,
+      "fresh": 32063,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 883,
+      "input_total": 32063,
+      "cost": 0.0747,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 16,
+      "wall": 109.8,
+      "billed": 275915,
+      "fresh": 45760,
+      "cache_read": 230155,
+      "cache_create": 0,
+      "output": 8147,
+      "input_total": 275915,
+      "cost": 0.2353,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 98.8,
+      "billed": 111015,
+      "fresh": 73840,
+      "cache_read": 37175,
+      "cache_create": 0,
+      "output": 1143,
+      "input_total": 111015,
+      "cost": 0.1688,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 28.1,
+      "billed": 97303,
+      "fresh": 33062,
+      "cache_read": 64241,
+      "cache_create": 0,
+      "output": 1353,
+      "input_total": 97303,
+      "cost": 0.0952,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 49.9,
+      "billed": 49634,
+      "fresh": 49634,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 869,
+      "input_total": 49634,
+      "cost": 0.1097,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "pass",
@@ -4927,38 +5027,6 @@
       "output": 908,
       "input_total": 61673,
       "cost": 0.1342,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 39.1,
-      "billed": 109582,
-      "fresh": 24960,
-      "cache_read": 84622,
-      "cache_create": 0,
-      "output": 1593,
-      "input_total": 109582,
-      "cost": 0.086,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 58.2,
-      "billed": 32063,
-      "fresh": 32063,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 883,
-      "input_total": 32063,
-      "cost": 0.0747,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -5091,70 +5159,6 @@
       "snapshot": "july02"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 16,
-      "wall": 109.8,
-      "billed": 275915,
-      "fresh": 45760,
-      "cache_read": 230155,
-      "cache_create": 0,
-      "output": 8147,
-      "input_total": 275915,
-      "cost": 0.2353,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 98.8,
-      "billed": 111015,
-      "fresh": 73840,
-      "cache_read": 37175,
-      "cache_create": 0,
-      "output": 1143,
-      "input_total": 111015,
-      "cost": 0.1688,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 28.1,
-      "billed": 97303,
-      "fresh": 33062,
-      "cache_read": 64241,
-      "cache_create": 0,
-      "output": 1353,
-      "input_total": 97303,
-      "cost": 0.0952,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 49.9,
-      "billed": 49634,
-      "fresh": 49634,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 869,
-      "input_total": 49634,
-      "cost": 0.1097,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -5279,6 +5283,38 @@
       "output": 1045,
       "input_total": 79523,
       "cost": 0.1716,
+      "cost_valid": true,
+      "snapshot": "july02"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 42.4,
+      "billed": 66750,
+      "fresh": 14443,
+      "cache_read": 52307,
+      "cache_create": 0,
+      "output": 1390,
+      "input_total": 66750,
+      "cost": 0.056,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 76.3,
+      "billed": 62425,
+      "fresh": 54632,
+      "cache_read": 7793,
+      "cache_create": 0,
+      "output": 1592,
+      "input_total": 62425,
+      "cost": 0.1299,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -5535,38 +5571,6 @@
       "output": 1406,
       "input_total": 122562,
       "cost": 0.2056,
-      "cost_valid": true,
-      "snapshot": "july02"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 42.4,
-      "billed": 66750,
-      "fresh": 14443,
-      "cache_read": 52307,
-      "cache_create": 0,
-      "output": 1390,
-      "input_total": 66750,
-      "cost": 0.056,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 76.3,
-      "billed": 62425,
-      "fresh": 54632,
-      "cache_read": 7793,
-      "cache_create": 0,
-      "output": 1592,
-      "input_total": 62425,
-      "cost": 0.1299,
       "cost_valid": true,
       "snapshot": "july02"
      }
@@ -6028,6 +6032,102 @@
       "snapshot": "july10"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 57.5,
+      "billed": 126059,
+      "fresh": 37739,
+      "cache_read": 88320,
+      "cache_create": 0,
+      "output": 2033,
+      "input_total": 126059,
+      "cost": 0.2938,
+      "cost_valid": true,
+      "snapshot": "july10"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 77.3,
+      "billed": 74974,
+      "fresh": 27358,
+      "cache_read": 47616,
+      "cache_create": 0,
+      "output": 2071,
+      "input_total": 74974,
+      "cost": 0.2227,
+      "cost_valid": true,
+      "snapshot": "july10"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 47.3,
+      "billed": 158225,
+      "fresh": 43409,
+      "cache_read": 114816,
+      "cache_create": 0,
+      "output": 2788,
+      "input_total": 158225,
+      "cost": 0.3581,
+      "cost_valid": true,
+      "snapshot": "july10"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 131.5,
+      "billed": 230536,
+      "fresh": 44680,
+      "cache_read": 185856,
+      "cache_create": 0,
+      "output": 4173,
+      "input_total": 230536,
+      "cost": 0.4415,
+      "cost_valid": true,
+      "snapshot": "july10"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 25.6,
+      "billed": 84579,
+      "fresh": 32867,
+      "cache_read": 51712,
+      "cache_create": 0,
+      "output": 946,
+      "input_total": 84579,
+      "cost": 0.2186,
+      "cost_valid": true,
+      "snapshot": "july10"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 70.0,
+      "billed": 59475,
+      "fresh": 15955,
+      "cache_read": 43520,
+      "cache_create": 0,
+      "output": 914,
+      "input_total": 59475,
+      "cost": 0.129,
+      "cost_valid": true,
+      "snapshot": "july10"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "pass",
@@ -6120,38 +6220,6 @@
       "output": 1994,
       "input_total": 72334,
       "cost": 0.2187,
-      "cost_valid": true,
-      "snapshot": "july10"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 57.5,
-      "billed": 126059,
-      "fresh": 37739,
-      "cache_read": 88320,
-      "cache_create": 0,
-      "output": 2033,
-      "input_total": 126059,
-      "cost": 0.2938,
-      "cost_valid": true,
-      "snapshot": "july10"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 77.3,
-      "billed": 74974,
-      "fresh": 27358,
-      "cache_read": 47616,
-      "cache_create": 0,
-      "output": 2071,
-      "input_total": 74974,
-      "cost": 0.2227,
       "cost_valid": true,
       "snapshot": "july10"
      }
@@ -6284,70 +6352,6 @@
       "snapshot": "july10"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 47.3,
-      "billed": 158225,
-      "fresh": 43409,
-      "cache_read": 114816,
-      "cache_create": 0,
-      "output": 2788,
-      "input_total": 158225,
-      "cost": 0.3581,
-      "cost_valid": true,
-      "snapshot": "july10"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 15,
-      "wall": 131.5,
-      "billed": 230536,
-      "fresh": 44680,
-      "cache_read": 185856,
-      "cache_create": 0,
-      "output": 4173,
-      "input_total": 230536,
-      "cost": 0.4415,
-      "cost_valid": true,
-      "snapshot": "july10"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 25.6,
-      "billed": 84579,
-      "fresh": 32867,
-      "cache_read": 51712,
-      "cache_create": 0,
-      "output": 946,
-      "input_total": 84579,
-      "cost": 0.2186,
-      "cost_valid": true,
-      "snapshot": "july10"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 70.0,
-      "billed": 59475,
-      "fresh": 15955,
-      "cache_read": 43520,
-      "cache_create": 0,
-      "output": 914,
-      "input_total": 59475,
-      "cost": 0.129,
-      "cost_valid": true,
-      "snapshot": "july10"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -6472,6 +6476,38 @@
       "output": 3682,
       "input_total": 198974,
       "cost": 0.3105,
+      "cost_valid": true,
+      "snapshot": "july10"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 1,
+      "wall": 72.5,
+      "billed": 124229,
+      "fresh": 50117,
+      "cache_read": 74112,
+      "cache_create": 0,
+      "output": 1473,
+      "input_total": 124229,
+      "cost": 0.3318,
+      "cost_valid": true,
+      "snapshot": "july10"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 82.0,
+      "billed": 1046928,
+      "fresh": 694672,
+      "cache_read": 352256,
+      "cache_create": 0,
+      "output": 1053,
+      "input_total": 1046928,
+      "cost": 3.6811,
       "cost_valid": true,
       "snapshot": "july10"
      }
@@ -6728,38 +6764,6 @@
       "output": 2787,
       "input_total": 97791,
       "cost": 0.2108,
-      "cost_valid": true,
-      "snapshot": "july10"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 1,
-      "wall": 72.5,
-      "billed": 124229,
-      "fresh": 50117,
-      "cache_read": 74112,
-      "cache_create": 0,
-      "output": 1473,
-      "input_total": 124229,
-      "cost": 0.3318,
-      "cost_valid": true,
-      "snapshot": "july10"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 82.0,
-      "billed": 1046928,
-      "fresh": 694672,
-      "cache_read": 352256,
-      "cache_create": 0,
-      "output": 1053,
-      "input_total": 1046928,
-      "cost": 3.6811,
       "cost_valid": true,
       "snapshot": "july10"
      }
@@ -7221,6 +7225,102 @@
       "snapshot": "june16"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 35.6,
+      "billed": 61345,
+      "fresh": 8097,
+      "cache_read": 53248,
+      "cache_create": 0,
+      "output": 974,
+      "input_total": 61345,
+      "cost": 0.0073,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 16,
+      "wall": 110.9,
+      "billed": 73149,
+      "fresh": 73149,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2184,
+      "input_total": 73149,
+      "cost": 0.0336,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 31.4,
+      "billed": 133774,
+      "fresh": 14990,
+      "cache_read": 118784,
+      "cache_create": 0,
+      "output": 1085,
+      "input_total": 133774,
+      "cost": 0.0129,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 22,
+      "wall": 246.2,
+      "billed": 149501,
+      "fresh": 149501,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 12851,
+      "input_total": 149501,
+      "cost": 0.0854,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 18.7,
+      "billed": 70967,
+      "fresh": 7479,
+      "cache_read": 63488,
+      "cache_create": 0,
+      "output": 307,
+      "input_total": 70967,
+      "cost": 0.0061,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 85.3,
+      "billed": 64874,
+      "fresh": 64874,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1397,
+      "input_total": 64874,
+      "cost": 0.0287,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "pass",
@@ -7313,38 +7413,6 @@
       "output": 1929,
       "input_total": 76135,
       "cost": 0.0343,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 35.6,
-      "billed": 61345,
-      "fresh": 8097,
-      "cache_read": 53248,
-      "cache_create": 0,
-      "output": 974,
-      "input_total": 61345,
-      "cost": 0.0073,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 16,
-      "wall": 110.9,
-      "billed": 73149,
-      "fresh": 73149,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2184,
-      "input_total": 73149,
-      "cost": 0.0336,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -7477,70 +7545,6 @@
       "snapshot": "june16"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 31.4,
-      "billed": 133774,
-      "fresh": 14990,
-      "cache_read": 118784,
-      "cache_create": 0,
-      "output": 1085,
-      "input_total": 133774,
-      "cost": 0.0129,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 22,
-      "wall": 246.2,
-      "billed": 149501,
-      "fresh": 149501,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 12851,
-      "input_total": 149501,
-      "cost": 0.0854,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 18.7,
-      "billed": 70967,
-      "fresh": 7479,
-      "cache_read": 63488,
-      "cache_create": 0,
-      "output": 307,
-      "input_total": 70967,
-      "cost": 0.0061,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 15,
-      "wall": 85.3,
-      "billed": 64874,
-      "fresh": 64874,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1397,
-      "input_total": 64874,
-      "cost": 0.0287,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -7665,6 +7669,38 @@
       "output": 1560,
       "input_total": 57094,
       "cost": 0.0259,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 5,
+      "wall": 35.2,
+      "billed": 64500,
+      "fresh": 9204,
+      "cache_read": 55296,
+      "cache_create": 0,
+      "output": 606,
+      "input_total": 64500,
+      "cost": 0.0071,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 18,
+      "wall": 180.1,
+      "billed": 78282,
+      "fresh": 78282,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2554,
+      "input_total": 78282,
+      "cost": 0.0364,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -7921,38 +7957,6 @@
       "output": 3549,
       "input_total": 87192,
       "cost": 0.0419,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 5,
-      "wall": 35.2,
-      "billed": 64500,
-      "fresh": 9204,
-      "cache_read": 55296,
-      "cache_create": 0,
-      "output": 606,
-      "input_total": 64500,
-      "cost": 0.0071,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 18,
-      "wall": 180.1,
-      "billed": 78282,
-      "fresh": 78282,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2554,
-      "input_total": 78282,
-      "cost": 0.0364,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8414,6 +8418,102 @@
       "snapshot": "june16"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 27.0,
+      "billed": 182711,
+      "fresh": 9,
+      "cache_read": 171913,
+      "cache_create": 10789,
+      "output": 1086,
+      "input_total": 182711,
+      "cost": 0.1083,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 52.4,
+      "billed": 63196,
+      "fresh": 4346,
+      "cache_read": 53614,
+      "cache_create": 5236,
+      "output": 1551,
+      "input_total": 63196,
+      "cost": 0.072,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 21,
+      "wall": 189.4,
+      "billed": 629303,
+      "fresh": 20,
+      "cache_read": 603022,
+      "cache_create": 26261,
+      "output": 10639,
+      "input_total": 629303,
+      "cost": 0.439,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 85.2,
+      "billed": 129643,
+      "fresh": 9349,
+      "cache_read": 108750,
+      "cache_create": 11544,
+      "output": 3337,
+      "input_total": 129643,
+      "cost": 0.154,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 35,
+      "wall": 255.4,
+      "billed": 1041305,
+      "fresh": 35,
+      "cache_read": 1016798,
+      "cache_create": 24472,
+      "output": 11979,
+      "input_total": 1041305,
+      "cost": 0.5766,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 49.5,
+      "billed": 77523,
+      "fresh": 3858,
+      "cache_read": 69543,
+      "cache_create": 4122,
+      "output": 996,
+      "input_total": 77523,
+      "cost": 0.0628,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "pass",
@@ -8506,38 +8606,6 @@
       "output": 1843,
       "input_total": 78911,
       "cost": 0.1065,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 27.0,
-      "billed": 182711,
-      "fresh": 9,
-      "cache_read": 171913,
-      "cache_create": 10789,
-      "output": 1086,
-      "input_total": 182711,
-      "cost": 0.1083,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 52.4,
-      "billed": 63196,
-      "fresh": 4346,
-      "cache_read": 53614,
-      "cache_create": 5236,
-      "output": 1551,
-      "input_total": 63196,
-      "cost": 0.072,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -8670,70 +8738,6 @@
       "snapshot": "june16"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 21,
-      "wall": 189.4,
-      "billed": 629303,
-      "fresh": 20,
-      "cache_read": 603022,
-      "cache_create": 26261,
-      "output": 10639,
-      "input_total": 629303,
-      "cost": 0.439,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 12,
-      "wall": 85.2,
-      "billed": 129643,
-      "fresh": 9349,
-      "cache_read": 108750,
-      "cache_create": 11544,
-      "output": 3337,
-      "input_total": 129643,
-      "cost": 0.154,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 35,
-      "wall": 255.4,
-      "billed": 1041305,
-      "fresh": 35,
-      "cache_read": 1016798,
-      "cache_create": 24472,
-      "output": 11979,
-      "input_total": 1041305,
-      "cost": 0.5766,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 49.5,
-      "billed": 77523,
-      "fresh": 3858,
-      "cache_read": 69543,
-      "cache_create": 4122,
-      "output": 996,
-      "input_total": 77523,
-      "cost": 0.0628,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -8858,6 +8862,38 @@
       "output": 1487,
       "input_total": 118948,
       "cost": 0.0958,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 9,
+      "wall": 39.2,
+      "billed": 130473,
+      "fresh": 7,
+      "cache_read": 119085,
+      "cache_create": 11381,
+      "output": 1179,
+      "input_total": 130473,
+      "cost": 0.0961,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 71.8,
+      "billed": 55612,
+      "fresh": 4762,
+      "cache_read": 45617,
+      "cache_create": 5233,
+      "output": 1372,
+      "input_total": 55612,
+      "cost": 0.0682,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9114,38 +9150,6 @@
       "output": 1111,
       "input_total": 63307,
       "cost": 0.0945,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 9,
-      "wall": 39.2,
-      "billed": 130473,
-      "fresh": 7,
-      "cache_read": 119085,
-      "cache_create": 11381,
-      "output": 1179,
-      "input_total": 130473,
-      "cost": 0.0961,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 71.8,
-      "billed": 55612,
-      "fresh": 4762,
-      "cache_read": 45617,
-      "cache_create": 5233,
-      "output": 1372,
-      "input_total": 55612,
-      "cost": 0.0682,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9607,6 +9611,102 @@
       "snapshot": "june16"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 8,
+      "wall": 21.8,
+      "billed": 73882,
+      "fresh": 14426,
+      "cache_read": 59456,
+      "cache_create": 0,
+      "output": 585,
+      "input_total": 73882,
+      "cost": 0.0269,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 15,
+      "wall": 49.2,
+      "billed": 78925,
+      "fresh": 78925,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 917,
+      "input_total": 78925,
+      "cost": 0.1009,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 7,
+      "wall": 18.0,
+      "billed": 63551,
+      "fresh": 8959,
+      "cache_read": 54592,
+      "cache_create": 0,
+      "output": 759,
+      "input_total": 63551,
+      "cost": 0.0199,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 29,
+      "wall": 67.8,
+      "billed": 284064,
+      "fresh": 284064,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 3168,
+      "input_total": 284064,
+      "cost": 0.363,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 10,
+      "wall": 18.2,
+      "billed": 87977,
+      "fresh": 22569,
+      "cache_read": 65408,
+      "cache_create": 0,
+      "output": 568,
+      "input_total": 87977,
+      "cost": 0.0378,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 42.2,
+      "billed": 67200,
+      "fresh": 67200,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 827,
+      "input_total": 67200,
+      "cost": 0.0861,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "pass",
@@ -9699,38 +9799,6 @@
       "output": 1196,
       "input_total": 53976,
       "cost": 0.0705,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 8,
-      "wall": 21.8,
-      "billed": 73882,
-      "fresh": 14426,
-      "cache_read": 59456,
-      "cache_create": 0,
-      "output": 585,
-      "input_total": 73882,
-      "cost": 0.0269,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 15,
-      "wall": 49.2,
-      "billed": 78925,
-      "fresh": 78925,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 917,
-      "input_total": 78925,
-      "cost": 0.1009,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -9863,70 +9931,6 @@
       "snapshot": "june16"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 18.0,
-      "billed": 63551,
-      "fresh": 8959,
-      "cache_read": 54592,
-      "cache_create": 0,
-      "output": 759,
-      "input_total": 63551,
-      "cost": 0.0199,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 29,
-      "wall": 67.8,
-      "billed": 284064,
-      "fresh": 284064,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 3168,
-      "input_total": 284064,
-      "cost": 0.363,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 10,
-      "wall": 18.2,
-      "billed": 87977,
-      "fresh": 22569,
-      "cache_read": 65408,
-      "cache_create": 0,
-      "output": 568,
-      "input_total": 87977,
-      "cost": 0.0378,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 42.2,
-      "billed": 67200,
-      "fresh": 67200,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 827,
-      "input_total": 67200,
-      "cost": 0.0861,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -10051,6 +10055,38 @@
       "output": 1511,
       "input_total": 136920,
       "cost": 0.1749,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 6,
+      "wall": 30.2,
+      "billed": 54580,
+      "fresh": 4020,
+      "cache_read": 50560,
+      "cache_create": 0,
+      "output": 491,
+      "input_total": 54580,
+      "cost": 0.0126,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 18,
+      "wall": 148.6,
+      "billed": 105215,
+      "fresh": 105215,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1327,
+      "input_total": 105215,
+      "cost": 0.1348,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -10307,38 +10343,6 @@
       "output": 815,
       "input_total": 59607,
       "cost": 0.0765,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 6,
-      "wall": 30.2,
-      "billed": 54580,
-      "fresh": 4020,
-      "cache_read": 50560,
-      "cache_create": 0,
-      "output": 491,
-      "input_total": 54580,
-      "cost": 0.0126,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 18,
-      "wall": 148.6,
-      "billed": 105215,
-      "fresh": 105215,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1327,
-      "input_total": 105215,
-      "cost": 0.1348,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -10800,6 +10804,102 @@
       "snapshot": "june16"
      }
     },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 0,
+      "wall": 89.4,
+      "billed": 637021,
+      "fresh": 637021,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 6026,
+      "input_total": 637021,
+      "cost": 0.2669,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 12,
+      "wall": 33.8,
+      "billed": 81486,
+      "fresh": 81486,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1010,
+      "input_total": 81486,
+      "cost": 0.0346,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 20,
+      "wall": 63.0,
+      "billed": 280860,
+      "fresh": 280860,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 1476,
+      "input_total": 280860,
+      "cost": 0.1153,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 33,
+      "wall": 108.4,
+      "billed": 329981,
+      "fresh": 329981,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2306,
+      "input_total": 329981,
+      "cost": 0.1366,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 0,
+      "wall": 62.1,
+      "billed": 463526,
+      "fresh": 463526,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 2017,
+      "input_total": 463526,
+      "cost": 0.1894,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 17,
+      "wall": 34.7,
+      "billed": 107758,
+      "fresh": 107758,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 549,
+      "input_total": 107758,
+      "cost": 0.0442,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
     "type-coercion-comparison": {
      "native": {
       "status": "fail",
@@ -10892,38 +10992,6 @@
       "output": 1723,
       "input_total": 170565,
       "cost": 0.0717,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 0,
-      "wall": 89.4,
-      "billed": 637021,
-      "fresh": 637021,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 6026,
-      "input_total": 637021,
-      "cost": 0.2669,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 12,
-      "wall": 33.8,
-      "billed": 81486,
-      "fresh": 81486,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1010,
-      "input_total": 81486,
-      "cost": 0.0346,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -11056,70 +11124,6 @@
       "snapshot": "june16"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 20,
-      "wall": 63.0,
-      "billed": 280860,
-      "fresh": 280860,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 1476,
-      "input_total": 280860,
-      "cost": 0.1153,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 33,
-      "wall": 108.4,
-      "billed": 329981,
-      "fresh": 329981,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2306,
-      "input_total": 329981,
-      "cost": 0.1366,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 0,
-      "wall": 62.1,
-      "billed": 463526,
-      "fresh": 463526,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 2017,
-      "input_total": 463526,
-      "cost": 0.1894,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 17,
-      "wall": 34.7,
-      "billed": 107758,
-      "fresh": 107758,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 549,
-      "input_total": 107758,
-      "cost": 0.0442,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "fail",
@@ -11244,6 +11248,38 @@
       "output": 459,
       "input_total": 69915,
       "cost": 0.0289,
+      "cost_valid": true,
+      "snapshot": "june16"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 0,
+      "wall": 170.6,
+      "billed": 698904,
+      "fresh": 698904,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 7008,
+      "input_total": 698904,
+      "cost": 0.2936,
+      "cost_valid": true,
+      "snapshot": "june16"
+     },
+     "kernel": {
+      "status": "pass",
+      "resolved": true,
+      "turns": 13,
+      "wall": 61.6,
+      "billed": 87111,
+      "fresh": 87111,
+      "cache_read": 0,
+      "cache_create": 0,
+      "output": 700,
+      "input_total": 87111,
+      "cost": 0.0362,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -11500,38 +11536,6 @@
       "output": 1928,
       "input_total": 123912,
       "cost": 0.0534,
-      "cost_valid": true,
-      "snapshot": "june16"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 0,
-      "wall": 170.6,
-      "billed": 698904,
-      "fresh": 698904,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 7008,
-      "input_total": 698904,
-      "cost": 0.2936,
-      "cost_valid": true,
-      "snapshot": "june16"
-     },
-     "kernel": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 13,
-      "wall": 61.6,
-      "billed": 87111,
-      "fresh": 87111,
-      "cache_read": 0,
-      "cache_create": 0,
-      "output": 700,
-      "input_total": 87111,
-      "cost": 0.0362,
       "cost_valid": true,
       "snapshot": "june16"
      }
@@ -11798,12 +11802,12 @@
    "model": "claude-fable-5",
    "type": "B",
    "native_cli": "claude-code",
-   "native_solved": 34,
+   "native_solved": 29,
    "kernel_solved": 17,
    "cells": {
     "postgres-migration-schema-drift": {
      "native": {
-      "status": "fail",
+      "status": "invalid",
       "resolved": false,
       "turns": 17,
       "wall": 157.7,
@@ -11813,8 +11817,8 @@
       "cache_create": 52251,
       "output": 20976,
       "input_total": 1334092,
-      "cost": 3.0394,
-      "cost_valid": true,
+      "cost": null,
+      "cost_valid": false,
       "snapshot": "july09v3"
      },
      "kernel": {
@@ -11963,7 +11967,7 @@
     },
     "sql-injection-search": {
      "native": {
-      "status": "pass",
+      "status": "invalid",
       "resolved": true,
       "turns": 14,
       "wall": 123.4,
@@ -11973,8 +11977,8 @@
       "cache_create": 14343,
       "output": 5638,
       "input_total": 358598,
-      "cost": 0.8243,
-      "cost_valid": true,
+      "cost": null,
+      "cost_valid": false,
       "snapshot": "july09v3"
      },
      "kernel": {
@@ -11989,6 +11993,102 @@
       "output": 487,
       "input_total": 60218,
       "cost": 0.1131,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "auth-bypass-path-traversal": {
+     "native": {
+      "status": "invalid",
+      "resolved": true,
+      "turns": 7,
+      "wall": 47.4,
+      "billed": 143623,
+      "fresh": 1825,
+      "cache_read": 131233,
+      "cache_create": 10565,
+      "output": 1722,
+      "input_total": 143623,
+      "cost": null,
+      "cost_valid": false,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 3,
+      "wall": 34.3,
+      "billed": 20077,
+      "fresh": 2066,
+      "cache_read": 57294,
+      "cache_create": 873,
+      "output": 460,
+      "input_total": 60233,
+      "cost": 0.1119,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "kernel-panic-ioctl": {
+     "native": {
+      "status": "invalid",
+      "resolved": true,
+      "turns": 16,
+      "wall": 109.7,
+      "billed": 381848,
+      "fresh": 2095,
+      "cache_read": 360921,
+      "cache_create": 18832,
+      "output": 6478,
+      "input_total": 381848,
+      "cost": null,
+      "cost_valid": false,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 4,
+      "wall": 45.6,
+      "billed": 27613,
+      "fresh": 3354,
+      "cache_read": 77718,
+      "cache_create": 1785,
+      "output": 734,
+      "input_total": 82857,
+      "cost": 0.1703,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "nginx-upstream-port-mismatch": {
+     "native": {
+      "status": "invalid",
+      "resolved": true,
+      "turns": 18,
+      "wall": 262.5,
+      "billed": 439028,
+      "fresh": 2105,
+      "cache_read": 419948,
+      "cache_create": 16975,
+      "output": 10311,
+      "input_total": 439028,
+      "cost": null,
+      "cost_valid": false,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 3,
+      "wall": 39.2,
+      "billed": 20080,
+      "fresh": 2073,
+      "cache_read": 57294,
+      "cache_create": 873,
+      "output": 511,
+      "input_total": 60240,
+      "cost": 0.1145,
       "cost_valid": true,
       "snapshot": "july09v3"
      }
@@ -12085,38 +12185,6 @@
       "output": 2331,
       "input_total": 138686,
       "cost": 0.4695,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
-    "auth-bypass-path-traversal": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 47.4,
-      "billed": 143623,
-      "fresh": 1825,
-      "cache_read": 131233,
-      "cache_create": 10565,
-      "output": 1722,
-      "input_total": 143623,
-      "cost": 0.3676,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 3,
-      "wall": 34.3,
-      "billed": 20077,
-      "fresh": 2066,
-      "cache_read": 57294,
-      "cache_create": 873,
-      "output": 460,
-      "input_total": 60233,
-      "cost": 0.1119,
       "cost_valid": true,
       "snapshot": "july09v3"
      }
@@ -12249,70 +12317,6 @@
       "snapshot": "july09v3"
      }
     },
-    "kernel-panic-ioctl": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 16,
-      "wall": 109.7,
-      "billed": 381848,
-      "fresh": 2095,
-      "cache_read": 360921,
-      "cache_create": 18832,
-      "output": 6478,
-      "input_total": 381848,
-      "cost": 0.9412,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 4,
-      "wall": 45.6,
-      "billed": 27613,
-      "fresh": 3354,
-      "cache_read": 77718,
-      "cache_create": 1785,
-      "output": 734,
-      "input_total": 82857,
-      "cost": 0.1703,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
-    "nginx-upstream-port-mismatch": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 18,
-      "wall": 262.5,
-      "billed": 439028,
-      "fresh": 2105,
-      "cache_read": 419948,
-      "cache_create": 16975,
-      "output": 10311,
-      "input_total": 439028,
-      "cost": 1.1687,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 3,
-      "wall": 39.2,
-      "billed": 20080,
-      "fresh": 2073,
-      "cache_read": 57294,
-      "cache_create": 873,
-      "output": 511,
-      "input_total": 60240,
-      "cost": 0.1145,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
     "null-pointer-config": {
      "native": {
       "status": "pass",
@@ -12437,6 +12441,38 @@
       "output": 1552,
       "input_total": 93045,
       "cost": 0.2506,
+      "cost_valid": true,
+      "snapshot": "july09v3"
+     }
+    },
+    "rate-limit-bypass-header": {
+     "native": {
+      "status": "invalid",
+      "resolved": true,
+      "turns": 7,
+      "wall": 65.1,
+      "billed": 140298,
+      "fresh": 1825,
+      "cache_read": 130591,
+      "cache_create": 7882,
+      "output": 1637,
+      "input_total": 140298,
+      "cost": null,
+      "cost_valid": false,
+      "snapshot": "july09v3"
+     },
+     "kernel": {
+      "status": "fail",
+      "resolved": false,
+      "turns": 7,
+      "wall": 94.4,
+      "billed": 65408,
+      "fresh": 7365,
+      "cache_read": 106078,
+      "cache_create": 6953,
+      "output": 2238,
+      "input_total": 120396,
+      "cost": 0.3785,
       "cost_valid": true,
       "snapshot": "july09v3"
      }
@@ -12693,38 +12729,6 @@
       "output": 2667,
       "input_total": 128473,
       "cost": 0.5293,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     }
-    },
-    "rate-limit-bypass-header": {
-     "native": {
-      "status": "pass",
-      "resolved": true,
-      "turns": 7,
-      "wall": 65.1,
-      "billed": 140298,
-      "fresh": 1825,
-      "cache_read": 130591,
-      "cache_create": 7882,
-      "output": 1637,
-      "input_total": 140298,
-      "cost": 0.3292,
-      "cost_valid": true,
-      "snapshot": "july09v3"
-     },
-     "kernel": {
-      "status": "fail",
-      "resolved": false,
-      "turns": 7,
-      "wall": 94.4,
-      "billed": 65408,
-      "fresh": 7365,
-      "cache_read": 106078,
-      "cache_create": 6953,
-      "output": 2238,
-      "input_total": 120396,
-      "cost": 0.3785,
       "cost_valid": true,
       "snapshot": "july09v3"
      }

@@ -23,10 +23,14 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified. Both tests pass.\n\nThe needle was in `/app/app/ratelimiter.ts`: `getClientIp()` derived the rate-limit key from the client-supplied `X-Forwarded-For` header. Since that header is trivially spoofable, an attacker could send a different value on every request (`10.0.0.1`, `10.0.0.2`, …) and get a fresh rate-limit window each time, bypassing the limiter entirely.\n\nThe fix keys the rate limiter on the actual TCP socket address (`req.socket.remoteAddress`), which the client can't forge. After the change, `test.sh` shows 20 of the 30 spoofed requests correctly blocked (10 passed = the real limit), while normal traffic still gets its expected 10-request window.\n\nNote: if this service is ever deployed behind a genuine trusted proxy/load balancer, the proxy's real IP should be resolved from configuration rather than by trusting request headers — I left a comment to that effect.",
+  "summary": "Fixed and verified. Both tests pass.\n\nThe needle was in `/app/app/ratelimiter.ts`: `getClientIp()` derived the rate-limit key from the client-supplied `X-Forwarded-For` header. Since that header is trivially spoofable, an attacker could send a different value on every request (`10.0.0.1`, `10.0.0.2`, \u2026) and get a fresh rate-limit window each time, bypassing the limiter entirely.\n\nThe fix keys the rate limiter on the actual TCP socket address (`req.socket.remoteAddress`), which the client can't forge. After the change, `test.sh` shows 20 of the 30 spoofed requests correctly blocked (10 passed = the real limit), while normal traffic still gets its expected 10-request window.\n\nNote: if this service is ever deployed behind a genuine trusted proxy/load balancer, the proxy's real IP should be resolved from configuration rather than by trusting request headers \u2014 I left a comment to that effect.",
   "timestamp": "2026-07-09T23:57:44Z",
   "token_cost": 141935,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 65.125
+  "wall_clock": 65.125,
+  "observed_models": [
+    "claude-fable-5",
+    "claude-opus-4-8"
+  ]
 }

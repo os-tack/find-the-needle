@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed. The bug was in `app/app.py:28` — the offset calculation subtracted an extra 1 for any page after the first (`offset = (page - 1) * per_page - 1`), causing page 2+ to skip an item at the boundary. Removed that erroneous subtraction so `offset = (page - 1) * per_page`. `test.sh` now passes.",
+  "summary": "Fixed. The bug was in `app/app.py:28` \u2014 the offset calculation subtracted an extra 1 for any page after the first (`offset = (page - 1) * per_page - 1`), causing page 2+ to skip an item at the boundary. Removed that erroneous subtraction so `offset = (page - 1) * per_page`. `test.sh` now passes.",
   "timestamp": "2026-07-09T23:29:44Z",
   "token_cost": 199874,
   "tool_uses": 8,
   "turns_to_fix": 9,
-  "wall_clock": 22.288
+  "wall_clock": 22.288,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

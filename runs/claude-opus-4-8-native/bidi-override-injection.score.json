@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass.\n\n## The needle\n\nA **Unicode BIDI-override privilege escalation** across two files:\n\n- **`sanitizer.py`** — `sanitize_username` scrubbed HTML/script vectors but ignored invisible Unicode bidirectional control characters. A username of `\\u202e` + `nimda` was stored byte-for-byte.\n- **`auth.py`** — `check_admin_access` ran the stored username through `_render_display_name()` and compared the *visually rendered* result against the `ADMIN_USERS` allowlist. The RLO character (U+202E) reverses `nimda` → renders as `admin`, so the attacker's session matched the allowlist and got admin — leaking DB creds and API keys.\n\n## The fix\n\n1. **Strip BIDI controls at registration** — added a `_BIDI_CONTROL_RE` step in `sanitize_username` that removes RLM/LRM, the LRE/RLE/PDF/LRO/RLO overrides (U+202A–202E), the isolates (U+2066–2069), and ALM (U+061C) before storage.\n2. **Compare the stored username, not the rendered form** — `check_admin_access` now matches `session[\"username\"]` directly against the allowlist. Access control must never depend on a display transformation.\n\nBoth layers matter: stripping stops the spoofed name from ever being stored, and comparing the raw stored value ensures the auth decision can't be swayed by rendering even if a control char slipped through.",
+  "summary": "All tests pass.\n\n## The needle\n\nA **Unicode BIDI-override privilege escalation** across two files:\n\n- **`sanitizer.py`** \u2014 `sanitize_username` scrubbed HTML/script vectors but ignored invisible Unicode bidirectional control characters. A username of `\\u202e` + `nimda` was stored byte-for-byte.\n- **`auth.py`** \u2014 `check_admin_access` ran the stored username through `_render_display_name()` and compared the *visually rendered* result against the `ADMIN_USERS` allowlist. The RLO character (U+202E) reverses `nimda` \u2192 renders as `admin`, so the attacker's session matched the allowlist and got admin \u2014 leaking DB creds and API keys.\n\n## The fix\n\n1. **Strip BIDI controls at registration** \u2014 added a `_BIDI_CONTROL_RE` step in `sanitize_username` that removes RLM/LRM, the LRE/RLE/PDF/LRO/RLO overrides (U+202A\u2013202E), the isolates (U+2066\u20132069), and ALM (U+061C) before storage.\n2. **Compare the stored username, not the rendered form** \u2014 `check_admin_access` now matches `session[\"username\"]` directly against the allowlist. Access control must never depend on a display transformation.\n\nBoth layers matter: stripping stops the spoofed name from ever being stored, and comparing the raw stored value ensures the auth decision can't be swayed by rendering even if a control char slipped through.",
   "timestamp": "2026-07-09T23:05:08Z",
   "token_cost": 180876,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 48.449
+  "wall_clock": 48.449,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

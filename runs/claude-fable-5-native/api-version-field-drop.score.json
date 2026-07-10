@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified — `test.sh` passes.\n\n**The needle:** in `app/models.go`, the `UserV2` struct was created by copying `UserV1` and adding new fields, but three v1 fields — `avatar_url`, `bio`, and `location` — were accidentally dropped in the process. Since v2 is documented (in `migration.go`) as a strict superset of v1, clients upgrading to v2 silently lost that data.\n\n**The fix:** added `AvatarURL`, `Bio`, and `Location` back to the `UserV2` struct and populated them in `ToV2()`. The test now confirms all v1 fields are present in v2 responses alongside the new `department`, `phone_number`, and `is_active` fields.",
+  "summary": "Fixed and verified \u2014 `test.sh` passes.\n\n**The needle:** in `app/models.go`, the `UserV2` struct was created by copying `UserV1` and adding new fields, but three v1 fields \u2014 `avatar_url`, `bio`, and `location` \u2014 were accidentally dropped in the process. Since v2 is documented (in `migration.go`) as a strict superset of v1, clients upgrading to v2 silently lost that data.\n\n**The fix:** added `AvatarURL`, `Bio`, and `Location` back to the `UserV2` struct and populated them in `ToV2()`. The test now confirms all v1 fields are present in v2 responses alongside the new `department`, `phone_number`, and `is_active` fields.",
   "timestamp": "2026-07-09T23:03:56Z",
   "token_cost": 174089,
   "tool_uses": 8,
   "turns_to_fix": 9,
-  "wall_clock": 60.964
+  "wall_clock": 60.964,
+  "observed_models": [
+    "claude-fable-5"
+  ]
 }

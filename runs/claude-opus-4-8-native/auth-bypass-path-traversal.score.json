@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified.\n\n**The needle:** an authentication bypass via path manipulation in `app/middleware.go`.\n\nThe auth middleware checked the **raw** `r.URL.Path` for the `/api/` prefix, but the router matched routes on the **cleaned** path (`path.Clean`). An attacker could hit `//api/admin` or `/health/../api/data` — the raw path doesn't start with `/api/`, so auth was skipped, yet the router normalized it to `/api/admin` and served the protected handler with its secrets.\n\n**The fix:** normalize the path in the middleware exactly as the router does (`path.Clean` + leading-slash guard) before the prefix check, so the auth decision and the routing decision operate on the same canonical path.\n\nAll 5 test cases pass — including the double-slash and dot-dot traversal bypass attempts, which now correctly return 401.",
+  "summary": "Fixed and verified.\n\n**The needle:** an authentication bypass via path manipulation in `app/middleware.go`.\n\nThe auth middleware checked the **raw** `r.URL.Path` for the `/api/` prefix, but the router matched routes on the **cleaned** path (`path.Clean`). An attacker could hit `//api/admin` or `/health/../api/data` \u2014 the raw path doesn't start with `/api/`, so auth was skipped, yet the router normalized it to `/api/admin` and served the protected handler with its secrets.\n\n**The fix:** normalize the path in the middleware exactly as the router does (`path.Clean` + leading-slash guard) before the prefix check, so the auth decision and the routing decision operate on the same canonical path.\n\nAll 5 test cases pass \u2014 including the double-slash and dot-dot traversal bypass attempts, which now correctly return 401.",
   "timestamp": "2026-07-09T23:04:18Z",
   "token_cost": 177250,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 40.531
+  "wall_clock": 40.531,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

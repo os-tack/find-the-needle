@@ -1603,7 +1603,9 @@
      "file": "v7.7.3/2026-07-09-experiment-scores.json",
      "judged": "axis-v2 (solve/cost split, fail-closed)",
      "snapshot": "july09v3",
-     "faults": [],
+     "faults": [
+      "july09v3-fable5-native-opus-fallback"
+     ],
      "models": {
       "claude-sonnet-5": {
        "native": {
@@ -1649,11 +1651,11 @@
       },
       "claude-fable-5": {
        "native": {
-        "solved": 34,
-        "total": 37,
-        "cost_usd": 29.788,
-        "cost_cells": 37,
-        "invalid": 0,
+        "solved": 29,
+        "total": 31,
+        "cost_usd": 23.1175,
+        "cost_cells": 31,
+        "invalid": 6,
         "cost_invalid": 0,
         "masked": 0
        },
@@ -1670,10 +1672,10 @@
       }
      },
      "trust": {
-      "solve_valid_cells": 222,
-      "cost_valid_cells": 222,
+      "solve_valid_cells": 216,
+      "cost_valid_cells": 216,
       "cost_invalid_cells": 0,
-      "invalid_cells": 0,
+      "invalid_cells": 6,
       "teardown_masked_cells": 2
      }
     }

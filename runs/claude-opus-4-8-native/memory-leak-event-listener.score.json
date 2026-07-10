@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified.\n\n**The needle** (`app/processor.js`): `process()` called `eventBus.on(...)` on every request, adding a fresh `data:validated` / `data:error` listener each time and never removing them. With 500 requests the listener count grew to 500+, and each closure captured that request's `data`, leaking memory. `setMaxListeners(0)` in `server.js` even silenced Node's usual warning.\n\n**The fix:** register both listeners once in the constructor. Since the per-call listener needed the request's `data`, I pass it through the emit payload (`{ validatedData, originalData }`) instead of capturing it in a per-call closure.\n\nTest result: listener count stays at 2 across 500 requests — `PASS: No event listener leak detected`.",
+  "summary": "Fixed and verified.\n\n**The needle** (`app/processor.js`): `process()` called `eventBus.on(...)` on every request, adding a fresh `data:validated` / `data:error` listener each time and never removing them. With 500 requests the listener count grew to 500+, and each closure captured that request's `data`, leaking memory. `setMaxListeners(0)` in `server.js` even silenced Node's usual warning.\n\n**The fix:** register both listeners once in the constructor. Since the per-call listener needed the request's `data`, I pass it through the emit payload (`{ validatedData, originalData }`) instead of capturing it in a per-call closure.\n\nTest result: listener count stays at 2 across 500 requests \u2014 `PASS: No event listener leak detected`.",
   "timestamp": "2026-07-09T23:20:33Z",
   "token_cost": 173675,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 56.213
+  "wall_clock": 56.213,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

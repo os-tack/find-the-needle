@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified. ✅\n\n**The needle:** `Product.hashCode()` returned `category.hashCode()` while `equals()` compared by `sku`. Since the inventory had only ~10 distinct categories, all 10,000 products hashed into ~10 buckets, producing max chain lengths of ~1000 — the performance cliff. It also broke the `equals`/`hashCode` contract.\n\n**The fix:** hash by `sku` (consistent with `equals`). Now 10,000 items spread across 5,991 buckets with a max chain length of 4, and the test passes.",
+  "summary": "Fixed and verified. \u2705\n\n**The needle:** `Product.hashCode()` returned `category.hashCode()` while `equals()` compared by `sku`. Since the inventory had only ~10 distinct categories, all 10,000 products hashed into ~10 buckets, producing max chain lengths of ~1000 \u2014 the performance cliff. It also broke the `equals`/`hashCode` contract.\n\n**The fix:** hash by `sku` (consistent with `equals`). Now 10,000 items spread across 5,991 buckets with a max chain length of 4, and the test passes.",
   "timestamp": "2026-07-09T23:29:12Z",
   "token_cost": 128014,
   "tool_uses": 5,
   "turns_to_fix": 6,
-  "wall_clock": 25.257
+  "wall_clock": 25.257,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

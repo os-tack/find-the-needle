@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The needle was in `informerUpdate` at main.go:73-78: when the informer delivered a newer version of an object the scheduler had assumed, the code deleted the assumed entry with no callback, channel, or log — the assumer kept operating on state that no longer existed (mirroring the k8s `assume_cache.go:426` behavior described in the comments).\n\nThe fix adds an `onConflict` hook to `AssumeCache` that fires at the drop site with the key, the dropped assumed object, and the winning informer object. `main` registers a handler that sets `conflictNotified` and logs the conflict. Test passes:\n\n```\nconflict on \"pv-0\": assumed version 5 dropped in favor of informer version 6\nOK: conflict notified\nPASS\n```\n\nOne caveat worth knowing: the callback runs while the cache mutex is held, so a handler that calls back into the cache (e.g. `Get` or `Assume`) would deadlock. Fine for this repro; in real code you'd dispatch the notification outside the lock or via a channel.",
+  "summary": "The needle was in `informerUpdate` at main.go:73-78: when the informer delivered a newer version of an object the scheduler had assumed, the code deleted the assumed entry with no callback, channel, or log \u2014 the assumer kept operating on state that no longer existed (mirroring the k8s `assume_cache.go:426` behavior described in the comments).\n\nThe fix adds an `onConflict` hook to `AssumeCache` that fires at the drop site with the key, the dropped assumed object, and the winning informer object. `main` registers a handler that sets `conflictNotified` and logs the conflict. Test passes:\n\n```\nconflict on \"pv-0\": assumed version 5 dropped in favor of informer version 6\nOK: conflict notified\nPASS\n```\n\nOne caveat worth knowing: the callback runs while the cache mutex is held, so a handler that calls back into the cache (e.g. `Get` or `Assume`) would deadlock. Fine for this repro; in real code you'd dispatch the notification outside the lock or via a channel.",
   "timestamp": "2026-07-09T23:26:30Z",
   "token_cost": 164800,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 51.903
+  "wall_clock": 51.903,
+  "observed_models": [
+    "claude-fable-5"
+  ]
 }

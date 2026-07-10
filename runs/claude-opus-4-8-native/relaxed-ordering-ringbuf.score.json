@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The test passes. \n\n## Summary\n\n**The needle:** a memory-ordering bug in the lock-free SPSC ring buffer (`ring_buffer.c`). Every atomic load/store used `memory_order_relaxed`, justified by a comment claiming x86 TSO makes it safe. That reasoning is wrong — under the C11 memory model, relaxed atomics establish **no happens-before relationship** between the producer's write to `slots[]` and the consumer's read of it, so it's a genuine data race (which TSan flags, and which corrupts data on weak-memory architectures like ARM64).\n\n**The fix:** the standard acquire/release handshake on the two index variables:\n\n| Operation | Before | After |\n|---|---|---|\n| Producer stores `write_idx` | relaxed | **release** (publishes the slot write) |\n| Consumer loads `write_idx` | relaxed | **acquire** (sees the slot write) |\n| Consumer stores `read_idx` | relaxed | **release** (publishes slot-free) |\n| Producer loads `read_idx` | relaxed | **acquire** (won't overwrite unread data) |\n\nEach thread's load of *its own* index stays relaxed since only that thread writes it. This creates the cross-thread happens-before edges that make the data transfer well-defined on all architectures.",
+  "summary": "The test passes. \n\n## Summary\n\n**The needle:** a memory-ordering bug in the lock-free SPSC ring buffer (`ring_buffer.c`). Every atomic load/store used `memory_order_relaxed`, justified by a comment claiming x86 TSO makes it safe. That reasoning is wrong \u2014 under the C11 memory model, relaxed atomics establish **no happens-before relationship** between the producer's write to `slots[]` and the consumer's read of it, so it's a genuine data race (which TSan flags, and which corrupts data on weak-memory architectures like ARM64).\n\n**The fix:** the standard acquire/release handshake on the two index variables:\n\n| Operation | Before | After |\n|---|---|---|\n| Producer stores `write_idx` | relaxed | **release** (publishes the slot write) |\n| Consumer loads `write_idx` | relaxed | **acquire** (sees the slot write) |\n| Consumer stores `read_idx` | relaxed | **release** (publishes slot-free) |\n| Producer loads `read_idx` | relaxed | **acquire** (won't overwrite unread data) |\n\nEach thread's load of *its own* index stays relaxed since only that thread writes it. This creates the cross-thread happens-before edges that make the data transfer well-defined on all architectures.",
   "timestamp": "2026-07-09T23:39:42Z",
   "token_cost": 155271,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 46.036
+  "wall_clock": 46.036,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

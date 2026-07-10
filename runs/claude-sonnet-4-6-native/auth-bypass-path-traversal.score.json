@@ -15,10 +15,13 @@
   "output_tokens": 1086,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All 4 tests pass. The fix: normalize the request path with `path.Clean` in the middleware (line 12 of `middleware.go`) before checking for the `/api/` prefix — the same normalization the router already applies. Without this, paths like `//api/admin` or `/health/../api/admin` bypass the auth check while still routing to protected handlers.",
+  "summary": "All 4 tests pass. The fix: normalize the request path with `path.Clean` in the middleware (line 12 of `middleware.go`) before checking for the `/api/` prefix \u2014 the same normalization the router already applies. Without this, paths like `//api/admin` or `/health/../api/admin` bypass the auth check while still routing to protected handlers.",
   "timestamp": "2026-06-15T17:43:00Z",
   "token_cost": 183797,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 27.01
+  "wall_clock": 27.01,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

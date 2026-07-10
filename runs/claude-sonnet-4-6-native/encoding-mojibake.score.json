@@ -15,10 +15,13 @@
   "output_tokens": 1132,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All 12 checks pass. The needle was in `CsvReader.java:18` — the reader used `ISO-8859-1` instead of `UTF-8`, corrupting every non-ASCII character in the CSV. Switched it to `StandardCharsets.UTF_8`.",
+  "summary": "All 12 checks pass. The needle was in `CsvReader.java:18` \u2014 the reader used `ISO-8859-1` instead of `UTF-8`, corrupting every non-ASCII character in the CSV. Switched it to `StandardCharsets.UTF_8`.",
   "timestamp": "2026-06-15T18:00:49Z",
   "token_cost": 181334,
   "tool_uses": 9,
   "turns_to_fix": 10,
-  "wall_clock": 25.956
+  "wall_clock": 25.956,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

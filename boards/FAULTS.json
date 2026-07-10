@@ -1,5 +1,5 @@
 {
- "_doc": "Machine-readable era/fault annotations for needle-bench published boards. Referenced by per-board 'faults' lists and boards/index.json. Historical boards publish AS-WERE, clearly era-tagged, and are NEVER re-judged by today's validity rules — these annotations are the honest context a reader needs instead.",
+ "_doc": "Machine-readable era/fault annotations for needle-bench published boards. Referenced by per-board 'faults' lists and boards/index.json. Historical boards publish AS-WERE, clearly era-tagged, and are NEVER re-judged by today's validity rules \u2014 these annotations are the honest context a reader needs instead.",
  "faults": [
   {
    "id": "pre-validity-era",
@@ -24,12 +24,12 @@
    "affects": [
     "gemini-* cells in any board generated before 2026-06-16"
    ],
-   "effect": "cachedContentTokenCount was not captured from streaming responses — cache_read under-reported (often 0), so gemini input was priced as fresh and cache columns are untrustworthy for those cells.",
+   "effect": "cachedContentTokenCount was not captured from streaming responses \u2014 cache_read under-reported (often 0), so gemini input was priced as fresh and cache columns are untrustworthy for those cells.",
    "reference": "haystack 073d9154 fix(gemini-cache): capture streaming cachedContentTokenCount (measurement bug), 2026-06-16"
   },
   {
    "id": "june16-teardown-masked",
-   "title": "June-16 kernel teardown hang — watchdog-scored cells",
+   "title": "June-16 kernel teardown hang \u2014 watchdog-scored cells",
    "window": {
     "from": "2026-06-15",
     "until": "2026-06-17"
@@ -42,7 +42,7 @@
   },
   {
    "id": "july02-cache-read-zero",
-   "title": "July-2 re-run reports cache_read=0 — all input folded into fresh",
+   "title": "July-2 re-run reports cache_read=0 \u2014 all input folded into fresh",
    "window": {
     "from": "2026-07-02",
     "until": "2026-07-02"
@@ -62,7 +62,7 @@
    "affects": [
     "score payloads with a bare '<model>' agent and arm='default', e.g. runs/claude-opus-4-8/off-by-one-pagination.score.json; any June-era board built before arm receipts were enforced"
    ],
-   "effect": "The runner dropped the arm from the agent identity, so the executed arm is unattributable. Under axis-split validity such cells fail the arm-receipt check (no_arm_receipt → fully INVALID on both axes); directories without an arm suffix are not discovered as columns at all. Historical boards that counted them publish as-were with this annotation.",
+   "effect": "The runner dropped the arm from the agent identity, so the executed arm is unattributable. Under axis-split validity such cells fail the arm-receipt check (no_arm_receipt \u2192 fully INVALID on both axes); directories without an arm suffix are not discovered as columns at all. Historical boards that counted them publish as-were with this annotation.",
    "reference": "cell_validity.split_agent_arm / REASON_NO_ARM_RECEIPT; needle-bench 46a35fcd"
   },
   {
@@ -71,7 +71,7 @@
     "claude-fable-5/kernel-cpu"
    ],
    "axis": "solve",
-   "title": "claude-fable-5 kernel-cpu refusals — triggered by ostk squashed tool-output format",
+   "title": "claude-fable-5 kernel-cpu refusals \u2014 triggered by ostk squashed tool-output format",
    "window": {
     "from": "2026-07-09",
     "until": "2026-07-09"
@@ -79,10 +79,10 @@
    "affects": [
     "v7.7.1 july09 snapshot: claude-fable-5 kernel-cpu (18/37 solved, strict-majority; 16 unsolved benches native solved). native arm 34/37."
    ],
-   "effect": "After 2-3 real tool turns the Anthropic API returns an empty-content response with stop_reason=refusal (journaled as agent exit_code:1); the agent completes without editing, the oracle fails, and the cell records resolved=false with real token accounting (solve+cost axes VALID). This is a provider refusal on the kernel-arm PROMPT SHAPE, not a demonstrated capability gap — treat fable-5 kernel-cpu solve rate as a FLOOR. The 21 cells the kernel DID solve remain honest, and their matched cost vs native holds (kernel = 18% of native cost / 14% of tokens on the 18 both-solved benches).",
+   "effect": "After 2-3 real tool turns the Anthropic API returns an empty-content response with stop_reason=refusal (journaled as agent exit_code:1); the agent completes without editing, the oracle fails, and the cell records resolved=false with real token accounting (solve+cost axes VALID). This is a provider refusal on the kernel-arm PROMPT SHAPE, not a demonstrated capability gap \u2014 treat fable-5 kernel-cpu solve rate as a FLOOR. The 21 cells the kernel DID solve remain honest, and their matched cost vs native holds (kernel = 18% of native cost / 14% of tokens on the 18 both-solved benches).",
    "reference": "runs/claude-fable-5-kernel-cpu/*.raw/journal.jsonl (2x cpu.response.decoded stop_reason=refusal per journal); root-cause receipts in the 2026-07-09 bench dossier.",
    "root_cause": "Bisected against api.anthropic.com by replaying the exact captured in-container request bodies (OSTK_DUMP_REQUEST). The trigger is ostk's own squasher / gen_table COMPRESSED TOOL-OUTPUT format, cumulatively: two dense squashed tool-results (e.g. '@ostk.prime+0 | v7.7.1 | POST 7/7 ... laws: invisible-write | ephemeral', '[ls_uniform] owner:root:root perms_f:mixed:2 ... [ls_anomaly]') cross Fable 5's dual-use safety threshold; rewriting EITHER result to plain text clears the refusal. Refuted as causes: tool-surface size (trimming to coding-only still refuses) and missing framing (an explicit authorized-benchmark system prompt still refuses). Only reducing squashed-output density clears it. Claude Fable 5 ships additional dual-use safety measures; its classifier reads accumulated cryptic/obfuscation-shaped output (compounded by the terse 'find the needle' prompt) as suspicious. The native arm never hits this because the vendor CLI passes plain tool output.",
-   "mitigation": "Operator design decision (NOT auto-applied): soften the squasher rendering for Anthropic frontier models (fable/mythos) — the only lever that provably works — or carry a per-model output-format capability flag, or accept+report as-is. Also: some refusal-terminated cells still trip the teardown-hang path because --profile oneshot keys clean exit on end_turn, not refusal; stall_watch SIGKILLs them correctly. A follow-up haystack change could treat refusal as a clean oneshot terminal."
+   "mitigation": "Operator design decision (NOT auto-applied): soften the squasher rendering for Anthropic frontier models (fable/mythos) \u2014 the only lever that provably works \u2014 or carry a per-model output-format capability flag, or accept+report as-is. Also: some refusal-terminated cells still trip the teardown-hang path because --profile oneshot keys clean exit on end_turn, not refusal; stall_watch SIGKILLs them correctly. A follow-up haystack change could treat refusal as a clean oneshot terminal."
   },
   {
    "id": "july09-opus48-unknown-tool-loop-exit",
@@ -90,7 +90,7 @@
     "claude-opus-4-8/kernel-cpu"
    ],
    "axis": "solve",
-   "title": "claude-opus-4-8 kernel-cpu: agent loop hard-exits on undeclared tool request — 2 cells lost",
+   "title": "claude-opus-4-8 kernel-cpu: agent loop hard-exits on undeclared tool request \u2014 2 cells lost",
    "window": {
     "from": "2026-07-09",
     "until": "2026-07-09"
@@ -98,10 +98,10 @@
    "affects": [
     "v7.7.1 july09 snapshot: claude-opus-4-8 kernel-cpu (34/38 raw strict-majority; relaxed-ordering-ringbuf and tls-chain-ordering-strict recorded unsolved). native arm unaffected (35/38)."
    ],
-   "effect": "In 2 kernel-cpu cells the model requested `ostk_show` — an operator-overlay verb that is CLI-only by design (→1589) and correctly absent from the MCP tool surface. Instead of returning an in-band unknown-tool error result, the agent loop journaled the declared_tools listing and hard-exited with code 1, discarding the VALID read/bash tool calls pending in the same content block. Cells record resolved=false with real token accounting (solve+cost axes VALID). This is a kernel harness defect, not a demonstrated capability gap — treat opus-4-8 kernel-cpu solve rate as a FLOOR (observed ceiling ~36/38).",
+   "effect": "In 2 kernel-cpu cells the model requested `ostk_show` \u2014 an operator-overlay verb that is CLI-only by design (\u21921589) and correctly absent from the MCP tool surface. Instead of returning an in-band unknown-tool error result, the agent loop journaled the declared_tools listing and hard-exited with code 1, discarding the VALID read/bash tool calls pending in the same content block. Cells record resolved=false with real token accounting (solve+cost axes VALID). This is a kernel harness defect, not a demonstrated capability gap \u2014 treat opus-4-8 kernel-cpu solve rate as a FLOOR (observed ceiling ~36/38).",
    "reference": "runs/claude-opus-4-8-kernel-cpu/{relaxed-ordering-ringbuf,tls-chain-ordering-strict}.raw/journal.jsonl (cpu.response.decoded stop_reason=tool_use, then declared_tools row + agent.completed exit_code:1).",
    "root_cause": "haystack agent-loop unknown-tool handling: a tool_use naming an undeclared tool terminates the agent (exit 1) rather than producing an error tool_result the model can recover from. Amplified by a vocabulary collision: the in-container boot envelope reports `needles: 0 open` (ostk work items) while the bench prompt says 'find the needle' (the planted bug), steering models toward the operator-overlay `show` verb.",
-   "mitigation": "Scores stand as honest evidence of harness behavior under the v7.7.1 pin. Fix in progress on haystack (in-band unknown-tool error); kernel-arm re-capture of the two cells deferred until the fixed kernel lands in a new content-hash pin — valid cells are never re-rolled on the same binary."
+   "mitigation": "Scores stand as honest evidence of harness behavior under the v7.7.1 pin. Fix in progress on haystack (in-band unknown-tool error); kernel-arm re-capture of the two cells deferred until the fixed kernel lands in a new content-hash pin \u2014 valid cells are never re-rolled on the same binary."
   },
   {
    "id": "july09-f7-earlystop-truncated-votes",
@@ -110,7 +110,7 @@
     "claude-fable-5/kernel-cpu"
    ],
    "axis": "solve",
-   "title": "F7 resampling stopped on mid-stream solve — [F,T] cells scored 1/2 miss without their deciding sample",
+   "title": "F7 resampling stopped on mid-stream solve \u2014 [F,T] cells scored 1/2 miss without their deciding sample",
    "window": {
     "until": "2026-07-09"
    },
@@ -119,11 +119,11 @@
    ],
    "effect": "Two design iterations drifted: the run_matrix F7 loop implemented retry semantics (stop resampling on any resolved sample, canonical score preserved) while consolidate_scores.py:418 scores strict majority over ALL samples taken. A cell that missed sample 1 and solved sample 2 locked in 1/2 = unsolved without ever running the deciding third sample. Cells publish as-were with this annotation.",
    "reference": "run_matrix_v41.py F7 outer loop (fixed 2026-07-09: once resampling begins, the full sample budget runs and strict majority decides); consolidate_scores.py:418; truncated-vote scan in the 2026-07-09 bench dossier.",
-   "mitigation": "Harness fixed 2026-07-09 before the v7.7.2 board was published. claude-sonnet-5 kernel-cpu silent-data-corruption hit the same truncation during capture and was remediated by a cold re-run under the fixed protocol before publish; it solved on sample 1 of the cold run and publishes as SOLVED under the era's uniform sample-1 trust rule. FULL SAMPLE HISTORY for that cell across the three 2026-07-09 captures: [F] (hard-fail bug, archived at runs-archive/sonnet5-kernel-sdc-hardfail-20260709), [F,T] (this truncation bug, archived at runs-archive/sonnet5-kernel-sdc-truncatedF7-20260709), [T] (canonical). 2 solves in 4 samples — the cell is variance-prone; both re-runs were forced by verified harness bugs before their outcomes were known. The two affected fable cells are superseded by the 2026-07-09 fable kernel re-capture; the opus cell publishes as-was (frozen era, archived pin — valid cells are never re-rolled on a different binary)."
+   "mitigation": "Harness fixed 2026-07-09 before the v7.7.2 board was published. claude-sonnet-5 kernel-cpu silent-data-corruption hit the same truncation during capture and was remediated by a cold re-run under the fixed protocol before publish; it solved on sample 1 of the cold run and publishes as SOLVED under the era's uniform sample-1 trust rule. FULL SAMPLE HISTORY for that cell across the three 2026-07-09 captures: [F] (hard-fail bug, archived at runs-archive/sonnet5-kernel-sdc-hardfail-20260709), [F,T] (this truncation bug, archived at runs-archive/sonnet5-kernel-sdc-truncatedF7-20260709), [T] (canonical). 2 solves in 4 samples \u2014 the cell is variance-prone; both re-runs were forced by verified harness bugs before their outcomes were known. The two affected fable cells are superseded by the 2026-07-09 fable kernel re-capture; the opus cell publishes as-was (frozen era, archived pin \u2014 valid cells are never re-rolled on a different binary)."
   },
   {
    "id": "july09-runcell-exit1-hardfail",
-   "title": "run_cell hard-failed clean completed-but-unsolved exits — unmasked by the v7.7.2 teardown fix",
+   "title": "run_cell hard-failed clean completed-but-unsolved exits \u2014 unmasked by the v7.7.2 teardown fix",
    "window": {
     "from": "2026-07-09",
     "until": "2026-07-09"
@@ -141,7 +141,7 @@
     "claude-sonnet-5/native"
    ],
    "axis": "cost",
-   "title": "claude-sonnet-5 native cost axis inflated — vendor CLI prices sonnet-5 at the Opus 4.8 rate card",
+   "title": "claude-sonnet-5 native cost axis inflated \u2014 vendor CLI prices sonnet-5 at the Opus 4.8 rate card",
    "window": {
     "from": "2026-07-09",
     "until": "2026-07-09"
@@ -149,7 +149,7 @@
    "affects": [
     "v7.7.1 july09 snapshot: claude-sonnet-5 native COST axis only (recorded $17.51 total; honest $7.58 at intro rates / $11.36 at standard). Solve axis and token counts unaffected."
    ],
-   "effect": "estimated_cost_usd is copied from the Claude Code CLI's own telemetry, and the CLI's price table maps claude-sonnet-5 to the Opus 4.8 rate card ($5/$25/$0.50/$6.25 per MTok) instead of Sonnet 5's $2/$10 introductory (through 2026-08-31) / $3/$15 standard — a uniform 2.5x (intro) / 1.67x (standard) overcharge on every sonnet native cell. Proven by exact linear-fit recovery of the CLI's effective rates from all 38 cells (max residual ~1e-15); opus-4-8 and fable-5 recover their genuine published rates (zero delta), so only sonnet-5 is mis-tiered. The long-context-premium hypothesis is disproven (200K window cap, flat-rate fit, docs confirm 1M at standard pricing). One cell (nginx-upstream-port-mismatch) additionally recorded $0 cost despite real tokens.",
+   "effect": "estimated_cost_usd is copied from the Claude Code CLI's own telemetry, and the CLI's price table maps claude-sonnet-5 to the Opus 4.8 rate card ($5/$25/$0.50/$6.25 per MTok) instead of Sonnet 5's $2/$10 introductory (through 2026-08-31) / $3/$15 standard \u2014 a uniform 2.5x (intro) / 1.67x (standard) overcharge on every sonnet native cell. Proven by exact linear-fit recovery of the CLI's effective rates from all 38 cells (max residual ~1e-15); opus-4-8 and fable-5 recover their genuine published rates (zero delta), so only sonnet-5 is mis-tiered. The long-context-premium hypothesis is disproven (200K window cap, flat-rate fit, docs confirm 1M at standard pricing). One cell (nginx-upstream-port-mismatch) additionally recorded $0 cost despite real tokens.",
    "reference": "scripts/reprice_native.py (pinned source-verified rate table, per-model repricing); cost-repricing findings 2026-07-09; runs/claude-sonnet-5-native/*.raw/native.stdout modelUsage.",
    "mitigation": "Recorded cells publish as-were with this annotation (cost_basis stays CLI-self-reported). Honest totals are reproducible from raw telemetry via scripts/reprice_native.py. Board-level cost restatement is an operator data-policy decision, deferred to the full clean re-capture."
   },
@@ -168,8 +168,26 @@
     "v7.7.1 july09 snapshot: claude-fable-5 native cells auth-bypass-path-traversal, bidi-override-injection, rate-limit-bypass-header, ssrf-allowlist-port-confusion."
    ],
    "effect": "Fable 5's cyber-safety classifier tripped mid-session on these security-flavored benches and the vendor CLI silently continued the session on claude-opus-4-8. Raw per-model telemetry (modelUsage) shows three billable models per cell (haiku sidecar + partial fable + opus); the score-file aggregate blends fable+opus tokens into one bucket (verified: auth-bypass fresh 1956 = fable 1815 + opus 141). Solve attribution for these 4 cells is NOT pure fable-5, and any single-rate cost treatment of the aggregate is wrong by construction.",
-   "reference": "runs/claude-fable-5-native/*.raw/native.stdout modelUsage; scripts/reprice_native.py findings §6.",
+   "reference": "runs/claude-fable-5-native/*.raw/native.stdout modelUsage; scripts/reprice_native.py findings \u00a76.",
    "mitigation": "Cells publish as-were with this annotation. Handling (annotate-only vs exclude vs re-run) is deferred to the operator's full clean re-capture; the kernel arm is unaffected (single-model by construction)."
+  },
+  {
+   "id": "july09v3-fable5-native-opus-fallback",
+   "models": [
+    "claude-fable-5/native"
+   ],
+   "axis": "attribution",
+   "title": "claude-fable-5 native (v7.7.3 re-capture): 7 security cells silently served partly or wholly by Opus 4.8 (classifier fallback) \u2014 6 published cells excluded as INVALID(model_mismatch)",
+   "window": {
+    "from": "2026-07-09",
+    "until": "2026-07-10"
+   },
+   "affects": [
+    "v7.7.3 july09v3 snapshot: claude-fable-5 native cells auth-bypass-path-traversal, kernel-panic-ioctl (entire session on opus), nginx-upstream-port-mismatch, postgres-migration-schema-drift, rate-limit-bypass-header, sql-injection-search (published, now INVALID) + retry-storm-duplicate-transfer (policy-excluded)."
+   ],
+   "effect": "The v7.7.1 opus-fallback incident (july09-fable5-native-opus-fallback) REPRODUCED in the clean v7.7.3 re-capture: Fable 5's cyber-safety classifier trips on these security-flavored benches and the vendor CLI silently continues on claude-opus-4-8 \u2014 the contamination is systematic, not incidental. modelUsage receipts (observed_models, backfilled 2026-07-10 by scripts/native_usage.py) show opus tokens in all 7 cells; kernel-panic-ioctl ran on opus alone. 5 of the 6 published cells were solves \u2014 not pure fable-5 work.",
+   "reference": "runs/claude-fable-5-native/*.raw/native.stdout modelUsage; observed_models field per score; cell_validity REASON_MODEL_MISMATCH [GPT-review F5].",
+   "mitigation": "RESOLVED MECHANICALLY (operator decision 2026-07-10): the F5 arm-receipt reconciliation classifies these cells solve-INVALID(model_mismatch:observed=...) \u2014 excluded from numerator AND denominator, listed in invalid_cells with receipts. fable-5 native publishes as 29/31. The v7.7.1 predecessor fault remains annotate-only (its era pre-dates the mechanical check)."
   }
  ]
 }

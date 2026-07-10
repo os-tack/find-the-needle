@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Test passes. The needle was the per-request listener registration in `app/processor.js:7-18` — `DataProcessor.process()` called `eventBus.on(...)` on every request instead of once, causing listener/closure accumulation. I moved the `eventBus.on('data:validated', ...)` and `eventBus.on('data:error', ...)` registrations into the constructor so they're bound once, and simplified `_handleValidated` to drop the now-unneeded closure over the original request data. `test.sh` now passes: listener count stays at 2 after 500 requests instead of growing unbounded.",
+  "summary": "Test passes. The needle was the per-request listener registration in `app/processor.js:7-18` \u2014 `DataProcessor.process()` called `eventBus.on(...)` on every request instead of once, causing listener/closure accumulation. I moved the `eventBus.on('data:validated', ...)` and `eventBus.on('data:error', ...)` registrations into the constructor so they're bound once, and simplified `_handleValidated` to drop the now-unneeded closure over the original request data. `test.sh` now passes: listener count stays at 2 after 500 requests instead of growing unbounded.",
   "timestamp": "2026-07-09T23:25:01Z",
   "token_cost": 286190,
   "tool_uses": 12,
   "turns_to_fix": 13,
-  "wall_clock": 37.368
+  "wall_clock": 37.368,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

@@ -15,10 +15,13 @@
   "output_tokens": 2888,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All 7 tests pass. The bug was in `scheduler.py:55` — the code used `window_start.date()` (the UTC date) to construct the event's scheduled time, but for events that cross midnight UTC (e.g., 23:30 Eastern = 04:30 UTC next day), this placed the scheduled datetime one full day too late, so it never fell inside the check window. The fix converts `window_start` into the event's local timezone first, then uses that local date to build the scheduled time.",
+  "summary": "All 7 tests pass. The bug was in `scheduler.py:55` \u2014 the code used `window_start.date()` (the UTC date) to construct the event's scheduled time, but for events that cross midnight UTC (e.g., 23:30 Eastern = 04:30 UTC next day), this placed the scheduled datetime one full day too late, so it never fell inside the check window. The fix converts `window_start` into the event's local timezone first, then uses that local date to build the scheduled time.",
   "timestamp": "2026-06-15T19:44:26Z",
   "token_cost": 162328,
   "tool_uses": 9,
   "turns_to_fix": 10,
-  "wall_clock": 49.631
+  "wall_clock": 49.631,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

@@ -15,10 +15,13 @@
   "output_tokens": 2281,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All 5 tests pass. The fix replaces the fragile string-based IP blocklist with `ipaddress.ip_address()` checks — `is_loopback` catches both `127.0.0.1` and all IPv6 loopback forms (`::1`, `0:0:0:0:0:0:0:1`), `is_link_local` catches `169.254.x.x`, and `is_private` covers RFC-1918 ranges.",
+  "summary": "All 5 tests pass. The fix replaces the fragile string-based IP blocklist with `ipaddress.ip_address()` checks \u2014 `is_loopback` catches both `127.0.0.1` and all IPv6 loopback forms (`::1`, `0:0:0:0:0:0:0:1`), `is_link_local` catches `169.254.x.x`, and `is_private` covers RFC-1918 ranges.",
   "timestamp": "2026-06-15T19:42:13Z",
   "token_cost": 134527,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 44.115
+  "wall_clock": 44.115,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed. The bug was a slice off-by-one in `processor.py:17` (`process_batch`) — `end = start + batch_size - 1` made each batch slice one record short, silently dropping the last record of every batch. Changed to `end = start + batch_size`. `test.sh` now passes.",
+  "summary": "Fixed. The bug was a slice off-by-one in `processor.py:17` (`process_batch`) \u2014 `end = start + batch_size - 1` made each batch slice one record short, silently dropping the last record of every batch. Changed to `end = start + batch_size`. `test.sh` now passes.",
   "timestamp": "2026-07-09T23:29:22Z",
   "token_cost": 163280,
   "tool_uses": 4,
   "turns_to_fix": 5,
-  "wall_clock": 13.834
+  "wall_clock": 13.834,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

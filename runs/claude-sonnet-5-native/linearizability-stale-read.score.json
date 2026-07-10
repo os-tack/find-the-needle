@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Found and fixed the needle — two compounding bugs causing stale reads after a partition heals:\n\n1. **`app/handler.go`** — `handleRead` called `node.Read()` (raw local state) instead of the already-implemented `node.ReadLinearizable()`, which does the read-index protocol against the leader.\n2. **`app/raft/node.go`** — `handleHeartbeat` appended piggybacked catch-up entries to the log but never called `advanceCommitIndex`, so a formerly-partitioned follower's applied state could never catch up via the heartbeat path (only `handleAppendEntries` did this correctly, masking the bug in normal operation).\n\nBoth fixes were required together — fixing only #1 would cause reads to time out waiting for an applied index that never advances; fixing only #2 wouldn't matter since reads bypass linearizability entirely.\n\nI couldn't run `test.sh` itself in this session — `/usr/local/bin` is root-owned (mode 755) and the `bench` user genuinely lacks write access here (confirmed via `touch` test, not a sandbox restriction). I instead built the binary to a writable path and ran the identical 3-round check logic from `test.sh`/`main.go` directly — all 3 rounds pass (`PASS: Linearizable read confirmed`). You may want to run `./test.sh` yourself in an environment with appropriate permissions to get the official pass confirmation.",
+  "summary": "Found and fixed the needle \u2014 two compounding bugs causing stale reads after a partition heals:\n\n1. **`app/handler.go`** \u2014 `handleRead` called `node.Read()` (raw local state) instead of the already-implemented `node.ReadLinearizable()`, which does the read-index protocol against the leader.\n2. **`app/raft/node.go`** \u2014 `handleHeartbeat` appended piggybacked catch-up entries to the log but never called `advanceCommitIndex`, so a formerly-partitioned follower's applied state could never catch up via the heartbeat path (only `handleAppendEntries` did this correctly, masking the bug in normal operation).\n\nBoth fixes were required together \u2014 fixing only #1 would cause reads to time out waiting for an applied index that never advances; fixing only #2 wouldn't matter since reads bypass linearizability entirely.\n\nI couldn't run `test.sh` itself in this session \u2014 `/usr/local/bin` is root-owned (mode 755) and the `bench` user genuinely lacks write access here (confirmed via `touch` test, not a sandbox restriction). I instead built the binary to a writable path and ran the identical 3-round check logic from `test.sh`/`main.go` directly \u2014 all 3 rounds pass (`PASS: Linearizable read confirmed`). You may want to run `./test.sh` yourself in an environment with appropriate permissions to get the official pass confirmation.",
   "timestamp": "2026-07-09T23:24:23Z",
   "token_cost": 1357121,
   "tool_uses": 27,
   "turns_to_fix": 28,
-  "wall_clock": 157.874
+  "wall_clock": 157.874,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

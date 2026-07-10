@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Found and fixed. The needle was in `src/Product.java:32` — `hashCode()` returned `category.hashCode()` instead of `sku.hashCode()`. Since there are only ~10 categories, all 10,000 products piled into ~10 buckets, turning lookups into O(n) chain scans. The comment even rationalized it as \"cache-friendly bucket placement.\"\n\nI changed it to hash on the SKU (the unique key, which `equals()` already uses), recompiled into `classes/`, and ran `test.sh`: the max chain length dropped from ~1000 to 4 across 16,384 buckets, and the test passes with `PASS: Hash map distributes items evenly across buckets`.",
+  "summary": "Found and fixed. The needle was in `src/Product.java:32` \u2014 `hashCode()` returned `category.hashCode()` instead of `sku.hashCode()`. Since there are only ~10 categories, all 10,000 products piled into ~10 buckets, turning lookups into O(n) chain scans. The comment even rationalized it as \"cache-friendly bucket placement.\"\n\nI changed it to hash on the SKU (the unique key, which `equals()` already uses), recompiled into `classes/`, and ran `test.sh`: the max chain length dropped from ~1000 to 4 across 16,384 buckets, and the test passes with `PASS: Hash map distributes items evenly across buckets`.",
   "timestamp": "2026-07-09T23:42:55Z",
   "token_cost": 145926,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 58.028
+  "wall_clock": 58.028,
+  "observed_models": [
+    "claude-fable-5"
+  ]
 }

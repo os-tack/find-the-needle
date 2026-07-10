@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified.\n\n**The needle:** a goroutine leak in `computeHandler` (`app/main.go`). Each `/compute` request spawned a background goroutine to run `performComputation`, but that goroutine had no cancellation awareness. When a client disconnected, the handler returned while the goroutine kept churning through its computation loop forever — leaking one goroutine per abandoned request.\n\n**The fix:**\n- Derived a cancellable context from `r.Context()` (which fires on client disconnect) with a 25s timeout.\n- Threaded `ctx` into `performComputation`, which now checks `ctx.Err()` each iteration and uses a `select` on `ctx.Done()` instead of a bare `time.Sleep`, so it exits promptly on cancellation.\n- The handler now selects on `ctx.Done()`, and the deferred `cancel()` stops the goroutine on any exit path. The result channel is buffered (size 1) and the goroutine skips the send on cancellation, so nothing blocks.\n\n`test.sh` passes: 0 leaked goroutines above baseline after 20 client disconnects.",
+  "summary": "Fixed and verified.\n\n**The needle:** a goroutine leak in `computeHandler` (`app/main.go`). Each `/compute` request spawned a background goroutine to run `performComputation`, but that goroutine had no cancellation awareness. When a client disconnected, the handler returned while the goroutine kept churning through its computation loop forever \u2014 leaking one goroutine per abandoned request.\n\n**The fix:**\n- Derived a cancellable context from `r.Context()` (which fires on client disconnect) with a 25s timeout.\n- Threaded `ctx` into `performComputation`, which now checks `ctx.Err()` each iteration and uses a `select` on `ctx.Done()` instead of a bare `time.Sleep`, so it exits promptly on cancellation.\n- The handler now selects on `ctx.Done()`, and the deferred `cancel()` stops the goroutine on any exit path. The result channel is buffered (size 1) and the goroutine skips the send on cancellation, so nothing blocks.\n\n`test.sh` passes: 0 leaked goroutines above baseline after 20 client disconnects.",
   "timestamp": "2026-07-09T23:12:15Z",
   "token_cost": 201121,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 82.686
+  "wall_clock": 82.686,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

@@ -28,5 +28,8 @@
   "token_cost": 116407,
   "tool_uses": 5,
   "turns_to_fix": 6,
-  "wall_clock": 31.279
+  "wall_clock": 31.279,
+  "observed_models": [
+    "claude-fable-5"
+  ]
 }

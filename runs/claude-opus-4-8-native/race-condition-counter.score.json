@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified. ✅\n\n**The needle:** `incrementCounter()` in `app/app/counter.js` used a non-atomic read-modify-write — `GET` the value, add 1 in JS, then `SET` it back. Under concurrency, multiple requests read the same value before any wrote back, so increments were silently lost (a classic lost-update race).\n\n**The fix:** Replaced the GET/SET pair with Redis's atomic `INCR`, which increments server-side in a single operation.\n\nTest result: 100 concurrent increments → counter reads exactly 100. `PASS`.",
+  "summary": "Fixed and verified. \u2705\n\n**The needle:** `incrementCounter()` in `app/app/counter.js` used a non-atomic read-modify-write \u2014 `GET` the value, add 1 in JS, then `SET` it back. Under concurrency, multiple requests read the same value before any wrote back, so increments were silently lost (a classic lost-update race).\n\n**The fix:** Replaced the GET/SET pair with Redis's atomic `INCR`, which increments server-side in a single operation.\n\nTest result: 100 concurrent increments \u2192 counter reads exactly 100. `PASS`.",
   "timestamp": "2026-07-09T23:36:26Z",
   "token_cost": 154247,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 40.851
+  "wall_clock": 40.851,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": false,
   "stop_reason": "fail",
-  "summary": "All three rounds pass with only the majority partition (node 2's side, 3/5 votes) electing a leader, while the minority partition (node 0's side, 2/5 votes) correctly fails to elect one.\n\n## Summary\n\nThe needle: `/app/app/cluster/node.go:124` had `finalVotes >= totalNodes/2`. With 5 nodes, integer division gives `totalNodes/2 == 2`, so a minority partition of 2 nodes (self + 1 grantor) could satisfy the \"quorum\" check and become leader alongside the legitimate majority leader — the split-brain bug.\n\nFix: changed the comparison to `finalVotes > totalNodes/2`, requiring strictly more than half the votes (3 of 5), which only the majority partition can achieve.\n\n`test.sh` now passes all 3 rounds (`PASS: No split-brain detected across all rounds`). Note: the prebuilt `/usr/local/bin/split-brain` binary is owned by root and not writable by the `bench` user, so I rebuilt the binary to `/tmp/bin/split-brain` and ran `test.sh` with that directory prepended to `PATH` to pick up the fix.",
+  "summary": "All three rounds pass with only the majority partition (node 2's side, 3/5 votes) electing a leader, while the minority partition (node 0's side, 2/5 votes) correctly fails to elect one.\n\n## Summary\n\nThe needle: `/app/app/cluster/node.go:124` had `finalVotes >= totalNodes/2`. With 5 nodes, integer division gives `totalNodes/2 == 2`, so a minority partition of 2 nodes (self + 1 grantor) could satisfy the \"quorum\" check and become leader alongside the legitimate majority leader \u2014 the split-brain bug.\n\nFix: changed the comparison to `finalVotes > totalNodes/2`, requiring strictly more than half the votes (3 of 5), which only the majority partition can achieve.\n\n`test.sh` now passes all 3 rounds (`PASS: No split-brain detected across all rounds`). Note: the prebuilt `/usr/local/bin/split-brain` binary is owned by root and not writable by the `bench` user, so I rebuilt the binary to `/tmp/bin/split-brain` and ran `test.sh` with that directory prepended to `PATH` to pick up the fix.",
   "timestamp": "2026-07-10T00:01:34Z",
   "token_cost": 577110,
   "tool_uses": 15,
   "turns_to_fix": 16,
-  "wall_clock": 52.02
+  "wall_clock": 52.02,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

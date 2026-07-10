@@ -15,10 +15,13 @@
   "output_tokens": 951,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Test passes. The bug was in `app/app.py:28` — a spurious `- (1 if page > 1 else 0)` was shifting the offset back by one for every page after the first, causing a one-item overlap at every page boundary.",
+  "summary": "Test passes. The bug was in `app/app.py:28` \u2014 a spurious `- (1 if page > 1 else 0)` was shifting the offset back by one for every page after the first, causing a one-item overlap at every page boundary.",
   "timestamp": "2026-06-15T18:35:16Z",
   "token_cost": 125974,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 37.213
+  "wall_clock": 37.213,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

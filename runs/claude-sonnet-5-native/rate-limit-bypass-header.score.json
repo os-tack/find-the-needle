@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Test passes. The vulnerability was in `ratelimiter.ts`'s `getClientIp` — it keyed the rate limiter on the client-supplied `X-Forwarded-For` header, so rotating that header per request gave each request a fresh bucket, bypassing the limit entirely. Fixed by keying solely on `req.socket.remoteAddress`, which the client cannot spoof.",
+  "summary": "Test passes. The vulnerability was in `ratelimiter.ts`'s `getClientIp` \u2014 it keyed the rate limiter on the client-supplied `X-Forwarded-For` header, so rotating that header per request gave each request a fresh bucket, bypassing the limit entirely. Fixed by keying solely on `req.socket.remoteAddress`, which the client cannot spoof.",
   "timestamp": "2026-07-09T23:42:54Z",
   "token_cost": 208235,
   "tool_uses": 8,
   "turns_to_fix": 9,
-  "wall_clock": 43.6
+  "wall_clock": 43.6,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

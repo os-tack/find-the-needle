@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Test passes. The needle was in `app/models.go`: the `UserV2` struct was missing `avatar_url`, `bio`, and `location` fields (and `ToV2()` didn't populate them), causing v1→v2 API clients to silently lose data. Added the missing fields/mapping — `test.sh` now passes.",
+  "summary": "Test passes. The needle was in `app/models.go`: the `UserV2` struct was missing `avatar_url`, `bio`, and `location` fields (and `ToV2()` didn't populate them), causing v1\u2192v2 API clients to silently lose data. Added the missing fields/mapping \u2014 `test.sh` now passes.",
   "timestamp": "2026-07-09T23:03:25Z",
   "token_cost": 240520,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 29.363
+  "wall_clock": 29.363,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

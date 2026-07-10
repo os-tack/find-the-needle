@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified — `test.sh` passes.\n\n**The needle:** In `routes.ts`, the `POST /inventory/:sku/adjust` handler validated only that `quantity` was a number, then applied it directly via `inventory.adjustQuantity`. There was no bounds check, so an adjustment like `-200` against a stock of `110` silently drove inventory to `-90`.\n\n**The fix:** Added a guard that rejects the adjustment with `400` when `product.quantity + quantity < 0`, preventing impossible negative-inventory states while still allowing valid additions and in-bounds subtractions.",
+  "summary": "Fixed and verified \u2014 `test.sh` passes.\n\n**The needle:** In `routes.ts`, the `POST /inventory/:sku/adjust` handler validated only that `quantity` was a number, then applied it directly via `inventory.adjustQuantity`. There was no bounds check, so an adjustment like `-200` against a stock of `110` silently drove inventory to `-90`.\n\n**The fix:** Added a guard that rejects the adjustment with `400` when `product.quantity + quantity < 0`, preventing impossible negative-inventory states while still allowing valid additions and in-bounds subtractions.",
   "timestamp": "2026-07-09T23:21:07Z",
   "token_cost": 115706,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 31.877
+  "wall_clock": 31.877,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

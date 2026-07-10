@@ -15,10 +15,13 @@
   "output_tokens": 19362,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All three tests pass. Here's a summary of what was done:\n\n**The needle:** `chain.pem` was assembled in wrong RFC 5246 order — `leaf → root → intermediate` instead of `leaf → intermediate → root` (the bug is in the Dockerfile's `cat` command). `tls.X509KeyPair` preserves PEM file order for non-leaf certs, so the server was advertising an out-of-order chain that strict TLS validators would reject (lenient clients like curl would still connect, masking the bug).\n\n**The fix** (`app/tlssetup/loader.go`): after `X509KeyPair` loads the certs, walk `Certificate[1:]` and reorder them by Subject/Issuer relationship — each cert is placed so its Subject matches the preceding cert's Issuer. This sorts any chain into correct RFC 5246 order regardless of PEM file order.\n\nTwo housekeeping changes were also needed to make `test.sh` runnable as a non-root user: build the binary to `/tmp` (since `/usr/local/bin` is root-only), and generate a fresh bench-readable cert chain (with the same wrong ordering) since `/certs/leaf.key` is `chmod 600` root-only.",
+  "summary": "All three tests pass. Here's a summary of what was done:\n\n**The needle:** `chain.pem` was assembled in wrong RFC 5246 order \u2014 `leaf \u2192 root \u2192 intermediate` instead of `leaf \u2192 intermediate \u2192 root` (the bug is in the Dockerfile's `cat` command). `tls.X509KeyPair` preserves PEM file order for non-leaf certs, so the server was advertising an out-of-order chain that strict TLS validators would reject (lenient clients like curl would still connect, masking the bug).\n\n**The fix** (`app/tlssetup/loader.go`): after `X509KeyPair` loads the certs, walk `Certificate[1:]` and reorder them by Subject/Issuer relationship \u2014 each cert is placed so its Subject matches the preceding cert's Issuer. This sorts any chain into correct RFC 5246 order regardless of PEM file order.\n\nTwo housekeeping changes were also needed to make `test.sh` runnable as a non-root user: build the binary to `/tmp` (since `/usr/local/bin` is root-only), and generate a fresh bench-readable cert chain (with the same wrong ordering) since `/certs/leaf.key` is `chmod 600` root-only.",
   "timestamp": "2026-06-15T19:54:56Z",
   "token_cost": 2026441,
   "tool_uses": 48,
   "turns_to_fix": 49,
-  "wall_clock": 386.372
+  "wall_clock": 386.372,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

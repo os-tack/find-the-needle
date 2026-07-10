@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass.\n\nThe needle was in `app/auth.py`: `check_admin_access` compared usernames against the admin allowlist using a *rendered display form* (`_render_display_name`) that applied Unicode BIDI rules — so a username like `\\u202enimda` (RLO + \"nimda\") visually renders as \"admin\" and matched the allowlist, granting privilege escalation. Compounding it, `app/sanitizer.py` never stripped BIDI control characters, so such usernames passed registration untouched.\n\nFix applied:\n- `sanitizer.py`: strip BIDI control characters (U+200E/200F, U+202A–202E, U+2066–2069) from usernames at registration time.\n- `auth.py`: removed `_render_display_name` and the rendered-form comparison; `check_admin_access` now checks the raw stored username directly against `ADMIN_USERS`.\n\n`test.sh` now passes all 5 checks (normal registration/login, real admin access, BIDI/LRO injection rejected, non-admin denied).",
+  "summary": "All tests pass.\n\nThe needle was in `app/auth.py`: `check_admin_access` compared usernames against the admin allowlist using a *rendered display form* (`_render_display_name`) that applied Unicode BIDI rules \u2014 so a username like `\\u202enimda` (RLO + \"nimda\") visually renders as \"admin\" and matched the allowlist, granting privilege escalation. Compounding it, `app/sanitizer.py` never stripped BIDI control characters, so such usernames passed registration untouched.\n\nFix applied:\n- `sanitizer.py`: strip BIDI control characters (U+200E/200F, U+202A\u2013202E, U+2066\u20132069) from usernames at registration time.\n- `auth.py`: removed `_render_display_name` and the rendered-form comparison; `check_admin_access` now checks the raw stored username directly against `ADMIN_USERS`.\n\n`test.sh` now passes all 5 checks (normal registration/login, real admin access, BIDI/LRO injection rejected, non-admin denied).",
   "timestamp": "2026-07-09T23:05:18Z",
   "token_cost": 644044,
   "tool_uses": 17,
   "turns_to_fix": 18,
-  "wall_clock": 82.314
+  "wall_clock": 82.314,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

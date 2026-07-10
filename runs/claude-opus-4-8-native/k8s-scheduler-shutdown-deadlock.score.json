@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified — `test.sh` passes.\n\n**The needle:** in `Scheduler.Run` (main.go:96-103), the shutdown sequence closed the queue *after* waiting for the worker goroutine to exit:\n\n```go\n<-done          // wait for goroutine...\ns.queue.Close() // ...then close\n```\n\nBut the worker only checks `ctx.Done()` between iterations of its `select`. If it was parked inside `Pop()` — blocked on `cond.Wait()` with an empty, not-yet-closed queue — it could never return to that check. `done` never closes, so `<-done` blocks forever, and the `Close()` that would wake `Pop()` is never reached. Deadlock.\n\n**The fix:** swap the order so `Close()` happens first. Closing sets `closed=true` and broadcasts, which wakes the parked `Pop()`; it returns the \"queue closed\" error, `ScheduleOne` returns, the loop hits the `ctx.Done()` case, and `done` closes — so the subsequent `<-done` is now guaranteed to complete.",
+  "summary": "Fixed and verified \u2014 `test.sh` passes.\n\n**The needle:** in `Scheduler.Run` (main.go:96-103), the shutdown sequence closed the queue *after* waiting for the worker goroutine to exit:\n\n```go\n<-done          // wait for goroutine...\ns.queue.Close() // ...then close\n```\n\nBut the worker only checks `ctx.Done()` between iterations of its `select`. If it was parked inside `Pop()` \u2014 blocked on `cond.Wait()` with an empty, not-yet-closed queue \u2014 it could never return to that check. `done` never closes, so `<-done` blocks forever, and the `Close()` that would wake `Pop()` is never reached. Deadlock.\n\n**The fix:** swap the order so `Close()` happens first. Closing sets `closed=true` and broadcasts, which wakes the parked `Pop()`; it returns the \"queue closed\" error, `ScheduleOne` returns, the loop hits the `ctx.Done()` case, and `done` closes \u2014 so the subsequent `<-done` is now guaranteed to complete.",
   "timestamp": "2026-07-09T23:15:20Z",
   "token_cost": 109232,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 36.73
+  "wall_clock": 36.73,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

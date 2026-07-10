@@ -15,10 +15,13 @@
   "output_tokens": 9066,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All 3 rounds pass. The fix is in `snapshot.go` — two changes to `InstallSnapshot`:\n\n1. **`commitIndex` update** (the critical fix): after installing a snapshot, `commitIndex` is advanced to `snap.LastIncludedIndex`. Without this, `Restart()` saves `commitIndex=0`, restores the snapshot (setting `lastApplied=10`), then the else branch drags `lastApplied` back to 0 — causing `applyEntries()` to re-apply entries 1–10 that the state machine already has from the snapshot restore.\n\n2. **Log compaction** (the cleanup fix): changed `>` to `>=` and added an `else` branch so that when the snapshot covers exactly our log boundary (10 ≥ 10), the covered entries are compacted away rather than silently retained.",
+  "summary": "All 3 rounds pass. The fix is in `snapshot.go` \u2014 two changes to `InstallSnapshot`:\n\n1. **`commitIndex` update** (the critical fix): after installing a snapshot, `commitIndex` is advanced to `snap.LastIncludedIndex`. Without this, `Restart()` saves `commitIndex=0`, restores the snapshot (setting `lastApplied=10`), then the else branch drags `lastApplied` back to 0 \u2014 causing `applyEntries()` to re-apply entries 1\u201310 that the state machine already has from the snapshot restore.\n\n2. **Log compaction** (the cleanup fix): changed `>` to `>=` and added an `else` branch so that when the snapshot covers exactly our log boundary (10 \u2265 10), the covered entries are compacted away rather than silently retained.",
   "timestamp": "2026-06-15T18:52:36Z",
   "token_cost": 352981,
   "tool_uses": 12,
   "turns_to_fix": 13,
-  "wall_clock": 164.025
+  "wall_clock": 164.025,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

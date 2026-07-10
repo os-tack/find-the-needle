@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": false,
   "stop_reason": "fail",
-  "summary": "**PASS — all three rounds report no split-brain.**\n\nThe needle was the quorum check in `app/cluster/node.go:124`:\n\n```go\nif finalVotes >= totalNodes/2 {   // buggy\nif finalVotes > totalNodes/2 {    // fixed\n```\n\nWith a 5-node cluster, integer division gives `totalNodes/2 = 2`, so `>=` let a candidate in a 2-node minority partition (its own vote plus one peer) become leader while the 3-node majority side also elected one — split-brain. Majority quorum requires strictly more than half, i.e. at least 3 of 5 votes. The test output confirms it: node 0 now gets 2/5 votes in the minority partition and stays a candidate, while node 2 wins with 3/5 on the majority side.\n\nOne note on verification: `test.sh` invokes the prebuilt `split-brain` binary from `/usr/local/bin`, which isn't writable in this environment, so I rebuilt the fixed binary to `/tmp/bin/split-brain` and ran `PATH=/tmp/bin:$PATH /app/test.sh`. All rounds pass.\n\nUnrelated cosmetic issue I left alone: the \"became LEADER for term 3 with 1 votes\" log line has its printf arguments swapped (`node.go:128` passes `finalVotes` where the term should go and vice versa) — it doesn't affect correctness.",
+  "summary": "**PASS \u2014 all three rounds report no split-brain.**\n\nThe needle was the quorum check in `app/cluster/node.go:124`:\n\n```go\nif finalVotes >= totalNodes/2 {   // buggy\nif finalVotes > totalNodes/2 {    // fixed\n```\n\nWith a 5-node cluster, integer division gives `totalNodes/2 = 2`, so `>=` let a candidate in a 2-node minority partition (its own vote plus one peer) become leader while the 3-node majority side also elected one \u2014 split-brain. Majority quorum requires strictly more than half, i.e. at least 3 of 5 votes. The test output confirms it: node 0 now gets 2/5 votes in the minority partition and stays a candidate, while node 2 wins with 3/5 on the majority side.\n\nOne note on verification: `test.sh` invokes the prebuilt `split-brain` binary from `/usr/local/bin`, which isn't writable in this environment, so I rebuilt the fixed binary to `/tmp/bin/split-brain` and ran `PATH=/tmp/bin:$PATH /app/test.sh`. All rounds pass.\n\nUnrelated cosmetic issue I left alone: the \"became LEADER for term 3 with 1 votes\" log line has its printf arguments swapped (`node.go:128` passes `finalVotes` where the term should go and vice versa) \u2014 it doesn't affect correctness.",
   "timestamp": "2026-07-10T00:19:49Z",
   "token_cost": 307234,
   "tool_uses": 11,
   "turns_to_fix": 12,
-  "wall_clock": 98.625
+  "wall_clock": 98.625,
+  "observed_models": [
+    "claude-fable-5"
+  ]
 }

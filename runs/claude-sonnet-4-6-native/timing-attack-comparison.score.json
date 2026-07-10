@@ -15,10 +15,13 @@
   "output_tokens": 4467,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass. The fix:\n\n**The needle** — `compareHashes` in `auth/compare.go` used `==` to compare password hashes, which leaks timing information. An attacker could measure how long comparisons take to infer how many characters of the hash matched, enabling a character-by-character brute-force.\n\n**The fix** — replaced `stored == input` with `subtle.ConstantTimeCompare([]byte(stored), []byte(input)) == 1` from `crypto/subtle`, which always runs in constant time regardless of where strings differ.",
+  "summary": "All tests pass. The fix:\n\n**The needle** \u2014 `compareHashes` in `auth/compare.go` used `==` to compare password hashes, which leaks timing information. An attacker could measure how long comparisons take to infer how many characters of the hash matched, enabling a character-by-character brute-force.\n\n**The fix** \u2014 replaced `stored == input` with `subtle.ConstantTimeCompare([]byte(stored), []byte(input)) == 1` from `crypto/subtle`, which always runs in constant time regardless of where strings differ.",
   "timestamp": "2026-06-15T19:47:15Z",
   "token_cost": 557390,
   "tool_uses": 23,
   "turns_to_fix": 24,
-  "wall_clock": 95.664
+  "wall_clock": 95.664,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

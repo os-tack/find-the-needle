@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass. The bug was in `app/scheduler.py`'s `_is_due`: it built each event's scheduled local time using the UTC window's calendar date, which breaks near midnight boundaries (e.g., 23:30 US/Eastern on one UTC date is actually 04:30 UTC the *next* day). Fixed by checking the UTC date ± 1 day as candidates and returning true if any lands in the window.",
+  "summary": "All tests pass. The bug was in `app/scheduler.py`'s `_is_due`: it built each event's scheduled local time using the UTC window's calendar date, which breaks near midnight boundaries (e.g., 23:30 US/Eastern on one UTC date is actually 04:30 UTC the *next* day). Fixed by checking the UTC date \u00b1 1 day as candidates and returning true if any lands in the window.",
   "timestamp": "2026-07-10T00:04:24Z",
   "token_cost": 249005,
   "tool_uses": 9,
   "turns_to_fix": 10,
-  "wall_clock": 33.174
+  "wall_clock": 33.174,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

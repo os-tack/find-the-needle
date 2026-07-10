@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Test passes. The needle was in `utils.js:22` — `min_rating` was left as a string while `min_price`/`max_price` were parsed as numbers, which broke type consistency in `buildRatingRange`'s loop (`filter.js`) and made `Array.includes` fail to match numeric ratings. Fixed by parsing it with `parseInt`.",
+  "summary": "Test passes. The needle was in `utils.js:22` \u2014 `min_rating` was left as a string while `min_price`/`max_price` were parsed as numbers, which broke type consistency in `buildRatingRange`'s loop (`filter.js`) and made `Array.includes` fail to match numeric ratings. Fixed by parsing it with `parseInt`.",
   "timestamp": "2026-07-10T00:09:08Z",
   "token_cost": 173500,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 35.922
+  "wall_clock": 35.922,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

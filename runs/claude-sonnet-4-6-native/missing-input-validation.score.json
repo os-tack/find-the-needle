@@ -15,10 +15,13 @@
   "output_tokens": 1466,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Tests pass. The needle was in `inventory.ts:38` — `adjustQuantity` had no guard against negative results. Added a bounds check that throws when an adjustment would push quantity below zero, and updated the route handler to catch that and return a 400.",
+  "summary": "Tests pass. The needle was in `inventory.ts:38` \u2014 `adjustQuantity` had no guard against negative results. Added a bounds check that throws when an adjustment would push quantity below zero, and updated the route handler to catch that and return a 400.",
   "timestamp": "2026-06-15T18:24:37Z",
   "token_cost": 183188,
   "tool_uses": 9,
   "turns_to_fix": 10,
-  "wall_clock": 35.123
+  "wall_clock": 35.123,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

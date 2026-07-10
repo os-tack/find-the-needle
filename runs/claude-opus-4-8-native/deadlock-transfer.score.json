@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified — test passes.\n\n**The needle:** a lock-ordering deadlock in `TransferService.transfer` (`/app/app/TransferService.java`). It acquired locks in parameter order (`from` then `to`), so two concurrent transfers going opposite directions (`A→B` and `B→A`) grabbed the two account locks in opposite orders and deadlocked, hanging until the 10s timeout.\n\n**The fix:** acquire the two account locks in a consistent global order sorted by account id, regardless of transfer direction. The withdraw/deposit logic still uses the real `from`/`to`, so behavior is unchanged — only the lock acquisition order is normalized, which eliminates the circular wait.\n\nBoth verification passes completed instantly with balance conserved (30000.00) and 200/200 transfers succeeding.",
+  "summary": "Fixed and verified \u2014 test passes.\n\n**The needle:** a lock-ordering deadlock in `TransferService.transfer` (`/app/app/TransferService.java`). It acquired locks in parameter order (`from` then `to`), so two concurrent transfers going opposite directions (`A\u2192B` and `B\u2192A`) grabbed the two account locks in opposite orders and deadlocked, hanging until the 10s timeout.\n\n**The fix:** acquire the two account locks in a consistent global order sorted by account id, regardless of transfer direction. The withdraw/deposit logic still uses the real `from`/`to`, so behavior is unchanged \u2014 only the lock acquisition order is normalized, which eliminates the circular wait.\n\nBoth verification passes completed instantly with balance conserved (30000.00) and 200/200 transfers succeeding.",
   "timestamp": "2026-07-09T23:08:59Z",
   "token_cost": 169114,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 52.247
+  "wall_clock": 52.247,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

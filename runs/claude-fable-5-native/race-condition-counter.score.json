@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified — the test passes with all 100 concurrent increments counted.\n\nThe needle was a race condition in `app/counter.js:12`: `incrementCounter()` did a non-atomic read-modify-write (`GET` the value, add 1 in JavaScript, `SET` it back). Under the test's 100 concurrent requests, multiple requests would read the same value and write back the same result, silently losing increments.\n\nThe fix replaces the GET/SET pair with a single `client.incr(COUNTER_KEY)` — Redis's atomic increment — which also returns the new value directly, so the function's return contract is unchanged. `test.sh` now reports `PASS: Counter is correct` (expected 100, got 100).",
+  "summary": "Fixed and verified \u2014 the test passes with all 100 concurrent increments counted.\n\nThe needle was a race condition in `app/counter.js:12`: `incrementCounter()` did a non-atomic read-modify-write (`GET` the value, add 1 in JavaScript, `SET` it back). Under the test's 100 concurrent requests, multiple requests would read the same value and write back the same result, silently losing increments.\n\nThe fix replaces the GET/SET pair with a single `client.incr(COUNTER_KEY)` \u2014 Redis's atomic increment \u2014 which also returns the new value directly, so the function's return contract is unchanged. `test.sh` now reports `PASS: Counter is correct` (expected 100, got 100).",
   "timestamp": "2026-07-09T23:53:56Z",
   "token_cost": 161243,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 63.846
+  "wall_clock": 63.846,
+  "observed_models": [
+    "claude-fable-5"
+  ]
 }

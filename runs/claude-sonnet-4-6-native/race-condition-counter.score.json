@@ -15,10 +15,13 @@
   "output_tokens": 1066,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The needle was in `counter.js:12-25` — a read-modify-write race condition where concurrent requests all read the same stale value before any write completes. Replaced with Redis's atomic `INCR` command, which guarantees each increment is a single indivisible operation. Test passes: 100/100.",
+  "summary": "The needle was in `counter.js:12-25` \u2014 a read-modify-write race condition where concurrent requests all read the same stale value before any write completes. Replaced with Redis's atomic `INCR` command, which guarantees each increment is a single indivisible operation. Test passes: 100/100.",
   "timestamp": "2026-06-15T18:48:16Z",
   "token_cost": 151261,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 32.552
+  "wall_clock": 32.552,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

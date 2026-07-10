@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified — `test.sh` passes.\n\n**The needle:** `main.go:66-81`, `informerUpdate`. When the informer delivered a newer version (v6) of an object that the scheduler had optimistically assumed (v5), the code silently `delete`d the assumed entry with no notification. The assumer had no way to learn its optimistic state was dropped.\n\n**The fix:** on that supersession path, set `conflictNotified = true` when dropping the assumed entry, so the conflict is surfaced instead of silently swallowed.\n\nTest output confirms: `OK: conflict notified` → `PASS`.",
+  "summary": "Fixed and verified \u2014 `test.sh` passes.\n\n**The needle:** `main.go:66-81`, `informerUpdate`. When the informer delivered a newer version (v6) of an object that the scheduler had optimistically assumed (v5), the code silently `delete`d the assumed entry with no notification. The assumer had no way to learn its optimistic state was dropped.\n\n**The fix:** on that supersession path, set `conflictNotified = true` when dropping the assumed entry, so the conflict is surfaced instead of silently swallowed.\n\nTest output confirms: `OK: conflict notified` \u2192 `PASS`.",
   "timestamp": "2026-07-09T23:14:41Z",
   "token_cost": 107317,
   "tool_uses": 4,
   "turns_to_fix": 5,
-  "wall_clock": 22.052
+  "wall_clock": 22.052,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

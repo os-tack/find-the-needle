@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified. **PASS.**\n\n**The needle:** `config.json` had `enable_metrics: true` but no `metrics` object. Since `Config.Metrics` is a pointer (`*MetricsConfig`), it deserialized to `nil`. When `/status` was hit with metrics enabled, `makeStatusHandler` dereferenced `cfg.Metrics.Endpoint` → nil-pointer panic → HTTP 500, failing test 3.\n\n**The fix:**\n1. Added the missing `metrics` object to `config.json` so the enabled feature has actual data to report.\n2. Added a `&& cfg.Metrics != nil` guard in `main.go:46` so a config that enables metrics without defining them can no longer panic the handler.\n\n(Side note: `middleware.go` defines a `RecoveryMiddleware` that would have caught the panic, but it's never wired into the mux — the root cause was better fixed at the config/handler level.)",
+  "summary": "Fixed and verified. **PASS.**\n\n**The needle:** `config.json` had `enable_metrics: true` but no `metrics` object. Since `Config.Metrics` is a pointer (`*MetricsConfig`), it deserialized to `nil`. When `/status` was hit with metrics enabled, `makeStatusHandler` dereferenced `cfg.Metrics.Endpoint` \u2192 nil-pointer panic \u2192 HTTP 500, failing test 3.\n\n**The fix:**\n1. Added the missing `metrics` object to `config.json` so the enabled feature has actual data to report.\n2. Added a `&& cfg.Metrics != nil` guard in `main.go:46` so a config that enables metrics without defining them can no longer panic the handler.\n\n(Side note: `middleware.go` defines a `RecoveryMiddleware` that would have caught the panic, but it's never wired into the mux \u2014 the root cause was better fixed at the config/handler level.)",
   "timestamp": "2026-07-09T23:27:51Z",
   "token_cost": 137047,
   "tool_uses": 8,
   "turns_to_fix": 9,
-  "wall_clock": 38.334
+  "wall_clock": 38.334,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

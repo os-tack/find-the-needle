@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified — `test.sh` passes.\n\n**The needle:** `config.json` enables metrics (`\"enable_metrics\": true`) but omits the `metrics` object entirely. Since `Config.Metrics` is a pointer (`*MetricsConfig`), it unmarshals to nil, and the `/status` handler unconditionally dereferences it (`cfg.Metrics.Endpoint` in `main.go:47`) whenever metrics are enabled — a nil-pointer panic that killed every `/status` request.\n\n**The fix:** in `LoadConfig` (config.go), alongside the existing port/version defaulting, if metrics are enabled but no metrics config was provided, default it to `&MetricsConfig{Endpoint: \"/metrics\", IntervalSec: 60}`. This keeps the handler untouched and matches the file's existing pattern of filling in sensible defaults after parsing.",
+  "summary": "Fixed and verified \u2014 `test.sh` passes.\n\n**The needle:** `config.json` enables metrics (`\"enable_metrics\": true`) but omits the `metrics` object entirely. Since `Config.Metrics` is a pointer (`*MetricsConfig`), it unmarshals to nil, and the `/status` handler unconditionally dereferences it (`cfg.Metrics.Endpoint` in `main.go:47`) whenever metrics are enabled \u2014 a nil-pointer panic that killed every `/status` request.\n\n**The fix:** in `LoadConfig` (config.go), alongside the existing port/version defaulting, if metrics are enabled but no metrics config was provided, default it to `&MetricsConfig{Endpoint: \"/metrics\", IntervalSec: 60}`. This keeps the handler untouched and matches the file's existing pattern of filling in sensible defaults after parsing.",
   "timestamp": "2026-07-09T23:40:18Z",
   "token_cost": 117519,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 47.46
+  "wall_clock": 47.46,
+  "observed_models": [
+    "claude-fable-5"
+  ]
 }

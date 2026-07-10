@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed. The deadlock was caused by `Run()` waiting on `<-done` before calling `s.queue.Close()` — but the worker goroutine could be stuck inside `Pop()`'s `cond.Wait()`, which only unblocks once `Close()` runs. Swapping the order (close first, then wait) breaks the circular wait. `test.sh` now passes with `-race` and reports \"OK: clean shutdown\".",
+  "summary": "Fixed. The deadlock was caused by `Run()` waiting on `<-done` before calling `s.queue.Close()` \u2014 but the worker goroutine could be stuck inside `Pop()`'s `cond.Wait()`, which only unblocks once `Close()` runs. Swapping the order (close first, then wait) breaks the circular wait. `test.sh` now passes with `-race` and reports \"OK: clean shutdown\".",
   "timestamp": "2026-07-09T23:19:16Z",
   "token_cost": 199327,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 31.929
+  "wall_clock": 31.929,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

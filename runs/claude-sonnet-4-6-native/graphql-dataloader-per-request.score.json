@@ -15,10 +15,13 @@
   "output_tokens": 4364,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass. The fix was straightforward: wire `createLoaders(db)` into `createContext()` so every request gets a shared set of DataLoader instances, then update both resolvers to use `ctx.loaders` instead of creating a new loader per call. The performance test confirms batching now works — 100 users + their posts required just 2 DB queries instead of 101.",
+  "summary": "All tests pass. The fix was straightforward: wire `createLoaders(db)` into `createContext()` so every request gets a shared set of DataLoader instances, then update both resolvers to use `ctx.loaders` instead of creating a new loader per call. The performance test confirms batching now works \u2014 100 users + their posts required just 2 DB queries instead of 101.",
   "timestamp": "2026-06-15T18:06:34Z",
   "token_cost": 265978,
   "tool_uses": 11,
   "turns_to_fix": 12,
-  "wall_clock": 76.369
+  "wall_clock": 76.369,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

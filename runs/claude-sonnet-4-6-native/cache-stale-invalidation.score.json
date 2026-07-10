@@ -15,10 +15,13 @@
   "output_tokens": 1179,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Both bugs were in `server.py` — the cache was never invalidated after writes:\n\n- **`_update_product`**: added `cache.delete(f'products:{product_id}')` after updating the store\n- **`_create_product`**: added `cache.delete('products:list')` after creating a product\n\nThe `Cache` class already had a `delete` method; it just wasn't being called. Tests pass.",
+  "summary": "Both bugs were in `server.py` \u2014 the cache was never invalidated after writes:\n\n- **`_update_product`**: added `cache.delete(f'products:{product_id}')` after updating the store\n- **`_create_product`**: added `cache.delete('products:list')` after creating a product\n\nThe `Cache` class already had a `delete` method; it just wasn't being called. Tests pass.",
   "timestamp": "2026-06-15T17:47:31Z",
   "token_cost": 132173,
   "tool_uses": 9,
   "turns_to_fix": 10,
-  "wall_clock": 27.226
+  "wall_clock": 27.226,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

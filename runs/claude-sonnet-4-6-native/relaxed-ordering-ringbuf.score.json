@@ -15,10 +15,13 @@
   "output_tokens": 5178,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All 5 runs passed. The fix: changed the `write_idx` store in `ringbuf_push` to `memory_order_release` and the `write_idx` load in `ringbuf_pop` to `memory_order_acquire` (and mirrored for `read_idx`). The original code's claim that `memory_order_relaxed` is sufficient on x86-TSO is true at the hardware level, but ThreadSanitizer enforces the C11 abstract machine — which requires explicit acquire/release pairing to prove the non-atomic `slots[]` accesses are race-free.",
+  "summary": "All 5 runs passed. The fix: changed the `write_idx` store in `ringbuf_push` to `memory_order_release` and the `write_idx` load in `ringbuf_pop` to `memory_order_acquire` (and mirrored for `read_idx`). The original code's claim that `memory_order_relaxed` is sufficient on x86-TSO is true at the hardware level, but ThreadSanitizer enforces the C11 abstract machine \u2014 which requires explicit acquire/release pairing to prove the non-atomic `slots[]` accesses are race-free.",
   "timestamp": "2026-06-15T18:57:38Z",
   "token_cost": 221594,
   "tool_uses": 9,
   "turns_to_fix": 10,
-  "wall_clock": 94.99
+  "wall_clock": 94.99,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

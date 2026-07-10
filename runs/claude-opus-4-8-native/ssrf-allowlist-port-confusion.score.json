@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass.\n\n## The needle\n\nAn **SSRF via IPv6 loopback bypass** in `app/validator.py`. The blocklist only contained IPv4 string literals (`127.0.0.1`, `0.0.0.0`, etc.). When a URL like `http://[::1]:8888/` was validated, `urlparse` returns the hostname `::1` (and `0:0:0:0:0:0:0:1` for the expanded form) — neither is in `BLOCKED_HOSTS`, so the proxy happily fetched the internal metadata service and leaked `INTERNAL_SECRET`.\n\n## The fix\n\nAdded a `_is_blocked_ip()` helper that parses the host with Python's `ipaddress` module and rejects any address flagged as loopback, private, link-local, reserved, or unspecified — covering every spelling of an internal address rather than a brittle string list. This also handles IPv4-mapped IPv6 (`::ffff:127.0.0.1`) by inspecting the embedded IPv4. The string blocklist is kept for hostnames like `localhost`.\n\nAll 5 tests pass, including the two previously-failing IPv6 loopback cases.",
+  "summary": "All tests pass.\n\n## The needle\n\nAn **SSRF via IPv6 loopback bypass** in `app/validator.py`. The blocklist only contained IPv4 string literals (`127.0.0.1`, `0.0.0.0`, etc.). When a URL like `http://[::1]:8888/` was validated, `urlparse` returns the hostname `::1` (and `0:0:0:0:0:0:0:1` for the expanded form) \u2014 neither is in `BLOCKED_HOSTS`, so the proxy happily fetched the internal metadata service and leaked `INTERNAL_SECRET`.\n\n## The fix\n\nAdded a `_is_blocked_ip()` helper that parses the host with Python's `ipaddress` module and rejects any address flagged as loopback, private, link-local, reserved, or unspecified \u2014 covering every spelling of an internal address rather than a brittle string list. This also handles IPv4-mapped IPv6 (`::ffff:127.0.0.1`) by inspecting the embedded IPv4. The string blocklist is kept for hostnames like `localhost`.\n\nAll 5 tests pass, including the two previously-failing IPv6 loopback cases.",
   "timestamp": "2026-07-10T00:00:30Z",
   "token_cost": 165036,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 44.257
+  "wall_clock": 44.257,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

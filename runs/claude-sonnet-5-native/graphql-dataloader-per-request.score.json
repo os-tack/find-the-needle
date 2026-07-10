@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass, including the performance test (query count dropped from ~100+ to 2).\n\n**The needle:** DataLoader instances were being created fresh inside each resolver call (`userResolver.ts`'s `userPosts`/`makeUserLoader`, `postResolver.ts`'s `postAuthor`) instead of once per request, so every loader only ever batched a single key — DataLoader batching never actually fired.\n\n**Fix:** moved loader creation into `createContext()` (`context.ts`), using the already-correct `createLoaders()` factory in `loaders.ts`, and updated the resolvers to pull `userLoader`/`postsByAuthorLoader` from `ctx.loaders` instead of instantiating their own. Now all resolvers in a request's query tree share the same loaders, so IDs enqueued across the whole tree get batched into single `WHERE id IN (...)` queries.",
+  "summary": "All tests pass, including the performance test (query count dropped from ~100+ to 2).\n\n**The needle:** DataLoader instances were being created fresh inside each resolver call (`userResolver.ts`'s `userPosts`/`makeUserLoader`, `postResolver.ts`'s `postAuthor`) instead of once per request, so every loader only ever batched a single key \u2014 DataLoader batching never actually fired.\n\n**Fix:** moved loader creation into `createContext()` (`context.ts`), using the already-correct `createLoaders()` factory in `loaders.ts`, and updated the resolvers to pull `userLoader`/`postsByAuthorLoader` from `ctx.loaders` instead of instantiating their own. Now all resolvers in a request's query tree share the same loaders, so IDs enqueued across the whole tree get batched into single `WHERE id IN (...)` queries.",
   "timestamp": "2026-07-09T23:17:56Z",
   "token_cost": 590511,
   "tool_uses": 14,
   "turns_to_fix": 15,
-  "wall_clock": 62.81
+  "wall_clock": 62.81,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

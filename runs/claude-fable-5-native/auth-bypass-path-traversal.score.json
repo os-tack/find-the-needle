@@ -23,10 +23,14 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified — all tests pass.\n\n**The needle:** an authentication bypass in `middleware.go`. The auth middleware decided whether a route needed authentication by checking the **raw** `r.URL.Path` for the `/api/` prefix, while the router matched routes against the **cleaned** path (`path.Clean`, which normalizes `//` and `..`). That mismatch let an attacker reach protected handlers unauthenticated:\n\n- `//api/admin` — raw path starts with `//api/`, so the middleware's `/api/` check is skipped, but the router cleans it to `/api/admin` and serves the admin handler (leaking secrets and API keys).\n- `/health/../api/data` — same idea via traversal.\n\n**The fix:** normalize the path in the middleware with the same `path.Clean` logic the router uses, then check the prefix against that cleaned path. Now both sides agree on which path is being served, closing the bypass. All five test cases pass, including the double-slash and traversal variants.",
+  "summary": "Fixed and verified \u2014 all tests pass.\n\n**The needle:** an authentication bypass in `middleware.go`. The auth middleware decided whether a route needed authentication by checking the **raw** `r.URL.Path` for the `/api/` prefix, while the router matched routes against the **cleaned** path (`path.Clean`, which normalizes `//` and `..`). That mismatch let an attacker reach protected handlers unauthenticated:\n\n- `//api/admin` \u2014 raw path starts with `//api/`, so the middleware's `/api/` check is skipped, but the router cleans it to `/api/admin` and serves the admin handler (leaking secrets and API keys).\n- `/health/../api/data` \u2014 same idea via traversal.\n\n**The fix:** normalize the path in the middleware with the same `path.Clean` logic the router uses, then check the prefix against that cleaned path. Now both sides agree on which path is being served, closing the bypass. All five test cases pass, including the double-slash and traversal variants.",
   "timestamp": "2026-07-09T23:04:45Z",
   "token_cost": 145345,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 47.398
+  "wall_clock": 47.398,
+  "observed_models": [
+    "claude-fable-5",
+    "claude-opus-4-8"
+  ]
 }

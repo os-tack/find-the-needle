@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Found and fixed the needle — the test passes with zero leaked goroutines.\n\n**The needle:** `computeHandler` in `app/main.go:62` spawned a computation goroutine per request with no cancellation path. When a client disconnected (or the 25s timeout fired), the handler returned but the goroutine kept grinding through its full iteration loop — each abandoned request leaked a goroutine for the duration of its computation.\n\n**The fix:**\n- Derived a context from the request with `context.WithTimeout(r.Context(), 25*time.Second)`, so client disconnect and the timeout both cancel it.\n- Passed that context into `performComputation`, which now checks `ctx.Err()` each iteration and uses a `select` on `ctx.Done()` instead of a bare `time.Sleep`, so it exits promptly on cancellation.\n- The handler waits on `resultCh` or `ctx.Done()` rather than a detached `time.After`, and the goroutine returns early (without sending) when cancelled.\n\n**Verification:** `test.sh` fires 20 requests that would each run ~50 seconds, kills the clients after 1 second, then checks goroutine counts. Result: baseline 4, after disconnects 4, after 5s wait 4 — 0 leaked, both PASS lines printed.",
+  "summary": "Found and fixed the needle \u2014 the test passes with zero leaked goroutines.\n\n**The needle:** `computeHandler` in `app/main.go:62` spawned a computation goroutine per request with no cancellation path. When a client disconnected (or the 25s timeout fired), the handler returned but the goroutine kept grinding through its full iteration loop \u2014 each abandoned request leaked a goroutine for the duration of its computation.\n\n**The fix:**\n- Derived a context from the request with `context.WithTimeout(r.Context(), 25*time.Second)`, so client disconnect and the timeout both cancel it.\n- Passed that context into `performComputation`, which now checks `ctx.Err()` each iteration and uses a `select` on `ctx.Done()` instead of a bare `time.Sleep`, so it exits promptly on cancellation.\n- The handler waits on `resultCh` or `ctx.Done()` rather than a detached `time.After`, and the goroutine returns early (without sending) when cancelled.\n\n**Verification:** `test.sh` fires 20 requests that would each run ~50 seconds, kills the clients after 1 second, then checks goroutine counts. Result: baseline 4, after disconnects 4, after 5s wait 4 \u2014 0 leaked, both PASS lines printed.",
   "timestamp": "2026-07-09T23:23:19Z",
   "token_cost": 172731,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 79.783
+  "wall_clock": 79.783,
+  "observed_models": [
+    "claude-fable-5"
+  ]
 }

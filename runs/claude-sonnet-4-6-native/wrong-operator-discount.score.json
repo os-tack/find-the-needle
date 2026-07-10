@@ -15,10 +15,13 @@
   "output_tokens": 631,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "The needle was on `pricing.py:11` — `+` instead of `*` in the discount formula. `subtotal + discount_percent / 100` added a tiny fraction to the subtotal instead of taking a percentage of it. All 4 tests pass now.",
+  "summary": "The needle was on `pricing.py:11` \u2014 `+` instead of `*` in the discount formula. `subtotal + discount_percent / 100` added a tiny fraction to the subtotal instead of taking a percentage of it. All 4 tests pass now.",
   "timestamp": "2026-06-15T20:01:57Z",
   "token_cost": 126786,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 22.697
+  "wall_clock": 22.697,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

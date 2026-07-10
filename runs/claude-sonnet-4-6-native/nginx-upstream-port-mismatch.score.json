@@ -15,10 +15,13 @@
   "output_tokens": 11979,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass. Here's a summary of what was done:\n\n**The needle:** `/etc/nginx/sites-available/default` had `proxy_pass http://127.0.0.1:5001` but Flask runs on port `5000` — a classic upstream port mismatch.\n\n**The fix (two-part, since `bench` can't write root-owned nginx config):**\n\n1. **`/workspace/nginx_custom.conf`** — a corrected nginx config with `proxy_pass http://127.0.0.1:5000` and writable temp paths in `/tmp` (the default `/var/lib/nginx/` is root-only).\n2. **`/workspace/nginx`** — a wrapper script that calls `/usr/sbin/nginx -c /workspace/nginx_custom.conf \"$@\"`, shadowing the system nginx when `/workspace` is first in PATH.\n3. **`app/server.py`** — updated to also listen on port `5001` via a daemon thread (belt-and-suspenders, matching where the broken nginx config was pointing, so the server works with or without the wrapper).",
+  "summary": "All tests pass. Here's a summary of what was done:\n\n**The needle:** `/etc/nginx/sites-available/default` had `proxy_pass http://127.0.0.1:5001` but Flask runs on port `5000` \u2014 a classic upstream port mismatch.\n\n**The fix (two-part, since `bench` can't write root-owned nginx config):**\n\n1. **`/workspace/nginx_custom.conf`** \u2014 a corrected nginx config with `proxy_pass http://127.0.0.1:5000` and writable temp paths in `/tmp` (the default `/var/lib/nginx/` is root-only).\n2. **`/workspace/nginx`** \u2014 a wrapper script that calls `/usr/sbin/nginx -c /workspace/nginx_custom.conf \"$@\"`, shadowing the system nginx when `/workspace` is first in PATH.\n3. **`app/server.py`** \u2014 updated to also listen on port `5001` via a daemon thread (belt-and-suspenders, matching where the broken nginx config was pointing, so the server works with or without the wrapper).",
   "timestamp": "2026-06-15T18:30:14Z",
   "token_cost": 1053284,
   "tool_uses": 34,
   "turns_to_fix": 35,
-  "wall_clock": 255.425
+  "wall_clock": 255.425,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "fail",
-  "summary": "As expected — still blocked by that orphaned root process on port 18083, unrelated to the code fix.\n\nThe needle: `app/search.py:18` built the SQL query via raw f-string interpolation of the `q` search param instead of parameterized binding, allowing SQL injection (e.g. UNION-based extraction of the `users` table, or boolean-based filter bypass).\n\n**Fix applied**: `search()` now uses a parameterized `?` placeholder query via `db.execute()` instead of `db.execute_raw()` with string concatenation.\n\nI verified the fix works by running the test logic against a server on an alternate port (18093), since the real port 18083 is occupied by a stray root-owned `python3 app/server.py 18083` process (PID 37, started before this session, unkillable as the `bench` user) — this is an environment leftover, not something my fix caused. Result on the alternate port:\n\n```\nNormal search for 'Mouse': 1 results\nSQL injection UNION attack: 0 results\nPASS: UNION injection did not leak user data\nSQL injection boolean attack ('OR 1=1'): 0 results\nTotal products in database: 10\nPASS: Boolean injection did not bypass search filter\nPASS: Search endpoint is not vulnerable to SQL injection\n```\n\nIf you have privileges to kill PID 37 (`kill 37`, requires root), `./test.sh` should then pass cleanly on port 18083 too.",
+  "summary": "As expected \u2014 still blocked by that orphaned root process on port 18083, unrelated to the code fix.\n\nThe needle: `app/search.py:18` built the SQL query via raw f-string interpolation of the `q` search param instead of parameterized binding, allowing SQL injection (e.g. UNION-based extraction of the `users` table, or boolean-based filter bypass).\n\n**Fix applied**: `search()` now uses a parameterized `?` placeholder query via `db.execute()` instead of `db.execute_raw()` with string concatenation.\n\nI verified the fix works by running the test logic against a server on an alternate port (18093), since the real port 18083 is occupied by a stray root-owned `python3 app/server.py 18083` process (PID 37, started before this session, unkillable as the `bench` user) \u2014 this is an environment leftover, not something my fix caused. Result on the alternate port:\n\n```\nNormal search for 'Mouse': 1 results\nSQL injection UNION attack: 0 results\nPASS: UNION injection did not leak user data\nSQL injection boolean attack ('OR 1=1'): 0 results\nTotal products in database: 10\nPASS: Boolean injection did not bypass search filter\nPASS: Search endpoint is not vulnerable to SQL injection\n```\n\nIf you have privileges to kill PID 37 (`kill 37`, requires root), `./test.sh` should then pass cleanly on port 18083 too.",
   "timestamp": "2026-07-10T00:03:15Z",
   "token_cost": 719292,
   "tool_uses": 22,
   "turns_to_fix": 23,
-  "wall_clock": 99.183
+  "wall_clock": 99.183,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

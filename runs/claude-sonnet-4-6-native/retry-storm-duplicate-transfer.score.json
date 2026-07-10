@@ -15,10 +15,13 @@
   "output_tokens": 4829,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "**PASS.** \n\nThe bug was a classic TOCTOU race in `processor.py:execute_transfer`. The original code:\n1. Debited and **committed** the source account\n2. Slept 50ms\n3. Only then checked idempotency\n\nThis meant 20 concurrent requests could all pass the balance check, all commit their debits, and then fight over who writes the idempotency record — leaving multiple debits and no way to reconcile them.\n\nThe fix uses `BEGIN EXCLUSIVE` to make the entire operation atomic: idempotency check → balance check → debit → credit → idempotency record all happen under a single exclusive lock. Only one request can hold it at a time; all others queue and then see the completed idempotency record and return `duplicate`.",
+  "summary": "**PASS.** \n\nThe bug was a classic TOCTOU race in `processor.py:execute_transfer`. The original code:\n1. Debited and **committed** the source account\n2. Slept 50ms\n3. Only then checked idempotency\n\nThis meant 20 concurrent requests could all pass the balance check, all commit their debits, and then fight over who writes the idempotency record \u2014 leaving multiple debits and no way to reconcile them.\n\nThe fix uses `BEGIN EXCLUSIVE` to make the entire operation atomic: idempotency check \u2192 balance check \u2192 debit \u2192 credit \u2192 idempotency record all happen under a single exclusive lock. Only one request can hold it at a time; all others queue and then see the completed idempotency record and return `duplicate`.",
   "timestamp": "2026-06-15T19:00:49Z",
   "token_cost": 178655,
   "tool_uses": 9,
   "turns_to_fix": 10,
-  "wall_clock": 92.4
+  "wall_clock": 92.4,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

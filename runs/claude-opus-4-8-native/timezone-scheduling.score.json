@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass.\n\n**The needle:** `scheduler.py`'s `_is_due()` built each event's scheduled instant from the **UTC date** combined with the event's **local** hour/minute:\n\n```python\ntoday_utc = window_start.date()\nnaive_scheduled = datetime(today_utc.year, ..., event.hour, event.minute)\nlocal_scheduled = tz.localize(naive_scheduled)\n```\n\nFor daytime events the local and UTC calendar days coincide, so it worked. But for events scheduled near midnight local time (evt-002 at 23:30 EST, evt-004 at 23:45 PST), the local day and UTC day differ — so localizing the UTC date to the local timezone produced an instant one day off, and those events never fired.\n\n**The fix:** derive the current date in the *event's own timezone* (`window_start.astimezone(tz)`), and check that local date plus its neighbors (since a UTC window can straddle local midnight), converting each candidate back to UTC before the window comparison.",
+  "summary": "All tests pass.\n\n**The needle:** `scheduler.py`'s `_is_due()` built each event's scheduled instant from the **UTC date** combined with the event's **local** hour/minute:\n\n```python\ntoday_utc = window_start.date()\nnaive_scheduled = datetime(today_utc.year, ..., event.hour, event.minute)\nlocal_scheduled = tz.localize(naive_scheduled)\n```\n\nFor daytime events the local and UTC calendar days coincide, so it worked. But for events scheduled near midnight local time (evt-002 at 23:30 EST, evt-004 at 23:45 PST), the local day and UTC day differ \u2014 so localizing the UTC date to the local timezone produced an instant one day off, and those events never fired.\n\n**The fix:** derive the current date in the *event's own timezone* (`window_start.astimezone(tz)`), and check that local date plus its neighbors (since a UTC window can straddle local midnight), converting each candidate back to UTC before the window comparison.",
   "timestamp": "2026-07-10T00:01:12Z",
   "token_cost": 142140,
   "tool_uses": 5,
   "turns_to_fix": 6,
-  "wall_clock": 40.124
+  "wall_clock": 40.124,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed the bug in `pricing.py:11` — `calculate_discount_amount` used `subtotal + discount_percent / 100` instead of `subtotal * discount_percent / 100`. Test now passes.",
+  "summary": "Fixed the bug in `pricing.py:11` \u2014 `calculate_discount_amount` used `subtotal + discount_percent / 100` instead of `subtotal * discount_percent / 100`. Test now passes.",
   "timestamp": "2026-07-10T00:13:21Z",
   "token_cost": 165520,
   "tool_uses": 5,
   "turns_to_fix": 6,
-  "wall_clock": 12.275
+  "wall_clock": 12.275,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

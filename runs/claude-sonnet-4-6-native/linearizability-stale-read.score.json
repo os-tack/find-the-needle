@@ -15,10 +15,13 @@
   "output_tokens": 7179,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All 3 rounds pass. Two bugs were fixed:\n\n1. **`app/raft/node.go` — `handleHeartbeat` didn't advance the commit index** after appending piggybacked entries. When a partitioned follower rejoined, it received the missing log entry via heartbeat but never committed it, so it was never applied to the KV state machine.\n\n2. **`app/handler.go` — `handleRead` used stale local `Read` instead of `ReadLinearizable`**. The HTTP read endpoint served data directly from local state without confirming the node's applied index was current with the leader's commit index.\n\nTogether: the follower couldn't commit entries from heartbeats, and reads didn't wait for consistency anyway — both paths had to be fixed for correct linearizability after a partition heals.",
+  "summary": "All 3 rounds pass. Two bugs were fixed:\n\n1. **`app/raft/node.go` \u2014 `handleHeartbeat` didn't advance the commit index** after appending piggybacked entries. When a partitioned follower rejoined, it received the missing log entry via heartbeat but never committed it, so it was never applied to the KV state machine.\n\n2. **`app/handler.go` \u2014 `handleRead` used stale local `Read` instead of `ReadLinearizable`**. The HTTP read endpoint served data directly from local state without confirming the node's applied index was current with the leader's commit index.\n\nTogether: the follower couldn't commit entries from heartbeats, and reads didn't wait for consistency anyway \u2014 both paths had to be fixed for correct linearizability after a partition heals.",
   "timestamp": "2026-06-15T18:21:05Z",
   "token_cost": 753617,
   "tool_uses": 22,
   "turns_to_fix": 23,
-  "wall_clock": 159.587
+  "wall_clock": 159.587,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

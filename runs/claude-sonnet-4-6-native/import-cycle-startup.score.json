@@ -15,10 +15,13 @@
   "output_tokens": 2024,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass. The needle was a circular import: `notifications.py` imported `users` to read `DEFAULT_ROLE`, while `users.py` imported `notifications` — causing Python to attempt accessing `DEFAULT_ROLE` on a partially-initialized module. The fix moves `DEFAULT_ROLE` into `config.py`, which neither module imports from the other, breaking the cycle cleanly.",
+  "summary": "All tests pass. The needle was a circular import: `notifications.py` imported `users` to read `DEFAULT_ROLE`, while `users.py` imported `notifications` \u2014 causing Python to attempt accessing `DEFAULT_ROLE` on a partially-initialized module. The fix moves `DEFAULT_ROLE` into `config.py`, which neither module imports from the other, breaking the cycle cleanly.",
   "timestamp": "2026-06-15T18:09:10Z",
   "token_cost": 214987,
   "tool_uses": 11,
   "turns_to_fix": 12,
-  "wall_clock": 37.692
+  "wall_clock": 37.692,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

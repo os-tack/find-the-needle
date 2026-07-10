@@ -103,8 +103,10 @@ SNAPSHOT_FAULTS = {
     "july09v2": ["july09-f7-earlystop-truncated-votes",
                  "july09-runcell-exit1-hardfail"],
     # v7.7.3: F7 early-stop + runcell hard-fail both fixed before this pin;
-    # retry-cost accounting summed across attempts (load_score F3).
-    "july09v3": [],
+    # retry-cost accounting summed across attempts (load_score F3). The
+    # fable-5 native opus-fallback reproduced in this era's re-capture —
+    # resolved mechanically via INVALID(model_mismatch), see FAULTS.json.
+    "july09v3": ["july09v3-fable5-native-opus-fallback"],
     # v7.7.4 (current latest): adds the native OpenAI Responses-API CpuDriver
     # (gpt-* kernel-cpu becomes a true Tier-1 native-driver arm; the old
     # generic-OpenRouter gpt kernel cells are archived, frozen boards keep

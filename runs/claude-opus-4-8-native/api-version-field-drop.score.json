@@ -28,5 +28,8 @@
   "token_cost": 171734,
   "tool_uses": 9,
   "turns_to_fix": 10,
-  "wall_clock": 40.013
+  "wall_clock": 40.013,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

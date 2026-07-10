@@ -15,10 +15,13 @@
   "output_tokens": 1901,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Test passes. The bug was in `processor.js`: `process()` registered new `data:validated` and `data:error` listeners on every call, leaking one listener pair per request. Moving those registrations into the constructor means they're set up once and reused for all calls — listener count stays flat at 2 regardless of request volume.",
+  "summary": "Test passes. The bug was in `processor.js`: `process()` registered new `data:validated` and `data:error` listeners on every call, leaking one listener pair per request. Moving those registrations into the constructor means they're set up once and reused for all calls \u2014 listener count stays flat at 2 regardless of request volume.",
   "timestamp": "2026-06-15T18:23:42Z",
   "token_cost": 221925,
   "tool_uses": 13,
   "turns_to_fix": 14,
-  "wall_clock": 44.795
+  "wall_clock": 44.795,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

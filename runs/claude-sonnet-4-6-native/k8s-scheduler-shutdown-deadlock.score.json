@@ -15,10 +15,13 @@
   "output_tokens": 1249,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "**Fixed.** The deadlock was in `Run()`: it waited on `<-done` before calling `s.queue.Close()`. If the goroutine was blocked inside `Pop()` waiting on the condition variable, it couldn't see `ctx.Done()` — and `Pop()` would never unblock because `Close()` was never reached. Swapping the order (close queue first, then join) breaks the cycle.",
+  "summary": "**Fixed.** The deadlock was in `Run()`: it waited on `<-done` before calling `s.queue.Close()`. If the goroutine was blocked inside `Pop()` waiting on the condition variable, it couldn't see `ctx.Done()` \u2014 and `Pop()` would never unblock because `Close()` was never reached. Swapping the order (close queue first, then join) breaks the cycle.",
   "timestamp": "2026-06-15T18:12:30Z",
   "token_cost": 123958,
   "tool_uses": 5,
   "turns_to_fix": 6,
-  "wall_clock": 31.784
+  "wall_clock": 31.784,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

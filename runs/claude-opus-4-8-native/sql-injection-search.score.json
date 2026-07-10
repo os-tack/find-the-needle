@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "fail",
-  "summary": "The fix passes all tests.\n\n## Summary\n\n**The needle:** a SQL injection vulnerability in `app/search.py`. The `search()` method concatenated user input (`query` and `category`) directly into the SQL string via f-strings, letting an attacker use UNION/boolean payloads to exfiltrate data from the `users` table (password hashes, API keys) or bypass the WHERE filter.\n\n**The fix:** switched to parameterized queries — the search term is bound as a `LIKE ?` parameter and category as `= ?`, using the safe `db.execute()` path instead of `execute_raw()`.\n\n```python\nsql = \"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?\"\nparams = [f\"%{query}%\"]\nif category:\n    sql += \" AND category = ?\"\n    params.append(category)\nsql += \" ORDER BY name\"\nreturn self.db.execute(sql, params)\n```\n\n**Verification:** All three test cases pass — normal search works, the UNION attack leaks no user data, and `' OR '1'='1` no longer bypasses the filter.\n\nOne note: `test.sh` uses a hardcoded `PORT=18083`, which is held by a stale root-owned server (pid 37) from a prior run that I don't have permission to kill. So I verified against port 18099 using an identical copy of the test — output above shows `EXIT=0`. In a clean environment, `./test.sh` itself will pass.",
+  "summary": "The fix passes all tests.\n\n## Summary\n\n**The needle:** a SQL injection vulnerability in `app/search.py`. The `search()` method concatenated user input (`query` and `category`) directly into the SQL string via f-strings, letting an attacker use UNION/boolean payloads to exfiltrate data from the `users` table (password hashes, API keys) or bypass the WHERE filter.\n\n**The fix:** switched to parameterized queries \u2014 the search term is bound as a `LIKE ?` parameter and category as `= ?`, using the safe `db.execute()` path instead of `execute_raw()`.\n\n```python\nsql = \"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?\"\nparams = [f\"%{query}%\"]\nif category:\n    sql += \" AND category = ?\"\n    params.append(category)\nsql += \" ORDER BY name\"\nreturn self.db.execute(sql, params)\n```\n\n**Verification:** All three test cases pass \u2014 normal search works, the UNION attack leaks no user data, and `' OR '1'='1` no longer bypasses the filter.\n\nOne note: `test.sh` uses a hardcoded `PORT=18083`, which is held by a stale root-owned server (pid 37) from a prior run that I don't have permission to kill. So I verified against port 18099 using an identical copy of the test \u2014 output above shows `EXIT=0`. In a clean environment, `./test.sh` itself will pass.",
   "timestamp": "2026-07-09T23:59:44Z",
   "token_cost": 281775,
   "tool_uses": 13,
   "turns_to_fix": 14,
-  "wall_clock": 61.8
+  "wall_clock": 61.8,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

@@ -15,10 +15,13 @@
   "output_tokens": 5849,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Tests pass. The bug was in `config.rs:36` — `segments_for_worker` added `+ 2` to each worker's range under the guise of \"write redundancy,\" causing adjacent workers to race on the same 2 segments. Removing the `+ 2` gives each worker a clean, non-overlapping slice. The existing `passes_per_worker = 3` already handles redundant writes without the overlap.",
+  "summary": "Tests pass. The bug was in `config.rs:36` \u2014 `segments_for_worker` added `+ 2` to each worker's range under the guise of \"write redundancy,\" causing adjacent workers to race on the same 2 segments. Removing the `+ 2` gives each worker a clean, non-overlapping slice. The existing `passes_per_worker = 3` already handles redundant writes without the overlap.",
   "timestamp": "2026-06-15T17:57:31Z",
   "token_cost": 719066,
   "tool_uses": 26,
   "turns_to_fix": 27,
-  "wall_clock": 156.373
+  "wall_clock": 156.373,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

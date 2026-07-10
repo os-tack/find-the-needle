@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified — `test.sh` passes.\n\n**The needle:** a type-coercion bug spanning `utils.js` and `filter.js`.\n\nIn `utils.js`, `min_rating` was read straight from the query string with `searchParams.get('min_rating')`, leaving `query.minRating` as a **string** (e.g. `\"4\"`) — unlike `min_price`/`max_price`, which go through `parseFloat`.\n\nThat string then flowed into `buildRatingRange(\"4\", 5)` in `filter.js`:\n```js\nfor (let i = \"4\"; i <= 5; i++) { range.push(i); }\n```\nThe first iteration pushes the string `\"4\"`, then `i++` coerces `i` to the number `5`, so the range came out as `[\"4\", 5]`. Since `acceptable.includes(p.rating)` uses strict equality and `p.rating` is a number, `4 !== \"4\"` — so all rating-4 products were silently dropped (min_rating=4 returned only the 4 five-star products instead of 9).\n\n**The fix:** parse `min_rating` as an integer in `utils.js`, matching how the price params are handled:\n```js\nquery.minRating = parseInt(searchParams.get('min_rating'), 10);\n```",
+  "summary": "Fixed and verified \u2014 `test.sh` passes.\n\n**The needle:** a type-coercion bug spanning `utils.js` and `filter.js`.\n\nIn `utils.js`, `min_rating` was read straight from the query string with `searchParams.get('min_rating')`, leaving `query.minRating` as a **string** (e.g. `\"4\"`) \u2014 unlike `min_price`/`max_price`, which go through `parseFloat`.\n\nThat string then flowed into `buildRatingRange(\"4\", 5)` in `filter.js`:\n```js\nfor (let i = \"4\"; i <= 5; i++) { range.push(i); }\n```\nThe first iteration pushes the string `\"4\"`, then `i++` coerces `i` to the number `5`, so the range came out as `[\"4\", 5]`. Since `acceptable.includes(p.rating)` uses strict equality and `p.rating` is a number, `4 !== \"4\"` \u2014 so all rating-4 products were silently dropped (min_rating=4 returned only the 4 five-star products instead of 9).\n\n**The fix:** parse `min_rating` as an integer in `utils.js`, matching how the price params are handled:\n```js\nquery.minRating = parseInt(searchParams.get('min_rating'), 10);\n```",
   "timestamp": "2026-07-10T00:05:09Z",
   "token_cost": 111061,
   "tool_uses": 6,
   "turns_to_fix": 7,
-  "wall_clock": 35.038
+  "wall_clock": 35.038,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

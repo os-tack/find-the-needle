@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified. The needle was an event-listener leak in `app/processor.js`: every call to `DataProcessor.process()` attached fresh `data:validated` and `data:error` listeners to the shared event bus and never removed them, so each request permanently retained a closure over its request payload — unbounded listener and memory growth.\n\nThe fix moves both listener registrations into the constructor so they're attached exactly once for the processor's lifetime, and drops the closure over the per-request `data` (the `_handleValidated` signature no longer takes `originalData`, which existed only as the leak vector).\n\n`test.sh` passes: listener count stays at 2 before and after 500 requests (previously it would have grown past 1000), and heap only moved from 4.43MB to 5.13MB.",
+  "summary": "Fixed and verified. The needle was an event-listener leak in `app/processor.js`: every call to `DataProcessor.process()` attached fresh `data:validated` and `data:error` listeners to the shared event bus and never removed them, so each request permanently retained a closure over its request payload \u2014 unbounded listener and memory growth.\n\nThe fix moves both listener registrations into the constructor so they're attached exactly once for the processor's lifetime, and drops the closure over the per-request `data` (the `_handleValidated` signature no longer takes `originalData`, which existed only as the leak vector).\n\n`test.sh` passes: listener count stays at 2 before and after 500 requests (previously it would have grown past 1000), and heap only moved from 4.43MB to 5.13MB.",
   "timestamp": "2026-07-09T23:34:16Z",
   "token_cost": 166202,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 66.634
+  "wall_clock": 66.634,
+  "observed_models": [
+    "claude-fable-5"
+  ]
 }

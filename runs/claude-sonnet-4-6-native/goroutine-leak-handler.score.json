@@ -15,10 +15,13 @@
   "output_tokens": 2812,
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Test passes. The fix was two-part:\n\n1. **`performComputation`** now accepts a `context.Context` and checks `ctx.Done()` at the top of each iteration — so it exits immediately when the client disconnects.\n2. **`computeHandler`** passes `r.Context()` to the goroutine and adds `case <-ctx.Done()` to the `select`, so the handler also returns promptly on disconnect instead of blocking until the 25-second timeout.",
+  "summary": "Test passes. The fix was two-part:\n\n1. **`performComputation`** now accepts a `context.Context` and checks `ctx.Done()` at the top of each iteration \u2014 so it exits immediately when the client disconnects.\n2. **`computeHandler`** passes `r.Context()` to the goroutine and adds `case <-ctx.Done()` to the `select`, so the handler also returns promptly on disconnect instead of blocking until the 25-second timeout.",
   "timestamp": "2026-06-15T18:03:14Z",
   "token_cost": 194802,
   "tool_uses": 10,
   "turns_to_fix": 11,
-  "wall_clock": 70.263
+  "wall_clock": 70.263,
+  "observed_models": [
+    "claude-sonnet-4-6"
+  ]
 }

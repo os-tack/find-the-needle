@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "All tests pass. The bug was a circular import in `app/users.py`: it imported `notifications` before defining `DEFAULT_ROLE`, but `notifications.py` reads `users.DEFAULT_ROLE` at module load time — so it crashed on a partially-initialized module. Fixed by moving the `DEFAULT_ROLE` assignment above the `notifications` import.",
+  "summary": "All tests pass. The bug was a circular import in `app/users.py`: it imported `notifications` before defining `DEFAULT_ROLE`, but `notifications.py` reads `users.DEFAULT_ROLE` at module load time \u2014 so it crashed on a partially-initialized module. Fixed by moving the `DEFAULT_ROLE` assignment above the `notifications` import.",
   "timestamp": "2026-07-09T23:18:25Z",
   "token_cost": 246765,
   "tool_uses": 10,
   "turns_to_fix": 11,
-  "wall_clock": 27.054
+  "wall_clock": 27.054,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }

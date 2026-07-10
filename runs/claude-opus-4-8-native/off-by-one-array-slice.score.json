@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified.\n\n**The needle** was an off-by-one array-slice bug in `processor.py:17`:\n\n```python\nend = start + batch_size - 1   # ❌ dropped the last item of every batch\n```\n\nPython slices are end-exclusive, so `records[start:end]` returned only `batch_size - 1` records per batch. With 25 records in batches of 10, three batches each silently dropped one record. The comment (\"grab exactly batch_size items\") described the intent, but the `- 1` contradicted it.\n\nFix:\n\n```python\nend = start + batch_size   # ✅ slice end is exclusive\n```\n\n`./test.sh` now passes all four cases (full batches, exact boundary, uneven division, and ID-sequence integrity).",
+  "summary": "Fixed and verified.\n\n**The needle** was an off-by-one array-slice bug in `processor.py:17`:\n\n```python\nend = start + batch_size - 1   # \u274c dropped the last item of every batch\n```\n\nPython slices are end-exclusive, so `records[start:end]` returned only `batch_size - 1` records per batch. With 25 records in batches of 10, three batches each silently dropped one record. The comment (\"grab exactly batch_size items\") described the intent, but the `- 1` contradicted it.\n\nFix:\n\n```python\nend = start + batch_size   # \u2705 slice end is exclusive\n```\n\n`./test.sh` now passes all four cases (full batches, exact boundary, uneven division, and ID-sequence integrity).",
   "timestamp": "2026-07-09T23:28:12Z",
   "token_cost": 105290,
   "tool_uses": 4,
   "turns_to_fix": 5,
-  "wall_clock": 19.479
+  "wall_clock": 19.479,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

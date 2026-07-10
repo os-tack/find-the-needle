@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "Fixed and verified. All tests pass.\n\n**The needle:** a circular import between `users.py` and `notifications.py`.\n\n- `users.py` imported `notifications` at line 10 — *before* defining `DEFAULT_ROLE` at line 14.\n- `notifications.py` does `import users` and then, at module load time (line 12), evaluates `_default_role = users.DEFAULT_ROLE`.\n\nDuring startup the `users` module was only partially initialized when `notifications` reached for `users.DEFAULT_ROLE`, so it hit `AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE'` and the service crashed on cold start.\n\n**The fix:** moved the `from notifications import NotificationService` line in `users.py` to *after* `DEFAULT_ROLE = \"member\"` is defined. The cycle still exists, but now the value `notifications` needs is already present when it's accessed, so import completes cleanly.",
+  "summary": "Fixed and verified. All tests pass.\n\n**The needle:** a circular import between `users.py` and `notifications.py`.\n\n- `users.py` imported `notifications` at line 10 \u2014 *before* defining `DEFAULT_ROLE` at line 14.\n- `notifications.py` does `import users` and then, at module load time (line 12), evaluates `_default_role = users.DEFAULT_ROLE`.\n\nDuring startup the `users` module was only partially initialized when `notifications` reached for `users.DEFAULT_ROLE`, so it hit `AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE'` and the service crashed on cold start.\n\n**The fix:** moved the `from notifications import NotificationService` line in `users.py` to *after* `DEFAULT_ROLE = \"member\"` is defined. The cycle still exists, but now the value `notifications` needs is already present when it's accessed, so import completes cleanly.",
   "timestamp": "2026-07-09T23:14:18Z",
   "token_cost": 192826,
   "tool_uses": 7,
   "turns_to_fix": 8,
-  "wall_clock": 51.371
+  "wall_clock": 51.371,
+  "observed_models": [
+    "claude-opus-4-8"
+  ]
 }

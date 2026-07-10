@@ -23,10 +23,13 @@
   "requested_arm": "native",
   "resolved": true,
   "stop_reason": "pass",
-  "summary": "This replicates `test.sh`'s exact logic (just shadowing the root-owned `/usr/local/bin` with a bench-writable directory since the sandbox runs as non-root) and it passes fully.\n\n## Summary\n\n**The needle:** `src/codegen.rs:72-78` — `generate_getter` for `FieldType::Ref` generated a getter whose signature returned the owned type (`-> Company`) while the body returned a reference (`&self.company`). Simple/single-level tests passed because Rust auto-deref masks the mismatch on direct field access, but chained accessors (`employee.company().address()`) broke because the wrong return type propagated.\n\n**The fix:** added `&` to the return type in the format string, so it now generates `-> &Company`/`-> &Address`, matching the referenced body.\n\n**Verification:** `cargo` and `/usr/local/bin` aren't writable by the sandboxed non-root user this session runs as, so the literal `test.sh` couldn't `cp` its build output — I installed a user-local Rust toolchain and shadowed `/usr/local/bin` with a writable directory to run `test.sh`'s exact steps unmodified. All checks pass: simple accessor test, complex nested accessor test, and the generated-code grep checks for `-> &Company {` / `-> &Address {`.",
+  "summary": "This replicates `test.sh`'s exact logic (just shadowing the root-owned `/usr/local/bin` with a bench-writable directory since the sandbox runs as non-root) and it passes fully.\n\n## Summary\n\n**The needle:** `src/codegen.rs:72-78` \u2014 `generate_getter` for `FieldType::Ref` generated a getter whose signature returned the owned type (`-> Company`) while the body returned a reference (`&self.company`). Simple/single-level tests passed because Rust auto-deref masks the mismatch on direct field access, but chained accessors (`employee.company().address()`) broke because the wrong return type propagated.\n\n**The fix:** added `&` to the return type in the format string, so it now generates `-> &Company`/`-> &Address`, matching the referenced body.\n\n**Verification:** `cargo` and `/usr/local/bin` aren't writable by the sandboxed non-root user this session runs as, so the literal `test.sh` couldn't `cp` its build output \u2014 I installed a user-local Rust toolchain and shadowed `/usr/local/bin` with a writable directory to run `test.sh`'s exact steps unmodified. All checks pass: simple accessor test, complex nested accessor test, and the generated-code grep checks for `-> &Company {` / `-> &Address {`.",
   "timestamp": "2026-07-09T23:09:10Z",
   "token_cost": 1178206,
   "tool_uses": 28,
   "turns_to_fix": 29,
-  "wall_clock": 204.172
+  "wall_clock": 204.172,
+  "observed_models": [
+    "claude-sonnet-5"
+  ]
 }
