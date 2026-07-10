@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "timezone-scheduling",
+    "billed_tokens": 198781,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 11811,
+    "cache_read_tokens": 185141,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.4708164999999999,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1829,
+    "input_tokens": 1829,
+    "output_tokens": 2383,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Found and fixed the needle \u2014 all 7 tests pass.\n\n**The bug** was in `app/scheduler.py:55` (`Scheduler._is_due`). It built the event's scheduled datetime from **today's date in UTC** (`window_start.date()`), then attached the event's local hour/minute to that date. That works for daytime events but breaks any event scheduled near local midnight: 23:30 US/Eastern on Jan 15 is 04:30 UTC on *Jan 16*, so when the scheduler ticked at that moment it used the UTC date (Jan 16) and computed \"Jan 16, 23:30 EST\" \u2014 a full day in the future. Late-night events in western timezones could therefore never fire.\n\n**The fix**: derive the date from the current time converted into the event's timezone (`window_start.astimezone(tz).date()`), so the scheduled datetime is built on the correct local calendar day before converting back to UTC for the window comparison.\n\n`test.sh` confirms: both midnight-crossing events (EST nightly sync, PST late cleanup) now fire at the right UTC times, the daytime events still work, and the negative tests still correctly don't fire.",
+    "timestamp": "2026-07-10T17:54:35Z",
+    "token_cost": 201164,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 77.529,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T17:54:36+00:00"
+  }
+]

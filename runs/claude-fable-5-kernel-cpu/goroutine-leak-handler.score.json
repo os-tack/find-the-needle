@@ -1,0 +1,33 @@
+{
+  "benchmark": "goroutine-leak-handler",
+  "agent": "claude-fable-5-kernel-cpu",
+  "arm": "kernel-cpu",
+  "control_type": "kernel-cpu",
+  "timestamp": "2026-07-10T15:46:03+00:00",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "resolution_source": "container:test.sh",
+  "turns_to_fix": 3,
+  "tool_uses": 2,
+  "token_cost": 834,
+  "input_tokens": 688,
+  "output_tokens": 146,
+  "fresh_input_tokens": 688,
+  "cache_read_tokens": 22608,
+  "cache_create_tokens": 291,
+  "cache_create_5m_tokens": 291,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 23587,
+  "estimated_cost_usd": 0.040425,
+  "stop_reason": "refusal",
+  "process_exit": "exit_code: 1",
+  "summary": "refusal: 3turns, 688+146 tokens, $0.0404 (scored by stall_watch from journal)",
+  "wall_clock": 61.9,
+  "teardown_masked": true,
+  "scored_by": "stall_watch:journal",
+  "bench_binary": {
+    "version": "7.7.5",
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222"
+  }
+}

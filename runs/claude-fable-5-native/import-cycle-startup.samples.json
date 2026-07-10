@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "import-cycle-startup",
+    "billed_tokens": 164585,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 9916,
+    "cache_read_tokens": 152842,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.37971,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1827,
+    "input_tokens": 1827,
+    "output_tokens": 1681,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Found and fixed the needle \u2014 all tests pass.\n\n**The bug:** a circular-import crash. `main.py` imports `users`, which imports `notifications` at `users.py:10` \u2014 but `notifications.py:12` read `users.DEFAULT_ROLE` at module import time. At that moment `users` was only partially initialized (its `DEFAULT_ROLE = \"member\"` on line 14 hadn't executed yet), so startup died with `AttributeError: partially initialized module 'users' has no attribute 'DEFAULT_ROLE'`.\n\n**The fix:** removed the module-level `_default_role = users.DEFAULT_ROLE` snapshot in `notifications.py` and instead reference `users.DEFAULT_ROLE` inside `send_welcome_email`, where it's evaluated at call time. The `import users` statement itself is safe in a cycle (it just binds the module object); only the eager attribute access was the problem.\n\n`test.sh` passes all three checks: cold start, welcome notifications, and authentication (including wrong-password rejection).",
+    "timestamp": "2026-07-10T15:51:24Z",
+    "token_cost": 166266,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 59.312,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T15:51:27+00:00"
+  }
+]

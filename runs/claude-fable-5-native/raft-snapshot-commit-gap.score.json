@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "raft-snapshot-commit-gap",
+  "billed_tokens": 477308,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 19488,
+  "cache_read_tokens": 455846,
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 1.021584,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1974,
+  "input_tokens": 1974,
+  "output_tokens": 6036,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Found and fixed the needle: **`InstallSnapshot` in `app/snapshot.go` never advanced `commitIndex`**, and `test.sh` now passes all 3 rounds (it fails on the unpatched code, which I confirmed by stashing the fix and rerunning).\n\n**The bug.** When a follower installed a snapshot, the handler set `lastApplied = snap.LastIncludedIndex` but left `commitIndex` at its stale value (e.g. 0). That inconsistency detonates in `Restart()` (raft.go:316): recovery restores the state machine from the snapshot, but because the persisted `commitIndex` is below the snapshot boundary, it takes the else branch at raft.go:348 and drags `lastApplied` back down to the stale `commitIndex`. When the new leader then replicates and commits, `applyEntries()` replays entries 1\u201310 that were already baked into the snapshot \u2014 every key applied twice.\n\n**The fix** (snapshot.go:61-63): after installing a snapshot, advance `commitIndex` to at least `LastIncludedIndex`, since a snapshot by definition contains only committed entries. This keeps the `lastApplied <= commitIndex` invariant intact through restart.\n\nOne environment note: `test.sh` builds the binary into `/usr/local/bin`, which is root-owned and not writable as this user (no sudo/root available). I ran the script unmodified but with a small `go` wrapper on PATH that redirects that one output path to a writable directory, so the freshly built binary is what `raft-snapshot check` executes. If you run `test.sh` as root, no workaround is needed.",
+  "timestamp": "2026-07-10T17:11:55Z",
+  "token_cost": 483344,
+  "tool_uses": 16,
+  "turns_to_fix": 17,
+  "wall_clock": 161.797,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

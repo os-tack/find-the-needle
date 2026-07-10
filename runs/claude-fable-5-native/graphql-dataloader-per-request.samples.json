@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 317972,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 22013,
+    "cache_read_tokens": 293997,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.7925275,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1962,
+    "input_tokens": 1962,
+    "output_tokens": 4063,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass, and the query count dropped from ~101 to 2.\n\n**The needle:** DataLoader instances were being created *inside each resolver call* instead of once per request. `userResolvers.userPosts`, `userResolvers.user`, and `postResolvers.postAuthor` each built a brand-new `DataLoader` on every invocation, so every loader only ever received a single key \u2014 batching never fired, and fetching 100 users with their posts ran 1 + 100 individual queries (the classic N+1). The comments claiming a fresh loader \"ensures clean state per resolution\" were misdirection; the `postsByDepartment` JOIN was a deliberate red herring (it was already a single correct query).\n\n**The fix:**\n- `src/context.ts` \u2014 the request-scoped context now calls the existing-but-unused `createLoaders()` from `src/loaders.ts`, so one `userLoader` and one `postsByAuthorLoader` are shared across the whole resolver tree for each request.\n- `src/resolvers/userResolver.ts` and `src/resolvers/postResolver.ts` \u2014 resolvers now use `ctx.loaders.*.load(...)` instead of constructing their own loaders; the duplicated inline batch functions were removed.\n\nVerified with `./test.sh`: all 5 functional tests pass, and the performance test shows 2 DB queries (1 for users + 1 batched posts query) against the \u226415 threshold.",
+    "timestamp": "2026-07-10T15:47:55Z",
+    "token_cost": 322035,
+    "tool_uses": 11,
+    "turns_to_fix": 12,
+    "wall_clock": 110.297,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T15:47:55+00:00"
+  }
+]

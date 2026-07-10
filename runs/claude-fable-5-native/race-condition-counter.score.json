@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "race-condition-counter",
+  "billed_tokens": 162026,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 9032,
+  "cache_read_tokens": 151167,
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.349085,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1827,
+  "input_tokens": 1827,
+  "output_tokens": 1323,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Found and fixed the needle. The bug was in `app/counter.js:12-25`: `incrementCounter` did a non-atomic read-modify-write \u2014 `GET` the counter, add 1 in JavaScript, then `SET` it back. With 100 concurrent requests, multiple handlers would read the same value and clobber each other's writes, losing increments.\n\nThe fix replaces that three-step sequence with a single `client.incr(COUNTER_KEY)`, Redis's atomic increment, which also returns the new value so the response payload is unchanged. `test.sh` now passes: 100 concurrent increments yield exactly 100.",
+  "timestamp": "2026-07-10T17:05:48Z",
+  "token_cost": 163349,
+  "tool_uses": 7,
+  "turns_to_fix": 8,
+  "wall_clock": 67.959,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

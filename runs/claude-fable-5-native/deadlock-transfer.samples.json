@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "deadlock-transfer",
+    "billed_tokens": 161885,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 9123,
+    "cache_read_tokens": 150935,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.3643405,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1827,
+    "input_tokens": 1827,
+    "output_tokens": 1610,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified \u2014 both test passes report PASS with all 200 transfers completing and the total balance conserved at 30000.00.\n\nThe needle was a classic lock-ordering deadlock in `TransferService.transfer` (app/TransferService.java:25): it acquired locks in parameter order (`from` then `to`), so two concurrent transfers in opposite directions (A\u2192B and B\u2192A) would each grab one lock and wait forever for the other \u2014 with a `Thread.sleep(1)` in between to make the deadlock nearly certain.\n\nThe fix keeps the same two-lock protection but always acquires the locks in a consistent global order, comparing account IDs to decide which lock to take first. Since every thread now locks in the same order regardless of transfer direction, the circular wait can't occur.",
+    "timestamp": "2026-07-10T15:35:17Z",
+    "token_cost": 163495,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 75.838,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T15:35:18+00:00"
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "ssrf-allowlist-port-confusion",
+    "billed_tokens": 141857,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 9651,
+    "cache_read_tokens": 130381,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.3711664999999999,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1825,
+    "input_tokens": 1825,
+    "output_tokens": 2026,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Found and fixed the needle \u2014 all tests pass.\n\n**The needle:** an SSRF bypass in `app/validator.py`. The webhook proxy's `is_url_allowed()` only compared the hostname against a string blocklist (`127.0.0.1`, `localhost`, `0.0.0.0`, `169.254.169.254`) plus a few RFC-1918 prefixes. It never parsed IP literals, so IPv6 loopback URLs like `http://[::1]:8888/...` or the expanded `http://[0:0:0:0:0:0:0:1]:8888/...` sailed through the validator and let an attacker reach internal services (the test demonstrates leaking `INTERNAL_SECRET` from a metadata service on port 8888).\n\n**The fix** (`app/validator.py:50-70`): after the existing string checks, parse the host with `ipaddress.ip_address()`. If it's an IP literal in any textual form, reject it when it's loopback, private, link-local, unspecified, reserved, or multicast. IPv4-mapped IPv6 addresses (e.g. `::ffff:127.0.0.1`) are unwrapped to their IPv4 form first so they're judged by the inner address. Non-IP hostnames fall through to the existing logic unchanged, so legitimate public webhook receivers still work.\n\n`./test.sh` output: all 5 tests pass, including the two that previously failed (IPv6 loopback `[::1]` and its expanded form are now blocked with 403).\n\nOne caveat worth knowing: the validator still checks the URL string only \u2014 a public DNS name that *resolves* to an internal IP (DNS rebinding) would still get through. Fixing that would require resolving the hostname and validating the resolved addresses (and pinning them for the actual request), which is beyond what the tests cover.",
+    "timestamp": "2026-07-10T17:50:43Z",
+    "token_cost": 143883,
+    "tool_uses": 5,
+    "turns_to_fix": 6,
+    "wall_clock": 59.637,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T17:50:45+00:00"
+  }
+]

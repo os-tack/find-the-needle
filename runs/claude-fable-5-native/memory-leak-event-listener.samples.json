@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "memory-leak-event-listener",
+    "billed_tokens": 165244,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 9808,
+    "cache_read_tokens": 153480,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.386738,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1956,
+    "input_tokens": 1956,
+    "output_tokens": 1810,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The needle was an event-listener leak in `app/processor.js`: every call to `process()` registered fresh `data:validated` and `data:error` listeners on the shared event bus and never removed them, so after N requests there were ~2N listeners \u2014 each closure also pinning that request's payload in memory. The `setMaxListeners(0)` call in `server.js:11` silenced the warning that would normally have exposed it.\n\nThe fix moves listener registration into the `DataProcessor` constructor so it happens exactly once, and drops the per-request `data` capture from `_handleValidated`.\n\n`test.sh` passes: listener count held steady at 2 after 500 requests (was previously ~1000), and heap grew only 4.43MB \u2192 5.15MB.",
+    "timestamp": "2026-07-10T16:15:38Z",
+    "token_cost": 167054,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 69.668,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T16:15:39+00:00"
+  }
+]

@@ -1728,6 +1728,65 @@
    "schema_era": "axis-v2",
    "judged": "axis-v2 (solve/cost split, fail-closed)",
    "comparable_with_other_versions": false
+  },
+  {
+   "version": "v7.7.5",
+   "runs": [
+    {
+     "date": "2026-07-10",
+     "file": "v7.7.5/2026-07-10-experiment-scores.json",
+     "judged": "axis-v2 (solve/cost split, fail-closed)",
+     "snapshot": "july10v2",
+     "faults": [
+      "july10v2-fable5-native-opus-fallback"
+     ],
+     "models": {
+      "gpt-5.5": {
+       "ostk": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 11.7715,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "cpu"
+       }
+      },
+      "claude-fable-5": {
+       "native": {
+        "solved": 27,
+        "total": 29,
+        "cost_usd": 21.3263,
+        "cost_cells": 29,
+        "invalid": 8,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 19,
+        "total": 37,
+        "cost_usd": 12.995,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 3,
+        "source_arm": "cpu"
+       }
+      }
+     },
+     "trust": {
+      "solve_valid_cells": 103,
+      "cost_valid_cells": 103,
+      "cost_invalid_cells": 0,
+      "invalid_cells": 8,
+      "teardown_masked_cells": 3
+     }
+    }
+   ],
+   "schema_era": "axis-v2",
+   "judged": "axis-v2 (solve/cost split, fail-closed)",
+   "comparable_with_other_versions": false
   }
  ]
 }

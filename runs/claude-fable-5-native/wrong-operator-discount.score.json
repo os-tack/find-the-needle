@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "wrong-operator-discount",
+  "billed_tokens": 115693,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 8514,
+  "cache_read_tokens": 105356,
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.267359,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1823,
+  "input_tokens": 1823,
+  "output_tokens": 735,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The needle was a wrong operator in `calculate_discount_amount` at `pricing.py:11`: it computed `subtotal + discount_percent / 100` instead of `subtotal * discount_percent / 100`. So applying SAVE20 produced a \"discount\" of `subtotal + 0.20` \u2014 larger than the subtotal itself \u2014 rather than 20% of it. Changed `+` to `*`, and `test.sh` now passes all four checks (`PASS: Discount calculations are correct`).",
+  "timestamp": "2026-07-10T18:19:45Z",
+  "token_cost": 116428,
+  "tool_uses": 5,
+  "turns_to_fix": 6,
+  "wall_clock": 42.549,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

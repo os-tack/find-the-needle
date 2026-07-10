@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "relaxed-ordering-ringbuf",
+    "billed_tokens": 129619,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 13694,
+    "cache_read_tokens": 114102,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.42810500000000007,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1823,
+    "input_tokens": 1823,
+    "output_tokens": 2480,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Found it and fixed it \u2014 `test.sh` passes (all 5 correctness runs OK).\n\n**The needle:** `ringbuf_push` and `ringbuf_pop` in `ring_buffer.c` used `memory_order_relaxed` for all atomic index operations, justified by a comment claiming x86-TSO makes it safe. That reasoning is wrong even on x86: relaxed atomics let the *compiler* reorder the `slots[]` data access relative to the index publish, and on weakly-ordered hardware (like this ARM64 container) the CPU reorders them too. The consumer could observe the incremented `write_idx` before the value written to the slot, reading stale data \u2014 and symmetrically the producer could overwrite a slot before the consumer finished reading it.\n\n**The fix** is the standard SPSC release/acquire pairing:\n- Producer (`ringbuf_push`, ring_buffer.c:76): loads `read_idx` with **acquire**, publishes `write_idx` with **release** (so the slot write happens-before the index becomes visible).\n- Consumer (`ringbuf_pop`, ring_buffer.c:106): loads `write_idx` with **acquire** (pairs with the producer's release, making the slot data visible), advances `read_idx` with **release** (so the slot read completes before the producer sees it as free).\n\nLoads of a thread's *own* index stay relaxed, since only that thread modifies it. The `ringbuf_resize` function with its dramatic `seq_cst` fence was a decoy \u2014 it's documented as single-threaded-only, so its ordering doesn't matter.",
+    "timestamp": "2026-07-10T17:19:53Z",
+    "token_cost": 132099,
+    "tool_uses": 6,
+    "turns_to_fix": 7,
+    "wall_clock": 59.681,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T17:19:55+00:00"
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "agent": "gpt-5.5-kernel-cpu",
+  "arm": "kernel",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "missing-input-validation",
+  "billed_tokens": 339897,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 248832,
+  "control_type": "kernel",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.627861,
+  "executed_arm": "kernel-cpu",
+  "executed_provider": "openai",
+  "fresh_input_tokens": 91065,
+  "input_tokens": 91065,
+  "output_tokens": 1604,
+  "process_exit": "end_turn",
+  "requested_arm": "kernel",
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "agent.completed: 10turns, 91065+1604 tokens, $0.6279",
+  "timestamp": "2026-07-10T18:40:11Z",
+  "token_cost": 341501,
+  "tool_uses": 9,
+  "turns_to_fix": 10,
+  "wall_clock": 67.217
+}

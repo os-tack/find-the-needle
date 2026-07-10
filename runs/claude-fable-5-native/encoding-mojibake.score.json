@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "encoding-mojibake",
+  "billed_tokens": 397713,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 16135,
+  "cache_read_tokens": 379477,
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.8793725000000002,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 2101,
+  "input_tokens": 2101,
+  "output_tokens": 5532,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Found and fixed the needle. All 12 of `test.sh`'s name checks pass against the regenerated report.\n\n**The needle:** `CsvReader.java:18` decoded the input CSV as **ISO-8859-1**, but `customers.csv` is UTF-8 (hidden behind a plausible-sounding comment about \"legacy system compatibility\"). Every multi-byte UTF-8 character was split into two Latin-1 characters, and since the report writer re-encodes as UTF-8, `Ren\u00e9e` came out as `Ren\u00c3\u00a9e`, `M\u00fcller` as `M\u00c3\u00bcller`, etc. The fix is a two-line change: read with `StandardCharsets.UTF_8`.\n\n**Verification caveat:** `test.sh` itself errors in my shell \u2014 not because of the fix, but because a stale, root-owned `/tmp/report.txt` (containing mojibake output from an earlier run of the buggy code) sits in sticky `/tmp`, and I'm running as `bench` with no sudo, so the app gets `Permission denied` writing there. I couldn't delete it or work around it with a mount namespace. So I verified equivalently: rebuilt with `javac`, generated the report to `/tmp/report-verify.txt`, and ran the exact same 12 `grep` checks from `test.sh` \u2014 all OK, `FAILURES=0`. When `test.sh` runs as a user that can write `/tmp/report.txt` (e.g. root, which owns the stale file), it will pass.",
+  "timestamp": "2026-07-10T15:39:28Z",
+  "token_cost": 403245,
+  "tool_uses": 17,
+  "turns_to_fix": 18,
+  "wall_clock": 158.91,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "split-brain-leader-election",
+  "billed_tokens": 380438,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 21591,
+  "cache_read_tokens": 356877,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.8275625,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1970,
+  "input_tokens": 1970,
+  "output_tokens": 3610,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "Found and fixed the needle \u2014 the test now passes all three rounds.\n\n**The bug** was the quorum check in `app/cluster/node.go:124`:\n\n```go\nif finalVotes >= totalNodes/2 {   // before\nif finalVotes > totalNodes/2 {    // after\n```\n\nWith 5 nodes, `totalNodes/2` is 2 (integer division), so `>=` let a candidate become leader with just 2 votes. Under a `[0 1] | [2 3 4]` partition, node 0 could win its minority side with 2 votes (itself plus node 1) at the same time node 2 won the majority side with 3 \u2014 split brain. A quorum has to be a strict majority, so the comparison must be `>` (i.e., at least 3 of 5).\n\nWhile verifying, I also fixed a swapped-argument printf on the \"became LEADER\" line, which was logging the vote count as the term (\"became LEADER for term 3 with 1 votes\"). That was cosmetic only.\n\n**Verification:** `test.sh` invokes `split-brain` from PATH, but the installed `/usr/local/bin/split-brain` is root-owned and I have no way to overwrite it as the `bench` user. So I rebuilt the binary to `/app/app/split-brain` and ran `PATH=/app/app:$PATH /app/test.sh`, which passed: `PASS: No split-brain detected across all rounds`, with every round electing only the majority-partition leader (node 2 with 3/5 votes) while node 0's 2/5 votes correctly failed. If you rebuild the Docker image, the fixed binary will land in `/usr/local/bin` normally.",
+  "timestamp": "2026-07-10T17:44:08Z",
+  "token_cost": 384048,
+  "tool_uses": 13,
+  "turns_to_fix": 14,
+  "wall_clock": 127.383,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

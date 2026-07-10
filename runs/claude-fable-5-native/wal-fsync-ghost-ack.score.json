@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "wal-fsync-ghost-ack",
+  "billed_tokens": 675753,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 25497,
+  "cache_read_tokens": 648145,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 1.5025654999999998,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 2111,
+  "input_tokens": 2111,
+  "output_tokens": 10280,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Found and fixed the needle, and verified it with the test. Two things needed fixing:\n\n**The needle \u2014 durability bug in `server.go:84`.** The SET handler acked `+OK` right after `WAL.Append`, but `Append` only writes into a 64KB `bufio.Writer` in memory; the actual `Flush` + `fsync` happened up to 100ms later in the background `syncLoop`. A crash (`kill -9`) in that window loses every acknowledged-but-unsynced write \u2014 the test's `crash-recover` step truncates the WAL to the last fsync point, so replay recovers nothing. The fix calls `s.wal.Sync()` after `Append` and before returning `+OK`, so the ack now means the entry is on stable storage (this also makes the sidecar sync-offset written right after it accurate).\n\n**A latent bug in `test.sh:39` that made the test unpassable.** It checked `grep -q \"LOST\"`, but the client's summary line is `summary: 50 OK, 0 LOST out of 50 acked` \u2014 the substring `LOST` appears even when zero writes are lost, so the test failed unconditionally. I anchored it to `grep -q \"^LOST \"`, which matches only the per-key `LOST key-NNNN` lines.\n\n**Verification caveat:** `/workspace/test.sh` can't run as-is in this environment \u2014 stale `/tmp/kvwal.wal` and `/tmp/kvwal.wal.sync` are owned by root, and as user `bench` (no sudo, `su` rejected, user namespaces blocked by seccomp) I can't delete them, so the script dies at its `rm -f` cleanup line. I verified with a byte-identical copy of the code and script, changed only to use a writable WAL path (`/tmp/kvwal-verify/`) and port 9877:\n\n- With the fix: `summary: 50 OK, 0 LOST out of 50 acked` \u2192 **PASS**\n- With the fix reverted: all 50 keys reported `LOST` \u2192 **FAIL** \u2014 confirming the test still catches the original bug\n\nIf you run `test.sh` as root (or clear those two stale files), it will pass in `/workspace` directly.",
+  "timestamp": "2026-07-10T18:16:07Z",
+  "token_cost": 686033,
+  "tool_uses": 21,
+  "turns_to_fix": 22,
+  "wall_clock": 242.806,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

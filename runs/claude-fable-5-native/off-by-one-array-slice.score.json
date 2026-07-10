@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "off-by-one-array-slice",
+  "billed_tokens": 110918,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 7072,
+  "cache_read_tokens": 102023,
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.24328600000000003,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1823,
+  "input_tokens": 1823,
+  "output_tokens": 681,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed and verified. The needle was in `processor.py:17`: the batch slice used `end = start + batch_size - 1`, but Python slice ends are exclusive, so each batch silently dropped its last record (e.g., 25 records in batches of 10 came back as 22). Changing it to `end = start + batch_size` fixes it, and `test.sh` now passes all four cases: `PASS: All records processed correctly across batch boundaries`.",
+  "timestamp": "2026-07-10T16:32:28Z",
+  "token_cost": 111599,
+  "tool_uses": 4,
+  "turns_to_fix": 5,
+  "wall_clock": 53.108,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

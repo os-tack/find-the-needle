@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "goroutine-leak-handler",
+    "billed_tokens": 203845,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 13316,
+    "cache_read_tokens": 188571,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.565299,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1958,
+    "input_tokens": 1958,
+    "output_tokens": 3802,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified \u2014 the test passes with 0 leaked goroutines (baseline 4, still 4 after 20 client disconnects).\n\nThe needle was a goroutine leak in `computeHandler` (`app/main.go:42`): each request spawned a computation goroutine that never observed the request context. When a client disconnected (which the test simulates with `curl -m 1` timeouts), the handler returned but the goroutine kept looping through all its iterations \u2014 20 abandoned requests left 20 goroutines grinding away.\n\nThe fix threads cancellation through:\n- The handler now derives `ctx, cancel := context.WithTimeout(r.Context(), 25*time.Second)`, so client disconnect and the 25s timeout both cancel the same context. The handler's `select` waits on `ctx.Done()` instead of a bare `time.After`.\n- `performComputation` takes the context and checks it each iteration \u2014 the per-iteration sleep is now a `select` between `ctx.Done()` and `time.After(delay)`, so a cancelled goroutine exits within one iteration instead of running to completion.\n- The result channel stays buffered (size 1) as a second safety net, and a cancelled computation returns early without sending.",
+    "timestamp": "2026-07-10T15:42:31Z",
+    "token_cost": 207647,
+    "tool_uses": 9,
+    "turns_to_fix": 10,
+    "wall_clock": 109.402,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T15:42:32+00:00"
+  }
+]

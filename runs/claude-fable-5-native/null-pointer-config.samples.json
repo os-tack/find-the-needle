@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "null-pointer-config",
+    "billed_tokens": 138503,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 8728,
+    "cache_read_tokens": 127950,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.33034800000000003,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1825,
+    "input_tokens": 1825,
+    "output_tokens": 1489,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Found and fixed the needle \u2014 all tests pass.\n\n**The bug:** `config.json` sets `features.enable_metrics: true` but contains no `metrics` section, so `cfg.Metrics` (a `*MetricsConfig`) is left nil after unmarshaling. The `/status` handler guards only on the feature flag (`main.go:46`), then dereferences `cfg.Metrics.Endpoint` \u2014 a nil-pointer panic that crashed every `/status` request. There's also a `RecoveryMiddleware` in middleware.go, but it's never wired into the mux, so nothing caught the panic.\n\n**The fix:** in `LoadConfig` (config.go:49), alongside the existing port/version defaults, when metrics are enabled but the `metrics` section is missing, populate a default `MetricsConfig` (`endpoint: \"/metrics\"`, `interval_sec: 60`). This keeps the invariant \"metrics enabled \u21d2 Metrics is non-nil\" at the config layer rather than sprinkling nil checks through handlers.\n\n`test.sh` output: `PASS: Server starts and responds correctly with metrics enabled` \u2014 health, data, and status endpoints all return 200, with the `metrics` field present in `/status`.",
+    "timestamp": "2026-07-10T16:29:03Z",
+    "token_cost": 139992,
+    "tool_uses": 7,
+    "turns_to_fix": 8,
+    "wall_clock": 63.495,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T16:29:06+00:00"
+  }
+]

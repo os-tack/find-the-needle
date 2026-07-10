@@ -1,0 +1,37 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "rate-limit-bypass-header",
+  "billed_tokens": 140281,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 9629,
+  "cache_read_tokens": 128827,
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.271892,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1825,
+  "input_tokens": 1825,
+  "output_tokens": 1824,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed and verified.\n\n**The needle:** `RateLimiter.getClientIp()` in `/app/app/ratelimiter.ts` used the client-supplied `X-Forwarded-For` header as the rate-limit key. Since that header is fully attacker-controlled, rotating it (`10.0.0.1`, `10.0.0.2`, \u2026) created a fresh rate-limit bucket per request, letting an attacker make unlimited requests despite the 10-per-window limit.\n\n**The fix:** Key rate limiting on `req.socket.remoteAddress` \u2014 the real TCP peer address, which the client cannot spoof \u2014 and drop the trust in `X-Forwarded-For` entirely.\n\n**Test results:** `test.sh` now passes both cases \u2014 the limiter blocks 5 of 15 normal requests, and with 30 spoofed-header requests still only 10 pass (20 blocked).\n\nOne note for a real deployment: if this service actually sits behind a trusted reverse proxy/load balancer, you'd want to restore `X-Forwarded-For` handling but only trust it when the connection originates from a known proxy address (e.g. an allowlist of proxy IPs). The current fix is the correct secure default for a directly-exposed server.",
+  "timestamp": "2026-07-10T17:15:20Z",
+  "token_cost": 142105,
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 78.664,
+  "observed_models": [
+    "claude-fable-5",
+    "claude-opus-4-8"
+  ]
+}

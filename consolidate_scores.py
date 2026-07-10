@@ -120,8 +120,10 @@ SNAPSHOT_FAULTS = {
     # + always-on [ostk:telemetry] boundary on every tool response (spoof
     # hardening; small constant per-call token cost) + executed_provider
     # stamped into score.json (F5b provider receipts go live this era).
-    # No known era faults yet.
-    "july10v2": [],
+    # The fable-5 native opus-fallback reproduced a THIRD time (8 cells) —
+    # caught inline by capture-time observed_models enrichment + F5
+    # model_mismatch exclusion; see FAULTS.json.
+    "july10v2": ["july10v2-fable5-native-opus-fallback"],
 }
 # Human-readable one-liners for the ids above; the canonical machine-readable
 # era annotations (windows, commits, affected models) live in boards/FAULTS.json.

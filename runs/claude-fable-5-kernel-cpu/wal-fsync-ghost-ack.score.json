@@ -1,0 +1,33 @@
+{
+  "agent": "claude-fable-5-kernel-cpu",
+  "arm": "kernel",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "wal-fsync-ghost-ack",
+  "billed_tokens": 228813,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 10609,
+  "cache_create_tokens": 10609,
+  "cache_read_tokens": 209260,
+  "control_type": "kernel",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.6902625000000001,
+  "executed_arm": "kernel-cpu",
+  "executed_provider": "anthropic",
+  "fresh_input_tokens": 8944,
+  "input_tokens": 8944,
+  "output_tokens": 5179,
+  "process_exit": "end_turn",
+  "requested_arm": "kernel",
+  "resolved": true,
+  "stop_reason": "end_turn",
+  "summary": "agent.completed: 17turns, 8944+5179 tokens, $0.6903",
+  "timestamp": "2026-07-10T18:19:02Z",
+  "token_cost": 233992,
+  "tool_uses": 17,
+  "turns_to_fix": 17,
+  "wall_clock": 172.926
+}

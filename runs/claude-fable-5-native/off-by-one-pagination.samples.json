@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "off-by-one-pagination",
+    "billed_tokens": 135437,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 8071,
+    "cache_read_tokens": 125236,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.2910215,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 2130,
+    "input_tokens": 2130,
+    "output_tokens": 860,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The needle was an off-by-one in the pagination offset in `app/app.py:28`:\n\n```python\noffset = (page - 1) * per_page - (1 if page > 1 else 0)\n```\n\nFor any page after the first, it subtracted an extra 1 from the offset, so page 2 started at ID 10 instead of 11 \u2014 duplicating the last item of page 1 and shifting every subsequent page. I removed the spurious subtraction so the offset is just `(page - 1) * per_page`, and `test.sh` now passes: `PASS: Pagination is correct across page boundaries`.",
+    "timestamp": "2026-07-10T16:34:39Z",
+    "token_cost": 136297,
+    "tool_uses": 6,
+    "turns_to_fix": 7,
+    "wall_clock": 53.433,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T16:34:42+00:00"
+  }
+]

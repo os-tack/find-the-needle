@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "timing-attack-comparison",
+  "billed_tokens": 466115,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 16285,
+  "cache_read_tokens": 447854,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.9430745,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1976,
+  "input_tokens": 1976,
+  "output_tokens": 5426,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The needle was a timing side-channel in the password hash comparison.\n\n**The bug:** `compareHashes` in `app/auth/compare.go:8` used Go's `==` string comparison, which short-circuits at the first mismatched byte. That makes comparison time proportional to how many leading characters of the hash match, letting an attacker recover the stored password hash character-by-character by measuring response times.\n\n**The fix:** replaced it with `crypto/subtle.ConstantTimeCompare`, which always examines every byte regardless of where mismatches occur. The early length check is kept \u2014 it's safe because hash length isn't secret, and `ConstantTimeCompare` requires equal-length inputs anyway.\n\n**Verification:** `test.sh` builds into root-owned `/usr/local/bin`, but this session runs as uid 1001 with no sudo/su and user namespaces disabled, so the script fails at the install step no matter what. I ran a byte-identical copy differing only in the build output path (`/tmp/bin` instead of `/usr/local/bin`, shown in the diff above). All checks pass:\n\n- Correct password accepted, wrong password rejected\n- Static analysis confirms `crypto/subtle.ConstantTimeCompare` is used\n- Timing ratio between full-prefix-match and no-match comparisons is 0.915 (no measurable leak; the vulnerable version shows >1.3)\n\nIf you run the original `/app/test.sh` as root it will pass as-is.",
+  "timestamp": "2026-07-10T18:00:15Z",
+  "token_cost": 471541,
+  "tool_uses": 16,
+  "turns_to_fix": 17,
+  "wall_clock": 146.987,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

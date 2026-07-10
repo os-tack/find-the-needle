@@ -1,0 +1,37 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "auth-bypass-path-traversal",
+  "billed_tokens": 180596,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 9204,
+  "cache_read_tokens": 169436,
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.24827525,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1956,
+  "input_tokens": 1956,
+  "output_tokens": 2237,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed and verified \u2014 the test passes.\n\nThe needle was an auth-bypass via path normalization mismatch in `middleware.go`. The custom router cleaned the request path (via `path.Clean`) *before* route matching, but `authMiddleware` checked the **raw** `r.URL.Path` for the `/api/` prefix. So a request to `//api/admin` or `/health/../api/data` had a raw path that didn't start with `/api/` \u2014 skipping the auth check entirely \u2014 yet the router cleaned it to `/api/admin` and served the protected handler with its secrets.\n\nThe fix applies the same `path.Clean` normalization in the middleware before the prefix check, so the auth gate sees exactly the path the router will route to. All five test cases now pass: unauthenticated `/api/*` access returns 401, valid tokens return 200, and both the double-slash and dot-dot traversal bypasses are correctly blocked.",
+  "timestamp": "2026-07-10T15:07:23Z",
+  "token_cost": 182833,
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 56.93,
+  "observed_models": [
+    "claude-fable-5",
+    "claude-opus-4-8"
+  ]
+}

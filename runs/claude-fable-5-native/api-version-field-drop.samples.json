@@ -1,0 +1,41 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "api-version-field-drop",
+    "billed_tokens": 152927,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 14034,
+    "cache_read_tokens": 136939,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.26056674999999996,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1954,
+    "input_tokens": 1954,
+    "output_tokens": 2158,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified \u2014 the test passes.\n\n**The needle:** The v2 API user response silently dropped three fields (`avatar_url`, `bio`, `location`) that existed in v1. The `UserV2` struct in `models.go` was built by copying `UserV1` and adding new fields, but those three were deleted during the refactor. Since the internal store still held the data and the v1 endpoint returned it, clients upgrading from v1 to v2 would silently lose it \u2014 a backward-compatibility regression rather than an outright error.\n\n**The fix:** Added `AvatarURL`, `Bio`, and `Location` back to the `UserV2` struct and populated them in the `ToV2()` converter, making v2 a proper superset of v1. The test now confirms all v1 fields are present in v2 alongside the new v2-only fields.",
+    "timestamp": "2026-07-10T15:03:17Z",
+    "token_cost": 155085,
+    "tool_uses": 11,
+    "turns_to_fix": 12,
+    "wall_clock": 49.413,
+    "observed_models": [
+      "claude-fable-5",
+      "claude-opus-4-8"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T15:03:20+00:00"
+  }
+]

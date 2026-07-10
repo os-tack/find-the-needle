@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "k8s-scheduler-shutdown-deadlock",
+    "billed_tokens": 135750,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 7958,
+    "cache_read_tokens": 125967,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.310775,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1825,
+    "input_tokens": 1825,
+    "output_tokens": 1330,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed and verified \u2014 `test.sh` passes (`OK: clean shutdown` / `PASS`), and 5 repeat runs of the race-detector build all shut down cleanly.\n\n**The needle** was the shutdown ordering in `Scheduler.Run` (main.go:98-102). On `ctx` cancellation it did `<-done` (wait for the worker goroutine) *before* `s.queue.Close()`. But if the worker was blocked inside `queue.Pop()` \u2014 waiting on the condition variable with an empty queue \u2014 the only thing that can wake it is `Close()`'s broadcast. So `Run` waited on a goroutine that was itself waiting on `Close()`: a classic shutdown deadlock (a simplified version of the k8s scheduler one, per the file's comments).\n\n**The fix** was to swap the two lines: call `s.queue.Close()` first to wake any goroutine parked in `Pop()` (which then returns the \"queue closed\" error and lets the worker observe `ctx.Done()` and exit), and only then wait on `<-done`.",
+    "timestamp": "2026-07-10T15:57:37Z",
+    "token_cost": 137080,
+    "tool_uses": 5,
+    "turns_to_fix": 6,
+    "wall_clock": 52.622,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T15:57:39+00:00"
+  }
+]

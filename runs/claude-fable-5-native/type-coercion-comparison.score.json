@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "type-coercion-comparison",
+  "billed_tokens": 116302,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 8939,
+  "cache_read_tokens": 105540,
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.2979055,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1823,
+  "input_tokens": 1823,
+  "output_tokens": 1236,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed and verified \u2014 `test.sh` passes.\n\n**The needle:** in `utils.js:22`, `min_rating` was read straight off the query string as a string (`\"4\"`), unlike `min_price`/`max_price` which go through `parseFloat`. The bug then hid inside `buildRatingRange` in `filter.js`: the loop `for (let i = min; i <= max; i++)` starts with `i = \"4\"`, pushes the *string* `\"4\"` on the first iteration, and only then coerces `i` to a number via `i++`. Since `Array.includes` uses strict equality, `\"4\"` never matched the numeric `rating: 4`, so `min_rating=4` silently returned only 5-star products.\n\n**The fix:** one line in `utils.js` \u2014 parse the value with `parseFloat` like the other numeric params. All three test cases now pass.",
+  "timestamp": "2026-07-10T18:09:43Z",
+  "token_cost": 117538,
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 52.502,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

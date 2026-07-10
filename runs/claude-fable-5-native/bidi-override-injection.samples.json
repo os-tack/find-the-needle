@@ -1,0 +1,41 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "bidi-override-injection",
+    "billed_tokens": 350600,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 13103,
+    "cache_read_tokens": 335402,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.47309425,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 2095,
+    "input_tokens": 2095,
+    "output_tokens": 4616,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass.\n\n## The needle\n\nA **Unicode BIDI override privilege-escalation** vulnerability caused by trusting a display-rendered username for access control.\n\n**Root cause (`auth.py`):** `check_admin_access` ran the stored username through `_render_display_name` \u2014 which applies the bidirectional algorithm and *reverses* text between RTL-override control characters \u2014 and then compared that rendered string against the admin allowlist. An attacker who registered the username `\\u202enimda` (bytes for RLO + \"nimda\") had it render visually as `admin`, matching the allowlist and granting full admin access, including the dashboard's secrets.\n\n**Contributing cause (`sanitizer.py`):** `sanitize_username` stripped HTML/script vectors but left BIDI control characters untouched, so the malicious username was stored verbatim.\n\n## The fix\n\n1. **`auth.py`** \u2014 `check_admin_access` now compares the *actual stored username* against `ADMIN_USERS`, never a display-rendered form. Access control decisions should never depend on how a string renders.\n2. **`sanitizer.py`** \u2014 Added `_BIDI_CONTROL_RE` and a stripping step in `sanitize_username` that removes all Unicode bidirectional control characters (LRE/RLE/PDF/LRO/RLO, the isolates LRI/RLI/FSI/PDI, the marks LRM/RLM, and ALM). So `\\u202enimda` is stored as plain `nimda`.\n\nThese are defense-in-depth: either fix alone closes the escalation, but together the username can't be spoofed at storage time *and* the auth check can't be fooled by rendering. All 5 tests pass, including the real-admin path (Test 2) which still works correctly.",
+    "timestamp": "2026-07-10T15:11:21Z",
+    "token_cost": 355216,
+    "tool_uses": 13,
+    "turns_to_fix": 14,
+    "wall_clock": 97.494,
+    "observed_models": [
+      "claude-fable-5",
+      "claude-opus-4-8"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T15:11:22+00:00"
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "kernel-panic-ioctl",
+    "billed_tokens": 318971,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 22881,
+    "cache_read_tokens": 293999,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.48429375,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 2091,
+    "input_tokens": 2091,
+    "output_tokens": 7330,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The test passes: `PASS: IOCTL handler correctly validates all inputs` with exit code 0.\n\n## Summary\n\nThe needle was **missing validation of the untrusted `value` pointer and `value_len`** in the ioctl handlers (`src/ioctl_handler.c`). The handlers carefully validated the `key` pointer but trusted `value`/`value_len` blindly, causing crashes on crafted input (a simulated kernel panic). Three defects, all now fixed:\n\n1. **`handle_set_config` \u2014 NULL value deref.** A `SET_CONFIG` request with `value == NULL` and a nonzero `value_len` reached `memcpy(entry->value, req->value, copy_len)`, dereferencing NULL. Added a NULL-value check.\n\n2. **`handle_get_config` \u2014 unsigned underflow.** With `value_len == 0`, the code computed `copy_len = req->value_len - 1`, which wraps to `SIZE_MAX` on a `size_t`, then `memcpy`'d into a NULL/tiny buffer. Added a check rejecting NULL buffer or `value_len == 0` up front.\n\n3. **`handle_set_config` \u2014 oversized `value_len` over-read.** An oversized `value_len` (e.g. 999999) was silently truncated to `MAX_VALUE_LEN - 1`, but `memcpy` still read that many bytes from a possibly-shorter source buffer (a buffer over-read), and the test requires an error return. Now oversized lengths are rejected with `-1` before any copy.\n\nNormal operation (self-test) is unaffected since legitimate requests always set `value_len` within bounds.\n\nNote: when I ran `test.sh` as the non-root `bench` user, its `cp /app/src/devctl /usr/local/bin/devctl` step hits a permission error because that path is root-owned (the grading harness runs as root, where it succeeds). To verify end-to-end I ran the script with the freshly built binary first on `PATH`, and it reports `PASS` with exit 0.",
+    "timestamp": "2026-07-10T16:03:18Z",
+    "token_cost": 326301,
+    "tool_uses": 16,
+    "turns_to_fix": 17,
+    "wall_clock": 116.808,
+    "observed_models": [
+      "claude-opus-4-8"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T16:03:22+00:00"
+  }
+]

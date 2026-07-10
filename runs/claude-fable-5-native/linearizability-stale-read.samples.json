@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "linearizability-stale-read",
+    "billed_tokens": 709727,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 36909,
+    "cache_read_tokens": 670711,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 1.8367365,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 2107,
+    "input_tokens": 2107,
+    "output_tokens": 13660,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All passing \u2014 6 consecutive full `test.sh` runs (18 rounds) plus 3 direct `check` runs. Here's the summary:\n\n## The needle\n\n**`app/handler.go:88`** \u2014 the HTTP `/read` endpoint served reads from stale local state via `node.Read()`, while a complete linearizable read-index implementation (`node.ReadLinearizable()`) sat in the codebase entirely unused. A misleading comment above the handler justified it as \"low latency.\" After a partition heals, the formerly-isolated follower would answer reads before catching up to the leader's committed writes \u2014 the exact violation the test checks.\n\n## The fix (two parts)\n\n1. **`app/handler.go`**: `handleRead` now calls `h.node.ReadLinearizable(key)`, which asks the leader for its commit index and blocks until the local applied index catches up before answering.\n\n2. **`app/raft/node.go` (`handleHeartbeat`)**: fixing the handler alone wasn't enough \u2014 the read would just time out. Heartbeats carry the leader's commit index in `msg.Index` (set in `sendHeartbeats`), but `handleHeartbeat` appended the piggybacked entries and threw the commit index away, never calling `advanceCommitIndex`. Since the leader sends `MsgAppendEntries` only once at write time (dropped while the follower is partitioned), heartbeats are the *only* channel through which a healed follower learns the commit index \u2014 so its apply loop never ran and the write stayed invisible forever. I added commit-index advancement (capped at the local last log index), mirroring what `handleAppendEntries` already does.\n\nThe red-herring comments about the heartbeat interval being larger than the election timeout base (\"this looks wrong but is correct\") are indeed fine \u2014 I left that timing alone.\n\n## Verification caveats\n\n- `test.sh` builds to `/usr/local/bin/kv-cluster`, which is root-owned, and this session runs as user `bench` with no sudo \u2014 so the script can't run verbatim here. I ran it through a PATH shim that redirects only the build output path to a writable directory; the test logic itself ran unmodified and passed 6/6 runs. When run as root (as in the container it was built for), it will work directly.\n- One early run failed with \"no leader elected within 5s\" \u2014 a pre-existing election flake unrelated to this fix (all three nodes derive jitter from `time.Now().UnixNano()` at nearly the same instant, so split votes can repeat). It didn't recur in 6 subsequent runs; I left election timing untouched since the source comments explicitly warn against changing it.",
+    "timestamp": "2026-07-10T16:11:48Z",
+    "token_cost": 723387,
+    "tool_uses": 22,
+    "turns_to_fix": 23,
+    "wall_clock": 340.286,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T16:11:51+00:00"
+  }
+]

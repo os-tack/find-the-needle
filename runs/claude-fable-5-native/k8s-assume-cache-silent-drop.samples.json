@@ -1,0 +1,40 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "k8s-assume-cache-silent-drop",
+    "billed_tokens": 164783,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 9504,
+    "cache_read_tokens": 153452,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.40962,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1827,
+    "input_tokens": 1827,
+    "output_tokens": 2370,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Test passes. \n\n**The needle:** in `informerUpdate` (main.go), when the informer delivered a newer version of an object the scheduler had assumed, the code just did `delete(c.assumed, obj.Key)` \u2014 the assumer's optimistic state was dropped with no callback, channel, or log, mirroring the k8s `assume_cache.go:426` bug the file describes.\n\n**The fix:** I added a conflict-notification path to `AssumeCache`:\n- An `onConflict func(assumed, informer *Object)` field with a `SetConflictHandler` setter.\n- `informerUpdate` now records the dropped assumed object and invokes the handler with both the dropped and superseding versions. The callback fires after the mutex is released, so a handler can safely call back into the cache.\n- `main` registers a handler that sets `conflictNotified` and logs the conflict.\n\n`test.sh` output confirms it: the conflict is reported (`assumed version=5 dropped in favor of informer version=6`), and the run ends with `OK: conflict notified` / `PASS`.",
+    "timestamp": "2026-07-10T15:55:07Z",
+    "token_cost": 167153,
+    "tool_uses": 6,
+    "turns_to_fix": 7,
+    "wall_clock": 65.937,
+    "observed_models": [
+      "claude-fable-5"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T15:55:10+00:00"
+  }
+]

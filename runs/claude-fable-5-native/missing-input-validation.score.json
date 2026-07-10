@@ -1,0 +1,36 @@
+{
+  "agent": "claude-fable-5-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+    "version": "7.7.5"
+  },
+  "benchmark": "missing-input-validation",
+  "billed_tokens": 165956,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 9265,
+  "cache_read_tokens": 154864,
+  "control_type": "native",
+  "difficulty_tier": "easy",
+  "estimated_cost_usd": 0.35754450000000004,
+  "executed_arm": "native",
+  "executed_provider": "claude",
+  "fresh_input_tokens": 1827,
+  "input_tokens": 1827,
+  "output_tokens": 1360,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Found and fixed. The needle was missing input validation on the adjust endpoint: `POST /inventory/:sku/adjust` checked that `quantity` was a number but never checked bounds, and `Inventory.adjustQuantity` blindly applied any adjustment \u2014 so a request like `{\"quantity\": -200}` drove stock negative and still returned 200 OK.\n\nThe fix adds a guard in `routes.ts:57` before applying the adjustment: if `product.quantity + quantity < 0`, the request is rejected with a 400 and the inventory is left untouched. Valid negative adjustments within bounds still work.\n\n`test.sh` passes: `PASS: Input validation correctly prevents impossible inventory states`.",
+  "timestamp": "2026-07-10T16:18:14Z",
+  "token_cost": 167316,
+  "tool_uses": 6,
+  "turns_to_fix": 7,
+  "wall_clock": 59.392,
+  "observed_models": [
+    "claude-fable-5"
+  ]
+}

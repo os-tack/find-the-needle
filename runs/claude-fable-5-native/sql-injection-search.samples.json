@@ -1,0 +1,41 @@
+[
+  {
+    "agent": "claude-fable-5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-3b70facf0aa6c7d34481d688c9a27a3d95cc5d7971494a1814f8c9798f908222",
+      "version": "7.7.5"
+    },
+    "benchmark": "sql-injection-search",
+    "billed_tokens": 268600,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 10475,
+    "cache_read_tokens": 256160,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.49198525,
+    "executed_arm": "native",
+    "executed_provider": "claude",
+    "fresh_input_tokens": 1965,
+    "input_tokens": 1965,
+    "output_tokens": 2732,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "fail",
+    "summary": "The fix works. Here's what happened.\n\n**The needle:** `app/app/search.py` built its SQL by string-interpolating the user's `query` (and `category`) straight into the statement (`WHERE name LIKE '%{query}%'`), so a crafted `q` value could inject SQL \u2014 UNION-extracting the `users` table or bypassing the filter with `' OR '1'='1`.\n\n**The fix:** switched to a parameterized query, passing the values as bind parameters via `self.db.execute(...)` instead of `execute_raw`:\n\n```python\nsql = \"SELECT id, name, description, price, category, in_stock FROM products WHERE name LIKE ?\"\nparams = [f'%{query}%']\nif category:\n    sql += \" AND category = ?\"\n    params.append(category)\nsql += \" ORDER BY name\"\nreturn self.db.execute(sql, tuple(params))\n```\n\n**Verification:** all three security checks pass \u2014 normal search returns results, the UNION attack leaks no user data, and `' OR '1'='1'` no longer bypasses the filter.\n\nOne caveat about running `test.sh` verbatim: a leftover server process from a previous run (root-owned, PID 37, `python3 app/server.py 18083`) is still holding port 18083, and I don't have permission to kill it, so `test.sh` fails at the \"Address already in use\" step before it can test anything. To confirm the fix I ran an identical copy of the test on a free port (18099), which passed cleanly. In a fresh environment where port 18083 isn't occupied, `test.sh` will pass as-is.",
+    "timestamp": "2026-07-10T17:47:31Z",
+    "token_cost": 271332,
+    "tool_uses": 11,
+    "turns_to_fix": 12,
+    "wall_clock": 101.66,
+    "observed_models": [
+      "claude-fable-5",
+      "claude-opus-4-8"
+    ],
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T17:47:33+00:00"
+  }
+]
