@@ -149,7 +149,16 @@ def required_keys(model: str, arm: str) -> tuple[list[str], str]:
         return ["MISTRAL_API_KEY", "OPENROUTER_API_KEY"], (
             "Mistral native if key, else OpenRouter"
         )
-    # deepseek- / kimi- / moonshot- / qwen* / grok- / meta-llama / org-slash
+    if m.startswith("deepseek-"):
+        # v7.7.6+: bare deepseek-* routes to the DeepSeek own endpoint
+        # UNCONDITIONALLY on every kernel arm (fail-closed — a silent
+        # OpenRouter fallback would compare a third-party serving stack
+        # against the native arm's own-endpoint opencode).
+        return ["DEEPSEEK_API_KEY"], (
+            "DeepSeek own endpoint (api.deepseek.com, generic OpenAI-compat "
+            "client, pinned bare wire id; unconditional since v7.7.6)"
+        )
+    # kimi- / moonshot- / qwen* / grok- / meta-llama / org-slash
     return ["OPENROUTER_API_KEY"], "generic OpenRouter kernel"
 
 
@@ -303,12 +312,17 @@ def probe_plan(model: str, arm: str) -> list[tuple[str, str]]:
         if m.startswith(("gpt", "o1", "o3")):
             # v7.7.4+: native OpenAI Responses driver, unconditional.
             return [("openai", model)]
+        if m.startswith("deepseek-"):
+            # v7.7.6+: DeepSeek own endpoint, unconditional.
+            return [("deepseek", model)]
         return [("openrouter", format_openrouter_model(model))]
-    # plain kernel: OpenRouter (wire_model) — EXCEPT gpt-*/o-series, which
-    # resolve_provider routes to the native OpenAI driver unconditionally
-    # since v7.7.4 (there is no OpenRouter-routed gpt kernel arm anymore).
+    # plain kernel: OpenRouter (wire_model) — EXCEPT gpt-*/o-series (native
+    # OpenAI driver since v7.7.4) and bare deepseek-* (own endpoint since
+    # v7.7.6), which resolve_provider routes unconditionally.
     if m.startswith(("gpt", "o1", "o3")):
         return [("openai", model)]
+    if m.startswith("deepseek-"):
+        return [("deepseek", model)]
     or_model = model.removeprefix("openrouter/") if m.startswith("openrouter/") \
         else format_openrouter_model(model)
     return [("openrouter", or_model)]

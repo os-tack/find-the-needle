@@ -220,6 +220,12 @@ def expected_provider(model: str | None) -> str | None:
         return "gemini"
     if "mistral" in m or "codestral" in m or "devstral" in m:
         return "mistral"
+    if m.startswith("deepseek-"):
+        # v7.7.6+: bare deepseek-* kernel cells execute on the DeepSeek own
+        # endpoint unconditionally. Pre-receipt (june16) cells fail open as
+        # before; the slash-form "deepseek/..." (explicit OpenRouter) is not
+        # a bench model id and deliberately does not match this hyphen check.
+        return "deepseek"
     return None
 
 

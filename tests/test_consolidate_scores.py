@@ -92,11 +92,12 @@ class TestCostInversionFix(unittest.TestCase):
         cell = deepseek_native_cell()
         cell["estimated_cost_usd"] = 0.0  # no provider-billed number
         cost, basis = cs.compute_cost_ex(cell, "deepseek-v4-pro")
-        expected = (56327 * 1.74 + 762 * 3.48) / 1_000_000  # 0.10066074
+        # deepseek-v4-pro official card (2026-07-10): 0.435 in / 0.87 out
+        expected = (56327 * 0.435 + 762 * 0.87) / 1_000_000  # 0.025165185
         self.assertAlmostEqual(cost, expected, places=9)
         self.assertEqual(basis, "total-as-fresh")
         # regression: the broken aggregator produced output-only cost
-        broken = 762 * 3.48 / 1_000_000  # 0.00265176
+        broken = 762 * 0.87 / 1_000_000  # 0.00066294
         self.assertGreater(cost, broken * 10)
 
     def test_present_but_zero_prefers_provider_billed_cost(self):

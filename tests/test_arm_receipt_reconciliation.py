@@ -171,11 +171,29 @@ class TestProviderMismatch(unittest.TestCase):
         self.assertEqual(cls.status, cv.VALID, cls.reasons)
 
     def test_model_with_no_native_expectation_is_noop(self):
-        # deepseek/grok/kimi/qwen: no single native provider to reconcile
-        # against — an unmapped model never poisons a cell by itself.
-        cell = base_cell(agent="deepseek-v4-pro-kernel-cpu", executed_arm="kernel-cpu",
+        # grok/kimi/qwen: no single native provider to reconcile against —
+        # an unmapped model never poisons a cell by itself. (deepseek moved
+        # to a mapped expectation in v7.7.6 — see the deepseek tests below.)
+        cell = base_cell(agent="grok-4.3-kernel-cpu", executed_arm="kernel-cpu",
                          executed_provider="openrouter")
-        cls = cv.classify_cell(cell, requested_arm="kernel-cpu", model="deepseek-v4-pro")
+        cls = cv.classify_cell(cell, requested_arm="kernel-cpu", model="grok-4.3")
+        self.assertEqual(cls.status, cv.VALID, cls.reasons)
+
+    def test_deepseek_kernel_via_openrouter_is_invalid(self):
+        # v7.7.6: bare deepseek-* kernel cells must execute on the DeepSeek
+        # own endpoint; an OpenRouter receipt is the exact silent-substitution
+        # this check exists to catch.
+        cell = base_cell(agent="deepseek-v4-pro-kernel", executed_arm="kernel",
+                         executed_provider="openrouter")
+        cls = cv.classify_cell(cell, requested_arm="kernel", model="deepseek-v4-pro")
+        self.assertEqual(cls.status, cv.INVALID)
+        self.assertIn("provider_mismatch:expected=deepseek:executed=openrouter",
+                      cls.reasons)
+
+    def test_deepseek_kernel_on_own_endpoint_is_valid(self):
+        cell = base_cell(agent="deepseek-v4-pro-kernel", executed_arm="kernel",
+                         executed_provider="deepseek")
+        cls = cv.classify_cell(cell, requested_arm="kernel", model="deepseek-v4-pro")
         self.assertEqual(cls.status, cv.VALID, cls.reasons)
 
     def test_gpt_kernel_via_openrouter_is_invalid(self):
@@ -213,8 +231,13 @@ class TestExpectedProviderHeuristic(unittest.TestCase):
         self.assertEqual(cv.expected_provider("codestral-2508"), "mistral")
         self.assertEqual(cv.expected_provider("mistral-medium"), "mistral")
 
+    def test_deepseek_maps_to_own_endpoint(self):
+        # v7.7.6: bare deepseek-* expects the own endpoint; the slash-form
+        # (explicit OpenRouter org/model) deliberately has no expectation.
+        self.assertEqual(cv.expected_provider("deepseek-v4-pro"), "deepseek")
+        self.assertIsNone(cv.expected_provider("deepseek/deepseek-v4-pro"))
+
     def test_unmapped_model_has_no_expectation(self):
-        self.assertIsNone(cv.expected_provider("deepseek-v4-pro"))
         self.assertIsNone(cv.expected_provider("grok-4.3"))
         self.assertIsNone(cv.expected_provider("kimi-k2.6"))
         self.assertIsNone(cv.expected_provider(None))

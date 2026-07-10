@@ -134,9 +134,16 @@ FRONTIER_2026 = {  # model -> arms (exact, no gating)
     # Tier-2: no native driver, B* = generic OpenRouter kernel. Native Control
     # runs via the opencode fallback against the provider's own key (xAI /
     # DeepSeek keys added by owner 2026-06-15). Not a first-party vendor CLI
-    # (xAI/DeepSeek ship none), but own-key on the provider endpoint — noted in
-    # results. kimi native = kimi CLI.
+    # (xAI/DeepSeek ship none — verified against deepseek.com/org/npm
+    # 2026-07-10; the "Deep Code" CLI circulating in reviews is a personal
+    # npm package, not DeepSeek Inc.), but own-key on the provider endpoint —
+    # noted in results. kimi native = kimi CLI.
     "grok-4.3":          ["native", "kernel"],
+    # deepseek-v4-pro kernel: since ostk v7.7.6 the bare deepseek-* prefix
+    # routes to the DeepSeek OWN endpoint (api.deepseek.com, own key,
+    # unconditional — generic OpenAI-compat client, pinned bare wire id).
+    # Still generic_kernel tier (no tuned driver), but both arms now hit the
+    # same vendor serving stack; executed_provider stamps "deepseek".
     "deepseek-v4-pro":   ["native", "kernel"],
     "kimi-k2.6":         ["native", "kernel"],
 }

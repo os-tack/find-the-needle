@@ -54,12 +54,12 @@ EXPERIMENT_OUTPUT = Path(__file__).parent / "public" / "experiment-scores.json"
 # hosted THREE frozen-bin pins in one day — v7.7.1 ("july09"; fable-5 + flash
 # smoke), v7.7.2 ("july09v2"), and v7.7.3 ("july09v3", the current latest).
 # ---------------------------------------------------------------------------
-OSTK_VERSION = "v7.7.5"                      # current binary (latest board)
+OSTK_VERSION = "v7.7.6"                      # current binary (latest board)
 # Chronological order — MUST stay oldest→newest: downstream ranking uses
 # SNAPSHOTS.index (see published_snapshot_for / consolidate_all) to pick the
 # newest snapshot per column, so a new pin is APPENDED, never inserted.
 SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3", "july10",
-             "july10v2")
+             "july10v2", "july10v3")
 # F2 FIX — RECEIPT-DRIVEN SNAPSHOT IDENTITY. The cell's own bench_binary.version
 # receipt is the RELIABLE attribution signal; the hand-maintained date ladder
 # below can only split the v7.6.0 june16/july02 pair (same binary, different run
@@ -68,7 +68,8 @@ SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3", "july10",
 # its payload date. v7.6.0 is intentionally ABSENT (date-ambiguous). Newest
 # first for readability; matching is exact-or-dotted-prefix (see snapshot_of).
 SNAPSHOT_BY_VERSION = (
-    ("7.7.5", "july10v2"),   # 2026-07-10 second pin (envelope trim + always-boundary telemetry; current latest)
+    ("7.7.6", "july10v3"),   # 2026-07-10 third pin (deepseek own-endpoint kernel; current latest)
+    ("7.7.5", "july10v2"),   # 2026-07-10 second pin (envelope trim + always-boundary telemetry)
     ("7.7.4", "july10"),     # 2026-07-10 first pin (native OpenAI Responses driver)
     ("7.7.3", "july09v3"),   # 2026-07-09 third pin
     ("7.7.2", "july09v2"),   # 2026-07-09 second pin
@@ -87,14 +88,14 @@ SNAPSHOT_BOUNDARIES = (
 SNAPSHOT_RUN_DATE = {"june16": "2026-06-16", "july02": "2026-07-02",
                      "july09": "2026-07-09", "july09v2": "2026-07-09",
                      "july09v3": "2026-07-09", "july10": "2026-07-10",
-                     "july10v2": "2026-07-10"}
+                     "july10v2": "2026-07-10", "july10v3": "2026-07-10"}
 # Binary identity per snapshot: versioned boards land under
 # boards/<SNAPSHOT_OSTK_VERSION[snap]>/ — a run is never re-attributed to a
 # binary it did not execute on (runs/.binary_identity.jsonl is the receipt).
 SNAPSHOT_OSTK_VERSION = {"june16": "v7.6.0", "july02": "v7.6.0",
                          "july09": "v7.7.1", "july09v2": "v7.7.2",
                          "july09v3": "v7.7.3", "july10": "v7.7.4",
-                         "july10v2": "v7.7.5"}
+                         "july10v2": "v7.7.5", "july10v3": "v7.7.6"}
 # Fault ids (boards/FAULTS.json) attached to each snapshot's published board.
 SNAPSHOT_FAULTS = {
     "june16": ["june16-teardown-masked"],
@@ -124,6 +125,11 @@ SNAPSHOT_FAULTS = {
     # caught inline by capture-time observed_models enrichment + F5
     # model_mismatch exclusion; see FAULTS.json.
     "july10v2": ["july10v2-fable5-native-opus-fallback"],
+    # v7.7.6 (current latest): deepseek-* kernel arm moves off OpenRouter to
+    # the DeepSeek own endpoint (api.deepseek.com, own key, unconditional) —
+    # same fairness doctrine as the v7.7.4 gpt change; executed_provider now
+    # stamps "deepseek". No known era faults yet.
+    "july10v3": [],
 }
 # Human-readable one-liners for the ids above; the canonical machine-readable
 # era annotations (windows, commits, affected models) live in boards/FAULTS.json.
@@ -265,10 +271,14 @@ RATE_CARD = {
     "kimi-k2.5": (0.40, 1.99), "kimi-k2.6": (0.40, 1.99),
     "deepseek-v3.2": (0.26, 0.38), "deepseek-r1": (0.70, 2.50),
     "deepseek-r1-0528": (0.45, 2.15),
-    # deepseek-v4-pro: DeepSeek V4 Pro STANDARD list price ($1.74/$3.48 per M).
-    # The 75%-off launch promo ($0.435/$0.87) expired 2026-05-31, so the
-    # standard rate now applies. Native Control is key-blocked; only B*/kernel runs.
-    "deepseek-v4-pro": (1.74, 3.48),
+    # deepseek-v4-pro: $0.435 in (cache miss) / $0.87 out per the OFFICIAL
+    # api-docs.deepseek.com card as fetched 2026-07-10. History: the June
+    # comment here treated $0.435/$0.87 as a launch promo expiring
+    # 2026-05-31 with standard $1.74/$3.48 to follow — the live card still
+    # serves $0.435/$0.87 with no promo caveat, so that rate IS the list
+    # price now. Cache hits bill at $0.003625 (automatic disk caching; the
+    # kernel binary carries the split — this card is in/out list only).
+    "deepseek-v4-pro": (0.435, 0.87),
     "qwen3-coder-plus": (0.65, 3.25), "qwen3-coder": (0.22, 1.00),
     "qwen3-coder-flash": (0.20, 0.97),
     "llama-4-maverick": (0.15, 0.60),
