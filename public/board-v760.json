@@ -1,6 +1,6 @@
 {
- "generated": "2026-07-10",
- "run": "v7.7.5",
+ "generated": "2026-07-11",
+ "run": "v7.7.7",
  "snapshot": "latest",
  "pipeline": "publish_boards.py \u2190 consolidate_scores.py (axis-split validity)",
  "published_tasks": 37,
@@ -40,29 +40,33 @@
   {
    "id": "july10v2-fable5-native-opus-fallback",
    "note": ""
+  },
+  {
+   "id": "july10v3-deepseek-kernel-openrouter-substitution",
+   "note": "v7.7.6 deepseek kernel column: launcher's blanket openrouter/ wrap overrode the own-endpoint routing \u2014 every dispatch rode OpenRouter while predicted executed_provider receipts stamped 'deepseek'. Solve axis stands (generic-OpenRouter result); superseded by the july11 v7.7.7 re-capture with observed provider attestation."
   }
  ],
  "faults_ref": "boards/FAULTS.json",
  "trust": {
   "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle verdict + arm receipt + not stalled): malformed / no-arm-receipt / arm-mismatch / deadline / zero-work / duplicate-column cells are fully INVALID \u2014 excluded from everything, counted visibly. COST axis (real token/cost accounting): zero token accounting on a completed run keeps the solve verdict and marks cost UNAVAILABLE \u2014 included in solve columns, excluded from cost/token columns, counted visibly, never priced. absent = never run (not invalid).",
-  "solve_valid_cells": 760,
-  "cost_valid_cells": 760,
+  "solve_valid_cells": 761,
+  "cost_valid_cells": 761,
   "cost_invalid_cells": 0,
-  "invalid_cells": 18,
+  "invalid_cells": 17,
   "policy_excluded_cells": 23,
   "invalid_by_reason": {
-   "deadline_exceeded": 6,
+   "deadline_exceeded": 5,
    "model_mismatch": 8,
    "zero_work": 4
   },
   "cost_invalid_by_reason": {},
-  "teardown_masked_cells": 40,
+  "teardown_masked_cells": 43,
   "by_ostk_version": {
    "v7.6.0": {
-    "solve_valid_cells": 471,
-    "cost_valid_cells": 471,
+    "solve_valid_cells": 398,
+    "cost_valid_cells": 398,
     "cost_invalid_cells": 0,
-    "invalid_cells": 10
+    "invalid_cells": 9
    },
    "v7.7.1": {
     "solve_valid_cells": 1,
@@ -87,6 +91,18 @@
     "cost_valid_cells": 103,
     "cost_invalid_cells": 0,
     "invalid_cells": 8
+   },
+   "v7.7.6": {
+    "solve_valid_cells": 37,
+    "cost_valid_cells": 37,
+    "cost_invalid_cells": 0,
+    "invalid_cells": 0
+   },
+   "v7.7.7": {
+    "solve_valid_cells": 37,
+    "cost_valid_cells": 37,
+    "cost_invalid_cells": 0,
+    "invalid_cells": 0
    }
   },
   "mixed_versions_note": "the totals above aggregate columns executed under more than one binary version (per-version split in by_ostk_version) \u2014 operational bookkeeping, NOT a cross-version comparison. No cross-version delta is published anywhere; versioned boards under boards/<version>/ are single-version."
@@ -156,72 +172,6 @@
     "billed": 5031104,
     "output": 97167,
     "input_total": 5031104
-   }
-  },
-  {
-   "model": "deepseek-v4-pro",
-   "type": "B*",
-   "native_cli": "opencode",
-   "native_present": true,
-   "published": 37,
-   "native_solved": 37,
-   "native_total": 37,
-   "kernel_solved": 35,
-   "kernel_total": 36,
-   "both_n": 35,
-   "both_cost_n": 35,
-   "invalid": {
-    "native": 0,
-    "ostk": 1
-   },
-   "cost_invalid": {
-    "native": 0,
-    "ostk": 0
-   },
-   "masked": {
-    "native": 0,
-    "ostk": 0
-   },
-   "native_cost_basis": "bucket-split",
-   "native_cost_bases": {
-    "bucket-split": 37
-   },
-   "source_arm": "kernel",
-   "snapshots": {
-    "native": "june16",
-    "ostk": "june16"
-   },
-   "cross_snapshot_delta": false,
-   "cross_version_pair": false,
-   "delta_note": null,
-   "native": {
-    "cost": 1.125,
-    "fresh": 211350,
-    "cache_read": 2639744,
-    "cache_create": 0,
-    "billed": 2851094,
-    "output": 85625,
-    "input_total": 2851094
-   },
-   "kernel": {
-    "cost": 8.16,
-    "fresh": 4353782,
-    "cache_read": 0,
-    "cache_create": 0,
-    "billed": 4353782,
-    "output": 167897,
-    "input_total": 4353782
-   },
-   "cost_delta": 625.3,
-   "tok_delta": 52.7,
-   "kernel_abs": {
-    "cost": 8.16,
-    "fresh": 4353782,
-    "cache_read": 0,
-    "cache_create": 0,
-    "billed": 4353782,
-    "output": 167897,
-    "input_total": 4353782
    }
   },
   {
@@ -354,6 +304,72 @@
     "billed": 3543856,
     "output": 77005,
     "input_total": 3726580
+   }
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "type": "B*",
+   "native_cli": "opencode",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 35,
+   "native_total": 37,
+   "kernel_solved": 36,
+   "kernel_total": 37,
+   "both_n": 35,
+   "both_cost_n": 35,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 3,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 37
+   },
+   "source_arm": "kernel",
+   "snapshots": {
+    "native": "july10v3",
+    "ostk": "july11"
+   },
+   "cross_snapshot_delta": true,
+   "cross_version_pair": true,
+   "delta_note": "SUPPRESSED: native (july10v3, v7.7.6) and ostk (july11, v7.7.7) columns executed under different binary versions \u2014 no cross-version delta is published anywhere (boards/index.json doctrine); compare within one version's board instead",
+   "native": {
+    "cost": 0.188,
+    "fresh": 217643,
+    "cache_read": 3571200,
+    "cache_create": 0,
+    "billed": 3439614,
+    "output": 92542,
+    "input_total": 3788843
+   },
+   "kernel": {
+    "cost": 0.237,
+    "fresh": 262808,
+    "cache_read": 4806912,
+    "cache_create": 0,
+    "billed": 4448039,
+    "output": 121394,
+    "input_total": 5069720
+   },
+   "cost_delta": null,
+   "tok_delta": null,
+   "kernel_abs": {
+    "cost": 0.243,
+    "fresh": 268158,
+    "cache_read": 4967424,
+    "cache_create": 0,
+    "billed": 4613901,
+    "output": 124303,
+    "input_total": 5235582
    }
   },
   {
@@ -657,7 +673,7 @@
    "cross_version_pair": false,
    "delta_note": null,
    "native": {
-    "cost": 0.853,
+    "cost": 0.976,
     "fresh": 470862,
     "cache_read": 1643840,
     "cache_create": 0,
@@ -674,7 +690,7 @@
     "output": 35325,
     "input_total": 2532728
    },
-   "cost_delta": 281.5,
+   "cost_delta": 233.4,
    "tok_delta": 19.8,
    "kernel_abs": {
     "cost": 3.254,

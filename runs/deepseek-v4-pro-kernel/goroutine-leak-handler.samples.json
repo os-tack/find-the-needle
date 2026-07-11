@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "deepseek-v4-pro-kernel",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-4887394baef897bc57c9d78e4cd0487b6524e8fe3bab8aaa52841e70d31c1c38",
+      "version": "7.7.7"
+    },
+    "benchmark": "goroutine-leak-handler",
+    "billed_tokens": 143375,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 137216,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "dispatched_model": "deepseek-v4-pro",
+    "estimated_cost_usd": 0.006194603,
+    "executed_arm": "kernel",
+    "executed_provider": "deepseek",
+    "fresh_input_tokens": 6159,
+    "input_tokens": 6159,
+    "output_tokens": 3469,
+    "process_exit": "end_turn",
+    "provider_attestation": "observed",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 17turns, 6159+3469 tokens, $0.0062",
+    "timestamp": "2026-07-11T06:00:56Z",
+    "token_cost": 146844,
+    "tool_uses": 16,
+    "turns_to_fix": 17,
+    "wall_clock": 106.841,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T06:01:03+00:00"
+  }
+]

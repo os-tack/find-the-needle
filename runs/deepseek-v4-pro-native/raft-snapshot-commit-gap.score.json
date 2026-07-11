@@ -1,0 +1,53 @@
+{
+  "agent": "deepseek-v4-pro-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+    "version": "7.7.6"
+  },
+  "benchmark": "raft-snapshot-commit-gap",
+  "billed_tokens": 74159,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 62592,
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.006701871000000001,
+  "executed_arm": "native",
+  "executed_provider": "opencode",
+  "fresh_input_tokens": 11567,
+  "input_tokens": 11567,
+  "output_tokens": 1659,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All 3 rounds pass. The fix is two additions in `app/snapshot.go:47-56`:\n1. **`n.raftLog.CompactUpTo(snap.LastIncludedIndex)`** \u2014 discards log entries already covered by the snapshot, preventing them from being replayed after restart.\n2. **`n.commitIndex = snap.LastIncludedIndex`** \u2014 keeps commitIndex consistent so that `Restart()` correctly derives `lastApplied` from the snapshot boundary instead of resetting it to 0.",
+  "timestamp": "2026-07-10T23:23:19Z",
+  "token_cost": 13226,
+  "tool_uses": 14,
+  "turns_to_fix": 5,
+  "wall_clock": 37.27,
+  "reasoning_tokens": 575,
+  "native_usage_source": "opencode_stdout",
+  "native_usage": {
+    "source": "opencode_stdout",
+    "api_calls": 5,
+    "fresh_input_tokens": 11567,
+    "cache_read_tokens": 62592,
+    "cache_create_tokens": 0,
+    "output_tokens": 1659,
+    "reasoning_tokens": 575,
+    "billed_tokens": 74159,
+    "cost_usd": 0.006702
+  },
+  "native_usage_prev": {
+    "input_tokens": 74159,
+    "output_tokens": 1084,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.006701871000000001,
+    "turns_to_fix": 5
+  }
+}

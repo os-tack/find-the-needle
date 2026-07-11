@@ -1,0 +1,53 @@
+{
+  "agent": "deepseek-v4-pro-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+    "version": "7.7.6"
+  },
+  "benchmark": "rate-limit-bypass-header",
+  "billed_tokens": 59754,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 55680,
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.00321378,
+  "executed_arm": "native",
+  "executed_provider": "opencode",
+  "fresh_input_tokens": 4074,
+  "input_tokens": 4074,
+  "output_tokens": 1425,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass:\n\n- **Test 1**: Without spoofing, 10 passed, 5 blocked (correctly rate-limited)\n- **Test 2**: With rotating `X-Forwarded-For` headers, 10 passed, 20 blocked (bypass prevented)\n\nThe fix was in `app/ratelimiter.ts:30-41` \u2014 the `getClientIp` method was trusting the user-supplied `X-Forwarded-For` header, which allowed attackers to rotate spoofed IPs and get fresh rate limit windows on every request. Changed it to use `req.socket.remoteAddress` instead, which is the actual connecting IP and cannot be spoofed.",
+  "timestamp": "2026-07-10T23:27:52Z",
+  "token_cost": 5499,
+  "tool_uses": 12,
+  "turns_to_fix": 6,
+  "wall_clock": 57.095,
+  "reasoning_tokens": 520,
+  "native_usage_source": "opencode_stdout",
+  "native_usage": {
+    "source": "opencode_stdout",
+    "api_calls": 6,
+    "fresh_input_tokens": 4074,
+    "cache_read_tokens": 55680,
+    "cache_create_tokens": 0,
+    "output_tokens": 1425,
+    "reasoning_tokens": 520,
+    "billed_tokens": 59754,
+    "cost_usd": 0.003214
+  },
+  "native_usage_prev": {
+    "input_tokens": 59754,
+    "output_tokens": 905,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.00321378,
+    "turns_to_fix": 6
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "agent": "deepseek-v4-pro-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+    "version": "7.7.6"
+  },
+  "benchmark": "cache-stale-invalidation",
+  "billed_tokens": 68718,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 64384,
+  "control_type": "native",
+  "difficulty_tier": "medium",
+  "estimated_cost_usd": 0.003278392,
+  "executed_arm": "native",
+  "executed_provider": "opencode",
+  "fresh_input_tokens": 4334,
+  "input_tokens": 4334,
+  "output_tokens": 1333,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All tests pass. The issue was that `server.py` wasn't invalidating the cache after write operations:\n\n- **`_update_product`**: Added `cache.delete(f'products:{product_id}')` and `cache.delete('products:list')` to invalidate both the individual product cache and the list cache.\n- **`_create_product`**: Added `cache.delete('products:list')` to invalidate the list cache so the new product shows up immediately.",
+  "timestamp": "2026-07-10T22:08:48Z",
+  "token_cost": 5667,
+  "tool_uses": 12,
+  "turns_to_fix": 7,
+  "wall_clock": 32.846,
+  "reasoning_tokens": 418,
+  "native_usage_source": "opencode_stdout",
+  "native_usage": {
+    "source": "opencode_stdout",
+    "api_calls": 7,
+    "fresh_input_tokens": 4334,
+    "cache_read_tokens": 64384,
+    "cache_create_tokens": 0,
+    "output_tokens": 1333,
+    "reasoning_tokens": 418,
+    "billed_tokens": 68718,
+    "cost_usd": 0.003278
+  },
+  "native_usage_prev": {
+    "input_tokens": 68718,
+    "output_tokens": 915,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.003278392,
+    "turns_to_fix": 7
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "race-condition-counter",
+    "billed_tokens": 54620,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 51968,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.002260724,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 2652,
+    "input_tokens": 2652,
+    "output_tokens": 1056,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The bug was a classic read-modify-write race condition in `app/counter.js:12-20`. The `incrementCounter` function fetched the current value with `GET`, computed `value + 1`, then wrote it back with `SET`. Under concurrent load, multiple requests would read the same value and overwrite each other, losing increments.\n\nThe fix replaces `GET` + `SET` with Redis's atomic `INCR` command, which is single-threaded and guarantees each increment is serialized. Test passes: 100/100.",
+    "timestamp": "2026-07-10T23:21:18Z",
+    "token_cost": 3708,
+    "tool_uses": 10,
+    "turns_to_fix": 6,
+    "wall_clock": 35.774,
+    "reasoning_tokens": 275,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 6,
+      "fresh_input_tokens": 2652,
+      "cache_read_tokens": 51968,
+      "cache_create_tokens": 0,
+      "output_tokens": 1056,
+      "reasoning_tokens": 275,
+      "billed_tokens": 54620,
+      "cost_usd": 0.002261
+    },
+    "native_usage_prev": {
+      "input_tokens": 54620,
+      "output_tokens": 781,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.002260724,
+      "turns_to_fix": 6
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T23:21:23+00:00"
+  }
+]

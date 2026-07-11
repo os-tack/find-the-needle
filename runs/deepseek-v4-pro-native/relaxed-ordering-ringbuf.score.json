@@ -1,0 +1,53 @@
+{
+  "agent": "deepseek-v4-pro-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+    "version": "7.7.6"
+  },
+  "benchmark": "relaxed-ordering-ringbuf",
+  "billed_tokens": 78819,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 72064,
+  "control_type": "native",
+  "difficulty_tier": "extreme",
+  "estimated_cost_usd": 0.006128077,
+  "executed_arm": "native",
+  "executed_provider": "opencode",
+  "fresh_input_tokens": 6755,
+  "input_tokens": 6755,
+  "output_tokens": 3366,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "All 5 runs passed. The fix replaced `memory_order_relaxed` with `memory_order_acquire`/`memory_order_release` on the atomic operations that synchronize between producer and consumer:\n\n- **`ringbuf_push`**: producer reads `read_idx` with `acquire` (to see consumer's latest release) and writes `write_idx` with `release` (to publish slot data before the index update).\n- **`ringbuf_pop`**: consumer reads `write_idx` with `acquire` (to see producer's slot data) and writes `read_idx` with `release` (to finish slot read before signaling reuse).",
+  "timestamp": "2026-07-10T23:30:04Z",
+  "token_cost": 10121,
+  "tool_uses": 9,
+  "turns_to_fix": 6,
+  "wall_clock": 45.291,
+  "reasoning_tokens": 1985,
+  "native_usage_source": "opencode_stdout",
+  "native_usage": {
+    "source": "opencode_stdout",
+    "api_calls": 6,
+    "fresh_input_tokens": 6755,
+    "cache_read_tokens": 72064,
+    "cache_create_tokens": 0,
+    "output_tokens": 3366,
+    "reasoning_tokens": 1985,
+    "billed_tokens": 78819,
+    "cost_usd": 0.006128
+  },
+  "native_usage_prev": {
+    "input_tokens": 78819,
+    "output_tokens": 1381,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.006128077,
+    "turns_to_fix": 6
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "auth-bypass-path-traversal",
+    "billed_tokens": 88102,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 82688,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.003988544,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 5414,
+    "input_tokens": 5414,
+    "output_tokens": 1533,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. The fix was in `middleware.go:13-16` \u2014 the auth middleware now cleans the path with `path.Clean()` before checking the `/api/` prefix, matching the same normalization the router uses. Path manipulation attacks (`//api/admin`, `/health/../api/data`) are now correctly caught and return 401.",
+    "timestamp": "2026-07-10T22:04:03Z",
+    "token_cost": 6947,
+    "tool_uses": 13,
+    "turns_to_fix": 8,
+    "wall_clock": 51.749,
+    "reasoning_tokens": 510,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 8,
+      "fresh_input_tokens": 5414,
+      "cache_read_tokens": 82688,
+      "cache_create_tokens": 0,
+      "output_tokens": 1533,
+      "reasoning_tokens": 510,
+      "billed_tokens": 88102,
+      "cost_usd": 0.003989
+    },
+    "native_usage_prev": {
+      "input_tokens": 88102,
+      "output_tokens": 1023,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.003988544,
+      "turns_to_fix": 8
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T22:04:05+00:00"
+  }
+]

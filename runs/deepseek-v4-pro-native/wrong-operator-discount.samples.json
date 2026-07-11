@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "wrong-operator-discount",
+    "billed_tokens": 48788,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 45184,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "estimated_cost_usd": 0.002551072,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 3604,
+    "input_tokens": 3604,
+    "output_tokens": 942,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. The bug was in `pricing.py:11` \u2014 `subtotal + discount_percent / 100` should be `subtotal * discount_percent / 100`. A 20% discount on $1098.94 was being calculated as $1099.14 instead of $219.79.",
+    "timestamp": "2026-07-11T00:16:13Z",
+    "token_cost": 4546,
+    "tool_uses": 11,
+    "turns_to_fix": 5,
+    "wall_clock": 28.113,
+    "reasoning_tokens": 328,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 5,
+      "fresh_input_tokens": 3604,
+      "cache_read_tokens": 45184,
+      "cache_create_tokens": 0,
+      "output_tokens": 942,
+      "reasoning_tokens": 328,
+      "billed_tokens": 48788,
+      "cost_usd": 0.002551
+    },
+    "native_usage_prev": {
+      "input_tokens": 48788,
+      "output_tokens": 614,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.002551072,
+      "turns_to_fix": 5
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T00:16:19+00:00"
+  }
+]

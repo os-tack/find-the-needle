@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "kernel-panic-ioctl",
+    "billed_tokens": 184989,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 176256,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.010077122999999999,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 8733,
+    "input_tokens": 8733,
+    "output_tokens": 6482,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. The fix addressed three validation gaps in `ioctl_handler.c`:\n\n1. **`handle_set_config`** \u2014 Added NULL check for `req->value` before `memcpy` (was the segfault)\n2. **`handle_set_config`** \u2014 Added validation that `value_len` doesn't exceed `MAX_VALUE_LEN` (prevents buffer overread)\n3. **`handle_get_config`** \u2014 Added NULL check for `req->value` buffer before `memcpy` (would also crash)",
+    "timestamp": "2026-07-10T22:34:12Z",
+    "token_cost": 15215,
+    "tool_uses": 19,
+    "turns_to_fix": 12,
+    "wall_clock": 93.876,
+    "reasoning_tokens": 4157,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 12,
+      "fresh_input_tokens": 8733,
+      "cache_read_tokens": 176256,
+      "cache_create_tokens": 0,
+      "output_tokens": 6482,
+      "reasoning_tokens": 4157,
+      "billed_tokens": 184989,
+      "cost_usd": 0.010077
+    },
+    "native_usage_prev": {
+      "input_tokens": 184989,
+      "output_tokens": 2325,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.010077122999999999,
+      "turns_to_fix": 12
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T22:34:14+00:00"
+  }
+]

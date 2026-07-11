@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "bidi-override-injection",
+    "billed_tokens": 83852,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 76928,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.005369234,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 6924,
+    "input_tokens": 6924,
+    "output_tokens": 2389,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All 5 tests pass. Two fixes applied:\n\n1. **`app/sanitizer.py:28-30`** \u2014 Added BIDI control character stripping (`U+200E`, `U+200F`, `U+202A`-`U+202E`, `U+2066`-`U+2069`, `U+061C`, `U+FEFF`) to `sanitize_username()` so `\\u202enimda` becomes `nimda` before storage.\n\n2. **`app/auth.py:144-148`** \u2014 `check_admin_access()` now compares the stored username directly against `ADMIN_USERS` instead of using `_render_display_name()` which would reverse BIDI-controlled text and match \"admin\" from \"nimda\".",
+    "timestamp": "2026-07-10T22:06:16Z",
+    "token_cost": 9313,
+    "tool_uses": 11,
+    "turns_to_fix": 7,
+    "wall_clock": 51.753,
+    "reasoning_tokens": 918,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 7,
+      "fresh_input_tokens": 6924,
+      "cache_read_tokens": 76928,
+      "cache_create_tokens": 0,
+      "output_tokens": 2389,
+      "reasoning_tokens": 918,
+      "billed_tokens": 83852,
+      "cost_usd": 0.005369
+    },
+    "native_usage_prev": {
+      "input_tokens": 83852,
+      "output_tokens": 1471,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.005369234,
+      "turns_to_fix": 7
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T22:06:26+00:00"
+  }
+]

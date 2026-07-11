@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "linearizability-stale-read",
+    "billed_tokens": 567972,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 546688,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.024994984000000005,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 21284,
+    "input_tokens": 21284,
+    "output_tokens": 15810,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Three bugs fixed:\n\n1. **`app/raft/node.go:578`** \u2014 `handleHeartbeat` now calls `advanceCommitIndex()` after appending entries, so followers apply committed entries received via heartbeats (they were stuck in the log but never applied).\n\n2. **`app/handler.go:88`** \u2014 `handleRead` now uses `ReadLinearizable()` instead of `Read()`, so reads confirm the node's applied index matches the leader's commit index before returning.\n\n3. **`app/raft/node.go:425-443`** + **`app/raft/transport.go:14`** \u2014 Vote requests now carry `LastLogTerm`, and `handleVoteReq` compares both last log term and index (Raft election restriction), preventing a partitioned follower with a stale log from becoming leader.",
+    "timestamp": "2026-07-10T22:40:38Z",
+    "token_cost": 37094,
+    "tool_uses": 27,
+    "turns_to_fix": 20,
+    "wall_clock": 230.88,
+    "reasoning_tokens": 12247,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 20,
+      "fresh_input_tokens": 21284,
+      "cache_read_tokens": 546688,
+      "cache_create_tokens": 0,
+      "output_tokens": 15810,
+      "reasoning_tokens": 12247,
+      "billed_tokens": 567972,
+      "cost_usd": 0.024995
+    },
+    "native_usage_prev": {
+      "input_tokens": 567972,
+      "output_tokens": 3563,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.024994984000000005,
+      "turns_to_fix": 20
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T22:40:41+00:00"
+  }
+]

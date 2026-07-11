@@ -1,0 +1,53 @@
+{
+  "agent": "deepseek-v4-pro-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+    "version": "7.7.6"
+  },
+  "benchmark": "postgres-migration-schema-drift",
+  "billed_tokens": 138669,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 133120,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.004630284999999999,
+  "executed_arm": "native",
+  "executed_provider": "opencode",
+  "fresh_input_tokens": 5549,
+  "input_tokens": 5549,
+  "output_tokens": 1993,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": false,
+  "stop_reason": "fail",
+  "summary": "All tests passed. The bug was in `app/main.go`: the SQL queries used the old column name `status` which migration `002_rename_status.sql` renamed to `order_status`. Fixed in both `createOrder` (line 109-112) and `getOrder` (line 130-131).",
+  "timestamp": "2026-07-10T23:08:36Z",
+  "token_cost": 7542,
+  "tool_uses": 19,
+  "turns_to_fix": 12,
+  "wall_clock": 126.155,
+  "reasoning_tokens": 441,
+  "native_usage_source": "opencode_stdout",
+  "native_usage": {
+    "source": "opencode_stdout",
+    "api_calls": 12,
+    "fresh_input_tokens": 5549,
+    "cache_read_tokens": 133120,
+    "cache_create_tokens": 0,
+    "output_tokens": 1993,
+    "reasoning_tokens": 441,
+    "billed_tokens": 138669,
+    "cost_usd": 0.00463
+  },
+  "native_usage_prev": {
+    "input_tokens": 138669,
+    "output_tokens": 1552,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.004630284999999999,
+    "turns_to_fix": 12
+  }
+}

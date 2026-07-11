@@ -1,0 +1,53 @@
+{
+  "agent": "deepseek-v4-pro-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+    "version": "7.7.6"
+  },
+  "benchmark": "performance-cliff-hash",
+  "billed_tokens": 63313,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 60928,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.002117029,
+  "executed_arm": "native",
+  "executed_provider": "opencode",
+  "fresh_input_tokens": 2385,
+  "input_tokens": 2385,
+  "output_tokens": 987,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "Fixed. Changed `hashCode()` from `category.hashCode()` to `sku.hashCode()` at `src/Product.java:32`. The test passes \u2014 max chain length is now 4 (down from ~1000 with the bug), and items distribute evenly across 5991/16384 buckets.",
+  "timestamp": "2026-07-10T22:58:43Z",
+  "token_cost": 3372,
+  "tool_uses": 12,
+  "turns_to_fix": 7,
+  "wall_clock": 33.713,
+  "reasoning_tokens": 229,
+  "native_usage_source": "opencode_stdout",
+  "native_usage": {
+    "source": "opencode_stdout",
+    "api_calls": 7,
+    "fresh_input_tokens": 2385,
+    "cache_read_tokens": 60928,
+    "cache_create_tokens": 0,
+    "output_tokens": 987,
+    "reasoning_tokens": 229,
+    "billed_tokens": 63313,
+    "cost_usd": 0.002117
+  },
+  "native_usage_prev": {
+    "input_tokens": 63313,
+    "output_tokens": 758,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.002117029,
+    "turns_to_fix": 7
+  }
+}

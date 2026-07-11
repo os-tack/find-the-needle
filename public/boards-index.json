@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-10",
+ "generated": "2026-07-11",
  "cross_version": {
   "comparable": false,
   "note": "ostk versions are different experimental conditions (different kernel, drivers, benchmark oracles, schema eras). NO cross-version delta is published anywhere, and versioned boards never aggregate across versions. The rolling latest view (public/experiment-scores.json) may span versions across its single-snapshot columns for operational continuity; it carries per-column version attribution (ostk_versions + column_snapshots) and a per-version trust breakdown, and its cross-version totals are bookkeeping, not comparison. Compare runs only within one version, and mind each run's faults list even then."
@@ -1781,6 +1781,87 @@
       "cost_invalid_cells": 0,
       "invalid_cells": 8,
       "teardown_masked_cells": 3
+     }
+    }
+   ],
+   "schema_era": "axis-v2",
+   "judged": "axis-v2 (solve/cost split, fail-closed)",
+   "comparable_with_other_versions": false
+  },
+  {
+   "version": "v7.7.6",
+   "runs": [
+    {
+     "date": "2026-07-10",
+     "file": "v7.7.6/2026-07-10-experiment-scores.json",
+     "judged": "axis-v2 (solve/cost split, fail-closed)",
+     "snapshot": "july10v3",
+     "faults": [],
+     "models": {
+      "deepseek-v4-pro": {
+       "native": {
+        "solved": 35,
+        "total": 37,
+        "cost_usd": 0.2169,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 3
+       },
+       "ostk": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 0.2989,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "kernel"
+       }
+      }
+     },
+     "trust": {
+      "solve_valid_cells": 74,
+      "cost_valid_cells": 74,
+      "cost_invalid_cells": 0,
+      "invalid_cells": 0,
+      "teardown_masked_cells": 3
+     }
+    }
+   ],
+   "schema_era": "axis-v2",
+   "judged": "axis-v2 (solve/cost split, fail-closed)",
+   "comparable_with_other_versions": false
+  },
+  {
+   "version": "v7.7.7",
+   "runs": [
+    {
+     "date": "2026-07-11",
+     "file": "v7.7.7/2026-07-11-experiment-scores.json",
+     "judged": "axis-v2 (solve/cost split, fail-closed)",
+     "snapshot": "july11",
+     "faults": [],
+     "models": {
+      "deepseek-v4-pro": {
+       "ostk": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 0.266,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "kernel"
+       }
+      }
+     },
+     "trust": {
+      "solve_valid_cells": 37,
+      "cost_valid_cells": 37,
+      "cost_invalid_cells": 0,
+      "invalid_cells": 0,
+      "teardown_masked_cells": 0
      }
     }
    ],

@@ -1,0 +1,53 @@
+{
+  "agent": "deepseek-v4-pro-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+    "version": "7.7.6"
+  },
+  "benchmark": "k8s-assume-cache-silent-drop",
+  "billed_tokens": 43784,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 41728,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.0016798540000000002,
+  "executed_arm": "native",
+  "executed_provider": "opencode",
+  "fresh_input_tokens": 2056,
+  "input_tokens": 2056,
+  "output_tokens": 729,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "PASS. The fix was setting `conflictNotified = true` in `informerUpdate` at `main.go:76` when the assumed entry is dropped \u2014 the assumer now gets notified instead of the conflict being silently swallowed.",
+  "timestamp": "2026-07-10T22:29:46Z",
+  "token_cost": 2785,
+  "tool_uses": 5,
+  "turns_to_fix": 5,
+  "wall_clock": 33.69,
+  "reasoning_tokens": 245,
+  "native_usage_source": "opencode_stdout",
+  "native_usage": {
+    "source": "opencode_stdout",
+    "api_calls": 5,
+    "fresh_input_tokens": 2056,
+    "cache_read_tokens": 41728,
+    "cache_create_tokens": 0,
+    "output_tokens": 729,
+    "reasoning_tokens": 245,
+    "billed_tokens": 43784,
+    "cost_usd": 0.00168
+  },
+  "native_usage_prev": {
+    "input_tokens": 43784,
+    "output_tokens": 484,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.0016798540000000002,
+    "turns_to_fix": 5
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "split-brain-leader-election",
+    "billed_tokens": 75094,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 64512,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.005778366,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 10582,
+    "input_tokens": 10582,
+    "output_tokens": 1082,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "PASS. The bug was an off-by-one in the quorum check at `app/cluster/node.go:124`:\n\n- **Before:** `if finalVotes >= totalNodes/2` \u2014 with 5 nodes, `5/2 = 2`, so a node with only 2 votes could become leader, allowing both sides of a partition to elect a leader (split-brain).\n- **After:** `if finalVotes >= totalNodes/2+1` \u2014 requires strict majority (3 votes minimum for a 5-node cluster).",
+    "timestamp": "2026-07-10T23:44:47Z",
+    "token_cost": 11664,
+    "tool_uses": 7,
+    "turns_to_fix": 7,
+    "wall_clock": 65.977,
+    "reasoning_tokens": 282,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 7,
+      "fresh_input_tokens": 10582,
+      "cache_read_tokens": 64512,
+      "cache_create_tokens": 0,
+      "output_tokens": 1082,
+      "reasoning_tokens": 282,
+      "billed_tokens": 75094,
+      "cost_usd": 0.005778
+    },
+    "native_usage_prev": {
+      "input_tokens": 75094,
+      "output_tokens": 800,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.005778366,
+      "turns_to_fix": 7
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T23:44:52+00:00"
+  }
+]

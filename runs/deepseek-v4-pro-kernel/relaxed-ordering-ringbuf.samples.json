@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "deepseek-v4-pro-kernel",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-4887394baef897bc57c9d78e4cd0487b6524e8fe3bab8aaa52841e70d31c1c38",
+      "version": "7.7.7"
+    },
+    "benchmark": "relaxed-ordering-ringbuf",
+    "billed_tokens": 144246,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 134528,
+    "control_type": "kernel",
+    "difficulty_tier": "extreme",
+    "dispatched_model": "deepseek-v4-pro",
+    "estimated_cost_usd": 0.008376824,
+    "executed_arm": "kernel",
+    "executed_provider": "deepseek",
+    "fresh_input_tokens": 9718,
+    "input_tokens": 9718,
+    "output_tokens": 4209,
+    "process_exit": "end_turn",
+    "provider_attestation": "observed",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 14turns, 9718+4209 tokens, $0.0084",
+    "timestamp": "2026-07-11T06:40:05Z",
+    "token_cost": 148455,
+    "tool_uses": 13,
+    "turns_to_fix": 14,
+    "wall_clock": 91.427,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T06:40:08+00:00"
+  }
+]

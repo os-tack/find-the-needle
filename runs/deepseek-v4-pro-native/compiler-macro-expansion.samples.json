@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "compiler-macro-expansion",
+    "billed_tokens": 63056,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 54656,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "estimated_cost_usd": 0.004802168,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 8400,
+    "input_tokens": 8400,
+    "output_tokens": 1092,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. The bug was in `src/codegen.rs:75` \u2014 the `Ref` getter format string was missing `&` before the return type, producing `fn company(&self) -> Company` instead of `fn company(&self) -> &Company`. The method body already returns `&self.company`, so the signature was mismatched.",
+    "timestamp": "2026-07-10T22:10:37Z",
+    "token_cost": 9492,
+    "tool_uses": 13,
+    "turns_to_fix": 5,
+    "wall_clock": 26.534,
+    "reasoning_tokens": 321,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 5,
+      "fresh_input_tokens": 8400,
+      "cache_read_tokens": 54656,
+      "cache_create_tokens": 0,
+      "output_tokens": 1092,
+      "reasoning_tokens": 321,
+      "billed_tokens": 63056,
+      "cost_usd": 0.004802
+    },
+    "native_usage_prev": {
+      "input_tokens": 63056,
+      "output_tokens": 771,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.004802168,
+      "turns_to_fix": 5
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T22:10:38+00:00"
+  }
+]

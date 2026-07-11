@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "tls-chain-ordering-strict",
+    "billed_tokens": 192460,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 186112,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "estimated_cost_usd": 0.008370676,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 6348,
+    "input_tokens": 6348,
+    "output_tokens": 5672,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "All tests pass. The fix adds a `reorderChain` function in `app/tlssetup/loader.go:62` that sorts the chain certificates into proper RFC 5246 order (leaf \u2192 intermediate \u2192 root) using `x509.Certificate.CheckSignatureFrom` to verify issuer relationships.",
+    "timestamp": "2026-07-11T00:08:43Z",
+    "token_cost": 12020,
+    "tool_uses": 18,
+    "turns_to_fix": 14,
+    "wall_clock": 93.82,
+    "reasoning_tokens": 2724,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 14,
+      "fresh_input_tokens": 6348,
+      "cache_read_tokens": 186112,
+      "cache_create_tokens": 0,
+      "output_tokens": 5672,
+      "reasoning_tokens": 2724,
+      "billed_tokens": 192460,
+      "cost_usd": 0.008371
+    },
+    "native_usage_prev": {
+      "input_tokens": 192460,
+      "output_tokens": 2948,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.008370676,
+      "turns_to_fix": 14
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T00:08:44+00:00"
+  }
+]

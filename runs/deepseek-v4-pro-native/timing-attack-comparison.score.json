@@ -1,0 +1,53 @@
+{
+  "agent": "deepseek-v4-pro-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+    "version": "7.7.6"
+  },
+  "benchmark": "timing-attack-comparison",
+  "billed_tokens": 53561,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 51456,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.001876503,
+  "executed_arm": "native",
+  "executed_provider": "opencode",
+  "fresh_input_tokens": 2105,
+  "input_tokens": 2105,
+  "output_tokens": 890,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "The test passes. The fix replaces the short-circuiting `==` comparison in `compareHashes` (`app/auth/compare.go:8`) with `crypto/subtle.ConstantTimeCompare`, which examines every byte regardless of match position, eliminating the timing side-channel.",
+  "timestamp": "2026-07-11T00:05:51Z",
+  "token_cost": 2995,
+  "tool_uses": 10,
+  "turns_to_fix": 6,
+  "wall_clock": 29.096,
+  "reasoning_tokens": 193,
+  "native_usage_source": "opencode_stdout",
+  "native_usage": {
+    "source": "opencode_stdout",
+    "api_calls": 6,
+    "fresh_input_tokens": 2105,
+    "cache_read_tokens": 51456,
+    "cache_create_tokens": 0,
+    "output_tokens": 890,
+    "reasoning_tokens": 193,
+    "billed_tokens": 53561,
+    "cost_usd": 0.001877
+  },
+  "native_usage_prev": {
+    "input_tokens": 53561,
+    "output_tokens": 697,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.001876503,
+    "turns_to_fix": 6
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "nginx-upstream-port-mismatch",
+    "billed_tokens": 88537,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 84608,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.003101579,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 3929,
+    "input_tokens": 3929,
+    "output_tokens": 1248,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The bug was an **nginx upstream port mismatch**: `proxy_pass http://127.0.0.1:5001` (`/etc/nginx/sites-available/default:15`) but Flask runs on port `5000`. Changed `5001` \u2192 `5000`. All tests pass.",
+    "timestamp": "2026-07-10T22:51:22Z",
+    "token_cost": 5177,
+    "tool_uses": 14,
+    "turns_to_fix": 9,
+    "wall_clock": 32.602,
+    "reasoning_tokens": 328,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 9,
+      "fresh_input_tokens": 3929,
+      "cache_read_tokens": 84608,
+      "cache_create_tokens": 0,
+      "output_tokens": 1248,
+      "reasoning_tokens": 328,
+      "billed_tokens": 88537,
+      "cost_usd": 0.003102
+    },
+    "native_usage_prev": {
+      "input_tokens": 88537,
+      "output_tokens": 920,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.003101579,
+      "turns_to_fix": 9
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T22:51:24+00:00"
+  }
+]

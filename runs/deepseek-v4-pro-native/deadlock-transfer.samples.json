@@ -1,0 +1,59 @@
+[
+  {
+    "agent": "deepseek-v4-pro-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+      "version": "7.7.6"
+    },
+    "benchmark": "deadlock-transfer",
+    "billed_tokens": 45999,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 43392,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "estimated_cost_usd": 0.0020873909999999996,
+    "executed_arm": "native",
+    "executed_provider": "opencode",
+    "fresh_input_tokens": 2607,
+    "input_tokens": 2607,
+    "output_tokens": 915,
+    "process_exit": null,
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "PASS. The fix: lock accounts in a consistent order by comparing IDs (`from.getId().compareTo(to.getId())`), always locking the lexicographically smaller ID first. This prevents the circular wait condition that caused deadlocks.",
+    "timestamp": "2026-07-10T22:15:36Z",
+    "token_cost": 3522,
+    "tool_uses": 5,
+    "turns_to_fix": 5,
+    "wall_clock": 67.184,
+    "teardown_masked": true,
+    "teardown_masked_by": "stall_watch",
+    "reasoning_tokens": 239,
+    "native_usage_source": "opencode_stdout",
+    "native_usage": {
+      "source": "opencode_stdout",
+      "api_calls": 5,
+      "fresh_input_tokens": 2607,
+      "cache_read_tokens": 43392,
+      "cache_create_tokens": 0,
+      "output_tokens": 915,
+      "reasoning_tokens": 239,
+      "billed_tokens": 45999,
+      "cost_usd": 0.002087
+    },
+    "native_usage_prev": {
+      "input_tokens": 45999,
+      "output_tokens": 676,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.0020873909999999996,
+      "turns_to_fix": 5
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-10T22:15:53+00:00"
+  }
+]

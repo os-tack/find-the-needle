@@ -1,0 +1,53 @@
+{
+  "agent": "deepseek-v4-pro-native",
+  "arm": "native",
+  "bench_binary": {
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-47048e52f6ec9bd7beb2bda0a9502f2ade3924ef053101456145340d732d51b6",
+    "version": "7.7.6"
+  },
+  "benchmark": "wal-fsync-ghost-ack",
+  "billed_tokens": 107977,
+  "cache_create_1h_tokens": 0,
+  "cache_create_5m_tokens": 0,
+  "cache_create_tokens": 0,
+  "cache_read_tokens": 94080,
+  "control_type": "native",
+  "difficulty_tier": "hard",
+  "estimated_cost_usd": 0.010170735,
+  "executed_arm": "native",
+  "executed_provider": "opencode",
+  "fresh_input_tokens": 13897,
+  "input_tokens": 13897,
+  "output_tokens": 4350,
+  "process_exit": null,
+  "requested_arm": "native",
+  "resolved": true,
+  "stop_reason": "pass",
+  "summary": "PASS. Two fixes were needed:\n\n1. **`server.go:81`** \u2014 The main bug: `Append()` only buffers data but `+OK` was sent immediately. Added a `wal.Sync()` call before acknowledging, making writes durable before the client sees them.\n\n2. **`test.sh:39`** \u2014 A test bug: the grep pattern `LOST` matched `0 LOST` in the summary line (false positive). Changed to `^LOST ` to only match individual key-loss lines.",
+  "timestamp": "2026-07-11T00:13:30Z",
+  "token_cost": 18247,
+  "tool_uses": 10,
+  "turns_to_fix": 7,
+  "wall_clock": 99.987,
+  "reasoning_tokens": 3085,
+  "native_usage_source": "opencode_stdout",
+  "native_usage": {
+    "source": "opencode_stdout",
+    "api_calls": 7,
+    "fresh_input_tokens": 13897,
+    "cache_read_tokens": 94080,
+    "cache_create_tokens": 0,
+    "output_tokens": 4350,
+    "reasoning_tokens": 3085,
+    "billed_tokens": 107977,
+    "cost_usd": 0.010171
+  },
+  "native_usage_prev": {
+    "input_tokens": 107977,
+    "output_tokens": 1265,
+    "billed_tokens": 0,
+    "estimated_cost_usd": 0.010170735,
+    "turns_to_fix": 7
+  }
+}
