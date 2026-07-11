@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "kimi-k2.7-code-kernel",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "timing-attack-comparison",
+    "billed_tokens": 102072,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 94204,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "dispatched_model": "kimi-k2.7-code",
+    "estimated_cost_usd": 0.03148536,
+    "executed_arm": "kernel",
+    "executed_provider": "moonshot",
+    "fresh_input_tokens": 7868,
+    "input_tokens": 7868,
+    "output_tokens": 1528,
+    "process_exit": "end_turn",
+    "provider_attestation": "observed",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 18turns, 7868+1528 tokens, $0.0315",
+    "timestamp": "2026-07-11T12:13:18Z",
+    "token_cost": 103600,
+    "tool_uses": 17,
+    "turns_to_fix": 18,
+    "wall_clock": 85.791,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T12:13:21+00:00"
+  }
+]

@@ -126,6 +126,12 @@ FRONTIER_2026 = {  # model -> arms (exact, no gating)
     # full matrix run on this id without a green smoke cell first.
     "gemini-3.5-flash":  ["native", "kernel-cpu"],
     "devstral-2512":     ["native", "kernel-cpu"],
+    # mistral-medium-3.5 (added 2026-07-11): Mistral's 128B/256K frontier
+    # coder that replaced Devstral 2 as the Vibe CLI's default. Tier-1:
+    # native -> vibe CLI (mistral- prefix, MISTRAL_API_KEY), kernel-cpu ->
+    # native Mistral CpuDriver (providers.rs mistral* -> ApiProvider::Mistral,
+    # api.mistral.ai own key). Both arms hit the vendor endpoint; no OpenRouter.
+    "mistral-medium-3.5": ["native", "kernel-cpu"],
     # gpt-5.5: runs the kernel-cpu arm but ostk v7.6.0 has no native OpenAI
     # Responses-API driver, so it falls back to generic OpenRouter → labeled B*
     # (generic_kernel) in consolidate_scores. gpt-5.5-pro dropped 2026-06-14
@@ -145,7 +151,14 @@ FRONTIER_2026 = {  # model -> arms (exact, no gating)
     # Still generic_kernel tier (no tuned driver), but both arms now hit the
     # same vendor serving stack; executed_provider stamps "deepseek".
     "deepseek-v4-pro":   ["native", "kernel"],
-    "kimi-k2.6":         ["native", "kernel"],
+    # kimi-k2.7-code (replaces kimi-k2.6 on the rolling board 2026-07-11):
+    # native -> Kimi CLI in-container (config.toml base_url api.moonshot.ai,
+    # own key) ; kernel -> Moonshot OWN endpoint since ostk v7.7.7 (bare
+    # kimi- prefix routes to api.moonshot.ai unconditionally, generic
+    # OpenAI-compat client, executed_provider stamps "moonshot"). The k2.6
+    # june16 columns stay frozen in boards/v7.6.0/; archiving runs/kimi-k2.6-*
+    # drops it from the latest view so k2.7-code takes the kimi slot.
+    "kimi-k2.7-code":    ["native", "kernel"],
 }
 
 @dataclass
@@ -779,6 +792,11 @@ def main() -> int:
                          "produced resolved=false. Pass --samples 1 to disable.")
     ap.add_argument("--no-resample", action="store_true",
                     help="alias for --samples 1 (single attempt, no F7 re-sampling)")
+    ap.add_argument("--no-consolidate", action="store_true",
+                    help="skip the auto-consolidate step on completion (use when "
+                         "running concurrent captures — consolidate_scores writes "
+                         "public/*.json non-atomically, so run ONE consolidation "
+                         "manually after all concurrent runs finish)")
     args = ap.parse_args()
     samples_max = 1 if args.no_resample else max(1, args.samples)
 
@@ -1026,10 +1044,13 @@ def main() -> int:
                     continue  # still retryable
                 print(f"  {v['status']:16s} {k[0]} / {k[1]} / {k[2]}")
 
-    # auto-consolidate on full success (skip in dry-run)
-    if not args.dry_run and failed_hard == 0 and failed_trans == 0 and (ROOT / "consolidate_scores.py").exists():
+    # auto-consolidate on full success (skip in dry-run or when --no-consolidate,
+    # e.g. concurrent captures that must share a single manual consolidation)
+    if not args.dry_run and not args.no_consolidate and failed_hard == 0 and failed_trans == 0 and (ROOT / "consolidate_scores.py").exists():
         print("\n[consolidate] running consolidate_scores.py")
         subprocess.run(["python3", "consolidate_scores.py"], cwd=ROOT)
+    elif args.no_consolidate:
+        print("\n[consolidate] SKIPPED (--no-consolidate) — run consolidate_scores.py manually after all concurrent captures finish")
 
     return 0 if failed_hard == 0 else 2
 

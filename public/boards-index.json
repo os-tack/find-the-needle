@@ -1843,6 +1843,48 @@
      "snapshot": "july11",
      "faults": [],
      "models": {
+      "kimi-k2.7-code": {
+       "native": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 1.1666,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 35,
+        "total": 37,
+        "cost_usd": 1.8612,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "kernel"
+       }
+      },
+      "mistral-medium-3.5": {
+       "native": {
+        "solved": 11,
+        "total": 23,
+        "cost_usd": 59.1491,
+        "cost_cells": 23,
+        "invalid": 4,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 23,
+        "total": 23,
+        "cost_usd": 9.6633,
+        "cost_cells": 23,
+        "invalid": 3,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "cpu"
+       }
+      },
       "deepseek-v4-pro": {
        "ostk": {
         "solved": 36,
@@ -1857,10 +1899,10 @@
       }
      },
      "trust": {
-      "solve_valid_cells": 37,
-      "cost_valid_cells": 37,
+      "solve_valid_cells": 157,
+      "cost_valid_cells": 157,
       "cost_invalid_cells": 0,
-      "invalid_cells": 0,
+      "invalid_cells": 7,
       "teardown_masked_cells": 0
      }
     }

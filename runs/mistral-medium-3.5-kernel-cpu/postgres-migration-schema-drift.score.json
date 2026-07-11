@@ -1,0 +1,37 @@
+{
+  "benchmark": "postgres-migration-schema-drift",
+  "agent": "mistral-medium-3.5-kernel-cpu",
+  "arm": "kernel-cpu",
+  "control_type": "kernel-cpu",
+  "timestamp": "2026-07-11T16:44:54+00:00",
+  "difficulty_tier": "hard",
+  "resolved": false,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "billed_tokens": 0,
+  "estimated_cost_usd": 0,
+  "stop_reason": "stall",
+  "summary": "stall_watch kill: hard deadline 1800s exceeded",
+  "wall_clock": 2416.9,
+  "stall": {
+    "detail": "hard deadline 1800s exceeded",
+    "timeline": [
+      {
+        "ts": "2026-07-11T16:04:37+00:00",
+        "model": "mistral-medium-3.5",
+        "bench": "postgres-migration-schema-drift",
+        "arm": "kernel-cpu",
+        "state": "running",
+        "detail": "pid=97976 deadline=1800s spool=/Users/scottmeyer/projects/needle-bench/runs/mistral-medium-3.5-kernel-cpu/postgres-migration-schema-drift.launcher.log"
+      }
+    ]
+  },
+  "scored_by": "stall_watch:stall_kill",
+  "bench_binary": {
+    "version": "7.7.7",
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d"
+  }
+}

@@ -293,6 +293,11 @@ RATE_CARD = {
     # the EU at wiring time — pre-wired for when access opens.
     "grok-4.5": (2.00, 6.00),
     "grok-code-fast-1": (0.20, 1.50),
+    # mistral-medium-3.5 (api.mistral.ai, 2026-07 card): $1.5 in / $7.5 out.
+    # Powers Mistral Vibe (replaced Devstral 2 as the CLI's default coder);
+    # 128B dense, 256K ctx. No documented prompt-caching surface (cache_seam
+    # NO_CACHE), so all input prices as fresh.
+    "mistral-medium-3.5": (1.50, 7.50),
     "devstral-small-latest": (0.10, 0.30), "devstral-small": (0.10, 0.30),
     "devstral-medium": (0.40, 2.00), "devstral-2512": (0.40, 2.00),
     "codestral-2508": (0.30, 0.90),
@@ -355,6 +360,9 @@ CPU_DRIVER_MODELS = {
     "gpt-5-5", "gpt-5-6",
     # Mistral — native API
     "codestral-2508", "devstral-2512", "devstral-medium", "devstral-small-latest",
+    "mistral-medium-3-5",  # frontier-2026: native Mistral CpuDriver (ApiProvider::Mistral,
+                           # src/cpu). Kernel-cpu journals show cpu.dispatch model=mistral-medium-3.5
+                           # with server-attributed cache reads — a true B (native driver), not B*.
 }
 
 
@@ -758,7 +766,8 @@ NATIVE_CLI_MAP = {
     "gpt-4-1": "codex", "gpt-5-codex": "codex", "o4-mini": "codex", "gpt-5-5": "codex",
     "gpt-5-6": "codex", "gpt-5-6-sol": "codex",
     "devstral-2512": "vibe", "devstral-medium": "vibe", "devstral-small-latest": "vibe",
-    "kimi-k2-5": "kimi-cli", "kimi-k2-6": "kimi",
+    "mistral-medium-3-5": "vibe",
+    "kimi-k2-5": "kimi-cli", "kimi-k2-6": "kimi", "kimi-k2-7-code": "kimi",
 }
 
 

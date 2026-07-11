@@ -1,0 +1,58 @@
+[
+  {
+    "agent": "kimi-k2.7-code-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "split-brain-leader-election",
+    "billed_tokens": 176650,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 158464,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "kimi",
+    "fresh_input_tokens": 18186,
+    "input_tokens": 18186,
+    "output_tokens": 2076,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "To resume this session: kimi -r 674e9bcf-2004-4f61-ab55-a6413584326c",
+    "timestamp": "2026-07-11T11:45:27Z",
+    "token_cost": 20262,
+    "tool_uses": 14,
+    "turns_to_fix": 10,
+    "wall_clock": 71.535,
+    "native_usage_source": "kimi_stdout",
+    "native_usage": {
+      "source": "kimi_stdout",
+      "api_calls": 10,
+      "fresh_input_tokens": 18186,
+      "cache_read_tokens": 158464,
+      "cache_create_tokens": 0,
+      "output_tokens": 2076,
+      "reasoning_tokens": 0,
+      "billed_tokens": 176650,
+      "cost_usd": null
+    },
+    "native_usage_prev": {
+      "input_tokens": 26441,
+      "output_tokens": 0,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "turns_to_fix": 10
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T11:45:28+00:00"
+  }
+]

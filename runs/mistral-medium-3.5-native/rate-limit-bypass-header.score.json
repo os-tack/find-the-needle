@@ -1,0 +1,37 @@
+{
+  "benchmark": "rate-limit-bypass-header",
+  "agent": "mistral-medium-3.5-native",
+  "arm": "native",
+  "control_type": "native",
+  "timestamp": "2026-07-11T20:24:43+00:00",
+  "difficulty_tier": "medium",
+  "resolved": false,
+  "turns_to_fix": 0,
+  "token_cost": 0,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "billed_tokens": 0,
+  "estimated_cost_usd": 0,
+  "stop_reason": "stall",
+  "summary": "stall_watch kill: no progress for 353s (warn@90 probe@180 kill@300)",
+  "wall_clock": 375.0,
+  "stall": {
+    "detail": "no progress for 353s (warn@90 probe@180 kill@300)",
+    "timeline": [
+      {
+        "ts": "2026-07-11T20:18:28+00:00",
+        "model": "mistral-medium-3.5",
+        "bench": "rate-limit-bypass-header",
+        "arm": "native",
+        "state": "running",
+        "detail": "pid=13472 deadline=1200s spool=/Users/scottmeyer/projects/needle-bench/runs/mistral-medium-3.5-native/rate-limit-bypass-header.launcher.log"
+      }
+    ]
+  },
+  "scored_by": "stall_watch:stall_kill",
+  "bench_binary": {
+    "version": "7.7.7",
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d"
+  }
+}

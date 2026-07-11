@@ -1,0 +1,58 @@
+[
+  {
+    "agent": "mistral-medium-3.5-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "k8s-scheduler-shutdown-deadlock",
+    "billed_tokens": 622411,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 0,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "vibe",
+    "fresh_input_tokens": 622411,
+    "input_tokens": 622411,
+    "output_tokens": 6093,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Excellent! The task tool confirms that the test passes with the fix. The output is:\n\n```\nOK: clean shutdown\nPASS\n```\n\n## Summary\n\n**The Needle Found:** The deadlock was in the `Run()` method of the `Scheduler` struct.\n\n**The Fix:** Swapped the order of operations on lines 98-101 in `/workspace/main.go`:\n- **Before (buggy):** Wait for goroutine to finish, then close queue \u2192 deadlock\n- **After (fixed):** Close queue first, then wait for goroutine \u2192 clean shutdown\n\n**Why it works:**\n1. When shutdown is triggered, `queue.Close()` is called immediately\n2. This sets `closed=true` and broadcasts to wake all waiting `Pop()` calls\n3. `Pop()` sees `closed=true` and returns an error\n4. The goroutine exits and closes the `done` channel\n5. `Run()` can now safely wait for the goroutine to finish\n\nThe test confirms the fix works correctly with output: `OK: clean shutdown` and `PASS`.",
+    "timestamp": "2026-07-11T12:29:30Z",
+    "token_cost": 628504,
+    "tool_uses": 44,
+    "turns_to_fix": 43,
+    "wall_clock": 135.036,
+    "native_usage_source": "vibe_meta",
+    "native_usage": {
+      "source": "vibe_meta",
+      "api_calls": 44,
+      "fresh_input_tokens": 622411,
+      "cache_read_tokens": 0,
+      "cache_create_tokens": 0,
+      "output_tokens": 6093,
+      "reasoning_tokens": 0,
+      "billed_tokens": 622411,
+      "cost_usd": null
+    },
+    "native_usage_prev": {
+      "input_tokens": 622411,
+      "output_tokens": 6093,
+      "billed_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "turns_to_fix": 43
+    },
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T12:29:36+00:00"
+  }
+]

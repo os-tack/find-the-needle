@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "mistral-medium-3.5-kernel-cpu",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "api-version-field-drop",
+    "billed_tokens": 248449,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 8688,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "dispatched_model": "mistral-medium-3.5",
+    "estimated_cost_usd": 0.7507944,
+    "executed_arm": "kernel-cpu",
+    "executed_provider": "mistral",
+    "fresh_input_tokens": 239761,
+    "input_tokens": 239761,
+    "output_tokens": 1927,
+    "process_exit": "end_turn",
+    "provider_attestation": "observed",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 24turns, 239761+1927 tokens, $0.7508",
+    "timestamp": "2026-07-11T09:59:00Z",
+    "token_cost": 250376,
+    "tool_uses": 23,
+    "turns_to_fix": 24,
+    "wall_clock": 105.417,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T09:59:01+00:00"
+  }
+]

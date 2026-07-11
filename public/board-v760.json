@@ -49,22 +49,23 @@
  "faults_ref": "boards/FAULTS.json",
  "trust": {
   "doctrine": "fail-closed, judged per axis. SOLVE axis (oracle verdict + arm receipt + not stalled): malformed / no-arm-receipt / arm-mismatch / deadline / zero-work / duplicate-column cells are fully INVALID \u2014 excluded from everything, counted visibly. COST axis (real token/cost accounting): zero token accounting on a completed run keeps the solve verdict and marks cost UNAVAILABLE \u2014 included in solve columns, excluded from cost/token columns, counted visibly, never priced. absent = never run (not invalid).",
-  "solve_valid_cells": 761,
-  "cost_valid_cells": 761,
+  "solve_valid_cells": 807,
+  "cost_valid_cells": 807,
   "cost_invalid_cells": 0,
-  "invalid_cells": 17,
+  "invalid_cells": 24,
   "policy_excluded_cells": 23,
   "invalid_by_reason": {
    "deadline_exceeded": 5,
    "model_mismatch": 8,
-   "zero_work": 4
+   "stall": 6,
+   "zero_work": 5
   },
   "cost_invalid_by_reason": {},
   "teardown_masked_cells": 43,
   "by_ostk_version": {
    "v7.6.0": {
-    "solve_valid_cells": 398,
-    "cost_valid_cells": 398,
+    "solve_valid_cells": 324,
+    "cost_valid_cells": 324,
     "cost_invalid_cells": 0,
     "invalid_cells": 9
    },
@@ -99,10 +100,10 @@
     "invalid_cells": 0
    },
    "v7.7.7": {
-    "solve_valid_cells": 37,
-    "cost_valid_cells": 37,
+    "solve_valid_cells": 157,
+    "cost_valid_cells": 157,
     "cost_invalid_cells": 0,
-    "invalid_cells": 0
+    "invalid_cells": 7
    }
   },
   "mixed_versions_note": "the totals above aggregate columns executed under more than one binary version (per-version split in by_ostk_version) \u2014 operational bookkeeping, NOT a cross-version comparison. No cross-version delta is published anywhere; versioned boards under boards/<version>/ are single-version."
@@ -238,6 +239,138 @@
     "billed": 558702,
     "output": 7732,
     "input_total": 558702
+   }
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "type": "B*",
+   "native_cli": "kimi",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 37,
+   "native_total": 37,
+   "kernel_solved": 35,
+   "kernel_total": 37,
+   "both_n": 35,
+   "both_cost_n": 35,
+   "invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 37
+   },
+   "source_arm": "kernel",
+   "snapshots": {
+    "native": "july11",
+    "ostk": "july11"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 1.086,
+    "fresh": 302099,
+    "cache_read": 3063040,
+    "cache_create": 0,
+    "billed": 3365139,
+    "output": 54214,
+    "input_total": 3365139
+   },
+   "kernel": {
+    "cost": 1.567,
+    "fresh": 356401,
+    "cache_read": 4424812,
+    "cache_create": 0,
+    "billed": 4414390,
+    "output": 96848,
+    "input_total": 4781213
+   },
+   "cost_delta": 44.3,
+   "tok_delta": 42.1,
+   "kernel_abs": {
+    "cost": 1.567,
+    "fresh": 356401,
+    "cache_read": 4424812,
+    "cache_create": 0,
+    "billed": 4414390,
+    "output": 96848,
+    "input_total": 4781213
+   }
+  },
+  {
+   "model": "mistral-medium-3.5",
+   "type": "B",
+   "native_cli": "vibe",
+   "native_present": true,
+   "published": 37,
+   "native_solved": 11,
+   "native_total": 23,
+   "kernel_solved": 23,
+   "kernel_total": 23,
+   "both_n": 11,
+   "both_cost_n": 11,
+   "invalid": {
+    "native": 4,
+    "ostk": 3
+   },
+   "cost_invalid": {
+    "native": 0,
+    "ostk": 0
+   },
+   "masked": {
+    "native": 0,
+    "ostk": 0
+   },
+   "native_cost_basis": "bucket-split",
+   "native_cost_bases": {
+    "bucket-split": 23
+   },
+   "source_arm": "cpu",
+   "snapshots": {
+    "native": "july11",
+    "ostk": "july11"
+   },
+   "cross_snapshot_delta": false,
+   "cross_version_pair": false,
+   "delta_note": null,
+   "native": {
+    "cost": 24.365,
+    "fresh": 15641612,
+    "cache_read": 0,
+    "cache_create": 0,
+    "billed": 12767672,
+    "output": 120284,
+    "input_total": 15641612
+   },
+   "kernel": {
+    "cost": 7.155,
+    "fresh": 4421344,
+    "cache_read": 345872,
+    "cache_create": 0,
+    "billed": 2712377,
+    "output": 62861,
+    "input_total": 4767216
+   },
+   "cost_delta": -70.6,
+   "tok_delta": -69.5,
+   "kernel_abs": {
+    "cost": 9.663,
+    "fresh": 6012307,
+    "cache_read": 439888,
+    "cache_create": 0,
+    "billed": 4397356,
+    "output": 77186,
+    "input_total": 6452195
    }
   },
   {
@@ -502,72 +635,6 @@
     "billed": 6946605,
     "output": 87624,
     "input_total": 6946605
-   }
-  },
-  {
-   "model": "kimi-k2.6",
-   "type": "B*",
-   "native_cli": "kimi",
-   "native_present": true,
-   "published": 37,
-   "native_solved": 36,
-   "native_total": 37,
-   "kernel_solved": 35,
-   "kernel_total": 37,
-   "both_n": 35,
-   "both_cost_n": 35,
-   "invalid": {
-    "native": 0,
-    "ostk": 0
-   },
-   "cost_invalid": {
-    "native": 0,
-    "ostk": 0
-   },
-   "masked": {
-    "native": 0,
-    "ostk": 0
-   },
-   "native_cost_basis": "bucket-split",
-   "native_cost_bases": {
-    "bucket-split": 37
-   },
-   "source_arm": "kernel",
-   "snapshots": {
-    "native": "june16",
-    "ostk": "june16"
-   },
-   "cross_snapshot_delta": false,
-   "cross_version_pair": false,
-   "delta_note": null,
-   "native": {
-    "cost": 0.327,
-    "fresh": 386585,
-    "cache_read": 2390016,
-    "cache_create": 0,
-    "billed": 2776601,
-    "output": 38486,
-    "input_total": 2776601
-   },
-   "kernel": {
-    "cost": 1.42,
-    "fresh": 2911943,
-    "cache_read": 0,
-    "cache_create": 0,
-    "billed": 2911943,
-    "output": 128090,
-    "input_total": 2911943
-   },
-   "cost_delta": 334.3,
-   "tok_delta": 4.9,
-   "kernel_abs": {
-    "cost": 1.42,
-    "fresh": 2911943,
-    "cache_read": 0,
-    "cache_create": 0,
-    "billed": 2911943,
-    "output": 128090,
-    "input_total": 2911943
    }
   },
   {
