@@ -171,12 +171,45 @@ class TestProviderMismatch(unittest.TestCase):
         self.assertEqual(cls.status, cv.VALID, cls.reasons)
 
     def test_model_with_no_native_expectation_is_noop(self):
-        # grok/kimi/qwen: no single native provider to reconcile against —
-        # an unmapped model never poisons a cell by itself. (deepseek moved
-        # to a mapped expectation in v7.7.6 — see the deepseek tests below.)
-        cell = base_cell(agent="grok-4.3-kernel-cpu", executed_arm="kernel-cpu",
+        # qwen: no single native provider to reconcile against — an unmapped
+        # model never poisons a cell by itself. (deepseek moved to a mapped
+        # expectation in v7.7.6; kimi/grok in v7.7.7 — see tests below.)
+        cell = base_cell(agent="qwen3-coder-plus-kernel-cpu", executed_arm="kernel-cpu",
                          executed_provider="openrouter")
-        cls = cv.classify_cell(cell, requested_arm="kernel-cpu", model="grok-4.3")
+        cls = cv.classify_cell(cell, requested_arm="kernel-cpu", model="qwen3-coder-plus")
+        self.assertEqual(cls.status, cv.VALID, cls.reasons)
+
+    def test_kimi_kernel_via_openrouter_is_invalid(self):
+        # v7.7.7: bare kimi-* kernel cells must execute on the Moonshot own
+        # endpoint; an OpenRouter receipt is the silent substitution this
+        # check exists to catch.
+        cell = base_cell(agent="kimi-k2.7-code-kernel", executed_arm="kernel",
+                         executed_provider="openrouter")
+        cls = cv.classify_cell(cell, requested_arm="kernel", model="kimi-k2.7-code")
+        self.assertEqual(cls.status, cv.INVALID)
+        self.assertIn("provider_mismatch:expected=moonshot:executed=openrouter",
+                      cls.reasons)
+
+    def test_kimi_kernel_on_own_endpoint_is_valid(self):
+        cell = base_cell(agent="kimi-k2.7-code-kernel", executed_arm="kernel",
+                         executed_provider="moonshot")
+        cls = cv.classify_cell(cell, requested_arm="kernel", model="kimi-k2.7-code")
+        self.assertEqual(cls.status, cv.VALID, cls.reasons)
+
+    def test_grok_kernel_via_openrouter_is_invalid(self):
+        # v7.7.7: bare grok-* kernel cells must execute on the xAI own
+        # endpoint.
+        cell = base_cell(agent="grok-4.3-kernel", executed_arm="kernel",
+                         executed_provider="openrouter")
+        cls = cv.classify_cell(cell, requested_arm="kernel", model="grok-4.3")
+        self.assertEqual(cls.status, cv.INVALID)
+        self.assertIn("provider_mismatch:expected=xai:executed=openrouter",
+                      cls.reasons)
+
+    def test_grok_kernel_on_own_endpoint_is_valid(self):
+        cell = base_cell(agent="grok-4.3-kernel", executed_arm="kernel",
+                         executed_provider="xai")
+        cls = cv.classify_cell(cell, requested_arm="kernel", model="grok-4.3")
         self.assertEqual(cls.status, cv.VALID, cls.reasons)
 
     def test_deepseek_kernel_via_openrouter_is_invalid(self):
@@ -238,10 +271,16 @@ class TestExpectedProviderHeuristic(unittest.TestCase):
         self.assertIsNone(cv.expected_provider("deepseek/deepseek-v4-pro"))
 
     def test_unmapped_model_has_no_expectation(self):
-        self.assertIsNone(cv.expected_provider("grok-4.3"))
-        self.assertIsNone(cv.expected_provider("kimi-k2.6"))
+        self.assertIsNone(cv.expected_provider("qwen3-coder-plus"))
         self.assertIsNone(cv.expected_provider(None))
         self.assertIsNone(cv.expected_provider(""))
+
+    def test_kimi_grok_expectations_v777(self):
+        self.assertEqual(cv.expected_provider("kimi-k2.7-code"), "moonshot")
+        self.assertEqual(cv.expected_provider("kimi-k2.6"), "moonshot")
+        self.assertEqual(cv.expected_provider("moonshot-v1-8k"), "moonshot")
+        self.assertEqual(cv.expected_provider("grok-4.3"), "xai")
+        self.assertEqual(cv.expected_provider("grok-4.20-0309-reasoning"), "xai")
 
 
 # =============================================================================

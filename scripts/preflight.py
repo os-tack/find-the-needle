@@ -158,7 +158,23 @@ def required_keys(model: str, arm: str) -> tuple[list[str], str]:
             "DeepSeek own endpoint (api.deepseek.com, generic OpenAI-compat "
             "client, pinned bare wire id; unconditional since v7.7.6)"
         )
-    # kimi- / moonshot- / qwen* / grok- / meta-llama / org-slash
+    if m.startswith(("kimi-", "moonshot-")):
+        # v7.7.7+: bare kimi-*/moonshot-* routes to the Moonshot own
+        # endpoint UNCONDITIONALLY — same doctrine as deepseek above.
+        # KIMI_API_KEY is the primary secret name (shared with the native
+        # kimi CLI); MOONSHOT_API_KEY is the factory's fallback alias.
+        return ["KIMI_API_KEY", "MOONSHOT_API_KEY"], (
+            "Moonshot own endpoint (api.moonshot.ai, generic OpenAI-compat "
+            "client, pinned bare wire id; unconditional since v7.7.7)"
+        )
+    if m.startswith("grok-"):
+        # v7.7.7+: bare grok-* routes to the xAI own endpoint
+        # UNCONDITIONALLY — same doctrine as deepseek above.
+        return ["XAI_API_KEY"], (
+            "xAI own endpoint (api.x.ai, generic OpenAI-compat client, "
+            "pinned bare wire id; unconditional since v7.7.7)"
+        )
+    # qwen* / meta-llama / org-slash
     return ["OPENROUTER_API_KEY"], "generic OpenRouter kernel"
 
 
@@ -315,14 +331,25 @@ def probe_plan(model: str, arm: str) -> list[tuple[str, str]]:
         if m.startswith("deepseek-"):
             # v7.7.6+: DeepSeek own endpoint, unconditional.
             return [("deepseek", model)]
+        if m.startswith(("kimi-", "moonshot-")):
+            # v7.7.7+: Moonshot own endpoint, unconditional.
+            return [("moonshot", model)]
+        if m.startswith("grok-"):
+            # v7.7.7+: xAI own endpoint, unconditional.
+            return [("xai", model)]
         return [("openrouter", format_openrouter_model(model))]
     # plain kernel: OpenRouter (wire_model) — EXCEPT gpt-*/o-series (native
-    # OpenAI driver since v7.7.4) and bare deepseek-* (own endpoint since
-    # v7.7.6), which resolve_provider routes unconditionally.
+    # OpenAI driver since v7.7.4), bare deepseek-* (own endpoint since
+    # v7.7.6), and bare kimi-*/moonshot-*/grok-* (own endpoints since
+    # v7.7.7), which resolve_provider routes unconditionally.
     if m.startswith(("gpt", "o1", "o3")):
         return [("openai", model)]
     if m.startswith("deepseek-"):
         return [("deepseek", model)]
+    if m.startswith(("kimi-", "moonshot-")):
+        return [("moonshot", model)]
+    if m.startswith("grok-"):
+        return [("xai", model)]
     or_model = model.removeprefix("openrouter/") if m.startswith("openrouter/") \
         else format_openrouter_model(model)
     return [("openrouter", or_model)]

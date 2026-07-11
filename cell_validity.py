@@ -226,6 +226,18 @@ def expected_provider(model: str | None) -> str | None:
         # before; the slash-form "deepseek/..." (explicit OpenRouter) is not
         # a bench model id and deliberately does not match this hyphen check.
         return "deepseek"
+    if m.startswith(("kimi-", "moonshot-")):
+        # v7.7.7+: bare kimi-*/moonshot-* kernel cells execute on the
+        # Moonshot own endpoint unconditionally (audited 2026-07-11: every
+        # pre-v7.7.7 kimi kernel cell carries executed_provider=None and
+        # fails open). "moonshotai/..." slash-form deliberately unmatched.
+        return "moonshot"
+    if m.startswith("grok-"):
+        # v7.7.7+: bare grok-* kernel cells execute on the xAI own endpoint
+        # unconditionally (audited 2026-07-11: every pre-v7.7.7 grok kernel
+        # cell carries executed_provider=None and fails open). "x-ai/..."
+        # slash-form deliberately unmatched.
+        return "xai"
     return None
 
 

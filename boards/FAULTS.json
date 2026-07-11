@@ -206,6 +206,24 @@
    "effect": "THIRD reproduction of the opus-fallback pattern (july09-, july09v3- prior entries): Fable 5's cyber-safety classifier trips and the vendor CLI silently continues on claude-opus-4-8. Cell set is nondeterministic per capture (6 cells in v7.7.3, 8 here; nginx-upstream-port-mismatch recovered, api-version-field-drop/bidi-override-injection/tls-chain-ordering-strict newly affected) but kernel-panic-ioctl has run wholly on opus in both re-captures. 7 of the 8 cells were solves — not pure fable-5 work. observed_models receipts were captured inline by run_matrix native-usage enrichment; cell_validity REASON_MODEL_MISMATCH excluded them before any board was built.",
    "reference": "runs/claude-fable-5-native/*.score.json observed_models; cell_validity REASON_MODEL_MISMATCH [GPT-review F5]; prior entries july09-fable5-native-opus-fallback, july09v3-fable5-native-opus-fallback.",
    "mitigation": "RESOLVED MECHANICALLY: F5 model_mismatch exclusion is now inline (capture-time enrichment + consolidation-time classification). Published fable-5 native column is 27/29 valid cells. No upstream fix available — the fallback is vendor CLI behavior."
+  },
+  {
+   "id": "july10v3-deepseek-kernel-openrouter-substitution",
+   "models": [
+    "deepseek-v4-pro/kernel"
+   ],
+   "axis": "attribution",
+   "title": "deepseek-v4-pro kernel (v7.7.6 own-endpoint capture): every dispatch actually rode OpenRouter — executed_provider=\"deepseek\" receipts were roster-derived predictions, not wire observations",
+   "window": {
+    "from": "2026-07-10",
+    "until": "2026-07-11"
+   },
+   "affects": [
+    "v7.7.6 july10v3 snapshot: the ENTIRE deepseek-v4-pro kernel column (38 cells; 37/37 published solves). The july10v3 NATIVE column is clean (opencode + DEEPSEEK_API_KEY, own endpoint)."
+   ],
+   "effect": "v7.7.6 added unconditional deepseek-* own-endpoint routing to resolve_provider, but the kernel-arm launcher's pre-existing blanket rule ('all models route via OpenRouter for unified billing') wrapped the roster id as openrouter/deepseek/deepseek-v4-pro BEFORE the in-container kernel resolved it — an explicit-OpenRouter request by design. Wire evidence: every journal api.call row carries model=\"openrouter/deepseek/deepseek-v4-pro\" and a server-reported cost field that api.deepseek.com verifiably never returns (probed 2026-07-11). The F5b provider check compared a prediction against the same prediction and passed 38/38. SOLVE axis unaffected (37/37 stands as a generic-OpenRouter result); COST receipts are OpenRouter-passthrough-true at DeepSeek list rates with full cache-field forwarding (94% hit).",
+   "reference": "runs-archive/deepseek-v4-pro-kernel-v776-openrouter-substitution-20260711/*.raw/journal.jsonl (api.call model field + cost field); haystack bench.rs wire_model wrap (pre-v7.7.7); probe transcript in session notes 2026-07-11.",
+   "mitigation": "v7.7.7 WIRE-TRUTH fixes: (1) own-endpoint families (deepseek-/kimi-/moonshot-/grok-) escape the openrouter/ wrap; (2) executed_provider is now OBSERVED from the journal's dispatched model id (provider_attestation=observed) with the dispatched_model receipt published verbatim, so a recurrence mechanically fails F5 provider_mismatch; (3) generic client records cache-EXCLUSIVE input_tokens. Kernel column re-captured under v7.7.7 (july11 era); the july10v3 kernel column is superseded and fault-annotated, never published as own-endpoint."
   }
  ]
 }

@@ -51,10 +51,21 @@ class TestProbePlan(unittest.TestCase):
                          [("deepseek", "deepseek-v4-pro")])
 
     def test_kernel_routes_via_openrouter_with_formatted_id(self):
-        self.assertEqual(probe_plan("kimi-k2.6", "kernel"),
-                         [("openrouter", "moonshotai/kimi-k2.6")])
+        # qwen remains the generic-OpenRouter exemplar (kimi/grok moved to
+        # own endpoints in v7.7.7 — see the own-endpoint test below).
+        self.assertEqual(probe_plan("qwen3-coder-plus", "kernel"),
+                         [("openrouter", "qwen/qwen3-coder-plus")])
+
+    def test_kernel_kimi_grok_own_endpoints_v777(self):
+        # Unconditional own-endpoint probes on both kernel arms, bare wire id.
+        self.assertEqual(probe_plan("kimi-k2.7-code", "kernel"),
+                         [("moonshot", "kimi-k2.7-code")])
+        self.assertEqual(probe_plan("kimi-k2.6", "kernel-cpu"),
+                         [("moonshot", "kimi-k2.6")])
         self.assertEqual(probe_plan("grok-4.3", "kernel"),
-                         [("openrouter", "x-ai/grok-4.3")])
+                         [("xai", "grok-4.3")])
+        self.assertEqual(probe_plan("grok-4.3", "kernel-cpu"),
+                         [("xai", "grok-4.3")])
 
     def test_kernel_cpu_native_drivers(self):
         self.assertEqual(probe_plan("claude-opus-4-8", "kernel-cpu"),

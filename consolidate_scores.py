@@ -54,12 +54,12 @@ EXPERIMENT_OUTPUT = Path(__file__).parent / "public" / "experiment-scores.json"
 # hosted THREE frozen-bin pins in one day — v7.7.1 ("july09"; fable-5 + flash
 # smoke), v7.7.2 ("july09v2"), and v7.7.3 ("july09v3", the current latest).
 # ---------------------------------------------------------------------------
-OSTK_VERSION = "v7.7.6"                      # current binary (latest board)
+OSTK_VERSION = "v7.7.7"                      # current binary (latest board)
 # Chronological order — MUST stay oldest→newest: downstream ranking uses
 # SNAPSHOTS.index (see published_snapshot_for / consolidate_all) to pick the
 # newest snapshot per column, so a new pin is APPENDED, never inserted.
 SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3", "july10",
-             "july10v2", "july10v3")
+             "july10v2", "july10v3", "july11")
 # F2 FIX — RECEIPT-DRIVEN SNAPSHOT IDENTITY. The cell's own bench_binary.version
 # receipt is the RELIABLE attribution signal; the hand-maintained date ladder
 # below can only split the v7.6.0 june16/july02 pair (same binary, different run
@@ -68,7 +68,8 @@ SNAPSHOTS = ("june16", "july02", "july09", "july09v2", "july09v3", "july10",
 # its payload date. v7.6.0 is intentionally ABSENT (date-ambiguous). Newest
 # first for readability; matching is exact-or-dotted-prefix (see snapshot_of).
 SNAPSHOT_BY_VERSION = (
-    ("7.7.6", "july10v3"),   # 2026-07-10 third pin (deepseek own-endpoint kernel; current latest)
+    ("7.7.7", "july11"),     # 2026-07-11 pin (kernel-arm wire-truth fix; current latest)
+    ("7.7.6", "july10v3"),   # 2026-07-10 third pin (deepseek own-endpoint routing — see era fault)
     ("7.7.5", "july10v2"),   # 2026-07-10 second pin (envelope trim + always-boundary telemetry)
     ("7.7.4", "july10"),     # 2026-07-10 first pin (native OpenAI Responses driver)
     ("7.7.3", "july09v3"),   # 2026-07-09 third pin
@@ -88,14 +89,16 @@ SNAPSHOT_BOUNDARIES = (
 SNAPSHOT_RUN_DATE = {"june16": "2026-06-16", "july02": "2026-07-02",
                      "july09": "2026-07-09", "july09v2": "2026-07-09",
                      "july09v3": "2026-07-09", "july10": "2026-07-10",
-                     "july10v2": "2026-07-10", "july10v3": "2026-07-10"}
+                     "july10v2": "2026-07-10", "july10v3": "2026-07-10",
+                     "july11": "2026-07-11"}
 # Binary identity per snapshot: versioned boards land under
 # boards/<SNAPSHOT_OSTK_VERSION[snap]>/ — a run is never re-attributed to a
 # binary it did not execute on (runs/.binary_identity.jsonl is the receipt).
 SNAPSHOT_OSTK_VERSION = {"june16": "v7.6.0", "july02": "v7.6.0",
                          "july09": "v7.7.1", "july09v2": "v7.7.2",
                          "july09v3": "v7.7.3", "july10": "v7.7.4",
-                         "july10v2": "v7.7.5", "july10v3": "v7.7.6"}
+                         "july10v2": "v7.7.5", "july10v3": "v7.7.6",
+                         "july11": "v7.7.7"}
 # Fault ids (boards/FAULTS.json) attached to each snapshot's published board.
 SNAPSHOT_FAULTS = {
     "june16": ["june16-teardown-masked"],
@@ -125,15 +128,32 @@ SNAPSHOT_FAULTS = {
     # caught inline by capture-time observed_models enrichment + F5
     # model_mismatch exclusion; see FAULTS.json.
     "july10v2": ["july10v2-fable5-native-opus-fallback"],
-    # v7.7.6 (current latest): deepseek-* kernel arm moves off OpenRouter to
-    # the DeepSeek own endpoint (api.deepseek.com, own key, unconditional) —
-    # same fairness doctrine as the v7.7.4 gpt change; executed_provider now
-    # stamps "deepseek". No known era faults yet.
-    "july10v3": [],
+    # v7.7.6: deepseek-* own-endpoint routing landed in resolve_provider, but
+    # the kernel-arm launcher's blanket `openrouter/` wrap OVERRODE it — every
+    # kernel dispatch went to OpenRouter while executed_provider receipts
+    # (roster-derived PREDICTIONS, not observations) stamped "deepseek".
+    # Wire evidence: journal api.call model="openrouter/deepseek/…" + a
+    # server cost field api.deepseek.com never returns. Solve axis unaffected;
+    # cost receipts are OpenRouter-passthrough-true. The NATIVE july10v3
+    # column is clean (opencode + own key). Kernel column superseded by the
+    # july11 re-capture; see FAULTS.json.
+    "july10v3": ["july10v3-deepseek-kernel-openrouter-substitution"],
+    # v7.7.7 (current latest): kernel-arm WIRE-TRUTH fixes — own-endpoint
+    # families (deepseek-/kimi-/moonshot-/grok-) escape the launcher's
+    # openrouter/ wrap; executed_provider is now OBSERVED from the journal's
+    # dispatched model (provider_attestation=observed) instead of predicted;
+    # the generic client records cache-EXCLUSIVE input_tokens (→2062 parity).
+    "july11": [],
 }
 # Human-readable one-liners for the ids above; the canonical machine-readable
 # era annotations (windows, commits, affected models) live in boards/FAULTS.json.
 FAULT_NOTES = {
+    "july10v3-deepseek-kernel-openrouter-substitution":
+        "v7.7.6 deepseek kernel column: launcher's blanket openrouter/ wrap "
+        "overrode the own-endpoint routing — every dispatch rode OpenRouter "
+        "while predicted executed_provider receipts stamped 'deepseek'. Solve "
+        "axis stands (generic-OpenRouter result); superseded by the july11 "
+        "v7.7.7 re-capture with observed provider attestation.",
     "june16-teardown-masked":
         "June-16 era: kernel teardown hang — a subset of cells were scored by "
         "the journal+SIGKILL watchdog and publish with teardown_masked=true "
@@ -260,15 +280,32 @@ RATE_CARD = {
     "o3": (2.00, 8.00), "o4-mini": (1.10, 4.40),
     "grok-3": (3.00, 15.00), "grok-3-fast": (0.20, 0.50), "grok-4": (3.00, 15.00),
     "grok-3-mini": (0.30, 0.50), "grok-4-fast": (0.20, 0.50),
-    "grok-4.1-fast": (0.20, 0.50), "grok-4.20": (2.00, 6.00),
-    # grok-4.3: xAI flagship, launched 2026-04-30 ($1.25/$2.50, ≤200k tier).
+    "grok-4.1-fast": (0.20, 0.50),
+    # grok-4.20 family: $1.25/$2.50 per the api.x.ai /v1/language-models
+    # metadata fetched 2026-07-11 (prompt 12500 / completion 25000 in 1e-4
+    # $/M units). History: the earlier (2.00, 6.00) entry here conflated
+    # 4.20 with grok-4.5's card; no 4.20 cells were ever priced with it.
+    "grok-4.20": (1.25, 2.50), "grok-4.20-0309-reasoning": (1.25, 2.50),
+    # grok-4.3: xAI flagship, launched 2026-04-30 ($1.25/$2.50, ≤200k tier;
+    # confirmed live 2026-07-11 via /v1/language-models with own key).
     "grok-4.3": (1.25, 2.50),
+    # grok-4.5 (docs.x.ai 2026-07): $2/$6, 500K context. Region-locked from
+    # the EU at wiring time — pre-wired for when access opens.
+    "grok-4.5": (2.00, 6.00),
     "grok-code-fast-1": (0.20, 1.50),
     "devstral-small-latest": (0.10, 0.30), "devstral-small": (0.10, 0.30),
     "devstral-medium": (0.40, 2.00), "devstral-2512": (0.40, 2.00),
     "codestral-2508": (0.30, 0.90),
     "mistral-small-4-0-26-03": (0.10, 0.30), "mistral-small-119b-2603": (0.10, 0.30),
+    # kimi-k2.5/k2.6: OpenRouter-era serving prices — these priced the
+    # frozen june16 columns (cells genuinely served+billed via OpenRouter);
+    # NOT Moonshot's own-endpoint card ($0.95/$4.00). Do not "correct" them:
+    # repricing would falsify what those cells actually cost.
     "kimi-k2.5": (0.40, 1.99), "kimi-k2.6": (0.40, 1.99),
+    # kimi-k2.7-code: Moonshot own-endpoint card (platform.kimi.ai pricing
+    # page fetched 2026-07-11): $0.95 in (cache miss) / $4.00 out; cache
+    # hits bill $0.19 (see cache_mult_for). highspeed variant is exactly 2x.
+    "kimi-k2.7-code": (0.95, 4.00), "kimi-k2.7-code-highspeed": (1.90, 8.00),
     "deepseek-v3.2": (0.26, 0.38), "deepseek-r1": (0.70, 2.50),
     "deepseek-r1-0528": (0.45, 2.15),
     # deepseek-v4-pro: $0.435 in (cache miss) / $0.87 out per the OFFICIAL
@@ -401,6 +438,21 @@ CACHE_MULT_OPENAI_PRE56 = {"fresh": 1.0, "cache_read": 0.10, "cache_create_5m": 
 CACHE_MULT_OPENAI_56 = {"fresh": 1.0, "cache_read": 0.10, "cache_create_5m": 1.25, "cache_create_1h": 1.25}
 
 
+# Own-endpoint vendor cards with automatic caching and NO write premium.
+# cache_read is the vendor's hit/miss price ratio applied to the RATE_CARD
+# input rate; creates mirror the input rate (no separate write fee).
+CACHE_MULT_DEEPSEEK_V4_PRO = {"fresh": 1.0, "cache_read": 0.003625 / 0.435,
+                              "cache_create_5m": 1.0, "cache_create_1h": 1.0}
+CACHE_MULT_DEEPSEEK_V4_FLASH = {"fresh": 1.0, "cache_read": 0.0028 / 0.14,
+                                "cache_create_5m": 1.0, "cache_create_1h": 1.0}
+CACHE_MULT_MOONSHOT_K27 = {"fresh": 1.0, "cache_read": 0.19 / 0.95,
+                           "cache_create_5m": 1.0, "cache_create_1h": 1.0}
+CACHE_MULT_XAI_GROK43 = {"fresh": 1.0, "cache_read": 0.20 / 1.25,
+                         "cache_create_5m": 1.0, "cache_create_1h": 1.0}
+CACHE_MULT_XAI_GROK45 = {"fresh": 1.0, "cache_read": 0.50 / 2.00,
+                         "cache_create_5m": 1.0, "cache_create_1h": 1.0}
+
+
 def cache_mult_for(model: str) -> dict:
     """Per-provider cache multipliers (see F6-broad note above)."""
     m = model.lower()
@@ -408,6 +460,20 @@ def cache_mult_for(model: str) -> dict:
         return CACHE_MULT_OPENAI_56
     if m.startswith(("gpt-", "o1", "o3", "o4")):
         return CACHE_MULT_OPENAI_PRE56
+    # Own-endpoint vendor cards (v7.7.6 deepseek; v7.7.7 kimi/grok). Gated
+    # to models whose RATE_CARD entry IS the official vendor card — e.g.
+    # kimi-k2.6 keeps the default because its card is OpenRouter-era (and
+    # all its cells carry cache_read=0 anyway).
+    if m.startswith("deepseek-v4-pro"):
+        return CACHE_MULT_DEEPSEEK_V4_PRO
+    if m.startswith(("deepseek-v4-flash", "deepseek-chat", "deepseek-reasoner")):
+        return CACHE_MULT_DEEPSEEK_V4_FLASH
+    if m.startswith("kimi-k2.7"):
+        return CACHE_MULT_MOONSHOT_K27
+    if m.startswith(("grok-4.3", "grok-4.20")):
+        return CACHE_MULT_XAI_GROK43
+    if m.startswith("grok-4.5"):
+        return CACHE_MULT_XAI_GROK45
     return CACHE_MULT
 
 
@@ -609,7 +675,38 @@ def load_score(fpath: Path) -> tuple[dict | None, str | None]:
                         data[field] = sum((s.get(field) or 0) for s in samples)
         except Exception as e:
             print(f"  WARN: samples sidecar unreadable {samples_fp} — {e}", file=sys.stderr)
+    _normalize_v776_inclusive_input(data)
     return data, None
+
+
+def _normalize_v776_inclusive_input(data: dict) -> None:
+    """v7.7.6 generic-client WRITER QUIRK (receipt-verified 2026-07-11):
+    deepseek kernel receipts stamp input_tokens/fresh_input_tokens INCLUSIVE
+    of cache_read (the OpenAI-wire prompt_tokens convention), while every
+    other writer is cache-EXCLUSIVE. The receipt's own estimated_cost_usd
+    proves the true split — it reproduces to full precision from
+    (input - cache_read) x miss + cache_read x hit + out x out-rate.
+    Left unnormalized, bucket-split bills the cached tokens twice (once at
+    the full rate inside "fresh", once at the cache rate): the july10v3
+    kernel column published $2.87 against $0.29 of receipts.
+
+    Normalize to the exclusive convention IN MEMORY at load. Gated to the
+    exact (binary version, provider) whose writer was inclusive — the
+    v7.7.7 kernel fixes the writer, so 7.7.7+ receipts arrive exclusive and
+    must not be double-subtracted. Runs after the F7 samples fold (the
+    subtraction is linear, so summed buckets normalize identically)."""
+    if (data.get("bench_binary") or {}).get("version") != "7.7.6":
+        return
+    if data.get("executed_provider") != "deepseek":
+        return
+    cache_read = data.get("cache_read_tokens", 0) or 0
+    tin = data.get("input_tokens", 0) or 0
+    fresh = data.get("fresh_input_tokens")
+    if cache_read <= 0 or tin < cache_read or fresh != tin:
+        return
+    data["input_tokens"] = tin - cache_read
+    data["fresh_input_tokens"] = tin - cache_read
+    data["v776_inclusive_input_normalized"] = True
 
 
 def arm_summary(entry: dict, model: str, cost_valid: bool = True,

@@ -81,6 +81,76 @@ def kimi_native_cell(bench="bench-a"):
 
 
 # ---------------------------------------------------------------------------
+# Own-endpoint cache economics (v7.7.6/v7.7.7) — vendor-true cache-read
+# multipliers + the v7.7.6 inclusive-input writer-quirk normalization
+# ---------------------------------------------------------------------------
+
+class TestOwnEndpointCachePricing(unittest.TestCase):
+    def _v776_kernel_cell(self):
+        # Shape of a real july10v3 receipt (api-version-field-drop):
+        # input/fresh INCLUSIVE of cache_read; est reproduces from the
+        # exclusive split to full precision.
+        return {
+            "agent": "deepseek-v4-pro-kernel", "arm": "kernel",
+            "benchmark": "api-version-field-drop",
+            "bench_binary": {"version": "7.7.6"},
+            "executed_arm": "kernel", "executed_provider": "deepseek",
+            "resolved": True, "turns_to_fix": 14,
+            "input_tokens": 103198, "fresh_input_tokens": 103198,
+            "cache_read_tokens": 97152, "cache_create_tokens": 0,
+            "cache_create_5m_tokens": 0, "cache_create_1h_tokens": 0,
+            "output_tokens": 2764, "billed_tokens": 200350,
+            "estimated_cost_usd": 0.005386866,
+            "stop_reason": "pass", "wall_clock": 75.0, "token_cost": 203114,
+            "timestamp": "2026-07-10T22:03:07Z",
+        }
+
+    def test_deepseek_cache_read_mult_is_vendor_ratio(self):
+        m = cs.cache_mult_for("deepseek-v4-pro")
+        self.assertAlmostEqual(m["cache_read"], 0.003625 / 0.435, places=12)
+        self.assertEqual((m["cache_create_5m"], m["cache_create_1h"]), (1.0, 1.0))
+        self.assertAlmostEqual(cs.cache_mult_for("kimi-k2.7-code")["cache_read"], 0.2)
+        self.assertAlmostEqual(cs.cache_mult_for("grok-4.3")["cache_read"], 0.16)
+        self.assertAlmostEqual(cs.cache_mult_for("grok-4.5")["cache_read"], 0.25)
+        # kimi-k2.6 keeps the default: its RATE_CARD entry is the
+        # OpenRouter-era serving price, not the vendor card.
+        self.assertEqual(cs.cache_mult_for("kimi-k2.6"), cs.CACHE_MULT)
+
+    def test_v776_inclusive_receipt_normalizes_and_reprices_exactly(self):
+        cell = self._v776_kernel_cell()
+        cs._normalize_v776_inclusive_input(cell)
+        self.assertTrue(cell.get("v776_inclusive_input_normalized"))
+        self.assertEqual(cell["fresh_input_tokens"], 6046)
+        self.assertEqual(cell["input_tokens"], 6046)
+        cost, basis = cs.compute_cost_ex(cell, "deepseek-v4-pro")
+        self.assertEqual(basis, "bucket-split")
+        # bucket-split must now agree with the receipt's own provider math
+        self.assertAlmostEqual(cost, 0.005386866, places=9)
+
+    def test_v776_quirk_gate_is_tight(self):
+        # 7.7.7 receipt (writer fixed → exclusive): untouched.
+        cell = self._v776_kernel_cell()
+        cell["bench_binary"] = {"version": "7.7.7"}
+        cell["input_tokens"] = cell["fresh_input_tokens"] = 6046
+        cs._normalize_v776_inclusive_input(cell)
+        self.assertEqual(cell["fresh_input_tokens"], 6046)
+        self.assertNotIn("v776_inclusive_input_normalized", cell)
+        # native cell (exclusive convention, opencode receipts): untouched
+        # even on 7.7.6 — the provider gate excludes it.
+        nat = deepseek_native_cell()
+        nat["bench_binary"] = {"version": "7.7.6"}
+        before = dict(nat)
+        cs._normalize_v776_inclusive_input(nat)
+        self.assertEqual(nat, before)
+        # already-exclusive 7.7.6 deepseek receipt (fresh != input): untouched.
+        cell = self._v776_kernel_cell()
+        cell["fresh_input_tokens"] = 6046
+        cs._normalize_v776_inclusive_input(cell)
+        self.assertEqual(cell["input_tokens"], 103198)
+        self.assertNotIn("v776_inclusive_input_normalized", cell)
+
+
+# ---------------------------------------------------------------------------
 # Cost computation (unit) — the bb4aa6d5 cost-inversion regression tests
 # ---------------------------------------------------------------------------
 
