@@ -217,7 +217,13 @@ def expected_provider(model: str | None) -> str | None:
     if m.startswith("gpt") or m.startswith(("o1", "o3", "o4")):
         return "openai"
     if m.startswith("gemini"):
-        return "gemini"
+        # haystack stamps executed_provider="google" for Gemini — the model
+        # family is "gemini" but the serving vendor is Google's API
+        # (src/cpu/gemini.rs: provider "google".into()). Reconcile to the
+        # vendor string haystack actually emits, else every gemini kernel-cpu
+        # cell fails provider_mismatch:expected=gemini:executed=google.
+        # Pre-receipt native cells carry provider=None and fail open.
+        return "google"
     if "mistral" in m or "codestral" in m or "devstral" in m:
         return "mistral"
     if m.startswith("deepseek-"):

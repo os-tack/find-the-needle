@@ -1,5 +1,5 @@
 {
- "generated": "2026-07-11",
+ "generated": "2026-07-12",
  "cross_version": {
   "comparable": false,
   "note": "ostk versions are different experimental conditions (different kernel, drivers, benchmark oracles, schema eras). NO cross-version delta is published anywhere, and versioned boards never aggregate across versions. The rolling latest view (public/experiment-scores.json) may span versions across its single-snapshot columns for operational continuity; it carries per-column version attribution (ostk_versions + column_snapshots) and a per-version trust breakdown, and its cross-version totals are bookkeeping, not comparison. Compare runs only within one version, and mind each run's faults list even then."
@@ -1843,6 +1843,69 @@
      "snapshot": "july11",
      "faults": [],
      "models": {
+      "gemini-3.1-pro-preview": {
+       "native": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 5.4599,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 7.2934,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0,
+        "source_arm": "cpu"
+       }
+      },
+      "gemini-3.5-flash": {
+       "native": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 7.7932,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 13.1921,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 36,
+        "source_arm": "cpu"
+       }
+      },
+      "gpt-5.6-terra": {
+       "native": {
+        "solved": 37,
+        "total": 37,
+        "cost_usd": 5.3928,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 1
+       },
+       "ostk": {
+        "solved": 36,
+        "total": 37,
+        "cost_usd": 2.9958,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 1,
+        "source_arm": "cpu"
+       }
+      },
       "kimi-k2.7-code": {
        "native": {
         "solved": 37,
@@ -1896,14 +1959,35 @@
         "masked": 0,
         "source_arm": "kernel"
        }
+      },
+      "gpt-5.6-luna": {
+       "native": {
+        "solved": 35,
+        "total": 37,
+        "cost_usd": 2.5818,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 0
+       },
+       "ostk": {
+        "solved": 35,
+        "total": 37,
+        "cost_usd": 1.7782,
+        "cost_cells": 37,
+        "invalid": 0,
+        "cost_invalid": 0,
+        "masked": 1,
+        "source_arm": "cpu"
+       }
       }
      },
      "trust": {
-      "solve_valid_cells": 157,
-      "cost_valid_cells": 157,
+      "solve_valid_cells": 453,
+      "cost_valid_cells": 453,
       "cost_invalid_cells": 0,
       "invalid_cells": 7,
-      "teardown_masked_cells": 0
+      "teardown_masked_cells": 39
      }
     }
    ],

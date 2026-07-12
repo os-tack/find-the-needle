@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-terra-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "compiler-macro-expansion",
+    "billed_tokens": 261940,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 236852,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 25088,
+    "input_tokens": 25088,
+    "output_tokens": 2485,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Updated reference-field getters to return borrowed nested structs, matching `&self.field`: `src/codegen.rs:75`.\n- Generated accessors now emit `-> &Company` and `-> &Address`.\n\n**Verified**\n- Ran `./test.sh` successfully: all simple, nested-accessor, and generated-code checks pass.\n- Build completes with pre-existing dead-code warnings only.",
+    "timestamp": "2026-07-12T01:50:38Z",
+    "token_cost": 264425,
+    "tool_uses": 8,
+    "turns_to_fix": 1,
+    "wall_clock": 41.51,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T01:50:43+00:00"
+  }
+]

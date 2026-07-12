@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "encoding-mojibake",
+    "billed_tokens": 127397,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 72848,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 54549,
+    "input_tokens": 54549,
+    "output_tokens": 3430,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have successfully found and resolved the \"needle.\"\n\n### Analysis & Issue\nThe `app/customers.csv` file was stored in **UTF-8**, but `CsvReader.java` was reading it using **ISO-8859-1** (`Latin-1`). This mismatch corrupted non-ASCII characters (e.g. `Ren\u00e9e Dub\u00f6is` became `Ren\u00c3\u00a9e Dub\u00c3\u00b6is`) when written to the UTF-8 report output.\n\n### Fix Applied\nUpdated `CsvReader.java` to decode the CSV input file using UTF-8:\n```java\n    public CsvReader() {\n        // Use UTF-8 to support international customer names correctly\n        this.charset = java.nio.charset.StandardCharsets.UTF_8;\n    }\n```\n\n### Verification\nRan `/app/test.sh` and verified that all checks passed:\n* **All customer names (including those with accents/diacritics) survived the round-trip correctly.**\n* Test script execution successfully returned **`PASS: All customer names preserved correctly`**.",
+    "timestamp": "2026-07-12T10:09:36Z",
+    "token_cost": 130827,
+    "tool_uses": 14,
+    "turns_to_fix": 9,
+    "wall_clock": 34.159,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:09:38+00:00"
+  }
+]

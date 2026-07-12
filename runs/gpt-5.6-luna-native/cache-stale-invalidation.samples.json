@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "cache-stale-invalidation",
+    "billed_tokens": 200788,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 181007,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 19781,
+    "input_tokens": 19781,
+    "output_tokens": 1822,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the stale-cache bug in `app/server.py`.\n\n- Invalidates the individual product cache after updates.\n- Invalidates the product list cache after updates and creates.\n- Verified with `./test.sh`: all checks pass.\n- `git diff --check` passes with only `app/server.py` modified.",
+    "timestamp": "2026-07-12T00:09:52Z",
+    "token_cost": 202610,
+    "tool_uses": 7,
+    "turns_to_fix": 1,
+    "wall_clock": 46.118,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T00:09:54+00:00"
+  }
+]

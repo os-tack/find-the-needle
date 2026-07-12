@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "compiler-macro-expansion",
+    "billed_tokens": 229209,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 162251,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 66958,
+    "input_tokens": 66958,
+    "output_tokens": 3796,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have found and successfully fixed the needle! \n\n### Root Cause\nIn `src/codegen.rs`, the code generator's getter implementation for reference-typed fields (`FieldType::Ref`) generated a signature returning the owned type (e.g., `Company`), despite correctly returning a reference in the function body.\n\n### Fix\n- Updated the `FieldType::Ref` match arm in `generate_getter` to output reference return types (e.g., `&Company` and `&Address`).\n- Added unit tests in `src/codegen.rs` to assert correct reference-typed signatures.\n- Verified that all cargo unit tests and integration tests via `test.sh` now pass perfectly.",
+    "timestamp": "2026-07-12T10:06:50Z",
+    "token_cost": 233005,
+    "tool_uses": 13,
+    "turns_to_fix": 14,
+    "wall_clock": 43.296,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:06:50+00:00"
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "sql-injection-search",
+    "billed_tokens": 300355,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 279517,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 20838,
+    "input_tokens": 20838,
+    "output_tokens": 2233,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Parameterized `q` and `category` in `app/search.py`.\n- Replaced raw SQL execution with `db.execute(...)`.\n- Prevents UNION and boolean-based SQL injection.\n\n**Verified**\n- `./test.sh` passes:\n  - Normal search returns results.\n  - UNION injection leaks no user data.\n  - Boolean injection does not bypass filtering.\n- `git diff --check` passes.",
+    "timestamp": "2026-07-12T01:20:54Z",
+    "token_cost": 302588,
+    "tool_uses": 10,
+    "turns_to_fix": 1,
+    "wall_clock": 37.196,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T01:20:57+00:00"
+  }
+]

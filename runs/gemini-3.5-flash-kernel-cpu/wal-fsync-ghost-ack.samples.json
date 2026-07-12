@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-kernel-cpu",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "wal-fsync-ghost-ack",
+    "billed_tokens": 1942413,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 844532,
+    "control_type": "kernel",
+    "difficulty_tier": "hard",
+    "dispatched_model": "gemini-3.5-flash",
+    "estimated_cost_usd": 1.7986113,
+    "executed_arm": "kernel-cpu",
+    "executed_provider": "google",
+    "fresh_input_tokens": 1097881,
+    "input_tokens": 1097881,
+    "output_tokens": 2790,
+    "process_exit": "end_turn",
+    "provider_attestation": "observed",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 33turns, 1097881+2790 tokens, $1.7986",
+    "timestamp": "2026-07-11T23:35:36Z",
+    "token_cost": 1945203,
+    "tool_uses": 32,
+    "turns_to_fix": 33,
+    "wall_clock": 137.89,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T23:35:38+00:00"
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "retry-storm-duplicate-transfer",
+    "billed_tokens": 248628,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 226648,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 21980,
+    "input_tokens": 21980,
+    "output_tokens": 2449,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Made idempotency checking and all balance updates atomic with `BEGIN IMMEDIATE` in `app/processor.py:34`.\n- Removed the pre-commit debit and rollback-compensation race.\n- Errors now roll back the entire transaction safely.\n\n**Verified**\n- Ran `./test.sh`\n- Result: `A=500 B=1500`\n- Total: `2000`\n- Test output: `PASS`",
+    "timestamp": "2026-07-12T01:11:32Z",
+    "token_cost": 251077,
+    "tool_uses": 7,
+    "turns_to_fix": 1,
+    "wall_clock": 87.875,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T01:11:34+00:00"
+  }
+]

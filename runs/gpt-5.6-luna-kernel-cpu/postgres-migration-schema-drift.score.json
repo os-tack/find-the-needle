@@ -1,0 +1,33 @@
+{
+  "benchmark": "postgres-migration-schema-drift",
+  "agent": "gpt-5.6-luna-kernel-cpu",
+  "arm": "kernel-cpu",
+  "control_type": "kernel-cpu",
+  "timestamp": "2026-07-12T01:02:16+00:00",
+  "difficulty_tier": "hard",
+  "resolved": false,
+  "resolution_source": "container:test.sh",
+  "turns_to_fix": 28,
+  "tool_uses": 31,
+  "token_cost": 3379,
+  "input_tokens": 84,
+  "output_tokens": 3295,
+  "fresh_input_tokens": 84,
+  "cache_read_tokens": 248334,
+  "cache_create_tokens": 13024,
+  "cache_create_5m_tokens": 0,
+  "cache_create_1h_tokens": 0,
+  "billed_tokens": 261442,
+  "estimated_cost_usd": 0.304837,
+  "stop_reason": "end_turn",
+  "process_exit": null,
+  "summary": "end_turn: 28turns, 84+3295 tokens, $0.3048 (scored by stall_watch from journal)",
+  "wall_clock": 183.1,
+  "teardown_masked": true,
+  "scored_by": "stall_watch:journal",
+  "bench_binary": {
+    "version": "7.7.7",
+    "build_sha": "unknown",
+    "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d"
+  }
+}

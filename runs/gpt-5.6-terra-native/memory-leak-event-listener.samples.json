@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-terra-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "memory-leak-event-listener",
+    "billed_tokens": 246957,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 225227,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 21730,
+    "input_tokens": 21730,
+    "output_tokens": 3439,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Moved `data:validated` and `data:error` listener registration into `DataProcessor` construction, preventing per-request listener accumulation in `app/processor.js:6`.\n- Removed the closure that retained each request payload in `app/processor.js:63`.\n\n**Verified**\n- Ran `./test.sh`: listener count stayed at `2` after 500 requests.\n- `git diff --check` passes.",
+    "timestamp": "2026-07-12T02:13:43Z",
+    "token_cost": 250396,
+    "tool_uses": 7,
+    "turns_to_fix": 1,
+    "wall_clock": 82.526,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T02:13:45+00:00"
+  }
+]

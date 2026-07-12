@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "linearizability-stale-read",
+    "billed_tokens": 669514,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 600180,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 69334,
+    "input_tokens": 69334,
+    "output_tokens": 3802,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- `/read` now uses `ReadLinearizable` in `app/handler.go:88`.\n- Heartbeats now advance the follower\u2019s commit index after healing in `app/raft/node.go:568`.\n\n**Verification**\n- Ran `./test.sh`.\n- All 3 rounds passed: `PASS: All rounds passed \u2014 reads are linearizable`.",
+    "timestamp": "2026-07-12T00:32:22Z",
+    "token_cost": 673316,
+    "tool_uses": 17,
+    "turns_to_fix": 1,
+    "wall_clock": 93.362,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T00:32:23+00:00"
+  }
+]

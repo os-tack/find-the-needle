@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "k8s-scheduler-shutdown-deadlock",
+    "billed_tokens": 118282,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 56671,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 61611,
+    "input_tokens": 61611,
+    "output_tokens": 3583,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have successfully resolved the scheduler shutdown deadlock by shifting the queue's `Close()` call prior to waiting for the worker goroutine to exit. \n\n### Summary of Changes\n1. **Identified the Deadlock**: During shutdown, `ScheduleOne` was blocked inside `queue.Pop()` waiting for work. Since `Scheduler.Run` was waiting for the goroutine to finish (`<-done`) before calling `s.queue.Close()`, a deadlock occurred where the worker couldn't exit and the main routine couldn't proceed.\n2. **Applied the Fix**: Reordered the shutdown process in `Scheduler.Run()` so `s.queue.Close()` is called immediately after `ctx.Done()`. This notifies the blocked `Pop()` call to wake up, see the closed state, return an error, and allow the worker loop to exit cleanly.\n3. **Verification**: Executed `./test.sh` to compile with the `-race` detector and confirmed the test passes successfully and outputs `\"OK: clean shutdown\"`.",
+    "timestamp": "2026-07-12T10:33:46Z",
+    "token_cost": 121865,
+    "tool_uses": 11,
+    "turns_to_fix": 9,
+    "wall_clock": 37.502,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:33:47+00:00"
+  }
+]

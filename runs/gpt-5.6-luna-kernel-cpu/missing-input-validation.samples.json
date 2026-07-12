@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-kernel-cpu",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "missing-input-validation",
+    "billed_tokens": 61473,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 8391,
+    "cache_read_tokens": 53049,
+    "control_type": "kernel",
+    "difficulty_tier": "easy",
+    "dispatched_model": "gpt-5.6-luna",
+    "estimated_cost_usd": 0.13517325,
+    "executed_arm": "kernel-cpu",
+    "executed_provider": "openai",
+    "fresh_input_tokens": 33,
+    "input_tokens": 33,
+    "output_tokens": 1868,
+    "process_exit": "teardown_hung (SIGKILL after journaled terminal stop)",
+    "provider_attestation": "observed",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 11turns, 33+1868 tokens, $0.1352",
+    "timestamp": "2026-07-11T22:01:30Z",
+    "token_cost": 63341,
+    "tool_uses": 18,
+    "turns_to_fix": 11,
+    "wall_clock": 88.775,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T22:01:34+00:00"
+  }
+]

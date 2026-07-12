@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "rate-limit-bypass-header",
+    "billed_tokens": 255883,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 178631,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 77252,
+    "input_tokens": 77252,
+    "output_tokens": 13828,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The rate limiter bypass vulnerability was successfully resolved by implementing secure IP extraction in `app/ratelimiter.ts`. `X-Forwarded-For` is no longer trusted unless a valid proxy trust configuration is provided, successfully blocking spoofing attempts as verified by `test.sh`.",
+    "timestamp": "2026-07-12T10:48:37Z",
+    "token_cost": 269711,
+    "tool_uses": 14,
+    "turns_to_fix": 14,
+    "wall_clock": 135.518,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:48:38+00:00"
+  }
+]

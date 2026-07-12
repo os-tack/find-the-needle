@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.1-pro-preview-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "postgres-migration-schema-drift",
+    "billed_tokens": 193955,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 132763,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 61192,
+    "input_tokens": 61192,
+    "output_tokens": 2259,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have investigated the codebase and found the \"needle\" in `app/main.go`. The application was trying to insert and retrieve data using the column name `status`, which had been renamed to `order_status` in the `migrations/002_rename_status.sql` migration.\n\nI have updated the SQL statements in `main.go` to use the correct `order_status` column name, rebuilt the API binary, and ran `test.sh`. All tests have passed successfully, confirming the schema drift bug is resolved.",
+    "timestamp": "2026-07-12T09:41:08Z",
+    "token_cost": 196214,
+    "tool_uses": 14,
+    "turns_to_fix": 15,
+    "wall_clock": 81.039,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T09:41:10+00:00"
+  }
+]

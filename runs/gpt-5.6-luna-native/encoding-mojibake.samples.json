@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "encoding-mojibake",
+    "billed_tokens": 198354,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 179224,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 19130,
+    "input_tokens": 19130,
+    "output_tokens": 1252,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the encoding bug in `app/CsvReader.java:18` by switching CSV input decoding from ISO-8859-1 to UTF-8.\n\n`./test.sh` passes successfully:\n- All accented customer names preserved\n- City names preserved\n- ASCII sanity checks pass\n- `PASS: All customer names preserved correctly`",
+    "timestamp": "2026-07-12T00:15:43Z",
+    "token_cost": 199606,
+    "tool_uses": 6,
+    "turns_to_fix": 1,
+    "wall_clock": 29.803,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T00:15:45+00:00"
+  }
+]

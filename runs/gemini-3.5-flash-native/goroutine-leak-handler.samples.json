@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "goroutine-leak-handler",
+    "billed_tokens": 212050,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 146241,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 65809,
+    "input_tokens": 65809,
+    "output_tokens": 13509,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The goroutine leak (\"the needle\") has been found and fixed. Running `./test.sh` confirms that 0 goroutines are leaked after client disconnections, and the test suite passes perfectly.",
+    "timestamp": "2026-07-12T10:11:46Z",
+    "token_cost": 225559,
+    "tool_uses": 11,
+    "turns_to_fix": 12,
+    "wall_clock": 128.206,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:11:47+00:00"
+  }
+]

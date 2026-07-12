@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "rate-limit-bypass-header",
+    "billed_tokens": 215489,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 195817,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 19672,
+    "input_tokens": 19672,
+    "output_tokens": 1855,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Updated `app/ratelimiter.ts:25` to use `req.socket.remoteAddress` exclusively.\n- Removed trust in attacker-controlled `X-Forwarded-For`.\n- Regenerated compiled files under `app/dist/`.\n\n**Verification**\n- `./test.sh` passes.\n- Normal requests: `10` allowed, `5` blocked.\n- Spoofed-header requests: `10` allowed, `20` blocked.\n- `git diff --check` passes.",
+    "timestamp": "2026-07-12T01:07:09Z",
+    "token_cost": 217344,
+    "tool_uses": 7,
+    "turns_to_fix": 1,
+    "wall_clock": 61.098,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T01:07:12+00:00"
+  }
+]

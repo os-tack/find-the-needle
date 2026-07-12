@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-terra-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "timezone-scheduling",
+    "billed_tokens": 228209,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 207821,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 20388,
+    "input_tokens": 20388,
+    "output_tokens": 1762,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the cross-midnight scheduling bug in `app/scheduler.py:54`.\n\n- Scheduler now derives the scheduled date from `window_start` in each event\u2019s local timezone.\n- This correctly fires late-night US events whose UTC time falls on the next day.\n- Verified with `./test.sh`: all scheduling tests pass.",
+    "timestamp": "2026-07-12T02:54:54Z",
+    "token_cost": 229971,
+    "tool_uses": 7,
+    "turns_to_fix": 1,
+    "wall_clock": 33.398,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T02:54:56+00:00"
+  }
+]

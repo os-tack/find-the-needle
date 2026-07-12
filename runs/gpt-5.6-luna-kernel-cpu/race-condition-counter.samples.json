@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-kernel-cpu",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "race-condition-counter",
+    "billed_tokens": 32403,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 3827,
+    "cache_read_tokens": 28555,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "dispatched_model": "gpt-5.6-luna",
+    "estimated_cost_usd": 0.05744125,
+    "executed_arm": "kernel-cpu",
+    "executed_provider": "openai",
+    "fresh_input_tokens": 21,
+    "input_tokens": 21,
+    "output_tokens": 638,
+    "process_exit": "end_turn",
+    "provider_attestation": "observed",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 7turns, 21+638 tokens, $0.0574",
+    "timestamp": "2026-07-12T01:04:32Z",
+    "token_cost": 33041,
+    "tool_uses": 10,
+    "turns_to_fix": 7,
+    "wall_clock": 72.216,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T01:04:35+00:00"
+  }
+]

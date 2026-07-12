@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "data-corruption-concurrent-write",
+    "billed_tokens": 268508,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 186333,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 82175,
+    "input_tokens": 82175,
+    "output_tokens": 5856,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have successfully fixed the overlapping segment assignment bug in `src/config.rs`, added a corresponding unit test to prevent future regressions, and verified the fix by running `./test.sh`. All tests are now passing successfully!",
+    "timestamp": "2026-07-12T10:07:44Z",
+    "token_cost": 274364,
+    "tool_uses": 19,
+    "turns_to_fix": 15,
+    "wall_clock": 53.608,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:07:45+00:00"
+  }
+]

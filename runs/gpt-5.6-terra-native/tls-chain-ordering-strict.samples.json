@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-terra-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "tls-chain-ordering-strict",
+    "billed_tokens": 224497,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 201364,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 23133,
+    "input_tokens": 23133,
+    "output_tokens": 3545,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Reordered the certificates after the leaf by following verified signing relationships in `app/tlssetup/loader.go:46`.\n- The loader now rejects a bundle with an unresolvable issuer chain instead of serving certificates in arbitrary PEM order.\n\n**Verified**\n- Ran `./test.sh`\n- Result: `PASS: TLS chain is correctly ordered per RFC 5246`",
+    "timestamp": "2026-07-12T02:58:54Z",
+    "token_cost": 228042,
+    "tool_uses": 7,
+    "turns_to_fix": 1,
+    "wall_clock": 103.014,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T02:58:56+00:00"
+  }
+]

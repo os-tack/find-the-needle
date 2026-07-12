@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "kernel-panic-ioctl",
+    "billed_tokens": 316019,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 288417,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 27602,
+    "input_tokens": 27602,
+    "output_tokens": 2358,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the IOCTL validation bug in `src/ioctl_handler.c`.\n\n- Rejects `NULL` SET values before copying.\n- Rejects oversized SET payloads instead of truncating unchecked input.\n- Rejects `NULL` or zero-length GET output buffers.\n- Uses bounded key-length validation.\n\n`./test.sh` now passes:\n\n- Self-test passed\n- Fuzz test passed\n- Final result: `PASS: IOCTL handler correctly validates all inputs`",
+    "timestamp": "2026-07-12T00:29:58Z",
+    "token_cost": 318377,
+    "tool_uses": 8,
+    "turns_to_fix": 1,
+    "wall_clock": 34.558,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T00:30:04+00:00"
+  }
+]

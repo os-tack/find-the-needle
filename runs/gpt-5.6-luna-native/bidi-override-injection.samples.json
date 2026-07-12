@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "bidi-override-injection",
+    "billed_tokens": 214891,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 193009,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 21882,
+    "input_tokens": 21882,
+    "output_tokens": 2147,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the Unicode BIDI privilege-escalation vulnerability.\n\n- `app/auth.py`: Admin authorization now compares the stored username directly instead of a visually rendered username.\n- `app/sanitizer.py`: Registration removes Unicode bidirectional formatting controls.\n- `test.sh`: Passes all tests, including both RLO and LRO attack variants.\n- `git diff --check`: Passes.",
+    "timestamp": "2026-07-11T22:11:17Z",
+    "token_cost": 217038,
+    "tool_uses": 5,
+    "turns_to_fix": 1,
+    "wall_clock": 45.178,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-11T22:11:18+00:00"
+  }
+]

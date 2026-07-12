@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "off-by-one-array-slice",
+    "billed_tokens": 139980,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 122703,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 17277,
+    "input_tokens": 17277,
+    "output_tokens": 1145,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the batch slicing off-by-one bug in `processor.py:17`.\n\n- Changed the slice endpoint from `start + batch_size - 1` to `start + batch_size`.\n- Verified with `./test.sh`:\n  - `PASS: All records processed correctly across batch boundaries`",
+    "timestamp": "2026-07-12T00:43:46Z",
+    "token_cost": 141125,
+    "tool_uses": 4,
+    "turns_to_fix": 1,
+    "wall_clock": 20.139,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T00:43:48+00:00"
+  }
+]

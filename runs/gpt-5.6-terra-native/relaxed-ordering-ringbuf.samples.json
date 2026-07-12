@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-terra-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "relaxed-ordering-ringbuf",
+    "billed_tokens": 303167,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 275136,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 28031,
+    "input_tokens": 28031,
+    "output_tokens": 4482,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Replaced unsafe relaxed cross-thread index handoff with acquire/release synchronization in `ring_buffer.c:76`.\n- Producer release-publishes slot writes; consumer acquires them before reading.\n- Consumer release-publishes freed slots; producer acquires before reuse.\n- Updated the memory-ordering documentation in `ring_buffer.h:29`.\n\n**Verified**\n- Ran `./test.sh` successfully.\n- ThreadSanitizer is unavailable in this container, but all 5 fallback stress-test runs passed with no corruption.\n- `git diff --check` passes.\n\n`ringbuf_test` is an untracked build artifact produced by the test script.",
+    "timestamp": "2026-07-12T02:39:43Z",
+    "token_cost": 307649,
+    "tool_uses": 10,
+    "turns_to_fix": 1,
+    "wall_clock": 41.529,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T02:39:46+00:00"
+  }
+]

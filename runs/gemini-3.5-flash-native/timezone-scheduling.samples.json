@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "timezone-scheduling",
+    "billed_tokens": 334588,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 235294,
+    "control_type": "native",
+    "difficulty_tier": "easy",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 99294,
+    "input_tokens": 99294,
+    "output_tokens": 11219,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have successfully found and resolved the \"needle\" in the scheduling logic.\n\n### Cause of the Bug\nThe bug resided in `app/scheduler.py`'s `_is_due` method. It constructed the scheduled local event datetime using only `window_start.date()` (the UTC date). This assumed that the date in the event's local timezone is identical to the UTC date. When events crossed local midnight (e.g., late-night EST/PST events or early-morning APAC events), the local date differed from the UTC date, causing the scheduler to miss the event.\n\n### Fix\nI refactored `_is_due` to convert the UTC window boundary datetimes into the target event's local timezone to determine the exact range of potential local dates (typically spanning at most 1 day before/after). The method then builds local candidate scheduled datetimes for those dates, converts them back to UTC, and checks if they fall inside the UTC window `[window_start, window_end)`.\n\n### Verification & Additional Tests\n1. **New Tests Added**: I added `evt-007` (\"Tokyo morning standup\" at 05:00 JST, which is 20:00 UTC of the previous day) to `app/config.json` and `test.sh` to thoroughly verify timezone crossings going in both directions (behind UTC and ahead of UTC).\n2. **Result**: Ran `./test.sh` successfully, with all 9 scheduling tests now passing!",
+    "timestamp": "2026-07-12T10:58:44Z",
+    "token_cost": 345807,
+    "tool_uses": 17,
+    "turns_to_fix": 18,
+    "wall_clock": 86.172,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:58:44+00:00"
+  }
+]

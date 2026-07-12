@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-terra-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "goroutine-leak-handler",
+    "billed_tokens": 211494,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 189304,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 22190,
+    "input_tokens": 22190,
+    "output_tokens": 4447,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Propagated request cancellation and the 25-second timeout into computation in `app/main.go:59`.\n- Made both the compute loop and per-iteration delay stop promptly when clients disconnect in `app/main.go:87`.\n- Prevented the worker from blocking while delivering a result after cancellation in `app/main.go:70`.\n\n**Verified**\n- Ran `./test.sh` successfully: goroutines returned to baseline (`0` leaked).\n- `server` is modified because `test.sh` rebuilds it from the updated Go source.",
+    "timestamp": "2026-07-12T01:58:37Z",
+    "token_cost": 215941,
+    "tool_uses": 6,
+    "turns_to_fix": 1,
+    "wall_clock": 92.073,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T01:58:41+00:00"
+  }
+]

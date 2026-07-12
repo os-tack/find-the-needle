@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-terra-kernel-cpu",
+    "arm": "kernel",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "memory-leak-event-listener",
+    "billed_tokens": 35792,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 4619,
+    "cache_read_tokens": 31152,
+    "control_type": "kernel",
+    "difficulty_tier": "medium",
+    "dispatched_model": "gpt-5.6-terra",
+    "estimated_cost_usd": 0.07721974999999999,
+    "executed_arm": "kernel-cpu",
+    "executed_provider": "openai",
+    "fresh_input_tokens": 21,
+    "input_tokens": 21,
+    "output_tokens": 1089,
+    "process_exit": "end_turn",
+    "provider_attestation": "observed",
+    "requested_arm": "kernel",
+    "resolved": true,
+    "stop_reason": "end_turn",
+    "summary": "agent.completed: 7turns, 21+1089 tokens, $0.0772",
+    "timestamp": "2026-07-12T02:14:46Z",
+    "token_cost": 36881,
+    "tool_uses": 15,
+    "turns_to_fix": 7,
+    "wall_clock": 60.593,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T02:14:48+00:00"
+  }
+]

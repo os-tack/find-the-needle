@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "nginx-upstream-port-mismatch",
+    "billed_tokens": 224046,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 205380,
+    "control_type": "native",
+    "difficulty_tier": "medium",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 18666,
+    "input_tokens": 18666,
+    "output_tokens": 1555,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the nginx upstream port mismatch in `/etc/nginx/sites-available/default:15`.\n\n- Changed `proxy_pass` from `127.0.0.1:5001` to `127.0.0.1:5000`\n- Ran `./test.sh`\n- All tests passed, including `/api/data` JSON validation with 3 items",
+    "timestamp": "2026-07-12T00:40:45Z",
+    "token_cost": 225601,
+    "tool_uses": 7,
+    "turns_to_fix": 1,
+    "wall_clock": 37.01,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T00:40:48+00:00"
+  }
+]

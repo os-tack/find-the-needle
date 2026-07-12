@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "tls-chain-ordering-strict",
+    "billed_tokens": 309966,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 286311,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 23655,
+    "input_tokens": 23655,
+    "output_tokens": 3534,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Reordered certificates after the leaf by matching each certificate\u2019s issuer to the next certificate\u2019s subject.\n- Added clear errors for malformed or incomplete chains.\n- Updated loader comments to reflect the new behavior.\n\n**Verification**\n- `./test.sh` passes:\n  - Lenient TLS client succeeds.\n  - Strict RFC 5246 chain ordering succeeds.\n  - Leaf certificate identity succeeds.\n- `go test ./...` passes.\n- `git diff --check` passes.\n\nChanged file: `app/tlssetup/loader.go:1`",
+    "timestamp": "2026-07-12T01:31:36Z",
+    "token_cost": 313500,
+    "tool_uses": 9,
+    "turns_to_fix": 1,
+    "wall_clock": 46.443,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T01:31:40+00:00"
+  }
+]

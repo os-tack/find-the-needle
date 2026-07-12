@@ -137,6 +137,12 @@ FRONTIER_2026 = {  # model -> arms (exact, no gating)
     # (generic_kernel) in consolidate_scores. gpt-5.5-pro dropped 2026-06-14
     # (owner: too expensive at $30/$180 API list, and B* anyway).
     "gpt-5.5":           ["native", "kernel-cpu"],
+    # gpt-5.6 family (GA 2026-07-09): kernel-cpu via the native OpenAI
+    # Responses-API CpuDriver (own endpoint, api.openai.com — true B), native
+    # via codex CLI. Prefix-routed in haystack (starts_with "gpt"); RATE_CARD
+    # + cache_mult (gpt-5.6 write-cache) already carry luna/terra.
+    "gpt-5.6-luna":      ["native", "kernel-cpu"],
+    "gpt-5.6-terra":     ["native", "kernel-cpu"],
     # Tier-2: no native driver, B* = generic OpenRouter kernel. Native Control
     # runs via the opencode fallback against the provider's own key (xAI /
     # DeepSeek keys added by owner 2026-06-15). Not a first-party vendor CLI

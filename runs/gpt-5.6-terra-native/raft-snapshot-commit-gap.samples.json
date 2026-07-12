@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-terra-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "raft-snapshot-commit-gap",
+    "billed_tokens": 436622,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 402990,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 33632,
+    "input_tokens": 33632,
+    "output_tokens": 3375,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Updated `InstallSnapshot` to advance `commitIndex` alongside `lastApplied`, preventing restart recovery from replaying snapshot-covered entries.\n- Compacted snapshot-covered log entries, retaining a suffix only when its boundary term matches the snapshot. `app/snapshot.go:36`\n\n**Verification**\n- Ran `./test.sh`\n- Passed all 3 rounds with no duplicate state-machine transitions.",
+    "timestamp": "2026-07-12T02:35:27Z",
+    "token_cost": 439997,
+    "tool_uses": 12,
+    "turns_to_fix": 1,
+    "wall_clock": 44.286,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T02:35:29+00:00"
+  }
+]

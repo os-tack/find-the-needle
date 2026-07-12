@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "bidi-override-injection",
+    "billed_tokens": 210810,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 129968,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 80842,
+    "input_tokens": 80842,
+    "output_tokens": 8574,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have successfully identified and fixed the Unicode BIDI override privilege escalation vulnerability (\"the needle\"). \n\n### Cause of the Issue\nThe application rendered usernames containing BIDI control characters (e.g., `\\u202e` or RIGHT-TO-LEFT OVERRIDE) to visually present them as they would appear in a UI. During authentication checks, it compared this visually rendered display name (e.g., `admin`) against the `ADMIN_USERS` allowlist instead of the stored username bytes, allowing privilege escalation.\n\n### Applied Solutions\n1. **BIDI Stripping during Registration (`app/sanitizer.py`)**:\n   Added a step in `sanitize_username` to translate and strip standard Unicode BIDI directional control characters (such as `\\u202e`, `\\u202d`, and others) from the input username before registration.\n2. **Robust Access Control Check (`app/auth.py`)**:\n   Modified `check_admin_access` to perform the admin privilege check against the raw, stored `username` rather than the rendered `display_name`. The display name is now strictly reserved for visual/diagnostic outputs.\n\n### Verification\nRunning `test.sh` now confirms all tests (including the BIDI injection vectors) successfully pass:\n* **PASS**: normal user registration and login works\n* **PASS**: real admin can access dashboard\n* **PASS**: BIDI-injected username was rejected/normalized and denied admin access\n* **PASS**: LRO-injected username was rejected/normalized and denied admin access",
+    "timestamp": "2026-07-12T10:05:24Z",
+    "token_cost": 219384,
+    "tool_uses": 13,
+    "turns_to_fix": 11,
+    "wall_clock": 70.15,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:05:24+00:00"
+  }
+]

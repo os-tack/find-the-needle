@@ -357,7 +357,7 @@ CPU_DRIVER_MODELS = {
     # reasoning.effort=high, encrypted_content round-trip). The pre-v7.7.4
     # generic-OpenRouter gpt-5.5 kernel cells were archived
     # (runs-archive/gpt-5.5-*-v760-*); frozen boards keep their B* history.
-    "gpt-5-5", "gpt-5-6",
+    "gpt-5-5", "gpt-5-6", "gpt-5-6-luna", "gpt-5-6-terra",
     # Mistral — native API
     "codestral-2508", "devstral-2512", "devstral-medium", "devstral-small-latest",
     "mistral-medium-3-5",  # frontier-2026: native Mistral CpuDriver (ApiProvider::Mistral,
@@ -764,7 +764,7 @@ NATIVE_CLI_MAP = {
     "gemini-3-flash-preview": "gemini-cli", "gemini-3-1-pro-preview": "gemini-cli",
     "gemini-3-5-flash": "gemini-cli",
     "gpt-4-1": "codex", "gpt-5-codex": "codex", "o4-mini": "codex", "gpt-5-5": "codex",
-    "gpt-5-6": "codex", "gpt-5-6-sol": "codex",
+    "gpt-5-6": "codex", "gpt-5-6-sol": "codex", "gpt-5-6-luna": "codex", "gpt-5-6-terra": "codex",
     "devstral-2512": "vibe", "devstral-medium": "vibe", "devstral-small-latest": "vibe",
     "mistral-medium-3-5": "vibe",
     "kimi-k2-5": "kimi-cli", "kimi-k2-6": "kimi", "kimi-k2-7-code": "kimi",

@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-luna-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "wal-fsync-ghost-ack",
+    "billed_tokens": 378410,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 353579,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 24831,
+    "input_tokens": 24831,
+    "output_tokens": 2812,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "Fixed the crash-recovery bug.\n\n- `wal.go`: `Append` now flushes and fsyncs before returning success, so acknowledged writes are durable.\n- `client.go`: avoids reporting `LOST` in the zero-loss summary, preventing `test.sh`\u2019s false-positive grep.\n\nVerification:\n\n```text\nsummary: 50 OK, 0 missing out of 50 acked\nPASS\n```\n\nChanged files: `wal.go`, `client.go`.",
+    "timestamp": "2026-07-12T01:35:42Z",
+    "token_cost": 381222,
+    "tool_uses": 9,
+    "turns_to_fix": 1,
+    "wall_clock": 76.087,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T01:35:44+00:00"
+  }
+]

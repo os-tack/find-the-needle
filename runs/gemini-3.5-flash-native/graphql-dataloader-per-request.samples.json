@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 195117,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 138050,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 57067,
+    "input_tokens": 57067,
+    "output_tokens": 11316,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The N+1 query issue (the \"needle\") has been successfully located and resolved!\n\n### Root Cause\nDataLoader batching relies on all keys being enqueued on the **same loader instance** within the same tick. Creating a new `DataLoader` inside every field resolver invocation (i.e. `userPosts` and `postAuthor`) broke batching, causing **101 database queries** (1 for the users, plus 100 individual post queries).\n\n### Solution\n1. **Request-scoped Loaders in Context (`src/context.ts`)**: Integrated the shared loaders created by `createLoaders(db)` directly into the `GqlContext` object.\n2. **Refactored Resolvers (`src/resolvers/userResolver.ts` & `src/resolvers/postResolver.ts`)**: Rewrote the field resolvers to utilize the context-scoped loaders (`ctx.loaders.postsByAuthorLoader` and `ctx.loaders.userLoader`) rather than instantiating fresh ones.\n\n### Results\nAfter applying the fixes, running `./test.sh` yields:\n- **Total DB queries executed**: **2** (down from 101)\n- **Status**: **PASS: All tests passed**",
+    "timestamp": "2026-07-12T10:13:03Z",
+    "token_cost": 206433,
+    "tool_uses": 14,
+    "turns_to_fix": 10,
+    "wall_clock": 76.057,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:13:03+00:00"
+  }
+]

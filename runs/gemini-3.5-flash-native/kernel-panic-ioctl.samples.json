@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "kernel-panic-ioctl",
+    "billed_tokens": 216316,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 137661,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 78655,
+    "input_tokens": 78655,
+    "output_tokens": 4792,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "The input validation vulnerabilities in `src/ioctl_handler.c` have been successfully fixed and verified.\n\n### Summary of Changes:\n1. **SET_CONFIG Handler:**\n   - Added validation check to reject NULL `req->value` pointers.\n   - Added validation check to ensure `req->value_len` does not exceed `MAX_VALUE_LEN`.\n2. **GET_CONFIG Handler:**\n   - Added validation check to reject NULL or zero-length output buffer (`req->value` / `req->value_len`).\n\n### Verification Results:\nBoth the normal self-test and the crafted-input fuzz test pass with zero crashes/segfaults:\n```\n=== IOCTL Handler Validation Test ===\n--- Building ---\n...\n--- Normal operation ---\nRunning device self-test...\nSelf-test PASSED\nOK: self-test passed\n--- Fuzz test with crafted inputs ---\nRunning fuzz test with crafted inputs...\n  Test: NULL request pointer... OK (returned -1)\n  Test: NULL key in set request... OK (returned -1)\n  Test: NULL value in set request... OK (returned -1)\n  Test: NULL value buffer in get request... OK (returned -1)\n  Test: invalid ioctl command... OK (returned -1)\n  Test: NULL device pointer... OK (returned -1)\n  Test: oversized value_len... OK (returned -1)\nFuzz test PASSED\nOK: fuzz test passed\nPASS: IOCTL handler correctly validates all inputs\n```",
+    "timestamp": "2026-07-12T10:34:32Z",
+    "token_cost": 221108,
+    "tool_uses": 16,
+    "turns_to_fix": 14,
+    "wall_clock": 45.338,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:34:33+00:00"
+  }
+]

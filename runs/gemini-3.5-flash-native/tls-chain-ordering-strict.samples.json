@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "tls-chain-ordering-strict",
+    "billed_tokens": 446689,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 324325,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 122364,
+    "input_tokens": 122364,
+    "output_tokens": 14477,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have found the issue and successfully resolved it. \n\n### What was fixed:\n- The certificate chain PEM bundle was loaded out of order (`[Leaf, Root, Intermediate]`).\n- Implemented `sortChainCerts` in `app/tlssetup/loader.go` to dynamically sort the certificate chain so that each certificate is followed by its issuer (`[Leaf, Intermediate, Root]`), conforming to RFC 5246.\n- Added robust unit tests in `app/tlssetup/loader_test.go` verifying the sorting logic.\n- Executed `test.sh` and verified that the entire test suite now passes perfectly.",
+    "timestamp": "2026-07-12T11:01:44Z",
+    "token_cost": 461166,
+    "tool_uses": 21,
+    "turns_to_fix": 21,
+    "wall_clock": 123.591,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T11:01:45+00:00"
+  }
+]

@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gemini-3.5-flash-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "performance-cliff-hash",
+    "billed_tokens": 252538,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 145743,
+    "control_type": "native",
+    "difficulty_tier": "hard",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "gemini",
+    "fresh_input_tokens": 106795,
+    "input_tokens": 106795,
+    "output_tokens": 3492,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "I have found the \"needle\" and successfully resolved the performance cliff bug.\n\n### Findings\n* **The Needle (Bug):** In `src/Product.java`, the `hashCode()` method was returning `category.hashCode()` instead of a unique identifier. This grouped all products into only 10 buckets, resulting in a max chain length of 1000 and severe O(n) performance degradation.\n\n### Fix Applied\n1. Updated `Product.hashCode()` to return `sku.hashCode()`.\n2. Compiled the updated sources with `javac -d /app/classes src/*.java`.\n3. Verified the fix by running `./test.sh`.\n\n### Verification Output\n```\n=== Hash Distribution Analysis ===\nCapacity: 16384\nSize: 10000\nNon-empty buckets: 5991 (36.6%)\nMax chain length: 4\nAvg chain length: 1.7\nDetected max chain length: 4\nOK: Max chain length 4 is within acceptable bounds\nPASS: Hash map distributes items evenly across buckets\n```",
+    "timestamp": "2026-07-12T10:42:17Z",
+    "token_cost": 256030,
+    "tool_uses": 16,
+    "turns_to_fix": 17,
+    "wall_clock": 44.019,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T10:42:19+00:00"
+  }
+]

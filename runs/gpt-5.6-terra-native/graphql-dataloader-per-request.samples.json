@@ -1,0 +1,39 @@
+[
+  {
+    "agent": "gpt-5.6-terra-native",
+    "arm": "native",
+    "bench_binary": {
+      "build_sha": "unknown",
+      "path": "/Users/scottmeyer/projects/needle-bench/frozen-bin/ostk-host-6df3036ff330921fab604584629e0d4235a5a5726218174b4cb7878de339447d",
+      "version": "7.7.7"
+    },
+    "benchmark": "graphql-dataloader-per-request",
+    "billed_tokens": 311102,
+    "cache_create_1h_tokens": 0,
+    "cache_create_5m_tokens": 0,
+    "cache_create_tokens": 0,
+    "cache_read_tokens": 285203,
+    "control_type": "native",
+    "difficulty_tier": "extreme",
+    "dispatched_model": null,
+    "estimated_cost_usd": 0.0,
+    "executed_arm": "native",
+    "executed_provider": "codex",
+    "fresh_input_tokens": 25899,
+    "input_tokens": 25899,
+    "output_tokens": 3411,
+    "process_exit": null,
+    "provider_attestation": "predicted",
+    "requested_arm": "native",
+    "resolved": true,
+    "stop_reason": "pass",
+    "summary": "**Fixed**\n- Made `DataLoader` instances request-scoped in `src/context.ts:10`.\n- Updated user and post resolvers to share `ctx.loaders`, eliminating per-field one-off loaders in `src/resolvers/userResolver.ts:20` and `src/resolvers/postResolver.ts:63`.\n- Regenerated compiled output under `dist/`.\n\n**Verified**\n- Ran `bash test.sh`\n- All functional tests pass.\n- Performance test now reports **2 DB queries** (previously 101).",
+    "timestamp": "2026-07-12T02:01:56Z",
+    "token_cost": 314513,
+    "tool_uses": 8,
+    "turns_to_fix": 1,
+    "wall_clock": 72.844,
+    "sample_attempt": 1,
+    "sample_ts": "2026-07-12T02:01:59+00:00"
+  }
+]
